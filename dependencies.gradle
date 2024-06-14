@@ -38,6 +38,8 @@
  * For more details, see https://docs.gradle.org/8.4/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
 dependencies {
-    implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5322654")
+    implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5322654") // GT:CEu 2.8.8
     api("codechicken:codechickenlib:3.2.3.358")
+
+    runtimeOnlyNonPublishable rfg.deobf("curse.maven:ae2-extended-life-570458:5378163") // AE2UEL v0.56.5
 }
