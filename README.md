@@ -8,5 +8,3 @@ Creative energy hatch
 
 Creative reservoir hatch
 - Same as the normal reservoir hatch but can be changed to provide other fluids.
-- Doesn't work with the JEI drag thingy :(.
-- Doesn't seem to notify the multiblock when the fluid is changed. (Not sure how to fix rn)
