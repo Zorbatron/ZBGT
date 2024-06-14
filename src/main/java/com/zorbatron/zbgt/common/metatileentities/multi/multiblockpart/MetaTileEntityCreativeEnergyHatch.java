@@ -7,6 +7,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import org.jetbrains.annotations.NotNull;
@@ -40,19 +41,19 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
 
     protected IEnergyContainer energyContainer;
 
-    private long voltage = 0;
+    private long voltage = 8;
     private long amps = 1;
 
     private int setTier = 0;
 
-    public MetaTileEntityCreativeEnergyHatch() {
-        super(GTUtility.gregtechId("energy_hatch.creative"), GTValues.MAX);
+    public MetaTileEntityCreativeEnergyHatch(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, GTValues.MAX);
         updateEnergyData();
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityCreativeEnergyHatch();
+        return new MetaTileEntityCreativeEnergyHatch(metaTileEntityId);
     }
 
     @Override
@@ -68,7 +69,6 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gregtech.creative_tooltip.1") + TooltipHelper.RAINBOW +
                 I18n.format("gregtech.creative_tooltip.2") + I18n.format("gregtech.creative_tooltip.3"));
-        tooltip.add(I18n.format("gregtech.machine.energy_hatch.input.tooltip"));
         tooltip.add(I18n.format("gregtech.universal.enabled"));
     }
 

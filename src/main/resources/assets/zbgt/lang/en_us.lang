@@ -1,1 +1,5 @@
-gregtech.machine.energy_hatch.creative.name=Creative Energy Hatch
+zbgt.machine.creative_energy_hatch.name=Creative Energy Hatch
+zbgt.machine.creative_energy_hatch.tooltip=Energy Input for Multiblocks
+
+zbgt.machine.creative_reservoir_hatch.name=Creative Reservoir Hatch
+zbgt.machine.creative_reservoir_hatch.tooltip=Fluid Input for Multiblocks
