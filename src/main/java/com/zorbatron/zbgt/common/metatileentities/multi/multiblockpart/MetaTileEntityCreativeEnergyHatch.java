@@ -17,6 +17,7 @@ import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
+import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.impl.EnergyContainerHandler;
 import gregtech.api.gui.GuiTextures;
@@ -41,13 +42,17 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
 
     protected IEnergyContainer energyContainer;
 
-    private long voltage = 8;
-    private long amps = 1;
+    private long voltage;
+    private long amps;
+    private boolean active;
 
     private int setTier = 0;
 
     public MetaTileEntityCreativeEnergyHatch(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTValues.MAX);
+        this.voltage = 8;
+        this.amps = 1;
+        this.active = true;
         updateEnergyData();
     }
 
@@ -83,9 +88,11 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
     public void update() {
         super.update();
 
-        long fillAmount = energyContainer.getEnergyCapacity() - energyContainer.getEnergyStored();
-        if (fillAmount > 0) {
-            energyContainer.addEnergy(fillAmount);
+        if (active) {
+            long fillAmount = energyContainer.getEnergyCapacity() - energyContainer.getEnergyStored();
+            if (fillAmount > 0) {
+                energyContainer.addEnergy(fillAmount);
+            }
         }
     }
 
@@ -152,33 +159,14 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
             updateEnergyData();
         }));
         builder.widget(new ClickButtonWidget(149, 111, 20, 20, "x4", data -> {
-            // Somehow doesn't block it from going over max int and resetting to 0.
             if (amps * 4 <= Integer.MAX_VALUE) {
                 amps = amps * 4;
             }
             updateEnergyData();
         }));
 
-        // builder.dynamicLabel(7, 110, () -> "Energy I/O per sec: " + this.lastEnergyIOPerSec, 0x232323);
-
-        /*
-         * builder.widget(new CycleButtonWidget(7, 139, 77, 20, () -> active, this::setActive,
-         * "gregtech.creative.activity.off", "gregtech.creative.activity.on"));
-         */
-        /*
-         * builder.widget(new CycleButtonWidget(85, 139, 77, 20, () -> source, value -> {
-         * source = value;
-         * if (source) {
-         * voltage = 0;
-         * amps = 0;
-         * setTier = 0;
-         * } else {
-         * voltage = V[MAX];
-         * amps = Integer.MAX_VALUE;
-         * setTier = 14;
-         * }
-         * }, "gregtech.creative.energy.sink", "gregtech.creative.energy.source"));
-         */
+        builder.widget(new CycleButtonWidget(7, 139, 77, 20, () -> this.active, this::setActive,
+                "gregtech.creative.activity.off", "gregtech.creative.activity.on"));
 
         return builder.build(getHolder(), entityPlayer);
     }
@@ -204,6 +192,13 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
     private void updateEnergyData() {
         this.energyContainer = EnergyContainerHandler.receiverContainer(this, voltage * amps * 16L,
                 voltage, amps);
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+        if (!this.getWorld().isRemote) {
+            this.writeCustomData(GregtechDataCodes.UPDATE_ACTIVE, (buf) -> buf.writeBoolean(active));
+        }
     }
 
     @Override

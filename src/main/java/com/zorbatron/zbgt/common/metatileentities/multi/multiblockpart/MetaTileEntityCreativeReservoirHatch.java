@@ -29,6 +29,7 @@ import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
+import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.capability.impl.FilteredItemHandler;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.NotifiableFluidTank;
@@ -48,13 +49,13 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
     private static final int FLUID_AMOUNT = Integer.MAX_VALUE;
     private FluidStack lockTank;
     private final InfiniteTank fluidTank;
-    private boolean isActive;
+    private boolean active;
 
     public MetaTileEntityCreativeReservoirHatch(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTValues.MAX, false);
         this.fluidTank = new InfiniteTank(FLUID_AMOUNT, this);
         initializeInventory();
-        this.isActive = false;
+        this.active = false;
     }
 
     @Override
@@ -77,7 +78,7 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
                 this.lockTank = f.copy();
                 this.fluidTank.setFluid(new FluidStack(f.copy(), FLUID_AMOUNT));
                 this.fluidTank.onContentsChanged();
-                this.isActive = true;
+                setActive(true);
             }
         })
                 .setAlwaysShowFull(true).setDrawHoveringText(false).setContainerClicking(true, false);
@@ -85,8 +86,8 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
         ClickButtonWidget clearButton = new ClickButtonWidget(8, 50, 35, 20, "Clear", (clickData) -> {
             this.lockTank = null;
             this.fluidTank.setFluid(null);
-            this.isActive = false;
-        }).setTooltipText("Reservoir must be empty to allow JEI dragging");
+            setActive(false);
+        }).setTooltipText("zbgt.machine.creative_reservoir_hatch.clear.tooltip");
 
         builder.image(7, 16, 81, 55, GuiTextures.DISPLAY)
                 .widget(new ImageWidget(91, 36, 14, 15, GuiTextures.TANK_ICON))
@@ -136,7 +137,7 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
     @Override
     public void update() {
         super.update();
-        if (this.isActive) {
+        if (this.active) {
             if (!getWorld().isRemote) {
                 fillContainerFromInternalTank(fluidTank);
                 if (getOffsetTimer() % 20 == 0) {
@@ -199,7 +200,7 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
         if (lockTank != null) {
             data.setTag("FluidInventory", lockTank.writeToNBT(new NBTTagCompound()));
         }
-        data.setBoolean("isActive", isActive);
+        data.setBoolean("isActive", active);
         return super.writeToNBT(data);
     }
 
@@ -208,8 +209,15 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
         if (data.hasKey("FluidInventory")) {
             this.lockTank = FluidStack.loadFluidStackFromNBT(data.getCompoundTag("FluidInventory"));
         }
-        this.isActive = data.getBoolean("isActive");
+        this.active = data.getBoolean("isActive");
         super.readFromNBT(data);
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+        if (!this.getWorld().isRemote) {
+            this.writeCustomData(GregtechDataCodes.UPDATE_ACTIVE, (buf) -> buf.writeBoolean(active));
+        }
     }
 
     private class InfiniteTank extends NotifiableFluidTank {
