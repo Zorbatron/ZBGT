@@ -49,13 +49,13 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
     private static final int FLUID_AMOUNT = Integer.MAX_VALUE;
     private FluidStack lockTank;
     private final InfiniteTank fluidTank;
-    private boolean active;
+    private boolean workingEnabled;
 
     public MetaTileEntityCreativeReservoirHatch(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTValues.MAX, false);
         this.fluidTank = new InfiniteTank(FLUID_AMOUNT, this);
         initializeInventory();
-        this.active = false;
+        this.workingEnabled = false;
     }
 
     @Override
@@ -78,7 +78,7 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
                 this.lockTank = f.copy();
                 this.fluidTank.setFluid(new FluidStack(f.copy(), FLUID_AMOUNT));
                 this.fluidTank.onContentsChanged();
-                setActive(true);
+                setworkingEnabled(true);
             }
         })
                 .setAlwaysShowFull(true).setDrawHoveringText(false).setContainerClicking(true, false);
@@ -86,7 +86,7 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
         ClickButtonWidget clearButton = new ClickButtonWidget(8, 50, 35, 20, "Clear", (clickData) -> {
             this.lockTank = null;
             this.fluidTank.setFluid(null);
-            setActive(false);
+            setworkingEnabled(false);
         }).setTooltipText("zbgt.machine.creative_reservoir_hatch.clear.tooltip");
 
         builder.image(7, 16, 81, 55, GuiTextures.DISPLAY)
@@ -137,12 +137,10 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
     @Override
     public void update() {
         super.update();
-        if (this.active) {
-            if (!getWorld().isRemote) {
-                fillContainerFromInternalTank(fluidTank);
-                if (getOffsetTimer() % 20 == 0) {
-                    fluidTank.refill();
-                }
+        if (!getWorld().isRemote) {
+            fillContainerFromInternalTank(fluidTank);
+            if ((getOffsetTimer() % 20 == 0) & workingEnabled) {
+                fluidTank.refill();
             }
         }
     }
@@ -200,7 +198,7 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
         if (lockTank != null) {
             data.setTag("FluidInventory", lockTank.writeToNBT(new NBTTagCompound()));
         }
-        data.setBoolean("isActive", active);
+        data.setBoolean("isworkingEnabled", workingEnabled);
         return super.writeToNBT(data);
     }
 
@@ -209,14 +207,14 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
         if (data.hasKey("FluidInventory")) {
             this.lockTank = FluidStack.loadFluidStackFromNBT(data.getCompoundTag("FluidInventory"));
         }
-        this.active = data.getBoolean("isActive");
+        this.workingEnabled = data.getBoolean("isworkingEnabled");
         super.readFromNBT(data);
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setworkingEnabled(boolean workingEnabled) {
+        this.workingEnabled = workingEnabled;
         if (!this.getWorld().isRemote) {
-            this.writeCustomData(GregtechDataCodes.UPDATE_ACTIVE, (buf) -> buf.writeBoolean(active));
+            this.writeCustomData(GregtechDataCodes.UPDATE_ACTIVE, (buf) -> buf.writeBoolean(workingEnabled));
         }
     }
 

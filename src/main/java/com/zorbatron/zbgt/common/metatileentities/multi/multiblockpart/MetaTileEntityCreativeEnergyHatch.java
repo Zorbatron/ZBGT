@@ -44,7 +44,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
 
     private long voltage;
     private long amps;
-    private boolean active;
+    private boolean workingEnabled;
 
     private int setTier = 0;
 
@@ -52,7 +52,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         super(metaTileEntityId, GTValues.MAX);
         this.voltage = 8;
         this.amps = 1;
-        this.active = true;
+        this.workingEnabled = true;
         updateEnergyData();
     }
 
@@ -88,7 +88,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
     public void update() {
         super.update();
 
-        if (active) {
+        if (workingEnabled) {
             long fillAmount = energyContainer.getEnergyCapacity() - energyContainer.getEnergyStored();
             if (fillAmount > 0) {
                 energyContainer.addEnergy(fillAmount);
@@ -165,7 +165,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
             updateEnergyData();
         }));
 
-        builder.widget(new CycleButtonWidget(7, 139, 77, 20, () -> this.active, this::setActive,
+        builder.widget(new CycleButtonWidget(7, 139, 77, 20, () -> this.workingEnabled, this::setworkingEnabled,
                 "gregtech.creative.activity.off", "gregtech.creative.activity.on"));
 
         return builder.build(getHolder(), entityPlayer);
@@ -194,10 +194,10 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
                 voltage, amps);
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setworkingEnabled(boolean workingEnabled) {
+        this.workingEnabled = workingEnabled;
         if (!this.getWorld().isRemote) {
-            this.writeCustomData(GregtechDataCodes.UPDATE_ACTIVE, (buf) -> buf.writeBoolean(active));
+            this.writeCustomData(GregtechDataCodes.UPDATE_ACTIVE, (buf) -> buf.writeBoolean(workingEnabled));
         }
     }
 
@@ -206,6 +206,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         data.setLong("Voltage", voltage);
         data.setLong("Amps", amps);
         data.setByte("Tier", (byte) setTier);
+        data.setBoolean("workingEnabled", workingEnabled);
         return super.writeToNBT(data);
     }
 
@@ -214,6 +215,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         voltage = data.getLong("Voltage");
         amps = data.getLong("Amps");
         setTier = data.getByte("Tier");
+        workingEnabled = data.getBoolean("workingEnabled");
         super.readFromNBT(data);
         updateEnergyData();
     }
