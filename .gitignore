@@ -79,5 +79,5 @@ local.properties
 *~
 
 run/
-
 logs/
+lib/

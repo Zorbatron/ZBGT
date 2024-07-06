@@ -47,6 +47,7 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
                                                   IMultiblockAbilityPart<IFluidTank> {
 
     private static final int FLUID_AMOUNT = Integer.MAX_VALUE;
+    @Nullable
     private FluidStack lockTank;
     private final InfiniteTank fluidTank;
     private boolean workingEnabled;
@@ -137,7 +138,7 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
     @Override
     public void update() {
         super.update();
-        if (!getWorld().isRemote) {
+        if (!getWorld().isRemote && lockTank != null) {
             fillContainerFromInternalTank(fluidTank);
             if ((getOffsetTimer() % 20 == 0) & workingEnabled) {
                 fluidTank.refill();
