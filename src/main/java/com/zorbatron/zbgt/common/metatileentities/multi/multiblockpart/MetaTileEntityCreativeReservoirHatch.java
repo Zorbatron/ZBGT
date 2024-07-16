@@ -85,13 +85,7 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
     }
 
     private Supplier<String> getFluidNameText(InfiniteTank fluidTank) {
-        return () -> {
-            try {
-                return fluidTank.getFluid().getLocalizedName();
-            } catch (NullPointerException e) {
-                return "";
-            }
-        };
+        return () -> fluidTank.getFluid() != null ? fluidTank.getFluid().getLocalizedName() : "";
     }
 
     private Supplier<String> getFluidAmountText(InfiniteTank fluidTank) {
@@ -101,6 +95,7 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
     private void setFluid(@Nullable FluidStack fluid) {
         if (fluid != null) {
             this.fluidTank.setFluid(new FluidStack(fluid.copy(), FLUID_AMOUNT));
+            this.fluidTank.onContentsChanged();
         }
     }
 
