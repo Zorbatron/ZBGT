@@ -112,7 +112,7 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
     @Override
     public void update() {
         super.update();
-        if (!getWorld().isRemote && fluidTank.getFluid() != null) {
+        if (!getWorld().isRemote) {
             fillContainerFromInternalTank(fluidTank);
             if (getOffsetTimer() % 20 == 0) {
                 fluidTank.refill();
