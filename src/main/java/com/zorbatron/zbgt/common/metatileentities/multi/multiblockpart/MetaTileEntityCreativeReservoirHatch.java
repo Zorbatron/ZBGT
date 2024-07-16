@@ -189,12 +189,6 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
         super.readFromNBT(data);
     }
 
-    @Override
-    public void writeItemStackData(NBTTagCompound tag) {
-        super.writeItemStackData(tag);
-        tag.setString("Hello", "World!");
-    }
-
     private static class InfiniteTank extends NotifiableFluidTank {
 
         public InfiniteTank(int capacity, MetaTileEntity entityToNotify) {
