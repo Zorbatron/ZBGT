@@ -3,4 +3,3 @@ zbgt.machine.creative_energy_hatch.tooltip=Energy Input for Multiblocks
 
 zbgt.machine.creative_reservoir_hatch.name=Creative Reservoir Hatch
 zbgt.machine.creative_reservoir_hatch.tooltip=Fluid Input for Multiblocks
-zbgt.machine.creative_reservoir_hatch.clear.tooltip=Reservoir must be empty to allow JEI dragging
