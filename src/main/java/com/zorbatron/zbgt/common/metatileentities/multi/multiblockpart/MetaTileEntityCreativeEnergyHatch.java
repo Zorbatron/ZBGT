@@ -165,7 +165,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
             updateEnergyData();
         }));
 
-        builder.widget(new CycleButtonWidget(7, 139, 77, 20, () -> this.workingEnabled, this::setworkingEnabled,
+        builder.widget(new CycleButtonWidget(7, 139, 77, 20, () -> this.workingEnabled, this::setWorkingEnabled,
                 "gregtech.creative.activity.off", "gregtech.creative.activity.on"));
 
         return builder.build(getHolder(), entityPlayer);
@@ -194,7 +194,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
                 voltage, amps);
     }
 
-    public void setworkingEnabled(boolean workingEnabled) {
+    public void setWorkingEnabled(boolean workingEnabled) {
         this.workingEnabled = workingEnabled;
         if (!this.getWorld().isRemote) {
             this.writeCustomData(GregtechDataCodes.UPDATE_ACTIVE, (buf) -> buf.writeBoolean(workingEnabled));
