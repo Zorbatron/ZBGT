@@ -306,6 +306,7 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
         super.writeInitialSyncData(packetBuffer);
         packetBuffer.writeEnumValue(pumpMode);
         packetBuffer.writeEnumValue(conveyorMode);
+        packetBuffer.writeEnumValue(dualMode);
     }
 
     @Override
@@ -313,6 +314,7 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
         super.readInitialSyncData(packetBuffer);
         this.pumpMode = packetBuffer.readEnumValue(CoverPump.PumpMode.class);
         this.conveyorMode = packetBuffer.readEnumValue(CoverConveyor.ConveyorMode.class);
+        this.dualMode = packetBuffer.readEnumValue(DualMode.class);
     }
 
     @Override
