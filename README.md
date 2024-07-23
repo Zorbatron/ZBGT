@@ -19,3 +19,6 @@ Dual Cover
 
 Precise Dual Cover
 - Will combine the Robot Arm and Fluid Regulator.
+
+Multi Creative Reservoir Hatch
+- Will be a creative reservoir but it will have multiple slots.
