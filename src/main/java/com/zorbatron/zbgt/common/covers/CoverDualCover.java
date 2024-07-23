@@ -23,7 +23,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.google.common.math.IntMath;
-import com.zorbatron.zbgt.ZBGTCore;
 import com.zorbatron.zbgt.client.ClientHandler;
 
 import codechicken.lib.raytracer.CuboidRayTraceResult;
@@ -348,10 +347,6 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
         if (timer % 20 == 0) {
             this.itemsLeftToTransferLastSecond = itemTransferRate;
             this.fluidLeftToTransferLastSecond = fluidTransferRate;
-        }
-
-        if (timer % 10 == 0) {
-            ZBGTCore.LOGGER.info(dualMode);
         }
     }
 
