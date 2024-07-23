@@ -23,3 +23,6 @@ Precise Dual Cover
 
 Multi Creative Reservoir Hatch
 - Will be a creative reservoir but it will have multiple slots.
+
+Creative input bus
+- Will have a similar UI to the ME input bus where it has 16 slots + circuit slot
