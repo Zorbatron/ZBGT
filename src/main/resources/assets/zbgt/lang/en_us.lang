@@ -3,3 +3,14 @@ zbgt.machine.creative_energy_hatch.tooltip=Energy Input for Multiblocks
 
 zbgt.machine.creative_reservoir_hatch.name=Creative Reservoir Hatch
 zbgt.machine.creative_reservoir_hatch.tooltip=Fluid Input for Multiblocks
+
+metaitem.cover.dual_cover.lv.name=LV Dual Cover
+metaitem.cover.dual_cover.mv.name=MV Dual Cover
+metaitem.cover.dual_cover.hv.name=HV Dual Cover
+metaitem.cover.dual_cover.ev.name=EV Dual Cover
+metaitem.cover.dual_cover.iv.name=IV Dual Cover
+metaitem.cover.dual_cover.luv.name=LuV Dual Cover
+metaitem.cover.dual_cover.zpm.name=ZPM Dual Cover
+metaitem.cover.dual_cover.uv.name=UV Dual Cover
+cover.dual_cover.title=Dual Cover Settings (%s)
+cover.dual_cover.mode_changer=Click to change between the item and fluid settings

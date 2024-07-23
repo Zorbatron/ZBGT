@@ -43,4 +43,5 @@ dependencies {
 
     runtimeOnlyNonPublishable rfg.deobf("curse.maven:ae2-extended-life-570458:5378163") // AE2UEL v0.56.5
     runtimeOnlyNonPublishable("curse.maven:groovyscript-687577:5507936")
+    runtimeOnlyNonPublishable("curse.maven:nae2-884359:5380800")
 }
