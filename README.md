@@ -15,10 +15,11 @@ Dual Cover
 - Combines the conveyor and pump into one cover!
 - Currently has no texture because I'm not an artist <:(
 
-## Planned:
-
 Precise Dual Cover
-- Will combine the Robot Arm and Fluid Regulator.
+- Combines the robot arm and fluid regulator into one cover!
+- Also has no texture 😔
+
+## Planned:
 
 Multi Creative Reservoir Hatch
 - Will be a creative reservoir but it will have multiple slots.
