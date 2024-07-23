@@ -1,0 +1,1 @@
+- The type switcher icon doesn't seem to sync properly
