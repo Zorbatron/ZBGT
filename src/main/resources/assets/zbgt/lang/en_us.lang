@@ -13,8 +13,20 @@ metaitem.cover.dual_cover.luv.name=LuV Dual Cover
 metaitem.cover.dual_cover.zpm.name=ZPM Dual Cover
 metaitem.cover.dual_cover.uv.name=UV Dual Cover
 metaitem.cover.dual_cover.tooltip=Transfers §fItems§7 and §fFluids§7 at specific rates as §fCover§7.
-metaitem.cover.dual_cover.tooltip.transfer_rate=§bTransfer Rate: §f%,d items/s§7 and §f%,d L/t
-metaitem.cover.dual_cover.tooltip.transfer_rate.stacks=§bTransfer Rate: §f%,d stacks/s§7 and §f%,d L/t
-
 cover.dual_cover.title=Dual Cover Settings (%s)
+
+metaitem.cover.precise_dual_cover.lv.name=LV Precise Dual Cover
+metaitem.cover.precise_dual_cover.mv.name=MV Precise Dual Cover
+metaitem.cover.precise_dual_cover.hv.name=HV Precise Dual Cover
+metaitem.cover.precise_dual_cover.ev.name=EV Precise Dual Cover
+metaitem.cover.precise_dual_cover.iv.name=IV Precise Dual Cover
+metaitem.cover.precise_dual_cover.luv.name=LuV Precise Dual Cover
+metaitem.cover.precise_dual_cover.zpm.name=ZPM Precise Dual Cover
+metaitem.cover.precise_dual_cover.uv.name=UV Precise Dual Cover
+metaitem.cover.precise_dual_cover.tooltip=Limits §fItems§7 and §fFluids§7 to specific quantities as §fCover§7.
+cover.precise_dual_cover.title=Precise Dual Cover Settings (%s)
+
+metaitem.cover.dual.tooltip.transfer_rate=§bTransfer Rate: §f%,d items/s§7 and §f%,d L/t
+metaitem.cover.dual.tooltip.transfer_rate.stacks=§bTransfer Rate: §f%,d stacks/s§7 and §f%,d L/t
+
 cover.dual_cover.mode_changer=Click to change between the item and fluid settings

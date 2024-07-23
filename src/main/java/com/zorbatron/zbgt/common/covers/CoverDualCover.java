@@ -1,5 +1,9 @@
 package com.zorbatron.zbgt.common.covers;
 
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -41,6 +45,7 @@ import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.*;
 import gregtech.api.util.GTTransferUtils;
+import gregtech.api.util.ItemStackHashStrategy;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.covers.CoverConveyor;
 import gregtech.common.covers.CoverPump;
@@ -48,6 +53,11 @@ import gregtech.common.covers.ManualImportExportMode;
 import gregtech.common.covers.filter.FluidFilterContainer;
 import gregtech.common.covers.filter.ItemFilterContainer;
 import gregtech.common.pipelike.itempipe.tile.TileEntityItemPipe;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenCustomHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectOpenCustomHashSet;
 
 public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable, IControllable {
 
@@ -85,9 +95,13 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
         this.conveyorMode = CoverConveyor.ConveyorMode.EXPORT;
         this.pumpMode = CoverPump.PumpMode.EXPORT;
         this.itemFilterContainer = new ItemFilterContainer(this);
-        this.fluidFilterContainer = new FluidFilterContainer(this, () -> false);
+        this.fluidFilterContainer = new FluidFilterContainer(this, this::shouldShowTip);
         this.dualMode = DualMode.ITEM;
         this.bucketMode = CoverPump.BucketMode.MILLI_BUCKET;
+    }
+
+    protected boolean shouldShowTip() {
+        return false;
     }
 
     @Override
@@ -113,9 +127,10 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
         WidgetGroup primaryGroup = new WidgetGroup();
         primaryGroup.addWidget(new LabelWidget(10, 5, getUITitle(), GTValues.VN[tier]));
 
-        primaryGroup.addWidget(new ImageCycleButtonWidget(176 - 16 - 4, 2, 16, 16, ClientHandler.ITEM_FLUID_OVERLAY, 2,
-                () -> dualMode.ordinal(), val -> dualMode = DualMode.values()[val])
-                        .setTooltipHoverString("cover.dual_cover.mode_changer"));
+        primaryGroup
+                .addWidget(new ImageCycleButtonWidget(176 - 16 - 4, 166, 16, 16, ClientHandler.ITEM_FLUID_OVERLAY, 2,
+                        () -> dualMode.ordinal(), val -> dualMode = DualMode.values()[val])
+                                .setTooltipHoverString("cover.dual_cover.mode_changer"));
 
         ServerWidgetGroup itemWidgetGroup = new ServerWidgetGroup(() -> dualMode == DualMode.ITEM);
         ServerWidgetGroup fluidWidgetGroup = new ServerWidgetGroup(() -> dualMode == DualMode.FLUID);
@@ -220,10 +235,6 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
 
     public CoverPump.BucketMode getBucketMode() {
         return bucketMode;
-    }
-
-    public int getTransferRate() {
-        return itemTransferRate;
     }
 
     protected void adjustTransferRate(int amount) {
@@ -355,6 +366,148 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
             return moveInventoryItems(myItemHandler, itemHandler, maxTransferAmount);
         }
         return 0;
+    }
+
+    protected int doTransferItemsByGroup(IItemHandler itemHandler, IItemHandler myItemHandler,
+                                         Map<Object, GroupItemInfo> itemInfos, int maxTransferAmount) {
+        if (conveyorMode == CoverConveyor.ConveyorMode.IMPORT) {
+            return moveInventoryItems(itemHandler, myItemHandler, itemInfos, maxTransferAmount);
+        } else if (conveyorMode == CoverConveyor.ConveyorMode.EXPORT) {
+            return moveInventoryItems(myItemHandler, itemHandler, itemInfos, maxTransferAmount);
+        }
+        return 0;
+    }
+
+    protected Map<Object, GroupItemInfo> doCountDestinationInventoryItemsByMatchIndex(IItemHandler itemHandler,
+                                                                                      IItemHandler myItemHandler) {
+        if (conveyorMode == CoverConveyor.ConveyorMode.IMPORT) {
+            return countInventoryItemsByMatchSlot(myItemHandler);
+        } else if (conveyorMode == CoverConveyor.ConveyorMode.EXPORT) {
+            return countInventoryItemsByMatchSlot(itemHandler);
+        }
+        return Collections.emptyMap();
+    }
+
+    protected Map<ItemStack, TypeItemInfo> doCountSourceInventoryItemsByType(IItemHandler itemHandler,
+                                                                             IItemHandler myItemHandler) {
+        if (conveyorMode == CoverConveyor.ConveyorMode.IMPORT) {
+            return countInventoryItemsByType(itemHandler);
+        } else if (conveyorMode == CoverConveyor.ConveyorMode.EXPORT) {
+            return countInventoryItemsByType(myItemHandler);
+        }
+        return Collections.emptyMap();
+    }
+
+    protected boolean doTransferItemsExact(IItemHandler itemHandler, IItemHandler myItemHandler,
+                                           TypeItemInfo itemInfo) {
+        if (conveyorMode == CoverConveyor.ConveyorMode.IMPORT) {
+            return moveInventoryItemsExact(itemHandler, myItemHandler, itemInfo);
+        } else if (conveyorMode == CoverConveyor.ConveyorMode.EXPORT) {
+            return moveInventoryItemsExact(myItemHandler, itemHandler, itemInfo);
+        }
+        return false;
+    }
+
+    protected static boolean moveInventoryItemsExact(IItemHandler sourceInventory, IItemHandler targetInventory,
+                                                     TypeItemInfo itemInfo) {
+        // first, compute how much can we extract in reality from the machine,
+        // because totalCount is based on what getStackInSlot returns, which may differ from what
+        // extractItem() will return
+        ItemStack resultStack = itemInfo.itemStack.copy();
+        int totalExtractedCount = 0;
+        int itemsLeftToExtract = itemInfo.totalCount;
+
+        for (int i = 0; i < itemInfo.slots.size(); i++) {
+            int slotIndex = itemInfo.slots.get(i);
+            ItemStack extractedStack = sourceInventory.extractItem(slotIndex, itemsLeftToExtract, true);
+            if (!extractedStack.isEmpty() &&
+                    ItemStack.areItemsEqual(resultStack, extractedStack) &&
+                    ItemStack.areItemStackTagsEqual(resultStack, extractedStack)) {
+                totalExtractedCount += extractedStack.getCount();
+                itemsLeftToExtract -= extractedStack.getCount();
+            }
+            if (itemsLeftToExtract == 0) {
+                break;
+            }
+        }
+        // if amount of items extracted is not equal to the amount of items we
+        // wanted to extract, abort item extraction
+        if (totalExtractedCount != itemInfo.totalCount) {
+            return false;
+        }
+        // adjust size of the result stack accordingly
+        resultStack.setCount(totalExtractedCount);
+
+        // now, see how much we can insert into destination inventory
+        // if we can't insert as much as itemInfo requires, and remainder is empty, abort, abort
+        ItemStack remainder = GTTransferUtils.insertItem(targetInventory, resultStack, true);
+        if (!remainder.isEmpty()) {
+            return false;
+        }
+
+        // otherwise, perform real insertion and then remove items from the source inventory
+        GTTransferUtils.insertItem(targetInventory, resultStack, false);
+
+        // perform real extraction of the items from the source inventory now
+        itemsLeftToExtract = itemInfo.totalCount;
+        for (int i = 0; i < itemInfo.slots.size(); i++) {
+            int slotIndex = itemInfo.slots.get(i);
+            ItemStack extractedStack = sourceInventory.extractItem(slotIndex, itemsLeftToExtract, false);
+            if (!extractedStack.isEmpty() &&
+                    ItemStack.areItemsEqual(resultStack, extractedStack) &&
+                    ItemStack.areItemStackTagsEqual(resultStack, extractedStack)) {
+                itemsLeftToExtract -= extractedStack.getCount();
+            }
+            if (itemsLeftToExtract == 0) {
+                break;
+            }
+        }
+        return true;
+    }
+
+    protected int moveInventoryItems(IItemHandler sourceInventory, IItemHandler targetInventory,
+                                     Map<Object, GroupItemInfo> itemInfos, int maxTransferAmount) {
+        int itemsLeftToTransfer = maxTransferAmount;
+        for (int i = 0; i < sourceInventory.getSlots(); i++) {
+            ItemStack itemStack = sourceInventory.getStackInSlot(i);
+            if (itemStack.isEmpty()) {
+                continue;
+            }
+            Object matchSlotIndex = itemFilterContainer.matchItemStack(itemStack);
+            if (matchSlotIndex == null || !itemInfos.containsKey(matchSlotIndex)) {
+                continue;
+            }
+
+            GroupItemInfo itemInfo = itemInfos.get(matchSlotIndex);
+
+            ItemStack extractedStack = sourceInventory.extractItem(i,
+                    Math.min(itemInfo.totalCount, itemsLeftToTransfer), true);
+
+            ItemStack remainderStack = GTTransferUtils.insertItem(targetInventory, extractedStack, true);
+            int amountToInsert = extractedStack.getCount() - remainderStack.getCount();
+
+            if (amountToInsert > 0) {
+                extractedStack = sourceInventory.extractItem(i, amountToInsert, false);
+
+                if (!extractedStack.isEmpty()) {
+
+                    GTTransferUtils.insertItem(targetInventory, extractedStack, false);
+                    itemsLeftToTransfer -= extractedStack.getCount();
+                    itemInfo.totalCount -= extractedStack.getCount();
+
+                    if (itemInfo.totalCount == 0) {
+                        itemInfos.remove(matchSlotIndex);
+                        if (itemInfos.isEmpty()) {
+                            break;
+                        }
+                    }
+                    if (itemsLeftToTransfer == 0) {
+                        break;
+                    }
+                }
+            }
+        }
+        return maxTransferAmount - itemsLeftToTransfer;
     }
 
     protected int moveInventoryItems(IItemHandler sourceInventory, IItemHandler targetInventory,
@@ -560,7 +713,7 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
         }
     }
 
-    private enum DualMode implements IStringSerializable {
+    protected enum DualMode implements IStringSerializable {
 
         ITEM("cover.cover_dual.mode.item"),
         FLUID("cover.cover_dual.mode.fluid");
@@ -576,5 +729,87 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
         public String getName() {
             return localeName;
         }
+    }
+
+    protected static class TypeItemInfo {
+
+        public final ItemStack itemStack;
+        public final Object filterSlot;
+        public final IntList slots;
+        public int totalCount;
+
+        public TypeItemInfo(ItemStack itemStack, Object filterSlot, IntList slots, int totalCount) {
+            this.itemStack = itemStack;
+            this.filterSlot = filterSlot;
+            this.slots = slots;
+            this.totalCount = totalCount;
+        }
+    }
+
+    protected static class GroupItemInfo {
+
+        public final Object filterSlot;
+        public final Set<ItemStack> itemStackTypes;
+        public int totalCount;
+
+        public GroupItemInfo(Object filterSlot, Set<ItemStack> itemStackTypes, int totalCount) {
+            this.filterSlot = filterSlot;
+            this.itemStackTypes = itemStackTypes;
+            this.totalCount = totalCount;
+        }
+    }
+
+    @NotNull
+    protected Map<ItemStack, TypeItemInfo> countInventoryItemsByType(@NotNull IItemHandler inventory) {
+        Map<ItemStack, TypeItemInfo> result = new Object2ObjectOpenCustomHashMap<>(
+                ItemStackHashStrategy.comparingAllButCount());
+        for (int srcIndex = 0; srcIndex < inventory.getSlots(); srcIndex++) {
+            ItemStack itemStack = inventory.getStackInSlot(srcIndex);
+            if (itemStack.isEmpty()) {
+                continue;
+            }
+            Object transferSlotIndex = itemFilterContainer.matchItemStack(itemStack);
+            if (transferSlotIndex == null) {
+                continue;
+            }
+            if (!result.containsKey(itemStack)) {
+                TypeItemInfo itemInfo = new TypeItemInfo(itemStack.copy(), transferSlotIndex, new IntArrayList(), 0);
+                itemInfo.totalCount += itemStack.getCount();
+                itemInfo.slots.add(srcIndex);
+                result.put(itemStack.copy(), itemInfo);
+            } else {
+                TypeItemInfo itemInfo = result.get(itemStack);
+                itemInfo.totalCount += itemStack.getCount();
+                itemInfo.slots.add(srcIndex);
+            }
+        }
+        return result;
+    }
+
+    @NotNull
+    protected Map<Object, GroupItemInfo> countInventoryItemsByMatchSlot(@NotNull IItemHandler inventory) {
+        Map<Object, GroupItemInfo> result = new Object2ObjectOpenHashMap<>();
+        for (int srcIndex = 0; srcIndex < inventory.getSlots(); srcIndex++) {
+            ItemStack itemStack = inventory.getStackInSlot(srcIndex);
+            if (itemStack.isEmpty()) {
+                continue;
+            }
+            Object transferSlotIndex = itemFilterContainer.matchItemStack(itemStack);
+            if (transferSlotIndex == null) {
+                continue;
+            }
+            if (!result.containsKey(transferSlotIndex)) {
+                GroupItemInfo itemInfo = new GroupItemInfo(transferSlotIndex,
+                        new ObjectOpenCustomHashSet<>(ItemStackHashStrategy.comparingAllButCount()), 0);
+                itemInfo.itemStackTypes.add(itemStack.copy());
+                itemInfo.totalCount += itemStack.getCount();
+                result.put(transferSlotIndex, itemInfo);
+            } else {
+                GroupItemInfo itemInfo = result.get(transferSlotIndex);
+                itemInfo.itemStackTypes.add(itemStack.copy());
+                itemInfo.totalCount += itemStack.getCount();
+            }
+        }
+        return result;
     }
 }
