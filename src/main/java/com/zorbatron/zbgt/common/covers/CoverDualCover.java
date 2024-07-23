@@ -104,10 +104,14 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
         return builder.build(this, player);
     }
 
+    protected String getUITitle() {
+        return "cover.dual_cover.title";
+    }
+
     @Override
     public ModularUI createUI(EntityPlayer player) {
         WidgetGroup primaryGroup = new WidgetGroup();
-        primaryGroup.addWidget(new LabelWidget(10, 5, "cover.dual_cover.title", GTValues.VN[tier]));
+        primaryGroup.addWidget(new LabelWidget(10, 5, getUITitle(), GTValues.VN[tier]));
 
         primaryGroup.addWidget(new ImageCycleButtonWidget(176 - 16 - 4, 2, 16, 16, ClientHandler.ITEM_FLUID_OVERLAY, 2,
                 () -> dualMode.ordinal(), val -> dualMode = DualMode.values()[val])
