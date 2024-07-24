@@ -1,2 +1,2 @@
-- The type switcher icon doesn't seem to sync properly
 - TOP integration
+- You can still shift click in the other filter
