@@ -20,6 +20,7 @@ import org.apache.logging.log4j.message.FormattedMessage;
 import org.jetbrains.annotations.NotNull;
 
 import com.google.common.math.IntMath;
+import com.zorbatron.zbgt.client.widgets.HideableFluidFilterContainer;
 
 import gregtech.api.cover.CoverDefinition;
 import gregtech.api.cover.CoverableView;
@@ -30,7 +31,6 @@ import gregtech.api.util.GTTransferUtils;
 import gregtech.common.covers.CoverConveyor;
 import gregtech.common.covers.CoverPump;
 import gregtech.common.covers.TransferMode;
-import gregtech.common.covers.filter.FluidFilterContainer;
 import gregtech.common.covers.filter.SmartItemFilter;
 import gregtech.common.pipelike.itempipe.net.ItemNetHandler;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
@@ -51,7 +51,8 @@ public class CoverPreciseDualCover extends CoverDualCover {
         this.fluidTransferMode = TransferMode.TRANSFER_ANY;
 
         this.itemFilterContainer.setTransferStackSize(1);
-        this.fluidFilterContainer = new FluidFilterContainer(this, this::shouldShowTip, maxFluidTransferRate * 100);
+        this.fluidFilterContainer = new HideableFluidFilterContainer(this, this::shouldShowTip,
+                maxFluidTransferRate * 100);
     }
 
     @Override

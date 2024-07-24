@@ -24,6 +24,8 @@ import org.jetbrains.annotations.Nullable;
 
 import com.google.common.math.IntMath;
 import com.zorbatron.zbgt.client.ClientHandler;
+import com.zorbatron.zbgt.client.widgets.HideableFluidFilterContainer;
+import com.zorbatron.zbgt.client.widgets.HideableItemFilterContainer;
 
 import codechicken.lib.raytracer.CuboidRayTraceResult;
 import codechicken.lib.render.CCRenderState;
@@ -49,8 +51,6 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.covers.CoverConveyor;
 import gregtech.common.covers.CoverPump;
 import gregtech.common.covers.ManualImportExportMode;
-import gregtech.common.covers.filter.FluidFilterContainer;
-import gregtech.common.covers.filter.ItemFilterContainer;
 import gregtech.common.pipelike.itempipe.tile.TileEntityItemPipe;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
@@ -65,14 +65,14 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
     protected CoverConveyor.ConveyorMode conveyorMode;
     protected int itemsLeftToTransferLastSecond;
     private CoverableItemHandlerWrapper itemHandlerWrapper;
-    protected ItemFilterContainer itemFilterContainer;
+    protected HideableItemFilterContainer itemFilterContainer;
 
     public final int maxFluidTransferRate;
     private int fluidTransferRate;
     protected CoverPump.PumpMode pumpMode;
     protected int fluidLeftToTransferLastSecond;
     private CoverableFluidHandlerWrapper fluidHandlerWrapper;
-    protected FluidFilterContainer fluidFilterContainer;
+    protected HideableFluidFilterContainer fluidFilterContainer;
     protected CoverPump.BucketMode bucketMode;
 
     protected ManualImportExportMode manualImportExportMode;
@@ -93,8 +93,8 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
         this.manualImportExportMode = ManualImportExportMode.DISABLED;
         this.conveyorMode = CoverConveyor.ConveyorMode.EXPORT;
         this.pumpMode = CoverPump.PumpMode.EXPORT;
-        this.itemFilterContainer = new ItemFilterContainer(this);
-        this.fluidFilterContainer = new FluidFilterContainer(this, this::shouldShowTip);
+        this.itemFilterContainer = new HideableItemFilterContainer(this);
+        this.fluidFilterContainer = new HideableFluidFilterContainer(this, this::shouldShowTip);
         this.dualMode = DualMode.ITEM;
         this.bucketMode = CoverPump.BucketMode.MILLI_BUCKET;
     }
@@ -153,8 +153,7 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
 
         itemWidgetGroup.addWidget(new CycleButtonWidget(10, 45, 75, 20,
                 CoverConveyor.ConveyorMode.class, this::getConveyorMode, this::setConveyorMode));
-
-        this.itemFilterContainer.initUI(70, itemWidgetGroup::addWidget);
+        this.itemFilterContainer.initUI(70, itemWidgetGroup, () -> dualMode == DualMode.ITEM);
 
         fluidWidgetGroup.addWidget(new ImageWidget(44, 20, 62, 20, GuiTextures.DISPLAY));
 
@@ -195,7 +194,7 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
 
         fluidWidgetGroup.addWidget(new CycleButtonWidget(10, 43, 75, 18,
                 CoverPump.PumpMode.class, this::getPumpMode, this::setPumpMode));
-        this.fluidFilterContainer.initUI(88, fluidWidgetGroup::addWidget);
+        this.fluidFilterContainer.initUI(88, fluidWidgetGroup, () -> dualMode == DualMode.FLUID);
 
         primaryGroup.addWidget(new CycleButtonWidget(7, 166, 116, 20,
                 ManualImportExportMode.class, this::getManualImportExportMode, this::setManualImportExportMode)
