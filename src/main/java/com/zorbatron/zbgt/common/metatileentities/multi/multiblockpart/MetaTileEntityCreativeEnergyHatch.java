@@ -3,8 +3,6 @@ package com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart;
 import java.util.List;
 import java.util.function.Function;
 
-import gregtech.common.metatileentities.multi.electric.MetaTileEntityActiveTransformer;
-import gregtech.common.metatileentities.multi.electric.MetaTileEntityPowerSubstation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -33,11 +31,14 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.SimpleOverlayRenderer;
 import gregtech.client.utils.PipelineUtil;
 import gregtech.client.utils.TooltipHelper;
+import gregtech.common.metatileentities.multi.electric.MetaTileEntityActiveTransformer;
+import gregtech.common.metatileentities.multi.electric.MetaTileEntityPowerSubstation;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 
 public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockPart implements
@@ -45,20 +46,20 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
 
     protected InfiniteEnergyContainerHandler energyContainer;
 
+    private int setTier = 0;
     private long voltage;
     private long amps;
     protected boolean workingEnabled;
     private boolean isSource;
-
-    private int setTier = 0;
+    protected boolean wasPssOrAt;
 
     public MetaTileEntityCreativeEnergyHatch(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTValues.MAX);
         this.voltage = 8;
         this.amps = 1;
-        this.workingEnabled = true;
-        setIsSource(true);
-        updateEnergyData(isSource);
+        this.workingEnabled = false;
+        this.isSource = true;
+        updateEnergyData();
     }
 
     @Override
@@ -123,7 +124,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
                 .widget(new CycleButtonWidget(7, 7, 30, 20, GTValues.VNF, () -> setTier, tier -> {
                     setTier = tier;
                     voltage = GTValues.V[setTier];
-                    updateEnergyData(this.isSource);
+                    updateEnergyData();
                 }));
         builder.label(7, 32, "gregtech.creative.energy.voltage");
         builder.widget(new ImageWidget(7, 44, 156, 20, GuiTextures.DISPLAY));
@@ -131,7 +132,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
             if (!value.isEmpty()) {
                 voltage = Long.parseLong(value);
                 setTier = GTUtility.getTierByVoltage(voltage);
-                updateEnergyData(this.isSource);
+                updateEnergyData();
             }
         }).setAllowedChars(TextFieldWidget2.NATURAL_NUMS).setMaxLength(19).setValidator(getTextFieldValidator()));
 
@@ -140,7 +141,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
             if (amps > 0) {
                 amps--;
             }
-            updateEnergyData(this.isSource);
+            updateEnergyData();
         }));
         builder.widget(new ClickButtonWidget(7, 111, 20, 20, "÷4", clickData -> {
             if (amps / 4 > 0) {
@@ -148,26 +149,26 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
             } else {
                 amps = 1;
             }
-            updateEnergyData(this.isSource);
+            updateEnergyData();
         }));
         builder.widget(new ImageWidget(29, 87, 118, 20, GuiTextures.DISPLAY));
         builder.widget(new TextFieldWidget2(31, 93, 114, 16, () -> String.valueOf(amps), value -> {
             if (!value.isEmpty()) {
                 amps = Integer.parseInt(value);
             }
-            updateEnergyData(this.isSource);
+            updateEnergyData();
         }).setMaxLength(10).setNumbersOnly(0, Integer.MAX_VALUE));
         builder.widget(new ClickButtonWidget(149, 87, 20, 20, "+", data -> {
             if (amps < Integer.MAX_VALUE) {
                 amps++;
             }
-            updateEnergyData(this.isSource);
+            updateEnergyData();
         }));
         builder.widget(new ClickButtonWidget(149, 111, 20, 20, "x4", data -> {
             if (amps * 4 <= Integer.MAX_VALUE) {
                 amps = amps * 4;
             }
-            updateEnergyData(this.isSource);
+            updateEnergyData();
         }));
 
         builder.widget(new CycleButtonWidget(7, 139, 77, 20, () -> this.workingEnabled, this::setWorkingEnabled,
@@ -194,20 +195,14 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         };
     }
 
-    protected void updateEnergyData(boolean isSource) {
+    protected void updateEnergyData() {
         long capacity = getVoltage() * getAmps();
 
-        int multiplier = 0;
-        var controller = getController();
-        if (controller != null) {
-            if (controller instanceof MetaTileEntityPowerSubstation || controller instanceof MetaTileEntityActiveTransformer) {
-                multiplier = 1;
-            } else {
-                multiplier = 16;
-            }
-        }
-        this.energyContainer = new InfiniteEnergyContainerHandler(this, capacity * multiplier,
-                getVoltage(), getAmps(), 0L, 0L, isSource);
+        // Normal multiblocks need a bit of a buffer to actually run a recipe. This ensures that it can actually run the
+        // recipe continuously.
+        // But a PSS/AT will try and eat up the entire buffer so this is to ensure it gets the correct amount of power.
+        this.energyContainer = new InfiniteEnergyContainerHandler(this, capacity * (wasPssOrAt ? 1 : 16),
+                getVoltage(), getAmps(), getVoltage(), getAmps(), this.isSource);
     }
 
     public void setWorkingEnabled(boolean workingEnabled) {
@@ -218,21 +213,31 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
     }
 
     @Override
+    public void addToMultiBlock(MultiblockControllerBase controllerBase) {
+        super.addToMultiBlock(controllerBase);
+        this.wasPssOrAt = controllerBase instanceof MetaTileEntityPowerSubstation ||
+                controllerBase instanceof MetaTileEntityActiveTransformer;
+        updateEnergyData();
+    }
+
+    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setLong("Voltage", voltage);
-        data.setLong("Amps", amps);
-        data.setByte("Tier", (byte) setTier);
-        data.setBoolean("workingEnabled", workingEnabled);
+        data.setLong("Voltage", this.voltage);
+        data.setLong("Amps", this.amps);
+        data.setByte("Tier", (byte) this.setTier);
+        data.setBoolean("workingEnabled", this.workingEnabled);
+        data.setBoolean("WasPssOrAt", this.wasPssOrAt);
         return super.writeToNBT(data);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound data) {
-        voltage = data.getLong("Voltage");
-        amps = data.getLong("Amps");
-        setTier = data.getByte("Tier");
-        workingEnabled = data.getBoolean("workingEnabled");
+        this.voltage = data.getLong("Voltage");
+        this.amps = data.getLong("Amps");
+        this.setTier = data.getByte("Tier");
+        this.workingEnabled = data.getBoolean("workingEnabled");
+        this.wasPssOrAt = data.getBoolean("WasPssOrAt");
         super.readFromNBT(data);
-        updateEnergyData(this.isSource);
+        updateEnergyData();
     }
 }

@@ -4,8 +4,8 @@ import static com.zorbatron.zbgt.ZBUtility.zbgtId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityCreativeEnergyHatch;
-import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityCreativeReservoirHatch;
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityCreativeEnergySink;
+import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityCreativeReservoirHatch;
 
 public class MetaTileEntities {
 
