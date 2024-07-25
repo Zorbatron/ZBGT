@@ -5,6 +5,6 @@
 - Make the energy hatch and sink extend a common MTE instead of having the sink extend the hatch.
 
 ## Features
-- TOP integration
+- Dual cover TOP integration
 - Creative multi reservoir hatch
 - Creative input bus
