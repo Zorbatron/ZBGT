@@ -3,6 +3,8 @@ package com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart;
 import java.util.List;
 import java.util.function.Function;
 
+import gregtech.common.metatileentities.multi.electric.MetaTileEntityActiveTransformer;
+import gregtech.common.metatileentities.multi.electric.MetaTileEntityPowerSubstation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -13,13 +15,14 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.api.capability.impl.InfiniteEnergyContainerHandler;
+
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.capability.IEnergyContainer;
-import gregtech.api.capability.impl.EnergyContainerHandler;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.ClickButtonWidget;
@@ -40,11 +43,12 @@ import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMulti
 public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockPart implements
                                                IMultiblockAbilityPart<IEnergyContainer> {
 
-    protected IEnergyContainer energyContainer;
+    protected InfiniteEnergyContainerHandler energyContainer;
 
     private long voltage;
     private long amps;
-    private boolean workingEnabled;
+    protected boolean workingEnabled;
+    private boolean isSource;
 
     private int setTier = 0;
 
@@ -53,12 +57,17 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         this.voltage = 8;
         this.amps = 1;
         this.workingEnabled = true;
-        updateEnergyData();
+        setIsSource(true);
+        updateEnergyData(isSource);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityCreativeEnergyHatch(metaTileEntityId);
+    }
+
+    protected void setIsSource(boolean isSource) {
+        this.isSource = isSource;
     }
 
     @Override
@@ -84,20 +93,16 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         super.addToolUsages(stack, world, tooltip, advanced);
     }
 
-    @Override
-    public void update() {
-        super.update();
+    public long getAmps() {
+        return this.amps;
+    }
 
-        if (workingEnabled) {
-            long fillAmount = energyContainer.getEnergyCapacity() - energyContainer.getEnergyStored();
-            if (fillAmount > 0) {
-                energyContainer.addEnergy(fillAmount);
-            }
-        }
+    public long getVoltage() {
+        return this.voltage;
     }
 
     @NotNull
-    private SimpleOverlayRenderer getOverlay() {
+    protected SimpleOverlayRenderer getOverlay() {
         return Textures.ENERGY_IN_MULTI;
     }
 
@@ -118,7 +123,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
                 .widget(new CycleButtonWidget(7, 7, 30, 20, GTValues.VNF, () -> setTier, tier -> {
                     setTier = tier;
                     voltage = GTValues.V[setTier];
-                    updateEnergyData();
+                    updateEnergyData(this.isSource);
                 }));
         builder.label(7, 32, "gregtech.creative.energy.voltage");
         builder.widget(new ImageWidget(7, 44, 156, 20, GuiTextures.DISPLAY));
@@ -126,7 +131,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
             if (!value.isEmpty()) {
                 voltage = Long.parseLong(value);
                 setTier = GTUtility.getTierByVoltage(voltage);
-                updateEnergyData();
+                updateEnergyData(this.isSource);
             }
         }).setAllowedChars(TextFieldWidget2.NATURAL_NUMS).setMaxLength(19).setValidator(getTextFieldValidator()));
 
@@ -135,7 +140,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
             if (amps > 0) {
                 amps--;
             }
-            updateEnergyData();
+            updateEnergyData(this.isSource);
         }));
         builder.widget(new ClickButtonWidget(7, 111, 20, 20, "÷4", clickData -> {
             if (amps / 4 > 0) {
@@ -143,26 +148,26 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
             } else {
                 amps = 1;
             }
-            updateEnergyData();
+            updateEnergyData(this.isSource);
         }));
         builder.widget(new ImageWidget(29, 87, 118, 20, GuiTextures.DISPLAY));
         builder.widget(new TextFieldWidget2(31, 93, 114, 16, () -> String.valueOf(amps), value -> {
             if (!value.isEmpty()) {
                 amps = Integer.parseInt(value);
             }
-            updateEnergyData();
+            updateEnergyData(this.isSource);
         }).setMaxLength(10).setNumbersOnly(0, Integer.MAX_VALUE));
         builder.widget(new ClickButtonWidget(149, 87, 20, 20, "+", data -> {
             if (amps < Integer.MAX_VALUE) {
                 amps++;
             }
-            updateEnergyData();
+            updateEnergyData(this.isSource);
         }));
         builder.widget(new ClickButtonWidget(149, 111, 20, 20, "x4", data -> {
             if (amps * 4 <= Integer.MAX_VALUE) {
                 amps = amps * 4;
             }
-            updateEnergyData();
+            updateEnergyData(this.isSource);
         }));
 
         builder.widget(new CycleButtonWidget(7, 139, 77, 20, () -> this.workingEnabled, this::setWorkingEnabled,
@@ -189,9 +194,20 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         };
     }
 
-    private void updateEnergyData() {
-        this.energyContainer = EnergyContainerHandler.receiverContainer(this, voltage * amps * 16L,
-                voltage, amps);
+    protected void updateEnergyData(boolean isSource) {
+        long capacity = getVoltage() * getAmps();
+
+        int multiplier = 0;
+        var controller = getController();
+        if (controller != null) {
+            if (controller instanceof MetaTileEntityPowerSubstation || controller instanceof MetaTileEntityActiveTransformer) {
+                multiplier = 1;
+            } else {
+                multiplier = 16;
+            }
+        }
+        this.energyContainer = new InfiniteEnergyContainerHandler(this, capacity * multiplier,
+                getVoltage(), getAmps(), 0L, 0L, isSource);
     }
 
     public void setWorkingEnabled(boolean workingEnabled) {
@@ -217,6 +233,6 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         setTier = data.getByte("Tier");
         workingEnabled = data.getBoolean("workingEnabled");
         super.readFromNBT(data);
-        updateEnergyData();
+        updateEnergyData(this.isSource);
     }
 }

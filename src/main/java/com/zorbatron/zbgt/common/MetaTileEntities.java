@@ -5,11 +5,13 @@ import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTile
 
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityCreativeEnergyHatch;
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityCreativeReservoirHatch;
+import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityEnergySink;
 
 public class MetaTileEntities {
 
     public static MetaTileEntityCreativeEnergyHatch CREATIVE_ENERGY_HATCH;
     public static MetaTileEntityCreativeReservoirHatch CREATIVE_RESERVOIR_HATCH;
+    public static MetaTileEntityEnergySink ENERGY_SINK;
 
     public static int id = 18000;
 
@@ -18,5 +20,7 @@ public class MetaTileEntities {
                 new MetaTileEntityCreativeEnergyHatch(zbgtId("creative_energy_hatch"))); // 18000
         CREATIVE_RESERVOIR_HATCH = registerMetaTileEntity(++id,
                 new MetaTileEntityCreativeReservoirHatch(zbgtId("creative_reservoir_hatch"))); // 18001
+        ENERGY_SINK = registerMetaTileEntity(++id,
+                new MetaTileEntityEnergySink(zbgtId("energy_sink"))); // 18002
     }
 }
