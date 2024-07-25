@@ -1,8 +1,12 @@
 zbgt.machine.creative_energy_hatch.name=Creative Energy Hatch
 zbgt.machine.creative_energy_hatch.tooltip=Energy Input for Multiblocks
 
+zbgt.machine.creative_energy_sink.name=Creative Energy Sink
+zbgt.machine.creative_energy_sink.tooltip=Energy Output for Multiblocks
+
 zbgt.machine.creative_reservoir_hatch.name=Creative Reservoir Hatch
 zbgt.machine.creative_reservoir_hatch.tooltip=Fluid Input for Multiblocks
+
 
 metaitem.cover.dual_cover.lv.name=LV Dual Cover
 metaitem.cover.dual_cover.mv.name=MV Dual Cover
