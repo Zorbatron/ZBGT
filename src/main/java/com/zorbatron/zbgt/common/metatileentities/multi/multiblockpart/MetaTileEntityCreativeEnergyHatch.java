@@ -49,26 +49,22 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
     private int setTier = 0;
     private long voltage;
     private long amps;
-    protected boolean workingEnabled;
-    private boolean isSource;
-    protected boolean wasPssOrAt;
+    private boolean workingEnabled;
+    private final boolean isExportHatch;
+    private boolean wasPssOrAt;
 
-    public MetaTileEntityCreativeEnergyHatch(ResourceLocation metaTileEntityId) {
+    public MetaTileEntityCreativeEnergyHatch(ResourceLocation metaTileEntityId, boolean isExportHatch) {
         super(metaTileEntityId, GTValues.MAX);
         this.voltage = 8;
         this.amps = 1;
         this.workingEnabled = false;
-        this.isSource = true;
+        this.isExportHatch = isExportHatch;
         updateEnergyData();
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityCreativeEnergyHatch(metaTileEntityId);
-    }
-
-    protected void setIsSource(boolean isSource) {
-        this.isSource = isSource;
+        return new MetaTileEntityCreativeEnergyHatch(metaTileEntityId, isExportHatch);
     }
 
     @Override
@@ -104,12 +100,12 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
 
     @NotNull
     protected SimpleOverlayRenderer getOverlay() {
-        return Textures.ENERGY_IN_MULTI;
+        return isExportHatch ? Textures.ENERGY_IN_MULTI : Textures.ENERGY_OUT_MULTI;
     }
 
     @Override
     public MultiblockAbility<IEnergyContainer> getAbility() {
-        return MultiblockAbility.INPUT_ENERGY;
+        return isExportHatch ? MultiblockAbility.INPUT_ENERGY : MultiblockAbility.OUTPUT_ENERGY;
     }
 
     @Override
@@ -199,8 +195,11 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         // Normal multiblocks need a bit of a buffer to actually run a recipe. This ensures that it can actually run the
         // recipe continuously.
         // But a PSS/AT will try and eat up the entire buffer so this is to ensure it gets the correct amount of power.
-        this.energyContainer = new InfiniteEnergyContainerHandler(this, getVoltage() * getAmps() * (wasPssOrAt ? 1 : 16),
-                getVoltage(), getAmps(), getVoltage(), getAmps(), this.isSource);
+        this.energyContainer = new InfiniteEnergyContainerHandler(this,
+                getVoltage() * getAmps() * (wasPssOrAt ? 1 : 16),
+                isExportHatch ? getVoltage() : 0L, isExportHatch ? getAmps() : 0L,
+                !isExportHatch ? getVoltage() : 0L,
+                !isExportHatch ? getAmps() : 0L, isExportHatch);
     }
 
     public void setWorkingEnabled(boolean workingEnabled) {

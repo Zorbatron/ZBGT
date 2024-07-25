@@ -1,8 +1,8 @@
 zbgt.machine.creative_energy_hatch.name=Creative Energy Hatch
-zbgt.machine.creative_energy_hatch.tooltip=Energy Input for Multiblocks
+zbgt.machine.creative_energy_hatch.tooltip=Infinite Energy Source for Multiblocks
 
 zbgt.machine.creative_energy_sink.name=Creative Energy Sink
-zbgt.machine.creative_energy_sink.tooltip=Energy Output for Multiblocks
+zbgt.machine.creative_energy_sink.tooltip=Infinite Energy Sink for Multiblocks
 
 zbgt.machine.creative_reservoir_hatch.name=Creative Reservoir Hatch
 zbgt.machine.creative_reservoir_hatch.tooltip=Fluid Input for Multiblocks
