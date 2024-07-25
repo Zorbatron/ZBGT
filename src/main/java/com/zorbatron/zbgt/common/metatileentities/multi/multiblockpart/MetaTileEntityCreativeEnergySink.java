@@ -11,16 +11,16 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.SimpleOverlayRenderer;
 
-public class MetaTileEntityEnergySink extends MetaTileEntityCreativeEnergyHatch {
+public class MetaTileEntityCreativeEnergySink extends MetaTileEntityCreativeEnergyHatch {
 
-    public MetaTileEntityEnergySink(ResourceLocation metaTileEntityId) {
+    public MetaTileEntityCreativeEnergySink(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
         setIsSource(false);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityEnergySink(metaTileEntityId);
+        return new MetaTileEntityCreativeEnergySink(metaTileEntityId);
     }
 
     @Override
