@@ -8,6 +8,9 @@ Creative Energy Hatch
 - Configurable like the creative emitter, but as a multiblock part.
 - You need to make the multiblock reform when you change it's setting because right now because GregTech doesn't have a way for an energy container to notify the multiblock controller that it's voltage/amperage has changed.
 
+Creative Energy Sink
+- Behaves the same as the Creative Energy Hatch but drains energy from the multiblock instead of providing.
+
 Creative Reservoir Hatch
 - Same as the normal reservoir hatch but can be changed to provide other fluids.
 
@@ -27,4 +30,4 @@ Multi Creative Reservoir Hatch
 - May replace the creative reservoir hatch.
 
 Creative input bus
-- Will have a similar UI to the ME input bus where it has 16 slots + circuit slot
+- Will likely have a similar UI to the ME input bus where it has 16 slots + circuit slot
