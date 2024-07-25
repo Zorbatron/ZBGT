@@ -196,12 +196,10 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
     }
 
     protected void updateEnergyData() {
-        long capacity = getVoltage() * getAmps();
-
         // Normal multiblocks need a bit of a buffer to actually run a recipe. This ensures that it can actually run the
         // recipe continuously.
         // But a PSS/AT will try and eat up the entire buffer so this is to ensure it gets the correct amount of power.
-        this.energyContainer = new InfiniteEnergyContainerHandler(this, capacity * (wasPssOrAt ? 1 : 16),
+        this.energyContainer = new InfiniteEnergyContainerHandler(this, getVoltage() * getAmps() * (wasPssOrAt ? 1 : 16),
                 getVoltage(), getAmps(), getVoltage(), getAmps(), this.isSource);
     }
 
