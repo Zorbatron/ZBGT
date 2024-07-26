@@ -19,7 +19,6 @@ import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
-import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
@@ -31,14 +30,11 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.SimpleOverlayRenderer;
 import gregtech.client.utils.PipelineUtil;
 import gregtech.client.utils.TooltipHelper;
-import gregtech.common.metatileentities.multi.electric.MetaTileEntityActiveTransformer;
-import gregtech.common.metatileentities.multi.electric.MetaTileEntityPowerSubstation;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 
 public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockPart implements
@@ -49,17 +45,14 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
     private int setTier = 0;
     private long voltage;
     private long amps;
-    private boolean workingEnabled;
     private final boolean isExportHatch;
-    private boolean wasPssOrAt;
 
     public MetaTileEntityCreativeEnergyHatch(ResourceLocation metaTileEntityId, boolean isExportHatch) {
         super(metaTileEntityId, GTValues.MAX);
         this.voltage = 8;
         this.amps = 1;
-        this.workingEnabled = false;
         this.isExportHatch = isExportHatch;
-        updateEnergyData();
+        setEnergyConfiguration();
     }
 
     @Override
@@ -100,12 +93,12 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
 
     @NotNull
     protected SimpleOverlayRenderer getOverlay() {
-        return isExportHatch ? Textures.ENERGY_IN_MULTI : Textures.ENERGY_OUT_MULTI;
+        return isExportHatch ? Textures.ENERGY_OUT_MULTI : Textures.ENERGY_IN_MULTI;
     }
 
     @Override
     public MultiblockAbility<IEnergyContainer> getAbility() {
-        return isExportHatch ? MultiblockAbility.INPUT_ENERGY : MultiblockAbility.OUTPUT_ENERGY;
+        return isExportHatch ?  MultiblockAbility.OUTPUT_ENERGY : MultiblockAbility.INPUT_ENERGY;
     }
 
     @Override
@@ -120,7 +113,6 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
                 .widget(new CycleButtonWidget(7, 7, 30, 20, GTValues.VNF, () -> setTier, tier -> {
                     setTier = tier;
                     voltage = GTValues.V[setTier];
-                    updateEnergyData();
                 }));
         builder.label(7, 32, "gregtech.creative.energy.voltage");
         builder.widget(new ImageWidget(7, 44, 156, 20, GuiTextures.DISPLAY));
@@ -128,7 +120,6 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
             if (!value.isEmpty()) {
                 voltage = Long.parseLong(value);
                 setTier = GTUtility.getTierByVoltage(voltage);
-                updateEnergyData();
             }
         }).setAllowedChars(TextFieldWidget2.NATURAL_NUMS).setMaxLength(19).setValidator(getTextFieldValidator()));
 
@@ -137,7 +128,6 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
             if (amps > 0) {
                 amps--;
             }
-            updateEnergyData();
         }));
         builder.widget(new ClickButtonWidget(7, 111, 20, 20, "÷4", clickData -> {
             if (amps / 4 > 0) {
@@ -145,30 +135,25 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
             } else {
                 amps = 1;
             }
-            updateEnergyData();
         }));
         builder.widget(new ImageWidget(29, 87, 118, 20, GuiTextures.DISPLAY));
         builder.widget(new TextFieldWidget2(31, 93, 114, 16, () -> String.valueOf(amps), value -> {
             if (!value.isEmpty()) {
                 amps = Integer.parseInt(value);
             }
-            updateEnergyData();
         }).setMaxLength(10).setNumbersOnly(0, Integer.MAX_VALUE));
         builder.widget(new ClickButtonWidget(149, 87, 20, 20, "+", data -> {
             if (amps < Integer.MAX_VALUE) {
                 amps++;
             }
-            updateEnergyData();
         }));
         builder.widget(new ClickButtonWidget(149, 111, 20, 20, "x4", data -> {
             if (amps * 4 <= Integer.MAX_VALUE) {
                 amps = amps * 4;
             }
-            updateEnergyData();
         }));
 
-        builder.widget(new CycleButtonWidget(7, 139, 77, 20, () -> this.workingEnabled, this::setWorkingEnabled,
-                "gregtech.creative.activity.off", "gregtech.creative.activity.on"));
+        builder.widget(new ClickButtonWidget(7, 139, 77, 20, I18n.format("zbgt.machine.creative_energy.apply_button"), (clickData) -> setEnergyConfiguration()));
 
         return builder.build(getHolder(), entityPlayer);
     }
@@ -191,30 +176,14 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         };
     }
 
-    protected void updateEnergyData() {
-        // Normal multiblocks need a bit of a buffer to actually run a recipe. This ensures that it can actually run the
-        // recipe continuously.
-        // But a PSS/AT will try and eat up the entire buffer so this is to ensure it gets the correct amount of power.
+    protected void setEnergyConfiguration() {
         this.energyContainer = new InfiniteEnergyContainerHandler(this,
-                getVoltage() * getAmps() * (wasPssOrAt ? 1 : 16),
-                isExportHatch ? getVoltage() : 0L, isExportHatch ? getAmps() : 0L,
-                !isExportHatch ? getVoltage() : 0L,
-                !isExportHatch ? getAmps() : 0L, isExportHatch);
-    }
-
-    public void setWorkingEnabled(boolean workingEnabled) {
-        this.workingEnabled = workingEnabled;
-        if (!this.getWorld().isRemote) {
-            this.writeCustomData(GregtechDataCodes.UPDATE_ACTIVE, (buf) -> buf.writeBoolean(workingEnabled));
-        }
-    }
-
-    @Override
-    public void addToMultiBlock(MultiblockControllerBase controllerBase) {
-        super.addToMultiBlock(controllerBase);
-        this.wasPssOrAt = controllerBase instanceof MetaTileEntityPowerSubstation ||
-                controllerBase instanceof MetaTileEntityActiveTransformer;
-        updateEnergyData();
+                getVoltage() * getAmps(),
+                isExportHatch ? 0L : getVoltage(),
+                isExportHatch ? 0L : getAmps(),
+                isExportHatch ? getVoltage() : 0L,
+                isExportHatch ? getAmps() : 0L,
+                isExportHatch);
     }
 
     @Override
@@ -222,8 +191,6 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         data.setLong("Voltage", this.voltage);
         data.setLong("Amps", this.amps);
         data.setByte("Tier", (byte) this.setTier);
-        data.setBoolean("workingEnabled", this.workingEnabled);
-        data.setBoolean("WasPssOrAt", this.wasPssOrAt);
         return super.writeToNBT(data);
     }
 
@@ -232,9 +199,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         this.voltage = data.getLong("Voltage");
         this.amps = data.getLong("Amps");
         this.setTier = data.getByte("Tier");
-        this.workingEnabled = data.getBoolean("workingEnabled");
-        this.wasPssOrAt = data.getBoolean("WasPssOrAt");
         super.readFromNBT(data);
-        updateEnergyData();
+        setEnergyConfiguration();
     }
 }
