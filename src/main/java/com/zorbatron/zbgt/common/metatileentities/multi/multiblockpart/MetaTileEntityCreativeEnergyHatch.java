@@ -98,7 +98,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
 
     @Override
     public MultiblockAbility<IEnergyContainer> getAbility() {
-        return isExportHatch ?  MultiblockAbility.OUTPUT_ENERGY : MultiblockAbility.INPUT_ENERGY;
+        return isExportHatch ? MultiblockAbility.OUTPUT_ENERGY : MultiblockAbility.INPUT_ENERGY;
     }
 
     @Override
@@ -153,7 +153,8 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
             }
         }));
 
-        builder.widget(new ClickButtonWidget(7, 139, 77, 20, I18n.format("zbgt.machine.creative_energy.apply_button"), (clickData) -> setEnergyConfiguration()));
+        builder.widget(new ClickButtonWidget(7, 139, 77, 20, I18n.format("zbgt.machine.creative_energy.apply_button"),
+                (clickData) -> setEnergyConfiguration()));
 
         return builder.build(getHolder(), entityPlayer);
     }
