@@ -36,6 +36,6 @@ public class InfiniteEnergyContainerHandler extends EnergyContainerHandler {
 
     @Override
     public long getInputPerSec() {
-        return isExportHatch ? 0L : getEnergyCapacity() * 16L;
+        return isExportHatch ? 0L : getEnergyCapacity();
     }
 }
