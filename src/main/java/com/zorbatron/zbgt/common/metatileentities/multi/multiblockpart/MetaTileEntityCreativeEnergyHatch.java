@@ -153,8 +153,9 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
             }
         }));
 
-        builder.widget(new ClickButtonWidget(7, 139, 77, 20, I18n.format("zbgt.machine.creative_energy.apply_button"),
-                (clickData) -> setEnergyConfiguration()));
+        builder.widget(new ClickButtonWidget(7, 139, 80, 20, I18n.format("zbgt.machine.creative_energy.apply_button"),
+                (clickData) -> setEnergyConfiguration())
+                        .setTooltipText(I18n.format("zbgt.machine.creative_energy.apply_button.tooltip")));
 
         return builder.build(getHolder(), entityPlayer);
     }

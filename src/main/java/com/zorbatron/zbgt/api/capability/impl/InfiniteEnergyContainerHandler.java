@@ -26,11 +26,16 @@ public class InfiniteEnergyContainerHandler extends EnergyContainerHandler {
 
     @Override
     public long getEnergyStored() {
-        return isExportHatch ? 0 : getInputVoltage() * getInputAmperage();
+        return isExportHatch ? 0L : getInputVoltage() * getInputAmperage();
     }
 
     @Override
     public long getEnergyCapacity() {
         return isExportHatch ? getOutputVoltage() * getOutputAmperage() : getInputVoltage() * getInputAmperage();
+    }
+
+    @Override
+    public long getInputPerSec() {
+        return isExportHatch ? 0L : getEnergyCapacity() * 16L;
     }
 }
