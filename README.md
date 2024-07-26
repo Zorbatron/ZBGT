@@ -4,7 +4,7 @@ Addon mod for [GregTech CEu](https://github.com/GregTechCEu/GregTech)
 
 ## Currently Has:
 
-Creative Energy Hatch
+Creative Energy Source
 - Configurable like the creative emitter, but as a multiblock part.
 - You need to make the multiblock reform when you change it's setting because right now because GregTech doesn't have a way for an energy container to notify the multiblock controller that it's voltage/amperage has changed.
 
