@@ -5,7 +5,9 @@ zbgt.machine.creative_energy_sink.name=Creative Energy Sink
 zbgt.machine.creative_energy_sink.tooltip=Infinite Energy Sink for Multiblocks
 
 zbgt.machine.creative_energy.apply_button=Apply Settings
-zbgt.machine.creative_energy.apply_button.tooltip=The connected multiblock needs to be reformed to accept the change!
+
+zbgt.machine.creative_energy.warning.1=The connected multiblock needs to be reformed to accept the changes!
+zbgt.machine.creative_energy.warning.2=PSSs and ATs will get 16x the power configured!
 
 zbgt.machine.creative_reservoir_hatch.name=Creative Reservoir Hatch
 zbgt.machine.creative_reservoir_hatch.tooltip=Fluid Input for Multiblocks

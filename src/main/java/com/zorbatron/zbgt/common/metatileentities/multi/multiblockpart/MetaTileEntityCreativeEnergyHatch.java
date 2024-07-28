@@ -74,6 +74,8 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         tooltip.add(I18n.format("gregtech.creative_tooltip.1") + TooltipHelper.RAINBOW +
                 I18n.format("gregtech.creative_tooltip.2") + I18n.format("gregtech.creative_tooltip.3"));
         tooltip.add(I18n.format("gregtech.universal.enabled"));
+        tooltip.add(I18n.format("zbgt.machine.creative_energy.warning.1"));
+        tooltip.add(I18n.format("zbgt.machine.creative_energy.warning.2"));
     }
 
     @Override
@@ -108,54 +110,57 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
 
     @Override
     protected ModularUI createUI(EntityPlayer entityPlayer) {
+        int yOffset = 10;
         // Voltage selector
-        ModularUI.Builder builder = ModularUI.defaultBuilder()
-                .widget(new CycleButtonWidget(7, 7, 30, 20, GTValues.VNF, () -> setTier, tier -> {
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 166 + yOffset)
+                .widget(new CycleButtonWidget(7, 7 + yOffset, 30, 20, GTValues.VNF, () -> setTier, tier -> {
                     setTier = tier;
                     voltage = GTValues.V[setTier];
                 }));
-        builder.label(7, 32, "gregtech.creative.energy.voltage");
-        builder.widget(new ImageWidget(7, 44, 156, 20, GuiTextures.DISPLAY));
-        builder.widget(new TextFieldWidget2(9, 50, 152, 16, () -> String.valueOf(voltage), value -> {
+        builder.label(10, 5, getMetaFullName());
+
+        builder.label(7, 32 + yOffset, "gregtech.creative.energy.voltage");
+        builder.widget(new ImageWidget(7, 44 + yOffset, 156, 20, GuiTextures.DISPLAY));
+        builder.widget(new TextFieldWidget2(9, 50 + yOffset, 152, 16, () -> String.valueOf(voltage), value -> {
             if (!value.isEmpty()) {
                 voltage = Long.parseLong(value);
                 setTier = GTUtility.getTierByVoltage(voltage);
             }
         }).setAllowedChars(TextFieldWidget2.NATURAL_NUMS).setMaxLength(19).setValidator(getTextFieldValidator()));
 
-        builder.label(7, 74, "gregtech.creative.energy.amperage");
-        builder.widget(new ClickButtonWidget(7, 87, 20, 20, "-", data -> {
+        builder.label(7, 74 + yOffset, "gregtech.creative.energy.amperage");
+        builder.widget(new ClickButtonWidget(7, 87 + yOffset, 20, 20, "-", data -> {
             if (amps > 0) {
                 amps--;
             }
         }));
-        builder.widget(new ClickButtonWidget(7, 111, 20, 20, "÷4", clickData -> {
+        builder.widget(new ClickButtonWidget(7, 111 + yOffset, 20, 20, "÷4", clickData -> {
             if (amps / 4 > 0) {
                 amps = amps / 4;
             } else {
                 amps = 1;
             }
         }));
-        builder.widget(new ImageWidget(29, 87, 118, 20, GuiTextures.DISPLAY));
-        builder.widget(new TextFieldWidget2(31, 93, 114, 16, () -> String.valueOf(amps), value -> {
+        builder.widget(new ImageWidget(29, 87 + yOffset, 118, 20, GuiTextures.DISPLAY));
+        builder.widget(new TextFieldWidget2(31, 93 + yOffset, 114, 16, () -> String.valueOf(amps), value -> {
             if (!value.isEmpty()) {
                 amps = Integer.parseInt(value);
             }
         }).setMaxLength(10).setNumbersOnly(0, Integer.MAX_VALUE));
-        builder.widget(new ClickButtonWidget(149, 87, 20, 20, "+", data -> {
+        builder.widget(new ClickButtonWidget(149, 87 + yOffset, 20, 20, "+", data -> {
             if (amps < Integer.MAX_VALUE) {
                 amps++;
             }
         }));
-        builder.widget(new ClickButtonWidget(149, 111, 20, 20, "x4", data -> {
+        builder.widget(new ClickButtonWidget(149, 111 + yOffset, 20, 20, "x4", data -> {
             if (amps * 4 <= Integer.MAX_VALUE) {
                 amps = amps * 4;
             }
         }));
 
-        builder.widget(new ClickButtonWidget(7, 139, 80, 20, I18n.format("zbgt.machine.creative_energy.apply_button"),
-                (clickData) -> setEnergyConfiguration())
-                        .setTooltipText(I18n.format("zbgt.machine.creative_energy.apply_button.tooltip")));
+        builder.widget(new ClickButtonWidget(7, 139 + yOffset, 80, 20,
+                I18n.format("zbgt.machine.creative_energy.apply_button"),
+                (clickData) -> setEnergyConfiguration()));
 
         return builder.build(getHolder(), entityPlayer);
     }
