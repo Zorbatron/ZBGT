@@ -3,14 +3,15 @@ package com.zorbatron.zbgt.common;
 import static com.zorbatron.zbgt.ZBUtility.zbgtId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 
-import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityCreativeEnergyHatch;
-import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityCreativeReservoirHatch;
+import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.*;
+import com.zorbatron.zbgt.common.metatileentities.storage.*;
 
 public class MetaTileEntities {
 
     public static MetaTileEntityCreativeEnergyHatch CREATIVE_ENERGY_SOURCE;
     public static MetaTileEntityCreativeEnergyHatch CREATIVE_ENERGY_SINK;
     public static MetaTileEntityCreativeReservoirHatch CREATIVE_RESERVOIR_HATCH;
+    public static MetaTileEntityCreativeComputationProvider CREATIVE_COMPUTATION_PROVIDER;
 
     public static int id = 18000;
 
@@ -21,5 +22,7 @@ public class MetaTileEntities {
                 new MetaTileEntityCreativeEnergyHatch(zbgtId("creative_energy_sink"), true)); // 18001
         CREATIVE_RESERVOIR_HATCH = registerMetaTileEntity(++id,
                 new MetaTileEntityCreativeReservoirHatch(zbgtId("creative_reservoir_hatch"))); // 18002
+        CREATIVE_COMPUTATION_PROVIDER = registerMetaTileEntity(++id,
+                new MetaTileEntityCreativeComputationProvider(zbgtId("creative_computation_provider"))); // 18003
     }
 }
