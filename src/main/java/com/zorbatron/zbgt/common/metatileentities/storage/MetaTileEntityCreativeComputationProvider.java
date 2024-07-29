@@ -148,14 +148,28 @@ public class MetaTileEntityCreativeComputationProvider extends MetaTileEntity
     }
 
     @Override
+    public void writeInitialSyncData(@NotNull PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+        buf.writeBoolean(this.isWorkingEnabled);
+    }
+
+    @Override
+    public void receiveInitialSyncData(@NotNull PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+        this.isWorkingEnabled = buf.readBoolean();
+    }
+
+    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("MaxCWUt", this.maxCWUt);
+        data.setBoolean("IsWorkingEnabled", this.isWorkingEnabled);
         return super.writeToNBT(data);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound data) {
         this.maxCWUt = data.getInteger("MaxCWUt");
+        this.isWorkingEnabled = data.getBoolean("IsWorkingEnabled");
         super.readFromNBT(data);
     }
 }
