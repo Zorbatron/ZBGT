@@ -5,6 +5,8 @@ import static gregtech.api.capability.GregtechDataCodes.UPDATE_IO_SPEED;
 
 import java.util.Collection;
 
+import codechicken.lib.render.pipeline.ColourMultiplier;
+import gregtech.api.util.GTUtility;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
@@ -12,6 +14,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
 
 import codechicken.lib.render.CCRenderState;
@@ -114,7 +117,10 @@ public class MetaTileEntityCreativeComputationProvider extends MetaTileEntity
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
-        Textures.VOLTAGE_CASINGS[GTValues.MAX].render(renderState, translation, pipeline);
+
+        IVertexOperation[] renderPipeline = ArrayUtils.add(pipeline,
+                new ColourMultiplier(GTUtility.convertRGBtoOpaqueRGBA_CL(getPaintingColorForRendering())));
+        Textures.VOLTAGE_CASINGS[GTValues.MAX].render(renderState, translation, renderPipeline);
         Textures.OPTICAL_DATA_ACCESS_HATCH.renderSided(getFrontFacing(), renderState, translation, pipeline);
     }
 
