@@ -22,6 +22,9 @@ Precise Dual Cover
 - Combines the robot arm and fluid regulator into one cover!
 - Also has no texture 😔
 
+Creative Computation Provider
+- Acts as an HPCA that can supply up to 2,147,483,647 CWU/t!
+
 ## Planned:
 
 Multi Creative Reservoir Hatch
