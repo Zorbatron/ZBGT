@@ -23,7 +23,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
-import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.capability.impl.FilteredItemHandler;
 import gregtech.api.capability.impl.FluidTankList;
@@ -47,15 +46,22 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
     protected final static XSTR floatGen = new XSTR();
     private boolean isWorkingEnabled;
 
-    public MetaTileEntityAirIntakeHatch(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTValues.LuV, false);
-        this.fluidTank = new NotifiableFluidTank(128_000, this, false);
+    private final int tankCapacity;
+    private final int fillAmount;
+
+    public MetaTileEntityAirIntakeHatch(ResourceLocation metaTileEntityId, int tier, int tankCapacity, int fillAmount) {
+        super(metaTileEntityId, tier, false);
+        this.fluidTank = new NotifiableFluidTank(tankCapacity, this, false);
+
+        this.tankCapacity = tankCapacity;
+        this.fillAmount = fillAmount;
+
         initializeInventory();
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityAirIntakeHatch(metaTileEntityId);
+        return new MetaTileEntityAirIntakeHatch(metaTileEntityId, getTier(), tankCapacity, fillAmount);
     }
 
     @Override
@@ -68,7 +74,7 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
 
         if (getOffsetTimer() % 5 == 0 && getWorld().isAirBlock(blockFacingPos)) {
             if (!getWorld().isRemote) {
-                int fillAmount = fluidTank.fill(new FluidStack(Materials.Air.getFluid(), 1000), true);
+                int fillAmount = fluidTank.fill(new FluidStack(Materials.Air.getFluid(), this.fillAmount), true);
 
                 if (fillAmount == 0 && isWorkingEnabled) {
                     isWorkingEnabled = false;
