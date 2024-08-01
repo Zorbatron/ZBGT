@@ -1,5 +1,6 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -13,6 +14,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.IFluidTank;
@@ -34,10 +36,15 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.recipeproperties.GasCollectorDimensionProperty;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.XSTR;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
+import it.unimi.dsi.fastutil.ints.IntList;
+import it.unimi.dsi.fastutil.ints.IntLists;
 
 public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifiablePart
                                           implements IMultiblockAbilityPart<IFluidTank> {
@@ -48,6 +55,7 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
 
     private final int tankCapacity;
     private final int fillAmount;
+    private Fluid fillFluid;
 
     public MetaTileEntityAirIntakeHatch(ResourceLocation metaTileEntityId, int tier, int tankCapacity, int fillAmount) {
         super(metaTileEntityId, tier, false);
@@ -68,13 +76,33 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
     public void update() {
         super.update();
 
+        if (isFirstTick() && !getWorld().isRemote) {
+            Collection<Recipe> collectorRecipes = RecipeMaps.GAS_COLLECTOR_RECIPES.getRecipeList();
+
+            for (Recipe recipe : collectorRecipes) {
+                if (!recipe.hasProperty(GasCollectorDimensionProperty.getInstance())) continue;
+
+                IntList dimensionProperty = recipe.getProperty(GasCollectorDimensionProperty.getInstance(),
+                        IntLists.EMPTY_LIST);
+
+                if (dimensionProperty.get(0) == getWorld().provider.getDimension()) {
+                    this.fillFluid = recipe.getFluidOutputs().get(0).getFluid();
+                    break;
+                }
+            }
+
+            if (this.fillFluid == null) {
+                this.fillFluid = Materials.Air.getFluid();
+            }
+        }
+
         final EnumFacing facing = getFrontFacing();
         final BlockPos blockFacingPos = new BlockPos(getPos().getX() + facing.getXOffset(),
                 getPos().getY() + facing.getYOffset(), getPos().getZ() + facing.getZOffset());
 
         if (getOffsetTimer() % 5 == 0 && getWorld().isAirBlock(blockFacingPos)) {
             if (!getWorld().isRemote) {
-                int fillAmount = fluidTank.fill(new FluidStack(Materials.Air.getFluid(), this.fillAmount), true);
+                int fillAmount = fluidTank.fill(new FluidStack(fillFluid, this.fillAmount), true);
 
                 if (fillAmount == 0 && isWorkingEnabled) {
                     isWorkingEnabled = false;
