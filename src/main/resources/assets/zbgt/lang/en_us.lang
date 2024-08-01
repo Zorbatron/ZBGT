@@ -16,6 +16,14 @@ zbgt.machine.creative_computation_provider.tooltip=Infinite source of computatio
 zbgt.machine.creative_computation_provider.average=Average Requested CWU/t
 zbgt.machine.creative_computation_provider.cwut=Maximum Requestable CWU/t
 
+zbgt.machine.air_intake_universal.rate=Collects %,d mB of air every %,d ticks
+
+zbgt.machine.air_intake_hatch.name=Air Intake Hatch
+zbgt.machine.air_intake_hatch.tooltip=Collects air from the world for multiblocks
+
+zbgt.machine.extreme_air_intake_hatch.name=Extreme Air Intake Hatch
+zbgt.machine.extreme_air_intake_hatch.tooltip=Collects air from the world for multiblocks
+
 
 metaitem.cover.dual_cover.lv.name=LV Dual Cover
 metaitem.cover.dual_cover.mv.name=MV Dual Cover

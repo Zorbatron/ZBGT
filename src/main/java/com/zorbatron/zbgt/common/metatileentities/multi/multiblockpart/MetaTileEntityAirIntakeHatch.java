@@ -4,7 +4,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -13,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -21,6 +24,8 @@ import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
+
+import org.jetbrains.annotations.Nullable;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
@@ -56,6 +61,8 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
     private final int tankCapacity;
     private final int fillAmount;
     private Fluid fillFluid;
+
+    private final int tickRate = 5;
 
     public MetaTileEntityAirIntakeHatch(ResourceLocation metaTileEntityId, int tier, int tankCapacity, int fillAmount) {
         super(metaTileEntityId, tier, false);
@@ -100,7 +107,7 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
         final BlockPos blockFacingPos = new BlockPos(getPos().getX() + facing.getXOffset(),
                 getPos().getY() + facing.getYOffset(), getPos().getZ() + facing.getZOffset());
 
-        if (getOffsetTimer() % 5 == 0 && getWorld().isAirBlock(blockFacingPos)) {
+        if (getOffsetTimer() % tickRate == 0 && getWorld().isAirBlock(blockFacingPos)) {
             if (!getWorld().isRemote) {
                 int fillAmount = fluidTank.fill(new FluidStack(fillFluid, this.fillAmount), true);
 
@@ -190,6 +197,11 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
                 list.add(new TextComponentString(fluidAmount));
             }
         };
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, boolean advanced) {
+        tooltip.add(I18n.format("zbgt.machine.air_intake_universal.rate", this.fillAmount, this.tickRate));
     }
 
     @Override
