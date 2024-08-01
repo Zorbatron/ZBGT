@@ -13,15 +13,20 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.ItemStackHandler;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.capability.GregtechDataCodes;
+import gregtech.api.capability.impl.FilteredItemHandler;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.NotifiableFluidTank;
 import gregtech.api.gui.GuiTextures;
@@ -153,7 +158,10 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
         tankWidget = new TankWidget(fluidTank, 69, 52, 18, 18)
                 .setAlwaysShowFull(true).setDrawHoveringText(false).setContainerClicking(true, false);
 
-        builder.image(7, 16, 81, 55, GuiTextures.DISPLAY);
+        builder.image(7, 16, 81, 55, GuiTextures.DISPLAY)
+                .widget(new ImageWidget(91, 36, 14, 15, GuiTextures.TANK_ICON))
+                .widget(new SlotWidget(exportItems, 0, 90, 53, true, false)
+                        .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.OUT_SLOT_OVERLAY));
 
         // Add general widgets
         return builder.label(6, 6, title)
@@ -161,6 +169,8 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
                 .widget(new AdvancedTextWidget(11, 30, getFluidAmountText(tankWidget), 0xFFFFFF))
                 .widget(new AdvancedTextWidget(11, 40, getFluidNameText(tankWidget), 0xFFFFFF))
                 .widget(tankWidget)
+                .widget(new FluidContainerSlotWidget(importItems, 0, 90, 16, false)
+                        .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.IN_SLOT_OVERLAY))
                 .bindPlayerInventory(entityPlayer.inventory);
     }
 
@@ -199,8 +209,28 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
     }
 
     @Override
+    public <T> T getCapability(Capability<T> capability, EnumFacing side) {
+        if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+            // allow both importing and exporting from the tank
+            return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(fluidTank);
+        }
+        return super.getCapability(capability, side);
+    }
+
+    @Override
     protected FluidTankList createImportFluidHandler() {
         return new FluidTankList(false, fluidTank);
+    }
+
+    @Override
+    protected IItemHandlerModifiable createImportItemHandler() {
+        return new FilteredItemHandler(this).setFillPredicate(
+                FilteredItemHandler.getCapabilityFilter(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY));
+    }
+
+    @Override
+    protected IItemHandlerModifiable createExportItemHandler() {
+        return new ItemStackHandler(1);
     }
 
     // Black magic from GT++
