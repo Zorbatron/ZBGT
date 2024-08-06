@@ -52,7 +52,9 @@ public class InfiniteEnergyContainerHandler extends EnergyContainerHandler {
     }
 
     private boolean isPSSOrAT() {
-        return controllerTileSupplier.get() instanceof MetaTileEntityPowerSubstation ||
-                controllerTileSupplier.get() instanceof MetaTileEntityActiveTransformer;
+        MultiblockControllerBase controllerBase = controllerTileSupplier.get();
+
+        return controllerBase instanceof MetaTileEntityPowerSubstation ||
+                controllerBase instanceof MetaTileEntityActiveTransformer;
     }
 }
