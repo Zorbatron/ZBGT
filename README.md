@@ -26,6 +26,10 @@ Creative Computation Provider
 - Acts as an HPCA that can supply up to 2,147,483,647 CWU/t!
 - Backported from GregTech Modern, and will be moved into base CEu once M-W-K finishes their PipeNet rewrite.
 
+Air Intake Hatch
+- Ported from GT++ but it collects dimensions specific gas now!
+- Is a Gas Collector that passively generates air.
+
 ## Planned:
 
 Multi Creative Reservoir Hatch
