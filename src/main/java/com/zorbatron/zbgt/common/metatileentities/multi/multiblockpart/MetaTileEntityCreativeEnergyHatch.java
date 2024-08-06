@@ -185,12 +185,11 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
 
     protected void setEnergyConfiguration() {
         this.energyContainer = new InfiniteEnergyContainerHandler(this,
-                getVoltage() * getAmps(),
                 isExportHatch ? 0L : getVoltage(),
                 isExportHatch ? 0L : getAmps(),
                 isExportHatch ? getVoltage() : 0L,
                 isExportHatch ? getAmps() : 0L,
-                isExportHatch);
+                isExportHatch, this::getController);
     }
 
     @Override
