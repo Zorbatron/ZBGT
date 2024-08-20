@@ -3,6 +3,9 @@ package com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart;
 import java.util.List;
 import java.util.function.Function;
 
+import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
+import gregtech.common.metatileentities.multi.electric.MetaTileEntityActiveTransformer;
+import gregtech.common.metatileentities.multi.electric.MetaTileEntityPowerSubstation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -43,14 +46,13 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
     protected InfiniteEnergyContainerHandler energyContainer;
 
     private int setTier = 0;
-    private long voltage;
-    private long amps;
+    private long voltage = 8;
+    private long amps = 1;
     private final boolean isExportHatch;
+    private boolean isPSSOrAT = false;
 
     public MetaTileEntityCreativeEnergyHatch(ResourceLocation metaTileEntityId, boolean isExportHatch) {
         super(metaTileEntityId, GTValues.MAX);
-        this.voltage = 8;
-        this.amps = 1;
         this.isExportHatch = isExportHatch;
         setEnergyConfiguration();
     }
@@ -67,6 +69,18 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
             getOverlay().renderSided(getFrontFacing(), renderState, translation,
                     PipelineUtil.color(pipeline, GTValues.VC[getTier()]));
         }
+    }
+
+    @Override
+    public void addToMultiBlock(MultiblockControllerBase controllerBase) {
+        super.addToMultiBlock(controllerBase);
+
+        setIsPSSOrAT(controllerBase instanceof MetaTileEntityPowerSubstation || controllerBase instanceof MetaTileEntityActiveTransformer);
+    }
+
+    @Override
+    public void removeFromMultiBlock(MultiblockControllerBase controllerBase) {
+        super.removeFromMultiBlock(controllerBase);
     }
 
     @Override
@@ -159,7 +173,12 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
 
         builder.widget(new ClickButtonWidget(7, 139 + yOffset, 80, 20,
                 I18n.format("zbgt.machine.creative_energy.apply_button"),
-                (clickData) -> setEnergyConfiguration()));
+                (clickData) -> {
+                    setEnergyConfiguration();
+                    if (getController() != null) {
+                        getController().invalidateStructure();
+                    }
+                }));
 
         return builder.build(getHolder(), entityPlayer);
     }
@@ -182,13 +201,16 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         };
     }
 
-    protected void setEnergyConfiguration() {
-        this.energyContainer = new InfiniteEnergyContainerHandler(this,
-                isExportHatch ? 0L : getVoltage(),
-                isExportHatch ? 0L : getAmps(),
-                isExportHatch ? getVoltage() : 0L,
-                isExportHatch ? getAmps() : 0L,
-                isExportHatch, this::getController);
+    private void setEnergyConfiguration() {
+        this.energyContainer = new InfiniteEnergyContainerHandler(this, getVoltage(), getAmps(), isExportHatch, this::isPSSOrAt);
+    }
+
+    private boolean isPSSOrAt() {
+        return this.isPSSOrAT;
+    }
+
+    private void setIsPSSOrAT(boolean isPSSOrAT) {
+        this.isPSSOrAT = isPSSOrAT;
     }
 
     @Override
