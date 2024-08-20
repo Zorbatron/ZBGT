@@ -23,6 +23,9 @@ zbgt.machine.air_intake_hatch.tooltip=Collects air from the world for multiblock
 zbgt.machine.extreme_air_intake_hatch.name=Extreme Air Intake Hatch
 zbgt.machine.extreme_air_intake_hatch.tooltip=Collects air from the world for multiblocks
 
+zbgt.machine.single_item_input_bus.name=Single Item Input Bus
+zbgt.machine.single_item_input_bus.stack_size=§6Max stack size: §f%,d
+
 
 metaitem.cover.dual_cover.lv.name=LV Dual Cover
 metaitem.cover.dual_cover.mv.name=MV Dual Cover

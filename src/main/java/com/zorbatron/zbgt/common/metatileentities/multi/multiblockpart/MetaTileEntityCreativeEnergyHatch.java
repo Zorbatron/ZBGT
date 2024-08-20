@@ -3,9 +3,6 @@ package com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart;
 import java.util.List;
 import java.util.function.Function;
 
-import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
-import gregtech.common.metatileentities.multi.electric.MetaTileEntityActiveTransformer;
-import gregtech.common.metatileentities.multi.electric.MetaTileEntityPowerSubstation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -33,11 +30,14 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.SimpleOverlayRenderer;
 import gregtech.client.utils.PipelineUtil;
 import gregtech.client.utils.TooltipHelper;
+import gregtech.common.metatileentities.multi.electric.MetaTileEntityActiveTransformer;
+import gregtech.common.metatileentities.multi.electric.MetaTileEntityPowerSubstation;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 
 public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockPart implements
@@ -75,12 +75,8 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
     public void addToMultiBlock(MultiblockControllerBase controllerBase) {
         super.addToMultiBlock(controllerBase);
 
-        setIsPSSOrAT(controllerBase instanceof MetaTileEntityPowerSubstation || controllerBase instanceof MetaTileEntityActiveTransformer);
-    }
-
-    @Override
-    public void removeFromMultiBlock(MultiblockControllerBase controllerBase) {
-        super.removeFromMultiBlock(controllerBase);
+        setIsPSSOrAT(controllerBase instanceof MetaTileEntityPowerSubstation ||
+                controllerBase instanceof MetaTileEntityActiveTransformer);
     }
 
     @Override
@@ -172,13 +168,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         }));
 
         builder.widget(new ClickButtonWidget(7, 139 + yOffset, 80, 20,
-                I18n.format("zbgt.machine.creative_energy.apply_button"),
-                (clickData) -> {
-                    setEnergyConfiguration();
-                    if (getController() != null) {
-                        getController().invalidateStructure();
-                    }
-                }));
+                I18n.format("zbgt.machine.creative_energy.apply_button"), clickData -> setEnergyConfiguration()));
 
         return builder.build(getHolder(), entityPlayer);
     }
@@ -202,7 +192,8 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
     }
 
     private void setEnergyConfiguration() {
-        this.energyContainer = new InfiniteEnergyContainerHandler(this, getVoltage(), getAmps(), isExportHatch, this::isPSSOrAt);
+        this.energyContainer = new InfiniteEnergyContainerHandler(this, getVoltage(), getAmps(), isExportHatch,
+                this::isPSSOrAt);
     }
 
     private boolean isPSSOrAt() {
