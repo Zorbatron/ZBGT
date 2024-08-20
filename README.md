@@ -30,6 +30,9 @@ Air Intake Hatch
 - Ported from GT++ but it collects dimensions specific gas now!
 - Is a Gas Collector that passively generates air.
 
+Single Item Input Bus
+- Functionally identical to a ULV input bus, but it has a max stack size of 1.
+
 ## Planned:
 
 Multi Creative Reservoir Hatch
