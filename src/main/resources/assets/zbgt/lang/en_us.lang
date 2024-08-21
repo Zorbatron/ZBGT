@@ -35,6 +35,11 @@ metaitem.cover.dual_cover.iv.name=IV Dual Cover
 metaitem.cover.dual_cover.luv.name=LuV Dual Cover
 metaitem.cover.dual_cover.zpm.name=ZPM Dual Cover
 metaitem.cover.dual_cover.uv.name=UV Dual Cover
+metaitem.cover.dual_cover.uhv.name=UHV Dual Cover
+metaitem.cover.dual_cover.uev.name=UEV Dual Cover
+metaitem.cover.dual_cover.uiv.name=UIV Dual Cover
+metaitem.cover.dual_cover.uxv.name=UXV Dual Cover
+metaitem.cover.dual_cover.opv.name=OpV Dual Cover
 metaitem.cover.dual_cover.tooltip=Transfers §fItems§7 and §fFluids§7 at specific rates as §fCover§7.
 cover.dual_cover.title=Dual Cover Settings (%s)
 
@@ -46,6 +51,11 @@ metaitem.cover.precise_dual_cover.iv.name=IV Precise Dual Cover
 metaitem.cover.precise_dual_cover.luv.name=LuV Precise Dual Cover
 metaitem.cover.precise_dual_cover.zpm.name=ZPM Precise Dual Cover
 metaitem.cover.precise_dual_cover.uv.name=UV Precise Dual Cover
+metaitem.cover.precise_dual_cover.uhv.name=UHV Precise Dual Cover
+metaitem.cover.precise_dual_cover.uev.name=UEV Precise Dual Cover
+metaitem.cover.precise_dual_cover.uiv.name=UIV Precise Dual Cover
+metaitem.cover.precise_dual_cover.uxv.name=UXV Precise Dual Cover
+metaitem.cover.precise_dual_cover.opv.name=OpV Precise Dual Cover
 metaitem.cover.precise_dual_cover.tooltip=Limits §fItems§7 and §fFluids§7 to specific quantities as §fCover§7.
 cover.precise_dual_cover.title=Precise Dual Cover Settings (%s)
 

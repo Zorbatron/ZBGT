@@ -12,6 +12,11 @@ public class ZBGTMetaItems {
     public static MetaItem<?>.MetaValueItem DUAL_COVER_LuV;
     public static MetaItem<?>.MetaValueItem DUAL_COVER_ZPM;
     public static MetaItem<?>.MetaValueItem DUAL_COVER_UV;
+    public static MetaItem<?>.MetaValueItem DUAL_COVER_UHV;
+    public static MetaItem<?>.MetaValueItem DUAL_COVER_UEV;
+    public static MetaItem<?>.MetaValueItem DUAL_COVER_UIV;
+    public static MetaItem<?>.MetaValueItem DUAL_COVER_UXV;
+    public static MetaItem<?>.MetaValueItem DUAL_COVER_OpV;
 
     public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_LV;
     public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_MV;
@@ -21,6 +26,11 @@ public class ZBGTMetaItems {
     public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_LuV;
     public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_ZPM;
     public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_UV;
+    public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_UHV;
+    public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_UEV;
+    public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_UIV;
+    public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_UXV;
+    public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_OpV;
 
     public static void init() {
         ZBGTMetaItem item = new ZBGTMetaItem();

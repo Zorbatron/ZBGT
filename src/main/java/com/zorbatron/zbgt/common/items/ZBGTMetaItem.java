@@ -7,6 +7,7 @@ import net.minecraft.util.ResourceLocation;
 
 import com.zorbatron.zbgt.ZBUtility;
 
+import gregtech.api.GregTechAPI;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.StandardMetaItem;
 import gregtech.common.items.behaviors.TooltipBehavior;
@@ -57,7 +58,26 @@ public class ZBGTMetaItem extends StandardMetaItem {
             lines.add(I18n.format("metaitem.cover.dual_cover.tooltip"));
             lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16, 1280 * 64 * 64 * 4 / 20));
         }));
-        // 8-12 reserved for higher tier dual covers.
+        DUAL_COVER_UHV = addItem(8, "cover.dual_cover.uhv").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16, 1280 * 64 * 64 * 4 / 20));
+        })).setInvisibleIf(!GregTechAPI.isHighTier());
+        DUAL_COVER_UEV = addItem(9, "cover.dual_cover.uev").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16, 1280 * 64 * 64 * 4 / 20));
+        })).setInvisibleIf(!GregTechAPI.isHighTier());
+        DUAL_COVER_UIV = addItem(10, "cover.dual_cover.uiv").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16, 1280 * 64 * 64 * 4 / 20));
+        })).setInvisibleIf(!GregTechAPI.isHighTier());
+        DUAL_COVER_UXV = addItem(11, "cover.dual_cover.uxv").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16, 1280 * 64 * 64 * 4 / 20));
+        })).setInvisibleIf(!GregTechAPI.isHighTier());
+        DUAL_COVER_OpV = addItem(12, "cover.dual_cover.opv").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16, 1280 * 64 * 64 * 4 / 20));
+        })).setInvisibleIf(!GregTechAPI.isHighTier());
 
         // Precise Dual Covers: 13-25
         PRECISE_DUAL_COVER_LV = addItem(13, "cover.precise_dual_cover.lv").addComponents(new TooltipBehavior(lines -> {
@@ -94,6 +114,35 @@ public class ZBGTMetaItem extends StandardMetaItem {
             lines.add(I18n.format("metaitem.cover.precise_dual_cover.tooltip"));
             lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16, 1280 * 64 * 64 * 4 / 20));
         }));
-        // 21-25 reserved for higher tier precise dual covers.
+        PRECISE_DUAL_COVER_UHV = addItem(21, "cover.precise_dual_cover.uhv")
+                .addComponents(new TooltipBehavior(lines -> {
+                    lines.add(I18n.format("metaitem.cover.precise_dual_cover.tooltip"));
+                    lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16,
+                            1280 * 64 * 64 * 4 / 20));
+                })).setInvisibleIf(!GregTechAPI.isHighTier());
+        PRECISE_DUAL_COVER_UEV = addItem(22, "cover.precise_dual_cover.uev")
+                .addComponents(new TooltipBehavior(lines -> {
+                    lines.add(I18n.format("metaitem.cover.precise_dual_cover.tooltip"));
+                    lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16,
+                            1280 * 64 * 64 * 4 / 20));
+                })).setInvisibleIf(!GregTechAPI.isHighTier());
+        PRECISE_DUAL_COVER_UIV = addItem(23, "cover.precise_dual_cover.uiv")
+                .addComponents(new TooltipBehavior(lines -> {
+                    lines.add(I18n.format("metaitem.cover.precise_dual_cover.tooltip"));
+                    lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16,
+                            1280 * 64 * 64 * 4 / 20));
+                })).setInvisibleIf(!GregTechAPI.isHighTier());
+        PRECISE_DUAL_COVER_UXV = addItem(24, "cover.precise_dual_cover.uxv")
+                .addComponents(new TooltipBehavior(lines -> {
+                    lines.add(I18n.format("metaitem.cover.precise_dual_cover.tooltip"));
+                    lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16,
+                            1280 * 64 * 64 * 4 / 20));
+                })).setInvisibleIf(!GregTechAPI.isHighTier());
+        PRECISE_DUAL_COVER_OpV = addItem(25, "cover.precise_dual_cover.opv")
+                .addComponents(new TooltipBehavior(lines -> {
+                    lines.add(I18n.format("metaitem.cover.precise_dual_cover.tooltip"));
+                    lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16,
+                            1280 * 64 * 64 * 4 / 20));
+                })).setInvisibleIf(!GregTechAPI.isHighTier());
     }
 }

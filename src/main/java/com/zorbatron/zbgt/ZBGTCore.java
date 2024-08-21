@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.zorbatron.zbgt.common.MetaTileEntities;
+import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
 
 @Mod(modid = ZBGTCore.MODID, version = ZBGTCore.VERSION, name = ZBGTCore.NAME, acceptedMinecraftVersions = "[1.12.2]")
 public class ZBGTCore {
@@ -35,7 +35,7 @@ public class ZBGTCore {
         MinecraftForge.EVENT_BUS.register(this);
         LOGGER.info("I am " + Tags.MODNAME + " + at version " + Tags.VERSION);
         proxy.preInit();
-        MetaTileEntities.init();
+        ZBGTMetaTileEntities.init();
     }
 
     @EventHandler
