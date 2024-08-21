@@ -4,16 +4,21 @@ import static gregtech.api.capability.GregtechDataCodes.UPDATE_ACTIVE;
 import static gregtech.api.capability.GregtechDataCodes.UPDATE_IO_SPEED;
 
 import java.util.Collection;
+import java.util.List;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.ColourMultiplier;
@@ -31,6 +36,7 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 
 public class MetaTileEntityCreativeComputationProvider extends MetaTileEntity
                                                        implements IOpticalComputationProvider, IControllable {
@@ -70,6 +76,12 @@ public class MetaTileEntityCreativeComputationProvider extends MetaTileEntity
         builder.widget(new DynamicLabelWidget(7, 74, () -> String.valueOf(this.lastRequestedCWUt)));
 
         return builder.build(getHolder(), entityPlayer);
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, boolean advanced) {
+        tooltip.add(I18n.format("gregtech.creative_tooltip.1") + TooltipHelper.RAINBOW +
+                I18n.format("gregtech.creative_tooltip.2") + I18n.format("gregtech.creative_tooltip.3"));
     }
 
     @Override
