@@ -37,16 +37,4 @@ public class ZBGTCore {
         proxy.preInit();
         ZBGTMetaTileEntities.init();
     }
-
-    @EventHandler
-    // load "Do your mod setup. Build whatever data structures you care about." (Remove if not needed)
-    public void init(FMLInitializationEvent event) {}
-
-    @EventHandler
-    // postInit "Handle interaction with other mods, complete your setup based on this." (Remove if not needed)
-    public void postInit(FMLPostInitializationEvent event) {}
-
-    @EventHandler
-    // register server commands in this event handler (Remove if not needed)
-    public void serverStarting(FMLServerStartingEvent event) {}
 }
