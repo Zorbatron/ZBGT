@@ -5,9 +5,9 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import com.zorbatron.zbgt.common.ZBGTRecipes;
 import com.zorbatron.zbgt.common.covers.ZBGTCovers;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
+import com.zorbatron.zbgt.loaders.recipe.ZBGTRecipes;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.cover.CoverDefinition;
