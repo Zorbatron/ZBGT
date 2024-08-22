@@ -39,7 +39,7 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
 public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNotifiablePart implements
-                                                  IMultiblockAbilityPart<IFluidTank> {
+                                              IMultiblockAbilityPart<IFluidTank> {
 
     private final InfiniteFluidTank fluidTank;
 
