@@ -5,16 +5,16 @@ import java.util.function.Supplier;
 import gregtech.api.capability.impl.EnergyContainerHandler;
 import gregtech.api.metatileentity.MetaTileEntity;
 
-public class InfiniteEnergyContainerHandler extends EnergyContainerHandler {
+public class InfiniteEnergyContainer extends EnergyContainerHandler {
 
     private final boolean isExportHatch;
     private final Supplier<Boolean> powerMultiplierSupplier;
     private final Supplier<Long> voltageSupplier;
     private final Supplier<Long> amperageSupplier;
 
-    public InfiniteEnergyContainerHandler(MetaTileEntity tileEntity, boolean isExportHatch,
-                                          Supplier<Boolean> powerMultiplierSupplier, Supplier<Long> voltageSupplier,
-                                          Supplier<Long> amperageSupplier) {
+    public InfiniteEnergyContainer(MetaTileEntity tileEntity, boolean isExportHatch,
+                                   Supplier<Boolean> powerMultiplierSupplier, Supplier<Long> voltageSupplier,
+                                   Supplier<Long> amperageSupplier) {
         super(tileEntity, 0, 0, 0, 0, 0);
 
         this.isExportHatch = isExportHatch;

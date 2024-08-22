@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import com.zorbatron.zbgt.api.capability.impl.InfiniteEnergyContainerHandler;
+import com.zorbatron.zbgt.api.capability.impl.InfiniteEnergyContainer;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
@@ -43,7 +43,7 @@ import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMulti
 public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockPart implements
                                                IMultiblockAbilityPart<IEnergyContainer> {
 
-    protected InfiniteEnergyContainerHandler energyContainer;
+    protected InfiniteEnergyContainer energyContainer;
 
     private int setTier = 0;
     private long voltage = 8;
@@ -202,7 +202,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
     }
 
     private void setInitialEnergyConfiguration() {
-        this.energyContainer = new InfiniteEnergyContainerHandler(this, isExportHatch, this::isPSSOrAt,
+        this.energyContainer = new InfiniteEnergyContainer(this, isExportHatch, this::isPSSOrAt,
                 this::getVoltage, this::getAmps);
     }
 
