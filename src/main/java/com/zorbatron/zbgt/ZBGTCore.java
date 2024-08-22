@@ -11,7 +11,13 @@ import org.apache.logging.log4j.Logger;
 
 import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
 
-@Mod(modid = ZBGTCore.MODID, version = ZBGTCore.VERSION, name = ZBGTCore.NAME, acceptedMinecraftVersions = "[1.12.2]")
+import gregtech.GTInternalTags;
+
+@Mod(modid = ZBGTCore.MODID,
+     version = ZBGTCore.VERSION,
+     name = ZBGTCore.NAME,
+     acceptedMinecraftVersions = "[1.12.2]",
+     dependencies = GTInternalTags.DEP_VERSION_STRING)
 public class ZBGTCore {
 
     public static final String MODID = Tags.MODID;
