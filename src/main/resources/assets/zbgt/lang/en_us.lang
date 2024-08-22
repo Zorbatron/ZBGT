@@ -7,8 +7,8 @@ zbgt.machine.creative_energy_sink.tooltip=Infinite Energy Sink for Multiblocks
 zbgt.machine.creative_energy.apply_button=Apply Settings
 zbgt.machine.creative_energy.warning.1=The connected multiblock needs to be reformed to accept the changes!
 
-zbgt.machine.creative_reservoir_hatch.name=Creative Reservoir Hatch
-zbgt.machine.creative_reservoir_hatch.tooltip=Fluid Input for Multiblocks
+zbgt.machine.creative_reservoir_hatch.name=Creative Fluid Hatch
+zbgt.machine.creative_reservoir_hatch.tooltip=Infinite fluid source for multiblocks
 
 zbgt.machine.creative_computation_provider.name=Creative Computation Provider
 zbgt.machine.creative_computation_provider.tooltip=Infinite source of computation for CWU consumers
