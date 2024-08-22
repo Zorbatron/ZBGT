@@ -5,7 +5,7 @@ import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTile
 import com.zorbatron.zbgt.ZBUtility;
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityAirIntakeHatch;
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityCreativeEnergyHatch;
-import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityCreativeReservoirHatch;
+import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityCreativeFluidHatch;
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntitySingleItemInputBus;
 import com.zorbatron.zbgt.common.metatileentities.storage.MetaTileEntityCreativeComputationProvider;
 
@@ -15,7 +15,7 @@ public class ZBGTMetaTileEntities {
 
     public static MetaTileEntityCreativeEnergyHatch CREATIVE_ENERGY_SOURCE;
     public static MetaTileEntityCreativeEnergyHatch CREATIVE_ENERGY_SINK;
-    public static MetaTileEntityCreativeReservoirHatch CREATIVE_RESERVOIR_HATCH;
+    public static MetaTileEntityCreativeFluidHatch CREATIVE_RESERVOIR_HATCH;
     public static MetaTileEntityCreativeComputationProvider CREATIVE_COMPUTATION_PROVIDER;
     public static MetaTileEntityAirIntakeHatch AIR_INTAKE_HATCH;
     public static MetaTileEntityAirIntakeHatch EXTREME_AIR_INTAKE_HATCH;
@@ -28,7 +28,7 @@ public class ZBGTMetaTileEntities {
                 new MetaTileEntityCreativeEnergyHatch(ZBUtility.zbgtId("creative_energy_sink"), true));
 
         CREATIVE_RESERVOIR_HATCH = registerMetaTileEntity(18002,
-                new MetaTileEntityCreativeReservoirHatch(ZBUtility.zbgtId("creative_reservoir_hatch")));
+                new MetaTileEntityCreativeFluidHatch(ZBUtility.zbgtId("creative_reservoir_hatch"), false));
 
         CREATIVE_COMPUTATION_PROVIDER = registerMetaTileEntity(18003,
                 new MetaTileEntityCreativeComputationProvider(ZBUtility.zbgtId("creative_computation_provider")));
