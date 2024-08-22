@@ -11,7 +11,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -20,6 +19,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.api.capability.impl.InfiniteFluidTank;
 import com.zorbatron.zbgt.client.ClientHandler;
 
 import codechicken.lib.render.CCRenderState;
@@ -28,7 +28,6 @@ import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.capability.impl.FilteredItemHandler;
 import gregtech.api.capability.impl.FluidTankList;
-import gregtech.api.capability.impl.NotifiableFluidTank;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.*;
@@ -42,18 +41,22 @@ import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMulti
 public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblockNotifiablePart implements
                                                   IMultiblockAbilityPart<IFluidTank> {
 
-    private static final int FLUID_AMOUNT = 2_000_000_000;
-    private final InfiniteTank fluidTank;
+    private final InfiniteFluidTank fluidTank;
 
-    public MetaTileEntityCreativeReservoirHatch(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTValues.MAX, false);
-        this.fluidTank = new InfiniteTank(FLUID_AMOUNT, this);
+    public MetaTileEntityCreativeReservoirHatch(ResourceLocation metaTileEntityId, boolean isExportHatch) {
+        super(metaTileEntityId, GTValues.MAX, isExportHatch);
+        this.fluidTank = new InfiniteFluidTank(this, isExportHatch);
         initializeInventory();
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityCreativeReservoirHatch(metaTileEntityId);
+        return new MetaTileEntityCreativeReservoirHatch(metaTileEntityId, isExportHatch);
+    }
+
+    @Override
+    protected boolean openGUIOnRightClick() {
+        return !isExportHatch;
     }
 
     @Override
@@ -62,43 +65,26 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
     }
 
     public ModularUI.Builder createTankUI(String title, EntityPlayer entityPlayer) {
-        // Create base builder/widget references
         ModularUI.Builder builder = ModularUI.defaultBuilder();
 
-        PhantomFluidWidget tankWidget = new PhantomFluidWidget(69, 52, 18, 18, this.fluidTank::getLockFluid,
-                this::setFluid)
-                        .showTip(false).setBackgroundTexture(null);
+        PhantomFluidWidget tankWidget = new PhantomFluidWidget(69, 52, 18, 18, this.fluidTank::getFluid,
+                this.fluidTank::setFluid).showTip(false).setBackgroundTexture(null);
 
         builder.image(7, 16, 81, 55, GuiTextures.DISPLAY)
                 .widget(new ImageWidget(91, 36, 14, 15, GuiTextures.TANK_ICON))
                 .widget(new SlotWidget(exportItems, 0, 90, 53, true, false)
                         .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.OUT_SLOT_OVERLAY));
 
-        // Add general widgets
         return builder.label(6, 6, title)
-                .label(11, 20, "gregtech.gui.fluid_amount", 0xFFFFFF)
-                .widget(new SimpleTextWidget(11, 30, "", 0xFFFFFF, getFluidAmountText(this.fluidTank)).setCenter(false))
-                .widget(new SimpleTextWidget(11, 40, "", 0xFFFFFF, getFluidNameText(this.fluidTank)).setCenter(false))
+                .widget(new SimpleTextWidget(11, 20, "", 0xFFFFFF, getFluidNameText(this.fluidTank)).setCenter(false))
                 .widget(tankWidget)
                 .widget(new FluidContainerSlotWidget(importItems, 0, 90, 16, false)
                         .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.IN_SLOT_OVERLAY))
                 .bindPlayerInventory(entityPlayer.inventory);
     }
 
-    private Supplier<String> getFluidNameText(InfiniteTank fluidTank) {
-        return () -> fluidTank.getLockFluid() != null ? fluidTank.getLockFluid().getLocalizedName() : "";
-    }
-
-    private Supplier<String> getFluidAmountText(InfiniteTank fluidTank) {
-        return () -> String.format("%,d", fluidTank.getFluidAmount());
-    }
-
-    private void setFluid(@Nullable FluidStack fluid) {
-        if (fluid != null) {
-            this.fluidTank.lockFluid = new FluidStack(fluid.copy(), 1);
-            this.fluidTank.setFluid(new FluidStack(fluid.copy(), FLUID_AMOUNT));
-            this.fluidTank.onContentsChanged();
-        }
+    private Supplier<String> getFluidNameText(InfiniteFluidTank fluidTank) {
+        return () -> fluidTank.getFluid() != null ? fluidTank.getFluid().getLocalizedName() : "";
     }
 
     @Override
@@ -114,11 +100,8 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
     @Override
     public void update() {
         super.update();
-        if (!getWorld().isRemote) {
+        if (!getWorld().isRemote && !isExportHatch) {
             fillContainerFromInternalTank(fluidTank);
-            if (getOffsetTimer() % 20 == 0) {
-                fluidTank.refill();
-            }
         }
     }
 
@@ -172,70 +155,15 @@ public class MetaTileEntityCreativeReservoirHatch extends MetaTileEntityMultiblo
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        if (fluidTank.getLockFluid() != null) {
-            data.setTag("FluidInventory", fluidTank.getLockFluid().writeToNBT(new NBTTagCompound()));
-        }
+        this.fluidTank.writeToNBT(data);
+
         return super.writeToNBT(data);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound data) {
-        if (data.hasKey("FluidInventory")) {
-            fluidTank.setLockFluid(FluidStack.loadFluidStackFromNBT(data.getCompoundTag("FluidInventory")));
-        }
+        this.fluidTank.readFromNBT(data);
+
         super.readFromNBT(data);
-    }
-
-    private static class InfiniteTank extends NotifiableFluidTank {
-
-        @Nullable
-        private FluidStack lockFluid;
-
-        public InfiniteTank(int capacity, MetaTileEntity entityToNotify) {
-            super(capacity, entityToNotify, false);
-            setFluid(null);
-            setCanFill(false);
-        }
-
-        public void refill() {
-            int fillAmount = Math.max(0, FLUID_AMOUNT - getFluidAmount());
-            if (fillAmount > 0) {
-                // call super since our overrides don't allow any kind of filling
-                if (lockFluid != null) {
-                    super.fillInternal(new FluidStack(lockFluid, fillAmount), true);
-                }
-            }
-        }
-
-        public void setLockFluid(@Nullable FluidStack fluid) {
-            if (fluid != null) {
-                lockFluid = new FluidStack(fluid.copy(), 1);
-            }
-        }
-
-        public @Nullable FluidStack getLockFluid() {
-            return lockFluid;
-        }
-
-        @Override
-        public boolean canDrainFluidType(@Nullable FluidStack fluid) {
-            return true;
-        }
-
-        // don't allow external filling
-        @Override
-        public int fillInternal(FluidStack resource, boolean doFill) {
-            return 0;
-        }
-
-        @Override
-        public boolean canFillFluidType(FluidStack fluid) {
-            return false;
-        }
-
-        @Override
-        public void onContentsChanged() {
-            super.onContentsChanged();
-        }
     }
 }
