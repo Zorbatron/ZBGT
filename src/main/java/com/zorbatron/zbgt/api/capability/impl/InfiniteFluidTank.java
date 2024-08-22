@@ -9,7 +9,7 @@ import gregtech.api.metatileentity.MetaTileEntity;
 
 public class InfiniteFluidTank extends NotifiableFluidTank {
 
-    // NotifiableFluidTank's isExport is private and there is not getter method :\
+    // NotifiableFluidTank's isExport is private and there is no getter method :\
     private final boolean isExport;
     private final int supplyAmount = Integer.MAX_VALUE;
 
