@@ -3,10 +3,7 @@ package com.zorbatron.zbgt.common;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 
 import com.zorbatron.zbgt.ZBUtility;
-import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityAirIntakeHatch;
-import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityCreativeEnergyHatch;
-import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityCreativeFluidHatch;
-import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntitySingleItemInputBus;
+import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.*;
 import com.zorbatron.zbgt.common.metatileentities.storage.MetaTileEntityCreativeComputationProvider;
 
 import gregtech.api.GTValues;
@@ -20,6 +17,7 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityAirIntakeHatch AIR_INTAKE_HATCH;
     public static MetaTileEntityAirIntakeHatch EXTREME_AIR_INTAKE_HATCH;
     public static MetaTileEntitySingleItemInputBus SINGLE_ITEM_INPUT_BUS;
+    public static MetaTileEntityCreativeItemBus CREATIVE_ITEM_BUS;
 
     public static void init() {
         CREATIVE_ENERGY_SOURCE = registerMetaTileEntity(18000,
@@ -41,5 +39,8 @@ public class ZBGTMetaTileEntities {
 
         SINGLE_ITEM_INPUT_BUS = registerMetaTileEntity(18006,
                 new MetaTileEntitySingleItemInputBus(ZBUtility.zbgtId("single_item_input_bus")));
+
+        CREATIVE_ITEM_BUS = registerMetaTileEntity(18008,
+                new MetaTileEntityCreativeItemBus(ZBUtility.zbgtId("creative_item_bus")));
     }
 }
