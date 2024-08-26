@@ -1,5 +1,7 @@
 package com.zorbatron.zbgt;
 
+import static com.zorbatron.zbgt.ZBGTCore.MODID;
+
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -11,8 +13,9 @@ import com.zorbatron.zbgt.loaders.recipe.ZBGTRecipes;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.cover.CoverDefinition;
+import gregtech.api.metatileentity.registry.MTEManager;
 
-@Mod.EventBusSubscriber(modid = ZBGTCore.MODID)
+@Mod.EventBusSubscriber(modid = MODID)
 public class CommonProxy {
 
     public void preInit() {
@@ -27,5 +30,10 @@ public class CommonProxy {
     @SubscribeEvent
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
         ZBGTRecipes.init();
+    }
+
+    @SubscribeEvent
+    public void registerMTERegistry(MTEManager.MTERegistryEvent event) {
+        GregTechAPI.mteManager.createRegistry(MODID);
     }
 }
