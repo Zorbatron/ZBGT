@@ -40,7 +40,7 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
 
     @Override
     protected void initializeInventory() {
-        this.infiniteItemStackHandler = new InfiniteItemStackHandler(this, false);
+        this.infiniteItemStackHandler = new InfiniteItemStackHandler(this, 4, false);
 
         super.initializeInventory();
     }
@@ -51,8 +51,16 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
 
         slots.addWidget(new PhantomSlotWidget(infiniteItemStackHandler, 0, 0, 0)
                 .setClearSlotOnRightClick(true)
-                .setBackgroundTexture(GuiTextures.SLOT)
-                .setChangeListener(this.infiniteItemStackHandler::onContentsChanged));
+                .setBackgroundTexture(GuiTextures.SLOT));
+        slots.addWidget(new PhantomSlotWidget(infiniteItemStackHandler, 1, 18, 0)
+                .setClearSlotOnRightClick(true)
+                .setBackgroundTexture(GuiTextures.SLOT));
+        slots.addWidget(new PhantomSlotWidget(infiniteItemStackHandler, 2, 0, 18)
+                .setClearSlotOnRightClick(true)
+                .setBackgroundTexture(GuiTextures.SLOT));
+        slots.addWidget(new PhantomSlotWidget(infiniteItemStackHandler, 3, 18, 18)
+                .setClearSlotOnRightClick(true)
+                .setBackgroundTexture(GuiTextures.SLOT));
 
         return ModularUI.defaultBuilder()
                 .label(7, 7, getMetaFullName())
@@ -70,6 +78,11 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
 
     @Override
     protected IItemHandlerModifiable createImportItemHandler() {
+        return this.infiniteItemStackHandler;
+    }
+
+    @Override
+    protected IItemHandlerModifiable createExportItemHandler() {
         return this.infiniteItemStackHandler;
     }
 
