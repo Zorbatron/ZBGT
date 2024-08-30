@@ -7,4 +7,3 @@
 ## Features
 - Dual cover TOP integration
 - Creative multi reservoir hatch
-- Creative input bus
