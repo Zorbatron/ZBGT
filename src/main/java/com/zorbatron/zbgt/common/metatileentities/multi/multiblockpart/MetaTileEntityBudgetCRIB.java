@@ -16,6 +16,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -45,6 +46,7 @@ import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.capability.IGhostSlotConfigurable;
+import gregtech.api.capability.INotifiableHandler;
 import gregtech.api.capability.impl.GhostCircuitItemStackHandler;
 import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.capability.impl.NotifiableItemStackHandler;
@@ -56,6 +58,7 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 import gregtech.common.ConfigHolder;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
@@ -418,5 +421,28 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
         circuitInventory.read(data);
 
         setPatternDetails();
+    }
+
+    @Override
+    public void addToMultiBlock(MultiblockControllerBase controllerBase) {
+        super.addToMultiBlock(controllerBase);
+
+        for (IItemHandler handler : ((ItemHandlerList) this.actualImportItems).getBackingHandlers()) {
+            if (handler instanceof INotifiableHandler notifiable) {
+                notifiable.addNotifiableMetaTileEntity(controllerBase);
+                notifiable.addToNotifiedList(this, handler, false);
+            }
+        }
+    }
+
+    @Override
+    public void removeFromMultiBlock(MultiblockControllerBase controllerBase) {
+        super.removeFromMultiBlock(controllerBase);
+
+        for (IItemHandler handler : ((ItemHandlerList) this.actualImportItems).getBackingHandlers()) {
+            if (handler instanceof INotifiableHandler notifiable) {
+                notifiable.removeNotifiableMetaTileEntity(controllerBase);
+            }
+        }
     }
 }
