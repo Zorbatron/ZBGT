@@ -1,5 +1,6 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart;
 
+import static gregtech.api.capability.GregtechDataCodes.UPDATE_ACTIVE;
 import static gregtech.api.capability.GregtechDataCodes.UPDATE_ONLINE_STATUS;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
@@ -45,14 +47,14 @@ import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
-import gregtech.api.capability.IGhostSlotConfigurable;
-import gregtech.api.capability.INotifiableHandler;
+import gregtech.api.capability.*;
 import gregtech.api.capability.impl.GhostCircuitItemStackHandler;
 import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.capability.impl.NotifiableItemStackHandler;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.GhostCircuitSlotWidget;
+import gregtech.api.gui.widgets.ImageCycleButtonWidget;
 import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -64,7 +66,7 @@ import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMulti
 
 public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiablePart
                                       implements IMultiblockAbilityPart<IItemHandlerModifiable>, ICraftingProvider,
-                                      IGridProxyable, IPowerChannelState, IGhostSlotConfigurable {
+                                      IGridProxyable, IPowerChannelState, IGhostSlotConfigurable, IControllable {
 
     @Nullable
     protected GhostCircuitItemStackHandler circuitInventory;
@@ -72,6 +74,8 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
     private ICraftingPatternDetails patternDetails;
     private IItemHandlerModifiable actualImportItems;
     private boolean needPatternSync = true;
+    // Controls blocking
+    private boolean isWorkingEnabled = true;
 
     private @Nullable AENetworkProxy aeProxy;
     private boolean isOnline;
@@ -115,7 +119,18 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
     @Override
     protected IItemHandlerModifiable createImportItemHandler() {
-        return new NotifiableItemStackHandler(this, 16, getController(), false);
+        return new NotifiableItemStackHandler(this, 16, getController(), false) {
+
+            @Override
+            public int getSlotLimit(int slot) {
+                return Integer.MAX_VALUE;
+            }
+
+            @Override
+            protected int getStackLimit(int slot, @NotNull ItemStack stack) {
+                return getSlotLimit(slot);
+            }
+        };
     }
 
     @Override
@@ -140,14 +155,18 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
         }
 
         // Pattern slot
-        builder.widget(new SlotWidget(pattern, 0, startX + 18 * 5, startY).setBackgroundTexture(GuiTextures.SLOT,
-                ClientHandler.ME_PATTERN_OVERLAY));
-        // .setChangeListener(this::setPatternDetails));
+        builder.widget(new SlotWidget(pattern, 0, startX + 18 * 5, startY)
+                .setBackgroundTexture(GuiTextures.SLOT, ClientHandler.ME_PATTERN_OVERLAY));
 
         // Circuit slot
         builder.widget(new GhostCircuitSlotWidget(circuitInventory, 0, startX + 18 * 5, startY + 18 * 3)
                 .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.INT_CIRCUIT_OVERLAY)
                 .setConsumer(this::getCircuitSlotTooltip));
+
+        // Blocking toggle button
+        builder.widget(new ImageCycleButtonWidget(startX + 18 * 5, startY + 18 + 9, 18, 18, GuiTextures.BUTTON_POWER,
+                this::isWorkingEnabled,
+                this::setWorkingEnabled).setTooltipHoverString("zbgt.machine.budget_crib.blocking_button"));
 
         builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 7, 18 + 18 * 5 + 12);
         return builder.build(getHolder(), entityPlayer);
@@ -232,6 +251,8 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
             if (this.isOnline != isOnline) {
                 this.isOnline = isOnline;
                 scheduleRenderUpdate();
+            } else if (dataId == UPDATE_ACTIVE) {
+                this.isWorkingEnabled = buf.readBoolean();
             }
         }
     }
@@ -349,13 +370,13 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
         for (int i = 0; i < inventoryCrafting.getSizeInventory(); ++i) {
             ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
-            if (itemStack == null) continue;
+            if (itemStack.isEmpty()) continue;
             if (importItems.insertItem(i, itemStack, true) != ItemStack.EMPTY) return false;
         }
 
         for (int i = 0; i < inventoryCrafting.getSizeInventory(); ++i) {
             ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
-            if (itemStack == null) continue;
+            if (itemStack.isEmpty()) continue;
             importItems.insertItem(i, itemStack, false);
         }
 
@@ -363,17 +384,19 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
     }
 
     @Override
-    public void gridChanged() {
-        needPatternSync = true;
-    }
-
-    @Override
     public boolean isBusy() {
+        if (!isWorkingEnabled) return false;
+
         for (int i = 0; i < importItems.getSlots(); i++) {
             if (!importItems.getStackInSlot(i).isEmpty()) return true;
         }
 
         return false;
+    }
+
+    @Override
+    public void gridChanged() {
+        needPatternSync = true;
     }
 
     @Override
@@ -444,5 +467,26 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
                 notifiable.removeNotifiableMetaTileEntity(controllerBase);
             }
         }
+    }
+
+    @Override
+    public boolean isWorkingEnabled() {
+        return this.isWorkingEnabled;
+    }
+
+    @Override
+    public void setWorkingEnabled(boolean isWorkingAllowed) {
+        this.isWorkingEnabled = isWorkingAllowed;
+        if (!getWorld().isRemote) {
+            writeCustomData(GregtechDataCodes.UPDATE_ACTIVE, buf -> buf.writeBoolean(isWorkingAllowed));
+        }
+    }
+
+    @Override
+    public <T> T getCapability(Capability<T> capability, EnumFacing side) {
+        if (capability == GregtechTileCapabilities.CAPABILITY_CONTROLLABLE) {
+            return GregtechTileCapabilities.CAPABILITY_CONTROLLABLE.cast(this);
+        }
+        return super.getCapability(capability, side);
     }
 }

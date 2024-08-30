@@ -1,3 +1,4 @@
+# Multiblock Parts
 zbgt.machine.creative_energy_source.name=Creative Energy Source
 zbgt.machine.creative_energy_source.tooltip=Infinite Energy Source for Multiblocks
 
@@ -29,7 +30,12 @@ zbgt.machine.extreme_air_intake_hatch.tooltip=Collects air from the world for mu
 zbgt.machine.single_item_input_bus.name=Single Item Input Bus
 zbgt.machine.single_item_input_bus.stack_size=§6Max stack size: §f%,d
 
+zbgt.machine.budget_crib.name=Budget CRIB
+zbgt.machine.budget_crib.tooltip=A Crafting Input Bus on a budget
+zbgt.machine.budget_crib.blocking_button=Click to toggle blocking mode
 
+
+# Covers
 metaitem.cover.dual_cover.lv.name=LV Dual Cover
 metaitem.cover.dual_cover.mv.name=MV Dual Cover
 metaitem.cover.dual_cover.hv.name=HV Dual Cover
