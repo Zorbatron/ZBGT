@@ -129,12 +129,12 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
     protected ModularUI createUI(EntityPlayer entityPlayer) {
         int yOffset = 10;
         // Voltage selector
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 166 + yOffset)
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 138 + yOffset)
                 .widget(new CycleButtonWidget(7, 7 + yOffset, 30, 20, GTValues.VNF, () -> setTier, tier -> {
                     setTier = tier;
                     voltage = GTValues.V[setTier];
                 }));
-        builder.label(10, 5, getMetaFullName());
+        builder.label(6, 6, getMetaFullName());
 
         builder.label(7, 32 + yOffset, "gregtech.creative.energy.voltage");
         builder.widget(new ImageWidget(7, 44 + yOffset, 156, 20, GuiTextures.DISPLAY));
@@ -174,11 +174,6 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
                 setAmps(amps * 4);
             }
         }));
-
-        /*
-         * builder.widget(new ClickButtonWidget(7, 139 + yOffset, 80, 20,
-         * I18n.format("zbgt.machine.creative_energy.apply_button"), clickData -> setInitialEnergyConfiguration()));
-         */
 
         return builder.build(getHolder(), entityPlayer);
     }
