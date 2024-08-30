@@ -3,15 +3,20 @@ package com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart;
 import java.util.Arrays;
 import java.util.List;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.capability.impl.InfiniteItemStackHandler;
+import com.zorbatron.zbgt.client.ClientHandler;
 import com.zorbatron.zbgt.client.widgets.PhantomSlotNoTextWidget;
 
 import codechicken.lib.render.CCRenderState;
@@ -32,7 +37,7 @@ import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 import gregtech.api.util.Position;
-import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
 public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotifiablePart implements
@@ -101,7 +106,9 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
 
-        Textures.ITEM_HATCH_INPUT_OVERLAY.renderSided(getFrontFacing(), renderState, translation, pipeline);
+        if (shouldRenderOverlay()) {
+            ClientHandler.ITEM_OVERLAY_INFINITY.renderSided(getFrontFacing(), renderState, translation, pipeline);
+        }
     }
 
     @Override
@@ -173,5 +180,20 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
         super.readFromNBT(data);
 
         this.circuitItemStackHandler.read(data);
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, boolean advanced) {
+        tooltip.add(I18n.format("gregtech.creative_tooltip.1") + TooltipHelper.RAINBOW +
+                I18n.format("gregtech.creative_tooltip.2") + I18n.format("gregtech.creative_tooltip.3"));
+        tooltip.add(I18n.format("gregtech.universal.enabled"));
+        tooltip.add(I18n.format("zbgt.machine.creative_energy.warning.1"));
+    }
+
+    @Override
+    public void addToolUsages(ItemStack stack, @Nullable World world, List<String> tooltip, boolean advanced) {
+        tooltip.add(I18n.format("gregtech.tool_action.screwdriver.access_covers"));
+        tooltip.add(I18n.format("gregtech.tool_action.wrench.set_facing"));
+        super.addToolUsages(stack, world, tooltip, advanced);
     }
 }
