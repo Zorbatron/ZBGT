@@ -122,6 +122,8 @@ public class MetaTileEntityCreativeComputationProvider extends MetaTileEntity
     public <T> T getCapability(Capability<T> capability, EnumFacing side) {
         if (side == getFrontFacing() && capability == GregtechTileCapabilities.CABABILITY_COMPUTATION_PROVIDER) {
             return GregtechTileCapabilities.CABABILITY_COMPUTATION_PROVIDER.cast(this);
+        } else if (capability == GregtechTileCapabilities.CAPABILITY_CONTROLLABLE) {
+            return GregtechTileCapabilities.CAPABILITY_CONTROLLABLE.cast(this);
         }
         return super.getCapability(capability, side);
     }
