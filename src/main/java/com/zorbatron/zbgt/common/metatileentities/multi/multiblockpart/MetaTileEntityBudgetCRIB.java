@@ -8,8 +8,6 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
 
-import appeng.me.GridNode;
-import appeng.me.cache.CraftingGridCache;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -52,6 +50,7 @@ import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.capability.impl.NotifiableItemStackHandler;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
+import gregtech.api.gui.widgets.ClickButtonWidget;
 import gregtech.api.gui.widgets.GhostCircuitSlotWidget;
 import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -147,6 +146,10 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
         builder.widget(new GhostCircuitSlotWidget(circuitInventory, 0, startX + 18 * 5, startY + 18 * 3)
                 .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.INT_CIRCUIT_OVERLAY)
                 .setConsumer(this::getCircuitSlotTooltip));
+
+        // Debug button to call MEPatternChange()
+        builder.widget(new ClickButtonWidget(startX, startY + 18 * 4 + 9, 120, 18,
+                "Force pattern change", (clickData) -> MEPatternChange()));
 
         builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 7, 18 + 18 * 5 + 12);
         return builder.build(getHolder(), entityPlayer);
@@ -297,14 +300,11 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
     @Nullable
     private AENetworkProxy createProxy() {
-        if (this.getHolder() instanceof IGridProxyable holder) {
-            AENetworkProxy proxy = new AENetworkProxy(holder, "mte_proxy", this.getStackForm(), true);
-            proxy.setFlags(GridFlags.REQUIRE_CHANNEL);
-            proxy.setIdlePowerUsage(ConfigHolder.compat.ae2.meHatchEnergyUsage);
-            proxy.setValidSides(EnumSet.of(this.getFrontFacing()));
-            return proxy;
-        }
-        return null;
+        AENetworkProxy proxy = new AENetworkProxy(this, "mte_proxy", this.getStackForm(), true);
+        proxy.setFlags(GridFlags.REQUIRE_CHANNEL);
+        proxy.setIdlePowerUsage(ConfigHolder.compat.ae2.meHatchEnergyUsage);
+        proxy.setValidSides(EnumSet.of(this.getFrontFacing()));
+        return proxy;
     }
 
     @Override
@@ -326,7 +326,9 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
     }
 
     private void setPatternDetails() {
-        if (!(pattern.getStackInSlot(0).getItem() instanceof ItemEncodedPattern) && !pattern.getStackInSlot(0).isEmpty()) return;
+        if (!(pattern.getStackInSlot(0).getItem() instanceof ItemEncodedPattern) &&
+                !pattern.getStackInSlot(0).isEmpty())
+            return;
 
         if (pattern.getStackInSlot(0).equals(ItemStack.EMPTY)) {
             this.needPatternSync = true;
