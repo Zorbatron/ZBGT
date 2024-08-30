@@ -1,5 +1,7 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart;
 
+import static gregtech.api.capability.GregtechDataCodes.UPDATE_ACTIVE;
+
 import java.util.List;
 import java.util.function.Function;
 
@@ -7,8 +9,11 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -19,13 +24,13 @@ import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
+import gregtech.api.capability.GregtechDataCodes;
+import gregtech.api.capability.GregtechTileCapabilities;
+import gregtech.api.capability.IControllable;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
-import gregtech.api.gui.widgets.ClickButtonWidget;
-import gregtech.api.gui.widgets.CycleButtonWidget;
-import gregtech.api.gui.widgets.ImageWidget;
-import gregtech.api.gui.widgets.TextFieldWidget2;
+import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
@@ -41,7 +46,7 @@ import gregtech.common.metatileentities.multi.electric.MetaTileEntityPowerSubsta
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 
 public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockPart implements
-                                               IMultiblockAbilityPart<IEnergyContainer> {
+                                               IMultiblockAbilityPart<IEnergyContainer>, IControllable {
 
     protected InfiniteEnergyContainer energyContainer;
 
@@ -50,6 +55,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
     private long amps = 1;
     private final boolean isExportHatch;
     private boolean isPSSOrAT = false;
+    private boolean isWorkingEnabled = true;
 
     public MetaTileEntityCreativeEnergyHatch(ResourceLocation metaTileEntityId, boolean isExportHatch) {
         super(metaTileEntityId, GTValues.MAX);
@@ -175,6 +181,10 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
             }
         }));
 
+        builder.widget(
+                new ImageCycleButtonWidget(149, 8 + yOffset, 18, 18, GuiTextures.BUTTON_POWER, this::isWorkingEnabled,
+                        this::setWorkingEnabled));
+
         return builder.build(getHolder(), entityPlayer);
     }
 
@@ -198,7 +208,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
 
     private void setInitialEnergyConfiguration() {
         this.energyContainer = new InfiniteEnergyContainer(this, isExportHatch, this::isPSSOrAt,
-                this::getVoltage, this::getAmps);
+                this::getVoltage, this::getAmps, this::isWorkingEnabled);
     }
 
     private boolean isPSSOrAt() {
@@ -207,6 +217,27 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
 
     private void setIsPSSOrAT(boolean isPSSOrAT) {
         this.isPSSOrAT = isPSSOrAT;
+    }
+
+    @Override
+    public boolean isWorkingEnabled() {
+        return this.isWorkingEnabled;
+    }
+
+    @Override
+    public void setWorkingEnabled(boolean isWorkingAllowed) {
+        this.isWorkingEnabled = isWorkingAllowed;
+        if (!getWorld().isRemote) {
+            writeCustomData(GregtechDataCodes.UPDATE_ACTIVE, buf -> buf.writeBoolean(isWorkingAllowed));
+        }
+    }
+
+    @Override
+    public void receiveCustomData(int dataId, @NotNull PacketBuffer buf) {
+        super.receiveCustomData(dataId, buf);
+        if (dataId == UPDATE_ACTIVE) {
+            this.isWorkingEnabled = buf.readBoolean();
+        }
     }
 
     @Override
@@ -224,5 +255,13 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         this.setTier = data.getByte("Tier");
         super.readFromNBT(data);
         setInitialEnergyConfiguration();
+    }
+
+    @Override
+    public <T> T getCapability(Capability<T> capability, EnumFacing side) {
+        if (capability == GregtechTileCapabilities.CAPABILITY_CONTROLLABLE) {
+            return GregtechTileCapabilities.CAPABILITY_CONTROLLABLE.cast(this);
+        }
+        return super.getCapability(capability, side);
     }
 }

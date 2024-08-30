@@ -11,16 +11,18 @@ public class InfiniteEnergyContainer extends EnergyContainerHandler {
     private final Supplier<Boolean> powerMultiplierSupplier;
     private final Supplier<Long> voltageSupplier;
     private final Supplier<Long> amperageSupplier;
+    private final Supplier<Boolean> isWorkingEnabledSupplier;
 
     public InfiniteEnergyContainer(MetaTileEntity tileEntity, boolean isExportHatch,
                                    Supplier<Boolean> powerMultiplierSupplier, Supplier<Long> voltageSupplier,
-                                   Supplier<Long> amperageSupplier) {
+                                   Supplier<Long> amperageSupplier, Supplier<Boolean> isWorkingEnabledSupplier) {
         super(tileEntity, 0, 0, 0, 0, 0);
 
         this.isExportHatch = isExportHatch;
         this.powerMultiplierSupplier = powerMultiplierSupplier;
         this.voltageSupplier = voltageSupplier;
         this.amperageSupplier = amperageSupplier;
+        this.isWorkingEnabledSupplier = isWorkingEnabledSupplier;
     }
 
     @Override
@@ -28,32 +30,31 @@ public class InfiniteEnergyContainer extends EnergyContainerHandler {
         return isExportHatch ? getOutputVoltage() * getOutputAmperage() : energyToAdd;
     }
 
+    // Check if the attached multiblock is a PSS or AT and if not, 16x the maximum capacity.
+    private long multiplier() {
+        long power;
+
+        if (isExportHatch) {
+            power = getOutputVoltage() * getOutputAmperage();
+        } else {
+            power = getInputVoltage() * getInputAmperage();
+        }
+
+        return powerMultiplierSupplier.get() ? power : power * 16;
+    }
+
     @Override
     public long getEnergyStored() {
-        if (isExportHatch) return 0L;
-
-        long power = getInputVoltage() * getInputAmperage();
-
-        // Check if the attached multiblock is a PSS or AT and if not, 16x the maximum capacity.
-        if (powerMultiplierSupplier.get()) {
-            return power;
+        if (isWorkingEnabledSupplier.get() == isExportHatch) {
+            return 0L;
         } else {
-            return power * 16;
+            return multiplier();
         }
     }
 
     @Override
     public long getEnergyCapacity() {
-        if (isExportHatch) return getOutputVoltage() * getOutputAmperage();
-
-        long power = getInputVoltage() * getInputAmperage();
-
-        // Check if the attached multiblock is a PSS or AT and if not, 16x the maximum capacity.
-        if (powerMultiplierSupplier.get()) {
-            return power;
-        } else {
-            return power * 16;
-        }
+        return multiplier();
     }
 
     @Override
