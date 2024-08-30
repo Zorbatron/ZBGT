@@ -59,11 +59,11 @@ public class MetaTileEntityCreativeComputationProvider extends MetaTileEntity
     @Override
     protected ModularUI createUI(EntityPlayer entityPlayer) {
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 170, 95);
-        builder.label(7, 7, getMetaFullName());
+        builder.label(6, 6, getMetaFullName());
 
-        builder.widget(new LabelWidget(7, 25, "zbgt.machine.creative_computation_provider.cwut"));
-        builder.widget(new ImageWidget(7, 34, 126, 20, GuiTextures.DISPLAY));
-        builder.widget(new TextFieldWidget2(9, 40, 122, 16, () -> String.valueOf(this.maxCWUt),
+        builder.widget(new LabelWidget(6, 25, "zbgt.machine.creative_computation_provider.cwut"));
+        builder.widget(new ImageWidget(6, 34, 126, 20, GuiTextures.DISPLAY));
+        builder.widget(new TextFieldWidget2(8, 40, 122, 16, () -> String.valueOf(this.maxCWUt),
                 value -> {
                     maxCWUt = Integer.parseInt(value);
                     markDirty();
@@ -72,8 +72,8 @@ public class MetaTileEntityCreativeComputationProvider extends MetaTileEntity
         builder.widget(new ImageCycleButtonWidget(140, 35, 18, 18, GuiTextures.BUTTON_POWER, this::isWorkingEnabled,
                 this::setWorkingEnabled));
 
-        builder.widget(new LabelWidget(7, 62, "zbgt.machine.creative_computation_provider.average"));
-        builder.widget(new DynamicLabelWidget(7, 74, () -> String.valueOf(this.lastRequestedCWUt)));
+        builder.widget(new LabelWidget(6, 62, "zbgt.machine.creative_computation_provider.average"));
+        builder.widget(new DynamicLabelWidget(6, 74, () -> String.valueOf(this.lastRequestedCWUt)));
 
         return builder.build(getHolder(), entityPlayer);
     }
