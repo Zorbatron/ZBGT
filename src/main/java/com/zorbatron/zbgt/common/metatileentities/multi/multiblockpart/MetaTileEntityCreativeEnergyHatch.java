@@ -264,4 +264,16 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         }
         return super.getCapability(capability, side);
     }
+
+    @Override
+    public void writeInitialSyncData(@NotNull PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+        buf.writeBoolean(this.isWorkingEnabled);
+    }
+
+    @Override
+    public void receiveInitialSyncData(@NotNull PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+        this.isWorkingEnabled = buf.readBoolean();
+    }
 }
