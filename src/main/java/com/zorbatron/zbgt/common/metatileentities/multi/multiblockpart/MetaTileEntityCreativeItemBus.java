@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.capability.impl.InfiniteItemStackHandler;
 import com.zorbatron.zbgt.client.ClientHandler;
-import com.zorbatron.zbgt.client.widgets.PhantomSlotNoTextWidget;
+import com.zorbatron.zbgt.client.widgets.PhantomSlotNoAmountTextWidget;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
@@ -78,7 +78,7 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
             for (int x = 0; x < 4; x++) {
                 int index = y * 4 + x;
 
-                slots.addWidget(new PhantomSlotNoTextWidget(infiniteItemStackHandler, index, x * 18, y * 18)
+                slots.addWidget(new PhantomSlotNoAmountTextWidget(infiniteItemStackHandler, index, x * 18, y * 18)
                         .setClearSlotOnRightClick(true).setBackgroundTexture(GuiTextures.SLOT));
             }
         }

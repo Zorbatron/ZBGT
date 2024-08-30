@@ -27,6 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.ZBGTCore;
 import com.zorbatron.zbgt.client.ClientHandler;
+import com.zorbatron.zbgt.client.widgets.ItemSlotTinyAmountTextWidget;
 
 import appeng.api.implementations.ICraftingPatternItem;
 import appeng.api.implementations.IPowerChannelState;
@@ -149,8 +150,9 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
         for (int y = 0; y <= 3; y++) {
             for (int x = 0; x <= 3; x++) {
                 int index = y * 4 + x;
-                builder.widget(new SlotWidget(importItems, index, startX + 18 * x, startY + 18 * y)
-                        .setBackgroundTexture(GuiTextures.SLOT));
+                builder.widget(new ItemSlotTinyAmountTextWidget(importItems, index, startX + 18 * x, startY + 18 * y,
+                        false, false)
+                                .setBackgroundTexture(GuiTextures.SLOT));
             }
         }
 
@@ -269,6 +271,7 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
             buf.writeBoolean(false);
         }
         buf.writeBoolean(this.isOnline);
+        buf.writeBoolean(this.isWorkingEnabled);
     }
 
     @Override
@@ -287,6 +290,7 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
             }
         }
         this.isOnline = buf.readBoolean();
+        this.isWorkingEnabled = buf.readBoolean();
     }
 
     @Nullable
@@ -429,9 +433,12 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
         super.writeToNBT(data);
 
         data.setTag("Pattern", this.pattern.serializeNBT());
+
         if (this.circuitInventory != null) {
             this.circuitInventory.write(data);
         }
+
+        data.setBoolean("BlockingEnabled", this.isWorkingEnabled);
 
         return data;
     }
@@ -441,7 +448,10 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
         super.readFromNBT(data);
 
         this.pattern.deserializeNBT(data.getCompoundTag("Pattern"));
+
         circuitInventory.read(data);
+
+        this.isWorkingEnabled = data.getBoolean("BlockingEnabled");
 
         setPatternDetails();
     }
