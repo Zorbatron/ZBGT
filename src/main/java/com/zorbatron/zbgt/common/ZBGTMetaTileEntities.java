@@ -18,6 +18,7 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityAirIntakeHatch EXTREME_AIR_INTAKE_HATCH;
     public static MetaTileEntitySingleItemInputBus SINGLE_ITEM_INPUT_BUS;
     public static MetaTileEntityCreativeItemBus CREATIVE_ITEM_BUS;
+    public static MetaTileEntityBudgetCRIB BUDGET_CRIB;
 
     public static void init() {
         CREATIVE_ENERGY_SOURCE = registerMetaTileEntity(18000,
@@ -42,5 +43,8 @@ public class ZBGTMetaTileEntities {
 
         CREATIVE_ITEM_BUS = registerMetaTileEntity(18008,
                 new MetaTileEntityCreativeItemBus(ZBUtility.zbgtId("creative_item_bus")));
+
+        BUDGET_CRIB = registerMetaTileEntity(18009,
+                new MetaTileEntityBudgetCRIB(ZBUtility.zbgtId("budget_crib")));
     }
 }
