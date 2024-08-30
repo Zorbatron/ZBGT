@@ -7,6 +7,7 @@ import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.*;
 import com.zorbatron.zbgt.common.metatileentities.storage.MetaTileEntityCreativeComputationProvider;
 
 import gregtech.api.GTValues;
+import gregtech.api.util.Mods;
 
 public class ZBGTMetaTileEntities {
 
@@ -44,7 +45,9 @@ public class ZBGTMetaTileEntities {
         CREATIVE_ITEM_BUS = registerMetaTileEntity(18008,
                 new MetaTileEntityCreativeItemBus(ZBUtility.zbgtId("creative_item_bus")));
 
-        BUDGET_CRIB = registerMetaTileEntity(18009,
-                new MetaTileEntityBudgetCRIB(ZBUtility.zbgtId("budget_crib")));
+        if (Mods.AppliedEnergistics2.isModLoaded()) {
+            BUDGET_CRIB = registerMetaTileEntity(18009,
+                    new MetaTileEntityBudgetCRIB(ZBUtility.zbgtId("budget_crib")));
+        }
     }
 }
