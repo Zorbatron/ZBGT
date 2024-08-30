@@ -1,5 +1,7 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart;
 
+import static gregtech.api.GTValues.RNG;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
@@ -45,7 +47,6 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.GasCollectorDimensionProperty;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.util.XSTR;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 import it.unimi.dsi.fastutil.ints.IntList;
@@ -55,9 +56,7 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
                                           implements IMultiblockAbilityPart<IFluidTank> {
 
     private final FluidTank fluidTank;
-    protected final static XSTR floatGen = new XSTR();
     private boolean isWorkingEnabled;
-
     private final int tankCapacity;
     private final int fillAmount;
     private Fluid fillFluid;
@@ -249,9 +248,9 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
     private void generateParticles() {
         final EnumParticleTypes particle = EnumParticleTypes.CLOUD;
 
-        final float ran1 = floatGen.nextFloat();
-        float ran2 = floatGen.nextFloat();
-        float ran3 = floatGen.nextFloat();
+        final float ran1 = RNG.nextFloat();
+        float ran2 = RNG.nextFloat();
+        float ran3 = RNG.nextFloat();
 
         final BlockPos position = this.getPos();
         final EnumFacing direction = getFrontFacing();
@@ -259,42 +258,42 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
         final float xPos = position.getX() + 0.25f + direction.getXOffset() * 0.76f;
         float yPos = position.getY() + 0.65f + direction.getYOffset() * 0.76f;
         final float zPos = position.getZ() + 0.25f + direction.getZOffset() * 0.76f;
-        float ySpd = direction.getYOffset() * 0.1f + 0.2f + 0.1f * floatGen.nextFloat();
+        float ySpd = direction.getYOffset() * 0.1f + 0.2f + 0.1f * RNG.nextFloat();
         float xSpd;
         float zSpd;
 
         if (direction.getYOffset() == -1) {
-            final float temp = (float) (floatGen.nextFloat() * 2.0f * Math.PI);
+            final float temp = (float) (RNG.nextFloat() * 2.0f * Math.PI);
             xSpd = (float) Math.sin(temp) * 0.1f;
             zSpd = (float) Math.cos(temp) * 0.1f;
             ySpd = -ySpd;
             yPos = yPos - 0.8f;
         } else {
-            xSpd = -(direction.getXOffset() * (0.1f + 0.2f * floatGen.nextFloat()));
-            zSpd = -(direction.getZOffset() * (0.1f + 0.2f * floatGen.nextFloat()));
+            xSpd = -(direction.getXOffset() * (0.1f + 0.2f * RNG.nextFloat()));
+            zSpd = -(direction.getZOffset() * (0.1f + 0.2f * RNG.nextFloat()));
         }
 
         getWorld().spawnParticle(
                 particle,
                 xPos + ran1 * 0.5f,
-                yPos + floatGen.nextFloat() * 0.5f,
-                zPos + floatGen.nextFloat() * 0.5f,
+                yPos + RNG.nextFloat() * 0.5f,
+                zPos + RNG.nextFloat() * 0.5f,
                 xSpd,
                 -ySpd,
                 zSpd);
         getWorld().spawnParticle(
                 particle,
                 (xPos + ran2 * 0.5f),
-                (yPos + floatGen.nextFloat() * 0.5f),
-                (zPos + floatGen.nextFloat() * 0.5f),
+                (yPos + RNG.nextFloat() * 0.5f),
+                (zPos + RNG.nextFloat() * 0.5f),
                 xSpd,
                 -ySpd,
                 zSpd);
         getWorld().spawnParticle(
                 particle,
                 (xPos + ran3 * 0.5f),
-                (yPos + floatGen.nextFloat() * 0.5f),
-                (zPos + floatGen.nextFloat() * 0.5f),
+                (yPos + RNG.nextFloat() * 0.5f),
+                (zPos + RNG.nextFloat() * 0.5f),
                 xSpd,
                 -ySpd,
                 zSpd);
