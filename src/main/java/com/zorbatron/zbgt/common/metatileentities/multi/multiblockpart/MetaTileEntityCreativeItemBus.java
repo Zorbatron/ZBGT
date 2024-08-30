@@ -36,6 +36,7 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
+import gregtech.api.util.GTUtility;
 import gregtech.api.util.Position;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
@@ -112,13 +113,8 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
     }
 
     @Override
-    protected IItemHandlerModifiable createImportItemHandler() {
+    public IItemHandlerModifiable getImportItems() {
         return this.actualImportItems;
-    }
-
-    @Override
-    protected IItemHandlerModifiable createExportItemHandler() {
-        return this.infiniteItemStackHandler;
     }
 
     @Override
@@ -128,7 +124,7 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
 
     @Override
     public void registerAbilities(List<IItemHandlerModifiable> abilityList) {
-        abilityList.add(this.importItems);
+        abilityList.add(this.actualImportItems);
     }
 
     @Override
@@ -168,8 +164,15 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
     }
 
     @Override
+    protected boolean shouldSerializeInventories() {
+        return false;
+    }
+
+    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
+
+        GTUtility.writeItems(infiniteItemStackHandler, "InfiniteInventory", data);
         this.circuitItemStackHandler.write(data);
 
         return data;
@@ -179,6 +182,7 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
 
+        GTUtility.readItems(infiniteItemStackHandler, "InfiniteInventory", data);
         this.circuitItemStackHandler.read(data);
     }
 
