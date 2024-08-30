@@ -50,7 +50,6 @@ import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.capability.impl.NotifiableItemStackHandler;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
-import gregtech.api.gui.widgets.ClickButtonWidget;
 import gregtech.api.gui.widgets.GhostCircuitSlotWidget;
 import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -87,10 +86,10 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
             protected void onContentsChanged(int slot) {
                 if (!getWorld().isRemote) {
                     if (stacks.get(0).getItem() instanceof ICraftingPatternItem) {
-                        ZBGTCore.LOGGER.info("Pattern slot contents changed");
                         setPatternDetails();
                     } else {
-                        ZBGTCore.LOGGER.warn("Item in Budget CRIB not a pattern!");
+                        ZBGTCore.LOGGER.warn(String.format("Item in Budget CRIB at X: %d, Y: %d, Z: %d not a pattern!",
+                                getPos().getX(), getPos().getZ(), getPos().getZ()));
                     }
                 }
             }
@@ -146,10 +145,6 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
         builder.widget(new GhostCircuitSlotWidget(circuitInventory, 0, startX + 18 * 5, startY + 18 * 3)
                 .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.INT_CIRCUIT_OVERLAY)
                 .setConsumer(this::getCircuitSlotTooltip));
-
-        // Debug button to call MEPatternChange()
-        builder.widget(new ClickButtonWidget(startX, startY + 18 * 4 + 9, 120, 18,
-                "Force pattern change", (clickData) -> MEPatternChange()));
 
         builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 7, 18 + 18 * 5 + 12);
         return builder.build(getHolder(), entityPlayer);
@@ -211,7 +206,6 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
         try {
             getProxy().getGrid()
                     .postEvent(new MENetworkCraftingPatternChange(this, getProxy().getNode()));
-            ZBGTCore.LOGGER.info("Posted pattern change to network");
         } catch (GridAccessException ignored) {
             return false;
         }
@@ -322,7 +316,6 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
     public void provideCrafting(ICraftingProviderHelper iCraftingProviderHelper) {
         if (!isActive() || pattern.getStackInSlot(0).isEmpty() || patternDetails == null) return;
         iCraftingProviderHelper.addCraftingOption(this, patternDetails);
-        ZBGTCore.LOGGER.info("Added pattern details to iCraftingProviderHelper");
     }
 
     private void setPatternDetails() {
@@ -332,7 +325,6 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
         if (pattern.getStackInSlot(0).equals(ItemStack.EMPTY)) {
             this.needPatternSync = true;
-            ZBGTCore.LOGGER.info("Empty pattern");
             return;
         }
 
@@ -341,13 +333,11 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
                         .getPatternForItem(pattern.getStackInSlot(0), getWorld());
 
         if (newPatternDetails.equals(this.patternDetails)) {
-            ZBGTCore.LOGGER.info("Pattern was not new");
             return;
         }
 
         this.patternDetails = newPatternDetails;
         this.needPatternSync = true;
-        ZBGTCore.LOGGER.info("New pattern set");
     }
 
     @Override
