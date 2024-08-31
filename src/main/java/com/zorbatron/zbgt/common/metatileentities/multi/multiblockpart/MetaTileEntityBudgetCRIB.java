@@ -1,7 +1,6 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart;
 
-import static gregtech.api.capability.GregtechDataCodes.UPDATE_ACTIVE;
-import static gregtech.api.capability.GregtechDataCodes.UPDATE_ONLINE_STATUS;
+import static gregtech.api.capability.GregtechDataCodes.*;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -32,6 +31,8 @@ import org.jetbrains.annotations.Nullable;
 import com.zorbatron.zbgt.client.ClientHandler;
 import com.zorbatron.zbgt.client.widgets.ItemSlotTinyAmountTextWidget;
 
+import appeng.api.AEApi;
+import appeng.api.config.Actionable;
 import appeng.api.implementations.ICraftingPatternItem;
 import appeng.api.implementations.IPowerChannelState;
 import appeng.api.networking.GridFlags;
@@ -40,11 +41,21 @@ import appeng.api.networking.crafting.ICraftingPatternDetails;
 import appeng.api.networking.crafting.ICraftingProvider;
 import appeng.api.networking.crafting.ICraftingProviderHelper;
 import appeng.api.networking.events.MENetworkCraftingPatternChange;
+import appeng.api.networking.security.IActionHost;
+import appeng.api.networking.security.IActionSource;
+import appeng.api.storage.IMEMonitor;
+import appeng.api.storage.IStorageChannel;
+import appeng.api.storage.channels.IItemStorageChannel;
+import appeng.api.storage.data.IAEItemStack;
 import appeng.api.util.AECableType;
 import appeng.api.util.AEPartLocation;
 import appeng.api.util.DimensionalCoord;
+import appeng.me.GridAccessException;
 import appeng.me.helpers.AENetworkProxy;
+import appeng.me.helpers.BaseActionSource;
 import appeng.me.helpers.IGridProxyable;
+import appeng.me.helpers.MachineSource;
+import appeng.util.item.AEItemStack;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
@@ -281,7 +292,47 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
         }
     }
 
-    private void returnItems() {}
+    private IActionSource getActionSource() {
+        if (this.getHolder() instanceof IActionHost holder) {
+            return new MachineSource(holder);
+        }
+        return new BaseActionSource();
+    }
+
+    @Nullable
+    private IMEMonitor<IAEItemStack> getMonitor() {
+        AENetworkProxy proxy = getProxy();
+        if (proxy == null) return null;
+
+        IStorageChannel<IAEItemStack> channel = AEApi.instance().storage().getStorageChannel(IItemStorageChannel.class);
+
+        try {
+            return proxy.getStorage().getInventory(channel);
+        } catch (GridAccessException ignored) {
+            return null;
+        }
+    }
+
+    private void returnItems() {
+        if (checkIfEmpty()) return;
+
+        IMEMonitor<IAEItemStack> monitor = getMonitor();
+        if (monitor == null) return;
+
+        for (int x = 0; x < this.patternItems.getSlots(); x++) {
+            ItemStack itemStack = this.patternItems.getStackInSlot(x);
+            if (itemStack.isEmpty()) continue;
+
+            IAEItemStack iaeItemStack = AEItemStack.fromItemStack(itemStack);
+
+            IAEItemStack notInserted = monitor.injectItems(iaeItemStack, Actionable.MODULATE, getActionSource());
+            if (notInserted != null && notInserted.getStackSize() > 0) {
+                itemStack.setCount((int) notInserted.getStackSize());
+            } else {
+                this.patternItems.setStackInSlot(x, ItemStack.EMPTY);
+            }
+        }
+    }
 
     private boolean MEPatternChange() {
         // don't post until it's active
@@ -434,13 +485,18 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
     @Override
     public boolean isBusy() {
-        if (!isWorkingEnabled) return false;
+        return isWorkingEnabled && !checkIfEmpty();
+    }
 
+    /**
+     * @return false if items are in any slot, true if empty
+     */
+    private boolean checkIfEmpty() {
         for (int i = 0; i < patternItems.getSlots(); i++) {
-            if (!patternItems.getStackInSlot(i).isEmpty()) return true;
+            if (!patternItems.getStackInSlot(i).isEmpty()) return false;
         }
 
-        return false;
+        return true;
     }
 
     @Override
@@ -554,5 +610,7 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
     public void clearMachineInventory(NonNullList<ItemStack> itemBuffer) {
         super.clearMachineInventory(itemBuffer);
         clearInventory(itemBuffer, this.patternSlot);
+        clearInventory(itemBuffer, this.extraItem);
+        this.returnItems();
     }
 }
