@@ -9,6 +9,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -18,9 +19,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
 import org.jetbrains.annotations.NotNull;
@@ -51,15 +54,15 @@ import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.capability.impl.NotifiableItemStackHandler;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
-import gregtech.api.gui.widgets.GhostCircuitSlotWidget;
-import gregtech.api.gui.widgets.ImageCycleButtonWidget;
-import gregtech.api.gui.widgets.SlotWidget;
+import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.Position;
+import gregtech.api.util.TextFormattingUtil;
 import gregtech.common.ConfigHolder;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
@@ -73,6 +76,7 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
     private ICraftingPatternDetails patternDetails;
     private IItemHandlerModifiable patternItems;
     private IItemHandlerModifiable actualImportItems;
+    private IItemHandlerModifiable extraItem;
     private boolean needPatternSync = true;
     // Controls blocking
     private boolean isWorkingEnabled = true;
@@ -104,7 +108,9 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
         this.circuitInventory = new GhostCircuitItemStackHandler(this);
         this.circuitInventory.addNotifiableMetaTileEntity(this);
 
-        this.patternItems = new NotifiableItemStackHandler(this, 16, getController(), false) {
+        this.extraItem = new NotifiableItemStackHandler(this, 1, null, false);
+
+        this.patternItems = new NotifiableItemStackHandler(this, 16, null, false) {
 
             @Override
             public int getSlotLimit(int slot) {
@@ -115,9 +121,39 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
             protected int getStackLimit(int slot, @NotNull ItemStack stack) {
                 return getSlotLimit(slot);
             }
+
+            @NotNull
+            @Override
+            public ItemStack extractItem(int slot, int amount, boolean simulate) {
+                if (amount == 0) return ItemStack.EMPTY;
+
+                validateSlotIndex(slot);
+
+                ItemStack existing = this.stacks.get(slot);
+
+                if (existing.isEmpty()) return ItemStack.EMPTY;
+
+                if (existing.getCount() <= amount) {
+                    if (!simulate) {
+                        this.stacks.set(slot, ItemStack.EMPTY);
+                        onContentsChanged(slot);
+                    }
+
+                    return existing;
+                } else {
+                    if (!simulate) {
+                        this.stacks.set(slot, ItemHandlerHelper.copyStackWithSize(
+                                existing, existing.getCount() - amount));
+                        onContentsChanged(slot);
+                    }
+
+                    return ItemHandlerHelper.copyStackWithSize(existing, amount);
+                }
+            }
         };
 
-        this.actualImportItems = new ItemHandlerList(Arrays.asList(this.patternItems, this.circuitInventory));
+        this.actualImportItems = new ItemHandlerList(
+                Arrays.asList(this.patternItems, this.circuitInventory, this.extraItem));
     }
 
     @Override
@@ -136,34 +172,56 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
                 .label(7, 7, getMetaFullName());
 
         // Item slots
-        int startX = 7;
-        int startY = 20;
+        WidgetGroup slots = new WidgetGroup(new Position((int) (7 + 18 * 2.5), 20));
         for (int y = 0; y <= 3; y++) {
             for (int x = 0; x <= 3; x++) {
                 int index = y * 4 + x;
-                builder.widget(new ItemSlotTinyAmountTextWidget(patternItems, index, startX + 18 * x, startY + 18 * y,
-                        false, false)
-                                .setBackgroundTexture(GuiTextures.SLOT));
+                slots.addWidget(new ItemSlotTinyAmountTextWidget(patternItems, index, 18 * x, 18 * y,
+                        false, false) {
+
+                    @Override
+                    public void drawInForeground(int mouseX, int mouseY) {
+                        if (isMouseOverElement(mouseX, mouseY)) {
+                            ItemStack item = patternItems.getStackInSlot(index);
+                            List<String> tooltip = getItemToolTip(item);
+
+                            tooltip.add(TextFormatting.GRAY + I18n.format("zbgt.machine.budget_crib.amount_tooltip",
+                                    TextFormattingUtil.formatNumbers(item.getCount())));
+
+                            drawHoveringText(item, tooltip, -1, mouseX, mouseY);
+                        }
+                    }
+                }.setBackgroundTexture(GuiTextures.SLOT));
             }
         }
 
-        // Pattern slot
-        builder.widget(new SlotWidget(patternSlot, 0, startX + 18 * 5, startY)
-                .setBackgroundTexture(GuiTextures.SLOT, ClientHandler.ME_PATTERN_OVERLAY)
-                .setChangeListener(this::setPatternDetails));
+        WidgetGroup buttons = new WidgetGroup(new Position(7 + 18 * 2, (int) (18 * 5.25) + 3));
+
+        // Extra item slot
+        buttons.addWidget(new SlotWidget(extraItem, 0, 0, 0)
+                .setBackgroundTexture(GuiTextures.SLOT));
 
         // Circuit slot
-        builder.widget(new GhostCircuitSlotWidget(circuitInventory, 0, startX + 18 * 5, startY + 18 * 3)
+        buttons.addWidget(new GhostCircuitSlotWidget(circuitInventory, 0, 18, 0)
                 .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.INT_CIRCUIT_OVERLAY)
                 .setConsumer(this::getCircuitSlotTooltip));
 
-        // Blocking toggle button
-        builder.widget(new ImageCycleButtonWidget(startX + 18 * 5, startY + 18 + 9, 18, 18, GuiTextures.BUTTON_POWER,
-                this::isWorkingEnabled,
-                this::setWorkingEnabled).setTooltipHoverString("zbgt.machine.budget_crib.blocking_button"));
+        // Pattern slot
+        buttons.addWidget(new SlotWidget(patternSlot, 0, 18 * 2, 0)
+                .setBackgroundTexture(GuiTextures.SLOT, ClientHandler.ME_PATTERN_OVERLAY)
+                .setChangeListener(this::setPatternDetails));
+
+        // Blocking toggle
+        buttons.addWidget(new ImageCycleButtonWidget(18 * 3, 0, 18, 18, GuiTextures.BUTTON_POWER,
+                this::isWorkingEnabled, this::setWorkingEnabled)
+                        .setTooltipHoverString("zbgt.machine.budget_crib.blocking_button"));
+
+        // Return items
+        buttons.addWidget(new ClickButtonWidget(18 * 4, 0, 18, 18, "", (clickData) -> returnItems())
+                .setButtonTexture(ClientHandler.EXPORT).setTooltipText("zbgt.machine.budget_crib.return_button"));
 
         builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 7, 18 + 18 * 5 + 12);
-        return builder.build(getHolder(), entityPlayer);
+        return builder.widget(slots).widget(buttons).build(getHolder(), entityPlayer);
     }
 
     protected void getCircuitSlotTooltip(@NotNull SlotWidget widget) {
@@ -215,6 +273,8 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
             }
         }
     }
+
+    private void returnItems() {}
 
     private boolean MEPatternChange() {
         // don't post until it's active
@@ -417,6 +477,8 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
             this.circuitInventory.write(data);
         }
 
+        GTUtility.writeItems(this.extraItem, "ExtraItem", data);
+
         data.setBoolean("BlockingEnabled", this.isWorkingEnabled);
 
         return data;
@@ -431,6 +493,8 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
         GTUtility.readItems(this.patternItems, "PatternItems", data);
 
         circuitInventory.read(data);
+
+        GTUtility.readItems(this.extraItem, "ExtraItem", data);
 
         this.isWorkingEnabled = data.getBoolean("BlockingEnabled");
     }

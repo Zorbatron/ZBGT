@@ -12,6 +12,7 @@ public class ClientHandler {
 
     public static TextureArea ITEM_FLUID_OVERLAY;
     public static TextureArea ME_PATTERN_OVERLAY;
+    public static TextureArea EXPORT;
 
     public static void preInit() {
         WATER_OVERLAY_INFINITY = new SimpleOverlayRenderer("overlay/machine/overlay_water_infinity");
@@ -21,5 +22,6 @@ public class ClientHandler {
 
         ITEM_FLUID_OVERLAY = TextureArea.fullImage("textures/gui/widget/item_fluid.png");
         ME_PATTERN_OVERLAY = TextureArea.fullImage("textures/gui/widget/pattern_me.png");
+        EXPORT = TextureArea.fullImage("textures/gui/widget/export.png");
     }
 }

@@ -33,6 +33,8 @@ zbgt.machine.single_item_input_bus.stack_size=§6Max stack size: §f%,d
 zbgt.machine.budget_crib.name=Budget CRIB
 zbgt.machine.budget_crib.tooltip=A Crafting Input Bus on a budget
 zbgt.machine.budget_crib.blocking_button=Click to toggle blocking mode
+zbgt.machine.budget_crib.amount_tooltip=Amount: %s
+zbgt.machine.budget_crib.return_button=Click to return items back to the network
 
 
 # Covers
