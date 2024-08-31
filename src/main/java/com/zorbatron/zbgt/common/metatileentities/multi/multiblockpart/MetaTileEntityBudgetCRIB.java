@@ -79,7 +79,8 @@ import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMulti
 
 public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiablePart
                                       implements IMultiblockAbilityPart<IItemHandlerModifiable>, ICraftingProvider,
-                                      IGridProxyable, IPowerChannelState, IGhostSlotConfigurable, IControllable {
+                                      IGridProxyable, IPowerChannelState, IGhostSlotConfigurable, IControllable,
+                                      IDataStickIntractable {
 
     @Nullable
     protected GhostCircuitItemStackHandler circuitInventory;
@@ -612,5 +613,34 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
         clearInventory(itemBuffer, this.patternSlot);
         clearInventory(itemBuffer, this.extraItem);
         this.returnItems();
+    }
+
+    @Override
+    public void onDataStickLeftClick(EntityPlayer player, ItemStack dataStick) {
+        NBTTagCompound tag = new NBTTagCompound();
+
+        tag.setTag("BudgetCRIB", writeLocationToTag());
+        dataStick.setTagCompound(tag);
+        dataStick.setTranslatableName("zbgt.machine.budget_crib.data_stick_name");
+        player.sendStatusMessage(new TextComponentTranslation("zbgt.machine.budget_crib.data_stick_use"), true);
+    }
+
+    private NBTTagCompound writeLocationToTag() {
+        NBTTagCompound tag = new NBTTagCompound();
+
+        tag.setInteger("MainX", getPos().getX());
+        tag.setInteger("MainY", getPos().getY());
+        tag.setInteger("MainZ", getPos().getZ());
+
+        return tag;
+    }
+
+    @Override
+    public boolean onDataStickRightClick(EntityPlayer player, ItemStack dataStick) {
+        return false;
+    }
+
+    public IItemHandlerModifiable getPatternItems() {
+        return this.patternItems;
     }
 }

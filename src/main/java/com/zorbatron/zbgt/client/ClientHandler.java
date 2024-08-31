@@ -9,6 +9,7 @@ public class ClientHandler {
     public static SimpleOverlayRenderer ITEM_OVERLAY_INFINITY;
     public static SimpleOverlayRenderer CRIB_ACTIVE;
     public static SimpleOverlayRenderer CRIB_INACTIVE;
+    public static SimpleOverlayRenderer CRIB_PROXY;
 
     public static TextureArea ITEM_FLUID_OVERLAY;
     public static TextureArea ME_PATTERN_OVERLAY;
@@ -19,6 +20,7 @@ public class ClientHandler {
         ITEM_OVERLAY_INFINITY = new SimpleOverlayRenderer("overlay/machine/overlay_item_infinity");
         CRIB_ACTIVE = new SimpleOverlayRenderer("overlay/machine/OVERLAY_ME_CRAFTING_INPUT_BUFFER");
         CRIB_INACTIVE = new SimpleOverlayRenderer("overlay/machine/OVERLAY_ME_CRAFTING_INPUT_BUS");
+        CRIB_PROXY = new SimpleOverlayRenderer("overlay/machine/OVERLAY_ME_CRAFTING_INPUT_SLAVE");
 
         ITEM_FLUID_OVERLAY = TextureArea.fullImage("textures/gui/widget/item_fluid.png");
         ME_PATTERN_OVERLAY = TextureArea.fullImage("textures/gui/widget/pattern_me.png");
