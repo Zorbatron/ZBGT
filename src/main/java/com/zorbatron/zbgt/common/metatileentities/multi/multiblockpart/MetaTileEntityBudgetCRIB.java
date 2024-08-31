@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
@@ -62,6 +63,7 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
+import gregtech.api.util.GTUtility;
 import gregtech.common.ConfigHolder;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
@@ -71,8 +73,9 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
     @Nullable
     protected GhostCircuitItemStackHandler circuitInventory;
-    private final ItemStackHandler pattern;
+    private ItemStackHandler patternSlot;
     private ICraftingPatternDetails patternDetails;
+    private IItemHandlerModifiable patternItems;
     private IItemHandlerModifiable actualImportItems;
     private boolean needPatternSync = true;
     // Controls blocking
@@ -83,7 +86,13 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
     public MetaTileEntityBudgetCRIB(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTValues.LuV, false);
-        pattern = new ItemStackHandler(1) {
+    }
+
+    @Override
+    protected void initializeInventory() {
+        super.initializeInventory();
+
+        this.patternSlot = new ItemStackHandler(1) {
 
             @Override
             public boolean isItemValid(int slot, @NotNull ItemStack stack) {
@@ -102,25 +111,11 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
                 }
             }
         };
-        initializeInventory();
-    }
 
-    @Override
-    protected void initializeInventory() {
-        super.initializeInventory();
         this.circuitInventory = new GhostCircuitItemStackHandler(this);
         this.circuitInventory.addNotifiableMetaTileEntity(this);
-        this.actualImportItems = new ItemHandlerList(Arrays.asList(super.getImportItems(), this.circuitInventory));
-    }
 
-    @Override
-    public IItemHandlerModifiable getImportItems() {
-        return this.actualImportItems;
-    }
-
-    @Override
-    protected IItemHandlerModifiable createImportItemHandler() {
-        return new NotifiableItemStackHandler(this, 16, getController(), false) {
+        this.patternItems = new NotifiableItemStackHandler(this, 16, getController(), false) {
 
             @Override
             public int getSlotLimit(int slot) {
@@ -132,6 +127,13 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
                 return getSlotLimit(slot);
             }
         };
+
+        this.actualImportItems = new ItemHandlerList(Arrays.asList(this.patternItems, this.circuitInventory));
+    }
+
+    @Override
+    public IItemHandlerModifiable getImportItems() {
+        return this.actualImportItems;
     }
 
     @Override
@@ -150,14 +152,14 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
         for (int y = 0; y <= 3; y++) {
             for (int x = 0; x <= 3; x++) {
                 int index = y * 4 + x;
-                builder.widget(new ItemSlotTinyAmountTextWidget(importItems, index, startX + 18 * x, startY + 18 * y,
+                builder.widget(new ItemSlotTinyAmountTextWidget(patternItems, index, startX + 18 * x, startY + 18 * y,
                         false, false)
                                 .setBackgroundTexture(GuiTextures.SLOT));
             }
         }
 
         // Pattern slot
-        builder.widget(new SlotWidget(pattern, 0, startX + 18 * 5, startY)
+        builder.widget(new SlotWidget(patternSlot, 0, startX + 18 * 5, startY)
                 .setBackgroundTexture(GuiTextures.SLOT, ClientHandler.ME_PATTERN_OVERLAY));
 
         // Circuit slot
@@ -342,23 +344,23 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
     @Override
     public void provideCrafting(ICraftingProviderHelper iCraftingProviderHelper) {
-        if (!isActive() || pattern.getStackInSlot(0).isEmpty() || patternDetails == null) return;
+        if (!isActive() || patternSlot.getStackInSlot(0).isEmpty() || patternDetails == null) return;
         iCraftingProviderHelper.addCraftingOption(this, patternDetails);
     }
 
     private void setPatternDetails() {
-        if (!(pattern.getStackInSlot(0).getItem() instanceof ItemEncodedPattern) &&
-                !pattern.getStackInSlot(0).isEmpty())
+        if (!(patternSlot.getStackInSlot(0).getItem() instanceof ItemEncodedPattern) &&
+                !patternSlot.getStackInSlot(0).isEmpty())
             return;
 
-        if (pattern.getStackInSlot(0).equals(ItemStack.EMPTY)) {
+        if (patternSlot.getStackInSlot(0).equals(ItemStack.EMPTY)) {
             this.needPatternSync = true;
             return;
         }
 
         ICraftingPatternDetails newPatternDetails = ((ICraftingPatternItem) Objects
-                .requireNonNull(pattern.getStackInSlot(0).getItem()))
-                        .getPatternForItem(pattern.getStackInSlot(0), getWorld());
+                .requireNonNull(patternSlot.getStackInSlot(0).getItem()))
+                        .getPatternForItem(patternSlot.getStackInSlot(0), getWorld());
 
         if (newPatternDetails.equals(this.patternDetails)) {
             return;
@@ -375,13 +377,13 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
         for (int i = 0; i < inventoryCrafting.getSizeInventory(); ++i) {
             ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
             if (itemStack.isEmpty()) continue;
-            if (importItems.insertItem(i, itemStack, true) != ItemStack.EMPTY) return false;
+            if (patternItems.insertItem(i, itemStack, true) != ItemStack.EMPTY) return false;
         }
 
         for (int i = 0; i < inventoryCrafting.getSizeInventory(); ++i) {
             ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
             if (itemStack.isEmpty()) continue;
-            importItems.insertItem(i, itemStack, false);
+            patternItems.insertItem(i, itemStack, false);
         }
 
         return true;
@@ -391,8 +393,8 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
     public boolean isBusy() {
         if (!isWorkingEnabled) return false;
 
-        for (int i = 0; i < importItems.getSlots(); i++) {
-            if (!importItems.getStackInSlot(i).isEmpty()) return true;
+        for (int i = 0; i < patternItems.getSlots(); i++) {
+            if (!patternItems.getStackInSlot(i).isEmpty()) return true;
         }
 
         return false;
@@ -432,7 +434,8 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
 
-        data.setTag("Pattern", this.pattern.serializeNBT());
+        data.setTag("Pattern", this.patternSlot.serializeNBT());
+        GTUtility.writeItems(this.patternItems, "PatternItems", data);
 
         if (this.circuitInventory != null) {
             this.circuitInventory.write(data);
@@ -447,7 +450,8 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
 
-        this.pattern.deserializeNBT(data.getCompoundTag("Pattern"));
+        this.patternSlot.deserializeNBT(data.getCompoundTag("Pattern"));
+        GTUtility.readItems(this.patternItems, "PatternItems", data);
 
         circuitInventory.read(data);
 
@@ -498,5 +502,11 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
             return GregtechTileCapabilities.CAPABILITY_CONTROLLABLE.cast(this);
         }
         return super.getCapability(capability, side);
+    }
+
+    @Override
+    public void clearMachineInventory(NonNullList<ItemStack> itemBuffer) {
+        super.clearMachineInventory(itemBuffer);
+        clearInventory(itemBuffer, this.patternSlot);
     }
 }
