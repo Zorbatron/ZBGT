@@ -47,7 +47,7 @@ public class ZBGTMetaTileEntities {
 
         if (Mods.AppliedEnergistics2.isModLoaded()) {
             BUDGET_CRIB = registerMetaTileEntity(18009,
-                    new MetaTileEntityBudgetCRIB(ZBUtility.zbgtId("budget_crib")));
+                    new MetaTileEntityBudgetCRIB(ZBUtility.zbgtId("budget_crib"), GTValues.EV));
         }
     }
 }

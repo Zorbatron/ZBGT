@@ -48,7 +48,6 @@ import appeng.me.helpers.IGridProxyable;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
-import gregtech.api.GTValues;
 import gregtech.api.capability.*;
 import gregtech.api.capability.impl.GhostCircuitItemStackHandler;
 import gregtech.api.capability.impl.ItemHandlerList;
@@ -84,8 +83,8 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
     private @Nullable AENetworkProxy aeProxy;
     private boolean isOnline;
 
-    public MetaTileEntityBudgetCRIB(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTValues.LuV, false);
+    public MetaTileEntityBudgetCRIB(ResourceLocation metaTileEntityId, int tier) {
+        super(metaTileEntityId, tier, false);
     }
 
     @Override
@@ -117,15 +116,15 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
         this.patternItems = new NotifiableItemStackHandler(this, 16, getController(), false) {
 
-            @Override
-            public int getSlotLimit(int slot) {
-                return Integer.MAX_VALUE;
-            }
-
-            @Override
-            protected int getStackLimit(int slot, @NotNull ItemStack stack) {
-                return getSlotLimit(slot);
-            }
+            // @Override
+            // public int getSlotLimit(int slot) {
+            // return Integer.MAX_VALUE;
+            // }
+            //
+            // @Override
+            // protected int getStackLimit(int slot, @NotNull ItemStack stack) {
+            // return getSlotLimit(slot);
+            // }
         };
 
         this.actualImportItems = new ItemHandlerList(Arrays.asList(this.patternItems, this.circuitInventory));
@@ -138,7 +137,7 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityBudgetCRIB(metaTileEntityId);
+        return new MetaTileEntityBudgetCRIB(metaTileEntityId, getTier());
     }
 
     @Override
