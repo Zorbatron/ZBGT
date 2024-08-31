@@ -116,15 +116,15 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
         this.patternItems = new NotifiableItemStackHandler(this, 16, getController(), false) {
 
-            // @Override
-            // public int getSlotLimit(int slot) {
-            // return Integer.MAX_VALUE;
-            // }
-            //
-            // @Override
-            // protected int getStackLimit(int slot, @NotNull ItemStack stack) {
-            // return getSlotLimit(slot);
-            // }
+             @Override
+             public int getSlotLimit(int slot) {
+             return Integer.MAX_VALUE;
+             }
+
+             @Override
+             protected int getStackLimit(int slot, @NotNull ItemStack stack) {
+             return getSlotLimit(slot);
+             }
         };
 
         this.actualImportItems = new ItemHandlerList(Arrays.asList(this.patternItems, this.circuitInventory));
