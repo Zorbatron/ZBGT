@@ -26,7 +26,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import com.zorbatron.zbgt.ZBGTCore;
 import com.zorbatron.zbgt.client.ClientHandler;
 import com.zorbatron.zbgt.client.widgets.ItemSlotTinyAmountTextWidget;
 
@@ -41,8 +40,6 @@ import appeng.api.networking.events.MENetworkCraftingPatternChange;
 import appeng.api.util.AECableType;
 import appeng.api.util.AEPartLocation;
 import appeng.api.util.DimensionalCoord;
-import appeng.items.misc.ItemEncodedPattern;
-import appeng.me.GridAccessException;
 import appeng.me.helpers.AENetworkProxy;
 import appeng.me.helpers.IGridProxyable;
 import codechicken.lib.render.CCRenderState;
@@ -94,20 +91,13 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
         this.patternSlot = new ItemStackHandler(1) {
 
             @Override
-            public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-                return stack.getItem() instanceof ICraftingPatternItem;
+            public int getSlotLimit(int slot) {
+                return 1;
             }
 
             @Override
-            protected void onContentsChanged(int slot) {
-                if (!getWorld().isRemote) {
-                    if (stacks.get(0).getItem() instanceof ICraftingPatternItem) {
-                        setPatternDetails();
-                    } else {
-                        ZBGTCore.LOGGER.warn(String.format("Item in Budget CRIB at X: %d, Y: %d, Z: %d not a pattern!",
-                                getPos().getX(), getPos().getZ(), getPos().getZ()));
-                    }
-                }
+            public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+                return stack.getItem() instanceof ICraftingPatternItem;
             }
         };
 
@@ -159,7 +149,8 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
         // Pattern slot
         builder.widget(new SlotWidget(patternSlot, 0, startX + 18 * 5, startY)
-                .setBackgroundTexture(GuiTextures.SLOT, ClientHandler.ME_PATTERN_OVERLAY));
+                .setBackgroundTexture(GuiTextures.SLOT, ClientHandler.ME_PATTERN_OVERLAY)
+                .setChangeListener(this::setPatternDetails));
 
         // Circuit slot
         builder.widget(new GhostCircuitSlotWidget(circuitInventory, 0, startX + 18 * 5, startY + 18 * 3)
@@ -220,21 +211,22 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
             updateMEStatus();
 
             if (needPatternSync && getOffsetTimer() % 10 == 0) {
-                needPatternSync = !MEPatternChange();
+                needPatternSync = MEPatternChange();
             }
         }
     }
 
     private boolean MEPatternChange() {
         // don't post until it's active
-        if (getProxy() == null && !getProxy().isActive()) return false;
+        if (getProxy() == null || !getProxy().isActive()) return true;
+
         try {
-            getProxy().getGrid()
-                    .postEvent(new MENetworkCraftingPatternChange(this, getProxy().getNode()));
-        } catch (GridAccessException ignored) {
-            return false;
+            getProxy().getGrid().postEvent(new MENetworkCraftingPatternChange(this, getProxy().getNode()));
+        } catch (Exception ignored) {
+            return true;
         }
-        return true;
+
+        return false;
     }
 
     public boolean updateMEStatus() {
@@ -348,24 +340,9 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
     }
 
     private void setPatternDetails() {
-        if (!(patternSlot.getStackInSlot(0).getItem() instanceof ItemEncodedPattern) &&
-                !patternSlot.getStackInSlot(0).isEmpty())
-            return;
+        this.patternDetails = ((ICraftingPatternItem) Objects.requireNonNull(patternSlot.getStackInSlot(0).getItem()))
+                .getPatternForItem(patternSlot.getStackInSlot(0), getWorld());
 
-        if (patternSlot.getStackInSlot(0).equals(ItemStack.EMPTY)) {
-            this.needPatternSync = true;
-            return;
-        }
-
-        ICraftingPatternDetails newPatternDetails = ((ICraftingPatternItem) Objects
-                .requireNonNull(patternSlot.getStackInSlot(0).getItem()))
-                        .getPatternForItem(patternSlot.getStackInSlot(0), getWorld());
-
-        if (newPatternDetails.equals(this.patternDetails)) {
-            return;
-        }
-
-        this.patternDetails = newPatternDetails;
         this.needPatternSync = true;
     }
 
@@ -450,13 +427,12 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
         super.readFromNBT(data);
 
         this.patternSlot.deserializeNBT(data.getCompoundTag("Pattern"));
+        setPatternDetails();
         GTUtility.readItems(this.patternItems, "PatternItems", data);
 
         circuitInventory.read(data);
 
         this.isWorkingEnabled = data.getBoolean("BlockingEnabled");
-
-        setPatternDetails();
     }
 
     @Override
