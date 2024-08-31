@@ -108,7 +108,13 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
         this.circuitInventory = new GhostCircuitItemStackHandler(this);
         this.circuitInventory.addNotifiableMetaTileEntity(this);
 
-        this.extraItem = new NotifiableItemStackHandler(this, 1, null, false);
+        this.extraItem = new NotifiableItemStackHandler(this, 1, null, false) {
+
+            @Override
+            public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+                return !(stack.getItem() instanceof ICraftingPatternItem);
+            }
+        };
 
         this.patternItems = new NotifiableItemStackHandler(this, 16, null, false) {
 
@@ -181,8 +187,9 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
                     @Override
                     public void drawInForeground(int mouseX, int mouseY) {
-                        if (isMouseOverElement(mouseX, mouseY)) {
-                            ItemStack item = patternItems.getStackInSlot(index);
+                        ItemStack item = patternItems.getStackInSlot(index);
+
+                        if (isMouseOverElement(mouseX, mouseY) && !item.isEmpty()) {
                             List<String> tooltip = getItemToolTip(item);
 
                             tooltip.add(TextFormatting.GRAY + I18n.format("zbgt.machine.budget_crib.amount_tooltip",
@@ -199,7 +206,7 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
         // Extra item slot
         buttons.addWidget(new SlotWidget(extraItem, 0, 0, 0)
-                .setBackgroundTexture(GuiTextures.SLOT));
+                .setBackgroundTexture(GuiTextures.SLOT).setTooltipText("zbgt.machine.budget_crib.extra_item"));
 
         // Circuit slot
         buttons.addWidget(new GhostCircuitSlotWidget(circuitInventory, 0, 18, 0)
