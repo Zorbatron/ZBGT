@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Objects;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -454,13 +453,17 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
     @Override
     public void provideCrafting(ICraftingProviderHelper iCraftingProviderHelper) {
-        if (!isActive() || patternSlot.getStackInSlot(0).isEmpty() || patternDetails == null) return;
+        if (!isActive() || patternDetails == null) return;
         iCraftingProviderHelper.addCraftingOption(this, patternDetails);
     }
 
     private void setPatternDetails() {
-        this.patternDetails = ((ICraftingPatternItem) Objects.requireNonNull(patternSlot.getStackInSlot(0).getItem()))
-                .getPatternForItem(patternSlot.getStackInSlot(0), getWorld());
+        ItemStack pattern = patternSlot.getStackInSlot(0);
+        if (pattern.isEmpty()) return;
+
+        if (pattern.getItem() instanceof ICraftingPatternItem patternItem) {
+            this.patternDetails = patternItem.getPatternForItem(pattern, getWorld());
+        }
 
         this.needPatternSync = true;
     }
