@@ -10,15 +10,24 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.zorbatron.zbgt.ZBGTCore;
+import com.zorbatron.zbgt.client.widgets.ItemSlotTinyAmountTextWidget;
+
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.pipeline.IVertexOperation;
+import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.capability.impl.NotifiableItemStackHandler;
+import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
+import gregtech.api.gui.widgets.ClickButtonWidget;
 import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.util.Position;
+import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
 public class MetaTileEntitySuperBus extends MetaTileEntityMultiblockNotifiablePart
@@ -80,19 +89,43 @@ public class MetaTileEntitySuperBus extends MetaTileEntityMultiblockNotifiablePa
 
     @Override
     protected ModularUI createUI(EntityPlayer entityPlayer) {
-        ModularUI.Builder builder = ModularUI.defaultBuilder().label(6, 6, getMetaFullName());
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 18 + 18 * 4 + 94)
+                .label(6, 6, getMetaFullName());
 
-        WidgetGroup slots = new WidgetGroup(new Position(6, 18));
+        WidgetGroup slots = new WidgetGroup(new Position(7 + (int) (18 * 2.5), 18));
 
+        // Item slots
         for (int x = 0; x < 4; x++) {
             for (int y = 0; y < 4; y++) {
                 int index = y * 4 + x;
 
+                slots.addWidget(new ItemSlotTinyAmountTextWidget(this.importItems, index,
+                        x * 18, y * 18, false, false)
+                                .setBackgroundTexture(GuiTextures.SLOT));
             }
         }
 
-        return builder.bindPlayerInventory(entityPlayer.inventory)
+        // Return items
+        builder.widget(new ClickButtonWidget(7 + 18 * 8, 18 + 18 * 3, 18, 18, "Test",
+                (clickData -> {
+                    ZBGTCore.LOGGER
+                            .info(String.format("%s: Returned items", getWorld().isRemote ? "Client" : "Server"));
+                })).setTooltipText("zbgt.machine.super_bus.return_items")
+                        .setButtonTexture(GuiTextures.BUTTON_ITEM_OUTPUT));
+
+        return builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 7, 18 + 18 * 4 + 12)
+                .widget(slots)
                 .build(getHolder(), entityPlayer);
+    }
+
+    @Override
+    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
+        super.renderMetaTileEntity(renderState, translation, pipeline);
+
+        if (shouldRenderOverlay()) {
+            Textures.PIPE_IN_OVERLAY.renderSided(getFrontFacing(), renderState, translation, pipeline);
+            Textures.ITEM_HATCH_INPUT_OVERLAY.renderSided(getFrontFacing(), renderState, translation, pipeline);
+        }
     }
 
     @Override

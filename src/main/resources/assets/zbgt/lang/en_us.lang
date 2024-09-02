@@ -29,6 +29,10 @@ zbgt.machine.extreme_air_intake_hatch.tooltip=Collects air from the world for mu
 zbgt.machine.single_item_input_bus.name=Single Item Input Bus
 zbgt.machine.single_item_input_bus.stack_size=§6Max stack size: §f%,d
 
+zbgt.machine.super_bus.name=Super Bus
+zbgt.machine.super_bus.tooltip=Has 16 slots but can hold MAX_INT items per slot!
+zbgt.machine.super_bus.return_items=Click to return items to the faced block
+
 
 metaitem.cover.dual_cover.lv.name=LV Dual Cover
 metaitem.cover.dual_cover.mv.name=MV Dual Cover
