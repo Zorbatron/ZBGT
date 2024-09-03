@@ -18,7 +18,7 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityAirIntakeHatch EXTREME_AIR_INTAKE_HATCH;
     public static MetaTileEntitySingleItemInputBus SINGLE_ITEM_INPUT_BUS;
     public static MetaTileEntityCreativeItemBus CREATIVE_ITEM_BUS;
-    public static MetaTileEntitySuperBus SUPER_BUS;
+    public static MetaTileEntitySuperInputBus SUPER_INPUT_BUS;
 
     public static void init() {
         CREATIVE_ENERGY_SOURCE = registerMetaTileEntity(18000,
@@ -44,7 +44,7 @@ public class ZBGTMetaTileEntities {
         CREATIVE_ITEM_BUS = registerMetaTileEntity(18008,
                 new MetaTileEntityCreativeItemBus(zbgtId("creative_item_bus")));
 
-        SUPER_BUS = registerMetaTileEntity(18009,
-                new MetaTileEntitySuperBus(zbgtId("super_bus")));
+        SUPER_INPUT_BUS = registerMetaTileEntity(18009,
+                new MetaTileEntitySuperInputBus(zbgtId("super_input_bus")));
     }
 }

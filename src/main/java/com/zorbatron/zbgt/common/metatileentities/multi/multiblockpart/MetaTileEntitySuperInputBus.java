@@ -47,7 +47,7 @@ import gregtech.api.util.Position;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
-public class MetaTileEntitySuperBus extends MetaTileEntityMultiblockNotifiablePart
+public class MetaTileEntitySuperInputBus extends MetaTileEntityMultiblockNotifiablePart
                                     implements IMultiblockAbilityPart<IItemHandlerModifiable>, IControllable {
 
     private boolean workingEnabled = false;
@@ -57,7 +57,7 @@ public class MetaTileEntitySuperBus extends MetaTileEntityMultiblockNotifiablePa
     private LargeSlotItemStackHandler largeSlotItemStackHandler;
     private ItemHandlerList actualImportItems;
 
-    public MetaTileEntitySuperBus(ResourceLocation metaTileEntityId) {
+    public MetaTileEntitySuperInputBus(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTValues.HV, false);
     }
 
@@ -74,7 +74,7 @@ public class MetaTileEntitySuperBus extends MetaTileEntityMultiblockNotifiablePa
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntitySuperBus(metaTileEntityId);
+        return new MetaTileEntitySuperInputBus(metaTileEntityId);
     }
 
     @Override
@@ -104,7 +104,7 @@ public class MetaTileEntitySuperBus extends MetaTileEntityMultiblockNotifiablePa
 
         // Slot limit
         extraWidgets.addWidget(new ImageWidget(0, 0, 18 * 4, 20, GuiTextures.DISPLAY)
-                .setTooltip("zbgt.machine.super_bus.slot_limit"));
+                .setTooltip("zbgt.machine.super_input_bus.slot_limit"));
         extraWidgets.addWidget(new TextFieldWidget2(2, 5, 18 * 4, 16,
                 () -> String.valueOf(this.slotLimit),
                 (string) -> {
@@ -123,12 +123,12 @@ public class MetaTileEntitySuperBus extends MetaTileEntityMultiblockNotifiablePa
         extraWidgets.addWidget(new ToggleButtonWidget(18 * 7, 0, 18, 18, ClientHandler.AUTO_PULL,
                 this::isWorkingEnabled, this::setWorkingEnabled)
                         .shouldUseBaseBackground()
-                        .setTooltipText("zbgt.machine.super_bus.auto_pull"));
+                        .setTooltipText("zbgt.machine.super_input_bus.auto_pull"));
 
         // Return items
         extraWidgets.addWidget(new ToggleButtonWidget(18 * 8, 0, 18, 18, GuiTextures.BUTTON_ITEM_OUTPUT,
                 this::shouldReturnItems, this::setReturningItems)
-                        .setTooltipText("zbgt.machine.super_bus.return_items.button")
+                        .setTooltipText("zbgt.machine.super_input_bus.return_items.button")
                         .shouldUseBaseBackground());
 
         return builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 7, 18 + 18 * 5 + 12)
@@ -246,11 +246,11 @@ public class MetaTileEntitySuperBus extends MetaTileEntityMultiblockNotifiablePa
         if (shouldReturnItems()) {
             setReturningItems(false);
             playerIn.sendStatusMessage(
-                    new TextComponentTranslation("zbgt.machine.super_bus.return_items.screwdriver.disabled"), true);
+                    new TextComponentTranslation("zbgt.machine.super_input_bus.return_items.screwdriver.disabled"), true);
         } else {
             setReturningItems(true);
             playerIn.sendStatusMessage(
-                    new TextComponentTranslation("zbgt.machine.super_bus.return_items.screwdriver.enabled"), true);
+                    new TextComponentTranslation("zbgt.machine.super_input_bus.return_items.screwdriver.enabled"), true);
         }
 
         return true;
@@ -265,8 +265,8 @@ public class MetaTileEntitySuperBus extends MetaTileEntityMultiblockNotifiablePa
     @Override
     public void addToolUsages(ItemStack stack, @Nullable World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gregtech.tool_action.screwdriver.access_covers"));
-        tooltip.add(I18n.format("zbgt.machine.super_bus.screwdriver"));
-        tooltip.add(I18n.format("zbgt.machine.super_bus.soft_mallet"));
+        tooltip.add(I18n.format("zbgt.machine.super_input_bus.screwdriver"));
+        tooltip.add(I18n.format("zbgt.machine.super_input_bus.soft_mallet"));
         tooltip.add(I18n.format("gregtech.tool_action.wrench.set_facing"));
         super.addToolUsages(stack, world, tooltip, advanced);
     }

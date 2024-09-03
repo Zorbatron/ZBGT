@@ -30,17 +30,17 @@ zbgt.machine.extreme_air_intake_hatch.tooltip=Collects air from the world for mu
 zbgt.machine.single_item_input_bus.name=Single Item Input Bus
 zbgt.machine.single_item_input_bus.stack_size=§6Max stack size: §f%,d
 
-zbgt.machine.super_bus.name=Super Bus
-zbgt.machine.super_bus.tooltip=Has 16 slots but can hold up to MAX_INT items per slot!
-zbgt.machine.super_bus.return_items.button.enabled=Stop returning items
-zbgt.machine.super_bus.return_items.button.disabled=Click to return items to the faced block
-zbgt.machine.super_bus.return_items.screwdriver.enabled=Started returning items
-zbgt.machine.super_bus.return_items.screwdriver.disabled=Stopped returning items
-zbgt.machine.super_bus.auto_pull.enabled=Item auto pulling enabled
-zbgt.machine.super_bus.auto_pull.disabled=Item auto pulling disabled
-zbgt.machine.super_bus.slot_limit=Set slot limit
-zbgt.machine.super_bus.screwdriver=§8Use Screwdriver to toggle sending item back to the faced block
-zbgt.machine.super_bus.soft_mallet=§8use Soft mallet to toggle auto pulling items
+zbgt.machine.super_input_bus.name=Super Input Bus
+zbgt.machine.super_input_bus.tooltip=Has 16 slots but can hold up to MAX_INT items per slot!
+zbgt.machine.super_input_bus.return_items.button.enabled=Stop returning items
+zbgt.machine.super_input_bus.return_items.button.disabled=Click to return items to the faced block
+zbgt.machine.super_input_bus.return_items.screwdriver.enabled=Started returning items
+zbgt.machine.super_input_bus.return_items.screwdriver.disabled=Stopped returning items
+zbgt.machine.super_input_bus.auto_pull.enabled=Item auto pulling enabled
+zbgt.machine.super_input_bus.auto_pull.disabled=Item auto pulling disabled
+zbgt.machine.super_input_bus.slot_limit=Set slot limit
+zbgt.machine.super_input_bus.screwdriver=§8Use Screwdriver to toggle sending item back to the faced block
+zbgt.machine.super_input_bus.soft_mallet=§8use Soft mallet to toggle auto pulling items
 
 # Covers
 metaitem.cover.dual_cover.lv.name=LV Dual Cover
