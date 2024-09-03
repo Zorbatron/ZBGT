@@ -1,0 +1,71 @@
+package com.zorbatron.zbgt;
+
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.items.IItemHandler;
+
+import org.jetbrains.annotations.NotNull;
+
+import gregtech.api.capability.INotifiableHandler;
+import gregtech.api.capability.impl.GhostCircuitItemStackHandler;
+import gregtech.api.capability.impl.ItemHandlerList;
+import gregtech.api.gui.widgets.SlotWidget;
+import gregtech.api.metatileentity.MetaTileEntity;
+import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
+
+public class ZBGTUtility {
+
+    public static @NotNull ResourceLocation zbgtId(@NotNull String path) {
+        return new ResourceLocation("zbgt", path);
+    }
+
+    public static void getCircuitSlotTooltip(@NotNull SlotWidget widget,
+                                             GhostCircuitItemStackHandler circuitItemStackHandler) {
+        String configString;
+        if (circuitItemStackHandler.getCircuitValue() == GhostCircuitItemStackHandler.NO_CONFIG) {
+            configString = new TextComponentTranslation("gregtech.gui.configurator_slot.no_value").getFormattedText();
+        } else {
+            configString = String.valueOf(circuitItemStackHandler.getCircuitValue());
+        }
+
+        widget.setTooltipText("gregtech.gui.configurator_slot.tooltip", configString);
+    }
+
+    public static boolean isInventoryEmpty(IItemHandler inventory) {
+        for (int slot = 0; slot < inventory.getSlots(); slot++) {
+            if (!inventory.getStackInSlot(slot).isEmpty()) return false;
+        }
+
+        return true;
+    }
+
+    public static void addNotifiableToMTE(ItemHandlerList itemHandlerList, MultiblockControllerBase controllerBase,
+                                          MetaTileEntity sourceMTE, boolean isExport) {
+        for (IItemHandler handler : itemHandlerList.getBackingHandlers()) {
+            if (handler instanceof INotifiableHandler notifiableHandler) {
+                notifiableHandler.addNotifiableMetaTileEntity(controllerBase);
+                notifiableHandler.addToNotifiedList(sourceMTE, handler, isExport);
+            }
+        }
+    }
+
+    public static void removeNotifiableFromMTE(ItemHandlerList itemHandlerList,
+                                               MultiblockControllerBase controllerBase) {
+        for (IItemHandler handler : itemHandlerList.getBackingHandlers()) {
+            if (handler instanceof INotifiableHandler notifiableHandler) {
+                notifiableHandler.removeNotifiableMetaTileEntity(controllerBase);
+            }
+        }
+    }
+
+    public static void addNotifiableToMTE(INotifiableHandler notifiableHandler, MultiblockControllerBase controllerBase,
+                                          MetaTileEntity sourceMTE, boolean isExport) {
+        notifiableHandler.addNotifiableMetaTileEntity(controllerBase);
+        notifiableHandler.addToNotifiedList(sourceMTE, notifiableHandler, isExport);
+    }
+
+    public static void removeNotifiableFromMTE(INotifiableHandler notifiableHandler,
+                                               MultiblockControllerBase controllerBase) {
+        notifiableHandler.removeNotifiableMetaTileEntity(controllerBase);
+    }
+}

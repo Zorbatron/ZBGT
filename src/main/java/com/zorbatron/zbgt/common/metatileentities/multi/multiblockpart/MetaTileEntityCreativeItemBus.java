@@ -8,13 +8,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.ZBGTUtility;
 import com.zorbatron.zbgt.api.capability.impl.InfiniteItemStackHandler;
 import com.zorbatron.zbgt.client.ClientHandler;
 import com.zorbatron.zbgt.client.widgets.PhantomSlotNoTextWidget;
@@ -84,23 +83,13 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
         }
 
         SlotWidget circuitSlot = new GhostCircuitSlotWidget(circuitItemStackHandler, 0, 151, 72)
-                .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.INT_CIRCUIT_OVERLAY);
-        builder.widget(circuitSlot.setConsumer(this::getCircuitSlotTooltip));
+                .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.INT_CIRCUIT_OVERLAY)
+                .setConsumer(slotWidget -> ZBGTUtility.getCircuitSlotTooltip(slotWidget, this.circuitItemStackHandler));
 
         return builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 7, 102)
                 .widget(slots)
+                .widget(circuitSlot)
                 .build(getHolder(), entityPlayer);
-    }
-
-    protected void getCircuitSlotTooltip(@NotNull SlotWidget widget) {
-        String configString;
-        if (circuitItemStackHandler.getCircuitValue() == GhostCircuitItemStackHandler.NO_CONFIG) {
-            configString = new TextComponentTranslation("gregtech.gui.configurator_slot.no_value").getFormattedText();
-        } else {
-            configString = String.valueOf(circuitItemStackHandler.getCircuitValue());
-        }
-
-        widget.setTooltipText("gregtech.gui.configurator_slot.tooltip", configString);
     }
 
     @Override
@@ -131,20 +120,14 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
     public void addToMultiBlock(MultiblockControllerBase controllerBase) {
         super.addToMultiBlock(controllerBase);
 
-        this.infiniteItemStackHandler.addNotifiableMetaTileEntity(controllerBase);
-        this.infiniteItemStackHandler.addToNotifiedList(this, controllerBase, false);
-
-        this.circuitItemStackHandler.addNotifiableMetaTileEntity(controllerBase);
-        this.circuitItemStackHandler.addToNotifiedList(this, controllerBase, false);
+        ZBGTUtility.addNotifiableToMTE(this.actualImportItems, controllerBase, this, false);
     }
 
     @Override
     public void removeFromMultiBlock(MultiblockControllerBase controllerBase) {
         super.removeFromMultiBlock(controllerBase);
 
-        this.infiniteItemStackHandler.removeNotifiableMetaTileEntity(controllerBase);
-
-        this.circuitItemStackHandler.removeNotifiableMetaTileEntity(controllerBase);
+        ZBGTUtility.removeNotifiableFromMTE(this.actualImportItems, controllerBase);
     }
 
     @Override
