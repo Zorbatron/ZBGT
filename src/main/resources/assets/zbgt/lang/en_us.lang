@@ -1,3 +1,4 @@
+# Multiblock parts
 zbgt.machine.creative_energy_source.name=Creative Energy Source
 zbgt.machine.creative_energy_source.tooltip=Infinite Energy Source for Multiblocks
 
@@ -29,7 +30,19 @@ zbgt.machine.extreme_air_intake_hatch.tooltip=Collects air from the world for mu
 zbgt.machine.single_item_input_bus.name=Single Item Input Bus
 zbgt.machine.single_item_input_bus.stack_size=§6Max stack size: §f%,d
 
+zbgt.machine.super_bus.name=Super Bus
+zbgt.machine.super_bus.tooltip=Has 16 slots but can hold up to MAX_INT items per slot!
+zbgt.machine.super_bus.return_items.button.enabled=Stop returning items
+zbgt.machine.super_bus.return_items.button.disabled=Click to return items to the faced block
+zbgt.machine.super_bus.return_items.screwdriver.enabled=Started returning items
+zbgt.machine.super_bus.return_items.screwdriver.disabled=Stopped returning items
+zbgt.machine.super_bus.auto_pull.enabled=Item auto pulling enabled
+zbgt.machine.super_bus.auto_pull.disabled=Item auto pulling disabled
+zbgt.machine.super_bus.slot_limit=Set slot limit
+zbgt.machine.super_bus.screwdriver=§8Use Screwdriver to toggle sending item back to the faced block
+zbgt.machine.super_bus.soft_mallet=§8use Soft mallet to toggle auto pulling items
 
+# Covers
 metaitem.cover.dual_cover.lv.name=LV Dual Cover
 metaitem.cover.dual_cover.mv.name=MV Dual Cover
 metaitem.cover.dual_cover.hv.name=HV Dual Cover
@@ -66,3 +79,6 @@ metaitem.cover.dual.tooltip.transfer_rate=§bTransfer Rate: §f%,d items/s§7 an
 metaitem.cover.dual.tooltip.transfer_rate.stacks=§bTransfer Rate: §f%,d stacks/s§7 and §f%,d L/t
 
 cover.dual_cover.mode_changer=Click to change between the item and fluid settings
+
+# Widgets
+zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s

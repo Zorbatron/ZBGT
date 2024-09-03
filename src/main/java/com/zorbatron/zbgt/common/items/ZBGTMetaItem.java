@@ -5,7 +5,7 @@ import static com.zorbatron.zbgt.common.items.ZBGTMetaItems.*;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
-import com.zorbatron.zbgt.ZBUtility;
+import com.zorbatron.zbgt.ZBGTUtility;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.items.metaitem.MetaItem;
@@ -20,7 +20,7 @@ public class ZBGTMetaItem extends StandardMetaItem {
 
     @Override
     public ResourceLocation createItemModelPath(MetaItem<?>.MetaValueItem metaValueItem, String postfix) {
-        return ZBUtility.zbgtId(this.formatModelPath(metaValueItem) + postfix);
+        return ZBGTUtility.zbgtId(this.formatModelPath(metaValueItem) + postfix);
     }
 
     @Override
