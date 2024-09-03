@@ -1,5 +1,7 @@
 package com.zorbatron.zbgt.api.capability.impl;
 
+import java.util.function.Supplier;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemHandlerHelper;
 
@@ -10,14 +12,23 @@ import gregtech.api.metatileentity.MetaTileEntity;
 
 public class LargeSlotItemStackHandler extends NotifiableItemStackHandler {
 
+    Supplier<Integer> slotCapacity;
+
     public LargeSlotItemStackHandler(MetaTileEntity metaTileEntity, int slots, MetaTileEntity entityToNotify,
                                      boolean isExport) {
+        this(metaTileEntity, slots, entityToNotify, isExport, () -> Integer.MAX_VALUE);
+    }
+
+    public LargeSlotItemStackHandler(MetaTileEntity metaTileEntity, int slots, MetaTileEntity entityToNotify,
+                                     boolean isExport, Supplier<Integer> slotCapacity) {
         super(metaTileEntity, slots, entityToNotify, isExport);
+
+        this.slotCapacity = slotCapacity;
     }
 
     @Override
     public int getSlotLimit(int slot) {
-        return Integer.MAX_VALUE;
+        return slotCapacity.get();
     }
 
     @Override
