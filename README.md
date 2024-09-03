@@ -19,6 +19,12 @@ Creative Item Bus
 
 ![](images/creative_item_bus.png)
 
+Super Input Bus
+- An input bus that has 16 slots but each slot can hold up to MAX_INT items
+- Depending on how many items are inside, it may take a while to empty back into and interface until AE2UEL PR [#448](https://github.com/AE2-UEL/Applied-Energistics-2/pull/448) makes its way into a stable release (v0.56.6 is NOT stable)
+
+![](images/super_input_bus.png)
+
 Creative Fluid Hatch
 - Same as the normal reservoir hatch but can be changed to provide other fluids.
 
