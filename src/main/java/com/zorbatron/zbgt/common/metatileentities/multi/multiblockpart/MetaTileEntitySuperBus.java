@@ -2,11 +2,8 @@ package com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart;
 
 import java.util.List;
 
-import gregtech.api.capability.GregtechDataCodes;
-import gregtech.api.capability.GregtechTileCapabilities;
-import gregtech.api.capability.IControllable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -14,21 +11,21 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.ItemHandlerHelper;
 
-import org.jetbrains.annotations.NotNull;
-
+import com.zorbatron.zbgt.api.capability.impl.LargeSlotItemStackHandler;
+import com.zorbatron.zbgt.client.ClientHandler;
 import com.zorbatron.zbgt.client.widgets.ItemSlotTinyAmountTextWidget;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
-import gregtech.api.capability.impl.NotifiableItemStackHandler;
+import gregtech.api.capability.GregtechDataCodes;
+import gregtech.api.capability.GregtechTileCapabilities;
+import gregtech.api.capability.IControllable;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
-import gregtech.api.gui.widgets.ClickButtonWidget;
-import gregtech.api.gui.widgets.WidgetGroup;
+import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
@@ -53,47 +50,7 @@ public class MetaTileEntitySuperBus extends MetaTileEntityMultiblockNotifiablePa
 
     @Override
     protected IItemHandlerModifiable createImportItemHandler() {
-        return new NotifiableItemStackHandler(this, 16, null, false) {
-
-            @Override
-            public int getSlotLimit(int slot) {
-                return Integer.MAX_VALUE;
-            }
-
-            @Override
-            protected int getStackLimit(int slot, @NotNull ItemStack stack) {
-                return getSlotLimit(slot);
-            }
-
-            @NotNull
-            @Override
-            public ItemStack extractItem(int slot, int amount, boolean simulate) {
-                if (amount == 0) return ItemStack.EMPTY;
-
-                validateSlotIndex(slot);
-
-                ItemStack existing = this.stacks.get(slot);
-
-                if (existing.isEmpty()) return ItemStack.EMPTY;
-
-                if (existing.getCount() <= amount) {
-                    if (!simulate) {
-                        this.stacks.set(slot, ItemStack.EMPTY);
-                        onContentsChanged(slot);
-                    }
-
-                    return existing;
-                } else {
-                    if (!simulate) {
-                        this.stacks.set(slot, ItemHandlerHelper.copyStackWithSize(
-                                existing, existing.getCount() - amount));
-                        onContentsChanged(slot);
-                    }
-
-                    return ItemHandlerHelper.copyStackWithSize(existing, amount);
-                }
-            }
-        };
+        return new LargeSlotItemStackHandler(this, 16, null, false);
     }
 
     @Override
@@ -114,7 +71,14 @@ public class MetaTileEntitySuperBus extends MetaTileEntityMultiblockNotifiablePa
             }
         }
 
+        // Auto pull
+        builder.widget(new ToggleButtonWidget(7 + 18 * 7, 18 + 18 * 3, 18, 18, ClientHandler.AUTO_PULL,
+                this::isWorkingEnabled, this::setWorkingEnabled)
+                        .shouldUseBaseBackground()
+                        .setTooltipText("zbgt.machine.super_bus.auto_pull"));
+
         // Return items
+        builder.widget(new ImageWidget(7 + 18 * 8, 18 + 18 * 3, 18, 18, GuiTextures.BUTTON_OVERCLOCK));
         builder.widget(new ClickButtonWidget(7 + 18 * 8, 18 + 18 * 3, 18, 18, "", (clickData -> returnItems()))
                 .setTooltipText("zbgt.machine.super_bus.return_items")
                 .setButtonTexture(GuiTextures.BUTTON_ITEM_OUTPUT));
@@ -189,5 +153,33 @@ public class MetaTileEntitySuperBus extends MetaTileEntityMultiblockNotifiablePa
         if (dataId == GregtechDataCodes.WORKING_ENABLED) {
             this.workingEnabled = buf.readBoolean();
         }
+    }
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setBoolean("AutoPull", this.workingEnabled);
+
+        return super.writeToNBT(data);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+
+        this.workingEnabled = data.getBoolean("AutoPull");
+    }
+
+    @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+
+        buf.writeBoolean(this.workingEnabled);
+    }
+
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+
+        this.workingEnabled = buf.readBoolean();
     }
 }

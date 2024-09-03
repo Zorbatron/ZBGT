@@ -32,6 +32,8 @@ zbgt.machine.single_item_input_bus.stack_size=§6Max stack size: §f%,d
 zbgt.machine.super_bus.name=Super Bus
 zbgt.machine.super_bus.tooltip=Has 16 slots but can hold MAX_INT items per slot!
 zbgt.machine.super_bus.return_items=Click to return items to the faced block
+zbgt.machine.super_bus.auto_pull.enabled=Item auto pulling enabled
+zbgt.machine.super_bus.auto_pull.disabled=Item auto pulling disabled
 
 
 metaitem.cover.dual_cover.lv.name=LV Dual Cover
@@ -70,3 +72,6 @@ metaitem.cover.dual.tooltip.transfer_rate=§bTransfer Rate: §f%,d items/s§7 an
 metaitem.cover.dual.tooltip.transfer_rate.stacks=§bTransfer Rate: §f%,d stacks/s§7 and §f%,d L/t
 
 cover.dual_cover.mode_changer=Click to change between the item and fluid settings
+
+# Widgets
+zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s

@@ -1,7 +1,11 @@
 package com.zorbatron.zbgt.client.widgets;
 
+import java.util.List;
+
+import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -19,6 +23,20 @@ public class ItemSlotTinyAmountTextWidget extends SlotWidget {
     public ItemSlotTinyAmountTextWidget(IItemHandlerModifiable itemHandler, int slotIndex, int xPosition,
                                         int yPosition, boolean canTakeItems, boolean canPutItems) {
         super(itemHandler, slotIndex, xPosition, yPosition, canTakeItems, canPutItems);
+    }
+
+    @Override
+    public void drawInForeground(int mouseX, int mouseY) {
+        ItemStack item = slotReference.getStack();
+
+        if (isMouseOverElement(mouseX, mouseY) && !item.isEmpty()) {
+            List<String> tooltip = getItemToolTip(item);
+
+            tooltip.add(TextFormatting.GRAY + I18n.format("zbgt.widget.item_slot_tiny_amount.amount_tooltip",
+                    TextFormattingUtil.formatNumbers(item.getCount())));
+
+            drawHoveringText(item, tooltip, -1, mouseX, mouseY);
+        }
     }
 
     @Override
