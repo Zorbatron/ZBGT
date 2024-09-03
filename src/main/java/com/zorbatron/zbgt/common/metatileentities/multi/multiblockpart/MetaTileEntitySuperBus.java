@@ -2,15 +2,22 @@ package com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart;
 
 import java.util.List;
 
+import gregtech.api.capability.GregtechDataCodes;
+import gregtech.api.capability.GregtechTileCapabilities;
+import gregtech.api.capability.IControllable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.zorbatron.zbgt.ZBGTCore;
 import com.zorbatron.zbgt.client.widgets.ItemSlotTinyAmountTextWidget;
 
 import codechicken.lib.render.CCRenderState;
@@ -31,7 +38,9 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
 public class MetaTileEntitySuperBus extends MetaTileEntityMultiblockNotifiablePart
-                                    implements IMultiblockAbilityPart<IItemHandlerModifiable> {
+                                    implements IMultiblockAbilityPart<IItemHandlerModifiable>, IControllable {
+
+    private boolean workingEnabled = false;
 
     public MetaTileEntitySuperBus(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTValues.HV, false);
@@ -106,16 +115,37 @@ public class MetaTileEntitySuperBus extends MetaTileEntityMultiblockNotifiablePa
         }
 
         // Return items
-        builder.widget(new ClickButtonWidget(7 + 18 * 8, 18 + 18 * 3, 18, 18, "Test",
-                (clickData -> {
-                    ZBGTCore.LOGGER
-                            .info(String.format("%s: Returned items", getWorld().isRemote ? "Client" : "Server"));
-                })).setTooltipText("zbgt.machine.super_bus.return_items")
-                        .setButtonTexture(GuiTextures.BUTTON_ITEM_OUTPUT));
+        builder.widget(new ClickButtonWidget(7 + 18 * 8, 18 + 18 * 3, 18, 18, "", (clickData -> returnItems()))
+                .setTooltipText("zbgt.machine.super_bus.return_items")
+                .setButtonTexture(GuiTextures.BUTTON_ITEM_OUTPUT));
 
         return builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 7, 18 + 18 * 4 + 12)
                 .widget(slots)
                 .build(getHolder(), entityPlayer);
+    }
+
+    @Override
+    public void update() {
+        super.update();
+
+        if (!getWorld().isRemote && getOffsetTimer() % 20 == 0 && workingEnabled) {
+            pullItemsFromNearbyHandlers(getFrontFacing());
+        }
+    }
+
+    private void returnItems() {
+        pushItemsIntoNearbyHandlers(getFrontFacing());
+    }
+
+    @Override
+    public <T> T getCapability(Capability<T> capability, EnumFacing side) {
+        if (capability.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)) {
+            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.importItems);
+        } else if (capability == GregtechTileCapabilities.CAPABILITY_CONTROLLABLE) {
+            return GregtechTileCapabilities.CAPABILITY_CONTROLLABLE.cast(this);
+        }
+
+        return super.getCapability(capability, side);
     }
 
     @Override
@@ -136,5 +166,28 @@ public class MetaTileEntitySuperBus extends MetaTileEntityMultiblockNotifiablePa
     @Override
     public void registerAbilities(List<IItemHandlerModifiable> abilityList) {
         abilityList.add(this.importItems);
+    }
+
+    @Override
+    public boolean isWorkingEnabled() {
+        return this.workingEnabled;
+    }
+
+    @Override
+    public void setWorkingEnabled(boolean workingEnabled) {
+        this.workingEnabled = workingEnabled;
+        World world = getWorld();
+        if (world != null && !world.isRemote) {
+            writeCustomData(GregtechDataCodes.WORKING_ENABLED, buf -> buf.writeBoolean(workingEnabled));
+        }
+    }
+
+    @Override
+    public void receiveCustomData(int dataId, PacketBuffer buf) {
+        super.receiveCustomData(dataId, buf);
+
+        if (dataId == GregtechDataCodes.WORKING_ENABLED) {
+            this.workingEnabled = buf.readBoolean();
+        }
     }
 }
