@@ -1,3 +1,4 @@
+# Multiblock parts
 zbgt.machine.creative_energy_source.name=Creative Energy Source
 zbgt.machine.creative_energy_source.tooltip=Infinite Energy Source for Multiblocks
 
@@ -41,7 +42,7 @@ zbgt.machine.super_bus.slot_limit=Set slot limit
 zbgt.machine.super_bus.screwdriver=§8Use Screwdriver to toggle sending item back to the faced block
 zbgt.machine.super_bus.soft_mallet=§8use Soft mallet to toggle auto pulling items
 
-
+# Covers
 metaitem.cover.dual_cover.lv.name=LV Dual Cover
 metaitem.cover.dual_cover.mv.name=MV Dual Cover
 metaitem.cover.dual_cover.hv.name=HV Dual Cover
