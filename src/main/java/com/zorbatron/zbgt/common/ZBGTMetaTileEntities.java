@@ -3,6 +3,10 @@ package com.zorbatron.zbgt.common;
 import static com.zorbatron.zbgt.ZBGTUtility.zbgtId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 
+import com.zorbatron.zbgt.api.util.ZBGTMods;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityMegaEBF;
+import com.zorbatron.zbgt.api.util.ZBGTMods;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityMegaEBF;
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.*;
 import com.zorbatron.zbgt.common.metatileentities.storage.MetaTileEntityCreativeComputationProvider;
 
@@ -19,8 +23,12 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntitySingleItemInputBus SINGLE_ITEM_INPUT_BUS;
     public static MetaTileEntityCreativeItemBus CREATIVE_ITEM_BUS;
     public static MetaTileEntitySuperInputBus SUPER_INPUT_BUS;
+    public static MetaTileEntityLargeParallelHatch[] ZBGT_PARALLEL_HATCHES = new MetaTileEntityLargeParallelHatch[7];
+
+    public static MetaTileEntityMegaEBF MEGA_EBF;
 
     public static void init() {
+        // 18000-18049 (50) reserved for multiblock parts
         CREATIVE_ENERGY_SOURCE = registerMetaTileEntity(18000,
                 new MetaTileEntityCreativeEnergyHatch(zbgtId("creative_energy_source"), false));
         CREATIVE_ENERGY_SINK = registerMetaTileEntity(18001,
@@ -46,5 +54,29 @@ public class ZBGTMetaTileEntities {
 
         SUPER_INPUT_BUS = registerMetaTileEntity(18009,
                 new MetaTileEntitySuperInputBus(zbgtId("super_input_bus")));
+
+        if (ZBGTMods.GCYM.isModLoaded()) {
+            ZBGT_PARALLEL_HATCHES[0] = registerMetaTileEntity(18010, new MetaTileEntityLargeParallelHatch(
+                    zbgtId(String.format("parallel_hatch.%s", GTValues.VN[GTValues.UEV])), GTValues.UHV, 1024));
+            ZBGT_PARALLEL_HATCHES[1] = registerMetaTileEntity(18011, new MetaTileEntityLargeParallelHatch(
+                    zbgtId(String.format("parallel_hatch.%s", GTValues.VN[GTValues.UIV])), GTValues.UEV, 4096));
+            ZBGT_PARALLEL_HATCHES[2] = registerMetaTileEntity(18012, new MetaTileEntityLargeParallelHatch(
+                    zbgtId(String.format("parallel_hatch.%s", GTValues.VN[GTValues.UXV])), GTValues.UIV, 16_384));
+            ZBGT_PARALLEL_HATCHES[3] = registerMetaTileEntity(18013, new MetaTileEntityLargeParallelHatch(
+                    zbgtId(String.format("parallel_hatch.%s", GTValues.VN[GTValues.OpV])), GTValues.UXV, 65_536));
+            ZBGT_PARALLEL_HATCHES[4] = registerMetaTileEntity(18014, new MetaTileEntityLargeParallelHatch(
+                    zbgtId(String.format("parallel_hatch.%s", GTValues.VN[GTValues.MAX])), GTValues.OpV, 262_144));
+            ZBGT_PARALLEL_HATCHES[5] = registerMetaTileEntity(18015, new MetaTileEntityLargeParallelHatch(
+                    zbgtId(String.format("parallel_hatch.%s", GTValues.VN[GTValues.MAX]) + ".1"), GTValues.MAX,
+                    1_048_576));
+            ZBGT_PARALLEL_HATCHES[6] = registerMetaTileEntity(18016, new MetaTileEntityLargeParallelHatch(
+                    zbgtId("parallel_hatch.final"), GTValues.MAX, Integer.MAX_VALUE));
+        }
+
+        // 18050-18099 (50) reserved for multiblocks
+        if (ZBGTMods.GCYM.isModLoaded()) {
+            MEGA_EBF = registerMetaTileEntity(18050,
+                    new MetaTileEntityMegaEBF(zbgtId("mega_ebf")));
+        }
     }
 }

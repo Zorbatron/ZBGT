@@ -42,6 +42,19 @@ zbgt.machine.super_input_bus.slot_limit=Set slot limit
 zbgt.machine.super_input_bus.screwdriver=§8Use Screwdriver to toggle sending item back to the faced block
 zbgt.machine.super_input_bus.soft_mallet=§8use Soft mallet to toggle auto pulling items
 
+zbgt.machine.parallel_hatch.uev.name=UEV Parallel Hatch
+zbgt.machine.parallel_hatch.uiv.name=UIV Parallel Hatch
+zbgt.machine.parallel_hatch.uxv.name=UXV Parallel Hatch
+zbgt.machine.parallel_hatch.uxv.tooltip=Warning, very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag
+zbgt.machine.parallel_hatch.opv.name=OpV Parallel Hatch
+zbgt.machine.parallel_hatch.opv.tooltip=Warning, very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag
+zbgt.machine.parallel_hatch.max.name=MAX Parallel Hatch
+zbgt.machine.parallel_hatch.max.tooltip=Warning, very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag
+zbgt.machine.parallel_hatch.max.1.name=MAX+1 Parallel Hatch
+zbgt.machine.parallel_hatch.max.1.tooltip=Warning, very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag
+zbgt.machine.parallel_hatch.final.name=The Final Parallel Hatch
+zbgt.machine.parallel_hatch.final.tooltip=Warning, very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag
+
 # Covers
 metaitem.cover.dual_cover.lv.name=LV Dual Cover
 metaitem.cover.dual_cover.mv.name=MV Dual Cover
@@ -82,3 +95,6 @@ cover.dual_cover.mode_changer=Click to change between the item and fluid setting
 
 # Widgets
 zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s
+
+# Multiblocks
+zbgt.machine.mega_ebf.name=Mega EBF
