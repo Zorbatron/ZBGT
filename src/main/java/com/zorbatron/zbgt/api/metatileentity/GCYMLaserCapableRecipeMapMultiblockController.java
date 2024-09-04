@@ -38,12 +38,7 @@ public abstract class GCYMLaserCapableRecipeMapMultiblockController extends GCYM
 
     @Override
     protected void initializeAbilities() {
-        this.inputInventory = new ItemHandlerList(getAbilities(MultiblockAbility.IMPORT_ITEMS));
-        this.inputFluidInventory = new FluidTankList(allowSameFluidFillForOutputs(),
-                getAbilities(MultiblockAbility.IMPORT_FLUIDS));
-        this.outputInventory = new ItemHandlerList(getAbilities(MultiblockAbility.EXPORT_ITEMS));
-        this.outputFluidInventory = new FluidTankList(allowSameFluidFillForOutputs(),
-                getAbilities(MultiblockAbility.EXPORT_FLUIDS));
+        super.initializeAbilities()
 
         List<IEnergyContainer> list = new ArrayList<>();
         list.addAll(getAbilities(MultiblockAbility.INPUT_ENERGY));
