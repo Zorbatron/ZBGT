@@ -11,6 +11,8 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.ZBGTConfig;
+
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.impl.EnergyContainerList;
@@ -21,19 +23,31 @@ import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.client.utils.TooltipHelper;
 
-public abstract class GCYMLaserCapableRecipeMapMultiblockController extends GCYMRecipeMapMultiblockController {
+public abstract class LaserCapableGCYMRecipeMapMultiblockController extends GCYMRecipeMapMultiblockController {
 
-    protected final boolean allowSubstationHatches;
+    private final boolean allowSubstationHatches;
 
-    public GCYMLaserCapableRecipeMapMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?>[] recipeMap,
+    public LaserCapableGCYMRecipeMapMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?>[] recipeMap) {
+        this(metaTileEntityId, recipeMap, true);
+    }
+
+    public LaserCapableGCYMRecipeMapMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap) {
+        this(metaTileEntityId, new RecipeMap<?>[] { recipeMap }, true);
+    }
+
+    public LaserCapableGCYMRecipeMapMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?>[] recipeMap,
                                                          boolean allowSubstationHatches) {
         super(metaTileEntityId, recipeMap);
         this.allowSubstationHatches = allowSubstationHatches;
     }
 
-    public GCYMLaserCapableRecipeMapMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap,
+    public LaserCapableGCYMRecipeMapMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap,
                                                          boolean allowSubstationHatches) {
         this(metaTileEntityId, new RecipeMap<?>[] { recipeMap }, allowSubstationHatches);
+    }
+
+    public boolean allowsSubstationHatches() {
+        return this.allowSubstationHatches && ZBGTConfig.multiblockSettings.allowSubstationHatches;
     }
 
     @Override
@@ -43,7 +57,7 @@ public abstract class GCYMLaserCapableRecipeMapMultiblockController extends GCYM
         List<IEnergyContainer> list = new ArrayList<>();
         list.addAll(getAbilities(MultiblockAbility.INPUT_ENERGY));
         list.addAll(getAbilities(MultiblockAbility.INPUT_LASER));
-        if (allowSubstationHatches) {
+        if (allowsSubstationHatches()) {
             list.addAll(getAbilities(MultiblockAbility.SUBSTATION_INPUT_ENERGY));
         }
 
@@ -64,15 +78,19 @@ public abstract class GCYMLaserCapableRecipeMapMultiblockController extends GCYM
         return predicate;
     }
 
-    public TraceabilityPredicate autoEnergyInputs(int min, int max) {
-        if (allowSubstationHatches) {
+    public TraceabilityPredicate autoEnergyInputs(int min, int max, int previewCount) {
+        if (allowsSubstationHatches()) {
             return new TraceabilityPredicate(abilities(MultiblockAbility.INPUT_ENERGY, MultiblockAbility.INPUT_LASER,
                     MultiblockAbility.SUBSTATION_INPUT_ENERGY)
-                            .setMinGlobalLimited(min).setMaxGlobalLimited(max));
+                            .setMinGlobalLimited(min).setMaxGlobalLimited(max).setPreviewCount(previewCount));
         } else {
             return new TraceabilityPredicate(abilities(MultiblockAbility.INPUT_ENERGY, MultiblockAbility.INPUT_LASER)
-                    .setMinGlobalLimited(min).setMaxGlobalLimited(max));
+                    .setMinGlobalLimited(min).setMaxGlobalLimited(max).setPreviewCount(previewCount));
         }
+    }
+
+    public TraceabilityPredicate autoEnergyInputs(int min, int max) {
+        return autoEnergyInputs(min, max, 2);
     }
 
     public TraceabilityPredicate autoEnergyInputs() {
@@ -83,6 +101,7 @@ public abstract class GCYMLaserCapableRecipeMapMultiblockController extends GCYM
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format(I18n.format("zbgt.laser_enabled.1") +
-                TooltipHelper.RAINBOW_SLOW + I18n.format("zbgt.laser_enabled.2")));
+                TooltipHelper.RAINBOW + I18n.format("zbgt.laser_enabled.2")) +
+                (allowsSubstationHatches() ? "zbgt.substation_enabled" : ""));
     }
 }

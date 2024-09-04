@@ -48,7 +48,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
 public class MetaTileEntitySuperInputBus extends MetaTileEntityMultiblockNotifiablePart
-                                    implements IMultiblockAbilityPart<IItemHandlerModifiable>, IControllable {
+                                         implements IMultiblockAbilityPart<IItemHandlerModifiable>, IControllable {
 
     private boolean workingEnabled = false;
     private boolean shouldReturnItems = false;
@@ -246,11 +246,13 @@ public class MetaTileEntitySuperInputBus extends MetaTileEntityMultiblockNotifia
         if (shouldReturnItems()) {
             setReturningItems(false);
             playerIn.sendStatusMessage(
-                    new TextComponentTranslation("zbgt.machine.super_input_bus.return_items.screwdriver.disabled"), true);
+                    new TextComponentTranslation("zbgt.machine.super_input_bus.return_items.screwdriver.disabled"),
+                    true);
         } else {
             setReturningItems(true);
             playerIn.sendStatusMessage(
-                    new TextComponentTranslation("zbgt.machine.super_input_bus.return_items.screwdriver.enabled"), true);
+                    new TextComponentTranslation("zbgt.machine.super_input_bus.return_items.screwdriver.enabled"),
+                    true);
         }
 
         return true;
