@@ -30,7 +30,7 @@ public abstract class LaserCapableGCYMRecipeMapMultiblockController extends GCYM
     }
 
     public LaserCapableGCYMRecipeMapMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap) {
-        this(metaTileEntityId, new RecipeMap<?>[] { recipeMap }, true);
+        this(metaTileEntityId, recipeMap, true);
     }
 
     public LaserCapableGCYMRecipeMapMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?>[] recipeMap,
@@ -41,7 +41,8 @@ public abstract class LaserCapableGCYMRecipeMapMultiblockController extends GCYM
 
     public LaserCapableGCYMRecipeMapMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap,
                                                          boolean allowSubstationHatches) {
-        this(metaTileEntityId, new RecipeMap<?>[] { recipeMap }, allowSubstationHatches);
+        super(metaTileEntityId, recipeMap);
+        this.allowSubstationHatches = allowSubstationHatches;
     }
 
     public boolean allowsSubstationHatches() {
