@@ -1,4 +1,4 @@
-package com.zorbatron.zbgt.common.metatileentities.multi.electric;
+package com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis;
 
 import static gregtech.api.recipes.logic.OverclockingLogic.heatingCoilOverclockingLogic;
 
@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import com.zorbatron.zbgt.api.metatileentity.GCYMLaserCapableRecipeMapMultiblockController;
+import com.zorbatron.zbgt.api.metatileentity.LaserCapableGCYMRecipeMapMultiblockController;
 
 import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
 import gregtech.api.GTValues;
@@ -50,12 +50,12 @@ import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
 
-public class MetaTileEntityMegaEBF extends GCYMLaserCapableRecipeMapMultiblockController implements IHeatingCoil {
+public class MetaTileEntityMegaEBF extends LaserCapableGCYMRecipeMapMultiblockController implements IHeatingCoil {
 
     private int blastFurnaceTemperature;
 
     public MetaTileEntityMegaEBF(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.BLAST_RECIPES, false);
+        super(metaTileEntityId, RecipeMaps.BLAST_RECIPES);
         this.recipeMapWorkable = new MegaBlastFurnaceRecipeLogic(this);
     }
 
@@ -242,7 +242,7 @@ public class MetaTileEntityMegaEBF extends GCYMLaserCapableRecipeMapMultiblockCo
     }
 
     @SuppressWarnings("InnerClassMayBeStatic")
-    private class MegaBlastFurnaceRecipeLogic extends GCYMMultiblockRecipeLogic {
+    protected class MegaBlastFurnaceRecipeLogic extends GCYMMultiblockRecipeLogic {
 
         public MegaBlastFurnaceRecipeLogic(RecipeMapMultiblockController metaTileEntity) {
             super(metaTileEntity);

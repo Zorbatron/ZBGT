@@ -98,8 +98,12 @@ zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s
 
 # Multiblocks
 zbgt.machine.mega_ebf.name=Mega Electric Blast Furnace (mEBF)
-zbgt.machine.mega_ebf.tooltip=Hold on, let them cook
+zbgt.machine.mega_ebf.tooltip=Hold on, let them cook..
+
+zbgt.machine.mega_lcr.name=Mega LCR (mLCR)
+zbgt.machine.mega_lcr.tooltip=Turn your goo into more goo!
 
 # Random
 zbgt.laser_enabled.1=Can use
 zbgt.laser_enabled.2= Laser Hatches
+zbgt.substation_enabled= and Substation Hatches

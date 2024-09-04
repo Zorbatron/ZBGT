@@ -4,9 +4,8 @@ import static com.zorbatron.zbgt.ZBGTUtility.zbgtId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 
 import com.zorbatron.zbgt.api.util.ZBGTMods;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityMegaEBF;
-import com.zorbatron.zbgt.api.util.ZBGTMods;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityMegaEBF;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis.MetaTileEntityMegaEBF;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis.MetaTileEntityMegaLCR;
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.*;
 import com.zorbatron.zbgt.common.metatileentities.storage.MetaTileEntityCreativeComputationProvider;
 
@@ -26,6 +25,7 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityLargeParallelHatch[] ZBGT_PARALLEL_HATCHES = new MetaTileEntityLargeParallelHatch[7];
 
     public static MetaTileEntityMegaEBF MEGA_EBF;
+    public static MetaTileEntityMegaLCR MEGA_LCR;
 
     public static void init() {
         // 18000-18049 (50) reserved for multiblock parts
@@ -77,6 +77,9 @@ public class ZBGTMetaTileEntities {
         if (ZBGTMods.GCYM.isModLoaded()) {
             MEGA_EBF = registerMetaTileEntity(18050,
                     new MetaTileEntityMegaEBF(zbgtId("mega_ebf")));
+
+            MEGA_LCR = registerMetaTileEntity(18051,
+                    new MetaTileEntityMegaLCR(zbgtId("mega_lcr")));
         }
     }
 }
