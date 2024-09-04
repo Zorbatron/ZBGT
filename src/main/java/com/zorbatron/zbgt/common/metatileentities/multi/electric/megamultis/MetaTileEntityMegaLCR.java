@@ -93,4 +93,9 @@ public class MetaTileEntityMegaLCR extends LaserCapableGCYMRecipeMapMultiblockCo
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc"));
     }
+
+    @Override
+    public boolean canBeDistinct() {
+        return true;
+    }
 }

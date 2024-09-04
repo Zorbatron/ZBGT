@@ -70,7 +70,7 @@ public abstract class LaserCapableGCYMRecipeMapMultiblockController extends GCYM
                 checkFluidIn, checkFluidOut, checkMuffler);
 
         if (checkEnergyIn) {
-            predicate.or(autoEnergyInputs());
+            predicate = predicate.or(autoEnergyInputs());
         }
 
         return predicate;
@@ -100,6 +100,6 @@ public abstract class LaserCapableGCYMRecipeMapMultiblockController extends GCYM
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format(I18n.format("zbgt.laser_enabled.1") +
                 TooltipHelper.RAINBOW + I18n.format("zbgt.laser_enabled.2")) +
-                (allowsSubstationHatches() ? "zbgt.substation_enabled" : ""));
+                (allowsSubstationHatches() ? I18n.format("zbgt.substation_enabled") : ""));
     }
 }
