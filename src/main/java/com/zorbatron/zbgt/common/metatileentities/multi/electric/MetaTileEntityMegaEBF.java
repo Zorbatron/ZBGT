@@ -5,19 +5,24 @@ import static gregtech.api.recipes.logic.OverclockingLogic.heatingCoilOverclocki
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import com.zorbatron.zbgt.api.metatileentity.GCYMLaserCapableRecipeMapMultiblockController;
 
 import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
-import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregtech.api.GTValues;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IHeatingCoil;
@@ -45,12 +50,12 @@ import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
 
-public class MetaTileEntityMegaEBF extends GCYMRecipeMapMultiblockController implements IHeatingCoil {
+public class MetaTileEntityMegaEBF extends GCYMLaserCapableRecipeMapMultiblockController implements IHeatingCoil {
 
     private int blastFurnaceTemperature;
 
     public MetaTileEntityMegaEBF(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.BLAST_RECIPES);
+        super(metaTileEntityId, RecipeMaps.BLAST_RECIPES, false);
         this.recipeMapWorkable = new MegaBlastFurnaceRecipeLogic(this);
     }
 
@@ -123,11 +128,9 @@ public class MetaTileEntityMegaEBF extends GCYMRecipeMapMultiblockController imp
                         "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG",
                         "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "XXXXXXXXXXXXXXX")
                 .where('S', selfPredicate())
-                .where('X', states(getCasingState())
+                .where('X', states(getCasingState()).setMinGlobalLimited(420)
                         .or(autoAbilities(false, true, true, true, true, true, false))
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY, MultiblockAbility.SUBSTATION_INPUT_ENERGY,
-                                MultiblockAbility.INPUT_LASER)
-                                        .setMinGlobalLimited(1).setMaxGlobalLimited(8)))
+                        .or(autoEnergyInputs(1, 8)))
                 .where('G', states(MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS)))
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('C', heatingCoils())
@@ -228,6 +231,14 @@ public class MetaTileEntityMegaEBF extends GCYMRecipeMapMultiblockController imp
                 new TextComponentTranslation(TextFormattingUtil.formatNumbers(blastFurnaceTemperature) + "K")
                         .setStyle(new Style().setColor(TextFormatting.RED))));
         return list;
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
     }
 
     @SuppressWarnings("InnerClassMayBeStatic")

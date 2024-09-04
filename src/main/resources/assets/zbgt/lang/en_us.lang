@@ -98,3 +98,7 @@ zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s
 
 # Multiblocks
 zbgt.machine.mega_ebf.name=Mega EBF
+
+# Random
+zbgt.laser_enabled.1=Can use
+zbgt.laser_enabled.2= Laser Hatches
