@@ -6,6 +6,7 @@ import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTile
 import com.zorbatron.zbgt.api.util.ZBGTMods;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis.MetaTileEntityMegaEBF;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis.MetaTileEntityMegaLCR;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis.MetaTileEntityMegaVF;
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.*;
 import com.zorbatron.zbgt.common.metatileentities.storage.MetaTileEntityCreativeComputationProvider;
 
@@ -26,6 +27,7 @@ public class ZBGTMetaTileEntities {
 
     public static MetaTileEntityMegaEBF MEGA_EBF;
     public static MetaTileEntityMegaLCR MEGA_LCR;
+    public static MetaTileEntityMegaVF MEGA_VF;
 
     public static void init() {
         // 18000-18049 (50) reserved for multiblock parts
@@ -80,6 +82,9 @@ public class ZBGTMetaTileEntities {
 
             MEGA_LCR = registerMetaTileEntity(18051,
                     new MetaTileEntityMegaLCR(zbgtId("mega_lcr")));
+
+            MEGA_VF = registerMetaTileEntity(18052,
+                    new MetaTileEntityMegaVF(zbgtId("mega_vf")));
         }
     }
 }

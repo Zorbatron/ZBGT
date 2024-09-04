@@ -103,6 +103,9 @@ zbgt.machine.mega_ebf.tooltip=Hold on, let them cook..
 zbgt.machine.mega_lcr.name=Mega LCR (mLCR)
 zbgt.machine.mega_lcr.tooltip=Turn your goo into more goo!
 
+zbgt.machine.mega_vf.name=Mega Vacuum Freezer (mVF)
+zbgt.machine.mega_vf.tooltip=Cool those ingots §lreally §r§7fast
+
 # Random
 zbgt.laser_enabled.1=Can use
 zbgt.laser_enabled.2= Laser Hatches
