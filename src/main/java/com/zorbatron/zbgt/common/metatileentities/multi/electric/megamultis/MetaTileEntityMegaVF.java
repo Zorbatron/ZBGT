@@ -81,7 +81,7 @@ public class MetaTileEntityMegaVF extends LaserCapableGCYMRecipeMapMultiblockCon
                         "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX")
                 .where('#', air())
                 .where('S', selfPredicate())
-                .where('X', states(getCasingState())
+                .where('X', states(getCasingState()).setMinGlobalLimited(1150)
                         .or(autoAbilities(false, true, true, true, true, true, false))
                         .or(autoEnergyInputs(1, 8)))
                 .build();
@@ -94,5 +94,10 @@ public class MetaTileEntityMegaVF extends LaserCapableGCYMRecipeMapMultiblockCon
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return Textures.FROST_PROOF_CASING;
+    }
+
+    @Override
+    public boolean canBeDistinct() {
+        return true;
     }
 }
