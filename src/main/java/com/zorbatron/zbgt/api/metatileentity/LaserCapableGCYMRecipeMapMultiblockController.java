@@ -52,7 +52,7 @@ public abstract class LaserCapableGCYMRecipeMapMultiblockController extends GCYM
 
     @Override
     protected void initializeAbilities() {
-        super.initializeAbilities()
+        super.initializeAbilities();
 
         List<IEnergyContainer> list = new ArrayList<>();
         list.addAll(getAbilities(MultiblockAbility.INPUT_ENERGY));
