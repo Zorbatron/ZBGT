@@ -13,6 +13,7 @@ public class ZBGTRecipes {
 
     public static void init() {
         ZBGTCore.LOGGER.info("Registering recipes...");
+        MultiblockRecipes.init();
         MultiblockPartRecipes.init();
         CoverRecipes.init();
     }
