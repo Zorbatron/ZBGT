@@ -1,7 +1,5 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis;
 
-import static gregtech.api.recipes.logic.OverclockingLogic.heatingCoilOverclockingLogic;
-
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
@@ -14,15 +12,13 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.api.capability.impl.HeatingCoilGCYMMultiblockRecipeLogic;
 import com.zorbatron.zbgt.api.metatileentity.LaserCapableGCYMRecipeMapMultiblockController;
 
-import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
 import gregtech.api.GTValues;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IHeatingCoil;
@@ -31,13 +27,11 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
@@ -56,7 +50,7 @@ public class MetaTileEntityMegaEBF extends LaserCapableGCYMRecipeMapMultiblockCo
 
     public MetaTileEntityMegaEBF(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.BLAST_RECIPES);
-        this.recipeMapWorkable = new MegaBlastFurnaceRecipeLogic(this);
+        this.recipeMapWorkable = new HeatingCoilGCYMMultiblockRecipeLogic(this);
     }
 
     @Override
@@ -131,7 +125,7 @@ public class MetaTileEntityMegaEBF extends LaserCapableGCYMRecipeMapMultiblockCo
                 .where('X', states(getCasingState()).setMinGlobalLimited(420)
                         .or(autoAbilities(false, true, true, true, true, true, false))
                         .or(autoEnergyInputs(1, 8)))
-                .where('G', states(MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS)))
+                .where('G', states(getGlassState()))
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('C', heatingCoils())
                 .where('#', air())
@@ -140,6 +134,10 @@ public class MetaTileEntityMegaEBF extends LaserCapableGCYMRecipeMapMultiblockCo
 
     protected IBlockState getCasingState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF);
+    }
+
+    protected IBlockState getGlassState() {
+        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS);
     }
 
     @Override
@@ -211,13 +209,6 @@ public class MetaTileEntityMegaEBF extends LaserCapableGCYMRecipeMapMultiblockCo
         return Textures.HEAT_PROOF_CASING;
     }
 
-    @SideOnly(Side.CLIENT)
-    @NotNull
-    @Override
-    protected ICubeRenderer getFrontOverlay() {
-        return Textures.BLAST_FURNACE_OVERLAY;
-    }
-
     @Override
     public int getCurrentTemperature() {
         return this.blastFurnaceTemperature;
@@ -239,24 +230,5 @@ public class MetaTileEntityMegaEBF extends LaserCapableGCYMRecipeMapMultiblockCo
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
-    }
-
-    @SuppressWarnings("InnerClassMayBeStatic")
-    protected class MegaBlastFurnaceRecipeLogic extends GCYMMultiblockRecipeLogic {
-
-        public MegaBlastFurnaceRecipeLogic(RecipeMapMultiblockController metaTileEntity) {
-            super(metaTileEntity);
-        }
-
-        @Override
-        protected int @NotNull [] runOverclockingLogic(@NotNull IRecipePropertyStorage propertyStorage, int recipeEUt,
-                                                       long maxVoltage, int duration, int maxOverclocks) {
-            return heatingCoilOverclockingLogic(Math.abs(recipeEUt),
-                    maxVoltage,
-                    duration,
-                    maxOverclocks,
-                    ((IHeatingCoil) metaTileEntity).getCurrentTemperature(),
-                    propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
-        }
     }
 }
