@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.ZBGTUtility;
 import com.zorbatron.zbgt.api.capability.impl.LargeSlotItemStackHandler;
-import com.zorbatron.zbgt.client.ClientHandler;
+import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.client.widgets.ItemSlotTinyAmountTextWidget;
 
 import codechicken.lib.raytracer.CuboidRayTraceResult;
@@ -120,7 +120,7 @@ public class MetaTileEntitySuperInputBus extends MetaTileEntityMultiblockNotifia
                         slotWidget -> ZBGTUtility.getCircuitSlotTooltip(slotWidget, ghostCircuitItemStackHandler)));
 
         // Auto pull
-        extraWidgets.addWidget(new ToggleButtonWidget(18 * 7, 0, 18, 18, ClientHandler.AUTO_PULL,
+        extraWidgets.addWidget(new ToggleButtonWidget(18 * 7, 0, 18, 18, ZBGTTextures.AUTO_PULL,
                 this::isWorkingEnabled, this::setWorkingEnabled)
                         .shouldUseBaseBackground()
                         .setTooltipText("zbgt.machine.super_input_bus.auto_pull"));

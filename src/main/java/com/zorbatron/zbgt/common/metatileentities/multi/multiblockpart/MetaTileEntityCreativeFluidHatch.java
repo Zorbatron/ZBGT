@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.capability.impl.InfiniteFluidTank;
-import com.zorbatron.zbgt.client.ClientHandler;
+import com.zorbatron.zbgt.api.render.ZBGTTextures;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
@@ -110,7 +110,7 @@ public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNo
                                      IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
         if (shouldRenderOverlay()) {
-            ClientHandler.WATER_OVERLAY_INFINITY.renderSided(getFrontFacing(), renderState, translation, pipeline);
+            ZBGTTextures.WATER_OVERLAY_INFINITY.renderSided(getFrontFacing(), renderState, translation, pipeline);
         }
     }
 

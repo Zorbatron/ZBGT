@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.ZBGTConfig;
-import com.zorbatron.zbgt.client.ClientHandler;
+import com.zorbatron.zbgt.api.render.ZBGTTextures;
 
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregtech.api.capability.IEnergyContainer;
@@ -147,6 +147,6 @@ public abstract class LaserCapableGCYMRecipeMapMultiblockController extends GCYM
     @NotNull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return ClientHandler.GTPP_MACHINE_OVERLAY;
+        return ZBGTTextures.GTPP_MACHINE_OVERLAY;
     }
 }

@@ -9,7 +9,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.zorbatron.zbgt.common.CommonProxy;
 import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
+import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 
 import gregtech.GTInternalTags;
 
@@ -27,8 +29,8 @@ public class ZBGTCore {
     public static final Logger LOGGER = LogManager.getLogger(Tags.MODID);
 
     @SidedProxy(modId = MODID,
-                clientSide = "com.zorbatron.zbgt.ClientProxy",
-                serverSide = "com.zorbatron.zbgt.CommonProxy")
+                clientSide = "com.zorbatron.zbgt.client.ClientProxy",
+                serverSide = "com.zorbatron.zbgt.common.CommonProxy")
     public static CommonProxy proxy;
 
     @EventHandler
@@ -37,7 +39,10 @@ public class ZBGTCore {
         // register to the event bus so that we can listen to events
         MinecraftForge.EVENT_BUS.register(this);
         LOGGER.info("I am " + Tags.MODNAME + " + at version " + Tags.VERSION);
-        proxy.preInit();
+
         ZBGTMetaTileEntities.init();
+        ZBGTMetaBlocks.init();
+
+        proxy.preInit();
     }
 }

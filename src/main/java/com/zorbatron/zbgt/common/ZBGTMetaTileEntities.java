@@ -28,6 +28,7 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityMegaVF MEGA_VF;
     public static MetaTileEntityMegaOCU MEGA_OCU;
     public static MetaTileEntityMegaABS MEGA_ABS;
+    public static MetaTileEntityPRASS PRASS;
 
     public static void init() {
         // 18000-18049 (50) reserved for multiblock parts
@@ -91,6 +92,9 @@ public class ZBGTMetaTileEntities {
 
             MEGA_ABS = registerMetaTileEntity(18054,
                     new MetaTileEntityMegaABS(zbgtId("mega_abs")));
+
+            PRASS = registerMetaTileEntity(18055,
+                    new MetaTileEntityPRASS(zbgtId("prass")));
         }
     }
 }

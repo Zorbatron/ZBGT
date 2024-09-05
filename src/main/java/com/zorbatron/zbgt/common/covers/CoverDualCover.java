@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.google.common.math.IntMath;
-import com.zorbatron.zbgt.client.ClientHandler;
+import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.client.widgets.HideableFluidFilterContainer;
 import com.zorbatron.zbgt.client.widgets.HideableItemFilterContainer;
 
@@ -127,7 +127,7 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
         primaryGroup.addWidget(new LabelWidget(10, 5, getUITitle(), GTValues.VN[tier]));
 
         primaryGroup
-                .addWidget(new ImageCycleButtonWidget(176 - 16 - 4, 166, 16, 16, ClientHandler.ITEM_FLUID_OVERLAY, 2,
+                .addWidget(new ImageCycleButtonWidget(176 - 16 - 4, 166, 16, 16, ZBGTTextures.ITEM_FLUID_OVERLAY, 2,
                         () -> dualMode.ordinal(), val -> dualMode = DualMode.values()[val])
                                 .setTooltipHoverString("cover.dual_cover.mode_changer"));
 

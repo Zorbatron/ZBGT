@@ -1,12 +1,12 @@
 [{
     "modid": "${modid}",
     "name": "${modname}",
-    "description": "Things I (Zorbatron) want in GregTech, but may not belong. ",
+    "description": "Things that I (Zorbatron), want in GregTech, but may not belong. ",
     "version": "${version}",
     "mcversion": "${mcversion}",
     "logoFile": "",
     "url": "https://github.com/Zorbatron/ZB-Greg",
     "authorList": ["Zorbatron"],
-    "credits": "GTCEu and GT5u for borrowed code",
+    "credits": "GTCEu and GT5u for borrowed code and textures",
     "dependencies": ["gregtech"]
 }]
