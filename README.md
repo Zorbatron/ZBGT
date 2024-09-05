@@ -4,6 +4,17 @@ Addon mod for [GregTech CEu](https://github.com/GregTechCEu/GregTech)
 
 ## Features:
 
+### Multiblocks:
+
+Ported the following multiblocks from GT:NH:
+- Mega Alloy Blast Smelter
+- Mega Electric Blast Furnace
+- Mega LCR
+- Mega Oil Cracking Unit
+- Mega Vacuum Freezer
+
+### Multiblock Parts:
+
 Creative Energy Source
 - Configurable like the creative emitter, but as a multiblock part.
 - You need to make the multiblock reform when you change its setting because right now because GregTech doesn't have a way for an energy container to notify the multiblock controller that its voltage/amperage has changed.
