@@ -28,11 +28,10 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.metatileentities.MetaTileEntities;
 
-public class MetaTileEntityPRASS extends LaserCapableMultiShapeGCYMMultiblockController {
+public class MetaTileEntityPreciseAssembler extends LaserCapableMultiShapeGCYMMultiblockController {
 
-    public MetaTileEntityPRASS(ResourceLocation metaTileEntityId) {
+    public MetaTileEntityPreciseAssembler(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new gregtech.api.recipes.RecipeMap[] { RecipeMaps.ASSEMBLER_RECIPES,
                 RecipeMaps.ASSEMBLY_LINE_RECIPES,
                 RecipeMaps.CIRCUIT_ASSEMBLER_RECIPES });
@@ -41,22 +40,22 @@ public class MetaTileEntityPRASS extends LaserCapableMultiShapeGCYMMultiblockCon
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityPRASS(metaTileEntityId);
+        return new MetaTileEntityPreciseAssembler(metaTileEntityId);
     }
 
     @Override
     protected @NotNull BlockPattern getStructurePattern(int index) {
         return FactoryBlockPattern.start()
                 .aisle("XXXXXXXXX", "F#######F", "F#######F", "F#######F", "XXXXXXXXX")
-                .aisle("XHHHHHHHX", "XGGGGGGGX", "XGGGGGGGX", "XGGGGGGGX", "XXXXXXXXX")
-                .aisle("XHHHHHHHX", "X#######X", "X#######X", "X#######X", "XXXXXXXXX")
-                .aisle("XHHHHHHHX", "XGGGGGGGX", "XGGGGGGGX", "XGGGGGGGX", "XXXXXXXXX")
+                .aisle("XXXXXXXXX", "XGGGGGGGX", "XGGGGGGGX", "XGGGGGGGX", "XXXXXXXXX")
+                .aisle("XXXXXXXXX", "X#######X", "X#######X", "X#######X", "XXXXXXXXX")
+                .aisle("XXXXXXXXX", "XGGGGGGGX", "XGGGGGGGX", "XGGGGGGGX", "XXXXXXXXX")
                 .aisle("XXXXSXXXX", "F#######F", "F#######F", "F#######F", "XXXXXXXXX")
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState())
                         .or(autoAbilities())
                         .or(dataHatchPredicate(index == 1)))
-                .where('H', metaTileEntities(MetaTileEntities.HULL))
+                // .where('H', metaTileEntities(MetaTileEntities.HULL))
                 .where('F', frames(Materials.TungstenSteel))
                 .where('G', states(getGlassState()))
                 .where('#', air())
@@ -113,5 +112,10 @@ public class MetaTileEntityPRASS extends LaserCapableMultiShapeGCYMMultiblockCon
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return ZBGTTextures.PRECISE_CASING_1;
+    }
+
+    @Override
+    public boolean canBeDistinct() {
+        return true;
     }
 }

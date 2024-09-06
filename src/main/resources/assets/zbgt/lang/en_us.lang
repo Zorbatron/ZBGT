@@ -55,6 +55,7 @@ zbgt.machine.parallel_hatch.max.1.tooltip=Warning, very high parallel counts on 
 zbgt.machine.parallel_hatch.final.name=The Final Parallel Hatch
 zbgt.machine.parallel_hatch.final.tooltip=Warning, very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag
 
+
 # Covers
 metaitem.cover.dual_cover.lv.name=LV Dual Cover
 metaitem.cover.dual_cover.mv.name=MV Dual Cover
@@ -93,8 +94,10 @@ metaitem.cover.dual.tooltip.transfer_rate.stacks=§bTransfer Rate: §f%,d stacks
 
 cover.dual_cover.mode_changer=Click to change between the item and fluid settings
 
+
 # Widgets
 zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s
+
 
 # Multiblocks
 zbgt.machine.mega_ebf.name=Mega Electric Blast Furnace (mEBF)
@@ -108,6 +111,10 @@ zbgt.machine.mega_vf.tooltip=Cool those ingots §lreally §r§7fast
 
 zbgt.machine.mega_ocu.name=Mega Oil Cracking Unit (mOCU)
 zbgt.machine.mega_ocu.tooltip=Release those hydrocarbons!
+
+zbgt.machine.precise_assembler.name=Precise Assembler (PRASS)
+zbgt.machine.precise_assembler.tooltip=Very balanced multiblock
+
 
 # Random
 zbgt.laser_enabled.1=Can use
