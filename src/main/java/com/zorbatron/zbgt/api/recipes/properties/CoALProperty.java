@@ -11,21 +11,21 @@ import org.apache.commons.lang3.Validate;
 import gregtech.api.recipes.recipeproperties.RecipeProperty;
 import gregtech.api.util.TextFormattingUtil;
 
-public class ComponentALProperty extends RecipeProperty<Integer> {
+public class CoALProperty extends RecipeProperty<Integer> {
 
     public static final String KEY = "component_al_casing_tier";
 
     private static final TreeMap<Integer, String> registeredCasingTiers = new TreeMap<>();
 
-    private static ComponentALProperty INSTANCE;
+    private static CoALProperty INSTANCE;
 
-    protected ComponentALProperty() {
+    protected CoALProperty() {
         super(KEY, Integer.class);
     }
 
-    public static ComponentALProperty getInstance() {
+    public static CoALProperty getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new ComponentALProperty();
+            INSTANCE = new CoALProperty();
         }
 
         return INSTANCE;

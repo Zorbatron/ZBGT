@@ -14,9 +14,9 @@ import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.core.sound.GTSoundEvents;
 
-public class RecipeMapComponentAL<R extends RecipeBuilder<R>> extends RecipeMap<R> {
+public class RecipeMapCoAL<R extends RecipeBuilder<R>> extends RecipeMap<R> {
 
-    public RecipeMapComponentAL(@NotNull String unlocalizedName, @NotNull R defaultRecipeBuilder) {
+    public RecipeMapCoAL(@NotNull String unlocalizedName, @NotNull R defaultRecipeBuilder) {
         super(unlocalizedName, 12, 1, 12, 1, defaultRecipeBuilder, false);
         setSound(GTSoundEvents.ASSEMBLER);
     }

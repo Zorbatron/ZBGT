@@ -12,7 +12,7 @@ import net.minecraft.world.IBlockAccess;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.zorbatron.zbgt.api.block.IComponentALTier;
+import com.zorbatron.zbgt.api.block.ICoALTier;
 
 import gregtech.api.block.IStateHarvestLevel;
 import gregtech.api.block.VariantBlock;
@@ -35,7 +35,7 @@ public class CoALCasing extends VariantBlock<CoALCasing.CasingType> {
         return false;
     }
 
-    public enum CasingType implements IStringSerializable, IStateHarvestLevel, IComponentALTier {
+    public enum CasingType implements IStringSerializable, IStateHarvestLevel, ICoALTier {
 
         CASING_LV("lv", 3),
         CASING_MV("mv", 3),

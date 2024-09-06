@@ -224,7 +224,10 @@ public class ZBGTUtility {
             case (2) -> Cupronickel;
             case (3) -> Electrum;
             case (4) -> Kanthal;
-            case (8) -> Duranium;
+            case (5) -> Graphene;
+            case (6) -> Ruridit;
+            case (7) -> Europium;
+            case (8) -> Americium;
             default -> Lead;
         };
     }
@@ -239,9 +242,6 @@ public class ZBGTUtility {
             case (6) -> RhodiumPlatedPalladium;
             case (7) -> Duranium;
             case (8) -> Tritanium;
-            case (9) -> Seaborgium;
-            case (10) -> Bohrium;
-            case (14) -> Neutronium;
             default -> Lead;
         };
     }
@@ -253,10 +253,9 @@ public class ZBGTUtility {
             case (3) -> Silver;
             case (4) -> Aluminium;
             case (5) -> Tungsten;
-            case (6) -> YttriumBariumCuprate;
-            case (7) -> Naquadah;
-            case (8) -> Duranium;
-            case (13) -> Neutronium;
+            case (6) -> NiobiumTitanium;
+            case (7) -> VanadiumGallium;
+            case (8) -> YttriumBariumCuprate;
             default -> Lead;
         };
     }
@@ -356,7 +355,7 @@ public class ZBGTUtility {
         };
     }
 
-    public static Material getMagneticMaterialFluidByTier(int tier) {
+    public static Material getMagneticMaterialByTier(int tier) {
         if (tier == 1)
             return IronMagnetic;
         if (tier < 4)
@@ -370,9 +369,8 @@ public class ZBGTUtility {
     public static Material getMainComponentMaterialByTier(int tier) {
         return switch (tier) {
             case (6) -> HSSS;
-            case (7) -> HSSE;
+            case (7) -> Osmiridium;
             case (8) -> Tritanium;
-            case (13) -> Neutronium;
             default -> Tin;
         };
     }

@@ -7,11 +7,9 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 
-import com.zorbatron.zbgt.api.recipes.builders.ComponentALRecipeBuilder;
+import com.zorbatron.zbgt.api.recipes.builders.CoALRecipeBuilder;
 
-import gregtech.api.GTValues;
 import gregtech.api.recipes.RecipeBuilder;
-import gregtech.api.unification.material.MarkerMaterials;
 
 public class CoALRecipes {
 
@@ -22,38 +20,40 @@ public class CoALRecipes {
     }
 
     private static void luv() {
-        COMPONENT_AL_RECIPES.recipeBuilder().EUt(GTValues.VA[GTValues.LuV - 1]).duration(28800)
-                .CWUt(getCWUt(GTValues.LuV))
+        int tier = LuV - 1;
+
+        COMPONENT_AL_RECIPES.recipeBuilder().EUt(VA[tier]).duration(28800)
+                .CWUt(getCWUt(tier))
                 .outputs(ELECTRIC_MOTOR_LuV.getStackForm(64))
-                .CasingTier(GTValues.LuV)
+                .CasingTier(tier)
                 .circuitMeta(1)
                 .input(stickLong, NeodymiumMagnetic, 48)
-                .input(cableGtHex, YttriumBariumCuprate, 6)
+                .input(cableGtHex, getCableByTier(tier), 6)
                 .fluidInputs(SolderingAlloy.getFluid(L * 48))
                 .fluidInputs(Lubricant.getFluid(12000))
-                .fluidInputs(RhodiumPlatedPalladium.getFluid(L * 1536))
+                .fluidInputs(Ruridit.getFluid(L * 16 * 48))
                 .fluidInputs(HSSS.getFluid(20352))
                 .buildAndRegister();
 
-        COMPONENT_AL_RECIPES.recipeBuilder().EUt(GTValues.VA[GTValues.LuV - 1]).duration(28800)
-                .CWUt(getCWUt(GTValues.LuV))
+        COMPONENT_AL_RECIPES.recipeBuilder().EUt(VA[tier]).duration(28800)
+                .CWUt(getCWUt(tier))
                 .outputs(ELECTRIC_PISTON_LUV.getStackForm(64))
-                .CasingTier(GTValues.LuV)
+                .CasingTier(tier)
                 .circuitMeta(2)
                 .input(plateDense, HSSS, 21)
                 .inputs(ELECTRIC_MOTOR_LuV.getStackForm(48))
-                .input(cableGtHex, YttriumBariumCuprate, 6)
+                .input(cableGtHex, NiobiumTitanium, 6)
                 .fluidInputs(SolderingAlloy.getFluid(L * 48))
                 .fluidInputs(Lubricant.getFluid(12000))
                 .fluidInputs(HSSS.getFluid(74544))
                 .buildAndRegister();
 
-        COMPONENT_AL_RECIPES.recipeBuilder().EUt(GTValues.VA[GTValues.LuV - 1]).duration(28800)
-                .CWUt(getCWUt(GTValues.LuV))
+        COMPONENT_AL_RECIPES.recipeBuilder().EUt(VA[tier - 1]).duration(28800)
+                .CWUt(getCWUt(tier))
                 .outputs(ELECTRIC_PUMP_LuV.getStackForm(64))
-                .CasingTier(GTValues.LuV)
+                .CasingTier(tier)
                 .circuitMeta(3)
-                .input(cableGtHex, YttriumBariumCuprate, 6)
+                .input(cableGtHex, NiobiumTitanium, 6)
                 .input(plateDense, HSSS, 10)
                 .inputs(ELECTRIC_MOTOR_LuV.getStackForm(48))
                 .fluidInputs(SolderingAlloy.getFluid(L * 48))
@@ -63,15 +63,15 @@ public class CoALRecipes {
                 .fluidInputs(SiliconeRubber.getFluid(L * 48))
                 .buildAndRegister();
 
-        COMPONENT_AL_RECIPES.recipeBuilder().EUt(GTValues.VA[GTValues.LuV - 1]).duration(28800)
-                .CWUt(getCWUt(GTValues.LuV))
+        COMPONENT_AL_RECIPES.recipeBuilder().EUt(VA[tier - 1]).duration(28800)
+                .CWUt(getCWUt(tier))
                 .outputs(ROBOT_ARM_LuV.getStackForm(64))
-                .CasingTier(GTValues.LuV)
+                .CasingTier(tier)
                 .circuitMeta(4)
-                .input(circuit, MarkerMaterials.Tier.LuV, 48)
-                .input(circuit, MarkerMaterials.Tier.IV, 96)
-                .input(circuit, MarkerMaterials.Tier.EV, 192)
-                .input(cableGtHex, YttriumBariumCuprate, 18)
+                .input(circuit, getMarkerMaterialByTier(tier), 48)
+                .input(circuit, getMarkerMaterialByTier(tier - 1), 96)
+                .input(circuit, getMarkerMaterialByTier(tier - 2), 192)
+                .input(cableGtHex, NiobiumTitanium, 18)
                 .inputs(ELECTRIC_PISTON_LUV.getStackForm(48))
                 .inputs(ELECTRIC_MOTOR_LuV.getStackForm(96))
                 .fluidInputs(SolderingAlloy.getFluid(192 * L))
@@ -79,13 +79,13 @@ public class CoALRecipes {
                 .fluidInputs(HSSS.getFluid(528 * L))
                 .buildAndRegister();
 
-        COMPONENT_AL_RECIPES.recipeBuilder().EUt(GTValues.VA[GTValues.LuV - 1]).duration(28800)
-                .CWUt(getCWUt(GTValues.LuV))
+        COMPONENT_AL_RECIPES.recipeBuilder().EUt(VA[tier - 1]).duration(28800)
+                .CWUt(getCWUt(tier))
                 .outputs(CONVEYOR_MODULE_LuV.getStackForm(64))
-                .CasingTier(GTValues.LuV)
+                .CasingTier(tier)
                 .circuitMeta(5)
                 .input(plateDense, HSSS, 10)
-                .input(cableGtHex, YttriumBariumCuprate, 6)
+                .input(cableGtHex, NiobiumTitanium, 6)
                 .inputs(ELECTRIC_MOTOR_LuV.getStackForm(96))
                 .fluidInputs(SolderingAlloy.getFluid(L * 48))
                 .fluidInputs(Lubricant.getFluid(12000))
@@ -93,97 +93,97 @@ public class CoALRecipes {
                 .fluidInputs(HSSS.getFluid(23136))
                 .buildAndRegister();
 
-        COMPONENT_AL_RECIPES.recipeBuilder().EUt(GTValues.VA[GTValues.LuV - 1]).duration(28800)
-                .CWUt(getCWUt(GTValues.LuV))
+        COMPONENT_AL_RECIPES.recipeBuilder().EUt(VA[tier - 1]).duration(28800)
+                .CWUt(getCWUt(tier))
                 .outputs(EMITTER_LuV.getStackForm(64))
-                .CasingTier(GTValues.LuV)
+                .CasingTier(tier)
                 .circuitMeta(6)
-                .input(cableGtHex, YttriumBariumCuprate, 24)
+                .input(cableGtHex, NiobiumTitanium, 24)
                 .inputs(ELECTRIC_MOTOR_LuV.getStackForm(48))
                 .input(gemExquisite, Ruby, 96)
                 .input(frameGt, HSSS, 48)
-                .input(circuit, MarkerMaterials.Tier.LuV, 96)
+                .input(circuit, getMarkerMaterialByTier(tier), 96)
                 .inputs(QUANTUM_STAR.getStackForm(48))
                 .fluidInputs(SolderingAlloy.getFluid(L * 96))
                 .fluidInputs(Ruridit.getFluid(L * 96))
                 .fluidInputs(Palladium.getFluid(1536 * L))
                 .buildAndRegister();
 
-        COMPONENT_AL_RECIPES.recipeBuilder().EUt(GTValues.VA[GTValues.LuV - 1]).duration(28800)
-                .CWUt(getCWUt(GTValues.LuV))
+        COMPONENT_AL_RECIPES.recipeBuilder().EUt(VA[tier - 1]).duration(28800)
+                .CWUt(getCWUt(tier))
                 .outputs(SENSOR_LuV.getStackForm(64))
-                .CasingTier(GTValues.LuV)
+                .CasingTier(tier)
                 .circuitMeta(7)
-                .input(cableGtHex, YttriumBariumCuprate, 24)
+                .input(cableGtHex, NiobiumTitanium, 24)
                 .inputs(ELECTRIC_MOTOR_LuV.getStackForm(48))
                 .input(gemExquisite, Ruby, 96)
                 .input(plateDense, Ruridit, 21)
                 .input(frameGt, HSSS, 48)
-                .input(circuit, MarkerMaterials.Tier.LuV, 96)
+                .input(circuit, getMarkerMaterialByTier(tier), 96)
                 .inputs(QUANTUM_STAR.getStackForm(48))
                 .fluidInputs(SolderingAlloy.getFluid(L * 96))
                 .fluidInputs(Palladium.getFluid(1536 * L))
                 .buildAndRegister();
 
-        COMPONENT_AL_RECIPES.recipeBuilder().EUt(GTValues.VA[GTValues.LuV - 1]).duration(28800)
-                .CWUt(getCWUt(GTValues.LuV))
+        COMPONENT_AL_RECIPES.recipeBuilder().EUt(VA[tier - 1]).duration(28800)
+                .CWUt(getCWUt(tier))
                 .outputs(FIELD_GENERATOR_LuV.getStackForm(64))
-                .CasingTier(GTValues.LuV)
+                .CasingTier(tier)
                 .circuitMeta(8)
                 .inputs(QUANTUM_STAR.getStackForm(48))
                 .input(frameGt, HSSS, 48)
                 .input(plateDense, HSSS, 32)
-                .input(cableGtHex, YttriumBariumCuprate, 48)
+                .input(cableGtHex, NiobiumTitanium, 48)
                 .inputs(EMITTER_LuV.getStackForm(96))
-                .input(circuit, MarkerMaterials.Tier.LuV, 384)
+                .input(circuit, getMarkerMaterialByTier(tier), 384)
                 .fluidInputs(SolderingAlloy.getFluid(L * 192))
                 .buildAndRegister();
     }
 
     private static void components() {
-        for (int i = GTValues.LV; i < GTValues.LuV; i++) {
-            getComponentALLowRecipe(i, 1).buildAndRegister();
-            getComponentALLowRecipe(i, 2).buildAndRegister();
-            if (i < GTValues.IV) {
-                getComponentALLowRecipe(i, 3).fluidInputs(Rubber.getFluid(3456)).buildAndRegister();
-                getComponentALLowRecipe(i, 5).input(plateDense, Rubber, 32).buildAndRegister();
+        for (int i = LV; i < LuV; i++) {
+            getCoALLowRecipe(i, 1).buildAndRegister();
+            getCoALLowRecipe(i, 2).buildAndRegister();
+            if (i < IV) {
+                getCoALLowRecipe(i, 3).fluidInputs(Rubber.getFluid(3456)).buildAndRegister();
+                getCoALLowRecipe(i, 5).input(plateDense, Rubber, 32).buildAndRegister();
             }
-            getComponentALLowRecipe(i, 3).fluidInputs(SiliconeRubber.getFluid(3456)).buildAndRegister();
-            getComponentALLowRecipe(i, 3).fluidInputs(StyreneButadieneRubber.getFluid(3456)).buildAndRegister();
-            getComponentALLowRecipe(i, 5).input(plateDense, SiliconeRubber, 32).buildAndRegister();
-            getComponentALLowRecipe(i, 5).input(plateDense, StyreneButadieneRubber, 32).buildAndRegister();
-            getComponentALLowRecipe(i, 4).buildAndRegister();
+            getCoALLowRecipe(i, 3).fluidInputs(SiliconeRubber.getFluid(3456)).buildAndRegister();
+            getCoALLowRecipe(i, 3).fluidInputs(StyreneButadieneRubber.getFluid(3456)).buildAndRegister();
+            getCoALLowRecipe(i, 5).input(plateDense, SiliconeRubber, 32).buildAndRegister();
+            getCoALLowRecipe(i, 5).input(plateDense, StyreneButadieneRubber, 32).buildAndRegister();
+            getCoALLowRecipe(i, 4).buildAndRegister();
 
-            if (i < GTValues.EV) {
-                getComponentALLowRecipe(i, 6)
-                        .input(i == GTValues.MV ? gemFlawless : gem, getLowEmitterSensorStarMaterial(i), 48)
+            if (i < EV) {
+                getCoALLowRecipe(i, 6)
+                        .input(i == MV ? gemFlawless : gem, getLowEmitterSensorStarMaterial(i), 48)
                         .buildAndRegister();
-                getComponentALLowRecipe(i, 7)
-                        .input(i == GTValues.MV ? gemFlawless : gem, getLowEmitterSensorStarMaterial(i), 48)
+                getCoALLowRecipe(i, 7)
+                        .input(i == MV ? gemFlawless : gem, getLowEmitterSensorStarMaterial(i), 48)
                         .buildAndRegister();
             } else {
-                getComponentALLowRecipe(i, 6).input(getStarByTier(i), 48).buildAndRegister();
-                getComponentALLowRecipe(i, 7).input(getStarByTier(i), 48).buildAndRegister();
+                getCoALLowRecipe(i, 6).input(getStarByTier(i), 48).buildAndRegister();
+                getCoALLowRecipe(i, 7).input(getStarByTier(i), 48).buildAndRegister();
             }
 
             switch (i) {
-                case (1) -> getComponentALLowRecipe(i, 8).input(gem, EnderPearl, 48).buildAndRegister();
-                case (2) -> getComponentALLowRecipe(i, 8).input(gem, EnderEye, 48).buildAndRegister();
-                case (3) -> getComponentALLowRecipe(i, 8).inputs(QUANTUM_EYE.getStackForm(48)).buildAndRegister();
-                case (4) -> getComponentALLowRecipe(i, 8).input(gem, NetherStar, 48).buildAndRegister();
-                case (5) -> getComponentALLowRecipe(i, 8).inputs(QUANTUM_STAR.getStackForm(48)).buildAndRegister();
+                case (1) -> getCoALLowRecipe(i, 8).input(gem, EnderPearl, 48).buildAndRegister();
+                case (2) -> getCoALLowRecipe(i, 8).input(gem, EnderEye, 48).buildAndRegister();
+                case (3) -> getCoALLowRecipe(i, 8).inputs(QUANTUM_EYE.getStackForm(48)).buildAndRegister();
+                case (4) -> getCoALLowRecipe(i, 8).input(gem, NetherStar, 48).buildAndRegister();
+                case (5) -> getCoALLowRecipe(i, 8).inputs(QUANTUM_STAR.getStackForm(48)).buildAndRegister();
             }
 
         }
 
-        getComponentALHighRecipe(ZPM, 1).buildAndRegister();
-        getComponentALHighRecipe(UV, 2).buildAndRegister();
+        getCoALHighRecipe(ZPM, 1).buildAndRegister();
+        getCoALHighRecipe(UV, 2).buildAndRegister();
     }
 
     private static void max() {}
 
-    private static RecipeBuilder<ComponentALRecipeBuilder> getComponentALLowRecipe(int tier, int type) {
-        ComponentALRecipeBuilder builder = COMPONENT_AL_RECIPES.recipeBuilder().EUt(GTValues.VA[tier - 1]).duration(600)
+    private static RecipeBuilder<CoALRecipeBuilder> getCoALLowRecipe(int tier, int type) {
+        CoALRecipeBuilder builder = COMPONENT_AL_RECIPES.recipeBuilder().EUt(VA[tier - 1]).duration(600)
                 .CasingTier(tier)
                 .CWUt(getCWUt(tier))
                 .circuitMeta(type);
@@ -241,12 +241,12 @@ public class CoALRecipes {
                     .input(stickLong, tier == 1 ? Iron : getMaterialByTier(tier), 48)
                     .input(cableGtHex, getCableByTier(tier), tier > 2 ? 12 : 6)
                     .input(wireGtHex, getFineWireByTier(tier), tier > 1 ? 24 * (tier == 5 ? 2 : 1) : 12)
-                    .input(stickLong, getMagneticMaterialFluidByTier(tier), 24);
+                    .input(stickLong, getMagneticMaterialByTier(tier), 24);
         };
     }
 
-    private static RecipeBuilder<ComponentALRecipeBuilder> getComponentALHighRecipe(int tier, int type) {
-        ComponentALRecipeBuilder builder = COMPONENT_AL_RECIPES.recipeBuilder().EUt(GTValues.VA[tier - 1])
+    private static RecipeBuilder<CoALRecipeBuilder> getCoALHighRecipe(int tier, int type) {
+        CoALRecipeBuilder builder = COMPONENT_AL_RECIPES.recipeBuilder().EUt(VA[tier - 1])
                 .duration(28800)
                 .CasingTier(tier)
                 .CWUt(getCWUt(tier))
@@ -358,7 +358,7 @@ public class CoALRecipes {
                     .input(cableGtHex, getCableByTier(tier), 6)
                     .fluidInputs(getSolderingAlloyByTier(tier).getFluid((int) (48 * L * Math.pow(2, tier - 6))))
                     .fluidInputs(Lubricant.getFluid((int) (48 * 250 * Math.pow(2, tier - 6))))
-                    .fluidInputs(getMagneticMaterialFluidByTier(tier).getFluid(
+                    .fluidInputs(getMagneticMaterialByTier(tier).getFluid(
                             (int) (tier < 10 ? 48 * L * Math.pow(2, tier - 6) : 48 * L * 8 * Math.pow(2, tier - 10))))
                     .fluidInputs(getMainComponentMaterialByTier(tier).getFluid(tier == 6 ? 20352 : 20352 * 2))
                     .fluidInputs(getFineWireByTier(tier).getFluid(L * 1536))

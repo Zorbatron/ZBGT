@@ -1,6 +1,6 @@
 package com.zorbatron.zbgt.api.block;
 
-public interface IComponentALTier {
+public interface ICoALTier {
 
     int getTier();
 }

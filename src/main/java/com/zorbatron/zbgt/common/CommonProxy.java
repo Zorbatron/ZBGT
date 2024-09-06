@@ -3,8 +3,6 @@ package com.zorbatron.zbgt.common;
 import java.util.Objects;
 import java.util.function.Function;
 
-import com.zorbatron.zbgt.api.recipes.properties.ComponentALProperty;
-import gregtech.api.GTValues;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -16,13 +14,15 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import com.zorbatron.zbgt.ZBGTCore;
+import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
+import com.zorbatron.zbgt.api.recipes.properties.CoALProperty;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.covers.ZBGTCovers;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 import com.zorbatron.zbgt.loaders.recipe.ZBGTRecipes;
-import com.zorbatron.zbgt.materials.ZBGTMaterialOverride;
+import com.zorbatron.zbgt.materials.ZBGTMaterialOverrides;
 
-import gregicality.multiblocks.api.utils.GCYMLog;
+import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.VariantItemBlock;
 import gregtech.api.cover.CoverDefinition;
@@ -44,34 +44,35 @@ public class CommonProxy {
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
         ZBGTCore.LOGGER.info("Registering recipes...");
 
-        for(int i = 1; i < GTValues.VN.length; i++) {
-            ComponentALProperty.registerCasingTier(i, GTValues.VN[i]);
+        for (int i = 1; i < GTValues.VN.length; i++) {
+            CoALProperty.registerCasingTier(i, GTValues.VN[i]);
         }
+
+        ZBGTRecipeMaps.modifyMaps();
 
         ZBGTRecipes.init();
     }
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        GCYMLog.logger.info("Registering blocks...");
+        ZBGTCore.LOGGER.info("Registering blocks...");
         IForgeRegistry<Block> registry = event.getRegistry();
 
-        registry.register(ZBGTMetaBlocks.MULTIBLOCK_CASING);
-        registry.register(ZBGTMetaBlocks.CoAL_CASING);
+        ZBGTMetaBlocks.ALL_CASINGS.forEach(registry::register);
     }
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        GCYMLog.logger.info("Registering Items...");
+        ZBGTCore.LOGGER.info("Registering Items...");
         IForgeRegistry<Item> registry = event.getRegistry();
 
-        registry.register(createItemBlock(ZBGTMetaBlocks.MULTIBLOCK_CASING, VariantItemBlock::new));
-        registry.register(createItemBlock(ZBGTMetaBlocks.CoAL_CASING, VariantItemBlock::new));
+        ZBGTMetaBlocks.ALL_CASINGS.forEach(casing -> registry.register(createItemBlock(casing, VariantItemBlock::new)));
     }
 
     @SubscribeEvent(priority = EventPriority.NORMAL)
     public static void registerMaterials(MaterialEvent event) {
-        ZBGTMaterialOverride.init();
+        ZBGTCore.LOGGER.info("Registering Materials...");
+        ZBGTMaterialOverrides.init();
     }
 
     private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {

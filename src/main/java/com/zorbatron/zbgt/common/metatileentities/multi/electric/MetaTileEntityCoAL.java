@@ -1,6 +1,6 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.electric;
 
-import static com.zorbatron.zbgt.api.pattern.TraceabilityPredicates.componentALCasings;
+import static com.zorbatron.zbgt.api.pattern.TraceabilityPredicates.*;
 import static com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps.COMPONENT_AL_RECIPES;
 import static gregtech.api.unification.material.Materials.TungstenSteel;
 import static gregtech.api.util.RelativeDirection.*;
@@ -9,20 +9,22 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.zorbatron.zbgt.api.block.IComponentALTier;
+import com.zorbatron.zbgt.api.block.ICoALTier;
+import com.zorbatron.zbgt.api.metatileentity.LaserCapableRecipeMapMultiblockController;
 import com.zorbatron.zbgt.api.recipes.ITier;
-import com.zorbatron.zbgt.api.recipes.properties.ComponentALProperty;
+import com.zorbatron.zbgt.api.recipes.properties.CoALProperty;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.ZBGTBlockMultiblockCasing;
@@ -36,30 +38,34 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.util.GTUtility;
+import gregtech.api.util.TextComponentUtil;
+import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.common.blocks.*;
 
-public class MetaTileEntityComponentAL extends RecipeMapMultiblockController
-                                       implements ITier, IOpticalComputationReceiver {
+public class MetaTileEntityCoAL extends LaserCapableRecipeMapMultiblockController
+                                implements ITier, IOpticalComputationReceiver {
 
     private IOpticalComputationProvider computationProvider;
     private int tier;
 
-    public MetaTileEntityComponentAL(ResourceLocation metaTileEntityId) {
+    public MetaTileEntityCoAL(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, COMPONENT_AL_RECIPES);
-        this.recipeMapWorkable = new ComponentALRecipeLogic(this);
+        this.recipeMapWorkable = new CoALRecipeLogic(this);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityComponentAL(metaTileEntityId);
+        return new MetaTileEntityCoAL(metaTileEntityId);
     }
 
+    @NotNull
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start(RIGHT, UP, FRONT)
@@ -131,26 +137,44 @@ public class MetaTileEntityComponentAL extends RecipeMapMultiblockController
                         "#CCCCCCC#", "#########", "#########")
                 .where('S', selfPredicate())
                 .where('F', frames(TungstenSteel))
-                .where('G', states(MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.LAMINATED_GLASS)))
-                .where('T', states(MetaBlocks.CLEANROOM_CASING.getState(BlockCleanroomCasing.CasingType.FILTER_CASING)))
-                .where('I', componentALCasings())
-                .where('A',
-                        states(MetaBlocks.MULTIBLOCK_CASING
-                                .getState(BlockMultiblockCasing.MultiblockCasingType.ASSEMBLY_CONTROL)))
-                .where('B',
-                        states(MetaBlocks.MULTIBLOCK_CASING
-                                .getState(BlockMultiblockCasing.MultiblockCasingType.ASSEMBLY_LINE_CASING)))
-                .where('P',
-                        states(MetaBlocks.BOILER_CASING
-                                .getState(BlockBoilerCasing.BoilerCasingType.POLYTETRAFLUOROETHYLENE_PIPE)))
-                .where('C',
-                        states(ZBGTMetaBlocks.MULTIBLOCK_CASING
-                                .getState(ZBGTBlockMultiblockCasing.CasingType.IRIDIUM_CASING))
-                                        .setMinGlobalLimited(630)
-                                        .or(autoAbilities(true, true, true, true, true, false, false))
-                                        .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1)))
+                .where('G', states(getGlassState()))
+                .where('T', states(getFilterState()))
+                .where('I', coALCasings())
+                .where('A', states(getAssemblyState()))
+                .where('B', states(getAssemblyControlState()))
+                .where('P', states(getPipeCasingState()))
+                .where('C', states(getCasingState()).setMinGlobalLimited(630)
+                        .or(autoEnergyInputs())
+                        .or(maintenanceHatch())
+                        .or(autoBusesAndHatches(getRecipeMap()))
+                        .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION)
+                                .setExactLimit(1)))
                 .where('#', air())
                 .build();
+    }
+
+    protected IBlockState getCasingState() {
+        return ZBGTMetaBlocks.MULTIBLOCK_CASING.getState(ZBGTBlockMultiblockCasing.CasingType.IRIDIUM_CASING);
+    }
+
+    protected IBlockState getPipeCasingState() {
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.POLYTETRAFLUOROETHYLENE_PIPE);
+    }
+
+    protected IBlockState getGlassState() {
+        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.LAMINATED_GLASS);
+    }
+
+    protected IBlockState getFilterState() {
+        return MetaBlocks.CLEANROOM_CASING.getState(BlockCleanroomCasing.CasingType.FILTER_CASING);
+    }
+
+    protected IBlockState getAssemblyState() {
+        return MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.ASSEMBLY_CONTROL);
+    }
+
+    protected IBlockState getAssemblyControlState() {
+        return MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.ASSEMBLY_LINE_CASING);
     }
 
     @SideOnly(Side.CLIENT)
@@ -162,9 +186,9 @@ public class MetaTileEntityComponentAL extends RecipeMapMultiblockController
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        Object type = context.get("ComponentALTier");
-        if (type instanceof IComponentALTier) {
-            this.tier = ((IComponentALTier) type).getTier() + 1;
+        Object type = context.get("CoALTier");
+        if (type instanceof ICoALTier) {
+            this.tier = ((ICoALTier) type).getTier() + 1;
         } else
             this.tier = 0;
 
@@ -196,8 +220,36 @@ public class MetaTileEntityComponentAL extends RecipeMapMultiblockController
 
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("zbgt.machine.coal.max_recipe_tier", GTValues.VN[this.tier]));
+        MultiblockDisplayText.builder(textList, isStructureFormed())
+                .setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addEnergyUsageLine(recipeMapWorkable.getEnergyContainer())
+                .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
+                .addParallelsLine(recipeMapWorkable.getParallelLimit())
+                .addCustom(tl -> {
+                    if (isStructureFormed()) {
+                        ITextComponent textTier = TextComponentUtil.translationWithColor(TextFormatting.GRAY,
+                                "zbgt.machine.coal.max_recipe_tier",
+                                GTValues.VNF[this.tier]);
+
+                        ITextComponent hoverTextTier = TextComponentUtil.translationWithColor(TextFormatting.GRAY,
+                                "zbgt.machine.coal.max_recipe_tier.hover");
+
+                        tl.add(TextComponentUtil.setHover(textTier, hoverTextTier));
+
+                        ITextComponent textComputation = TextComponentUtil.translationWithColor(TextFormatting.GRAY,
+                                "zbgt.machine.coal.computation_tier",
+                                TextComponentUtil.stringWithColor(TextFormatting.WHITE,
+                                        TextFormattingUtil.formatNumbers(computationProvider.getMaxCWUt())));
+
+                        ITextComponent hoverTextComputation = TextComponentUtil.translationWithColor(
+                                TextFormatting.GRAY,
+                                "zbgt.machine.coal.computation_tier.hover");
+
+                        tl.add(TextComponentUtil.setHover(textComputation, hoverTextComputation));
+                    }
+                })
+                .addWorkingStatusLine()
+                .addProgressLine(recipeMapWorkable.getProgressPercent());
     }
 
     @Override
@@ -211,13 +263,13 @@ public class MetaTileEntityComponentAL extends RecipeMapMultiblockController
         return computationProvider;
     }
 
-    private class ComponentALRecipeLogic extends ComputationRecipeLogic {
+    private class CoALRecipeLogic extends ComputationRecipeLogic {
 
-        MetaTileEntityComponentAL componentAL;
+        MetaTileEntityCoAL CoAL;
 
-        public ComponentALRecipeLogic(MetaTileEntityComponentAL metaTileEntity) {
+        public CoALRecipeLogic(MetaTileEntityCoAL metaTileEntity) {
             super(metaTileEntity, ComputationType.STEADY);
-            this.componentAL = metaTileEntity;
+            this.CoAL = metaTileEntity;
         }
 
         @Override
@@ -225,7 +277,7 @@ public class MetaTileEntityComponentAL extends RecipeMapMultiblockController
             if (!super.checkRecipe(recipe))
                 return false;
 
-            return recipe.getProperty(ComponentALProperty.getInstance(), 0) <= tier;
+            return recipe.getProperty(CoALProperty.getInstance(), 0) <= tier;
         }
     }
 }

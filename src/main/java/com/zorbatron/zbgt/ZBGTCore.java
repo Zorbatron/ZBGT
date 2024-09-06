@@ -1,6 +1,6 @@
 package com.zorbatron.zbgt;
 
-import static com.zorbatron.zbgt.api.ZBGTAPI.COMPONENT_AL_CASINGS;
+import static com.zorbatron.zbgt.api.ZBGTAPI.CoAL_CASINGS;
 import static com.zorbatron.zbgt.common.block.ZBGTMetaBlocks.CoAL_CASING;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -48,7 +48,7 @@ public class ZBGTCore {
         ZBGTMetaBlocks.init();
 
         for (CoALCasing.CasingType type : CoALCasing.CasingType.values()) {
-            COMPONENT_AL_CASINGS.put(CoAL_CASING.getState(type), type);
+            CoAL_CASINGS.put(CoAL_CASING.getState(type), type);
         }
 
         proxy.preInit();

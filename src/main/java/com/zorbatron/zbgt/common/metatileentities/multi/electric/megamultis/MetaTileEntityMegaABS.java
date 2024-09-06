@@ -15,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.capability.impl.HeatingCoilGCYMMultiblockRecipeLogic;
 import com.zorbatron.zbgt.api.metatileentity.LaserCapableGCYMRecipeMapMultiblockController;
+import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 
 import gregicality.multiblocks.api.metatileentity.GCYMMultiblockAbility;
 import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
@@ -105,7 +106,10 @@ public class MetaTileEntityMegaABS extends LaserCapableGCYMRecipeMapMultiblockCo
                         "###########", "###########", "###########", "###########", "###########", "###########",
                         "###########", "###########")
                 .where('S', selfPredicate())
-                .where('B', states(getCasingState()).or(busesAndHatches()).or(autoEnergyInputs(1, 8)))
+                .where('B',
+                        states(getCasingState())
+                                .or(TraceabilityPredicates.autoBusesAndHatches(getAvailableRecipeMaps()))
+                                .or(autoEnergyInputs(1, 8)))
                 .where('X', states(getCasingState()))
                 .where('V', states(getVentState()))
                 .where('G', states(getGlassState()))
