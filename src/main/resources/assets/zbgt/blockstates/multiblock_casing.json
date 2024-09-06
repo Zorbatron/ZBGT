@@ -8,22 +8,24 @@
   },
   "variants": {
     "variant": {
-      "precise_casing_1": {
-        "model": "minecraft:cube_all",
+      "precise_1": {
         "textures": {
-          "all": "gregtech:blocks/multiblock_casing/precise_casing_1"
+          "all": "gregtech:blocks/casings/multiblocks/precise_1"
         }
       },
-      "precise_casing_2": {
-        "model": "minecraft:cube_all",
+      "precise_2": {
         "textures": {
-          "all": "gregtech:blocks/multiblock_casing/precise_casing_2"
+          "all": "gregtech:blocks/casings/multiblocks/precise_2"
         }
       },
-      "precise_casing_3": {
-        "model": "minecraft:cube_all",
+      "precise_3": {
         "textures": {
-          "all": "gregtech:blocks/multiblock_casing/precise_casing_3"
+          "all": "gregtech:blocks/casings/multiblocks/precise_3"
+        }
+      },
+      "iridium": {
+        "textures": {
+          "all": "gregtech:blocks/casings/multiblocks/iridium"
         }
       }
     }

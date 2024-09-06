@@ -14,6 +14,9 @@ public class ZBGTTextures {
     public static TextureArea ITEM_FLUID_OVERLAY;
     public static TextureArea AUTO_PULL;
 
+    public static final TextureArea PROGRESS_BAR_COMPONENT_AL = TextureArea
+            .fullImage("textures/gui/progress_bar/progress_bar_component_al.png");
+
     // Multiblock controller overlays
     public static OrientedOverlayRenderer GTPP_MACHINE_OVERLAY;
 
@@ -24,6 +27,8 @@ public class ZBGTTextures {
     public static SimpleOverlayRenderer PRECISE_CASING_3;
     public static SimpleOverlayRenderer PRECISE_CASING_4;
 
+    public static SimpleOverlayRenderer IRIDIUM_CASING;
+
     public static void preInit() {
         WATER_OVERLAY_INFINITY = new SimpleOverlayRenderer("overlay/machine/overlay_water_infinity");
         ITEM_OVERLAY_INFINITY = new SimpleOverlayRenderer("overlay/machine/overlay_item_infinity");
@@ -31,12 +36,14 @@ public class ZBGTTextures {
         ITEM_FLUID_OVERLAY = TextureArea.fullImage("textures/gui/widget/item_fluid.png");
         AUTO_PULL = TextureArea.fullImage("textures/gui/widget/auto_pull.png");
 
-        GTPP_MACHINE_OVERLAY = new OrientedOverlayRenderer("multiblock/mega_abs");
+        GTPP_MACHINE_OVERLAY = new OrientedOverlayRenderer("multiblock/gtpp");
 
-        PRECISE_CASING_0 = new SimpleOverlayRenderer("multiblock_casing/precise_casing_0");
-        PRECISE_CASING_1 = new SimpleOverlayRenderer("multiblock_casing/precise_casing_1");
-        PRECISE_CASING_2 = new SimpleOverlayRenderer("multiblock_casing/precise_casing_2");
-        PRECISE_CASING_3 = new SimpleOverlayRenderer("multiblock_casing/precise_casing_3");
-        PRECISE_CASING_4 = new SimpleOverlayRenderer("multiblock_casing/precise_casing_4");
+        PRECISE_CASING_0 = new SimpleOverlayRenderer("casings/multiblocks/precise_0");
+        PRECISE_CASING_1 = new SimpleOverlayRenderer("casings/multiblocks/precise_1");
+        PRECISE_CASING_2 = new SimpleOverlayRenderer("casings/multiblocks/precise_2");
+        PRECISE_CASING_3 = new SimpleOverlayRenderer("casings/multiblocks/precise_3");
+        PRECISE_CASING_4 = new SimpleOverlayRenderer("casings/multiblocks/precise_4");
+
+        IRIDIUM_CASING = new SimpleOverlayRenderer("casings/multiblocks/iridium");
     }
 }

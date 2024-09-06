@@ -115,6 +115,27 @@ zbgt.machine.mega_ocu.tooltip=Release those hydrocarbons!
 zbgt.machine.precise_assembler.name=Precise Assembler (PRASS)
 zbgt.machine.precise_assembler.tooltip=Very balanced multiblock
 
+zbgt.machine.coal.name=Component Assembly Line (CoAL)
+zbgt.machine.coal.description.1=Creates large batches of §fComponents§7 for §e75%%§7 of the Cost.
+zbgt.machine.coal.description.2=Recipes are limited by §bCasing Tier§7.
+zbgt.machine.coal.max_recipe_tier=Max Component Tier: %s
+gregtech.recipe.component_al_casing_tier=Casing Tier:
+recipemap.component_al_recipes.name=Component Assembly Line
+tile.coal_casing.lv.name=Component Assembly Line Casing (LV)
+tile.coal_casing.mv.name=Component Assembly Line Casing (MV)
+tile.coal_casing.hv.name=Component Assembly Line Casing (HV)
+tile.coal_casing.ev.name=Component Assembly Line Casing (EV)
+tile.coal_casing.iv.name=Component Assembly Line Casing (IV)
+tile.coal_casing.luv.name=Component Assembly Line Casing (LuV)
+tile.coal_casing.zpm.name=Component Assembly Line Casing (ZPM)
+tile.coal_casing.uv.name=Component Assembly Line Casing (UV)
+tile.coal_casing.uhv.name=Component Assembly Line Casing (UHV)
+tile.coal_casing.uev.name=Component Assembly Line Casing (UEV)
+tile.coal_casing.uiv.name=Component Assembly Line Casing (UIV)
+tile.coal_casing.uxv.name=Component Assembly Line Casing (UXV)
+tile.coal_casing.opv.name=Component Assembly Line Casing (OpV)
+tile.coal_casing.max.name=Component Assembly Line Casing (MAX)
+
 
 # Random
 zbgt.laser_enabled.1=Can use

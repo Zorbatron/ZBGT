@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import com.zorbatron.zbgt.api.metatileentity.LaserCapableMultiShapeGCYMMultiblockController;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
-import com.zorbatron.zbgt.common.block.blocks.BlockMultiblockCasing;
+import com.zorbatron.zbgt.common.block.blocks.ZBGTBlockMultiblockCasing;
 
 import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
 import gregtech.api.capability.IDataAccessHatch;
@@ -63,7 +63,7 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiShapeGCYMMu
     }
 
     protected IBlockState getCasingState() {
-        return ZBGTMetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.CasingType.PRECISE_CASING_1);
+        return ZBGTMetaBlocks.MULTIBLOCK_CASING.getState(ZBGTBlockMultiblockCasing.CasingType.PRECISE_CASING_1);
     }
 
     protected IBlockState getGlassState() {
