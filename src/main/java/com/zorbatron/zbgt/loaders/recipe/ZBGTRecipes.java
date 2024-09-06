@@ -1,7 +1,5 @@
 package com.zorbatron.zbgt.loaders.recipe;
 
-import com.zorbatron.zbgt.ZBGTCore;
-
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 
@@ -12,9 +10,9 @@ public class ZBGTRecipes {
             Materials.NaquadahAlloy, Materials.Darmstadtium, Materials.Neutronium };
 
     public static void init() {
-        ZBGTCore.LOGGER.info("Registering recipes...");
         MultiblockRecipes.init();
         MultiblockPartRecipes.init();
         CoverRecipes.init();
+        CoALRecipes.init();
     }
 }
