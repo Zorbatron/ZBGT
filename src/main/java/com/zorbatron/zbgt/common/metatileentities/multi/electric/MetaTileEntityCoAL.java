@@ -145,7 +145,7 @@ public class MetaTileEntityCoAL extends LaserCapableRecipeMapMultiblockControlle
                 .where('P', states(getPipeCasingState()))
                 .where('C', states(getCasingState()).setMinGlobalLimited(630)
                         .or(autoEnergyInputs())
-                        .or(maintenanceHatch())
+                        .or(maintenanceHatch(this))
                         .or(autoBusesAndHatches(getRecipeMap()))
                         .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION)
                                 .setExactLimit(1)))
@@ -263,7 +263,7 @@ public class MetaTileEntityCoAL extends LaserCapableRecipeMapMultiblockControlle
         return computationProvider;
     }
 
-    private class CoALRecipeLogic extends ComputationRecipeLogic {
+    protected class CoALRecipeLogic extends ComputationRecipeLogic {
 
         MetaTileEntityCoAL CoAL;
 

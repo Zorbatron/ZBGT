@@ -10,8 +10,12 @@ import net.minecraft.block.state.IBlockState;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.block.ICoALTier;
+import com.zorbatron.zbgt.api.block.IPreciseTier;
 
+import gregicality.multiblocks.api.capability.IParallelMultiblock;
+import gregicality.multiblocks.api.metatileentity.GCYMMultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 import gregtech.api.pattern.PatternStringError;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.RecipeMap;
@@ -43,6 +47,31 @@ public class TraceabilityPredicates {
 
     public static TraceabilityPredicate coALCasings() {
         return CoAL_PREDICATE.get();
+    }
+
+    private static final Supplier<TraceabilityPredicate> PRECISE_PREDICATE = () -> new TraceabilityPredicate(
+            blockWorldState -> {
+                IBlockState blockState = blockWorldState.getBlockState();
+                if (ZBGTAPI.PRECISE_CASINGS.containsKey(blockState)) {
+                    IPreciseTier tier = ZBGTAPI.PRECISE_CASINGS.get(blockState);
+                    Object casing = blockWorldState.getMatchContext().getOrPut("PreciseTier", tier);
+                    if (!casing.equals(tier)) {
+                        blockWorldState.setError(
+                                new PatternStringError("gregtech.multiblock.pattern.error.precise_tier"));
+                        return false;
+                    }
+                    blockWorldState.getMatchContext().getOrPut("VBlock", new LinkedList<>())
+                            .add(blockWorldState.getPos());
+                    return true;
+                }
+                return false;
+            }, () -> ZBGTAPI.PRECISE_CASINGS.entrySet().stream()
+                    .sorted(Comparator.comparingInt(entry -> entry.getValue().getTier()))
+                    .map(entry -> new BlockInfo(entry.getKey(), null))
+                    .toArray(BlockInfo[]::new)).addTooltips("gcyl.multiblock.pattern.error.precise_casings");
+
+    public static TraceabilityPredicate preciseCasings() {
+        return PRECISE_PREDICATE.get();
     }
 
     public static TraceabilityPredicate autoBusesAndHatches(RecipeMap<?>[] recipeMaps) {
@@ -83,7 +112,15 @@ public class TraceabilityPredicates {
         return autoBusesAndHatches(new RecipeMap<?>[] { recipeMap });
     }
 
-    public static TraceabilityPredicate maintenanceHatch() {
-        return abilities(MultiblockAbility.MAINTENANCE_HATCH);
+    public static TraceabilityPredicate maintenanceHatch(MultiblockControllerBase controller) {
+        TraceabilityPredicate predicate = new TraceabilityPredicate(
+                abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1));
+
+        if (controller instanceof IParallelMultiblock) {
+            predicate = predicate
+                    .or(abilities(GCYMMultiblockAbility.PARALLEL_HATCH).setMaxGlobalLimited(1).setPreviewCount(1));
+        }
+
+        return predicate;
     }
 }

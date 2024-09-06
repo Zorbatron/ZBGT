@@ -15,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.capability.impl.ZBGT_GCYMMultiblockRecipeLogic;
 import com.zorbatron.zbgt.api.metatileentity.LaserCapableGCYMRecipeMapMultiblockController;
+import com.zorbatron.zbgt.api.render.ZBGTTextures;
 
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -97,5 +98,12 @@ public class MetaTileEntityMegaLCR extends LaserCapableGCYMRecipeMapMultiblockCo
     @Override
     public boolean canBeDistinct() {
         return true;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @NotNull
+    @Override
+    protected ICubeRenderer getFrontOverlay() {
+        return ZBGTTextures.GTPP_MACHINE_OVERLAY;
     }
 }

@@ -12,12 +12,15 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.capability.impl.HeatingCoilGCYMMultiblockRecipeLogic;
 import com.zorbatron.zbgt.api.metatileentity.LaserCapableGCYMRecipeMapMultiblockController;
+import com.zorbatron.zbgt.api.render.ZBGTTextures;
 
 import gregtech.api.GTValues;
 import gregtech.api.block.IHeatingCoilBlockStats;
@@ -230,5 +233,12 @@ public class MetaTileEntityMegaEBF extends LaserCapableGCYMRecipeMapMultiblockCo
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
+    }
+
+    @SideOnly(Side.CLIENT)
+    @NotNull
+    @Override
+    protected ICubeRenderer getFrontOverlay() {
+        return ZBGTTextures.GTPP_MACHINE_OVERLAY;
     }
 }

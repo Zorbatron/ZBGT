@@ -14,9 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import com.zorbatron.zbgt.api.block.ICoALTier;
 
-import gregtech.api.block.IStateHarvestLevel;
 import gregtech.api.block.VariantBlock;
-import gregtech.api.items.toolitem.ToolClasses;
 
 public class CoALCasing extends VariantBlock<CoALCasing.CasingType> {
 
@@ -26,7 +24,8 @@ public class CoALCasing extends VariantBlock<CoALCasing.CasingType> {
         setHardness(5.0f);
         setResistance(10.0f);
         setSoundType(SoundType.METAL);
-        setDefaultState(getState(CasingType.CASING_LV));
+        setHarvestLevel("wrench", 2);
+        setDefaultState(getState(CasingType.values()[0]));
     }
 
     @Override
@@ -35,45 +34,33 @@ public class CoALCasing extends VariantBlock<CoALCasing.CasingType> {
         return false;
     }
 
-    public enum CasingType implements IStringSerializable, IStateHarvestLevel, ICoALTier {
+    public enum CasingType implements IStringSerializable, ICoALTier {
 
-        CASING_LV("lv", 3),
-        CASING_MV("mv", 3),
-        CASING_HV("hv", 3),
-        CASING_EV("ev", 3),
-        CASING_IV("iv", 3),
-        CASING_LuV("luv", 3),
-        CASING_ZPM("zpm", 3),
-        CASING_UV("uv", 3),
-        CASING_UHV("uhv", 3),
-        CASING_UEV("uev", 3),
-        CASING_UIV("uiv", 3),
-        CASING_UXV("uxv", 3),
-        CASING_OpV("opv", 3),
-        CASING_MAX("max", 3);
+        CASING_LV("lv"),
+        CASING_MV("mv"),
+        CASING_HV("hv"),
+        CASING_EV("ev"),
+        CASING_IV("iv"),
+        CASING_LuV("luv"),
+        CASING_ZPM("zpm"),
+        CASING_UV("uv"),
+        CASING_UHV("uhv"),
+        CASING_UEV("uev"),
+        CASING_UIV("uiv"),
+        CASING_UXV("uxv"),
+        CASING_OpV("opv"),
+        CASING_MAX("max");
 
-        private final int harvestLevel;
         private final String name;
 
-        CasingType(String name, int harvestLevel) {
+        CasingType(String name) {
             this.name = name;
-            this.harvestLevel = harvestLevel;
         }
 
         @NotNull
         @Override
         public String getName() {
             return this.name;
-        }
-
-        @Override
-        public int getHarvestLevel(IBlockState state) {
-            return harvestLevel;
-        }
-
-        @Override
-        public String getHarvestTool(IBlockState state) {
-            return ToolClasses.WRENCH;
         }
 
         @Override

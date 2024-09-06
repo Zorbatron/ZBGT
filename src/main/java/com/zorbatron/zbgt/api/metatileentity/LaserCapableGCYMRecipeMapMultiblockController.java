@@ -8,14 +8,10 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.ZBGTConfig;
-import com.zorbatron.zbgt.api.render.ZBGTTextures;
 
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregtech.api.capability.IEnergyContainer;
@@ -23,7 +19,6 @@ import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.utils.TooltipHelper;
 
 public abstract class LaserCapableGCYMRecipeMapMultiblockController extends GCYMRecipeMapMultiblockController {
@@ -107,12 +102,5 @@ public abstract class LaserCapableGCYMRecipeMapMultiblockController extends GCYM
         tooltip.add(I18n.format(I18n.format("zbgt.laser_enabled.1") +
                 TooltipHelper.RAINBOW + I18n.format("zbgt.laser_enabled.2")) +
                 (allowsSubstationHatches() ? I18n.format("zbgt.substation_enabled") : ""));
-    }
-
-    @SideOnly(Side.CLIENT)
-    @NotNull
-    @Override
-    protected ICubeRenderer getFrontOverlay() {
-        return ZBGTTextures.GTPP_MACHINE_OVERLAY;
     }
 }

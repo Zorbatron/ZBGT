@@ -1,7 +1,9 @@
 package com.zorbatron.zbgt;
 
 import static com.zorbatron.zbgt.api.ZBGTAPI.CoAL_CASINGS;
+import static com.zorbatron.zbgt.api.ZBGTAPI.PRECISE_CASINGS;
 import static com.zorbatron.zbgt.common.block.ZBGTMetaBlocks.CoAL_CASING;
+import static com.zorbatron.zbgt.common.block.ZBGTMetaBlocks.PRECISE_CASING;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -16,6 +18,7 @@ import com.zorbatron.zbgt.common.CommonProxy;
 import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
+import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
 
 import gregtech.GTInternalTags;
 
@@ -49,6 +52,10 @@ public class ZBGTCore {
 
         for (CoALCasing.CasingType type : CoALCasing.CasingType.values()) {
             CoAL_CASINGS.put(CoAL_CASING.getState(type), type);
+        }
+
+        for (PreciseCasing.CasingType type : PreciseCasing.CasingType.values()) {
+            PRECISE_CASINGS.put(PRECISE_CASING.getState(type), type);
         }
 
         proxy.preInit();

@@ -1,16 +1,19 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.zorbatron.zbgt.api.block.IPreciseTier;
+import com.zorbatron.zbgt.api.capability.ZBGTDataCodes;
 import com.zorbatron.zbgt.api.metatileentity.LaserCapableMultiShapeGCYMMultiblockController;
+import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
+import com.zorbatron.zbgt.api.recipes.ITier;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
-import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
-import com.zorbatron.zbgt.common.block.blocks.ZBGTBlockMultiblockCasing;
 
 import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
 import gregtech.api.capability.IDataAccessHatch;
@@ -20,6 +23,7 @@ import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
@@ -29,7 +33,9 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 
-public class MetaTileEntityPreciseAssembler extends LaserCapableMultiShapeGCYMMultiblockController {
+public class MetaTileEntityPreciseAssembler extends LaserCapableMultiShapeGCYMMultiblockController implements ITier {
+
+    private int tier;
 
     public MetaTileEntityPreciseAssembler(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new gregtech.api.recipes.RecipeMap[] { RecipeMaps.ASSEMBLER_RECIPES,
@@ -52,7 +58,7 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiShapeGCYMMu
                 .aisle("XXXXXXXXX", "XGGGGGGGX", "XGGGGGGGX", "XGGGGGGGX", "XXXXXXXXX")
                 .aisle("XXXXSXXXX", "F#######F", "F#######F", "F#######F", "XXXXXXXXX")
                 .where('S', selfPredicate())
-                .where('X', states(getCasingState())
+                .where('X', getCasingState()
                         .or(autoAbilities())
                         .or(dataHatchPredicate(index == 1)))
                 // .where('H', metaTileEntities(MetaTileEntities.HULL))
@@ -62,8 +68,8 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiShapeGCYMMu
                 .build();
     }
 
-    protected IBlockState getCasingState() {
-        return ZBGTMetaBlocks.MULTIBLOCK_CASING.getState(ZBGTBlockMultiblockCasing.CasingType.PRECISE_CASING_1);
+    protected TraceabilityPredicate getCasingState() {
+        return TraceabilityPredicates.preciseCasings();
     }
 
     protected IBlockState getGlassState() {
@@ -77,7 +83,7 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiShapeGCYMMu
                     .setExactLimit(1);
         }
 
-        return states(getCasingState());
+        return getCasingState();
     }
 
     @Override
@@ -111,11 +117,59 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiShapeGCYMMu
 
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-        return ZBGTTextures.PRECISE_CASING_1;
+        return switch (getTier()) {
+            case (2) -> ZBGTTextures.PRECISE_CASING_2;
+            case (3) -> ZBGTTextures.PRECISE_CASING_3;
+            default -> ZBGTTextures.PRECISE_CASING_1;
+        };
     }
 
     @Override
     public boolean canBeDistinct() {
         return true;
+    }
+
+    @Override
+    protected void formStructure(PatternMatchContext context) {
+        super.formStructure(context);
+        Object type = context.get("PreciseTier");
+        if (type instanceof IPreciseTier preciseTier) {
+            this.tier = preciseTier.getTier() + 1;
+        } else {
+            this.tier = 0;
+        }
+
+        writeCustomData(ZBGTDataCodes.MULTIBLOCK_TIER_CHANGE, packetBuffer -> packetBuffer.writeInt(this.tier));
+    }
+
+    @Override
+    public void invalidateStructure() {
+        super.invalidateStructure();
+        this.tier = 0;
+    }
+
+    @Override
+    public int getTier() {
+        return this.tier;
+    }
+
+    @Override
+    public void receiveCustomData(int dataId, PacketBuffer buf) {
+        super.receiveCustomData(dataId, buf);
+        if (dataId == ZBGTDataCodes.MULTIBLOCK_TIER_CHANGE) {
+            this.tier = buf.readInt();
+        }
+    }
+
+    @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+        buf.writeInt(this.tier);
+    }
+
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+        this.tier = buf.readInt();
     }
 }
