@@ -11,7 +11,7 @@ public final class ZBGTRecipeMaps {
     private ZBGTRecipeMaps() {}
 
     public static final RecipeMap<CoALRecipeBuilder> CoAL_RECIPES = new RecipeMapCoAL<>(
-            "CoAL_RECIPES",
+            "coal_recipes",
             new CoALRecipeBuilder());
 
     public static void modifyMaps() {

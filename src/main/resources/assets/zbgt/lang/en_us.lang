@@ -126,7 +126,7 @@ zbgt.machine.coal.max_recipe_tier.hover=The highest component tier that can be a
 zbgt.machine.coal.computation_tier=Max Computation Available: %s
 zbgt.machine.coal.computation_tier.hover=Maximum amount of computation available for recipes
 gregtech.recipe.component_al_casing_tier=Casing Tier:
-recipemap.component_al_recipes.name=Component Assembly Line
+recipemap.coal_recipes.name=Component Assembly Line
 
 
 # Multiblock Casings
