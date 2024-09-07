@@ -122,6 +122,12 @@ zbgt.machine.quad_ebf.name=Quad EBF (qEBF)
 zbgt.machine.quad_ebf.tooltip=The same shape as a quad EBF, and thus has 4 innate parallels!
 
 
+# Multiblock Casings
+tile.multiblock_casing.precise_1.name=Precise Electronic Unit Casing MK-I
+tile.multiblock_casing.precise_2.name=Precise Electronic Unit Casing MK-II
+tile.multiblock_casing.precise_3.name=Precise Electronic Unit Casing MK-III
+
+
 # Random
 zbgt.laser_enabled.1=Can use
 zbgt.laser_enabled.2= Laser Hatches
