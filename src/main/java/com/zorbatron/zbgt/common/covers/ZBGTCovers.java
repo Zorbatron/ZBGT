@@ -2,7 +2,7 @@ package com.zorbatron.zbgt.common.covers;
 
 import static com.zorbatron.zbgt.ZBGTUtility.zbgtId;
 
-import com.zorbatron.zbgt.ZBGTCore;
+import com.zorbatron.zbgt.api.util.ZBGTLog;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 
 import gregtech.api.GTValues;
@@ -11,7 +11,7 @@ import gregtech.common.covers.CoverBehaviors;
 public final class ZBGTCovers {
 
     public static void init() {
-        ZBGTCore.LOGGER.info("Registering cover behaviors...");
+        ZBGTLog.logger.info("Registering cover behaviors...");
 
         CoverBehaviors.registerBehavior(zbgtId("dual_cover.lv"), ZBGTMetaItems.DUAL_COVER_LV,
                 (def, tile, side) -> new CoverDualCover(def, tile, side, GTValues.LV, 8, 1280));

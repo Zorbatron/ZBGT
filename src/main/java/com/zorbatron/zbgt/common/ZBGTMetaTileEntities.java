@@ -4,6 +4,7 @@ import static com.zorbatron.zbgt.ZBGTUtility.zbgtId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 
 import com.zorbatron.zbgt.api.util.ZBGTMods;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityQuadEBF;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.*;
 import com.zorbatron.zbgt.common.metatileentities.storage.MetaTileEntityCreativeComputationProvider;
@@ -29,6 +30,7 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityMegaOCU MEGA_OCU;
     public static MetaTileEntityMegaABS MEGA_ABS;
     public static MetaTileEntityPreciseAssembler PRASS;
+    public static MetaTileEntityQuadEBF QUAD_EBF;
 
     public static void init() {
         // 18000-18049 (50) reserved for multiblock parts
@@ -96,5 +98,10 @@ public class ZBGTMetaTileEntities {
             PRASS = registerMetaTileEntity(18055,
                     new MetaTileEntityPreciseAssembler(zbgtId("precise_assembler")));
         }
+
+        // 18056 reserved for CoAL
+
+        QUAD_EBF = registerMetaTileEntity(18057,
+                new MetaTileEntityQuadEBF(zbgtId("quad_ebf")));
     }
 }

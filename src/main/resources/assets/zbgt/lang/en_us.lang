@@ -115,6 +115,9 @@ zbgt.machine.mega_ocu.tooltip=Release those hydrocarbons!
 zbgt.machine.precise_assembler.name=Precise Assembler (PRASS)
 zbgt.machine.precise_assembler.tooltip=Very balanced multiblock
 
+zbgt.machine.quad_ebf.name=Quad EBF (qEBF)
+zbgt.machine.quad_ebf.tooltip=The same shape as a quad EBF, and thus has 4 innate parallels!
+
 
 # Random
 zbgt.laser_enabled.1=Can use
