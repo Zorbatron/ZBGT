@@ -18,12 +18,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import com.zorbatron.zbgt.api.util.ZBGTLog;
-
 import gregtech.api.GTValues;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IHeatingCoil;
-import gregtech.api.capability.impl.HeatingCoilRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -34,7 +31,6 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.GTUtility;
@@ -53,7 +49,7 @@ public class MetaTileEntityQuadEBF extends RecipeMapMultiblockController impleme
 
     public MetaTileEntityQuadEBF(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.BLAST_RECIPES);
-        this.recipeMapWorkable = new QuadEBFRecipeLogic(this);
+        this.recipeMapWorkable.setParallelLimit(4);
     }
 
     @Override
@@ -180,28 +176,5 @@ public class MetaTileEntityQuadEBF extends RecipeMapMultiblockController impleme
                 new TextComponentTranslation(TextFormattingUtil.formatNumbers(blastFurnaceTemperature) + "K")
                         .setStyle(new Style().setColor(TextFormatting.RED))));
         return list;
-    }
-
-    @SuppressWarnings("InnerClassMayBeStatic")
-    protected class QuadEBFRecipeLogic extends HeatingCoilRecipeLogic {
-
-        public QuadEBFRecipeLogic(RecipeMapMultiblockController metaTileEntity) {
-            super(metaTileEntity);
-            setParallelLimit(4);
-        }
-
-        @Override
-        public void applyParallelBonus(@NotNull RecipeBuilder<?> builder) {
-            int currentRecipeEU = builder.getEUt();
-            int currentRecipeDuration = builder.getDuration() / getParallelLimit();
-            int modifiedRecipeEU = currentRecipeEU * 4;
-
-            builder.EUt(modifiedRecipeEU).duration(currentRecipeDuration);
-
-            ZBGTLog.logger.info("currentRecipeEU: {}\ncurrentRecipeDuration: {}\nmodifiedRecipeEU {}",
-                    TextFormattingUtil.formatNumbers(currentRecipeEU),
-                    TextFormattingUtil.formatNumbers(currentRecipeDuration),
-                    TextFormattingUtil.formatNumbers(modifiedRecipeEU));
-        }
     }
 }
