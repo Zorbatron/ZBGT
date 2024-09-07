@@ -7,11 +7,25 @@ Addon mod for [GregTech CEu](https://github.com/GregTechCEu/GregTech)
 ### Multiblocks:
 
 Ported the following multiblocks from GT:NH:
-- Mega Alloy Blast Smelter
-- Mega Electric Blast Furnace
-- Mega LCR
-- Mega Oil Cracking Unit
-- Mega Vacuum Freezer
+- Mega Electric Blast Furnace (mEBF)
+- Mega LCR (mLCR)
+- Mega Vacuum Freezer (mVF)
+- Mega Oil Cracking Unit (mOCU)
+- Mega Alloy Blast Smelter (mABS)
+- Precise Assembler (PRASS) (Does Assembler, Circuit Assembler, and Assembly Line recipes xD)
+
+My multiblocks:
+- Quad EBF (qEBF)
+
+Images (_In order with the above list_):
+![](images/mega_ebf.png)
+![](images/mega_lcr.png)
+![](images/mega_vf.png)
+![](images/mega_ocu.png)
+![](images/mega_abs.png)
+![](images/prass.png)
+
+![](images/quad_ebf.png)
 
 ### Multiblock Parts:
 
