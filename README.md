@@ -82,6 +82,10 @@ Air Intake Hatch
 Single Item Input Bus
 - Functionally identical to a ULV input bus, but it has a max stack size of 1.
 
+## Upcoming
+- The Component Assembly Line from GT:NH (CoAL)
+- Thank you to Brian for actually doing the hard work in [GCYL: CEu](https://github.com/Synthitic/GCYL-CEu) 
+
 ## Planned:
 
 Multi Creative Reservoir Hatch
