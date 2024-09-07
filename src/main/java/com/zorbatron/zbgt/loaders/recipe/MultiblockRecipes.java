@@ -13,7 +13,7 @@ public class MultiblockRecipes {
 
     public static void init() {
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(GCYMMetaTileEntities.ALLOY_BLAST_SMELTER)
+                .input(GCYMMetaTileEntities.ALLOY_BLAST_SMELTER, 64)
                 .fluidInputs(Materials.SolderingAlloy.getFluid(L * 64))
                 .circuitMeta(17)
                 .output(ZBGTMetaTileEntities.MEGA_ABS)
@@ -21,7 +21,7 @@ public class MultiblockRecipes {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.ELECTRIC_BLAST_FURNACE)
+                .input(MetaTileEntities.ELECTRIC_BLAST_FURNACE, 64)
                 .fluidInputs(Materials.SolderingAlloy.getFluid(L * 64))
                 .circuitMeta(17)
                 .output(ZBGTMetaTileEntities.MEGA_EBF)
@@ -29,7 +29,7 @@ public class MultiblockRecipes {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.LARGE_CHEMICAL_REACTOR)
+                .input(MetaTileEntities.LARGE_CHEMICAL_REACTOR, 64)
                 .fluidInputs(Materials.SolderingAlloy.getFluid(L * 64))
                 .circuitMeta(17)
                 .output(ZBGTMetaTileEntities.MEGA_LCR)
@@ -37,7 +37,7 @@ public class MultiblockRecipes {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.CRACKER)
+                .input(MetaTileEntities.CRACKER, 64)
                 .fluidInputs(Materials.SolderingAlloy.getFluid(L * 64))
                 .circuitMeta(17)
                 .output(ZBGTMetaTileEntities.MEGA_OCU)
@@ -45,11 +45,19 @@ public class MultiblockRecipes {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.VACUUM_FREEZER)
+                .input(MetaTileEntities.VACUUM_FREEZER, 64)
                 .fluidInputs(Materials.SolderingAlloy.getFluid(L * 64))
                 .circuitMeta(17)
                 .output(ZBGTMetaTileEntities.MEGA_VF)
                 .duration(20 * 30).EUt(VA[HV])
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(MetaTileEntities.ELECTRIC_BLAST_FURNACE, 4)
+                .fluidInputs(Materials.SolderingAlloy.getFluid(L * 4))
+                .circuitMeta(4)
+                .output(ZBGTMetaTileEntities.QUAD_EBF)
+                .duration(20 * 18).EUt(VA[HV])
                 .buildAndRegister();
     }
 }

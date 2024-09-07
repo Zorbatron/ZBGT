@@ -107,13 +107,25 @@ zbgt.machine.mega_lcr.name=Mega LCR (mLCR)
 zbgt.machine.mega_lcr.tooltip=Turn your goo into more goo!
 
 zbgt.machine.mega_vf.name=Mega Vacuum Freezer (mVF)
-zbgt.machine.mega_vf.tooltip=Cool those ingots §lreally §r§7fast
+zbgt.machine.mega_vf.tooltip=Cool those ingots §lreally §r§7fast!
 
 zbgt.machine.mega_ocu.name=Mega Oil Cracking Unit (mOCU)
 zbgt.machine.mega_ocu.tooltip=Release those hydrocarbons!
 
 zbgt.machine.precise_assembler.name=Precise Assembler (PRASS)
-zbgt.machine.precise_assembler.tooltip=Very balanced multiblock
+zbgt.machine.precise_assembler.tooltip=Very balanced multiblock ;)
+
+zbgt.machine.mega_abs.name=Mega Alloy Blast Smelter (mABS)
+zbgt.machine.mega_abs.tooltip=Mix and melt everything!
+
+zbgt.machine.quad_ebf.name=Quad EBF (qEBF)
+zbgt.machine.quad_ebf.tooltip=The same shape as a quad EBF, and thus has 4 innate parallels!
+
+
+# Multiblock Casings
+tile.multiblock_casing.precise_1.name=Precise Electronic Unit Casing MK-I
+tile.multiblock_casing.precise_2.name=Precise Electronic Unit Casing MK-II
+tile.multiblock_casing.precise_3.name=Precise Electronic Unit Casing MK-III
 
 
 # Random

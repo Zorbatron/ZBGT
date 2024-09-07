@@ -7,7 +7,6 @@ import org.jetbrains.annotations.NotNull;
 
 import com.zorbatron.zbgt.api.metatileentity.LaserCapableGCYMRecipeMapMultiblockController;
 
-import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -23,7 +22,6 @@ public class MetaTileEntityMegaVF extends LaserCapableGCYMRecipeMapMultiblockCon
 
     public MetaTileEntityMegaVF(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.VACUUM_RECIPES);
-        this.recipeMapWorkable = new GCYMMultiblockRecipeLogic(this);
     }
 
     @Override
