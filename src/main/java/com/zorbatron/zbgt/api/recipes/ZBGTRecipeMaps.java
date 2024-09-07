@@ -10,8 +10,8 @@ public final class ZBGTRecipeMaps {
 
     private ZBGTRecipeMaps() {}
 
-    public static final RecipeMap<CoALRecipeBuilder> COMPONENT_AL_RECIPES = new RecipeMapCoAL<>(
-            "component_al_recipes",
+    public static final RecipeMap<CoALRecipeBuilder> CoAL_RECIPES = new RecipeMapCoAL<>(
+            "CoAL_RECIPES",
             new CoALRecipeBuilder());
 
     public static void modifyMaps() {

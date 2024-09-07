@@ -1,7 +1,7 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.electric;
 
 import static com.zorbatron.zbgt.api.pattern.TraceabilityPredicates.*;
-import static com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps.COMPONENT_AL_RECIPES;
+import static com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps.CoAL_RECIPES;
 import static gregtech.api.unification.material.Materials.TungstenSteel;
 import static gregtech.api.util.RelativeDirection.*;
 
@@ -56,7 +56,7 @@ public class MetaTileEntityCoAL extends LaserCapableRecipeMapMultiblockControlle
     private int tier;
 
     public MetaTileEntityCoAL(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, COMPONENT_AL_RECIPES);
+        super(metaTileEntityId, CoAL_RECIPES);
         this.recipeMapWorkable = new CoALRecipeLogic(this);
     }
 
