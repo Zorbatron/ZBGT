@@ -5,11 +5,15 @@ import static gregtech.api.recipes.RecipeMaps.COMPRESSOR_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.POLARIZER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 
+import com.zorbatron.zbgt.ZBGTConfig;
+
 public class MiscRecipes {
 
     public static void init() {
         magneticFluids();
-        sillyRecipes();
+        if (ZBGTConfig.miscSettings.enableSillyRecipes) {
+            sillyRecipes();
+        }
     }
 
     private static void magneticFluids() {
