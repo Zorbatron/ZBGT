@@ -1,7 +1,6 @@
 package com.zorbatron.zbgt.common.block.blocks;
 
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.IStringSerializable;
@@ -11,11 +10,13 @@ import net.minecraft.world.IBlockAccess;
 import org.jetbrains.annotations.NotNull;
 
 import gregtech.api.block.VariantBlock;
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.Materials;
 
 public class ZBGTBlockMultiblockCasing extends VariantBlock<ZBGTBlockMultiblockCasing.CasingType> {
 
     public ZBGTBlockMultiblockCasing() {
-        super(Material.IRON);
+        super(net.minecraft.block.material.Material.IRON);
         setTranslationKey("multiblock_casing");
         setHardness(5.0f);
         setResistance(10.0f);
@@ -32,18 +33,24 @@ public class ZBGTBlockMultiblockCasing extends VariantBlock<ZBGTBlockMultiblockC
 
     public enum CasingType implements IStringSerializable {
 
-        IRIDIUM_CASING("iridium");
+        IRIDIUM_CASING("iridium", Materials.Iridium);
 
         private final String name;
+        private final Material material;
 
-        CasingType(String name) {
+        CasingType(String name, Material material) {
             this.name = name;
+            this.material = material;
         }
 
         @NotNull
         @Override
         public String getName() {
             return this.name;
+        }
+
+        public Material getMaterial() {
+            return this.material;
         }
     }
 }

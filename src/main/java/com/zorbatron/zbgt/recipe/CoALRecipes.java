@@ -1,8 +1,8 @@
-package com.zorbatron.zbgt.loaders.recipe;
+package com.zorbatron.zbgt.recipe;
 
 import static com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps.CoAL_RECIPES;
-import static com.zorbatron.zbgt.loaders.recipe.CoALRecipes.coalRecipeType.*;
-import static com.zorbatron.zbgt.loaders.recipe.RecipeAssists.*;
+import static com.zorbatron.zbgt.recipe.CoALRecipes.coalRecipeType.*;
+import static com.zorbatron.zbgt.recipe.helpers.RecipeAssists.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
