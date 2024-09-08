@@ -1,7 +1,5 @@
 package com.zorbatron.zbgt.common.block.blocks;
 
-import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.Materials;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
@@ -12,6 +10,8 @@ import net.minecraft.world.IBlockAccess;
 import org.jetbrains.annotations.NotNull;
 
 import gregtech.api.block.VariantBlock;
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.Materials;
 
 public class ZBGTBlockMultiblockCasing extends VariantBlock<ZBGTBlockMultiblockCasing.CasingType> {
 

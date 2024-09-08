@@ -20,8 +20,8 @@ import com.zorbatron.zbgt.api.util.ZBGTLog;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.covers.ZBGTCovers;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
-import com.zorbatron.zbgt.recipe.ZBGTRecipes;
 import com.zorbatron.zbgt.materials.ZBGTMaterialOverrides;
+import com.zorbatron.zbgt.recipe.ZBGTRecipes;
 
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;

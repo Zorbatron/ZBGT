@@ -1,5 +1,7 @@
 package com.zorbatron.zbgt.common.block.blocks;
 
+import static gregtech.api.GTValues.*;
+
 import javax.annotation.Nonnull;
 
 import net.minecraft.block.SoundType;
@@ -15,8 +17,6 @@ import org.jetbrains.annotations.NotNull;
 import com.zorbatron.zbgt.api.block.ICoALTier;
 
 import gregtech.api.block.VariantBlock;
-
-import static gregtech.api.GTValues.*;
 
 public class CoALCasing extends VariantBlock<CoALCasing.CasingType> {
 
