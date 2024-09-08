@@ -3,7 +3,6 @@ package com.zorbatron.zbgt.common;
 import java.util.Objects;
 import java.util.function.Function;
 
-import com.zorbatron.zbgt.api.util.ZBGTLog;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -57,7 +56,7 @@ public class CommonProxy {
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        ZBGTCore.LOGGER.info("Registering blocks...");
+        ZBGTLog.logger.info("Registering blocks...");
         IForgeRegistry<Block> registry = event.getRegistry();
 
         ZBGTMetaBlocks.ALL_CASINGS.forEach(registry::register);
@@ -65,7 +64,7 @@ public class CommonProxy {
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        ZBGTCore.LOGGER.info("Registering Items...");
+        ZBGTLog.logger.info("Registering Items...");
         IForgeRegistry<Item> registry = event.getRegistry();
 
         ZBGTMetaBlocks.ALL_CASINGS.forEach(casing -> registry.register(createItemBlock(casing, VariantItemBlock::new)));
@@ -73,7 +72,7 @@ public class CommonProxy {
 
     @SubscribeEvent(priority = EventPriority.NORMAL)
     public static void registerMaterials(MaterialEvent event) {
-        ZBGTCore.LOGGER.info("Registering Materials...");
+        ZBGTLog.logger.info("Registering Materials...");
         ZBGTMaterialOverrides.init();
     }
 

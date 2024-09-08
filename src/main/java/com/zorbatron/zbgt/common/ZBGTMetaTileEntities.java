@@ -102,7 +102,6 @@ public class ZBGTMetaTileEntities {
 
         CoAL = registerMetaTileEntity(18056,
                 new MetaTileEntityCoAL(zbgtId("coal")));
-    }
 
         QUAD_EBF = registerMetaTileEntity(18057,
                 new MetaTileEntityQuadEBF(zbgtId("quad_ebf")));
