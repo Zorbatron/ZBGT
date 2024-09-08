@@ -1,4 +1,4 @@
-package com.zorbatron.zbgt.loaders.recipe;
+package com.zorbatron.zbgt.recipe.helpers;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -65,15 +65,15 @@ public class RecipeAssists {
 
     public static Material getFineWireByTier(int tier) {
         return switch (tier) {
-            case (1) -> Copper;
-            case (2) -> Cupronickel;
-            case (3) -> Electrum;
-            case (4) -> Kanthal;
-            case (5) -> Graphene;
-            case (6) -> Ruridit;
-            case (7) -> Europium;
-            case (8) -> Americium;
-            default -> Lead;
+            case (LV)  -> Copper;
+            case (MV)  -> Cupronickel;
+            case (HV)  -> Electrum;
+            case (EV)  -> Kanthal;
+            case (IV)  -> Graphene;
+            case (LuV) -> Ruridit;
+            case (ZPM) -> Europium;
+            case (UV)  -> Americium;
+            default    -> Lead;
         };
     }
 

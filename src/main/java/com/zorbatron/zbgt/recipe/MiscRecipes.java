@@ -1,4 +1,4 @@
-package com.zorbatron.zbgt.loaders.recipe;
+package com.zorbatron.zbgt.recipe;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.POLARIZER_RECIPES;

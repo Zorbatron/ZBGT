@@ -1,4 +1,4 @@
-package com.zorbatron.zbgt.loaders.recipe;
+package com.zorbatron.zbgt.recipe;
 
 public class ZBGTRecipes {
 
@@ -8,5 +8,6 @@ public class ZBGTRecipes {
         CoverRecipes.init();
         CoALRecipes.init();
         MiscRecipes.init();
+        CasingRecipes.init();
     }
 }

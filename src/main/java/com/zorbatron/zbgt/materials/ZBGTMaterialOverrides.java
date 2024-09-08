@@ -16,6 +16,7 @@ public class ZBGTMaterialOverrides {
         densePlates();
         frameBoxes();
         longRods();
+        gears();
     }
 
     private static void magneticMaterialFluids() {
@@ -37,7 +38,7 @@ public class ZBGTMaterialOverrides {
     }
 
     private static void frameBoxes() {
-        Material[] materials = { NaquadahAlloy };
+        Material[] materials = { NaquadahAlloy, RhodiumPlatedPalladium, Darmstadtium };
 
         for (Material material : materials) {
             material.addFlags(MaterialFlags.GENERATE_FRAME);
@@ -49,6 +50,14 @@ public class ZBGTMaterialOverrides {
 
         for (Material material : materials) {
             material.addFlags(MaterialFlags.GENERATE_LONG_ROD);
+        }
+    }
+
+    private static void gears() {
+        Material[] materials = { RhodiumPlatedPalladium, Darmstadtium };
+
+        for (Material material : materials) {
+            material.addFlags(MaterialFlags.GENERATE_GEAR);
         }
     }
 }
