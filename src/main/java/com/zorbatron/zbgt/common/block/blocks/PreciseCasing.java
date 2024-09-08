@@ -10,11 +10,13 @@ import net.minecraft.world.IBlockAccess;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.zorbatron.zbgt.api.block.IPreciseTier;
+
 import gregtech.api.block.VariantBlock;
 
-public class BlockMultiblockCasing extends VariantBlock<BlockMultiblockCasing.CasingType> {
+public class PreciseCasing extends VariantBlock<PreciseCasing.CasingType> {
 
-    public BlockMultiblockCasing() {
+    public PreciseCasing() {
         super(Material.IRON);
         setTranslationKey("multiblock_casing");
         setHardness(5.0f);
@@ -25,16 +27,16 @@ public class BlockMultiblockCasing extends VariantBlock<BlockMultiblockCasing.Ca
     }
 
     @Override
-    public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos,
-                                    EntityLiving.SpawnPlacementType type) {
+    public boolean canCreatureSpawn(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos,
+                                    EntityLiving.@NotNull SpawnPlacementType type) {
         return false;
     }
 
-    public enum CasingType implements IStringSerializable {
+    public enum CasingType implements IStringSerializable, IPreciseTier {
 
-        PRECISE_CASING_1("precise_casing_1"),
-        PRECISE_CASING_2("precise_casing_2"),
-        PRECISE_CASING_3("precise_casing_3");
+        PRECISE_CASING_1("precise_1"),
+        PRECISE_CASING_2("precise_2"),
+        PRECISE_CASING_3("precise_3");
 
         private final String name;
 
@@ -46,6 +48,19 @@ public class BlockMultiblockCasing extends VariantBlock<BlockMultiblockCasing.Ca
         @Override
         public String getName() {
             return this.name;
+        }
+
+        @Override
+        public int getTier() {
+            return this.ordinal();
+        }
+
+        public CasingType getCasingByTier(int tier) {
+            return switch (tier) {
+                case (2) -> PRECISE_CASING_2;
+                case (3) -> PRECISE_CASING_3;
+                default -> PRECISE_CASING_1;
+            };
         }
     }
 }

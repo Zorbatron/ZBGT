@@ -9,12 +9,16 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.capability.impl.HeatingCoilGCYMMultiblockRecipeLogic;
 import com.zorbatron.zbgt.api.metatileentity.LaserCapableGCYMRecipeMapMultiblockController;
+import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
+import com.zorbatron.zbgt.api.render.ZBGTTextures;
 
 import gregicality.multiblocks.api.metatileentity.GCYMMultiblockAbility;
 import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
@@ -105,7 +109,10 @@ public class MetaTileEntityMegaABS extends LaserCapableGCYMRecipeMapMultiblockCo
                         "###########", "###########", "###########", "###########", "###########", "###########",
                         "###########", "###########")
                 .where('S', selfPredicate())
-                .where('B', states(getCasingState()).or(busesAndHatches()).or(autoEnergyInputs(1, 8)))
+                .where('B',
+                        states(getCasingState())
+                                .or(TraceabilityPredicates.autoBusesAndHatches(getAvailableRecipeMaps()))
+                                .or(autoEnergyInputs(1, 8)))
                 .where('X', states(getCasingState()))
                 .where('V', states(getVentState()))
                 .where('G', states(getGlassState()))
@@ -118,12 +125,12 @@ public class MetaTileEntityMegaABS extends LaserCapableGCYMRecipeMapMultiblockCo
                 .build();
     }
 
-    protected static IBlockState getCasingState() {
+    protected IBlockState getCasingState() {
         return GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING
                 .getState(BlockLargeMultiblockCasing.CasingType.HIGH_TEMPERATURE_CASING);
     }
 
-    protected static IBlockState getVentState() {
+    protected IBlockState getVentState() {
         return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
     }
 
@@ -207,5 +214,12 @@ public class MetaTileEntityMegaABS extends LaserCapableGCYMRecipeMapMultiblockCo
     @Override
     public int getCurrentTemperature() {
         return this.temperature;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @NotNull
+    @Override
+    protected ICubeRenderer getFrontOverlay() {
+        return ZBGTTextures.GTPP_MACHINE_OVERLAY;
     }
 }

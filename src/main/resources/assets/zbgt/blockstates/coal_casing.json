@@ -1,0 +1,83 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "gregtech:blocks/rendering_error"
+    }
+  },
+  "variants": {
+    "variant": {
+      "lv": {
+        "textures": {
+          "all": "gregtech:blocks/casings/coal/0"
+        }
+      },
+      "mv": {
+        "textures": {
+          "all": "gregtech:blocks/casings/coal/1"
+        }
+      },
+      "hv": {
+        "textures": {
+          "all": "gregtech:blocks/casings/coal/2"
+        }
+      },
+      "ev": {
+        "textures": {
+          "all": "gregtech:blocks/casings/coal/3"
+        }
+      },
+      "iv": {
+        "textures": {
+          "all": "gregtech:blocks/casings/coal/4"
+        }
+      },
+      "luv": {
+        "textures": {
+          "all": "gregtech:blocks/casings/coal/5"
+        }
+      },
+      "zpm": {
+        "textures": {
+          "all": "gregtech:blocks/casings/coal/6"
+        }
+      },
+      "uv": {
+        "textures": {
+          "all": "gregtech:blocks/casings/coal/7"
+        }
+      },
+      "uhv": {
+        "textures": {
+          "all": "gregtech:blocks/casings/coal/8"
+        }
+      },
+      "uev": {
+        "textures": {
+          "all": "gregtech:blocks/casings/coal/9"
+        }
+      },
+      "uiv": {
+        "textures": {
+          "all": "gregtech:blocks/casings/coal/10"
+        }
+      },
+      "uxv": {
+        "textures": {
+          "all": "gregtech:blocks/casings/coal/11"
+        }
+      },
+      "opv": {
+        "textures": {
+          "all": "gregtech:blocks/casings/coal/12"
+        }
+      },
+      "max": {
+        "textures": {
+          "all": "gregtech:blocks/casings/coal/13"
+        }
+      }
+    }
+  }
+}
