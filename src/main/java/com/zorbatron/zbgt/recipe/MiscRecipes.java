@@ -48,5 +48,6 @@ public class MiscRecipes {
                 .fluidOutputs(Neutronium.getFluid(1))
                 .EUt(Integer.MAX_VALUE).duration(Integer.MAX_VALUE)
                 .buildAndRegister();
+
     }
 }
