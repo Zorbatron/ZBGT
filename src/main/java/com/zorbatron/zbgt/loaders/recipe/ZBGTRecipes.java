@@ -6,8 +6,7 @@ public class ZBGTRecipes {
         MultiblockRecipes.init();
         MultiblockPartRecipes.init();
         CoverRecipes.init();
-        // CoALRecipes.init();
-        CoALRecipes2.init();
+        CoALRecipes.init();
         MiscRecipes.init();
     }
 }
