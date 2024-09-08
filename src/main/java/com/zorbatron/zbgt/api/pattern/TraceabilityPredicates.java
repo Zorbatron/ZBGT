@@ -31,7 +31,7 @@ public class TraceabilityPredicates {
                     Object casing = blockWorldState.getMatchContext().getOrPut("CoALTier", tier);
                     if (!casing.equals(tier)) {
                         blockWorldState.setError(
-                                new PatternStringError("gregtech.multiblock.pattern.error.component_al_tier"));
+                                new PatternStringError("gregtech.multiblock.pattern.error.coal_tier"));
                         return false;
                     }
                     blockWorldState.getMatchContext().getOrPut("VBlock", new LinkedList<>())
@@ -43,7 +43,7 @@ public class TraceabilityPredicates {
                     .sorted(Comparator.comparingInt(entry -> entry.getValue().getTier()))
                     .map(entry -> new BlockInfo(entry.getKey(), null))
                     .toArray(BlockInfo[]::new))
-                            .addTooltips("gcyl.multiblock.pattern.error.component_al_casings");
+                            .addTooltips("zbgt.multiblock.pattern.coal_tier");
 
     public static TraceabilityPredicate coALCasings() {
         return CoAL_PREDICATE.get();
@@ -68,7 +68,7 @@ public class TraceabilityPredicates {
             }, () -> ZBGTAPI.PRECISE_CASINGS.entrySet().stream()
                     .sorted(Comparator.comparingInt(entry -> entry.getValue().getTier()))
                     .map(entry -> new BlockInfo(entry.getKey(), null))
-                    .toArray(BlockInfo[]::new)).addTooltips("gcyl.multiblock.pattern.error.precise_casings");
+                    .toArray(BlockInfo[]::new)).addTooltips("zbgt.multiblock.pattern.precise_tier");
 
     public static TraceabilityPredicate preciseCasings() {
         return PRECISE_PREDICATE.get();
