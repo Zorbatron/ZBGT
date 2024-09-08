@@ -34,9 +34,11 @@ public class PreciseCasing extends VariantBlock<PreciseCasing.CasingType> {
 
     public enum CasingType implements IStringSerializable, IPreciseTier {
 
+        PRECISE_CASING_0("precise_0"),
         PRECISE_CASING_1("precise_1"),
         PRECISE_CASING_2("precise_2"),
-        PRECISE_CASING_3("precise_3");
+        PRECISE_CASING_3("precise_3"),
+        PRECISE_CASING_4("precise_4");
 
         private final String name;
 
@@ -55,11 +57,13 @@ public class PreciseCasing extends VariantBlock<PreciseCasing.CasingType> {
             return this.ordinal();
         }
 
-        public CasingType getCasingByTier(int tier) {
+        public static CasingType getCasingByTier(int tier) {
             return switch (tier) {
+                case (1) -> PRECISE_CASING_1;
                 case (2) -> PRECISE_CASING_2;
                 case (3) -> PRECISE_CASING_3;
-                default -> PRECISE_CASING_1;
+                case (4) -> PRECISE_CASING_4;
+                default -> PRECISE_CASING_0;
             };
         }
     }
