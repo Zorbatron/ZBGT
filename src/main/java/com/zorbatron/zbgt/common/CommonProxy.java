@@ -72,7 +72,6 @@ public class CommonProxy {
 
     @SubscribeEvent(priority = EventPriority.NORMAL)
     public static void registerMaterials(MaterialEvent event) {
-        ZBGTLog.logger.info("Registering Materials...");
         ZBGTMaterialOverrides.init();
     }
 

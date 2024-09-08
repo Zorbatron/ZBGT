@@ -13,7 +13,7 @@ import gregtech.api.util.TextFormattingUtil;
 
 public class CoALProperty extends RecipeProperty<Integer> {
 
-    public static final String KEY = "component_al_casing_tier";
+    public static final String KEY = "coal_casing_tier";
 
     private static final TreeMap<Integer, String> registeredCasingTiers = new TreeMap<>();
 
@@ -48,7 +48,7 @@ public class CoALProperty extends RecipeProperty<Integer> {
 
     @Override
     public void drawInfo(Minecraft minecraft, int x, int y, int color, Object value) {
-        minecraft.fontRenderer.drawString(I18n.format("gregtech.recipe.component_al_casing_tier",
+        minecraft.fontRenderer.drawString(I18n.format("gregtech.recipe.coal_casing_tier",
                 TextFormattingUtil.formatLongToCompactString(castValue(value))) + getCasingTier(castValue(value)), x, y,
                 color);
     }

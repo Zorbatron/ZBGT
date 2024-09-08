@@ -118,17 +118,8 @@ zbgt.machine.mega_abs.tooltip=Mix and melt everything!
 zbgt.machine.precise_assembler.name=Precise Assembler (PRASS)
 zbgt.machine.precise_assembler.tooltip=Very balanced multiblock ;)
 
-zbgt.machine.mega_abs.name=Mega Alloy Blast Smelter (mABS)
-zbgt.machine.mega_abs.tooltip=Mix and melt everything!
-
 zbgt.machine.quad_ebf.name=Quad EBF (qEBF)
 zbgt.machine.quad_ebf.tooltip=The same shape as a quad EBF, and thus has 4 innate parallels!
-
-
-# Multiblock Casings
-tile.multiblock_casing.precise_1.name=Precise Electronic Unit Casing MK-I
-tile.multiblock_casing.precise_2.name=Precise Electronic Unit Casing MK-II
-tile.multiblock_casing.precise_3.name=Precise Electronic Unit Casing MK-III
 
 zbgt.machine.coal.name=Component Assembly Line (CoAL)
 zbgt.machine.coal.description.1=Creates large batches of §fComponents§7 for §e75%%§7 of the Cost.
@@ -137,7 +128,7 @@ zbgt.machine.coal.max_recipe_tier=Max Component Tier: %s
 zbgt.machine.coal.max_recipe_tier.hover=The highest component tier that can be assembled
 zbgt.machine.coal.computation_tier=Max Computation Available: %s
 zbgt.machine.coal.computation_tier.hover=Maximum amount of computation available for recipes
-gregtech.recipe.component_al_casing_tier=Casing Tier:
+gregtech.recipe.coal_casing_tier=Casing Tier:
 recipemap.coal_recipes.name=Component Assembly Line
 
 
