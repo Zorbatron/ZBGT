@@ -117,6 +117,8 @@ zbgt.machine.mega_abs.tooltip=Mix and melt everything!
 
 zbgt.machine.precise_assembler.name=Precise Assembler (PRASS)
 zbgt.machine.precise_assembler.tooltip=Very balanced multiblock ;)
+zbgt.machine.precise_assembler.tier=Casing tier: %s
+zbgt.machine.precise_assembler.tier.error=Error, casing tier somehow not set!
 
 zbgt.machine.quad_ebf.name=Quad EBF (qEBF)
 zbgt.machine.quad_ebf.tooltip=The same shape as a quad EBF, and thus has 4 innate parallels!
@@ -133,9 +135,12 @@ recipemap.coal_recipes.name=Component Assembly Line
 
 
 # Multiblock Casings
+tile.multiblock_casing.precise_0.name=Imprecise Electronic Unit Casing
 tile.multiblock_casing.precise_1.name=Precise Electronic Unit Casing MK-I
 tile.multiblock_casing.precise_2.name=Precise Electronic Unit Casing MK-II
 tile.multiblock_casing.precise_3.name=Precise Electronic Unit Casing MK-III
+tile.multiblock_casing.precise_4.name=Precise Electronic Unit Casing MK-IV
+
 tile.multiblock_casing.iridium.name=Advanced Iridium Plated Machine Casing
 
 tile.coal_casing.lv.name=Component Assembly Line Casing (LV)
@@ -153,6 +158,7 @@ tile.coal_casing.uxv.name=Component Assembly Line Casing (UXV)
 tile.coal_casing.opv.name=Component Assembly Line Casing (OpV)
 tile.coal_casing.max.name=Component Assembly Line Casing (MAX)
 
+zbgt.multiblock.pattern.error.casings=§cAll casings must be the same tier§r
 
 # Random
 zbgt.laser_enabled.1=Can use

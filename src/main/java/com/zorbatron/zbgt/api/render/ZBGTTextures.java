@@ -46,4 +46,14 @@ public class ZBGTTextures {
 
         IRIDIUM_CASING = new SimpleOverlayRenderer("casings/multiblocks/iridium");
     }
+
+    public static SimpleOverlayRenderer getPrassTextureByTier(int tier) {
+        return switch (tier) {
+            case (1) -> PRECISE_CASING_1;
+            case (2) -> PRECISE_CASING_2;
+            case (3) -> PRECISE_CASING_3;
+            case (4) -> PRECISE_CASING_4;
+            default -> PRECISE_CASING_0;
+        };
+    }
 }
