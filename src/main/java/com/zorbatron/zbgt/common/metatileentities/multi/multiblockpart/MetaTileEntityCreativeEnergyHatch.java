@@ -88,8 +88,9 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gregtech.creative_tooltip.1") + TooltipHelper.RAINBOW +
                 I18n.format("gregtech.creative_tooltip.2") + I18n.format("gregtech.creative_tooltip.3"));
-        tooltip.add(I18n.format("gregtech.universal.enabled"));
+        tooltip.add(I18n.format("gregtech.machine.me.copy_paste.tooltip"));
         tooltip.add(I18n.format("zbgt.machine.creative_energy.warning.1"));
+        tooltip.add(I18n.format("gregtech.universal.enabled"));
     }
 
     @Override

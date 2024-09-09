@@ -147,6 +147,7 @@ public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNo
                                boolean advanced) {
         tooltip.add(I18n.format("gregtech.creative_tooltip.1") + TooltipHelper.RAINBOW +
                 I18n.format("gregtech.creative_tooltip.2") + I18n.format("gregtech.creative_tooltip.3"));
+        tooltip.add(I18n.format("gregtech.machine.me.copy_paste.tooltip"));
         tooltip.add(I18n.format("gregtech.universal.enabled"));
     }
 
