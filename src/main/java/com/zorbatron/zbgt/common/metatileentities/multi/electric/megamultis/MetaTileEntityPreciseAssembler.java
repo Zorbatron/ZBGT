@@ -10,11 +10,13 @@ import java.util.List;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -50,6 +52,7 @@ import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
+import org.jetbrains.annotations.Nullable;
 
 public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblockController {
 
@@ -261,6 +264,11 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
     public boolean checkRecipe(@NotNull Recipe recipe, boolean consumeIfSuccess) {
         int supposedRecipeMap = recipe.getRecipeCategory().getRecipeMap() == RecipeMaps.ASSEMBLER_RECIPES ? 0 : 1;
         return getRecipeMapIndex() == supposedRecipeMap;
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
     }
 
     protected class PreciseAssemblerRecipeLogic extends MultiblockRecipeLogic {
