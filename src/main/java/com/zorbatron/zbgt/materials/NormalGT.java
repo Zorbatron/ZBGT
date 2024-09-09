@@ -15,6 +15,7 @@ public class NormalGT {
 
     protected static void init() {
         magneticMaterialFluids();
+        doublePlates();
         densePlates();
         frameBoxes();
         longRods();
@@ -30,6 +31,12 @@ public class NormalGT {
         for (Material material : materials) {
             material.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         }
+    }
+
+    private static void doublePlates() {
+        Material[] materials = { Invar };
+
+        setFlags(materials, GENERATE_DOUBLE_PLATE);
     }
 
     private static void densePlates() {
