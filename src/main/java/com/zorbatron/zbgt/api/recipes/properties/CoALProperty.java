@@ -48,7 +48,7 @@ public class CoALProperty extends RecipeProperty<Integer> {
 
     @Override
     public void drawInfo(Minecraft minecraft, int x, int y, int color, Object value) {
-        minecraft.fontRenderer.drawString(I18n.format("gregtech.recipe.coal_casing_tier",
+        minecraft.fontRenderer.drawString(I18n.format("zbgt.recipe.coal_casing_tier",
                 TextFormattingUtil.formatLongToCompactString(castValue(value))) + getCasingTier(castValue(value)), x, y,
                 color);
     }

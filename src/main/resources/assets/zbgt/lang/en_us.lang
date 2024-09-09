@@ -1,6 +1,7 @@
 # Multiblock parts
 zbgt.machine.creative_energy_source.name=Creative Energy Source
 zbgt.machine.creative_energy_source.tooltip=Infinite Energy Source for Multiblocks
+zbgt.machine.creative_energy_source.data_stick.name=§oCreative Energy Source Configuration Data
 
 zbgt.machine.creative_energy_sink.name=Creative Energy Sink
 zbgt.machine.creative_energy_sink.tooltip=Infinite Energy Sink for Multiblocks
@@ -10,6 +11,7 @@ zbgt.machine.creative_energy.warning.1=Changing settings requires the multiblock
 
 zbgt.machine.creative_reservoir_hatch.name=Creative Fluid Hatch
 zbgt.machine.creative_reservoir_hatch.tooltip=Infinite fluid source for multiblocks
+zbgt.machine.creative_reservoir_hatch.data_stick.name=§oCreative Fluid Hatch Configuration Data
 
 zbgt.machine.creative_computation_provider.name=Creative Computation Provider
 zbgt.machine.creative_computation_provider.tooltip=Infinite source of computation for CWU consumers
@@ -18,6 +20,7 @@ zbgt.machine.creative_computation_provider.cwut=Maximum Requestable CWU/t
 
 zbgt.machine.creative_item_bus.name=Creative Item Bus
 zbgt.machine.creative_item_bus.tooltip=Infinite item source for multiblocks
+zbgt.machine.creative_item_bus.data_stick.name=§oCreative Item Bus Configuration Data
 
 zbgt.machine.air_intake_universal.rate=Collects %,d mB of air every %,d ticks
 
@@ -116,7 +119,11 @@ zbgt.machine.mega_abs.name=Mega Alloy Blast Smelter (mABS)
 zbgt.machine.mega_abs.tooltip=Mix and melt everything!
 
 zbgt.machine.precise_assembler.name=Precise Assembler (PRASS)
-zbgt.machine.precise_assembler.tooltip=Very balanced multiblock ;)
+zbgt.machine.precise_assembler.precise_casing.tier=Casing tier: %s
+zbgt.machine.precise_assembler.precise_casing.tier.hover=Highest precise tier recipe that can be run
+zbgt.machine.precise_assembler.machine_casing.tier=Machine casing tier: %s
+zbgt.machine.precise_assembler.machine_casing.tier.hover=Recipes are limited to this voltage, regardless of the energy hatch
+recipemap.precise_assembler_recipes.name=Precise Assembler
 
 zbgt.machine.quad_ebf.name=Quad EBF (qEBF)
 zbgt.machine.quad_ebf.tooltip=The same shape as a quad EBF, and thus has 4 innate parallels!
@@ -128,17 +135,26 @@ zbgt.machine.coal.max_recipe_tier=Max Component Tier: %s
 zbgt.machine.coal.max_recipe_tier.hover=The highest component tier that can be assembled
 zbgt.machine.coal.computation_tier=Max Computation Available: %s
 zbgt.machine.coal.computation_tier.hover=Maximum amount of computation available for recipes
-gregtech.recipe.coal_casing_tier=Casing Tier:
+zbgt.recipe.coal_casing_tier=Casing Tier:
 recipemap.coal_recipes.name=Component Assembly Line
 
 
 # Multiblock Casings
+tile.multiblock_casing.precise_0.name=Imprecise Electronic Unit Casing
 tile.multiblock_casing.precise_1.name=Precise Electronic Unit Casing MK-I
 tile.multiblock_casing.precise_2.name=Precise Electronic Unit Casing MK-II
 tile.multiblock_casing.precise_3.name=Precise Electronic Unit Casing MK-III
+tile.multiblock_casing.precise_4.name=Precise Electronic Unit Casing MK-IV
+tile.multiblock_casing.precise_0.name.short=Imprecise
+tile.multiblock_casing.precise_1.name.short=MK-I
+tile.multiblock_casing.precise_2.name.short=MK-II
+tile.multiblock_casing.precise_3.name.short=MK-III
+tile.multiblock_casing.precise_4.name.short=MK-IV
+
 tile.multiblock_casing.iridium.name=Advanced Iridium Plated Machine Casing
 zbgt.multiblock.pattern.precise_tier=§cAll casings must be the same tier§r
 
+tile.coal_casing.ulv.name=Component Assembly Line Casing (ULV)
 tile.coal_casing.lv.name=Component Assembly Line Casing (LV)
 tile.coal_casing.mv.name=Component Assembly Line Casing (MV)
 tile.coal_casing.hv.name=Component Assembly Line Casing (HV)
@@ -155,6 +171,7 @@ tile.coal_casing.opv.name=Component Assembly Line Casing (OpV)
 tile.coal_casing.max.name=Component Assembly Line Casing (MAX)
 zbgt.multiblock.pattern.coal_tier=§cAll casings must be the same tier§r
 
+zbgt.multiblock.pattern.error.casings=§cAll casings must be the same tier§r
 
 # Random
 zbgt.laser_enabled.1=Can use

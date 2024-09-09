@@ -1,54 +1,23 @@
 package com.zorbatron.zbgt.materials;
 
-import static gregtech.api.unification.material.Materials.*;
+import com.zorbatron.zbgt.api.util.ZBGTMods;
 
-import gregtech.api.fluids.FluidBuilder;
-import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.info.MaterialFlags;
-import gregtech.api.unification.material.properties.FluidProperty;
-import gregtech.api.unification.material.properties.PropertyKey;
+import gregtech.api.unification.material.info.MaterialFlag;
 
 public class ZBGTMaterialOverrides {
 
     public static void init() {
-        magneticMaterialFluids();
-        densePlates();
-        frameBoxes();
-        longRods();
-    }
+        NormalGT.init();
 
-    private static void magneticMaterialFluids() {
-        Material[] materials = { IronMagnetic, SteelMagnetic, NeodymiumMagnetic, SamariumMagnetic };
-
-        for (Material material : materials) {
-            material.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-            material.addFlags(MaterialFlags.GENERATE_LONG_ROD);
+        if (ZBGTMods.GCYM.isModLoaded()) {
+            GCYM.init();
         }
     }
 
-    private static void densePlates() {
-        Material[] materials = { Steel, Aluminium, StainlessSteel, Titanium, TungstenSteel, Tritanium, HSSS,
-                Osmiridium, NiobiumTitanium };
-
+    protected static void setFlags(Material[] materials, MaterialFlag... flags) {
         for (Material material : materials) {
-            material.addFlags(MaterialFlags.GENERATE_DENSE);
-        }
-    }
-
-    private static void frameBoxes() {
-        Material[] materials = { NaquadahAlloy };
-
-        for (Material material : materials) {
-            material.addFlags(MaterialFlags.GENERATE_FRAME);
-        }
-    }
-
-    private static void longRods() {
-        Material[] materials = { Chrome };
-
-        for (Material material : materials) {
-            material.addFlags(MaterialFlags.GENERATE_LONG_ROD);
+            material.addFlags(flags);
         }
     }
 }

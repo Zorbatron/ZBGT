@@ -10,8 +10,6 @@ import net.minecraft.world.IBlockAccess;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.zorbatron.zbgt.api.block.IPreciseTier;
-
 import gregtech.api.block.VariantBlock;
 
 public class PreciseCasing extends VariantBlock<PreciseCasing.CasingType> {
@@ -32,11 +30,13 @@ public class PreciseCasing extends VariantBlock<PreciseCasing.CasingType> {
         return false;
     }
 
-    public enum CasingType implements IStringSerializable, IPreciseTier {
+    public enum CasingType implements IStringSerializable {
 
+        PRECISE_CASING_0("precise_0"),
         PRECISE_CASING_1("precise_1"),
         PRECISE_CASING_2("precise_2"),
-        PRECISE_CASING_3("precise_3");
+        PRECISE_CASING_3("precise_3"),
+        PRECISE_CASING_4("precise_4");
 
         private final String name;
 
@@ -50,17 +50,22 @@ public class PreciseCasing extends VariantBlock<PreciseCasing.CasingType> {
             return this.name;
         }
 
-        @Override
-        public int getTier() {
-            return this.ordinal();
-        }
-
-        public CasingType getCasingByTier(int tier) {
+        public static CasingType getCasingByTier(int tier) {
             return switch (tier) {
+                case (0) -> PRECISE_CASING_0;
+                case (1) -> PRECISE_CASING_1;
                 case (2) -> PRECISE_CASING_2;
                 case (3) -> PRECISE_CASING_3;
-                default -> PRECISE_CASING_1;
+                default -> PRECISE_CASING_4;
             };
+        }
+
+        public static String getUntranslatedNameByTier(int tier) {
+            return "tile.multiblock_casing." + getCasingByTier(tier).getName() + ".name";
+        }
+
+        public static String getUntranslatedShortNameByTier(int tier) {
+            return "tile.multiblock_casing." + getCasingByTier(tier).getName() + ".name.short";
         }
     }
 }

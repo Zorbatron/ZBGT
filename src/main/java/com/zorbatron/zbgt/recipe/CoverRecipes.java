@@ -1,4 +1,4 @@
-package com.zorbatron.zbgt.loaders.recipe;
+package com.zorbatron.zbgt.recipe;
 
 import static com.zorbatron.zbgt.common.items.ZBGTMetaItems.*;
 import static gregtech.api.GTValues.*;
@@ -12,7 +12,7 @@ import gregtech.api.unification.ore.OrePrefix;
 
 public class CoverRecipes {
 
-    public static void init() {
+    protected static void init() {
         dualCovers();
         preciseDualCovers();
     }

@@ -1,5 +1,7 @@
 package com.zorbatron.zbgt.common.block.blocks;
 
+import static gregtech.api.GTValues.*;
+
 import javax.annotation.Nonnull;
 
 import net.minecraft.block.SoundType;
@@ -11,8 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 import org.jetbrains.annotations.NotNull;
-
-import com.zorbatron.zbgt.api.block.ICoALTier;
 
 import gregtech.api.block.VariantBlock;
 
@@ -34,8 +34,9 @@ public class CoALCasing extends VariantBlock<CoALCasing.CasingType> {
         return false;
     }
 
-    public enum CasingType implements IStringSerializable, ICoALTier {
+    public enum CasingType implements IStringSerializable {
 
+        CASING_ULV("ulv"),
         CASING_LV("lv"),
         CASING_MV("mv"),
         CASING_HV("hv"),
@@ -63,27 +64,23 @@ public class CoALCasing extends VariantBlock<CoALCasing.CasingType> {
             return this.name;
         }
 
-        @Override
-        public int getTier() {
-            return this.ordinal();
-        }
-
-        public CasingType getCasingByTier(int tier) {
+        public static CasingType getCasingByTier(int tier) {
             return switch (tier) {
-                case (2) -> CASING_MV;
-                case (3) -> CASING_HV;
-                case (4) -> CASING_EV;
-                case (5) -> CASING_IV;
-                case (6) -> CASING_LuV;
-                case (7) -> CASING_ZPM;
-                case (8) -> CASING_UV;
-                case (9) -> CASING_UHV;
-                case (10) -> CASING_UEV;
-                case (11) -> CASING_UIV;
-                case (12) -> CASING_UXV;
-                case (13) -> CASING_OpV;
-                case (14) -> CASING_MAX;
-                default -> CASING_LV;
+                case (LV)  -> CASING_LV;
+                case (MV)  -> CASING_MV;
+                case (HV)  -> CASING_HV;
+                case (EV)  -> CASING_EV;
+                case (IV)  -> CASING_IV;
+                case (LuV) -> CASING_LuV;
+                case (ZPM) -> CASING_ZPM;
+                case (UV)  -> CASING_UV;
+                case (UHV) -> CASING_UHV;
+                case (UEV) -> CASING_UEV;
+                case (UIV) -> CASING_UIV;
+                case (UXV) -> CASING_UXV;
+                case (OpV) -> CASING_OpV;
+                case (MAX) -> CASING_MAX;
+                default    -> CASING_ULV;
             };
         }
     }

@@ -1,4 +1,4 @@
-package com.zorbatron.zbgt.api.recipes;
+package com.zorbatron.zbgt.api.recipes.maps;
 
 import net.minecraftforge.items.IItemHandlerModifiable;
 
@@ -26,7 +26,7 @@ public class RecipeMapCoAL<R extends RecipeBuilder<R>> extends RecipeMap<R> {
     public ModularUI.Builder createJeiUITemplate(IItemHandlerModifiable importItems, IItemHandlerModifiable exportItems,
                                                  FluidTankList importFluids, FluidTankList exportFluids, int yOffset) {
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 176)
-                .widget(new ProgressWidget(100, 62, 0, 72, 20, ZBGTTextures.PROGRESS_BAR_COMPONENT_AL,
+                .widget(new ProgressWidget(100, 62, 0, 72, 20, ZBGTTextures.PROGRESS_BAR_CoAL,
                         ProgressWidget.MoveType.HORIZONTAL));
         this.addInventorySlotGroup(builder, importItems, importFluids, false, yOffset);
         this.addInventorySlotGroup(builder, exportItems, exportFluids, true, yOffset);

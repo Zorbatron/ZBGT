@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
@@ -22,6 +23,7 @@ import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
+import gregtech.api.capability.IDataStickIntractable;
 import gregtech.api.capability.IGhostSlotConfigurable;
 import gregtech.api.capability.impl.GhostCircuitItemStackHandler;
 import gregtech.api.capability.impl.ItemHandlerList;
@@ -41,7 +43,8 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
 public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotifiablePart implements
-                                           IMultiblockAbilityPart<IItemHandlerModifiable>, IGhostSlotConfigurable {
+                                           IMultiblockAbilityPart<IItemHandlerModifiable>, IGhostSlotConfigurable,
+                                           IDataStickIntractable {
 
     private InfiniteItemStackHandler infiniteItemStackHandler;
     private GhostCircuitItemStackHandler circuitItemStackHandler;
@@ -173,8 +176,8 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gregtech.creative_tooltip.1") + TooltipHelper.RAINBOW +
                 I18n.format("gregtech.creative_tooltip.2") + I18n.format("gregtech.creative_tooltip.3"));
+        tooltip.add(I18n.format("gregtech.machine.me.copy_paste.tooltip"));
         tooltip.add(I18n.format("gregtech.universal.enabled"));
-        tooltip.add(I18n.format("zbgt.machine.creative_energy.warning.1"));
     }
 
     @Override
@@ -182,5 +185,36 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
         tooltip.add(I18n.format("gregtech.tool_action.screwdriver.access_covers"));
         tooltip.add(I18n.format("gregtech.tool_action.wrench.set_facing"));
         super.addToolUsages(stack, world, tooltip, advanced);
+    }
+
+    @Override
+    public void onDataStickLeftClick(EntityPlayer player, ItemStack dataStick) {
+        NBTTagCompound tag = new NBTTagCompound();
+        tag.setTag("CreativeItemBus", writeConfigToTag());
+        dataStick.setTagCompound(tag);
+        dataStick.setTranslatableName("zbgt.machine.creative_item_bus.data_stick.name");
+        player.sendStatusMessage(new TextComponentTranslation("gregtech.machine.me.import_copy_settings"), true);
+    }
+
+    private NBTTagCompound writeConfigToTag() {
+        NBTTagCompound tag = new NBTTagCompound();
+        tag.setTag("Inventory", infiniteItemStackHandler.serializeNBT());
+        this.circuitItemStackHandler.write(tag);
+        return tag;
+    }
+
+    @Override
+    public boolean onDataStickRightClick(EntityPlayer player, ItemStack dataStick) {
+        NBTTagCompound tag = dataStick.getTagCompound();
+        if (tag == null || !tag.hasKey("CreativeItemBus")) return false;
+
+        readConfigFromTag(tag.getCompoundTag("CreativeItemBus"));
+
+        return true;
+    }
+
+    private void readConfigFromTag(NBTTagCompound tag) {
+        this.infiniteItemStackHandler.deserializeNBT(tag.getCompoundTag("Inventory"));
+        this.circuitItemStackHandler.read(tag);
     }
 }

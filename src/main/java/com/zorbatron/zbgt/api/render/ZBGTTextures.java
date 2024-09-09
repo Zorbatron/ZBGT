@@ -14,7 +14,7 @@ public class ZBGTTextures {
     public static TextureArea ITEM_FLUID_OVERLAY;
     public static TextureArea AUTO_PULL;
 
-    public static final TextureArea PROGRESS_BAR_COMPONENT_AL = TextureArea
+    public static final TextureArea PROGRESS_BAR_CoAL = TextureArea
             .fullImage("textures/gui/progress_bar/progress_bar_component_al.png");
 
     // Multiblock controller overlays
@@ -45,5 +45,15 @@ public class ZBGTTextures {
         PRECISE_CASING_4 = new SimpleOverlayRenderer("casings/multiblocks/precise_4");
 
         IRIDIUM_CASING = new SimpleOverlayRenderer("casings/multiblocks/iridium");
+    }
+
+    public static SimpleOverlayRenderer getPrassTextureByTier(int tier) {
+        return switch (tier) {
+            case (1) -> PRECISE_CASING_1;
+            case (2) -> PRECISE_CASING_2;
+            case (3) -> PRECISE_CASING_3;
+            case (4) -> PRECISE_CASING_4;
+            default -> PRECISE_CASING_0;
+        };
     }
 }

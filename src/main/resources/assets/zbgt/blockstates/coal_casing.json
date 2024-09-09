@@ -8,74 +8,79 @@
   },
   "variants": {
     "variant": {
+      "ulv": {
+        "textures": {
+          "all": "gregtech:blocks/casings/coal/ulv"
+        }
+      },
       "lv": {
         "textures": {
-          "all": "gregtech:blocks/casings/coal/0"
+          "all": "gregtech:blocks/casings/coal/lv"
         }
       },
       "mv": {
         "textures": {
-          "all": "gregtech:blocks/casings/coal/1"
+          "all": "gregtech:blocks/casings/coal/mv"
         }
       },
       "hv": {
         "textures": {
-          "all": "gregtech:blocks/casings/coal/2"
+          "all": "gregtech:blocks/casings/coal/hv"
         }
       },
       "ev": {
         "textures": {
-          "all": "gregtech:blocks/casings/coal/3"
+          "all": "gregtech:blocks/casings/coal/ev"
         }
       },
       "iv": {
         "textures": {
-          "all": "gregtech:blocks/casings/coal/4"
+          "all": "gregtech:blocks/casings/coal/iv"
         }
       },
       "luv": {
         "textures": {
-          "all": "gregtech:blocks/casings/coal/5"
+          "all": "gregtech:blocks/casings/coal/luv"
         }
       },
       "zpm": {
         "textures": {
-          "all": "gregtech:blocks/casings/coal/6"
+          "all": "gregtech:blocks/casings/coal/zpm"
         }
       },
       "uv": {
         "textures": {
-          "all": "gregtech:blocks/casings/coal/7"
+          "all": "gregtech:blocks/casings/coal/uv"
         }
       },
       "uhv": {
         "textures": {
-          "all": "gregtech:blocks/casings/coal/8"
+          "all": "gregtech:blocks/casings/coal/uhv"
         }
       },
       "uev": {
         "textures": {
-          "all": "gregtech:blocks/casings/coal/9"
+          "all": "gregtech:blocks/casings/coal/uev"
         }
       },
       "uiv": {
         "textures": {
-          "all": "gregtech:blocks/casings/coal/10"
+          "all": "gregtech:blocks/casings/coal/uiv"
         }
       },
       "uxv": {
         "textures": {
-          "all": "gregtech:blocks/casings/coal/11"
+          "all": "gregtech:blocks/casings/coal/uxv"
         }
       },
       "opv": {
         "textures": {
-          "all": "gregtech:blocks/casings/coal/12"
+          "all": "gregtech:blocks/casings/coal/opv"
         }
       },
       "max": {
         "textures": {
-          "all": "gregtech:blocks/casings/coal/13"
+          "all": "gregtech:blocks/casings/coal/max"
         }
       }
     }
