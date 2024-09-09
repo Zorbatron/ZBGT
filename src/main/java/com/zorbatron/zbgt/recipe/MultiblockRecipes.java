@@ -12,6 +12,8 @@ import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
 
 import gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities;
+import gregtech.api.recipes.ModHandler;
+import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.blocks.BlockMultiblockCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
@@ -20,8 +22,19 @@ import gregtech.common.metatileentities.MetaTileEntities;
 public class MultiblockRecipes {
 
     protected static void init() {
+        craftingTableRecipes();
         assemblerRecipes();
         assemblyLineRecipes();
+    }
+
+    private static void craftingTableRecipes() {
+        ModHandler.addShapedRecipe("quad_ebf", ZBGTMetaTileEntities.QUAD_EBF.getStackForm(),
+                "PBP",
+                "BCB",
+                "PBP",
+                'P', new UnificationEntry(plateDouble, Invar),
+                'B', MetaTileEntities.ELECTRIC_BLAST_FURNACE.getStackForm(),
+                'C', new UnificationEntry(circuit, getMarkerMaterialByTier(HV)));
     }
 
     private static void assemblerRecipes() {
@@ -67,10 +80,12 @@ public class MultiblockRecipes {
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(MetaTileEntities.ELECTRIC_BLAST_FURNACE, 4)
+                .input(plate, Invar, 4)
+                .input(circuit, getMarkerMaterialByTier(HV))
                 .fluidInputs(SolderingAlloy.getFluid(L * 4))
                 .circuitMeta(4)
                 .output(ZBGTMetaTileEntities.QUAD_EBF)
-                .duration(20 * 18).EUt(VA[HV])
+                .duration(20 * 5).EUt(VA[HV])
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
