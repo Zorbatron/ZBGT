@@ -4,9 +4,16 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.common.items.MetaItems.*;
 
+import net.minecraft.item.ItemStack;
+
+import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
+import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
+
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
+import gregtech.common.blocks.BlockMachineCasing;
+import gregtech.common.blocks.MetaBlocks;
 
 public class RecipeAssists {
 
@@ -73,7 +80,7 @@ public class RecipeAssists {
             case (LuV) -> Ruridit;
             case (ZPM) -> Europium;
             case (UV)  -> Americium;
-            default    -> Lead;
+            default    -> Tin;
         };
     }
 
@@ -302,7 +309,7 @@ public class RecipeAssists {
         return getMainComponentMaterialByTier(tier);
     }
 
-    public static Material getSensorEmitterFoil(int tier) {
+    public static Material getSensorEmitterFoilByTier(int tier) {
         return switch (tier) {
             case (LuV) -> Palladium;
             case (ZPM) -> Trinium;
@@ -311,11 +318,44 @@ public class RecipeAssists {
         };
     }
 
-    public static Material getSensorEmitterPlateRod(int tier) {
+    public static Material getSensorEmitterPlateRodByTier(int tier) {
         return switch (tier) {
             case (LuV) -> Ruridit;
             case (ZPM) -> Osmiridium;
             default    -> getMainComponentMaterialByTier(tier);
+        };
+    }
+
+    public static ItemStack getMachineCasingByTier(int tier) {
+        return MetaBlocks.MACHINE_CASING.getItemVariant(getMachineCasingTypeByTier(tier));
+    }
+
+    public static BlockMachineCasing.MachineCasingType getMachineCasingTypeByTier(int tier) {
+        return switch (tier) {
+            case (LV) -> BlockMachineCasing.MachineCasingType.LV;
+            case (MV) -> BlockMachineCasing.MachineCasingType.MV;
+            case (HV) -> BlockMachineCasing.MachineCasingType.HV;
+            case (EV) -> BlockMachineCasing.MachineCasingType.EV;
+            case (IV) -> BlockMachineCasing.MachineCasingType.IV;
+            case (LuV) -> BlockMachineCasing.MachineCasingType.LuV;
+            case (ZPM) -> BlockMachineCasing.MachineCasingType.ZPM;
+            case (UV) -> BlockMachineCasing.MachineCasingType.UV;
+            case (UHV) -> BlockMachineCasing.MachineCasingType.UHV;
+            default -> BlockMachineCasing.MachineCasingType.ULV;
+        };
+    }
+
+    public static ItemStack getPreciseCasingByTier(int tier) {
+        return ZBGTMetaBlocks.PRECISE_CASING.getItemVariant(getPreciseCasingTypeByTier(tier));
+    }
+
+    public static PreciseCasing.CasingType getPreciseCasingTypeByTier(int tier) {
+        return switch (tier) {
+            case (1) -> PreciseCasing.CasingType.PRECISE_CASING_1;
+            case (2) -> PreciseCasing.CasingType.PRECISE_CASING_2;
+            case (3) -> PreciseCasing.CasingType.PRECISE_CASING_3;
+            case (4) -> PreciseCasing.CasingType.PRECISE_CASING_4;
+            default -> PreciseCasing.CasingType.PRECISE_CASING_0;
         };
     }
 }

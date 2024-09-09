@@ -8,6 +8,7 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.properties.FluidProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
+import gregtech.api.unification.material.properties.WireProperties;
 
 public class ZBGTMaterialOverrides {
 
@@ -17,6 +18,7 @@ public class ZBGTMaterialOverrides {
         frameBoxes();
         longRods();
         gears();
+        wire();
     }
 
     private static void magneticMaterialFluids() {
@@ -30,7 +32,7 @@ public class ZBGTMaterialOverrides {
 
     private static void densePlates() {
         Material[] materials = { Steel, Aluminium, StainlessSteel, Titanium, TungstenSteel, Tritanium, HSSS,
-                Osmiridium, NiobiumTitanium };
+                Osmiridium, NiobiumTitanium, Iridium, WroughtIron };
 
         for (Material material : materials) {
             material.addFlags(MaterialFlags.GENERATE_DENSE);
@@ -38,7 +40,7 @@ public class ZBGTMaterialOverrides {
     }
 
     private static void frameBoxes() {
-        Material[] materials = { NaquadahAlloy, RhodiumPlatedPalladium, Darmstadtium };
+        Material[] materials = { NaquadahAlloy, RhodiumPlatedPalladium, Darmstadtium, WroughtIron };
 
         for (Material material : materials) {
             material.addFlags(MaterialFlags.GENERATE_FRAME);
@@ -58,6 +60,14 @@ public class ZBGTMaterialOverrides {
 
         for (Material material : materials) {
             material.addFlags(MaterialFlags.GENERATE_GEAR);
+        }
+    }
+
+    private static void wire() {
+        Material[] materials = { Titanium };
+
+        for (Material material : materials) {
+            material.setProperty(PropertyKey.WIRE, new WireProperties(2048, 4, 2));
         }
     }
 }

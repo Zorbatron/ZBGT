@@ -66,20 +66,21 @@ public class CoALCasing extends VariantBlock<CoALCasing.CasingType> {
 
         public static CasingType getCasingByTier(int tier) {
             return switch (tier) {
-                case (MV) -> CASING_MV;
-                case (HV) -> CASING_HV;
-                case (EV) -> CASING_EV;
-                case (IV) -> CASING_IV;
+                case (LV)  -> CASING_LV;
+                case (MV)  -> CASING_MV;
+                case (HV)  -> CASING_HV;
+                case (EV)  -> CASING_EV;
+                case (IV)  -> CASING_IV;
                 case (LuV) -> CASING_LuV;
                 case (ZPM) -> CASING_ZPM;
-                case (UV) -> CASING_UV;
+                case (UV)  -> CASING_UV;
                 case (UHV) -> CASING_UHV;
                 case (UEV) -> CASING_UEV;
                 case (UIV) -> CASING_UIV;
                 case (UXV) -> CASING_UXV;
                 case (OpV) -> CASING_OpV;
                 case (MAX) -> CASING_MAX;
-                default -> CASING_LV;
+                default    -> CASING_ULV;
             };
         }
     }

@@ -9,13 +9,18 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.QUANTUM_EYE;
 import static gregtech.common.items.MetaItems.QUANTUM_STAR;
 
+import com.filostorm.ulvcovers.items.ULVCoverMetaItems;
 import com.zorbatron.zbgt.api.recipes.builders.CoALRecipeBuilder;
+import com.zorbatron.zbgt.api.util.ZBGTMods;
 
 import gregtech.api.recipes.RecipeBuilder;
 
 public class CoALRecipes {
 
     public static void init() {
+        if (ZBGTMods.ULV_COVERS.isModLoaded()) {
+            ulv();
+        }
         lvToEV();
         luvToUV();
     }
@@ -31,9 +36,59 @@ public class CoALRecipes {
                     .EUt(VA[ULV]).duration(600)
                     .CasingTier(LV)
                     .CWUt(getCWUt(LV))
-                    .circuitMeta(1)
+                    .circuitMeta(MOTOR.ordinal() + 1)
                     .buildAndRegister();
         }
+    }
+
+    private static void ulv() {
+        CoAL_RECIPES.recipeBuilder()
+                .output(ULVCoverMetaItems.ELECTRIC_MOTOR_ULV, 64)
+                .input(stickLong, Bronze, 48)
+                .input(cableGtHex, getCableByTier(ULV), 48)
+                .input(wireGtHex, getFineWireByTier(ULV), 12)
+                .input(stickLong, IronMagnetic, 24)
+                .EUt(VA[ULV]).duration(600)
+                .buildAndRegister();
+
+        CoAL_RECIPES.recipeBuilder()
+                .output(ULVCoverMetaItems.ELECTRIC_PISTON_ULV, 64)
+                .input(gear, Bronze, 12)
+                .input(stickLong, Bronze, 48)
+                .input(ULVCoverMetaItems.ELECTRIC_MOTOR_ULV, 48)
+                .input(cableGtHex, getCableByTier(ULV), 6)
+                .input(plateDense, Bronze, 16)
+                .EUt(VA[ULV]).duration(600)
+                .buildAndRegister();
+
+        CoAL_RECIPES.recipeBuilder()
+                .output(ULVCoverMetaItems.ELECTRIC_PUMP_ULV, 64)
+                .input(screw, Bronze, 48)
+                .input(rotor, Bronze, 48)
+                .input(pipeNormalFluid, Bronze, 48)
+                .input(cableGtHex, getCableByTier(ULV), 3)
+                .input(ULVCoverMetaItems.ELECTRIC_MOTOR_ULV, 48)
+                .fluidInputs(Rubber.getFluid(L * 24))
+                .EUt(VA[ULV]).duration(600)
+                .buildAndRegister();
+
+        CoAL_RECIPES.recipeBuilder()
+                .output(ULVCoverMetaItems.ROBOT_ARM_ULV, 64)
+                .input(circuit, getMarkerMaterialByTier(ULV), 48)
+                .input(stickLong, Bronze, 48)
+                .input(cableGtHex, getCableByTier(ULV), 9)
+                .input(ULVCoverMetaItems.ELECTRIC_PISTON_ULV, 64)
+                .input(ULVCoverMetaItems.ELECTRIC_MOTOR_ULV, 96)
+                .EUt(VA[ULV]).duration(600)
+                .buildAndRegister();
+
+        CoAL_RECIPES.recipeBuilder()
+                .output(ULVCoverMetaItems.CONVEYOR_MODULE_ULV, 64)
+                .input(ULVCoverMetaItems.ELECTRIC_MOTOR_ULV, 96)
+                .input(cableGtHex, getCableByTier(ULV), 3)
+                .fluidInputs(Rubber.getFluid(L * 288))
+                .EUt(VA[ULV]).duration(600)
+                .buildAndRegister();
     }
 
     private static void lvToEV() {
@@ -69,13 +124,7 @@ public class CoALRecipes {
                         getCoALLowTierRecipe(tier, type)
                                 .input(tier == MV ? gemFlawless : gem, getLowEmitterSensorStarMaterial(tier), 48)
                                 .buildAndRegister();
-                        getCoALLowTierRecipe(tier, type)
-                                .input(tier == MV ? gemFlawless : gem, getLowEmitterSensorStarMaterial(tier), 48)
-                                .buildAndRegister();
                     } else {
-                        getCoALLowTierRecipe(tier, type)
-                                .input(getStarByTier(tier), 48)
-                                .buildAndRegister();
                         getCoALLowTierRecipe(tier, type)
                                 .input(getStarByTier(tier), 48)
                                 .buildAndRegister();
@@ -248,8 +297,8 @@ public class CoALRecipes {
                     .input(frameGt, tier == ZPM ? NaquadahAlloy : getMainComponentMaterialByTier(tier), 48)
                     .input(circuit, getMarkerMaterialByTier(tier), 96)
                     .fluidInputs(SolderingAlloy.getFluid((int) (48 * L * Math.pow(2, tier - LuV))))
-                    .fluidInputs(getSensorEmitterFoil(tier).getFluid(L * 48 * 24))
-                    .fluidInputs(getSensorEmitterPlateRod(tier).getFluid(L * 48 * 4))
+                    .fluidInputs(getSensorEmitterFoilByTier(tier).getFluid(L * 48 * 24))
+                    .fluidInputs(getSensorEmitterPlateRodByTier(tier).getFluid(L * 48 * 4))
                     .fluidInputs(tier > ZPM ? Naquadria.getFluid(L * 4 * 48) : null);
 
             case SENSOR -> builder
@@ -260,8 +309,8 @@ public class CoALRecipes {
                     .input(frameGt, tier == ZPM ? NaquadahAlloy : getMainComponentMaterialByTier(tier), 48)
                     .input(circuit, getMarkerMaterialByTier(tier), 96)
                     .fluidInputs(SolderingAlloy.getFluid((int) (48 * L * Math.pow(2, tier - LuV))))
-                    .fluidInputs(getSensorEmitterFoil(tier).getFluid(L * 48 * 24))
-                    .fluidInputs(getSensorEmitterPlateRod(tier).getFluid(L * 48 * 4))
+                    .fluidInputs(getSensorEmitterFoilByTier(tier).getFluid(L * 48 * 24))
+                    .fluidInputs(getSensorEmitterPlateRodByTier(tier).getFluid(L * 48 * 4))
                     .fluidInputs(tier > ZPM ? Naquadria.getFluid(L * 4 * 48) : null);
 
             case FIELD_GEN -> builder

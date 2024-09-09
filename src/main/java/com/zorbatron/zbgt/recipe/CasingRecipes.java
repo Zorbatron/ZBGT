@@ -5,12 +5,15 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
 import static gregtech.api.unification.material.Materials.Naquadria;
+import static gregtech.api.unification.material.Materials.SolderingAlloy;
 import static gregtech.api.unification.ore.OrePrefix.*;
 
 import java.util.Arrays;
 
 import net.minecraft.util.IStringSerializable;
 
+import com.filostorm.ulvcovers.items.ULVCoverMetaItems;
+import com.zorbatron.zbgt.api.util.ZBGTMods;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
 import com.zorbatron.zbgt.common.block.blocks.ZBGTBlockMultiblockCasing;
@@ -26,7 +29,8 @@ public class CasingRecipes {
 
     public static void init() {
         ZBGTBlockMultiblockCasings();
-        CoALCasings();
+        coALCasings();
+        preciseCasings();
     }
 
     private static void ZBGTBlockMultiblockCasings() {
@@ -45,15 +49,33 @@ public class CasingRecipes {
                 'P', OreDictUnifier.get(plate, inputMaterial),
                 'F', OreDictUnifier.get(frameGt, inputMaterial));
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(16)
+        ASSEMBLER_RECIPES.recipeBuilder()
                 .input(plate, inputMaterial, 6)
                 .input(frameGt, inputMaterial)
                 .circuitMeta(6)
                 .outputs(outputCasingType.getItemVariant(outputCasing, ConfigHolder.recipes.casingsPerCraft))
+                .EUt(16).duration(50)
                 .buildAndRegister();
     }
 
-    private static void CoALCasings() {
+    private static void coALCasings() {
+        if (ZBGTMods.ULV_COVERS.isModLoaded()) {
+            ASSEMBLER_RECIPES.recipeBuilder()
+                    .input(frameGt, getMaterialByTier(ULV))
+                    .input(plateDense, getMaterialByTier(ULV), 4)
+                    .input(ULVCoverMetaItems.ROBOT_ARM_ULV, 4)
+                    .input(ULVCoverMetaItems.ELECTRIC_PISTON_ULV, 8)
+                    .input(ULVCoverMetaItems.ELECTRIC_MOTOR_ULV, 10)
+                    .input(gear, getMaterialByTier(ULV), 4)
+                    .input(cableGtQuadruple, getCableByTier(ULV), 6)
+                    .input(circuit, getMarkerMaterialByTier(LV), 8)
+                    .input(circuit, getMarkerMaterialByTier(ULV), 16)
+                    .fluidInputs(SolderingAlloy.getFluid(L))
+                    .outputs(ZBGTMetaBlocks.CoAL_CASING.getItemVariant(CoALCasing.CasingType.getCasingByTier(ULV)))
+                    .EUt(VA[ULV]).duration(150)
+                    .buildAndRegister();
+        }
+
         for (int tier = LV; tier <= IV; tier++) {
             ASSEMBLER_RECIPES.recipeBuilder()
                     .input(frameGt, getMaterialByTier(tier))
@@ -98,6 +120,24 @@ public class CasingRecipes {
                             .CWUt((int) Math.pow(16, finalTier - IV))
                             .EUt(VA[finalTier]))
                     .EUt(VA[tier]).duration(20 * 15)
+                    .buildAndRegister();
+        }
+    }
+
+    private static void preciseCasings() {
+        for (int tier = EV; tier < UHV; tier++) {
+            ASSEMBLER_RECIPES.recipeBuilder()
+                    .inputs(getMachineCasingByTier(tier))
+                    .input(getRobotArmByTier(tier), 2)
+                    .input(cableGtDouble, getCableByTier(tier), 2)
+                    .input(plateDouble, getMaterialByTier(tier), 2)
+                    .input(circuit, getMarkerMaterialByTier(tier))
+                    .input(bolt, getSecondaryComponentMaterialByTier(tier), 32)
+                    .input(gearSmall, getSecondaryComponentMaterialByTier(tier), 8)
+                    .fluidInputs(SolderingAlloy.getFluid(L * 4 * tier))
+                    .circuitMeta(18)
+                    .outputs(getPreciseCasingByTier(tier - EV))
+                    .EUt(VA[tier]).duration(20 * 8 * (tier - HV))
                     .buildAndRegister();
         }
     }
