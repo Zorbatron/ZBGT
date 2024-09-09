@@ -27,7 +27,7 @@ import gregtech.common.ConfigHolder;
 
 public class CasingRecipes {
 
-    public static void init() {
+    protected static void init() {
         ZBGTBlockMultiblockCasings();
         coALCasings();
         preciseCasings();

@@ -19,7 +19,7 @@ import gregtech.common.metatileentities.MetaTileEntities;
 
 public class MultiblockRecipes {
 
-    public static void init() {
+    protected static void init() {
         assemblerRecipes();
         assemblyLineRecipes();
     }

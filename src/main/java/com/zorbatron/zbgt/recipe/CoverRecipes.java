@@ -12,7 +12,7 @@ import gregtech.api.unification.ore.OrePrefix;
 
 public class CoverRecipes {
 
-    public static void init() {
+    protected static void init() {
         dualCovers();
         preciseDualCovers();
     }

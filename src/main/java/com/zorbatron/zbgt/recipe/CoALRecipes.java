@@ -17,7 +17,7 @@ import gregtech.api.recipes.RecipeBuilder;
 
 public class CoALRecipes {
 
-    public static void init() {
+    protected static void init() {
         if (ZBGTMods.ULV_COVERS.isModLoaded()) {
             ulv();
         }

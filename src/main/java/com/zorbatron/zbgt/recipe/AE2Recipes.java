@@ -12,7 +12,7 @@ import gregtech.api.recipes.RecipeMaps;
 
 public class AE2Recipes {
 
-    public static void init() {
+    protected static void init() {
         final IMaterials ae2Materials = AEApi.instance().definitions().materials();
 
         RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder()
