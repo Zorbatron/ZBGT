@@ -152,6 +152,7 @@ tile.multiblock_casing.precise_3.name.short=MK-III
 tile.multiblock_casing.precise_4.name.short=MK-IV
 
 tile.multiblock_casing.iridium.name=Advanced Iridium Plated Machine Casing
+zbgt.multiblock.pattern.precise_tier=§cAll casings must be the same tier§r
 
 tile.coal_casing.ulv.name=Component Assembly Line Casing (ULV)
 tile.coal_casing.lv.name=Component Assembly Line Casing (LV)
@@ -168,6 +169,7 @@ tile.coal_casing.uiv.name=Component Assembly Line Casing (UIV)
 tile.coal_casing.uxv.name=Component Assembly Line Casing (UXV)
 tile.coal_casing.opv.name=Component Assembly Line Casing (OpV)
 tile.coal_casing.max.name=Component Assembly Line Casing (MAX)
+zbgt.multiblock.pattern.coal_tier=§cAll casings must be the same tier§r
 
 zbgt.multiblock.pattern.error.casings=§cAll casings must be the same tier§r
 

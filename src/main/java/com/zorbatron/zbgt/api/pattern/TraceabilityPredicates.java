@@ -48,7 +48,7 @@ public class TraceabilityPredicates {
                     .sorted(Comparator.comparingInt(entry -> entry.getValue().ordinal()))
                     .map(entry -> new BlockInfo(entry.getKey(), null))
                     .toArray(BlockInfo[]::new))
-                            .addTooltips("zbgt.multiblock.pattern.error.casings");
+                            .addTooltips("zbgt.multiblock.pattern.coal_tier");
 
     public static TraceabilityPredicate coALCasings() {
         return CoAL_PREDICATE.get();
@@ -77,7 +77,8 @@ public class TraceabilityPredicates {
             }, () -> ZBGTAPI.PRECISE_CASINGS.entrySet().stream()
                     .sorted(Comparator.comparingInt(entry -> entry.getValue().ordinal()))
                     .map(entry -> new BlockInfo(entry.getKey(), null))
-                    .toArray(BlockInfo[]::new)).addTooltips("zbgt.multiblock.pattern.error.casings");
+                    .toArray(BlockInfo[]::new))
+                            .addTooltips("zbgt.multiblock.pattern.precise_tier");
 
     public static TraceabilityPredicate preciseCasings() {
         return PRECISE_PREDICATE.get();
