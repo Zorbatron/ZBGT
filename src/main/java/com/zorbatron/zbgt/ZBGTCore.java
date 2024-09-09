@@ -1,7 +1,6 @@
 package com.zorbatron.zbgt;
 
-import static com.zorbatron.zbgt.api.ZBGTAPI.CoAL_CASINGS;
-import static com.zorbatron.zbgt.api.ZBGTAPI.PRECISE_CASINGS;
+import static com.zorbatron.zbgt.api.ZBGTAPI.*;
 import static com.zorbatron.zbgt.common.block.ZBGTMetaBlocks.CoAL_CASING;
 import static com.zorbatron.zbgt.common.block.ZBGTMetaBlocks.PRECISE_CASING;
 
@@ -19,6 +18,8 @@ import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
 import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
 
 import gregtech.GTInternalTags;
+import gregtech.common.blocks.BlockMachineCasing;
+import gregtech.common.blocks.MetaBlocks;
 
 @Mod(modid = ZBGTCore.MODID,
      version = ZBGTCore.VERSION,
@@ -54,6 +55,10 @@ public class ZBGTCore {
 
         for (PreciseCasing.CasingType type : PreciseCasing.CasingType.values()) {
             PRECISE_CASINGS.put(PRECISE_CASING.getState(type), type);
+        }
+
+        for (BlockMachineCasing.MachineCasingType type : BlockMachineCasing.MachineCasingType.values()) {
+            MACHINE_CASINGS.put(MetaBlocks.MACHINE_CASING.getState(type), type);
         }
 
         proxy.preInit();

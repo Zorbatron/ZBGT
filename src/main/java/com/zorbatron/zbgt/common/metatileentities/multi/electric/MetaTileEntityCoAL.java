@@ -21,12 +21,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.zorbatron.zbgt.api.block.ICoALTier;
 import com.zorbatron.zbgt.api.metatileentity.LaserCapableRecipeMapMultiblockController;
-import com.zorbatron.zbgt.api.recipes.ITier;
 import com.zorbatron.zbgt.api.recipes.properties.CoALProperty;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
+import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
 import com.zorbatron.zbgt.common.block.blocks.ZBGTBlockMultiblockCasing;
 
 import gregtech.api.GTValues;
@@ -50,7 +49,7 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.common.blocks.*;
 
 public class MetaTileEntityCoAL extends LaserCapableRecipeMapMultiblockController
-                                implements ITier, IOpticalComputationReceiver {
+                                implements IOpticalComputationReceiver {
 
     private IOpticalComputationProvider computationProvider;
     private int tier;
@@ -187,13 +186,13 @@ public class MetaTileEntityCoAL extends LaserCapableRecipeMapMultiblockControlle
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object type = context.get("CoALTier");
-        if (type instanceof ICoALTier) {
-            this.tier = ((ICoALTier) type).getTier() + 1;
+        if (type instanceof CoALCasing.CasingType coalTier) {
+            this.tier = coalTier.ordinal();
         } else
-            this.tier = 0;
+            this.tier = -1;
 
         List<IOpticalComputationHatch> providers = getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION);
-        if (providers != null && providers.size() >= 1) {
+        if (providers != null && !providers.isEmpty()) {
             computationProvider = providers.get(0);
         }
 
@@ -213,7 +212,6 @@ public class MetaTileEntityCoAL extends LaserCapableRecipeMapMultiblockControlle
         this.tier = 0;
     }
 
-    @Override
     public int getTier() {
         return this.tier;
     }
@@ -274,8 +272,7 @@ public class MetaTileEntityCoAL extends LaserCapableRecipeMapMultiblockControlle
 
         @Override
         public boolean checkRecipe(@NotNull Recipe recipe) {
-            if (!super.checkRecipe(recipe))
-                return false;
+            if (!super.checkRecipe(recipe)) return false;
 
             return recipe.getProperty(CoALProperty.getInstance(), 0) <= tier;
         }

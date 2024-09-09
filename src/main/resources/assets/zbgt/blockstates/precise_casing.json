@@ -8,6 +8,11 @@
   },
   "variants": {
     "variant": {
+      "precise_0": {
+        "textures": {
+          "all": "gregtech:blocks/casings/multiblocks/precise_0"
+        }
+      },
       "precise_1": {
         "textures": {
           "all": "gregtech:blocks/casings/multiblocks/precise_1"
@@ -21,6 +26,11 @@
       "precise_3": {
         "textures": {
           "all": "gregtech:blocks/casings/multiblocks/precise_3"
+        }
+      },
+      "precise_4": {
+        "textures": {
+          "all": "gregtech:blocks/casings/multiblocks/precise_4"
         }
       }
     }
