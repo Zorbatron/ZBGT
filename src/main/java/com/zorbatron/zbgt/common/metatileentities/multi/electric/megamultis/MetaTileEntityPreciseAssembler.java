@@ -21,6 +21,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.metatileentity.LaserCapableMultiMapMultiblockController;
@@ -52,7 +53,6 @@ import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
-import org.jetbrains.annotations.Nullable;
 
 public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblockController {
 
@@ -269,6 +269,12 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+
+        tooltip.add(I18n.format("zbgt.machine.precise_assembler.tooltip.1"));
+        tooltip.add(I18n.format("zbgt.machine.precise_assembler.tooltip.2"));
+        tooltip.add(I18n.format("zbgt.machine.precise_assembler.tooltip.3"));
+        tooltip.add(I18n.format("zbgt.machine.precise_assembler.tooltip.4"));
+        tooltip.add(I18n.format("zbgt.machine.precise_assembler.tooltip.5"));
     }
 
     protected class PreciseAssemblerRecipeLogic extends MultiblockRecipeLogic {
