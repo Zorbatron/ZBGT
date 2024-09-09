@@ -9,8 +9,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -26,6 +28,7 @@ import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
+import gregtech.api.capability.IDataStickIntractable;
 import gregtech.api.capability.impl.FilteredItemHandler;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.gui.GuiTextures;
@@ -39,7 +42,7 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
 public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNotifiablePart implements
-                                              IMultiblockAbilityPart<IFluidTank> {
+                                              IMultiblockAbilityPart<IFluidTank>, IDataStickIntractable {
 
     private final InfiniteFluidTank fluidTank;
 
@@ -165,5 +168,36 @@ public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNo
         this.fluidTank.readFromNBT(data);
 
         super.readFromNBT(data);
+    }
+
+    @Override
+    public void onDataStickLeftClick(EntityPlayer player, ItemStack dataStick) {
+        NBTTagCompound tag = new NBTTagCompound();
+        tag.setTag("CreativeFluidHatch", writeConfigToTag());
+        dataStick.setTagCompound(tag);
+        dataStick.setTranslatableName("zbgt.machine.creative_reservoir_hatch.data_stick.name");
+        player.sendStatusMessage(new TextComponentTranslation("gregtech.machine.me.import_copy_settings"), true);
+    }
+
+    private NBTTagCompound writeConfigToTag() {
+        NBTTagCompound tag = new NBTTagCompound();
+
+        return fluidTank.writeToNBT(tag);
+    }
+
+    @Override
+    public boolean onDataStickRightClick(EntityPlayer player, ItemStack dataStick) {
+        NBTTagCompound tag = dataStick.getTagCompound();
+
+        if (tag == null || !tag.hasKey("CreativeFluidHatch")) return false;
+
+        readConfigFromTag(tag.getCompoundTag("CreativeFluidHatch"));
+        player.sendStatusMessage(new TextComponentTranslation("gregtech.machine.me.import_paste_settings"), true);
+
+        return true;
+    }
+
+    private void readConfigFromTag(NBTTagCompound tag) {
+        fluidTank.setFluid(FluidStack.loadFluidStackFromNBT(tag));
     }
 }

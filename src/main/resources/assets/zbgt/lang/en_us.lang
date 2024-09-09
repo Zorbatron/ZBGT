@@ -1,6 +1,7 @@
 # Multiblock parts
 zbgt.machine.creative_energy_source.name=Creative Energy Source
 zbgt.machine.creative_energy_source.tooltip=Infinite Energy Source for Multiblocks
+zbgt.machine.creative_energy_source.data_stick.name=§oCreative Energy Source Configuration Data
 
 zbgt.machine.creative_energy_sink.name=Creative Energy Sink
 zbgt.machine.creative_energy_sink.tooltip=Infinite Energy Sink for Multiblocks
@@ -10,6 +11,7 @@ zbgt.machine.creative_energy.warning.1=Changing settings requires the multiblock
 
 zbgt.machine.creative_reservoir_hatch.name=Creative Fluid Hatch
 zbgt.machine.creative_reservoir_hatch.tooltip=Infinite fluid source for multiblocks
+zbgt.machine.creative_reservoir_hatch.data_stick.name=§oCreative Fluid Hatch Configuration Data
 
 zbgt.machine.creative_computation_provider.name=Creative Computation Provider
 zbgt.machine.creative_computation_provider.tooltip=Infinite source of computation for CWU consumers
