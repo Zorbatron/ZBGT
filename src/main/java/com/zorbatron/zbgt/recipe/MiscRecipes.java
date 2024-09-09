@@ -46,6 +46,7 @@ public class MiscRecipes {
         COMPRESSOR_RECIPES.recipeBuilder()
                 .fluidInputs(Water.getFluid(Integer.MAX_VALUE))
                 .fluidOutputs(Neutronium.getFluid(1))
+                .circuitMeta(1)
                 .EUt(Integer.MAX_VALUE).duration(Integer.MAX_VALUE)
                 .buildAndRegister();
     }

@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
@@ -20,21 +21,26 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
-import com.zorbatron.zbgt.api.metatileentity.LaserCapableMultiShapeGCYMMultiblockController;
+import com.zorbatron.zbgt.api.metatileentity.LaserCapableMultiMapMultiblockController;
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
+import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
+import com.zorbatron.zbgt.api.recipes.properties.PreciseAssemblerProperty;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
 
-import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
 import gregtech.api.GTValues;
+import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
+import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.*;
+import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
@@ -45,14 +51,15 @@ import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 
-public class MetaTileEntityPreciseAssembler extends LaserCapableMultiShapeGCYMMultiblockController {
+public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblockController {
 
     private int preciseCasingTier = -1;
     private int machineCasingTier = -1;
 
     public MetaTileEntityPreciseAssembler(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new gregtech.api.recipes.RecipeMap[] { RecipeMaps.ASSEMBLER_RECIPES });
-        this.recipeMapWorkable = new GCYMMultiblockRecipeLogic(this);
+        super(metaTileEntityId, new gregtech.api.recipes.RecipeMap[] { RecipeMaps.ASSEMBLER_RECIPES,
+                ZBGTRecipeMaps.PRECISE_ASSEMBLER_RECIPES });
+        this.recipeMapWorkable = new PreciseAssemblerRecipeLogic(this);
     }
 
     @Override
@@ -61,7 +68,7 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiShapeGCYMMu
     }
 
     @Override
-    protected @NotNull BlockPattern getStructurePattern(int index) {
+    protected @NotNull BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
                 .aisle("XXXXXXXXX", "F#######F", "F#######F", "F#######F", "XXXXXXXXX")
                 .aisle("XHHHHHHHX", "XGGGGGGGX", "XGGGGGGGX", "XGGGGGGGX", "XXXXXXXXX")
@@ -112,21 +119,51 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiShapeGCYMMu
                 .setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
                 .addEnergyUsageLine(getEnergyContainer())
                 .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
+                .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addCustom(tl -> {
                     if (isStructureFormed()) {
-                        if (getPreciseCasingTier() == -1) {
-                            tl.add(TextComponentUtil.translationWithColor(
+                        int preciseCasingTier = getPreciseCasingTier();
+                        ITextComponent preciseCasingText;
+
+                        if (preciseCasingTier == -1) {
+                            preciseCasingText = TextComponentUtil.translationWithColor(
                                     TextFormatting.GRAY,
-                                    "zbgt.machine.precise_assembler.preciseCasingTier.error"));
+                                    "zbgt.machine.precise_assembler.precise_casing.tier.error");
                         } else {
-                            tl.add(TextComponentUtil.translationWithColor(
+                            preciseCasingText = TextComponentUtil.translationWithColor(
                                     TextFormatting.GRAY,
-                                    "zbgt.machine.precise_assembler.preciseCasingTier",
-                                    getPreciseCasingTier()));
+                                    "zbgt.machine.precise_assembler.precise_casing.tier",
+                                    I18n.format(PreciseCasing.CasingType
+                                            .getUntranslatedShortNameByTier(preciseCasingTier)));
                         }
+
+                        ITextComponent preciseCasingHoverText = TextComponentUtil.translationWithColor(
+                                TextFormatting.GRAY,
+                                "zbgt.machine.precise_assembler.precise_casing.tier.hover");
+
+                        tl.add(TextComponentUtil.setHover(preciseCasingText, preciseCasingHoverText));
+
+                        int machineCasingTier = getMachineCasingTier();
+                        ITextComponent machineCasingText;
+
+                        if (machineCasingTier == -1) {
+                            machineCasingText = TextComponentUtil.translationWithColor(
+                                    TextFormatting.GRAY,
+                                    "zbgt.machine.precise_assembler.machine_casing.tier.error");
+                        } else {
+                            machineCasingText = TextComponentUtil.translationWithColor(
+                                    TextFormatting.GRAY,
+                                    "zbgt.machine.precise_assembler.machine_casing.tier",
+                                    GTValues.VNF[machineCasingTier]);
+                        }
+
+                        ITextComponent machineCasingHoverText = TextComponentUtil.translationWithColor(
+                                TextFormatting.GRAY,
+                                "zbgt.machine.precise_assembler.machine_casing.tier.hover");
+
+                        tl.add(TextComponentUtil.setHover(machineCasingText, machineCasingHoverText));
                     }
                 })
-                .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()
                 .addProgressLine(recipeMapWorkable.getProgressPercent());
     }
@@ -184,11 +221,16 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiShapeGCYMMu
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
-        this.preciseCasingTier = 0;
+        this.preciseCasingTier = -1;
+        this.machineCasingTier = -1;
     }
 
     public int getPreciseCasingTier() {
         return this.preciseCasingTier;
+    }
+
+    public int getMachineCasingTier() {
+        return this.machineCasingTier;
     }
 
     @Override
@@ -213,5 +255,42 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiShapeGCYMMu
         super.receiveInitialSyncData(buf);
         this.preciseCasingTier = buf.readInt();
         this.machineCasingTier = buf.readInt();
+    }
+
+    protected class PreciseAssemblerRecipeLogic extends MultiblockRecipeLogic {
+
+        public PreciseAssemblerRecipeLogic(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        @Override
+        protected void modifyOverclockPre(int @NotNull [] values, @NotNull IRecipePropertyStorage storage) {
+            if (getRecipeMapIndex() == 0) {
+                values[1] = (int) (values[1] * 0.5);
+            }
+
+            super.modifyOverclockPre(values, storage);
+        }
+
+        @Override
+        public int getParallelLimit() {
+            return (int) (16 * Math.pow(2, getPreciseCasingTier()));
+        }
+
+        @Override
+        public boolean checkRecipe(@NotNull Recipe recipe) {
+            if (!super.checkRecipe(recipe)) return false;
+
+            boolean meetsPreciseTier = recipe.getProperty(PreciseAssemblerProperty.getInstance(), 0) <=
+                    getPreciseCasingTier();
+            boolean meetsCasingTier = Math.min(GTUtility.getTierByVoltage(recipe.getEUt()), GTValues.UHV) <=
+                    getMachineCasingTier();
+
+            if (getRecipeMapIndex() == 1) {
+                return meetsCasingTier && meetsPreciseTier;
+            } else {
+                return meetsCasingTier;
+            }
+        }
     }
 }

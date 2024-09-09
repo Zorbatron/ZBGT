@@ -14,7 +14,7 @@ public class ZBGTTextures {
     public static TextureArea ITEM_FLUID_OVERLAY;
     public static TextureArea AUTO_PULL;
 
-    public static final TextureArea PROGRESS_BAR_COMPONENT_AL = TextureArea
+    public static final TextureArea PROGRESS_BAR_CoAL = TextureArea
             .fullImage("textures/gui/progress_bar/progress_bar_component_al.png");
 
     // Multiblock controller overlays

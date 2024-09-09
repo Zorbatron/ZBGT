@@ -59,5 +59,13 @@ public class PreciseCasing extends VariantBlock<PreciseCasing.CasingType> {
                 default -> PRECISE_CASING_4;
             };
         }
+
+        public static String getUntranslatedNameByTier(int tier) {
+            return "tile.multiblock_casing." + getCasingByTier(tier).getName() + ".name";
+        }
+
+        public static String getUntranslatedShortNameByTier(int tier) {
+            return "tile.multiblock_casing." + getCasingByTier(tier).getName() + ".name.short";
+        }
     }
 }

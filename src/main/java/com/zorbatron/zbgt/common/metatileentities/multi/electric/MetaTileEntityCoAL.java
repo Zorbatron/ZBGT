@@ -272,8 +272,7 @@ public class MetaTileEntityCoAL extends LaserCapableRecipeMapMultiblockControlle
 
         @Override
         public boolean checkRecipe(@NotNull Recipe recipe) {
-            if (!super.checkRecipe(recipe))
-                return false;
+            if (!super.checkRecipe(recipe)) return false;
 
             return recipe.getProperty(CoALProperty.getInstance(), 0) <= tier;
         }
