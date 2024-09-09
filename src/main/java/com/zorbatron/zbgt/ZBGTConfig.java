@@ -17,14 +17,20 @@ public class ZBGTConfig {
         public boolean allowSubstationHatches = false;
     }
 
-    public static MiscSettings miscSettings = new MiscSettings();
+    public static RecipeSettings recipeSettings = new RecipeSettings();
 
-    public static class MiscSettings {
+    public static class RecipeSettings {
 
         @Config.Comment({ "How silly are you?",
                 "Default: true" })
         @Config.RequiresMcRestart
         @Config.Name("sillyRecipes")
         public boolean enableSillyRecipes = true;
+
+        @Config.Comment({ "Enable recipes for the large parallel hatches.",
+                "Default: true" })
+        @Config.RequiresMcRestart
+        @Config.Name("sillyRecipes")
+        public boolean enableParallelHatchRecipes = true;
     }
 }

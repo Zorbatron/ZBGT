@@ -9,9 +9,10 @@ import com.zorbatron.zbgt.ZBGTConfig;
 
 public class MiscRecipes {
 
-    public static void init() {
+    protected static void init() {
         magneticFluids();
-        if (ZBGTConfig.miscSettings.enableSillyRecipes) {
+
+        if (ZBGTConfig.recipeSettings.enableSillyRecipes) {
             sillyRecipes();
         }
     }
