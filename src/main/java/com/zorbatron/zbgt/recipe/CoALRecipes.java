@@ -124,13 +124,7 @@ public class CoALRecipes {
                         getCoALLowTierRecipe(tier, type)
                                 .input(tier == MV ? gemFlawless : gem, getLowEmitterSensorStarMaterial(tier), 48)
                                 .buildAndRegister();
-                        getCoALLowTierRecipe(tier, type)
-                                .input(tier == MV ? gemFlawless : gem, getLowEmitterSensorStarMaterial(tier), 48)
-                                .buildAndRegister();
                     } else {
-                        getCoALLowTierRecipe(tier, type)
-                                .input(getStarByTier(tier), 48)
-                                .buildAndRegister();
                         getCoALLowTierRecipe(tier, type)
                                 .input(getStarByTier(tier), 48)
                                 .buildAndRegister();
