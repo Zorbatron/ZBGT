@@ -297,8 +297,8 @@ public class CoALRecipes {
                     .input(frameGt, tier == ZPM ? NaquadahAlloy : getMainComponentMaterialByTier(tier), 48)
                     .input(circuit, getMarkerMaterialByTier(tier), 96)
                     .fluidInputs(SolderingAlloy.getFluid((int) (48 * L * Math.pow(2, tier - LuV))))
-                    .fluidInputs(getSensorEmitterFoil(tier).getFluid(L * 48 * 24))
-                    .fluidInputs(getSensorEmitterPlateRod(tier).getFluid(L * 48 * 4))
+                    .fluidInputs(getSensorEmitterFoilByTier(tier).getFluid(L * 48 * 24))
+                    .fluidInputs(getSensorEmitterPlateRodByTier(tier).getFluid(L * 48 * 4))
                     .fluidInputs(tier > ZPM ? Naquadria.getFluid(L * 4 * 48) : null);
 
             case SENSOR -> builder
@@ -309,8 +309,8 @@ public class CoALRecipes {
                     .input(frameGt, tier == ZPM ? NaquadahAlloy : getMainComponentMaterialByTier(tier), 48)
                     .input(circuit, getMarkerMaterialByTier(tier), 96)
                     .fluidInputs(SolderingAlloy.getFluid((int) (48 * L * Math.pow(2, tier - LuV))))
-                    .fluidInputs(getSensorEmitterFoil(tier).getFluid(L * 48 * 24))
-                    .fluidInputs(getSensorEmitterPlateRod(tier).getFluid(L * 48 * 4))
+                    .fluidInputs(getSensorEmitterFoilByTier(tier).getFluid(L * 48 * 24))
+                    .fluidInputs(getSensorEmitterPlateRodByTier(tier).getFluid(L * 48 * 4))
                     .fluidInputs(tier > ZPM ? Naquadria.getFluid(L * 4 * 48) : null);
 
             case FIELD_GEN -> builder

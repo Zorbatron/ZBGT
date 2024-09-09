@@ -29,7 +29,8 @@ public class CasingRecipes {
 
     public static void init() {
         ZBGTBlockMultiblockCasings();
-        CoALCasings();
+        coALCasings();
+        preciseCasings();
     }
 
     private static void ZBGTBlockMultiblockCasings() {
@@ -48,15 +49,16 @@ public class CasingRecipes {
                 'P', OreDictUnifier.get(plate, inputMaterial),
                 'F', OreDictUnifier.get(frameGt, inputMaterial));
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(16)
+        ASSEMBLER_RECIPES.recipeBuilder()
                 .input(plate, inputMaterial, 6)
                 .input(frameGt, inputMaterial)
                 .circuitMeta(6)
                 .outputs(outputCasingType.getItemVariant(outputCasing, ConfigHolder.recipes.casingsPerCraft))
+                .EUt(16).duration(50)
                 .buildAndRegister();
     }
 
-    private static void CoALCasings() {
+    private static void coALCasings() {
         if (ZBGTMods.ULV_COVERS.isModLoaded()) {
             ASSEMBLER_RECIPES.recipeBuilder()
                     .input(frameGt, getMaterialByTier(ULV))
@@ -118,6 +120,24 @@ public class CasingRecipes {
                             .CWUt((int) Math.pow(16, finalTier - IV))
                             .EUt(VA[finalTier]))
                     .EUt(VA[tier]).duration(20 * 15)
+                    .buildAndRegister();
+        }
+    }
+
+    private static void preciseCasings() {
+        for (int tier = EV; tier < UHV; tier++) {
+            ASSEMBLER_RECIPES.recipeBuilder()
+                    .inputs(getMachineCasingByTier(tier))
+                    .input(getRobotArmByTier(tier), 2)
+                    .input(cableGtDouble, getCableByTier(tier), 2)
+                    .input(plateDouble, getMaterialByTier(tier), 2)
+                    .input(circuit, getMarkerMaterialByTier(tier))
+                    .input(bolt, getSecondaryComponentMaterialByTier(tier), 32)
+                    .input(gearSmall, getSecondaryComponentMaterialByTier(tier), 8)
+                    .fluidInputs(SolderingAlloy.getFluid(L * 4 * tier))
+                    .circuitMeta(18)
+                    .outputs(getPreciseCasingByTier(tier - EV))
+                    .EUt(VA[tier]).duration(20 * 8 * (tier - HV))
                     .buildAndRegister();
         }
     }
