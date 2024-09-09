@@ -73,7 +73,7 @@ public class RecipeAssists {
             case (LuV) -> Ruridit;
             case (ZPM) -> Europium;
             case (UV)  -> Americium;
-            default    -> Lead;
+            default    -> Tin;
         };
     }
 

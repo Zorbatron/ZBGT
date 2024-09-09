@@ -4,7 +4,8 @@ import net.minecraftforge.fml.common.Loader;
 
 public enum ZBGTMods {
 
-    GCYM(Names.GCYM);
+    GCYM(Names.GCYM),
+    ULV_COVERS(Names.ULV_COVERS);
 
     private final String ID;
     private Boolean modLoaded;
@@ -23,5 +24,6 @@ public enum ZBGTMods {
     public static class Names {
 
         public static final String GCYM = "gcym";
+        public static final String ULV_COVERS = "ulv_covers";
     }
 }
