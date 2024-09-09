@@ -20,6 +20,7 @@ zbgt.machine.creative_computation_provider.cwut=Maximum Requestable CWU/t
 
 zbgt.machine.creative_item_bus.name=Creative Item Bus
 zbgt.machine.creative_item_bus.tooltip=Infinite item source for multiblocks
+zbgt.machine.creative_item_bus.data_stick.name=§oCreative Item Bus Configuration Data
 
 zbgt.machine.air_intake_universal.rate=Collects %,d mB of air every %,d ticks
 
