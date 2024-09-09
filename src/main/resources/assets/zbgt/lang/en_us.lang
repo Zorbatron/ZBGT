@@ -143,6 +143,7 @@ tile.multiblock_casing.precise_4.name=Precise Electronic Unit Casing MK-IV
 
 tile.multiblock_casing.iridium.name=Advanced Iridium Plated Machine Casing
 
+tile.coal_casing.ulv.name=Component Assembly Line Casing (ULV)
 tile.coal_casing.lv.name=Component Assembly Line Casing (LV)
 tile.coal_casing.mv.name=Component Assembly Line Casing (MV)
 tile.coal_casing.hv.name=Component Assembly Line Casing (HV)

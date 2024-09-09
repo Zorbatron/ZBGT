@@ -14,8 +14,6 @@ import net.minecraft.world.IBlockAccess;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.zorbatron.zbgt.api.block.ICoALTier;
-
 import gregtech.api.block.VariantBlock;
 
 public class CoALCasing extends VariantBlock<CoALCasing.CasingType> {
@@ -36,8 +34,9 @@ public class CoALCasing extends VariantBlock<CoALCasing.CasingType> {
         return false;
     }
 
-    public enum CasingType implements IStringSerializable, ICoALTier {
+    public enum CasingType implements IStringSerializable {
 
+        CASING_ULV("ulv"),
         CASING_LV("lv"),
         CASING_MV("mv"),
         CASING_HV("hv"),
@@ -63,11 +62,6 @@ public class CoALCasing extends VariantBlock<CoALCasing.CasingType> {
         @Override
         public String getName() {
             return this.name;
-        }
-
-        @Override
-        public int getTier() {
-            return this.ordinal();
         }
 
         public static CasingType getCasingByTier(int tier) {

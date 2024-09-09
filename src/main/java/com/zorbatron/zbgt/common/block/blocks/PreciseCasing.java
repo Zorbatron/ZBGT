@@ -10,8 +10,6 @@ import net.minecraft.world.IBlockAccess;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.zorbatron.zbgt.api.block.IPreciseTier;
-
 import gregtech.api.block.VariantBlock;
 
 public class PreciseCasing extends VariantBlock<PreciseCasing.CasingType> {
@@ -32,7 +30,7 @@ public class PreciseCasing extends VariantBlock<PreciseCasing.CasingType> {
         return false;
     }
 
-    public enum CasingType implements IStringSerializable, IPreciseTier {
+    public enum CasingType implements IStringSerializable {
 
         PRECISE_CASING_0("precise_0"),
         PRECISE_CASING_1("precise_1"),
@@ -52,18 +50,13 @@ public class PreciseCasing extends VariantBlock<PreciseCasing.CasingType> {
             return this.name;
         }
 
-        @Override
-        public int getTier() {
-            return this.ordinal();
-        }
-
         public static CasingType getCasingByTier(int tier) {
             return switch (tier) {
+                case (0) -> PRECISE_CASING_0;
                 case (1) -> PRECISE_CASING_1;
                 case (2) -> PRECISE_CASING_2;
                 case (3) -> PRECISE_CASING_3;
-                case (4) -> PRECISE_CASING_4;
-                default -> PRECISE_CASING_0;
+                default -> PRECISE_CASING_4;
             };
         }
     }
