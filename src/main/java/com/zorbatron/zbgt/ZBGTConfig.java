@@ -30,7 +30,7 @@ public class ZBGTConfig {
         @Config.Comment({ "Enable recipes for the large parallel hatches.",
                 "Default: true" })
         @Config.RequiresMcRestart
-        @Config.Name("sillyRecipes")
+        @Config.Name("parallelHatchRecipes")
         public boolean enableParallelHatchRecipes = true;
     }
 }
