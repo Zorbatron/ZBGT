@@ -51,10 +51,15 @@ public class CoALRecipeBuilder extends RecipeBuilder<CoALRecipeBuilder> {
 
     public CoALRecipeBuilder CasingTier(int tier) {
         if (tier < 0) {
-            ZBGTLog.logger.error("Casing tier cannot be less than 0", new IllegalArgumentException());
+            ZBGTLog.logger.error("CoAL casing tier cannot be less than 0 (ULV)!", new IllegalArgumentException());
             recipeStatus = EnumValidationResult.INVALID;
+        } else if (tier > 14) {
+            ZBGTLog.logger.error("CoAL casing tier cannot be more than 14 (MAX)!", new IllegalArgumentException());
+            this.recipeStatus = EnumValidationResult.INVALID;
         }
+
         this.applyProperty(CoALProperty.getInstance(), tier);
+
         return this;
     }
 

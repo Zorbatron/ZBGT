@@ -40,7 +40,11 @@ public class PreciseAssemblerRecipeBuilder extends RecipeBuilder<PreciseAssemble
 
     public PreciseAssemblerRecipeBuilder CasingTier(int tier) {
         if (tier < 0) {
-            ZBGTLog.logger.error("Casing tier cannot be less than 0!", new IllegalArgumentException());
+            ZBGTLog.logger.error("Precise casing tier cannot be less than 0 (Imprecise)!",
+                    new IllegalArgumentException());
+            this.recipeStatus = EnumValidationResult.INVALID;
+        } else if (tier > 4) {
+            ZBGTLog.logger.error("Precise casing tier cannot be more than 4 (Mk-IV)!", new IllegalArgumentException());
             this.recipeStatus = EnumValidationResult.INVALID;
         }
 
