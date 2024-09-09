@@ -257,6 +257,12 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
         this.machineCasingTier = buf.readInt();
     }
 
+    @Override
+    public boolean checkRecipe(@NotNull Recipe recipe, boolean consumeIfSuccess) {
+        int supposedRecipeMap = recipe.getRecipeCategory().getRecipeMap() == RecipeMaps.ASSEMBLER_RECIPES ? 0 : 1;
+        return getRecipeMapIndex() == supposedRecipeMap;
+    }
+
     protected class PreciseAssemblerRecipeLogic extends MultiblockRecipeLogic {
 
         public PreciseAssemblerRecipeLogic(RecipeMapMultiblockController tileEntity) {
