@@ -1,10 +1,14 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.electric;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
@@ -18,7 +22,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
+import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
+
 import gregtech.api.GTValues;
+import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -29,6 +37,7 @@ import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
@@ -41,6 +50,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 
 public class MetaTileEntityQuadEBF extends RecipeMapMultiblockController implements IHeatingCoil {
@@ -68,7 +78,8 @@ public class MetaTileEntityQuadEBF extends RecipeMapMultiblockController impleme
                 .where('S', selfPredicate())
                 .where('C', heatingCoils())
                 .where('X', states(getCasingState())
-                        .or(autoAbilities(true, true, true, true, true, true, false)))
+                        .or(autoAbilities(false, true, true, true, true, true, false))
+                        .or(TraceabilityPredicates.autoEnergyInputs(1, 8)))
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('#', air())
                 .build();
@@ -76,6 +87,33 @@ public class MetaTileEntityQuadEBF extends RecipeMapMultiblockController impleme
 
     protected IBlockState getCasingState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF);
+    }
+
+    @Override
+    public List<MultiblockShapeInfo> getMatchingShapes() {
+        ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
+
+        MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
+                .aisle("EEXEE", "CCCCC", "CCCCC", "EEXEE")
+                .aisle("XXXXX", "C#C#C", "C#C#C", "XMXMX")
+                .aisle("XXXXX", "CCCCC", "CCCCC", "XXFXX")
+                .aisle("XXXXX", "C#C#C", "C#C#C", "XMXMX")
+                .aisle("XISOX", "CCCCC", "CCCCC", "XXZXX")
+                .where('S', ZBGTMetaTileEntities.QUAD_EBF, EnumFacing.SOUTH)
+                .where('X', getCasingState())
+                .where('Z', TraceabilityPredicates.getMaintenanceHatchMTE(), EnumFacing.SOUTH)
+                .where('M', MetaTileEntities.MUFFLER_HATCH[GTValues.LV], EnumFacing.UP)
+                .where('I', MetaTileEntities.ITEM_IMPORT_BUS[1], EnumFacing.SOUTH)
+                .where('O', MetaTileEntities.ITEM_EXPORT_BUS[1], EnumFacing.SOUTH)
+                .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[1], EnumFacing.NORTH)
+                .where('F', MetaTileEntities.FLUID_IMPORT_HATCH[1], EnumFacing.UP)
+                .where('#', Blocks.AIR.getDefaultState());
+
+        GregTechAPI.HEATING_COILS.entrySet().stream()
+                .sorted(Comparator.comparingInt(entry -> entry.getValue().getTier()))
+                .forEach(entry -> shapeInfo.add(builder.where('C', entry.getKey()).build()));
+
+        return shapeInfo;
     }
 
     @Override

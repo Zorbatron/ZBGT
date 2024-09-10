@@ -1,10 +1,13 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
@@ -20,9 +23,13 @@ import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.capability.impl.HeatingCoilGCYMMultiblockRecipeLogic;
 import com.zorbatron.zbgt.api.metatileentity.LaserCapableGCYMRecipeMapMultiblockController;
+import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
+import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
 
+import gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities;
 import gregtech.api.GTValues;
+import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -32,6 +39,7 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
@@ -45,6 +53,7 @@ import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 
 public class MetaTileEntityMegaEBF extends LaserCapableGCYMRecipeMapMultiblockController implements IHeatingCoil {
@@ -141,6 +150,88 @@ public class MetaTileEntityMegaEBF extends LaserCapableGCYMRecipeMapMultiblockCo
 
     protected IBlockState getGlassState() {
         return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS);
+    }
+
+    @Override
+    public List<MultiblockShapeInfo> getMatchingShapes() {
+        ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
+
+        MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
+                .aisle("EEEEXXXXXXXEEEE", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG",
+                        "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG",
+                        "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG",
+                        "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG",
+                        "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG",
+                        "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG",
+                        "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXMXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
+                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG",
+                        "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG",
+                        "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG",
+                        "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXIPOXXXXXX", "GGGGGGGGGGGGGGG", "GGGGGGGSGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG",
+                        "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG",
+                        "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG",
+                        "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "XXXXXXXZXXXXXXX")
+                .where('S', ZBGTMetaTileEntities.MEGA_EBF, EnumFacing.SOUTH)
+                .where('X', getCasingState())
+                .where('G', getGlassState())
+                .where('M', MetaTileEntities.MUFFLER_HATCH[1], EnumFacing.UP)
+                .where('Z', TraceabilityPredicates.getMaintenanceHatchMTE(), EnumFacing.SOUTH)
+                .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[1], EnumFacing.NORTH)
+                .where('I', MetaTileEntities.ITEM_IMPORT_BUS[1], EnumFacing.SOUTH)
+                .where('O', MetaTileEntities.ITEM_EXPORT_BUS[1], EnumFacing.SOUTH)
+                .where('P', GCYMMetaTileEntities.PARALLEL_HATCH[0], EnumFacing.SOUTH);
+
+        GregTechAPI.HEATING_COILS.entrySet().stream()
+                .sorted(Comparator.comparingInt(entry -> entry.getValue().getTier()))
+                .forEach(entry -> shapeInfo.add(builder.where('C', entry.getKey()).build()));
+
+        return shapeInfo;
     }
 
     @Override

@@ -101,7 +101,8 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
                 .where('G', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS))
                 .where('F', MetaBlocks.FRAMES.get(Materials.TungstenSteel).getBlock(Materials.TungstenSteel))
                 .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.LV], EnumFacing.SOUTH)
-                .where('M', MetaTileEntities.MAINTENANCE_HATCH, EnumFacing.SOUTH)
+                .where('M', TraceabilityPredicates.getMaintenanceHatchMTE(),
+                        EnumFacing.SOUTH)
                 .where('#', Blocks.AIR.getDefaultState());
 
         ZBGTAPI.MACHINE_CASINGS.entrySet().stream()
