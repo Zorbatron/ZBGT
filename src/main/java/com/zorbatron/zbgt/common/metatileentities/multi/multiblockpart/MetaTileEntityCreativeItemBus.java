@@ -16,6 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.ZBGTUtility;
 import com.zorbatron.zbgt.api.capability.impl.InfiniteItemStackHandler;
+import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.client.widgets.PhantomSlotNoTextWidget;
 
 import codechicken.lib.render.CCRenderState;
@@ -101,7 +102,7 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
 
         if (shouldRenderOverlay()) {
             Textures.ITEM_HATCH_INPUT_OVERLAY.renderSided(getFrontFacing(), renderState, translation, pipeline);
-            Textures.CREATIVE_CONTAINER_OVERLAY.renderSided(getFrontFacing(), renderState, translation, pipeline);
+            ZBGTTextures.SWIRLY_INFINITY.renderSided(getFrontFacing(), renderState, translation, pipeline);
         }
     }
 

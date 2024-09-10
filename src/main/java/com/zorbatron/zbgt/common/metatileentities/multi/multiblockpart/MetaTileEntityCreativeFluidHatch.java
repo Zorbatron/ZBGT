@@ -38,6 +38,7 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
@@ -113,7 +114,8 @@ public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNo
                                      IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
         if (shouldRenderOverlay()) {
-            ZBGTTextures.WATER_OVERLAY_INFINITY.renderSided(getFrontFacing(), renderState, translation, pipeline);
+            Textures.FLUID_HATCH_INPUT_OVERLAY.renderSided(getFrontFacing(), renderState, translation, pipeline);
+            ZBGTTextures.SWIRLY_INFINITY.renderSided(getFrontFacing(), renderState, translation, pipeline);
         }
     }
 
