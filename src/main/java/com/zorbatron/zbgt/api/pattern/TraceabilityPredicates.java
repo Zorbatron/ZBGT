@@ -20,7 +20,11 @@ import gregtech.api.pattern.PatternStringError;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.BlockInfo;
+import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMachineCasing;
+import gregtech.common.blocks.BlockMetalCasing;
+import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.MetaTileEntities;
 
 public class TraceabilityPredicates {
 
@@ -174,5 +178,10 @@ public class TraceabilityPredicates {
 
     public static TraceabilityPredicate autoEnergyInputs() {
         return autoEnergyInputs(1, 3);
+    }
+
+    public static Supplier<?> getMaintenanceHatchMTE() {
+        return () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH :
+                MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF);
     }
 }

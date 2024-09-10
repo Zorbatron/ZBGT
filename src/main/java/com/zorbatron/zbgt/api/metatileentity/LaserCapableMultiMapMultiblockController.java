@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+
+import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.ZBGTConfig;
 
@@ -14,6 +19,7 @@ import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.client.utils.TooltipHelper;
 
 public abstract class LaserCapableMultiMapMultiblockController extends MultiMapMultiblockController {
 
@@ -78,5 +84,13 @@ public abstract class LaserCapableMultiMapMultiblockController extends MultiMapM
 
     public TraceabilityPredicate autoEnergyInputs() {
         return autoEnergyInputs(1, 3);
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(I18n.format(I18n.format("zbgt.laser_enabled.1") +
+                TooltipHelper.RAINBOW + I18n.format("zbgt.laser_enabled.2")) +
+                (allowsSubstationHatches() ? I18n.format("zbgt.substation_enabled") : ""));
     }
 }
