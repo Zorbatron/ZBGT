@@ -9,6 +9,7 @@ import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
+import gregtech.api.gui.widgets.ImageWidget;
 import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
@@ -28,6 +29,9 @@ public class RecipeMapCoAL<R extends RecipeBuilder<R>> extends RecipeMap<R> {
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 176)
                 .widget(new ProgressWidget(100, 62, 0, 72, 20, ZBGTTextures.PROGRESS_BAR_CoAL,
                         ProgressWidget.MoveType.HORIZONTAL));
+
+        builder.widget(new ImageWidget(67, 12, 7, 32, ZBGTTextures.PME));
+
         this.addInventorySlotGroup(builder, importItems, importFluids, false, yOffset);
         this.addInventorySlotGroup(builder, exportItems, exportFluids, true, yOffset);
         return builder;
