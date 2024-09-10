@@ -162,4 +162,17 @@ public class TraceabilityPredicates {
 
         return predicate;
     }
+
+    public static TraceabilityPredicate autoEnergyInputs(int min, int max, int previewCount) {
+        return new TraceabilityPredicate(abilities(MultiblockAbility.INPUT_ENERGY, MultiblockAbility.INPUT_LASER)
+                    .setMinGlobalLimited(min).setMaxGlobalLimited(max).setPreviewCount(previewCount));
+    }
+
+    public static TraceabilityPredicate autoEnergyInputs(int min, int max) {
+        return autoEnergyInputs(min, max, 2);
+    }
+
+    public static TraceabilityPredicate autoEnergyInputs() {
+        return autoEnergyInputs(1, 3);
+    }
 }
