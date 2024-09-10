@@ -39,6 +39,7 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.Position;
+import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
@@ -100,7 +101,8 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
         super.renderMetaTileEntity(renderState, translation, pipeline);
 
         if (shouldRenderOverlay()) {
-            ZBGTTextures.ITEM_OVERLAY_INFINITY.renderSided(getFrontFacing(), renderState, translation, pipeline);
+            Textures.ITEM_HATCH_INPUT_OVERLAY.renderSided(getFrontFacing(), renderState, translation, pipeline);
+            ZBGTTextures.SWIRLY_INFINITY.renderSided(getFrontFacing(), renderState, translation, pipeline);
         }
     }
 
