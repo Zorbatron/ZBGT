@@ -85,6 +85,10 @@ public class MetaTileEntityQuadEBF extends RecipeMapMultiblockController impleme
                 .build();
     }
 
+    protected IBlockState getCasingState() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF);
+    }
+
     @Override
     public List<MultiblockShapeInfo> getMatchingShapes() {
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
@@ -111,10 +115,6 @@ public class MetaTileEntityQuadEBF extends RecipeMapMultiblockController impleme
                 .forEach(entry -> shapeInfo.add(builder.where('C', entry.getKey()).build()));
 
         return shapeInfo;
-    }
-
-    protected IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF);
     }
 
     @Override
