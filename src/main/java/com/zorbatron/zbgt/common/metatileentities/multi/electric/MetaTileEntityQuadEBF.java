@@ -101,7 +101,7 @@ public class MetaTileEntityQuadEBF extends RecipeMapMultiblockController impleme
                 .aisle("XXXXX", "C#C#C", "C#C#C", "XMXMX")
                 .aisle("XISOX", "CCCCC", "CCCCC", "XXZXX")
                 .where('S', ZBGTMetaTileEntities.QUAD_EBF, EnumFacing.SOUTH)
-                .where('X', MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF))
+                .where('X', getCasingState())
                 .where('Z', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH :
                         MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF),
                         EnumFacing.SOUTH)
