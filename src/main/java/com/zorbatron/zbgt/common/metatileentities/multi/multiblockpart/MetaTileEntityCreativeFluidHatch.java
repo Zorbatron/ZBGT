@@ -15,6 +15,8 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -109,6 +111,7 @@ public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNo
         }
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, @NotNull Matrix4 translation,
                                      IVertexOperation[] pipeline) {
@@ -144,6 +147,7 @@ public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNo
         return new ItemStackHandler(1);
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @NotNull List<String> tooltip,
                                boolean advanced) {
@@ -153,6 +157,7 @@ public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNo
         tooltip.add(I18n.format("gregtech.universal.enabled"));
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void addToolUsages(ItemStack stack, @Nullable World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gregtech.tool_action.screwdriver.access_covers"));

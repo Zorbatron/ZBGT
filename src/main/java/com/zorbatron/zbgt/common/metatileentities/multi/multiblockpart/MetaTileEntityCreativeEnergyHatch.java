@@ -15,6 +15,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -67,6 +69,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         return new MetaTileEntityCreativeEnergyHatch(metaTileEntityId, isExportHatch);
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
@@ -84,6 +87,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
                 controllerBase instanceof MetaTileEntityActiveTransformer);
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gregtech.creative_tooltip.1") + TooltipHelper.RAINBOW +
@@ -93,6 +97,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         tooltip.add(I18n.format("gregtech.universal.enabled"));
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void addToolUsages(ItemStack stack, @Nullable World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gregtech.tool_action.screwdriver.access_covers"));

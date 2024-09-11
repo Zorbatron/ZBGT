@@ -116,6 +116,7 @@ public class MetaTileEntityQuadEBF extends RecipeMapMultiblockController impleme
         return shapeInfo;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return Textures.HEAT_PROOF_CASING;

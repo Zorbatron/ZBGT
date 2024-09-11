@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -37,7 +39,7 @@ public class MetaTileEntityLargeParallelHatch extends MetaTileEntityParallelHatc
 
     public MetaTileEntityLargeParallelHatch(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier);
-        this.maxParallelUpper = (int) Math.pow(4, tier - GTValues.EV);;
+        this.maxParallelUpper = (int) Math.pow(4, tier - GTValues.EV);
         this.currentParallelUpper = maxParallelUpper;
     }
 
@@ -98,6 +100,7 @@ public class MetaTileEntityLargeParallelHatch extends MetaTileEntityParallelHatc
         this.currentParallelUpper = currentParallelUpper;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @NotNull List<String> tooltip,
                                boolean advanced) {

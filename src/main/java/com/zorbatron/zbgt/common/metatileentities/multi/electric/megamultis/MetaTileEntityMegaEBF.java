@@ -298,6 +298,7 @@ public class MetaTileEntityMegaEBF extends LaserCapableGCYMRecipeMapMultiblockCo
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return Textures.HEAT_PROOF_CASING;
@@ -318,6 +319,7 @@ public class MetaTileEntityMegaEBF extends LaserCapableGCYMRecipeMapMultiblockCo
         return list;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);

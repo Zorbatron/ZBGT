@@ -147,6 +147,7 @@ public class MetaTileEntityMegaOCU extends LaserCapableGCYMRecipeMapMultiblockCo
         return shapeInfo;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return Textures.CLEAN_STAINLESS_STEEL_CASING;
@@ -157,6 +158,7 @@ public class MetaTileEntityMegaOCU extends LaserCapableGCYMRecipeMapMultiblockCo
         return true;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
