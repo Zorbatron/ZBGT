@@ -97,6 +97,23 @@ metaitem.cover.dual.tooltip.transfer_rate.stacks=§bTransfer Rate: §f%,d stacks
 
 cover.dual_cover.mode_changer=Click to change between the item and fluid settings
 
+# Items
+metaitem.generic_circuit.ulv.name=Generic ULV Circuit
+metaitem.generic_circuit.lv.name=Generic LV Circuit
+metaitem.generic_circuit.mv.name=Generic MV Circuit
+metaitem.generic_circuit.hv.name=Generic HV Circuit
+metaitem.generic_circuit.ev.name=Generic EV Circuit
+metaitem.generic_circuit.iv.name=Generic IV Circuit
+metaitem.generic_circuit.luv.name=Generic LuV Circuit
+metaitem.generic_circuit.zpm.name=Generic ZPM Circuit
+metaitem.generic_circuit.uv.name=Generic UV Circuit
+metaitem.generic_circuit.uhv.name=Generic UHV Circuit
+metaitem.generic_circuit.uev.name=Generic UEV Circuit
+metaitem.generic_circuit.uiv.name=Generic UIV Circuit
+metaitem.generic_circuit.uxv.name=Generic UXV Circuit
+metaitem.generic_circuit.opv.name=Generic OpV Circuit
+metaitem.generic_circuit.max.name=Generic MAX Circuit
+
 
 # Widgets
 zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s

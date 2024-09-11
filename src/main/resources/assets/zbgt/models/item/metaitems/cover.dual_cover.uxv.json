@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gregtech:items/metaitems/dual_cover.uxv"
+    "layer0": "gregtech:items/metaitems/dual_cover/uxv"
   }
 }
 
