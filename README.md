@@ -68,14 +68,12 @@ Creative Computation Provider
 
 Dual Cover
 - Combines the conveyor and pump into one cover!
-- Currently has no texture because I'm not an artist <:(
 
 ![](images/dual_cover_item.png)
 ![](images/dual_cover_fluid.png)
 
 Precise Dual Cover
 - Combines the robot arm and fluid regulator into one cover!
-- Also has no texture 😔
 
 ![](images/precise_dual_cover_item.png)
 ![](images/precise_dual_cover_fluid.png)
