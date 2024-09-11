@@ -1,5 +1,6 @@
 package com.zorbatron.zbgt.recipe.helpers;
 
+import static com.zorbatron.zbgt.common.items.ZBGTMetaItems.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.common.items.MetaItems.*;
@@ -38,6 +39,26 @@ public class RecipeAssists {
             case (OpV) -> MarkerMaterials.Tier.OpV;
             case (MAX) -> MarkerMaterials.Tier.MAX;
             default -> MarkerMaterials.Tier.ULV;
+        };
+    }
+
+    public static MetaItem<?>.MetaValueItem getGenericCircuitByTier(int tier) {
+        return switch (tier) {
+            case (1) -> GENERIC_CIRCUIT_LV;
+            case (2) -> GENERIC_CIRCUIT_MV;
+            case (3) -> GENERIC_CIRCUIT_HV;
+            case (4) -> GENERIC_CIRCUIT_EV;
+            case (5) -> GENERIC_CIRCUIT_IV;
+            case (6) -> GENERIC_CIRCUIT_LuV;
+            case (7) -> GENERIC_CIRCUIT_ZPM;
+            case (8) -> GENERIC_CIRCUIT_UV;
+            case (9) -> GENERIC_CIRCUIT_UHV;
+            case (10) -> GENERIC_CIRCUIT_UEV;
+            case (11) -> GENERIC_CIRCUIT_UIV;
+            case (12) -> GENERIC_CIRCUIT_UXV;
+            case (13) -> GENERIC_CIRCUIT_OpV;
+            case (14) -> GENERIC_CIRCUIT_MAX;
+            default -> GENERIC_CIRCUIT_ULV;
         };
     }
 
