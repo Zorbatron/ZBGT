@@ -1,6 +1,9 @@
-# ZBGT
-
-Addon mod for [GregTech CEu](https://github.com/GregTechCEu/GregTech)
+<p align="center"><img src="TEMPORARY" alt="Logo"></p>
+<h1 align="center">Zorbatron's GT:CEu Extras</h1>
+<p align="center"><i>Things that I (Zorbatron), want in GregTech, but probably don't belong in the base mod</i></p>
+<p align="center">
+  An addon mod for <a href="https://github.com/GregTechCEu/GregTech">GregTech CEu</a>
+</p>
 
 ## Features:
 
@@ -13,6 +16,7 @@ Ported the following multiblocks from GT:NH:
 - Mega Oil Cracking Unit (mOCU)
 - Mega Alloy Blast Smelter (mABS)
 - Precise Assembler (PRASS) (Does Assembler, Circuit Assembler, and Assembly Line recipes xD)
+- Component Assembly Line (CoAL)
 
 My multiblocks:
 - Quad EBF (qEBF)
@@ -24,6 +28,7 @@ Images (_In order with the above list_):
 ![](images/mega_ocu.png)
 ![](images/mega_abs.png)
 ![](images/prass.png)
+![](images/coal.png)
 
 ![](images/quad_ebf.png)
 
@@ -82,13 +87,8 @@ Air Intake Hatch
 Single Item Input Bus
 - Functionally identical to a ULV input bus, but it has a max stack size of 1.
 
-## Upcoming
-- The Component Assembly Line from GT:NH (CoAL)
-- Thank you to Brian for actually doing the hard work in [GCYL: CEu](https://github.com/Synthitic/GCYL-CEu) 
 
-## Planned:
-
-Multi Creative Reservoir Hatch
-- Will be a creative reservoir but it will have multiple slots.
-- Will likely have the UI of the ME input hatch.
-- May replace the creative reservoir hatch.
+## Credited Works
+- GT:NH for many of the multiblocks
+- Ursamina for the dual cover textures and the icon! :heart:
+- [Synthitic](https://github.com/Synthitic/) for porting GT:NH's CoAL to [GCYL: CEu](https://github.com/Synthitic/GCYL-CEu), which I more or less directly copied.
