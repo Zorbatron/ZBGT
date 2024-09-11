@@ -1,4 +1,4 @@
-<p align="center"><img src="TEMPORARY" alt="Logo"></p>
+<p align="center"><img src="https://github.com/Zorbatron/ZB-Greg/blob/main/images/logo.png?raw=true" alt="Logo"></p>
 <h1 align="center">Zorbatron's GT:CEu Extras</h1>
 <p align="center"><i>Things that I (Zorbatron), want in GregTech, but probably don't belong in the base mod</i></p>
 <p align="center">
