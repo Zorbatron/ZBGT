@@ -15,6 +15,7 @@ import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
@@ -46,8 +47,11 @@ public class MetaTileEntityQueezer extends RecipeMapMultiblockController {
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState())
                         .or(TraceabilityPredicates.autoBusesAndHatches(getRecipeMap()))
-                        .or(TraceabilityPredicates.autoEnergyInputs(1, 8))
-                        .or(TraceabilityPredicates.maintenanceOrParallel(this)))
+                        .or(TraceabilityPredicates.maintenanceOrParallel(this))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY)
+                                .setMinGlobalLimited(1)
+                                .setMaxGlobalLimited(8)
+                                .setPreviewCount(8)))
                 .where('#', air())
                 .build();
     }
