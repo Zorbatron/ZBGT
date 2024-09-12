@@ -160,6 +160,9 @@ zbgt.machine.coal.computation_tier.hover=Maximum amount of computation available
 zbgt.recipe.coal_casing_tier=Casing Tier:
 recipemap.coal_recipes.name=Component Assembly Line
 
+zbgt.machine.queezer.name=Queezer
+zbgt.machine.queezer.tooltip=A quad freezer that has 4 innate parallels
+
 
 # Multiblock Casings
 tile.multiblock_casing.precise_0.name=Imprecise Electronic Unit Casing
