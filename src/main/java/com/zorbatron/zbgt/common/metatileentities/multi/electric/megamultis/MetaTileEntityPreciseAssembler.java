@@ -101,18 +101,20 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
                 .where('G', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS))
                 .where('F', MetaBlocks.FRAMES.get(Materials.TungstenSteel).getBlock(Materials.TungstenSteel))
                 .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.LV], EnumFacing.SOUTH)
-                .where('M', TraceabilityPredicates.getMaintenanceHatchMTE(),
-                        EnumFacing.SOUTH)
                 .where('#', Blocks.AIR.getDefaultState());
 
         ZBGTAPI.MACHINE_CASINGS.entrySet().stream()
                 .sorted(Comparator.comparingInt(entry -> entry.getValue().ordinal()))
-                .forEach(entry -> shapeInfo.add(builder
-                        .where('H', entry.getKey())
-                        .where('X',
-                                ZBGTMetaBlocks.PRECISE_CASING.getState(
-                                        PreciseCasing.CasingType.getCasingByTier(entry.getValue().ordinal())))
-                        .build()));
+                .forEach(entry -> {
+                    IBlockState preciseCasingState = ZBGTMetaBlocks.PRECISE_CASING
+                            .getState(PreciseCasing.CasingType.getCasingByTier(entry.getValue().ordinal()));
+                    shapeInfo.add(builder
+                            .where('H', entry.getKey())
+                            .where('X', preciseCasingState)
+                            .where('M', TraceabilityPredicates.getMaintenanceHatchMTE(preciseCasingState),
+                                    EnumFacing.SOUTH)
+                            .build());
+                });
 
         return shapeInfo;
     }

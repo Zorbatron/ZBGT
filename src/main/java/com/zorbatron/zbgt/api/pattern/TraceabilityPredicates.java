@@ -19,8 +19,6 @@ import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.BlockInfo;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMachineCasing;
-import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 
 public class TraceabilityPredicates {
@@ -128,6 +126,7 @@ public class TraceabilityPredicates {
                 return false;
             });
 
+    @SuppressWarnings("unused")
     public static TraceabilityPredicate airBlockWithCount() {
         return AIR_BLOCKS_COUNTED;
     }
@@ -166,12 +165,12 @@ public class TraceabilityPredicates {
         return predicate;
     }
 
+    @SuppressWarnings("unused")
     public static TraceabilityPredicate autoBusesAndHatches(RecipeMap<?> recipeMap) {
         return autoBusesAndHatches(new RecipeMap<?>[] { recipeMap });
     }
 
-    public static Supplier<?> getMaintenanceHatchMTE() {
-        return () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH :
-                MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF);
+    public static Supplier<?> getMaintenanceHatchMTE(IBlockState defaultCasing) {
+        return () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : defaultCasing;
     }
 }

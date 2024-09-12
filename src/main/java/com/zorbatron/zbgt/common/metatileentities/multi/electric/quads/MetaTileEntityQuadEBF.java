@@ -104,7 +104,7 @@ public class MetaTileEntityQuadEBF extends RecipeMapMultiblockController impleme
                 .aisle("XISOX", "CCCCC", "CCCCC", "XXZXX")
                 .where('S', ZBGTMetaTileEntities.QUAD_EBF, EnumFacing.SOUTH)
                 .where('X', getCasingState())
-                .where('Z', TraceabilityPredicates.getMaintenanceHatchMTE(), EnumFacing.SOUTH)
+                .where('Z', TraceabilityPredicates.getMaintenanceHatchMTE(getCasingState()), EnumFacing.SOUTH)
                 .where('M', MetaTileEntities.MUFFLER_HATCH[GTValues.LV], EnumFacing.UP)
                 .where('I', MetaTileEntities.ITEM_IMPORT_BUS[1], EnumFacing.SOUTH)
                 .where('O', MetaTileEntities.ITEM_EXPORT_BUS[1], EnumFacing.SOUTH)

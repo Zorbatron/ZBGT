@@ -195,7 +195,7 @@ public class MetaTileEntityMegaABS extends LaserCapableGCYMRecipeMapMultiblockCo
                         "###########", "###########", "###########", "###########", "###########", "###########",
                         "###########", "###########")
                 .where('S', ZBGTMetaTileEntities.MEGA_ABS, EnumFacing.SOUTH)
-                .where('Z', TraceabilityPredicates.getMaintenanceHatchMTE(), EnumFacing.SOUTH)
+                .where('Z', TraceabilityPredicates.getMaintenanceHatchMTE(getCasingState()), EnumFacing.SOUTH)
                 .where('P', GCYMMetaTileEntities.PARALLEL_HATCH[0], EnumFacing.SOUTH)
                 .where('X', getCasingState())
                 .where('V', getVentState())

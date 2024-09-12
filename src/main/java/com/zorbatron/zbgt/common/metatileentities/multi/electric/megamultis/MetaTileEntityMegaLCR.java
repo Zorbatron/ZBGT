@@ -58,7 +58,7 @@ public class MetaTileEntityMegaLCR extends LaserCapableGCYMRecipeMapMultiblockCo
                 .where('#', air())
                 .where('G', states(getGlassState()))
                 .where('F', states(getCoilState()))
-                .where('M', autoAbilities(false, true, false, false, false, false, false))
+                .where('M', maintenancePredicate())
                 .where('E', states(getCasingState())
                         .or(autoEnergyInputs(1, 8)))
                 .where('H', states(getCasingState())
