@@ -25,7 +25,9 @@ import gregtech.common.blocks.MetaBlocks;
      version = ZBGTCore.VERSION,
      name = ZBGTCore.NAME,
      acceptedMinecraftVersions = "[1.12.2]",
-     dependencies = GTInternalTags.DEP_VERSION_STRING)
+     dependencies = GTInternalTags.DEP_VERSION_STRING +
+             "required-after:gcym@[1.2.11,);" +
+             "after:appliedenergistics2;")
 public class ZBGTCore {
 
     public static final String MODID = Tags.MODID;

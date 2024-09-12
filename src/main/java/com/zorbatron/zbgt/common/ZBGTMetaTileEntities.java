@@ -3,7 +3,6 @@ package com.zorbatron.zbgt.common;
 import static com.zorbatron.zbgt.ZBGTUtility.zbgtId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 
-import com.zorbatron.zbgt.api.util.ZBGTMods;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.quads.MetaTileEntityQuadEBF;
@@ -66,44 +65,40 @@ public class ZBGTMetaTileEntities {
         SUPER_INPUT_BUS = registerMetaTileEntity(18009,
                 new MetaTileEntitySuperInputBus(zbgtId("super_input_bus")));
 
-        if (ZBGTMods.GCYM.isModLoaded()) {
-            ZBGT_PARALLEL_HATCHES[0] = registerMetaTileEntity(18010, new MetaTileEntityLargeParallelHatch(
-                    zbgtId(String.format("parallel_hatch.%s", GTValues.VN[GTValues.UEV])), GTValues.UHV, 1024));
-            ZBGT_PARALLEL_HATCHES[1] = registerMetaTileEntity(18011, new MetaTileEntityLargeParallelHatch(
-                    zbgtId(String.format("parallel_hatch.%s", GTValues.VN[GTValues.UIV])), GTValues.UEV, 4096));
-            ZBGT_PARALLEL_HATCHES[2] = registerMetaTileEntity(18012, new MetaTileEntityLargeParallelHatch(
-                    zbgtId(String.format("parallel_hatch.%s", GTValues.VN[GTValues.UXV])), GTValues.UIV, 16_384));
-            ZBGT_PARALLEL_HATCHES[3] = registerMetaTileEntity(18013, new MetaTileEntityLargeParallelHatch(
-                    zbgtId(String.format("parallel_hatch.%s", GTValues.VN[GTValues.OpV])), GTValues.UXV, 65_536));
-            ZBGT_PARALLEL_HATCHES[4] = registerMetaTileEntity(18014, new MetaTileEntityLargeParallelHatch(
-                    zbgtId(String.format("parallel_hatch.%s", GTValues.VN[GTValues.MAX])), GTValues.OpV, 262_144));
-            ZBGT_PARALLEL_HATCHES[5] = registerMetaTileEntity(18015, new MetaTileEntityLargeParallelHatch(
-                    zbgtId(String.format("parallel_hatch.%s", GTValues.VN[GTValues.MAX]) + ".1"), GTValues.MAX,
-                    1_048_576));
-            ZBGT_PARALLEL_HATCHES[6] = registerMetaTileEntity(18016, new MetaTileEntityLargeParallelHatch(
-                    zbgtId("parallel_hatch.final"), GTValues.MAX, Integer.MAX_VALUE));
-        }
+        ZBGT_PARALLEL_HATCHES[0] = registerMetaTileEntity(18010, new MetaTileEntityLargeParallelHatch(
+                zbgtId(String.format("parallel_hatch.%s", GTValues.VN[GTValues.UEV])), GTValues.UHV, 1024));
+        ZBGT_PARALLEL_HATCHES[1] = registerMetaTileEntity(18011, new MetaTileEntityLargeParallelHatch(
+                zbgtId(String.format("parallel_hatch.%s", GTValues.VN[GTValues.UIV])), GTValues.UEV, 4096));
+        ZBGT_PARALLEL_HATCHES[2] = registerMetaTileEntity(18012, new MetaTileEntityLargeParallelHatch(
+                zbgtId(String.format("parallel_hatch.%s", GTValues.VN[GTValues.UXV])), GTValues.UIV, 16_384));
+        ZBGT_PARALLEL_HATCHES[3] = registerMetaTileEntity(18013, new MetaTileEntityLargeParallelHatch(
+                zbgtId(String.format("parallel_hatch.%s", GTValues.VN[GTValues.OpV])), GTValues.UXV, 65_536));
+        ZBGT_PARALLEL_HATCHES[4] = registerMetaTileEntity(18014, new MetaTileEntityLargeParallelHatch(
+                zbgtId(String.format("parallel_hatch.%s", GTValues.VN[GTValues.MAX])), GTValues.OpV, 262_144));
+        ZBGT_PARALLEL_HATCHES[5] = registerMetaTileEntity(18015, new MetaTileEntityLargeParallelHatch(
+                zbgtId(String.format("parallel_hatch.%s", GTValues.VN[GTValues.MAX]) + ".1"), GTValues.MAX,
+                1_048_576));
+        ZBGT_PARALLEL_HATCHES[6] = registerMetaTileEntity(18016, new MetaTileEntityLargeParallelHatch(
+                zbgtId("parallel_hatch.final"), GTValues.MAX, Integer.MAX_VALUE));
 
         // 18050-18099 (50) reserved for multiblocks
-        if (ZBGTMods.GCYM.isModLoaded()) {
-            MEGA_EBF = registerMetaTileEntity(18050,
-                    new MetaTileEntityMegaEBF(zbgtId("mega_ebf")));
+        MEGA_EBF = registerMetaTileEntity(18050,
+                new MetaTileEntityMegaEBF(zbgtId("mega_ebf")));
 
-            MEGA_LCR = registerMetaTileEntity(18051,
-                    new MetaTileEntityMegaLCR(zbgtId("mega_lcr")));
+        MEGA_LCR = registerMetaTileEntity(18051,
+                new MetaTileEntityMegaLCR(zbgtId("mega_lcr")));
 
-            MEGA_VF = registerMetaTileEntity(18052,
-                    new MetaTileEntityMegaVF(zbgtId("mega_vf")));
+        MEGA_VF = registerMetaTileEntity(18052,
+                new MetaTileEntityMegaVF(zbgtId("mega_vf")));
 
-            MEGA_OCU = registerMetaTileEntity(18053,
-                    new MetaTileEntityMegaOCU(zbgtId("mega_ocu")));
+        MEGA_OCU = registerMetaTileEntity(18053,
+                new MetaTileEntityMegaOCU(zbgtId("mega_ocu")));
 
-            MEGA_ABS = registerMetaTileEntity(18054,
-                    new MetaTileEntityMegaABS(zbgtId("mega_abs")));
+        MEGA_ABS = registerMetaTileEntity(18054,
+                new MetaTileEntityMegaABS(zbgtId("mega_abs")));
 
-            PRASS = registerMetaTileEntity(18055,
-                    new MetaTileEntityPreciseAssembler(zbgtId("precise_assembler")));
-        }
+        PRASS = registerMetaTileEntity(18055,
+                new MetaTileEntityPreciseAssembler(zbgtId("precise_assembler")));
 
         CoAL = registerMetaTileEntity(18056,
                 new MetaTileEntityCoAL(zbgtId("coal")));
