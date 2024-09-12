@@ -10,8 +10,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
-
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -46,8 +44,7 @@ public class MetaTileEntityQueezer extends RecipeMapMultiblockController {
                 .aisle("XXXXX", "XXXXX", "XXXXX", "XXXXX", "XXXXX")
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState())
-                        .or(TraceabilityPredicates.autoBusesAndHatches(getRecipeMap()))
-                        .or(TraceabilityPredicates.maintenanceOrParallel(this))
+                        .or(autoAbilities(false, true, true, true, true, true, false))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY)
                                 .setMinGlobalLimited(1)
                                 .setMaxGlobalLimited(8)

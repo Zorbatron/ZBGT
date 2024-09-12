@@ -12,10 +12,7 @@ import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
 import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
 
-import gregicality.multiblocks.api.capability.IParallelMultiblock;
-import gregicality.multiblocks.api.metatileentity.GCYMMultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 import gregtech.api.pattern.PatternStringError;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.RecipeMap;
@@ -171,18 +168,6 @@ public class TraceabilityPredicates {
 
     public static TraceabilityPredicate autoBusesAndHatches(RecipeMap<?> recipeMap) {
         return autoBusesAndHatches(new RecipeMap<?>[] { recipeMap });
-    }
-
-    public static TraceabilityPredicate maintenanceOrParallel(MultiblockControllerBase controller) {
-        TraceabilityPredicate predicate = new TraceabilityPredicate(
-                abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1));
-
-        if (controller instanceof IParallelMultiblock) {
-            predicate = predicate
-                    .or(abilities(GCYMMultiblockAbility.PARALLEL_HATCH).setMaxGlobalLimited(1).setPreviewCount(1));
-        }
-
-        return predicate;
     }
 
     public static Supplier<?> getMaintenanceHatchMTE() {

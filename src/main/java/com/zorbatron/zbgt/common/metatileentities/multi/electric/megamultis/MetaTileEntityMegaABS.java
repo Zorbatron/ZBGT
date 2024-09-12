@@ -127,7 +127,7 @@ public class MetaTileEntityMegaABS extends LaserCapableGCYMRecipeMapMultiblockCo
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('C', heatingCoils())
                 .where('W', states(getCasingState())
-                        .or(TraceabilityPredicates.maintenanceOrParallel(this)))
+                        .or(autoAbilities(false, true, false, false, false, false, false)))
                 .where('#', air())
                 .build();
     }
