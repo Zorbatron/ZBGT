@@ -198,6 +198,8 @@ zbgt.multiblock.pattern.coal_tier=§cAll casings must be the same tier§r
 
 zbgt.multiblock.pattern.error.casings=§cAll casings must be the same tier§r
 
+zbgt.multiblock.pattern.error.machine_casings=§cAll machine casings must be the same tier§r
+
 # Random
 zbgt.laser_enabled.1=Can use
 zbgt.laser_enabled.2= Laser Hatches

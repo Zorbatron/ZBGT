@@ -133,7 +133,7 @@ public class MetaTileEntityMegaOCU extends LaserCapableGCYMRecipeMapMultiblockCo
                 .where('S', ZBGTMetaTileEntities.MEGA_OCU, EnumFacing.SOUTH)
                 .where('G', getGlassState())
                 .where('X', getCasingState())
-                .where('M', TraceabilityPredicates.getMaintenanceHatchMTE(), EnumFacing.SOUTH)
+                .where('M', TraceabilityPredicates.getMaintenanceHatchMTE(getCasingState()), EnumFacing.SOUTH)
                 .where('P', GCYMMetaTileEntities.PARALLEL_HATCH[0], EnumFacing.SOUTH)
                 .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[1], EnumFacing.NORTH)
                 .where('I', MetaTileEntities.FLUID_IMPORT_HATCH[1], EnumFacing.WEST)

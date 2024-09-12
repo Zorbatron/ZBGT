@@ -20,7 +20,6 @@ import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.recipes.RecipeMaps;
@@ -59,7 +58,7 @@ public class MetaTileEntityMegaLCR extends LaserCapableGCYMRecipeMapMultiblockCo
                 .where('#', air())
                 .where('G', states(getGlassState()))
                 .where('F', states(getCoilState()))
-                .where('M', abilities(MultiblockAbility.MAINTENANCE_HATCH))
+                .where('M', maintenancePredicate())
                 .where('E', states(getCasingState())
                         .or(autoEnergyInputs(1, 8)))
                 .where('H', states(getCasingState())

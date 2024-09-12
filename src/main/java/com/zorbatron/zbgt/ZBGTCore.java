@@ -18,6 +18,8 @@ import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
 import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
 
 import gregtech.GTInternalTags;
+import gregtech.api.GTValues;
+import gregtech.api.GregTechAPI;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.MetaBlocks;
 
@@ -60,6 +62,8 @@ public class ZBGTCore {
         }
 
         for (BlockMachineCasing.MachineCasingType type : BlockMachineCasing.MachineCasingType.values()) {
+            if (type.ordinal() > (GregTechAPI.isHighTier() ? GTValues.MAX : GTValues.UHV)) continue;
+
             MACHINE_CASINGS.put(MetaBlocks.MACHINE_CASING.getState(type), type);
         }
 
