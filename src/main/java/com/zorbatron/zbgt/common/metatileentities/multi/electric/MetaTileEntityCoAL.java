@@ -144,7 +144,7 @@ public class MetaTileEntityCoAL extends LaserCapableRecipeMapMultiblockControlle
                 .where('P', states(getPipeCasingState()))
                 .where('C', states(getCasingState()).setMinGlobalLimited(630)
                         .or(autoEnergyInputs())
-                        .or(maintenanceHatch(this))
+                        .or(maintenanceOrParallel(this))
                         .or(autoBusesAndHatches(getRecipeMap()))
                         .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION)
                                 .setExactLimit(1)))

@@ -9,6 +9,7 @@ import java.util.function.Supplier;
 import net.minecraft.block.state.IBlockState;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
+import com.zorbatron.zbgt.api.util.ZBGTMods;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
 import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
 
@@ -117,6 +118,24 @@ public class TraceabilityPredicates {
         return MACHINE_CASING_PREDICATE.get();
     }
 
+    public static TraceabilityPredicate AIR_BLOCKS_COUNTED = new TraceabilityPredicate(
+            blockWorldState -> {
+                boolean isAirBlock = blockWorldState.getBlockState().getBlock().isAir(blockWorldState.getBlockState(),
+                        blockWorldState.getWorld(), blockWorldState.getPos());
+
+                if (isAirBlock) {
+                    blockWorldState.getMatchContext().getOrPut("AirBlocks", new LinkedList<>())
+                            .add(blockWorldState.getPos());
+                    return true;
+                }
+
+                return false;
+            });
+
+    public static TraceabilityPredicate airBlockWithCount() {
+        return AIR_BLOCKS_COUNTED;
+    }
+
     public static TraceabilityPredicate autoBusesAndHatches(RecipeMap<?>[] recipeMaps) {
         boolean checkedItemIn = false, checkedItemOut = false, checkedFluidIn = false, checkedFluidOut = false;
         TraceabilityPredicate predicate = new TraceabilityPredicate();
@@ -155,13 +174,17 @@ public class TraceabilityPredicates {
         return autoBusesAndHatches(new RecipeMap<?>[] { recipeMap });
     }
 
-    public static TraceabilityPredicate maintenanceHatch(MultiblockControllerBase controller) {
+    public static TraceabilityPredicate maintenanceOrParallel(MultiblockControllerBase controller) {
         TraceabilityPredicate predicate = new TraceabilityPredicate(
                 abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1));
 
-        if (controller instanceof IParallelMultiblock) {
-            predicate = predicate
-                    .or(abilities(GCYMMultiblockAbility.PARALLEL_HATCH).setMaxGlobalLimited(1).setPreviewCount(1));
+        // Check if GYCM is loaded before checking if the controller is an IParallelMultiblock because if it isn't bad
+        // stuff will happen
+        if (ZBGTMods.GCYM.isModLoaded()) {
+            if (controller instanceof IParallelMultiblock) {
+                predicate = predicate
+                        .or(abilities(GCYMMultiblockAbility.PARALLEL_HATCH).setMaxGlobalLimited(1).setPreviewCount(1));
+            }
         }
 
         return predicate;

@@ -1,4 +1,4 @@
-package com.zorbatron.zbgt.common.metatileentities.multi.electric;
+package com.zorbatron.zbgt.common.metatileentities.multi.electric.quads;
 
 import java.util.ArrayList;
 import java.util.Comparator;
