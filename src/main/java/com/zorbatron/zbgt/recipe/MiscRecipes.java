@@ -1,16 +1,19 @@
 package com.zorbatron.zbgt.recipe;
 
 import static gregtech.api.GTValues.*;
-import static gregtech.api.recipes.RecipeMaps.COMPRESSOR_RECIPES;
-import static gregtech.api.recipes.RecipeMaps.POLARIZER_RECIPES;
+import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 
 import com.zorbatron.zbgt.ZBGTConfig;
+import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
+
+import gregtech.api.unification.ore.OrePrefix;
 
 public class MiscRecipes {
 
     protected static void init() {
         magneticFluids();
+        genericCircuits();
 
         if (ZBGTConfig.recipeSettings.enableSillyRecipes) {
             sillyRecipes();
@@ -41,6 +44,17 @@ public class MiscRecipes {
                 .fluidOutputs(SamariumMagnetic.getFluid(144))
                 .EUt(VHA[EV]).duration(150)
                 .buildAndRegister();
+    }
+
+    private static void genericCircuits() {
+        for (int tier = ULV; tier <= MAX; tier++) {
+            ASSEMBLER_RECIPES.recipeBuilder()
+                    .input(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(tier), 16)
+                    .circuitMeta(29)
+                    .output(RecipeAssists.getGenericCircuitByTier(tier), 16)
+                    .EUt(8).duration(20)
+                    .buildAndRegister();
+        }
     }
 
     private static void sillyRecipes() {

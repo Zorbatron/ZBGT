@@ -1,15 +1,18 @@
 package com.zorbatron.zbgt.common.items;
 
 import static com.zorbatron.zbgt.common.items.ZBGTMetaItems.*;
+import static gregtech.api.GTValues.*;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
 import com.zorbatron.zbgt.ZBGTUtility;
+import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.StandardMetaItem;
+import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.items.behaviors.TooltipBehavior;
 
 public class ZBGTMetaItem extends StandardMetaItem {
@@ -144,5 +147,42 @@ public class ZBGTMetaItem extends StandardMetaItem {
                     lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16,
                             1280 * 64 * 64 * 4 / 20));
                 })).setInvisibleIf(!GregTechAPI.isHighTier());
+
+        // Generic Circuits: 26-40
+        GENERIC_CIRCUIT_ULV = addItem(26, "generic_circuit.ulv")
+                .setUnificationData(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(ULV));
+        GENERIC_CIRCUIT_LV = addItem(27, "generic_circuit.lv")
+                .setUnificationData(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(LV));
+        GENERIC_CIRCUIT_MV = addItem(28, "generic_circuit.mv")
+                .setUnificationData(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(MV));
+        GENERIC_CIRCUIT_HV = addItem(29, "generic_circuit.hv")
+                .setUnificationData(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(HV));
+        GENERIC_CIRCUIT_EV = addItem(30, "generic_circuit.ev")
+                .setUnificationData(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(EV));
+        GENERIC_CIRCUIT_IV = addItem(31, "generic_circuit.iv")
+                .setUnificationData(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(IV));
+        GENERIC_CIRCUIT_LuV = addItem(32, "generic_circuit.luv")
+                .setUnificationData(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(LuV));
+        GENERIC_CIRCUIT_ZPM = addItem(33, "generic_circuit.zpm")
+                .setUnificationData(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(ZPM));
+        GENERIC_CIRCUIT_UV = addItem(34, "generic_circuit.uv")
+                .setUnificationData(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(UV));
+        GENERIC_CIRCUIT_UHV = addItem(35, "generic_circuit.uhv")
+                .setUnificationData(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(UHV));
+        GENERIC_CIRCUIT_UEV = addItem(36, "generic_circuit.uev")
+                .setUnificationData(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(UEV))
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        GENERIC_CIRCUIT_UIV = addItem(37, "generic_circuit.uiv")
+                .setUnificationData(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(UIV))
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        GENERIC_CIRCUIT_UXV = addItem(38, "generic_circuit.uxv")
+                .setUnificationData(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(UXV))
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        GENERIC_CIRCUIT_OpV = addItem(39, "generic_circuit.opv")
+                .setUnificationData(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(OpV))
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        GENERIC_CIRCUIT_MAX = addItem(40, "generic_circuit.max")
+                .setUnificationData(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(MAX))
+                .setInvisibleIf(!GregTechAPI.isHighTier());
     }
 }
