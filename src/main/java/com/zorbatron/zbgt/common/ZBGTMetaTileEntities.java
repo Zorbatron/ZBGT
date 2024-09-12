@@ -24,6 +24,7 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityCreativeItemBus CREATIVE_ITEM_BUS;
     public static MetaTileEntitySuperInputBus SUPER_INPUT_BUS;
     public static MetaTileEntityLargeParallelHatch[] ZBGT_PARALLEL_HATCHES = new MetaTileEntityLargeParallelHatch[7];
+    public static MetaTileEntityItemOnlyCrib ITEM_ONLY_CRIB;
 
     public static MetaTileEntityMegaEBF MEGA_EBF;
     public static MetaTileEntityMegaLCR MEGA_LCR;
@@ -80,6 +81,9 @@ public class ZBGTMetaTileEntities {
                 1_048_576));
         ZBGT_PARALLEL_HATCHES[6] = registerMetaTileEntity(18016, new MetaTileEntityLargeParallelHatch(
                 zbgtId("parallel_hatch.final"), GTValues.MAX, Integer.MAX_VALUE));
+
+        ITEM_ONLY_CRIB = registerMetaTileEntity(18017,
+                new MetaTileEntityItemOnlyCrib(zbgtId("item_only_crib"), GTValues.LuV));
 
         // 18050-18099 (50) reserved for multiblocks
         MEGA_EBF = registerMetaTileEntity(18050,
