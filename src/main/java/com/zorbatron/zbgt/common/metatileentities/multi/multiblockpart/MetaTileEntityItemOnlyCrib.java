@@ -1,23 +1,23 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import javax.annotation.Nonnull;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import appeng.api.implementations.ICraftingPatternItem;
 import appeng.api.networking.crafting.ICraftingPatternDetails;
+import appeng.me.helpers.AENetworkProxy;
 import gregtech.api.capability.impl.GhostCircuitItemStackHandler;
+import gregtech.api.capability.impl.ItemHandlerList;
+import gregtech.api.capability.impl.NotifiableItemStackHandler;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -28,16 +28,39 @@ import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMulti
 public class MetaTileEntityItemOnlyCrib extends MetaTileEntityMultiblockNotifiablePart
                                         implements IMultiblockAbilityPart<IItemHandlerModifiable> {
 
-    private GhostCircuitItemStackHandler circuit;
+    private static final int MAX_PATTERN_COUNT = 4 * 9;
+
+    private GhostCircuitItemStackHandler ghostCircuit;
     private IItemHandlerModifiable sharedItems;
+    private final ItemHandlerList[] actualImportItems;
+    private final PatternSlot[] internalInventory = new PatternSlot[MAX_PATTERN_COUNT];
+    private final Map<ICraftingPatternDetails, PatternSlot> patternDetailsPatternSlotMap;
+
+    private boolean needPatternSync = true;
+    private boolean justHadNewItems = false;
+
+    private @Nullable AENetworkProxy proxy;
+    private String customName = null;
+    private boolean additionalConnection = false;
 
     public MetaTileEntityItemOnlyCrib(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier, false);
+        this.actualImportItems = new ItemHandlerList[MAX_PATTERN_COUNT];
+        this.patternDetailsPatternSlotMap = new HashMap<>(MAX_PATTERN_COUNT);
     }
 
     @Override
     protected void initializeInventory() {
         super.initializeInventory();
+
+        this.sharedItems = new NotifiableItemStackHandler(this, 9, null, false);
+        this.ghostCircuit = new GhostCircuitItemStackHandler(this);
+
+        for (int i = 0; i < MAX_PATTERN_COUNT; i++) {
+            this.internalInventory[i] = new PatternSlot();
+            this.actualImportItems[i] = new ItemHandlerList(
+                    Arrays.asList(internalInventory[i], sharedItems, ghostCircuit));
+        }
     }
 
     @Override
@@ -56,19 +79,23 @@ public class MetaTileEntityItemOnlyCrib extends MetaTileEntityMultiblockNotifiab
     }
 
     @Override
-    public void registerAbilities(List<IItemHandlerModifiable> abilityList) {}
+    public void registerAbilities(List<IItemHandlerModifiable> abilityList) {
+        abilityList.addAll(Arrays.asList(actualImportItems));
+    }
 
+    @SuppressWarnings("InnerClassMayBeStatic")
     public class PatternSlot implements IItemHandlerModifiable {
 
-        private final ItemStack pattern;
-        private final ICraftingPatternDetails patternDetails;
+        private ItemStack pattern;
+        private ICraftingPatternDetails patternDetails;
         private final List<ItemStack> stacks;
 
-        public PatternSlot(ItemStack pattern, World world) {
-            this.pattern = pattern;
-            this.patternDetails = ((ICraftingPatternItem) Objects.requireNonNull(pattern.getItem()))
-                    .getPatternForItem(pattern, world);
+        public PatternSlot() {
             this.stacks = new ArrayList<>();
+        }
+
+        public ICraftingPatternDetails getPatternDetails() {
+            return this.patternDetails;
         }
 
         @Override
