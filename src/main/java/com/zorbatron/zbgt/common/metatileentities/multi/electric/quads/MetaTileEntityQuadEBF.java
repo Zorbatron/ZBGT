@@ -79,7 +79,10 @@ public class MetaTileEntityQuadEBF extends RecipeMapMultiblockController impleme
                 .where('C', heatingCoils())
                 .where('X', states(getCasingState())
                         .or(autoAbilities(false, true, true, true, true, true, false))
-                        .or(TraceabilityPredicates.autoEnergyInputs(1, 8)))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY)
+                                .setMinGlobalLimited(1)
+                                .setMaxGlobalLimited(8)
+                                .setPreviewCount(8)))
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('#', air())
                 .build();
