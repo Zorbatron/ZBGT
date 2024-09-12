@@ -191,6 +191,7 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
         return Textures.DISPLAY;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return getPreciseCasingTier() == -1 ? ZBGTTextures.PRECISE_CASING_1 :
@@ -267,6 +268,7 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
         return getRecipeMapIndex() == supposedRecipeMap;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);

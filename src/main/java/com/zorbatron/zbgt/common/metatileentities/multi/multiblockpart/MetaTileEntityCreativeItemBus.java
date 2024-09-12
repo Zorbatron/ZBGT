@@ -10,6 +10,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import org.jetbrains.annotations.Nullable;
@@ -96,6 +98,7 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
                 .build(getHolder(), entityPlayer);
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
@@ -174,6 +177,7 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
         this.circuitItemStackHandler.read(data);
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gregtech.creative_tooltip.1") + TooltipHelper.RAINBOW +
@@ -182,6 +186,7 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
         tooltip.add(I18n.format("gregtech.universal.enabled"));
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void addToolUsages(ItemStack stack, @Nullable World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gregtech.tool_action.screwdriver.access_covers"));
