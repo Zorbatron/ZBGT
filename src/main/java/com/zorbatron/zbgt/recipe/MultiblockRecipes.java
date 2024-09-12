@@ -35,6 +35,14 @@ public class MultiblockRecipes {
                 'P', new UnificationEntry(plateDouble, Invar),
                 'B', MetaTileEntities.ELECTRIC_BLAST_FURNACE.getStackForm(),
                 'C', new UnificationEntry(circuit, getMarkerMaterialByTier(HV)));
+
+        ModHandler.addShapedRecipe("queezer", ZBGTMetaTileEntities.QUEEZER.getStackForm(),
+                "PBP",
+                "BCB",
+                "PBP",
+                'P', new UnificationEntry(plateDouble, Aluminium),
+                'B', MetaTileEntities.VACUUM_FREEZER.getStackForm(),
+                'C', new UnificationEntry(circuit, getMarkerMaterialByTier(HV)));
     }
 
     private static void assemblerRecipes() {
@@ -100,6 +108,16 @@ public class MultiblockRecipes {
                 .fluidInputs(Palladium.getFluid(L * 8))
                 .output(ZBGTMetaTileEntities.PRASS)
                 .EUt(VA[IV]).duration(20 * 18)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(MetaTileEntities.VACUUM_FREEZER, 4)
+                .input(plate, Aluminium, 4)
+                .input(circuit, getMarkerMaterialByTier(HV))
+                .fluidInputs(SolderingAlloy.getFluid(L * 4))
+                .circuitMeta(4)
+                .output(ZBGTMetaTileEntities.QUEEZER)
+                .duration(20 * 5).EUt(VA[HV])
                 .buildAndRegister();
     }
 
