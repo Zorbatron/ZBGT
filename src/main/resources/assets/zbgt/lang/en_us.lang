@@ -163,6 +163,8 @@ recipemap.coal_recipes.name=Component Assembly Line
 zbgt.machine.queezer.name=Queezer
 zbgt.machine.queezer.tooltip=A quad freezer that has 4 innate parallels
 
+zbgt.machine.ipbf.name=Industrial Primitive Blast Furnace (iPBF)
+
 
 # Multiblock Casings
 tile.multiblock_casing.precise_0.name=Imprecise Electronic Unit Casing

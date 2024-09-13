@@ -8,6 +8,7 @@ import com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.quads.MetaTileEntityQuadEBF;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.quads.MetaTileEntityQueezer;
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.*;
+import com.zorbatron.zbgt.common.metatileentities.multi.primitive.MetaTileEntityIndustrialPBF;
 import com.zorbatron.zbgt.common.metatileentities.storage.MetaTileEntityCreativeComputationProvider;
 
 import gregtech.api.GTValues;
@@ -36,6 +37,8 @@ public class ZBGTMetaTileEntities {
 
     public static MetaTileEntityQuadEBF QUAD_EBF;
     public static MetaTileEntityQueezer QUEEZER;
+
+    public static MetaTileEntityIndustrialPBF IPBF;
 
     public static void init() {
         // 18000-18049 (50) reserved for multiblock parts
@@ -105,7 +108,11 @@ public class ZBGTMetaTileEntities {
 
         QUAD_EBF = registerMetaTileEntity(18057,
                 new MetaTileEntityQuadEBF(zbgtId("quad_ebf")));
+
         QUEEZER = registerMetaTileEntity(18058,
                 new MetaTileEntityQueezer(zbgtId("queezer")));
+
+        IPBF = registerMetaTileEntity(18059,
+                new MetaTileEntityIndustrialPBF(zbgtId("ipbf")));
     }
 }
