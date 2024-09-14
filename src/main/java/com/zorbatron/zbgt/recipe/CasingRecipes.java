@@ -4,8 +4,7 @@ import static com.zorbatron.zbgt.recipe.helpers.RecipeAssists.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
-import static gregtech.api.unification.material.Materials.Naquadria;
-import static gregtech.api.unification.material.Materials.SolderingAlloy;
+import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 
 import java.util.Arrays;
@@ -17,6 +16,7 @@ import com.zorbatron.zbgt.api.util.ZBGTMods;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
 import com.zorbatron.zbgt.common.block.blocks.MaterialCasing;
+import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
 
 import gregtech.api.block.VariantBlock;
 import gregtech.api.recipes.ModHandler;
@@ -28,12 +28,13 @@ import gregtech.common.ConfigHolder;
 public class CasingRecipes {
 
     protected static void init() {
-        ZBGTBlockMultiblockCasings();
+        materialCasings();
         coALCasings();
         preciseCasings();
+        miscCasings();
     }
 
-    private static void ZBGTBlockMultiblockCasings() {
+    private static void materialCasings() {
         Arrays.stream(MaterialCasing.CasingType.values()).forEach(
                 casing -> registerMetalCasingRecipe(casing.getMaterial(), ZBGTMetaBlocks.MATERIAL_CASINGS, casing));
     }
@@ -140,5 +141,16 @@ public class CasingRecipes {
                     .EUt(VA[tier]).duration(20 * 8 * (tier - HV))
                     .buildAndRegister();
         }
+    }
+
+    private static void miscCasings() {
+        ModHandler.addShapedRecipe("yottank_casing",
+                ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.YOTTANK_CASING,
+                        ConfigHolder.recipes.casingsPerCraft),
+                "BPB", "TFT", "BPB",
+                'B', OreDictUnifier.get(plate, BlackSteel),
+                'P', OreDictUnifier.get(pipeNormalFluid, StainlessSteel),
+                'F', OreDictUnifier.get(frameGt, BlackSteel),
+                'T', OreDictUnifier.get(plate, Polytetrafluoroethylene));
     }
 }
