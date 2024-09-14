@@ -2,7 +2,10 @@ package com.zorbatron.zbgt.common.metatileentities.storage;
 
 import static gregtech.api.capability.GregtechDataCodes.UPDATE_ACTIVE;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 import net.minecraft.block.state.IBlockState;
@@ -64,6 +67,20 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
     protected void updateFormedValid() {}
 
     @Override
+    protected void formStructure(PatternMatchContext context) {
+        super.formStructure(context);
+
+        List<YOTTankCell.CasingType> cells = new ArrayList<>();
+        for (Map.Entry<String, Object> cell : context.entrySet()) {
+            if (cell.getKey().startsWith(YOTTANK_CELL_HEADER) && cell.getValue() instanceof CellMatchWrapper wrapper) {
+                for (int i = 0; i < wrapper.amount; i++) {
+                    cells.add(wrapper.casingType);
+                }
+            }
+        }
+    }
+
+    @Override
     @NotNull
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.FRONT, RelativeDirection.UP)
@@ -77,9 +94,9 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
                 .where('M', autoAbilities(true, false)
                         .or(states(getCasingState())))
                 .where('C', CELL_PREDICATE.get())
-                .where('O', abilities(MultiblockAbility.EXPORT_FLUIDS).setPreviewCount(1)
+                .where('O', abilities(MultiblockAbility.EXPORT_FLUIDS).setPreviewCount(1).setMinGlobalLimited(1)
                         .or(states(getCasingState())))
-                .where('I', abilities(MultiblockAbility.IMPORT_FLUIDS).setPreviewCount(1)
+                .where('I', abilities(MultiblockAbility.IMPORT_FLUIDS).setPreviewCount(1).setMinGlobalLimited(1)
                         .or(states(getCasingState())))
                 .where('F', frames(Materials.Steel))
                 .where('G', states(getGlassState()))
@@ -104,7 +121,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
                     String key = YOTTANK_CELL_HEADER + casing.getCellName();
                     CellMatchWrapper wrapper = blockWorldState.getMatchContext().get(key);
                     if (wrapper == null) wrapper = new CellMatchWrapper(casing);
-                    blockWorldState.getMatchContext().set(key, wrapper);
+                    blockWorldState.getMatchContext().set(key, wrapper.increment());
 
                     return true;
                 }
@@ -115,11 +132,6 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
                     .map(entry -> new BlockInfo(entry.getKey(), null))
                     .toArray(BlockInfo[]::new))
                             .addTooltips("zbgt.multiblock.pattern.error.yottank_cells");
-
-    @Override
-    protected void formStructure(PatternMatchContext context) {
-        super.formStructure(context);
-    }
 
     @SideOnly(Side.CLIENT)
     @NotNull
@@ -135,6 +147,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         return Textures.DISPLAY;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
@@ -182,10 +195,6 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         public CellMatchWrapper increment() {
             this.amount++;
             return this;
-        }
-
-        public YOTTankCell.CasingType getCasingType() {
-            return this.casingType;
         }
     }
 }
