@@ -112,7 +112,7 @@ public class TraceabilityPredicates {
         return MACHINE_CASING_PREDICATE.get();
     }
 
-    public static TraceabilityPredicate AIR_BLOCKS_COUNTED = new TraceabilityPredicate(
+    private static TraceabilityPredicate AIR_BLOCKS_COUNTED = new TraceabilityPredicate(
             blockWorldState -> {
                 boolean isAirBlock = blockWorldState.getBlockState().getBlock().isAir(blockWorldState.getBlockState(),
                         blockWorldState.getWorld(), blockWorldState.getPos());

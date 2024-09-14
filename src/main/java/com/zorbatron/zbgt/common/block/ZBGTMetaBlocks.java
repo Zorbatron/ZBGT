@@ -35,7 +35,7 @@ public class ZBGTMetaBlocks {
 
     public static void init() {
         MATERIAL_CASINGS = new MaterialCasing();
-        MATERIAL_CASINGS.setRegistryName("material_casing");
+        MATERIAL_CASINGS.setRegistryName("multiblock_casing");
 
         CoAL_CASING = new CoALCasing();
         CoAL_CASING.setRegistryName("coal_casing");

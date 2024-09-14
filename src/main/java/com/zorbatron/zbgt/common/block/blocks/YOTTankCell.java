@@ -59,6 +59,10 @@ public class YOTTankCell extends VariantBlock<YOTTankCell.CasingType> {
             return this.name;
         }
 
+        public String getCellName() {
+            return name().toLowerCase();
+        }
+
         public BigInteger getCapacity() {
             return BigInteger.TEN.pow(this.zeros);
         }
