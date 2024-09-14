@@ -1,7 +1,8 @@
-package com.zorbatron.zbgt.common.metatileentities.storage;
+package com.zorbatron.zbgt.common.metatileentities.multi;
 
 import static gregtech.api.capability.GregtechDataCodes.UPDATE_ACTIVE;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -13,6 +14,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -50,6 +52,11 @@ import gregtech.common.blocks.MetaBlocks;
 public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements IControllable {
 
     private boolean isWorkingEnabled;
+
+    private BigInteger storage = BigInteger.ZERO;
+    private BigInteger storageCurrent = BigInteger.ZERO;
+    private FluidStack fluid;
+    private FluidStack lockedFluid;
 
     private static final String YOTTANK_CELL_HEADER = "YOTTANK_CELL_";
 

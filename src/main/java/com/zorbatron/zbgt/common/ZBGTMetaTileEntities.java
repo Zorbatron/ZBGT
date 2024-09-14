@@ -3,13 +3,13 @@ package com.zorbatron.zbgt.common;
 import static com.zorbatron.zbgt.ZBGTUtility.zbgtId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 
+import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.quads.MetaTileEntityQuadEBF;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.quads.MetaTileEntityQueezer;
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.*;
 import com.zorbatron.zbgt.common.metatileentities.storage.MetaTileEntityCreativeComputationProvider;
-import com.zorbatron.zbgt.common.metatileentities.storage.MetaTileEntityYOTTank;
 
 import gregtech.api.GTValues;
 
@@ -38,7 +38,7 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityQuadEBF QUAD_EBF;
     public static MetaTileEntityQueezer QUEEZER;
 
-    public static MetaTileEntityYOTTank YOTTank;
+    public static MetaTileEntityYOTTank YOTTANK;
 
     public static void init() {
         // 18000-18049 (50) reserved for multiblock parts
@@ -111,7 +111,7 @@ public class ZBGTMetaTileEntities {
         QUEEZER = registerMetaTileEntity(18058,
                 new MetaTileEntityQueezer(zbgtId("queezer")));
 
-        YOTTank = registerMetaTileEntity(18059,
+        YOTTANK = registerMetaTileEntity(18059,
                 new MetaTileEntityYOTTank(zbgtId("yottank")));
     }
 }

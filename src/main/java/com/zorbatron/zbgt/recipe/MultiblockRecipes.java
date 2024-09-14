@@ -10,6 +10,7 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
+import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
 
 import gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities;
 import gregtech.api.recipes.ModHandler;
@@ -43,6 +44,16 @@ public class MultiblockRecipes {
                 'P', new UnificationEntry(plateDouble, Aluminium),
                 'B', MetaTileEntities.VACUUM_FREEZER.getStackForm(),
                 'C', new UnificationEntry(circuit, getMarkerMaterialByTier(HV)));
+
+        ModHandler.addShapedRecipe("yottank", ZBGTMetaTileEntities.YOTTANK.getStackForm(),
+                "STS",
+                "CYC",
+                "SPS",
+                'S', new UnificationEntry(screw, BlueSteel),
+                'Y', ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.YOTTANK_CASING),
+                'C', new UnificationEntry(circuit, getMarkerMaterialByTier(EV)),
+                'T', MetaItems.COVER_SCREEN,
+                'P', new UnificationEntry(pipeNormalFluid, TungstenSteel));
     }
 
     private static void assemblerRecipes() {

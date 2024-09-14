@@ -20,7 +20,8 @@ public class NormalGT {
         frameBoxes();
         longRods();
         gears();
-        wire();
+        wires();
+        screws();
     }
 
     private static void magneticMaterialFluids() {
@@ -64,7 +65,13 @@ public class NormalGT {
         setFlags(materials, GENERATE_GEAR);
     }
 
-    private static void wire() {
+    private static void wires() {
         Titanium.setProperty(PropertyKey.WIRE, new WireProperties(2048, 4, 2));
+    }
+
+    private static void screws() {
+        Material[] materials = { BlueSteel };
+
+        setFlags(materials, GENERATE_BOLT_SCREW);
     }
 }
