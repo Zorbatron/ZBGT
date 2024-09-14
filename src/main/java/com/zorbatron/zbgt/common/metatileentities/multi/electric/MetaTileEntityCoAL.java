@@ -26,7 +26,7 @@ import com.zorbatron.zbgt.api.recipes.properties.CoALProperty;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
-import com.zorbatron.zbgt.common.block.blocks.ZBGTBlockMultiblockCasing;
+import com.zorbatron.zbgt.common.block.blocks.MaterialCasing;
 
 import gregtech.api.GTValues;
 import gregtech.api.capability.IOpticalComputationHatch;
@@ -150,7 +150,7 @@ public class MetaTileEntityCoAL extends LaserCapableRecipeMapMultiblockControlle
     }
 
     protected IBlockState getCasingState() {
-        return ZBGTMetaBlocks.MULTIBLOCK_CASING.getState(ZBGTBlockMultiblockCasing.CasingType.IRIDIUM_CASING);
+        return ZBGTMetaBlocks.MATERIAL_CASINGS.getState(MaterialCasing.CasingType.IRIDIUM_CASING);
     }
 
     protected IBlockState getPipeCasingState() {

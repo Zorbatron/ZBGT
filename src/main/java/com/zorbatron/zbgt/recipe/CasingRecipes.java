@@ -16,7 +16,7 @@ import com.filostorm.ulvcovers.items.ULVCoverMetaItems;
 import com.zorbatron.zbgt.api.util.ZBGTMods;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
-import com.zorbatron.zbgt.common.block.blocks.ZBGTBlockMultiblockCasing;
+import com.zorbatron.zbgt.common.block.blocks.MaterialCasing;
 
 import gregtech.api.block.VariantBlock;
 import gregtech.api.recipes.ModHandler;
@@ -34,8 +34,8 @@ public class CasingRecipes {
     }
 
     private static void ZBGTBlockMultiblockCasings() {
-        Arrays.stream(ZBGTBlockMultiblockCasing.CasingType.values()).forEach(
-                casing -> registerMetalCasingRecipe(casing.getMaterial(), ZBGTMetaBlocks.MULTIBLOCK_CASING, casing));
+        Arrays.stream(MaterialCasing.CasingType.values()).forEach(
+                casing -> registerMetalCasingRecipe(casing.getMaterial(), ZBGTMetaBlocks.MATERIAL_CASINGS, casing));
     }
 
     // Copied from GCYL: CEu

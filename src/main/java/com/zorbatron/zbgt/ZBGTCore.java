@@ -1,8 +1,7 @@
 package com.zorbatron.zbgt;
 
 import static com.zorbatron.zbgt.api.ZBGTAPI.*;
-import static com.zorbatron.zbgt.common.block.ZBGTMetaBlocks.CoAL_CASING;
-import static com.zorbatron.zbgt.common.block.ZBGTMetaBlocks.PRECISE_CASING;
+import static com.zorbatron.zbgt.common.block.ZBGTMetaBlocks.*;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -16,6 +15,7 @@ import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
 import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
+import com.zorbatron.zbgt.common.block.blocks.YOTTankCell;
 
 import gregtech.GTInternalTags;
 import gregtech.api.GTValues;
@@ -65,6 +65,10 @@ public class ZBGTCore {
             if (type.ordinal() > (GregTechAPI.isHighTier() ? GTValues.MAX : GTValues.UHV)) continue;
 
             MACHINE_CASINGS.put(MetaBlocks.MACHINE_CASING.getState(type), type);
+        }
+
+        for (YOTTankCell.CasingType type : YOTTankCell.CasingType.values()) {
+            YOTTANK_CELLS.put(YOTTANK_CELL.getState(type), type);
         }
 
         proxy.preInit();

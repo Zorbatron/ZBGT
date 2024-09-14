@@ -46,13 +46,13 @@ public class ZBGTTextures {
 
         GTPP_MACHINE_OVERLAY = new OrientedOverlayRenderer("multiblock/gtpp");
 
-        PRECISE_CASING_0 = new SimpleOverlayRenderer("casings/multiblocks/precise_0");
-        PRECISE_CASING_1 = new SimpleOverlayRenderer("casings/multiblocks/precise_1");
-        PRECISE_CASING_2 = new SimpleOverlayRenderer("casings/multiblocks/precise_2");
-        PRECISE_CASING_3 = new SimpleOverlayRenderer("casings/multiblocks/precise_3");
-        PRECISE_CASING_4 = new SimpleOverlayRenderer("casings/multiblocks/precise_4");
+        PRECISE_CASING_0 = new SimpleOverlayRenderer("casings/precise/precise_0");
+        PRECISE_CASING_1 = new SimpleOverlayRenderer("casings/precise/precise_1");
+        PRECISE_CASING_2 = new SimpleOverlayRenderer("casings/precise/precise_2");
+        PRECISE_CASING_3 = new SimpleOverlayRenderer("casings/precise/precise_3");
+        PRECISE_CASING_4 = new SimpleOverlayRenderer("casings/precise/precise_4");
 
-        IRIDIUM_CASING = new SimpleOverlayRenderer("casings/multiblocks/iridium");
+        IRIDIUM_CASING = new SimpleOverlayRenderer("casings/material/iridium");
         YOTTANK_CASING = new SidedCubeRenderer("casings/yottank");
     }
 
