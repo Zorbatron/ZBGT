@@ -4,6 +4,14 @@
 <p align="center">
   An addon mod for <a href="https://github.com/GregTechCEu/GregTech">GregTech CEu</a>
 </p>
+<h1 align="center">
+    <a href="https://www.curseforge.com/minecraft/mc-mods/zbgt"><img src="https://img.shields.io/badge/Available%20for-MC%201.12.2%20-informational?style=for-the-badge" alt="Supported Versions"></a>
+    <a href="https://github.com/GregTechCEu/GregTech/blob/master/LICENSE"><img src="https://img.shields.io/github/license/Zorbatron/ZBGT?style=for-the-badge" alt="License"></a>
+    <br>
+    <a href="https://www.curseforge.com/minecraft/mc-mods/zbgt"><img src="https://cf.way2muchnoise.eu/1101263.svg?badge_style=for_the_badge" alt="CurseForge"></a>
+    <a href="https://modrinth.com/mod/zbgt"><img src="https://img.shields.io/modrinth/dt/zbgt?logo=modrinth&label=&suffix=%20&style=for-the-badge&color=2d2d2d&labelColor=5ca424&logoColor=1c1c1c" alt="Modrinth"></a>
+    <a href="https://github.com/Zorbatron/ZBGT/releases"><img src="https://img.shields.io/github/downloads/Zorbatron/ZBGT/total?sort=semver&logo=github&label=&style=for-the-badge&color=2d2d2d&labelColor=545454&logoColor=FFFFFF" alt="GitHub"></a>
+</h1>
 
 ## Features:
 
