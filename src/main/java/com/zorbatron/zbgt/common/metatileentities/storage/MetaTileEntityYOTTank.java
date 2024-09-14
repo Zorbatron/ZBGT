@@ -1,5 +1,9 @@
 package com.zorbatron.zbgt.common.metatileentities.storage;
 
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.pipeline.IVertexOperation;
+import codechicken.lib.vec.Matrix4;
+import gregtech.client.renderer.texture.Textures;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -28,7 +32,9 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase {
     }
 
     @Override
-    protected void updateFormedValid() {}
+    protected void updateFormedValid() {
+
+    }
 
     @Override
     protected @NotNull BlockPattern createStructurePattern() {
@@ -49,7 +55,13 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase {
     @NotNull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return ZBGTTextures.SWIRLY_INFINITY;
+        return Textures.DISPLAY;
+    }
+
+    @Override
+    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
+        super.renderMetaTileEntity(renderState, translation, pipeline);
+        getFrontOverlay().renderSided(getFrontFacing(), renderState, translation, pipeline);
     }
 
     @Override
