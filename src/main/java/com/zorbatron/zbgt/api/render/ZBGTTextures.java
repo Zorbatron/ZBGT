@@ -1,7 +1,9 @@
 package com.zorbatron.zbgt.api.render;
 
 import gregtech.api.gui.resources.TextureArea;
+import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
+import gregtech.client.renderer.texture.cube.SidedCubeRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOverlayRenderer;
 
 public class ZBGTTextures {
@@ -16,8 +18,7 @@ public class ZBGTTextures {
     public static TextureArea AUTO_PULL;
     public static TextureArea PME;
 
-    public static final TextureArea PROGRESS_BAR_CoAL = TextureArea
-            .fullImage("textures/gui/progress_bar/progress_bar_component_al.png");
+    public static TextureArea PROGRESS_BAR_CoAL;
 
     // Multiblock controller overlays
     public static OrientedOverlayRenderer GTPP_MACHINE_OVERLAY;
@@ -30,6 +31,7 @@ public class ZBGTTextures {
     public static SimpleOverlayRenderer PRECISE_CASING_4;
 
     public static SimpleOverlayRenderer IRIDIUM_CASING;
+    public static ICubeRenderer YOTTANK_CASING;
 
     public static void preInit() {
         WATER_OVERLAY_INFINITY = new SimpleOverlayRenderer("overlay/machine/water_infinity");
@@ -40,6 +42,8 @@ public class ZBGTTextures {
         AUTO_PULL = TextureArea.fullImage("textures/gui/widget/auto_pull.png");
         PME = TextureArea.fullImage("textures/gui/widget/pme.png");
 
+        PROGRESS_BAR_CoAL = TextureArea.fullImage("textures/gui/progress_bar/progress_bar_component_al.png");
+
         GTPP_MACHINE_OVERLAY = new OrientedOverlayRenderer("multiblock/gtpp");
 
         PRECISE_CASING_0 = new SimpleOverlayRenderer("casings/multiblocks/precise_0");
@@ -49,6 +53,7 @@ public class ZBGTTextures {
         PRECISE_CASING_4 = new SimpleOverlayRenderer("casings/multiblocks/precise_4");
 
         IRIDIUM_CASING = new SimpleOverlayRenderer("casings/multiblocks/iridium");
+        YOTTANK_CASING = new SidedCubeRenderer("casings/yottank");
     }
 
     public static SimpleOverlayRenderer getPrassTextureByTier(int tier) {

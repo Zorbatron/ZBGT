@@ -1,0 +1,63 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "gregtech:blocks/rendering_error"
+    }
+  },
+  "variants": {
+    "variant": {
+      "yottank_cell_1": {
+        "textures": {
+          "all": "gregtech:blocks/casings/yottank_cell/1"
+        }
+      },
+      "yottank_cell_2": {
+        "textures": {
+          "all": "gregtech:blocks/casings/yottank_cell/2"
+        }
+      },
+      "yottank_cell_3": {
+        "textures": {
+          "all": "gregtech:blocks/casings/yottank_cell/3"
+        }
+      },
+      "yottank_cell_4": {
+        "textures": {
+          "all": "gregtech:blocks/casings/yottank_cell/4"
+        }
+      },
+      "yottank_cell_5": {
+        "textures": {
+          "all": "gregtech:blocks/casings/yottank_cell/5"
+        }
+      },
+      "yottank_cell_6": {
+        "textures": {
+          "all": "gregtech:blocks/casings/yottank_cell/6"
+        }
+      },
+      "yottank_cell_7": {
+        "textures": {
+          "all": "gregtech:blocks/casings/yottank_cell/7"
+        }
+      },
+      "yottank_cell_8": {
+        "textures": {
+          "all": "gregtech:blocks/casings/yottank_cell/8"
+        }
+      },
+      "yottank_cell_9": {
+        "textures": {
+          "all": "gregtech:blocks/casings/yottank_cell/9"
+        }
+      },
+      "yottank_cell_10": {
+        "textures": {
+          "all": "gregtech:blocks/casings/yottank_cell/10"
+        }
+      }
+    }
+  }
+}

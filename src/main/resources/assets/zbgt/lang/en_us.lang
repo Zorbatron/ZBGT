@@ -200,6 +200,27 @@ zbgt.multiblock.pattern.error.casings=§cAll casings must be the same tier§r
 
 zbgt.multiblock.pattern.error.machine_casings=§cAll machine casings must be the same tier§r
 
+tile.yottank_cell.yottank_cell_1.name=Fluid Cell T1
+tile.yottank_cell.yottank_cell_1.tooltip=Capacity: 1,000,000
+tile.yottank_cell.yottank_cell_2.name=Fluid Cell T2
+tile.yottank_cell.yottank_cell_2.tooltip=Capacity: 100,000,000
+tile.yottank_cell.yottank_cell_3.name=Fluid Cell T3
+tile.yottank_cell.yottank_cell_3.tooltip=Capacity: 10,000,000,000
+tile.yottank_cell.yottank_cell_4.name=Fluid Cell T4
+tile.yottank_cell.yottank_cell_4.tooltip=Capacity: 1,000,000,000,000
+tile.yottank_cell.yottank_cell_5.name=Fluid Cell T5
+tile.yottank_cell.yottank_cell_5.tooltip=Capacity: 100,000,000,000,000
+tile.yottank_cell.yottank_cell_6.name=Fluid Cell T6
+tile.yottank_cell.yottank_cell_6.tooltip=Capacity: 10,000,000,000,000,000
+tile.yottank_cell.yottank_cell_7.name=Fluid Cell T7
+tile.yottank_cell.yottank_cell_7.tooltip=Capacity: 1,000,000,000,000,000,000
+tile.yottank_cell.yottank_cell_8.name=Fluid Cell T8
+tile.yottank_cell.yottank_cell_8.tooltip=Capacity: 100,000,000,000,000,000,000
+tile.yottank_cell.yottank_cell_9.name=Fluid Cell T9
+tile.yottank_cell.yottank_cell_9.tooltip=Capacity: 100,000,000,000,000,00,000,000
+tile.yottank_cell.yottank_cell_10.name=Fluid Cell T10
+tile.yottank_cell.yottank_cell_10.tooltip=Capacity: 1,000,000,000,000,000,000,000,000
+
 # Random
 zbgt.laser_enabled.1=Can use
 zbgt.laser_enabled.2= Laser Hatches
