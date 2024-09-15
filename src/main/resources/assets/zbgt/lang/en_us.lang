@@ -164,6 +164,12 @@ zbgt.machine.queezer.name=Queezer
 zbgt.machine.queezer.tooltip=A quad freezer that has 4 innate parallels
 
 zbgt.machine.yottank.name=YOTTank
+zbgt.machine.yottank.max_capacity=Capacity: %s
+zbgt.machine.yottank.current_capacity=Stored: %s
+zbgt.machine.yottank.fluid=Current fluid: %s
+zbgt.machine.yottank.locked_fluid=Locked fluid: %s
+zbgt.machine.yottank.none=None
+
 
 # Multiblock Casings
 tile.multiblock_casing.precise_0.name=Imprecise Electronic Unit Casing
