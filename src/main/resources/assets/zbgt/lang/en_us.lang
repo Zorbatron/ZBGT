@@ -169,6 +169,7 @@ zbgt.machine.yottank.current_capacity=Stored: %s
 zbgt.machine.yottank.fluid=Current fluid: %s
 zbgt.machine.yottank.locked_fluid=Locked fluid: %s
 zbgt.machine.yottank.none=None
+zbgt.machine.yottank.next=None. Will lock to the next fluid
 
 
 # Multiblock Casings

@@ -1,6 +1,6 @@
 package com.zorbatron.zbgt.common.metatileentities.multi;
 
-import static gregtech.api.capability.GregtechDataCodes.UPDATE_ACTIVE;
+import static gregtech.api.capability.GregtechDataCodes.*;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -43,6 +43,7 @@ import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.AdvancedTextWidget;
 import gregtech.api.gui.widgets.ImageCycleButtonWidget;
 import gregtech.api.gui.widgets.ImageWidget;
+import gregtech.api.gui.widgets.ToggleButtonWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -74,6 +75,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
     private FluidStack lockedFluid;
 
     private int tickRate;
+    private boolean voiding;
 
     private static final String YOTTANK_CELL_HEADER = "YOTTANK_CELL_";
 
@@ -110,8 +112,12 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
                 if (lockedFluid != null) {
                     if (!lockedFluid.isFluidEqual(tankFluid)) continue;
                 } else {
-                    lockedFluid = tankFluid.copy();
-                    lockedFluid.amount = 1;
+                    if (fluid != null) {
+                        lockedFluid = fluid.copy();
+                    } else {
+                        lockedFluid = tankFluid.copy();
+                        lockedFluid.amount = 1;
+                    }
                 }
             }
 
@@ -124,7 +130,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
                 if (addFluid(tankFluid.amount, true)) {
                     tank.drain(tankFluid.amount, true);
                 } else {
-                    if (getVoidingMode() == VoidingMode.VOID_FLUIDS.ordinal()) {
+                    if (isVoiding()) {
                         tank.drain(tankFluid.amount, true);
                     } else {
                         final BigInteger delta = this.storage.subtract(this.storageCurrent);
@@ -290,18 +296,35 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS);
     }
 
-    @Override
-    protected void setVoidingMode(int mode) {
-        super.setVoidingMode(mode == 1 ? 2 : 0);
+    protected void setVoiding(boolean isVoiding) {
+        this.voiding = isVoiding;
+        if (!getWorld().isRemote) {
+            writeCustomData(UPDATE_IS_VOIDING, buf -> buf.writeBoolean(this.voiding));
+            markDirty();
+        }
     }
 
-    @Override
-    protected int getVoidingMode() {
-        return super.getVoidingMode() == 2 ? 1 : 0;
+    protected boolean isVoiding() {
+        return voiding;
     }
 
-    protected String getVoidingModeTooltipOverride(int mode) {
-        return VoidingMode.VALUES[mode == 1 ? 2 : 0].getName();
+    protected void setLocked(boolean locked) {
+        this.isFluidLocked = locked;
+        if (!getWorld().isRemote) {
+            writeCustomData(UPDATE_LOCKED_STATE, buf -> buf.writeBoolean(this.isFluidLocked));
+
+            if (!locked && lockedFluid != null) {
+                lockedFluid = null;
+            } else if (fluid != null) {
+                lockedFluid = fluid.copy();
+            }
+
+            markDirty();
+        }
+    }
+
+    protected boolean isLocked() {
+        return isFluidLocked;
     }
 
     @Override
@@ -314,29 +337,19 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
                 .setMaxWidthLimit(181)
                 .setClickHandler(this::handleDisplayClick));
 
-        // Power Button
-        IControllable controllable = getCapability(GregtechTileCapabilities.CAPABILITY_CONTROLLABLE, null);
-        if (controllable != null) {
-            builder.widget(new ImageCycleButtonWidget(173, 183, 18, 18, GuiTextures.BUTTON_POWER,
-                    controllable::isWorkingEnabled, controllable::setWorkingEnabled));
-            builder.widget(new ImageWidget(173, 201, 18, 6, GuiTextures.BUTTON_POWER_DETAIL));
-        }
+        builder.widget(new ImageCycleButtonWidget(173, 183, 18, 18, GuiTextures.BUTTON_POWER,
+                this::isWorkingEnabled, this::setWorkingEnabled));
+        builder.widget(new ImageWidget(173, 201, 18, 6, GuiTextures.BUTTON_POWER_DETAIL));
 
-        // Voiding Mode Button
-        builder.widget(new ImageCycleButtonWidget(173, 161, 18, 18, ZBGTTextures.VOID_FLUID,
-                2, this::getVoidingMode, this::setVoidingMode)
-                        .setTooltipHoverString(this::getVoidingModeTooltipOverride));
+        builder.widget(new ToggleButtonWidget(173, 161, 18, 18, GuiTextures.BUTTON_FLUID_VOID,
+                this::isVoiding, this::setVoiding)
+                        .setTooltipText("gregtech.gui.fluid_voiding.tooltip")
+                        .shouldUseBaseBackground());
 
-        // Distinct Buses Button
-        if (this instanceof IDistinctBusController distinct && distinct.canBeDistinct()) {
-            builder.widget(new ImageCycleButtonWidget(173, 143, 18, 18, GuiTextures.BUTTON_DISTINCT_BUSES,
-                    distinct::isDistinct, distinct::setDistinct)
-                            .setTooltipHoverString(i -> "gregtech.multiblock.universal.distinct_" +
-                                    (i == 0 ? "disabled" : "enabled")));
-        } else {
-            builder.widget(new ImageWidget(173, 143, 18, 18, GuiTextures.BUTTON_NO_DISTINCT_BUSES)
-                    .setTooltip("gregtech.multiblock.universal.distinct_not_supported"));
-        }
+        builder.widget(new ToggleButtonWidget(173, 143, 18, 18, GuiTextures.BUTTON_LOCK,
+                this::isLocked, this::setLocked)
+                        .setTooltipText("gregtech.gui.fluid_lock.tooltip")
+                        .shouldUseBaseBackground());
 
         // Flex Button
         builder.widget(getFlexButton(173, 125, 18, 18));
@@ -365,10 +378,15 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
 
                     tl.add(TextComponentUtil.translationWithColor(TextFormatting.WHITE,
                             "zbgt.machine.yottank.locked_fluid",
-                            this.lockedFluid == null ? I18n.format("zbgt.machine.yottank.none") :
-                                    this.lockedFluid.getLocalizedName()));
+                            I18n.format(getLockedFluidName())));
                 })
                 .addWorkingStatusLine();
+    }
+
+    protected String getLockedFluidName() {
+        if (!isFluidLocked) return "zbgt.machine.yottank.none";
+        if (lockedFluid == null) return "zbgt.machine.yottank.next";
+        return lockedFluid.getUnlocalizedName();
     }
 
     protected static final Supplier<TraceabilityPredicate> CELL_PREDICATE = () -> new TraceabilityPredicate(
@@ -426,6 +444,10 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         super.receiveCustomData(dataId, buf);
         if (dataId == UPDATE_ACTIVE) {
             this.isWorkingEnabled = buf.readBoolean();
+        } else if (dataId == UPDATE_IS_VOIDING) {
+            this.voiding = buf.readBoolean();
+        } else if (dataId == UPDATE_LOCKED_STATE) {
+            this.isFluidLocked = buf.readBoolean();
         }
     }
 
@@ -448,6 +470,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         data.setString("Fluid", this.fluid == null ? "" : this.fluid.getFluid().getName());
         data.setString("LockedFluid", this.lockedFluid == null ? "" : this.lockedFluid.getFluid().getName());
         data.setBoolean("IsFluidLocked", this.isFluidLocked);
+        data.setBoolean("IsVoiding", this.voiding);
 
         return super.writeToNBT(data);
     }
@@ -462,6 +485,23 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         this.fluid = FluidRegistry.getFluidStack(data.getString("Fluid"), 1);
         this.lockedFluid = FluidRegistry.getFluidStack(data.getString("LockedFluid"), 1);
         this.isFluidLocked = data.getBoolean("IsFluidLocked");
+        this.voiding = data.getBoolean("IsVoiding");
+    }
+
+    @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+
+        buf.writeBoolean(voiding);
+        buf.writeBoolean(isFluidLocked);
+    }
+
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+
+        this.voiding = buf.readBoolean();
+        this.isFluidLocked = buf.readBoolean();
     }
 
     private static class CellMatchWrapper {
