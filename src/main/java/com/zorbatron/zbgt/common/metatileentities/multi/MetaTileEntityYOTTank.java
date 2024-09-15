@@ -29,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
+import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
 import com.zorbatron.zbgt.common.block.blocks.YOTTankCell;
@@ -187,6 +188,26 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         }
     }
 
+    public FluidStack getFluid() {
+        return this.fluid;
+    }
+
+    public FluidStack getLockedFluid() {
+        return this.lockedFluid;
+    }
+
+    public BigInteger getStorage() {
+        return this.storage;
+    }
+
+    public void setStorage(BigInteger storage) {
+        this.storage = storage;
+    }
+
+    public BigInteger getStorageCurrent() {
+        return this.storageCurrent;
+    }
+
     /**
      * Attempts to put {@code amount} of fluid into the tank if possible, fails if there's not enough space for all of
      * it.
@@ -276,7 +297,8 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
                         .or(states(getCasingState())))
                 .where('C', CELL_PREDICATE.get())
                 .where('O', abilities(MultiblockAbility.EXPORT_FLUIDS).setPreviewCount(1)
-                        .or(states(getCasingState())))
+                        .or(states(getCasingState()))
+                        .or(getYOTTankMEHatch()))
                 .where('I', abilities(MultiblockAbility.IMPORT_FLUIDS).setPreviewCount(1)
                         .or(states(getCasingState())))
                 .where('F', frames(Materials.Steel))
@@ -293,6 +315,10 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS);
     }
 
+    protected TraceabilityPredicate getYOTTankMEHatch() {
+        return metaTileEntities(ZBGTMetaTileEntities.YOTTANK_ME_HATCH).setMaxGlobalLimited(1);
+    }
+
     protected void setVoiding(boolean isVoiding) {
         this.voiding = isVoiding;
         if (!getWorld().isRemote) {
@@ -301,7 +327,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         }
     }
 
-    protected boolean isVoiding() {
+    public boolean isVoiding() {
         return voiding;
     }
 
