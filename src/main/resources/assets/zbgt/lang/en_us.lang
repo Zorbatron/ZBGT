@@ -170,6 +170,7 @@ zbgt.machine.yottank.fluid=Current fluid: %s
 zbgt.machine.yottank.locked_fluid=Locked fluid: %s
 zbgt.machine.yottank.none=None
 zbgt.machine.yottank.next=None. Will lock to the next fluid
+zbgt.machine.yottank.tick_rate=Tick rate:
 
 
 # Multiblock Casings

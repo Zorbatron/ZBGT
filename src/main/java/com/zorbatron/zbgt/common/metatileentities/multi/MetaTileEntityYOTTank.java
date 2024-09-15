@@ -40,10 +40,7 @@ import gregtech.api.capability.*;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
-import gregtech.api.gui.widgets.AdvancedTextWidget;
-import gregtech.api.gui.widgets.ImageCycleButtonWidget;
-import gregtech.api.gui.widgets.ImageWidget;
-import gregtech.api.gui.widgets.ToggleButtonWidget;
+import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -327,6 +324,23 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         return isFluidLocked;
     }
 
+    protected void setTickRate(String tickRate) {
+        int newTickRate;
+
+        try {
+            newTickRate = Integer.parseInt(tickRate);
+        } catch (Exception ignored) {
+            newTickRate = 20;
+        }
+
+        this.tickRate = newTickRate;
+        markDirty();
+    }
+
+    protected String getTickRate() {
+        return String.valueOf(this.tickRate);
+    }
+
     @Override
     protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 198, 208);
@@ -353,6 +367,13 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
 
         // Flex Button
         builder.widget(getFlexButton(173, 125, 18, 18));
+
+        builder.widget(new AdvancedTextWidget(9, 108,
+                (tl) -> tl.add(TextComponentUtil.translationWithColor(TextFormatting.WHITE,
+                        I18n.format("zbgt.machine.yottank.tick_rate"))),
+                0xFFFFFF));
+        builder.widget(new TextFieldWidget2(9 + 50, 108, 25, 18, this::getTickRate, this::setTickRate)
+                .setNumbersOnly(1, 100));
 
         builder.bindPlayerInventory(entityPlayer.inventory, 125);
         return builder;
@@ -471,6 +492,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         data.setString("LockedFluid", this.lockedFluid == null ? "" : this.lockedFluid.getFluid().getName());
         data.setBoolean("IsFluidLocked", this.isFluidLocked);
         data.setBoolean("IsVoiding", this.voiding);
+        data.setInteger("TickRate", this.tickRate);
 
         return super.writeToNBT(data);
     }
@@ -486,6 +508,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         this.lockedFluid = FluidRegistry.getFluidStack(data.getString("LockedFluid"), 1);
         this.isFluidLocked = data.getBoolean("IsFluidLocked");
         this.voiding = data.getBoolean("IsVoiding");
+        this.tickRate = data.getInteger("TickRate");
     }
 
     @Override
@@ -494,6 +517,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
 
         buf.writeBoolean(voiding);
         buf.writeBoolean(isFluidLocked);
+        buf.writeInt(this.tickRate);
     }
 
     @Override
@@ -502,6 +526,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
 
         this.voiding = buf.readBoolean();
         this.isFluidLocked = buf.readBoolean();
+        this.tickRate = buf.readInt();
     }
 
     private static class CellMatchWrapper {
