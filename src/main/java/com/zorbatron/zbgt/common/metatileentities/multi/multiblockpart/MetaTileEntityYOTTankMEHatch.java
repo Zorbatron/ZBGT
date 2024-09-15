@@ -23,6 +23,7 @@ import appeng.api.config.AccessRestriction;
 import appeng.api.config.Actionable;
 import appeng.api.networking.GridFlags;
 import appeng.api.networking.IGridNode;
+import appeng.api.networking.events.MENetworkCellArrayUpdate;
 import appeng.api.networking.security.IActionHost;
 import appeng.api.networking.security.IActionSource;
 import appeng.api.storage.*;
@@ -52,11 +53,18 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
     private AENetworkProxy aeProxy;
     private int priority;
     private AccessRestriction readMode;
+    private int tickRate;
+    private BigInteger lastAmount;
+    private FluidStack lastFluid;
+    private boolean notifiedNoController;
 
     public MetaTileEntityYOTTankMEHatch(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier);
         this.priority = 0;
         this.readMode = AccessRestriction.READ_WRITE;
+        this.tickRate = 20;
+        this.lastAmount = BigInteger.ZERO;
+        this.notifiedNoController = false;
     }
 
     @Override
@@ -67,16 +75,52 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
     @Override
     public void update() {
         super.update();
+
+        MultiblockControllerBase controller = getController();
+        if (getOffsetTimer() % this.tickRate == 0) {
+            if (controller instanceof MetaTileEntityYOTTank metaTileEntityYOTTank) {
+                notifiedNoController = true;
+                if (isChanged(metaTileEntityYOTTank)) {
+                    getProxy().getNode().getGrid().postEvent(new MENetworkCellArrayUpdate());
+
+                    faster();
+                    updateLast(metaTileEntityYOTTank);
+                } else {
+                    slower();
+                }
+            }
+        } else if (!notifiedNoController) {
+            updateLast(null);
+            getProxy().getNode().getGrid().postEvent(new MENetworkCellArrayUpdate());
+            notifiedNoController = true;
+        }
     }
 
-    @Override
-    public void addToMultiBlock(MultiblockControllerBase controllerBase) {
-        super.addToMultiBlock(controllerBase);
+    private boolean isChanged(MetaTileEntityYOTTank metaTileEntityYOTTank) {
+        return !this.lastAmount.equals(metaTileEntityYOTTank.getStorageCurrent()) ||
+                this.lastFluid != metaTileEntityYOTTank.getFluid();
     }
 
-    @Override
-    public void removeFromMultiBlock(MultiblockControllerBase controllerBase) {
-        super.removeFromMultiBlock(controllerBase);
+    private void updateLast(MetaTileEntityYOTTank metaTileEntityYOTTank) {
+        if (metaTileEntityYOTTank != null) {
+            this.lastAmount = metaTileEntityYOTTank.getStorageCurrent();
+            this.lastFluid = metaTileEntityYOTTank.getFluid();
+        } else {
+            this.lastAmount = BigInteger.ZERO;
+            this.lastFluid = null;
+        }
+    }
+
+    private void faster() {
+        if (this.tickRate > 15) {
+            this.tickRate -= 5;
+        }
+    }
+
+    private void slower() {
+        if (this.tickRate < 100) {
+            this.tickRate += 5;
+        }
     }
 
     @Override
