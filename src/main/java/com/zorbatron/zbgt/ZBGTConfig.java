@@ -17,6 +17,10 @@ public class ZBGTConfig {
         @Config.RequiresMcRestart
         @Config.Name("Allow Substation Hatches")
         public boolean allowSubstationHatches = false;
+
+        @Config.Comment({ "Let YOTTanks play their \"whoomp\" \"whoomp\" noise",
+                "Default: true" })
+        public boolean yottankSound = true;
     }
 
     @Config.Name("Recipe Settings")
