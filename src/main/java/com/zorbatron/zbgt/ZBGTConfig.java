@@ -9,8 +9,9 @@ public class ZBGTConfig {
 
     public static class MultiblockSettings {
 
-        @Config.Comment({ "Not all of my multiblocks may allow substation energy hatches, " +
-                "but this is a global toggle. If false, no multiblock will work with substation hatches.",
+        @Config.Comment({
+                "Not all of my multiblocks may allow substation energy hatches, but this is a global toggle. ",
+                "If false, no multiblock will work with substation hatches.",
                 "Default: false" })
         @Config.RequiresMcRestart
         @Config.Name("allowSubstationHatches")
