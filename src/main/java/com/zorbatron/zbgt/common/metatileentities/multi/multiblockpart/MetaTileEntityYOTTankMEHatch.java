@@ -6,10 +6,12 @@ import java.util.EnumSet;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -17,6 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.api.capability.ZBGTDataCodes;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
 
@@ -41,9 +44,12 @@ import appeng.me.helpers.IGridProxyable;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+import gregtech.api.capability.IDataStickIntractable;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.ImageCycleButtonWidget;
+import gregtech.api.gui.widgets.TextFieldWidget2;
+import gregtech.api.gui.widgets.ToggleButtonWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.common.ConfigHolder;
@@ -51,7 +57,8 @@ import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMulti
 
 public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
                                           implements IGridProxyable, IActionHost, ICellContainer,
-                                          IMEInventory<IAEFluidStack>, IMEInventoryHandler<IAEFluidStack> {
+                                          IMEInventory<IAEFluidStack>, IMEInventoryHandler<IAEFluidStack>,
+                                          IDataStickIntractable {
 
     private int priority;
     private AccessRestriction readMode;
@@ -70,6 +77,8 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         this.readMode = AccessRestriction.READ_WRITE;
         this.tickRate = 20;
         this.lastAmount = BigInteger.ZERO;
+        this.tickRateOverride = false;
+        this.overriddenTickRate = 20;
     }
 
     @Override
@@ -133,10 +142,62 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         this.readMode = AccessRestriction.values()[readMode];
         notifyME();
         markDirty();
+        writeCustomData(ZBGTDataCodes.MODE_CHANGE, buf -> buf.writeInt(readMode));
     }
 
     private int getReadMode() {
         return this.readMode.ordinal();
+    }
+
+    private void setPriority(int priority) {
+        this.priority = priority;
+        notifyME();
+        markDirty();
+        writeCustomData(ZBGTDataCodes.PRIORITY_CHANGE, buf -> buf.writeInt(priority));
+    }
+
+    private void setPriorityFromString(String priority) {
+        int newPriority;
+
+        try {
+            newPriority = Integer.parseInt(priority);
+        } catch (Exception ignored) {
+            return;
+        }
+
+        setPriority(newPriority);
+    }
+
+    private void setOverriddenTickRate(int overriddenTickRate) {
+        this.overriddenTickRate = overriddenTickRate;
+        markDirty();
+        writeCustomData(ZBGTDataCodes.RATE_CHANGE, buf -> buf.writeInt(overriddenTickRate));
+    }
+
+    private int getOverriddenTickRate() {
+        return this.overriddenTickRate;
+    }
+
+    private void setOverriddenTickRateFromString(String tickRateOverride) {
+        int newTickRateOverride;
+
+        try {
+            newTickRateOverride = Integer.parseInt(tickRateOverride);
+        } catch (Exception ignored) {
+            return;
+        }
+
+        setOverriddenTickRate(newTickRateOverride);
+    }
+
+    private void setTickRateOverride(boolean tickRateOverride) {
+        this.tickRateOverride = tickRateOverride;
+        markDirty();
+        writeCustomData(ZBGTDataCodes.RATE_ACTIVATE, buf -> buf.writeBoolean(tickRateOverride));
+    }
+
+    private boolean isTickRateOverride() {
+        return this.tickRateOverride;
     }
 
     @Override
@@ -144,8 +205,19 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 170, 95);
         builder.label(6, 6, getMetaFullName());
 
-        builder.widget(new ImageCycleButtonWidget(6, 6 + 18, 18, 18, ZBGTTextures.AE2_RW_STATES, 4,
-                this::getReadMode, this::setReadMode));
+        builder.widget(new ImageCycleButtonWidget(6, 6 + 9, 18, 18, ZBGTTextures.AE2_RW_STATES, 4,
+                this::getReadMode, this::setReadMode).shouldUseBaseBackground());
+
+        builder.widget(new TextFieldWidget2(6 + 18, 6 + 9, 150, 18,
+                () -> String.valueOf(getPriority()), this::setPriorityFromString)
+                        .setNumbersOnly(Integer.MIN_VALUE, Integer.MAX_VALUE));
+
+        builder.widget(new ToggleButtonWidget(6, 6 + 9 + 18, 18, 18, GuiTextures.BUTTON_LOCK,
+                this::isTickRateOverride, this::setTickRateOverride)
+                        .shouldUseBaseBackground());
+        builder.widget(new TextFieldWidget2(6 + 18, 6 + 9 + 18, 150, 18,
+                () -> String.valueOf(getOverriddenTickRate()), this::setOverriddenTickRateFromString)
+                        .setNumbersOnly(1, 100));
 
         return builder.build(getHolder(), entityPlayer);
     }
@@ -398,6 +470,21 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
     }
 
     @Override
+    public void receiveCustomData(int dataId, PacketBuffer buf) {
+        super.receiveCustomData(dataId, buf);
+
+        if (dataId == ZBGTDataCodes.MODE_CHANGE) {
+            this.readMode = AccessRestriction.values()[buf.readInt()];
+        } else if (dataId == ZBGTDataCodes.PRIORITY_CHANGE) {
+            this.priority = buf.readInt();
+        } else if (dataId == ZBGTDataCodes.RATE_CHANGE) {
+            this.overriddenTickRate = buf.readInt();
+        } else if (dataId == ZBGTDataCodes.RATE_ACTIVATE) {
+            this.tickRateOverride = buf.readBoolean();
+        }
+    }
+
+    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("Priority", this.priority);
         data.setInteger("ReadMode", this.readMode.ordinal());
@@ -415,5 +502,44 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         this.readMode = AccessRestriction.values()[data.getInteger("ReadMode")];
         this.overriddenTickRate = data.getInteger("OverriddenTickRate");
         this.tickRateOverride = data.getBoolean("TickRateOverride");
+    }
+
+    @Override
+    public void onDataStickLeftClick(EntityPlayer player, ItemStack dataStick) {
+        NBTTagCompound tag = new NBTTagCompound();
+        tag.setTag("YOTTankMEHatch", writeConfigToTag());
+        dataStick.setTagCompound(tag);
+        dataStick.setTranslatableName("zbgt.machine.yottank_me_hatch.data_stick.name");
+        player.sendStatusMessage(new TextComponentTranslation("gregtech.machine.me.import_copy_settings"), true);
+    }
+
+    private NBTTagCompound writeConfigToTag() {
+        NBTTagCompound tag = new NBTTagCompound();
+
+        tag.setInteger("Priority", this.priority);
+        tag.setInteger("ReadMode", this.readMode.ordinal());
+        tag.setInteger("OverriddenTickRate", this.overriddenTickRate);
+        tag.setBoolean("TickRateOverride", this.tickRateOverride);
+
+        return tag;
+    }
+
+    @Override
+    public boolean onDataStickRightClick(EntityPlayer player, ItemStack dataStick) {
+        NBTTagCompound tag = dataStick.getTagCompound();
+
+        if (tag == null || !tag.hasKey("YOTTankMEHatch")) return false;
+
+        readConfigFromTag(tag.getCompoundTag("YOTTankMEHatch"));
+        player.sendStatusMessage(new TextComponentTranslation("gregtech.machine.me.import_paste_settings"), true);
+
+        return true;
+    }
+
+    private void readConfigFromTag(NBTTagCompound tag) {
+        setPriority(tag.getInteger("Priority"));
+        setReadMode(tag.getInteger("ReadMode"));
+        setOverriddenTickRate(tag.getInteger("OverriddenTickRate"));
+        setTickRateOverride(tag.getBoolean("TickRateOverride"));
     }
 }
