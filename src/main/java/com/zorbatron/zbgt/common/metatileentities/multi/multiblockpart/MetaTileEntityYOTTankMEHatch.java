@@ -42,7 +42,6 @@ import codechicken.lib.vec.Matrix4;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 import gregtech.common.ConfigHolder;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 
@@ -56,7 +55,6 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
     private int tickRate;
     private BigInteger lastAmount;
     private FluidStack lastFluid;
-    private boolean notifiedNoController;
 
     public MetaTileEntityYOTTankMEHatch(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier);
@@ -64,7 +62,6 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         this.readMode = AccessRestriction.READ_WRITE;
         this.tickRate = 20;
         this.lastAmount = BigInteger.ZERO;
-        this.notifiedNoController = false;
     }
 
     @Override
@@ -76,10 +73,8 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
     public void update() {
         super.update();
 
-        MultiblockControllerBase controller = getController();
-        if (getOffsetTimer() % this.tickRate == 0) {
-            if (controller instanceof MetaTileEntityYOTTank metaTileEntityYOTTank) {
-                notifiedNoController = true;
+        if (getOffsetTimer() % this.tickRate == 0 && getProxy() != null) {
+            if (getController() instanceof MetaTileEntityYOTTank metaTileEntityYOTTank) {
                 if (isChanged(metaTileEntityYOTTank)) {
                     getProxy().getNode().getGrid().postEvent(new MENetworkCellArrayUpdate());
 
@@ -89,10 +84,6 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
                     slower();
                 }
             }
-        } else if (!notifiedNoController) {
-            updateLast(null);
-            getProxy().getNode().getGrid().postEvent(new MENetworkCellArrayUpdate());
-            notifiedNoController = true;
         }
     }
 
@@ -335,10 +326,10 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         if (controller.getFluid() == null || controllerCurrent.signum() <= 0) return iItemList;
 
         long ready;
-        if (controllerCurrent.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) >= 0) {
+        if (controllerCurrent.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) >= 0) {
             ready = Long.MAX_VALUE;
         } else {
-            ready = controllerCurrent.longValue();
+            ready = controllerCurrent.longValueExact();
         }
 
         iItemList.add(AEFluidStack.fromFluidStack(new FluidStack(controller.getFluid(), 1)).setStackSize(ready));
@@ -348,5 +339,11 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
     @Override
     public IStorageChannel<IAEFluidStack> getChannel() {
         return AEApi.instance().storage().getStorageChannel(IFluidStorageChannel.class);
+    }
+
+    public void shutdown() {
+        if (getProxy() != null) {
+            getProxy().getNode().getGrid().postEvent(new MENetworkCellArrayUpdate());
+        }
     }
 }

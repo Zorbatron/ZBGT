@@ -33,6 +33,7 @@ import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
 import com.zorbatron.zbgt.common.block.blocks.YOTTankCell;
+import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityYOTTankMEHatch;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
@@ -66,6 +67,8 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
 
     private boolean isWorkingEnabled;
     private boolean isFluidLocked;
+    private boolean shouldImport;
+    private boolean shouldExport;
 
     private BigInteger storage;
     private BigInteger storageCurrent;
@@ -81,6 +84,8 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         super(metaTileEntityId);
         this.isWorkingEnabled = true;
         this.isFluidLocked = false;
+        this.shouldImport = false;
+        this.shouldExport = false;
 
         this.storage = BigInteger.ZERO;
         this.storageCurrent = BigInteger.ZERO;
@@ -96,8 +101,13 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
     @Override
     protected void updateFormedValid() {
         if (!getWorld().isRemote && isWorkingEnabled() && getOffsetTimer() % tickRate == 0) {
-            importFluids();
-            exportFluids();
+            if (shouldImport) {
+                importFluids();
+            }
+
+            if (shouldExport) {
+                exportFluids();
+            }
         }
     }
 
@@ -147,7 +157,12 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
 
     private void exportFluids() {
         if (this.fluid != null) {
-            int outputAmount = this.storageCurrent.intValueExact();
+            int outputAmount;
+            if (this.storageCurrent.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) >= 0) {
+                outputAmount = Integer.MAX_VALUE;
+            } else {
+                outputAmount = this.storageCurrent.intValueExact();
+            }
 
             final int originalOutputAmount = outputAmount;
 
@@ -253,6 +268,9 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         super.formStructure(context);
         initializeAbilities();
 
+        this.shouldImport = this.importFluids.getTanks() > 0;
+        this.shouldExport = this.exportFluids.getTanks() > 0;
+
         List<YOTTankCell.CasingType> cells = new ArrayList<>();
         for (Map.Entry<String, Object> cell : context.entrySet()) {
             if (cell.getKey().startsWith(YOTTANK_CELL_HEADER) && cell.getValue() instanceof CellMatchWrapper wrapper) {
@@ -274,6 +292,13 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
     public void invalidateStructure() {
         this.storage = BigInteger.ZERO;
         resetTileAbilities();
+
+        for (IMultiblockPart multiblockPart : this.getMultiblockParts()) {
+            if (multiblockPart instanceof MetaTileEntityYOTTankMEHatch meHatch) {
+                meHatch.shutdown();
+            }
+        }
+
         super.invalidateStructure();
     }
 
