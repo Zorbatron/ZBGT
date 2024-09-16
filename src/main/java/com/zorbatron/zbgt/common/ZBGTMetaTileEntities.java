@@ -87,7 +87,7 @@ public class ZBGTMetaTileEntities {
                 zbgtId("parallel_hatch.final"), GTValues.MAX, Integer.MAX_VALUE));
         if (Mods.AppliedEnergistics2.isModLoaded()) {
             YOTTANK_ME_HATCH = registerMetaTileEntity(18017,
-                    new MetaTileEntityYOTTankMEHatch(zbgtId("yottank_me_hatch"), GTValues.LuV));
+                    new MetaTileEntityYOTTankMEHatch(zbgtId("yottank_me_hatch"), GTValues.IV));
         }
 
         // 18050-18099 (50) reserved for multiblocks
