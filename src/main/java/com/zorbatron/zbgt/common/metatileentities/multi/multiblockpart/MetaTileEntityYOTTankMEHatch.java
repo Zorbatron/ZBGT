@@ -6,6 +6,8 @@ import java.util.EnumSet;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
@@ -39,7 +41,9 @@ import appeng.me.helpers.IGridProxyable;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
+import gregtech.api.gui.widgets.ImageCycleButtonWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.common.ConfigHolder;
@@ -49,9 +53,13 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
                                           implements IGridProxyable, IActionHost, ICellContainer,
                                           IMEInventory<IAEFluidStack>, IMEInventoryHandler<IAEFluidStack> {
 
-    private AENetworkProxy aeProxy;
     private int priority;
     private AccessRestriction readMode;
+
+    private boolean tickRateOverride;
+    private int overriddenTickRate;
+
+    private AENetworkProxy aeProxy;
     private int tickRate;
     private BigInteger lastAmount;
     private FluidStack lastFluid;
@@ -73,16 +81,23 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
     public void update() {
         super.update();
 
-        if (getOffsetTimer() % this.tickRate == 0 && getProxy() != null) {
+        if (getOffsetTimer() % (tickRateOverride ? overriddenTickRate : tickRate) == 0) {
             if (getController() instanceof MetaTileEntityYOTTank metaTileEntityYOTTank) {
                 if (isChanged(metaTileEntityYOTTank)) {
-                    getProxy().getNode().getGrid().postEvent(new MENetworkCellArrayUpdate());
-
+                    notifyME();
                     faster();
                     updateLast(metaTileEntityYOTTank);
                 } else {
                     slower();
                 }
+            }
+        }
+    }
+
+    private void notifyME() {
+        if (getProxy() != null) {
+            if (getProxy().getNode() != null) {
+                getProxy().getNode().getGrid().postEvent(new MENetworkCellArrayUpdate());
             }
         }
     }
@@ -114,14 +129,25 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         }
     }
 
-    @Override
-    protected boolean openGUIOnRightClick() {
-        return false;
+    private void setReadMode(int readMode) {
+        this.readMode = AccessRestriction.values()[readMode];
+        notifyME();
+        markDirty();
+    }
+
+    private int getReadMode() {
+        return this.readMode.ordinal();
     }
 
     @Override
     protected ModularUI createUI(EntityPlayer entityPlayer) {
-        return null;
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 170, 95);
+        builder.label(6, 6, getMetaFullName());
+
+        builder.widget(new ImageCycleButtonWidget(6, 6 + 18, 18, 18, ZBGTTextures.AE2_RW_STATES, 4,
+                this::getReadMode, this::setReadMode));
+
+        return builder.build(getHolder(), entityPlayer);
     }
 
     @SideOnly(Side.CLIENT)
@@ -216,7 +242,8 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
 
     @Override
     public boolean canAccept(IAEFluidStack iaeFluidStack) {
-        return fill(iaeFluidStack, false) > 0;
+        return (fill(iaeFluidStack, false) > 0) &&
+                !(readMode.equals(AccessRestriction.NO_ACCESS) || readMode.equals(AccessRestriction.WRITE));
     }
 
     @Override
@@ -248,8 +275,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
             return 0;
         if (controllerFluid == null || controllerFluid.isFluidEqual(iaeFluidStack.getFluidStack())) {
             if (controllerFluid == null) {
-                controllerFluid = iaeFluidStack.getFluidStack().copy();
-                controllerFluid.amount = 1;
+                controller.setFluid(iaeFluidStack.getFluidStack().copy());
             }
 
             BigInteger controllerStorageCurrent = controller.getStorageCurrent();
@@ -275,6 +301,8 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
 
     @Override
     public IAEFluidStack injectItems(IAEFluidStack iaeFluidStack, Actionable actionable, IActionSource iActionSource) {
+        if (readMode.equals(AccessRestriction.NO_ACCESS) || readMode.equals(AccessRestriction.READ))
+            return iaeFluidStack;
         long amount = fill(iaeFluidStack, actionable.equals(Actionable.MODULATE));
         if (amount == 0) return iaeFluidStack;
 
@@ -308,6 +336,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
 
     @Override
     public IAEFluidStack extractItems(IAEFluidStack iaeFluidStack, Actionable actionable, IActionSource iActionSource) {
+        if (readMode.equals(AccessRestriction.NO_ACCESS) || readMode.equals(AccessRestriction.WRITE)) return null;
         IAEFluidStack ready = drain(iaeFluidStack, false);
 
         if (ready != null) {
@@ -318,6 +347,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
 
     @Override
     public IItemList<IAEFluidStack> getAvailableItems(IItemList<IAEFluidStack> iItemList) {
+        if (readMode.equals(AccessRestriction.NO_ACCESS) || readMode.equals(AccessRestriction.WRITE)) return iItemList;
         if (!(getController() instanceof MetaTileEntityYOTTank controller)) return iItemList;
         if (!controller.isWorkingEnabled()) return iItemList;
 
@@ -345,5 +375,45 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         if (getProxy() != null) {
             getProxy().getNode().getGrid().postEvent(new MENetworkCellArrayUpdate());
         }
+    }
+
+    @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+
+        buf.writeInt(this.priority);
+        buf.writeByte(this.readMode.ordinal());
+        buf.writeInt(this.overriddenTickRate);
+        buf.writeBoolean(this.tickRateOverride);
+    }
+
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+
+        this.priority = buf.readInt();
+        this.readMode = AccessRestriction.values()[buf.readByte()];
+        this.overriddenTickRate = buf.readInt();
+        this.tickRateOverride = buf.readBoolean();
+    }
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("Priority", this.priority);
+        data.setInteger("ReadMode", this.readMode.ordinal());
+        data.setInteger("OverriddenTickRate", this.overriddenTickRate);
+        data.setBoolean("TickRateOverride", this.tickRateOverride);
+
+        return super.writeToNBT(data);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+
+        this.priority = data.getInteger("Priority");
+        this.readMode = AccessRestriction.values()[data.getInteger("ReadMode")];
+        this.overriddenTickRate = data.getInteger("OverriddenTickRate");
+        this.tickRateOverride = data.getBoolean("TickRateOverride");
     }
 }

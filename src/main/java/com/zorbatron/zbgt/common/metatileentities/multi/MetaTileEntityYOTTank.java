@@ -131,8 +131,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
 
             if (this.fluid == null || tankFluid.isFluidEqual(this.fluid)) {
                 if (this.fluid == null) {
-                    this.fluid = tankFluid.copy();
-                    this.fluid.amount = 1;
+                    setFluid(tankFluid.copy());
                 }
 
                 if (addFluid(tankFluid.amount, true)) {
@@ -200,6 +199,15 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
                             "YOTTank drained beyond its fluid amount, indicating logic bug: " + this.storageCurrent);
                 }
             }
+        }
+    }
+
+    public void setFluid(FluidStack fluid) {
+        this.fluid = fluid;
+        this.fluid.amount = 1;
+
+        if (this.lockedFluid == null && this.isFluidLocked) {
+            this.lockedFluid = this.fluid.copy();
         }
     }
 

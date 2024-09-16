@@ -18,7 +18,7 @@ public class ZBGTTextures {
     public static TextureArea ITEM_FLUID_OVERLAY;
     public static TextureArea AUTO_PULL;
     public static TextureArea PME;
-    public static TextureArea VOID_FLUID;
+    public static TextureArea AE2_RW_STATES;
 
     public static TextureArea PROGRESS_BAR_CoAL;
 
@@ -44,7 +44,7 @@ public class ZBGTTextures {
         ITEM_FLUID_OVERLAY = TextureArea.fullImage("textures/gui/widget/item_fluid.png");
         AUTO_PULL = TextureArea.fullImage("textures/gui/widget/auto_pull.png");
         PME = TextureArea.fullImage("textures/gui/widget/pme.png");
-        VOID_FLUID = TextureArea.fullImage("textures/gui/widget/button_void_fluid.png");
+        AE2_RW_STATES = TextureArea.fullImage("textures/gui/widget/ae2_rw_states.png");
 
         PROGRESS_BAR_CoAL = TextureArea.fullImage("textures/gui/progress_bar/progress_bar_component_al.png");
 
