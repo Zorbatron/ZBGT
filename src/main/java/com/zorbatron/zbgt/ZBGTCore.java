@@ -9,7 +9,6 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.util.ZBGTLog;
 import com.zorbatron.zbgt.common.CommonProxy;
 import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
@@ -17,6 +16,7 @@ import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
 import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
 import com.zorbatron.zbgt.common.block.blocks.YOTTankCell;
+import com.zorbatron.zbgt.core.sound.ZBGTSoundEvents;
 
 import gregtech.GTInternalTags;
 import gregtech.api.GTValues;
@@ -72,7 +72,7 @@ public class ZBGTCore {
             YOTTANK_CELLS.put(YOTTANK_CELL.getState(type), type);
         }
 
-        ZBGTAPI.preInit();
+        ZBGTSoundEvents.register();
 
         proxy.preInit();
     }

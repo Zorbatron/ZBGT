@@ -598,7 +598,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
 
     @Override
     public boolean isActive() {
-        return isWorkingEnabled();
+        return isWorkingEnabled() && isStructureFormed();
     }
 
     private static class CellMatchWrapper {
