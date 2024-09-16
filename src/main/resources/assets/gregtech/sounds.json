@@ -1,0 +1,12 @@
+{
+  "fx_lo_freq": {
+    "category": "block",
+    "subtitle": "zbgt.subtitle.fx_lo_freq",
+    "sounds": [
+      {
+        "name": "gregtech:fx_lo_freq",
+        "stream": false
+      }
+    ]
+  }
+}

@@ -16,6 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.StringUtils;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -34,6 +35,7 @@ import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
 import com.zorbatron.zbgt.common.block.blocks.YOTTankCell;
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityYOTTankMEHatch;
+import com.zorbatron.zbgt.core.sound.ZBGTSoundEvents;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
@@ -586,6 +588,17 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         this.voiding = buf.readBoolean();
         this.isFluidLocked = buf.readBoolean();
         this.tickRate = buf.readInt();
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public SoundEvent getSound() {
+        return ZBGTSoundEvents.FX_LOW_FREQ;
+    }
+
+    @Override
+    public boolean isActive() {
+        return isWorkingEnabled();
     }
 
     private static class CellMatchWrapper {

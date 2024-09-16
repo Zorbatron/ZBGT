@@ -240,3 +240,7 @@ tile.yottank_cell.yottank_cell_10.tooltip=Capacity: 1,000,000,000,000,000,000,00
 zbgt.laser_enabled.1=Can use
 zbgt.laser_enabled.2= Laser Hatches
 zbgt.substation_enabled= and Substation Hatches
+
+
+# Sound subtitles
+zbgt.subtitle.fx_lo_freq=Low Frequency Buzzing

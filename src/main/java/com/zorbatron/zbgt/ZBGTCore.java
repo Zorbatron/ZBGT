@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.util.ZBGTLog;
 import com.zorbatron.zbgt.common.CommonProxy;
 import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
@@ -70,6 +71,8 @@ public class ZBGTCore {
         for (YOTTankCell.CasingType type : YOTTankCell.CasingType.values()) {
             YOTTANK_CELLS.put(YOTTANK_CELL.getState(type), type);
         }
+
+        ZBGTAPI.preInit();
 
         proxy.preInit();
     }
