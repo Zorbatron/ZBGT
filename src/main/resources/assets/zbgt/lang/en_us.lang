@@ -221,6 +221,8 @@ zbgt.multiblock.pattern.error.casings=§cAll casings must be the same tier§r
 
 zbgt.multiblock.pattern.error.machine_casings=§cAll machine casings must be the same tier§r
 
+zbgt.multiblock.pattern.error.yottank_cells=§cThe cells do not have to be the same tier§r
+
 tile.misc_casing.yottank_casing.name=YOTTank Casing
 
 tile.yottank_cell.yottank_cell_1.name=Fluid Cell Block T1

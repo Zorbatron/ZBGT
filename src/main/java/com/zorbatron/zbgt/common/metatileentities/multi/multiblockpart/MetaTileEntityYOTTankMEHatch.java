@@ -317,6 +317,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         return getProxy().getNode();
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public List<IMEInventoryHandler> getCellArray(IStorageChannel<?> iStorageChannel) {
         if (iStorageChannel == AEApi.instance().storage().getStorageChannel(IFluidStorageChannel.class)) {
