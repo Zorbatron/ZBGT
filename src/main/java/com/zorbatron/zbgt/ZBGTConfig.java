@@ -5,33 +5,33 @@ import net.minecraftforge.common.config.Config;
 @Config(modid = ZBGTCore.MODID)
 public class ZBGTConfig {
 
-    @Config.Name("Multiblock Settings")
     public static MultiblockSettings multiblockSettings = new MultiblockSettings();
 
     public static class MultiblockSettings {
 
-        @Config.Comment({ "Not all of my multiblocks may allow substation energy hatches, but this is a global toggle.",
+        @Config.Comment({
+                "Not all of my multiblocks may allow substation energy hatches, but this is a global toggle. ",
                 "If false, no multiblock will work with substation hatches.",
                 "Default: false" })
         @Config.RequiresMcRestart
-        @Config.Name("Allow Substation Hatches")
+        @Config.Name("allowSubstationHatches")
         public boolean allowSubstationHatches = false;
     }
 
-    @Config.Name("Recipe Settings")
-    @Config.RequiresMcRestart
     public static RecipeSettings recipeSettings = new RecipeSettings();
 
     public static class RecipeSettings {
 
         @Config.Comment({ "How silly are you?",
                 "Default: true" })
-        @Config.Name("Silly Recipes")
+        @Config.RequiresMcRestart
+        @Config.Name("sillyRecipes")
         public boolean enableSillyRecipes = true;
 
         @Config.Comment({ "Enable recipes for the large parallel hatches.",
                 "Default: true" })
-        @Config.Name("Parallel Hatch Recipes")
+        @Config.RequiresMcRestart
+        @Config.Name("parallelHatchRecipes")
         public boolean enableParallelHatchRecipes = true;
     }
 }
