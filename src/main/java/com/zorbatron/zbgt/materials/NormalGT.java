@@ -70,7 +70,7 @@ public class NormalGT {
     }
 
     private static void screws() {
-        Material[] materials = { BlueSteel };
+        Material[] materials = { BlueSteel, CertusQuartz };
 
         setFlags(materials, GENERATE_BOLT_SCREW);
     }
