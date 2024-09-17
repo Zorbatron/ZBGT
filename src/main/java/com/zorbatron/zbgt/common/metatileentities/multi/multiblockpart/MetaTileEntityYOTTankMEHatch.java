@@ -108,13 +108,13 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
                 } else {
                     slower();
                 }
+            }
 
-                boolean isOnline = this.aeProxy != null && this.aeProxy.isActive() && this.aeProxy.isPowered();
-                if (isOnline != lastActive) {
-                    if (!lastActive) notifyME();
-                    lastActive = isOnline;
-                    writeCustomData(GregtechDataCodes.UPDATE_ONLINE_STATUS, buf -> buf.writeBoolean(isOnline));
-                }
+            boolean isOnline = this.aeProxy != null && this.aeProxy.isActive() && this.aeProxy.isPowered();
+            if (isOnline != lastActive) {
+                if (!lastActive) notifyME();
+                lastActive = isOnline;
+                writeCustomData(GregtechDataCodes.UPDATE_ONLINE_STATUS, buf -> buf.writeBoolean(isOnline));
             }
         }
     }
@@ -220,10 +220,10 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
 
     @Override
     protected ModularUI createUI(EntityPlayer entityPlayer) {
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 170, 95);
-        builder.label(6, 6, getMetaFullName());
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 170, 95)
+                .label(6, 6, getMetaFullName());
 
-        builder.dynamicLabel(6, 6 + 9,
+        builder.dynamicLabel(6, 6 + 10,
                 () -> I18n.format("zbgt.machine.yottank_me_hatch.automatic_rate", this.tickRate), 0x404040);
 
         builder.widget(new ImageCycleButtonWidget(6, 6 + 9 + 18, 18, 18, ZBGTTextures.AE2_RW_STATES, 4,
@@ -242,9 +242,9 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
                         .shouldUseBaseBackground()
                         .setTooltipText("zbgt.machine.yottank_me_hatch.override_rate"));
 
-        builder.widget(new ImageWidget(6 + 18 - 2 + 9, 6 + 9 + 18 + 18, 125 + 4, 18, GuiTextures.DISPLAY)
+        builder.widget(new ImageWidget(6 + 18 - 2 + 9, 6 + 9 + 18 * 2, 125 + 4, 18, GuiTextures.DISPLAY)
                 .setTooltip("zbgt.machine.yottank_me_hatch.set_override_rate"));
-        builder.widget(new TextFieldWidget2(6 + 18 + 9, 6 + 14 + 18 + 18, 125, 18,
+        builder.widget(new TextFieldWidget2(6 + 18 + 9, 6 + 14 + 18 * 2, 125, 18,
                 () -> String.valueOf(getOverriddenTickRate()), this::setOverriddenTickRateFromString)
                         .setNumbersOnly(1, 100));
 
@@ -252,6 +252,9 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
                 this::isSticky, this::setSticky)
                         .shouldUseBaseBackground()
                         .setTooltipText("zbgt.machine.yottank_me_hatch.sticky"));
+        builder.dynamicLabel(6 + 18 + 10, 6 + 15 + 18 * 3, () -> this.lastActive ?
+                I18n.format("gregtech.gui.me_network.online") :
+                I18n.format("gregtech.gui.me_network.offline"), 0x404040);
 
         return builder.build(getHolder(), entityPlayer);
     }
