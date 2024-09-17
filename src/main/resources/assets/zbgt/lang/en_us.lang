@@ -58,7 +58,7 @@ zbgt.machine.parallel_hatch.max.1.tooltip=Warning, very high parallel counts on 
 zbgt.machine.parallel_hatch.final.name=The Final Parallel Hatch
 zbgt.machine.parallel_hatch.final.tooltip=Warning, very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag
 
-zbgt.machine.yottank_me_hatch.name=YOTTHatch
+zbgt.machine.yottank_me_hatch.name=YOTHatch
 zbgt.machine.yottank_me_hatch.tooltip=Connects your YOTTank directly to your ME network
 zbgt.machine.yottank_me_hatch.data_stick.name=§YOTTHatch Configuration Data
 zbgt.machine.yottank_me_hatch.automatic_rate=Automatic report rate: %d ticks
