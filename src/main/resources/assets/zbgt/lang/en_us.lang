@@ -61,6 +61,14 @@ zbgt.machine.parallel_hatch.final.tooltip=Warning, very high parallel counts on 
 zbgt.machine.yottank_me_hatch.name=YOTTHatch
 zbgt.machine.yottank_me_hatch.tooltip=Connects your YOTTank directly to your ME network
 zbgt.machine.yottank_me_hatch.data_stick.name=§YOTTHatch Configuration Data
+zbgt.machine.yottank_me_hatch.automatic_rate=Automatic report rate: %d ticks
+zbgt.machine.yottank_me_hatch.override_rate.enabled=Stop overriding the automatic report rate
+zbgt.machine.yottank_me_hatch.override_rate.disabled=Override the automatic report rate
+zbgt.machine.yottank_me_hatch.set_override_rate=Overridden report rate
+zbgt.machine.yottank_me_hatch.visibility=Set visibility
+zbgt.machine.yottank_me_hatch.priority=Priority
+zbgt.machine.yottank_me_hatch.sticky.enabled=Disable sticky mode
+zbgt.machine.yottank_me_hatch.sticky.disabled=Enable sticky mode
 
 
 # Covers

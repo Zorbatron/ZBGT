@@ -19,6 +19,7 @@ public class ZBGTTextures {
     public static TextureArea AUTO_PULL;
     public static TextureArea PME;
     public static TextureArea AE2_RW_STATES;
+    public static TextureArea SLIME_BALL;
 
     public static TextureArea PROGRESS_BAR_CoAL;
 
@@ -45,6 +46,7 @@ public class ZBGTTextures {
         AUTO_PULL = TextureArea.fullImage("textures/gui/widget/auto_pull.png");
         PME = TextureArea.fullImage("textures/gui/widget/pme.png");
         AE2_RW_STATES = TextureArea.fullImage("textures/gui/widget/ae2_rw_states.png");
+        SLIME_BALL = TextureArea.fullImage("textures/gui/widget/slimeball.png");
 
         PROGRESS_BAR_CoAL = TextureArea.fullImage("textures/gui/progress_bar/progress_bar_component_al.png");
 

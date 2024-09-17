@@ -1,10 +1,13 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart;
 
+import static com.zorbatron.zbgt.api.capability.ZBGTDataCodes.*;
+
 import java.math.BigInteger;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,7 +22,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import com.zorbatron.zbgt.api.capability.ZBGTDataCodes;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
 
@@ -48,6 +50,7 @@ import gregtech.api.capability.IDataStickIntractable;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.ImageCycleButtonWidget;
+import gregtech.api.gui.widgets.ImageWidget;
 import gregtech.api.gui.widgets.TextFieldWidget2;
 import gregtech.api.gui.widgets.ToggleButtonWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -65,6 +68,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
 
     private boolean tickRateOverride;
     private int overriddenTickRate;
+    private boolean sticky;
 
     private AENetworkProxy aeProxy;
     private int tickRate;
@@ -79,6 +83,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         this.lastAmount = BigInteger.ZERO;
         this.tickRateOverride = false;
         this.overriddenTickRate = 20;
+        this.sticky = false;
     }
 
     @Override
@@ -90,7 +95,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
     public void update() {
         super.update();
 
-        if (getOffsetTimer() % (tickRateOverride ? overriddenTickRate : tickRate) == 0) {
+        if (getOffsetTimer() % (tickRateOverride ? overriddenTickRate : tickRate) == 0 && !getWorld().isRemote) {
             if (getController() instanceof MetaTileEntityYOTTank metaTileEntityYOTTank) {
                 if (isChanged(metaTileEntityYOTTank)) {
                     notifyME();
@@ -129,12 +134,14 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
     private void faster() {
         if (this.tickRate > 15) {
             this.tickRate -= 5;
+            writeCustomData(AUTOMATIC_RATE_CHANGE, buf -> buf.writeInt(this.tickRate));
         }
     }
 
     private void slower() {
         if (this.tickRate < 100) {
             this.tickRate += 5;
+            writeCustomData(AUTOMATIC_RATE_CHANGE, buf -> buf.writeInt(this.tickRate));
         }
     }
 
@@ -142,7 +149,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         this.readMode = AccessRestriction.values()[readMode];
         notifyME();
         markDirty();
-        writeCustomData(ZBGTDataCodes.MODE_CHANGE, buf -> buf.writeInt(readMode));
+        writeCustomData(MODE_CHANGE, buf -> buf.writeInt(readMode));
     }
 
     private int getReadMode() {
@@ -153,7 +160,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         this.priority = priority;
         notifyME();
         markDirty();
-        writeCustomData(ZBGTDataCodes.PRIORITY_CHANGE, buf -> buf.writeInt(priority));
+        writeCustomData(PRIORITY_CHANGE, buf -> buf.writeInt(priority));
     }
 
     private void setPriorityFromString(String priority) {
@@ -171,7 +178,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
     private void setOverriddenTickRate(int overriddenTickRate) {
         this.overriddenTickRate = overriddenTickRate;
         markDirty();
-        writeCustomData(ZBGTDataCodes.RATE_CHANGE, buf -> buf.writeInt(overriddenTickRate));
+        writeCustomData(RATE_CHANGE, buf -> buf.writeInt(overriddenTickRate));
     }
 
     private int getOverriddenTickRate() {
@@ -193,7 +200,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
     private void setTickRateOverride(boolean tickRateOverride) {
         this.tickRateOverride = tickRateOverride;
         markDirty();
-        writeCustomData(ZBGTDataCodes.RATE_ACTIVATE, buf -> buf.writeBoolean(tickRateOverride));
+        writeCustomData(RATE_ACTIVATE, buf -> buf.writeBoolean(tickRateOverride));
     }
 
     private boolean isTickRateOverride() {
@@ -205,19 +212,35 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 170, 95);
         builder.label(6, 6, getMetaFullName());
 
-        builder.widget(new ImageCycleButtonWidget(6, 6 + 9, 18, 18, ZBGTTextures.AE2_RW_STATES, 4,
-                this::getReadMode, this::setReadMode).shouldUseBaseBackground());
+        builder.dynamicLabel(6, 6 + 9,
+                () -> I18n.format("zbgt.machine.yottank_me_hatch.automatic_rate", this.tickRate), 0x404040);
 
-        builder.widget(new TextFieldWidget2(6 + 18, 6 + 9, 150, 18,
+        builder.widget(new ImageCycleButtonWidget(6, 6 + 9 + 18, 18, 18, ZBGTTextures.AE2_RW_STATES, 4,
+                this::getReadMode, this::setReadMode)
+                        .shouldUseBaseBackground()
+                        .setTooltipHoverString("zbgt.machine.yottank_me_hatch.visibility"));
+
+        builder.widget(new ImageWidget(6 + 18 - 2 + 9, 6 + 9 + 18, 125 + 4, 18, GuiTextures.DISPLAY)
+                .setTooltip("zbgt.machine.yottank_me_hatch.priority"));
+        builder.widget(new TextFieldWidget2(6 + 18 + 9, 6 + 14 + 18, 125, 18,
                 () -> String.valueOf(getPriority()), this::setPriorityFromString)
                         .setNumbersOnly(Integer.MIN_VALUE, Integer.MAX_VALUE));
 
-        builder.widget(new ToggleButtonWidget(6, 6 + 9 + 18, 18, 18, GuiTextures.BUTTON_LOCK,
+        builder.widget(new ToggleButtonWidget(6, 6 + 9 + 18 * 2, 18, 18, GuiTextures.BUTTON_LOCK,
                 this::isTickRateOverride, this::setTickRateOverride)
-                        .shouldUseBaseBackground());
-        builder.widget(new TextFieldWidget2(6 + 18, 6 + 9 + 18, 150, 18,
+                        .shouldUseBaseBackground()
+                        .setTooltipText("zbgt.machine.yottank_me_hatch.override_rate"));
+
+        builder.widget(new ImageWidget(6 + 18 - 2 + 9, 6 + 9 + 18 + 18, 125 + 4, 18, GuiTextures.DISPLAY)
+                .setTooltip("zbgt.machine.yottank_me_hatch.set_override_rate"));
+        builder.widget(new TextFieldWidget2(6 + 18 + 9, 6 + 14 + 18 + 18, 125, 18,
                 () -> String.valueOf(getOverriddenTickRate()), this::setOverriddenTickRateFromString)
                         .setNumbersOnly(1, 100));
+
+        builder.widget(new ToggleButtonWidget(6, 6 + 9 + 18 * 3, 18, 18, ZBGTTextures.SLIME_BALL,
+                this::isSticky, this::setSticky)
+                        .shouldUseBaseBackground()
+                        .setTooltipText("zbgt.machine.yottank_me_hatch.sticky"));
 
         return builder.build(getHolder(), entityPlayer);
     }
@@ -309,13 +332,17 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
 
     @Override
     public boolean isPrioritized(IAEFluidStack iaeFluidStack) {
-        return true;
+        if (getController() instanceof MetaTileEntityYOTTank metaTileEntityYOTTank) {
+            return metaTileEntityYOTTank.getFluid().isFluidEqual(iaeFluidStack.getFluidStack());
+        }
+
+        return false;
     }
 
     @Override
     public boolean canAccept(IAEFluidStack iaeFluidStack) {
         return (fill(iaeFluidStack, false) > 0) &&
-                !(readMode.equals(AccessRestriction.NO_ACCESS) || readMode.equals(AccessRestriction.WRITE));
+                !(readMode.equals(AccessRestriction.NO_ACCESS) || readMode.equals(AccessRestriction.READ));
     }
 
     @Override
@@ -443,6 +470,17 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         return AEApi.instance().storage().getStorageChannel(IFluidStorageChannel.class);
     }
 
+    @Override
+    public boolean isSticky() {
+        return this.sticky;
+    }
+
+    private void setSticky(boolean sticky) {
+        this.sticky = sticky;
+        notifyME();
+        writeCustomData(STICKY_CHANGE, buf -> buf.writeBoolean(sticky));
+    }
+
     public void shutdown() {
         if (getProxy() != null) {
             getProxy().getNode().getGrid().postEvent(new MENetworkCellArrayUpdate());
@@ -473,14 +511,18 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
 
-        if (dataId == ZBGTDataCodes.MODE_CHANGE) {
+        if (dataId == MODE_CHANGE) {
             this.readMode = AccessRestriction.values()[buf.readInt()];
-        } else if (dataId == ZBGTDataCodes.PRIORITY_CHANGE) {
+        } else if (dataId == PRIORITY_CHANGE) {
             this.priority = buf.readInt();
-        } else if (dataId == ZBGTDataCodes.RATE_CHANGE) {
+        } else if (dataId == RATE_CHANGE) {
             this.overriddenTickRate = buf.readInt();
-        } else if (dataId == ZBGTDataCodes.RATE_ACTIVATE) {
+        } else if (dataId == RATE_ACTIVATE) {
             this.tickRateOverride = buf.readBoolean();
+        } else if (dataId == AUTOMATIC_RATE_CHANGE) {
+            this.tickRate = buf.readInt();
+        } else if (dataId == STICKY_CHANGE) {
+            this.sticky = buf.readBoolean();
         }
     }
 
