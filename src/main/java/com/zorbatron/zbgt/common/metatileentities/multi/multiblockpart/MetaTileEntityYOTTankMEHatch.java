@@ -46,6 +46,7 @@ import appeng.me.helpers.IGridProxyable;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.capability.IDataStickIntractable;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
@@ -75,6 +76,8 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
     private BigInteger lastAmount;
     private FluidStack lastFluid;
 
+    private boolean lastActive;
+
     public MetaTileEntityYOTTankMEHatch(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier);
         this.priority = 0;
@@ -84,6 +87,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         this.tickRateOverride = false;
         this.overriddenTickRate = 20;
         this.sticky = false;
+        this.lastActive = false;
     }
 
     @Override
@@ -103,6 +107,13 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
                     updateLast(metaTileEntityYOTTank);
                 } else {
                     slower();
+                }
+
+                boolean isOnline = this.aeProxy != null && this.aeProxy.isActive() && this.aeProxy.isPowered();
+                if (isOnline != lastActive) {
+                    if (!lastActive) notifyME();
+                    lastActive = isOnline;
+                    writeCustomData(GregtechDataCodes.UPDATE_ONLINE_STATUS, buf -> buf.writeBoolean(isOnline));
                 }
             }
         }
@@ -524,6 +535,8 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
             this.tickRate = buf.readInt();
         } else if (dataId == STICKY_CHANGE) {
             this.sticky = buf.readBoolean();
+        } else if (dataId == GregtechDataCodes.UPDATE_ONLINE_STATUS) {
+            this.lastActive = buf.readBoolean();
         }
     }
 
@@ -533,6 +546,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         data.setInteger("ReadMode", this.readMode.ordinal());
         data.setInteger("OverriddenTickRate", this.overriddenTickRate);
         data.setBoolean("TickRateOverride", this.tickRateOverride);
+        data.setBoolean("Sticky", this.sticky);
 
         return super.writeToNBT(data);
     }
@@ -545,6 +559,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         this.readMode = AccessRestriction.values()[data.getInteger("ReadMode")];
         this.overriddenTickRate = data.getInteger("OverriddenTickRate");
         this.tickRateOverride = data.getBoolean("TickRateOverride");
+        this.sticky = data.getBoolean("Sticky");
     }
 
     @Override
@@ -563,6 +578,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         tag.setInteger("ReadMode", this.readMode.ordinal());
         tag.setInteger("OverriddenTickRate", this.overriddenTickRate);
         tag.setBoolean("TickRateOverride", this.tickRateOverride);
+        tag.setBoolean("Sticky", this.sticky);
 
         return tag;
     }
@@ -584,5 +600,6 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         setReadMode(tag.getInteger("ReadMode"));
         setOverriddenTickRate(tag.getInteger("OverriddenTickRate"));
         setTickRateOverride(tag.getBoolean("TickRateOverride"));
+        setSticky(tag.getBoolean("Sticky"));
     }
 }
