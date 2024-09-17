@@ -25,11 +25,13 @@ Ported the following multiblocks from GT:NH:
 - Mega Alloy Blast Smelter (mABS)
 - Precise Assembler (PRASS) (Does Assembler, Circuit Assembler, and Assembly Line recipes xD)
 - Component Assembly Line (CoAL)
+- YOTTank and YOTHatch
 
 My multiblocks:
 - Quad EBF (qEBF)
+- Queezer
 
-Images (_In order with the above list_):
+### Images (_In order with the above list_):
 ![](images/mega_ebf.png)
 ![](images/mega_lcr.png)
 ![](images/mega_vf.png)
@@ -37,8 +39,13 @@ Images (_In order with the above list_):
 ![](images/mega_abs.png)
 ![](images/prass.png)
 ![](images/coal.png)
+![](images/yottank.png)
+![](images/yothatch.png)
 
+<br></br>
+### My multiblocks:
 ![](images/quad_ebf.png)
+![](images/queezer.png)
 
 ### Multiblock Parts:
 
