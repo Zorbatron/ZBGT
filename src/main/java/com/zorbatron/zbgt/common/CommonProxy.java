@@ -7,7 +7,10 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -79,5 +82,12 @@ public class CommonProxy {
         ItemBlock itemBlock = producer.apply(block);
         itemBlock.setRegistryName(Objects.requireNonNull(block.getRegistryName()));
         return itemBlock;
+    }
+
+    @SubscribeEvent
+    public static void syncConfigValues(ConfigChangedEvent.OnConfigChangedEvent event) {
+        if (event.getModID().equals(ZBGTCore.MODID)) {
+            ConfigManager.sync(ZBGTCore.MODID, Config.Type.INSTANCE);
+        }
     }
 }
