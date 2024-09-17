@@ -461,13 +461,20 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
 
     @Override
     public IItemList<IAEFluidStack> getAvailableItems(IItemList<IAEFluidStack> iItemList) {
-        if (readMode.equals(AccessRestriction.NO_ACCESS) || readMode.equals(AccessRestriction.WRITE)) return iItemList;
+        if (readMode.equals(AccessRestriction.NO_ACCESS)) return iItemList;
+        if (readMode.equals(AccessRestriction.WRITE)) {
+            iItemList.add(null);
+            return iItemList;
+        }
         if (!(getController() instanceof MetaTileEntityYOTTank controller)) return iItemList;
         if (!controller.isWorkingEnabled()) return iItemList;
 
         final BigInteger controllerCurrent = controller.getStorageCurrent();
 
-        if (controller.getFluid() == null || controllerCurrent.signum() <= 0) return iItemList;
+        if (controller.getFluid() == null || controllerCurrent.signum() <= 0) {
+            iItemList.add(null);
+            return iItemList;
+        }
 
         long ready;
         if (controllerCurrent.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) >= 0) {
