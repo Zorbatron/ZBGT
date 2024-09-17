@@ -3,6 +3,7 @@ package com.zorbatron.zbgt.recipe;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 
+import com.zorbatron.zbgt.ZBGTConfig;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
@@ -17,7 +18,9 @@ public class MultiblockPartRecipes {
 
     protected static void init() {
         misc();
-        largeParallelHatches();
+        if (ZBGTConfig.recipeSettings.enableParallelHatchRecipes) {
+            largeParallelHatches();
+        }
     }
 
     private static void misc() {
