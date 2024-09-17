@@ -119,7 +119,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         }
     }
 
-    private void notifyME() {
+    public void notifyME() {
         if (getProxy() != null) {
             if (getProxy().getNode() != null) {
                 getProxy().getNode().getGrid().postEvent(new MENetworkCellArrayUpdate());
@@ -290,7 +290,6 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         return AECableType.SMART;
     }
 
-    @Nullable
     private AENetworkProxy createProxy() {
         AENetworkProxy proxy = new AENetworkProxy(this, "mte_proxy", this.getStackForm(), true);
         proxy.setFlags(GridFlags.REQUIRE_CHANNEL);
@@ -501,12 +500,6 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         this.sticky = sticky;
         notifyME();
         writeCustomData(STICKY_CHANGE, buf -> buf.writeBoolean(sticky));
-    }
-
-    public void shutdown() {
-        if (getProxy() != null) {
-            getProxy().getNode().getGrid().postEvent(new MENetworkCellArrayUpdate());
-        }
     }
 
     @Override

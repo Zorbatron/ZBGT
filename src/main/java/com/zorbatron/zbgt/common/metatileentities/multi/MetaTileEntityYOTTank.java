@@ -261,16 +261,12 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
      * Attempts to remove {@code amount} of fluid from the tank if possible, does not do partial removals.
      *
      * @param amount The millibucket amount of the fluid to remove
-     * @return True if successfully removed amount, false if no fluid was removed.
      */
-    public boolean reduceFluid(long amount) {
+    public void reduceFluid(long amount) {
         final BigInteger bigAmount = BigInteger.valueOf(amount);
 
-        if (this.storageCurrent.compareTo(bigAmount) < 0) {
-            return false;
-        } else {
+        if (this.storageCurrent.compareTo(bigAmount) >= 0) {
             this.storageCurrent = this.storageCurrent.subtract(bigAmount);
-            return true;
         }
     }
 
@@ -292,6 +288,8 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         }
 
         cells.forEach(casingType -> this.storage = this.storage.add(casingType.getCapacity()));
+
+        resetMEHatches();
     }
 
     protected void initializeAbilities() {
@@ -303,12 +301,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
     public void invalidateStructure() {
         this.storage = BigInteger.ZERO;
         resetTileAbilities();
-
-        for (IMultiblockPart multiblockPart : this.getMultiblockParts()) {
-            if (multiblockPart instanceof MetaTileEntityYOTTankMEHatch meHatch) {
-                meHatch.shutdown();
-            }
-        }
+        resetMEHatches();
 
         super.invalidateStructure();
     }
@@ -316,6 +309,14 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
     private void resetTileAbilities() {
         this.importFluids = new FluidTankList(true);
         this.exportFluids = new FluidTankList(true);
+    }
+
+    private void resetMEHatches() {
+        for (IMultiblockPart multiblockPart : this.getMultiblockParts()) {
+            if (multiblockPart instanceof MetaTileEntityYOTTankMEHatch meHatch) {
+                meHatch.notifyME();
+            }
+        }
     }
 
     @Override
@@ -469,7 +470,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
     protected String getLockedFluidName() {
         if (!isFluidLocked) return "zbgt.machine.yottank.none";
         if (lockedFluid == null) return "zbgt.machine.yottank.next";
-        return lockedFluid.getUnlocalizedName();
+        return lockedFluid.getLocalizedName();
     }
 
     protected static final Supplier<TraceabilityPredicate> CELL_PREDICATE = () -> new TraceabilityPredicate(
