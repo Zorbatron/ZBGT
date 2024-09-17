@@ -20,6 +20,7 @@ public class ZBGTConfig {
 
         @Config.Comment({ "Let YOTTanks play their \"whoomp\" \"whoomp\" noise",
                 "Default: false" })
+        @Config.Name("YOTTank Sounds")
         public boolean yottankSound = false;
     }
 
