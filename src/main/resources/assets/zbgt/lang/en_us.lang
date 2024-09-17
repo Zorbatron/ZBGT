@@ -58,6 +58,18 @@ zbgt.machine.parallel_hatch.max.1.tooltip=Warning, very high parallel counts on 
 zbgt.machine.parallel_hatch.final.name=The Final Parallel Hatch
 zbgt.machine.parallel_hatch.final.tooltip=Warning, very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag
 
+zbgt.machine.yottank_me_hatch.name=YOTTHatch
+zbgt.machine.yottank_me_hatch.tooltip=Connects your YOTTank directly to your ME network
+zbgt.machine.yottank_me_hatch.data_stick.name=§YOTTHatch Configuration Data
+zbgt.machine.yottank_me_hatch.automatic_rate=Automatic report rate: %d ticks
+zbgt.machine.yottank_me_hatch.override_rate.enabled=Stop overriding the automatic report rate
+zbgt.machine.yottank_me_hatch.override_rate.disabled=Override the automatic report rate
+zbgt.machine.yottank_me_hatch.set_override_rate=Overridden report rate
+zbgt.machine.yottank_me_hatch.visibility=Set visibility
+zbgt.machine.yottank_me_hatch.priority=Priority
+zbgt.machine.yottank_me_hatch.sticky.enabled=Disable sticky mode
+zbgt.machine.yottank_me_hatch.sticky.disabled=Enable sticky mode
+
 
 # Covers
 metaitem.cover.dual_cover.lv.name=LV Dual Cover
@@ -163,6 +175,15 @@ recipemap.coal_recipes.name=Component Assembly Line
 zbgt.machine.queezer.name=Queezer
 zbgt.machine.queezer.tooltip=A quad freezer that has 4 innate parallels
 
+zbgt.machine.yottank.name=YOTTank
+zbgt.machine.yottank.max_capacity=Capacity: %s
+zbgt.machine.yottank.current_capacity=Stored: %s
+zbgt.machine.yottank.fluid=Current fluid: %s
+zbgt.machine.yottank.locked_fluid=Locked fluid: %s
+zbgt.machine.yottank.none=None
+zbgt.machine.yottank.next=None. Will lock to the next fluid
+zbgt.machine.yottank.tick_rate=Tick rate:
+
 
 # Multiblock Casings
 tile.multiblock_casing.precise_0.name=Imprecise Electronic Unit Casing
@@ -176,7 +197,7 @@ tile.multiblock_casing.precise_2.name.short=MK-II
 tile.multiblock_casing.precise_3.name.short=MK-III
 tile.multiblock_casing.precise_4.name.short=MK-IV
 
-tile.multiblock_casing.iridium.name=Advanced Iridium Plated Machine Casing
+tile.material_casing.iridium.name=Advanced Iridium Plated Machine Casing
 zbgt.multiblock.pattern.precise_tier=§cAll casings must be the same tier§r
 
 tile.coal_casing.ulv.name=Component Assembly Line Casing (ULV)
@@ -200,7 +221,37 @@ zbgt.multiblock.pattern.error.casings=§cAll casings must be the same tier§r
 
 zbgt.multiblock.pattern.error.machine_casings=§cAll machine casings must be the same tier§r
 
-# Random
+zbgt.multiblock.pattern.error.yottank_cells=§cThe cells do not have to be the same tier§r
+
+tile.misc_casing.yottank_casing.name=YOTTank Casing
+
+tile.yottank_cell.yottank_cell_1.name=Fluid Cell Block T1
+tile.yottank_cell.yottank_cell_1.tooltip=Capacity: 1,000,000 L
+tile.yottank_cell.yottank_cell_2.name=Fluid Cell Block T2
+tile.yottank_cell.yottank_cell_2.tooltip=Capacity: 100,000,000 L
+tile.yottank_cell.yottank_cell_3.name=Fluid Cell Block T3
+tile.yottank_cell.yottank_cell_3.tooltip=Capacity: 10,000,000,000 L
+tile.yottank_cell.yottank_cell_4.name=Fluid Cell Block T4
+tile.yottank_cell.yottank_cell_4.tooltip=Capacity: 1,000,000,000,000 L
+tile.yottank_cell.yottank_cell_5.name=Fluid Cell Block T5
+tile.yottank_cell.yottank_cell_5.tooltip=Capacity: 100,000,000,000,000 L
+tile.yottank_cell.yottank_cell_6.name=Fluid Cell Block T6
+tile.yottank_cell.yottank_cell_6.tooltip=Capacity: 10,000,000,000,000,000 L
+tile.yottank_cell.yottank_cell_7.name=Fluid Cell Block T7
+tile.yottank_cell.yottank_cell_7.tooltip=Capacity: 1,000,000,000,000,000,000 L
+tile.yottank_cell.yottank_cell_8.name=Fluid Cell Block T8
+tile.yottank_cell.yottank_cell_8.tooltip=Capacity: 100,000,000,000,000,000,000 L
+tile.yottank_cell.yottank_cell_9.name=Fluid Cell Block T9
+tile.yottank_cell.yottank_cell_9.tooltip=Capacity: 100,000,000,000,000,00,000,000 L
+tile.yottank_cell.yottank_cell_10.name=Fluid Cell Block T10
+tile.yottank_cell.yottank_cell_10.tooltip=Capacity: 1,000,000,000,000,000,000,000,000 L
+
+
+# Misc
 zbgt.laser_enabled.1=Can use
 zbgt.laser_enabled.2= Laser Hatches
 zbgt.substation_enabled= and Substation Hatches
+
+
+# Sound subtitles
+zbgt.subtitle.fx_lo_freq=Low Frequency Buzzing

@@ -10,27 +10,27 @@
     "variant": {
       "precise_0": {
         "textures": {
-          "all": "gregtech:blocks/casings/multiblocks/precise_0"
+          "all": "gregtech:blocks/casings/precise/precise_0"
         }
       },
       "precise_1": {
         "textures": {
-          "all": "gregtech:blocks/casings/multiblocks/precise_1"
+          "all": "gregtech:blocks/casings/precise/precise_1"
         }
       },
       "precise_2": {
         "textures": {
-          "all": "gregtech:blocks/casings/multiblocks/precise_2"
+          "all": "gregtech:blocks/casings/precise/precise_2"
         }
       },
       "precise_3": {
         "textures": {
-          "all": "gregtech:blocks/casings/multiblocks/precise_3"
+          "all": "gregtech:blocks/casings/precise/precise_3"
         }
       },
       "precise_4": {
         "textures": {
-          "all": "gregtech:blocks/casings/multiblocks/precise_4"
+          "all": "gregtech:blocks/casings/precise/precise_4"
         }
       }
     }

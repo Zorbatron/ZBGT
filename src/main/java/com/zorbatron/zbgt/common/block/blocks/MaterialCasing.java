@@ -13,11 +13,11 @@ import gregtech.api.block.VariantBlock;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 
-public class ZBGTBlockMultiblockCasing extends VariantBlock<ZBGTBlockMultiblockCasing.CasingType> {
+public class MaterialCasing extends VariantBlock<MaterialCasing.CasingType> {
 
-    public ZBGTBlockMultiblockCasing() {
+    public MaterialCasing() {
         super(net.minecraft.block.material.Material.IRON);
-        setTranslationKey("multiblock_casing");
+        setTranslationKey("material_casing");
         setHardness(5.0f);
         setResistance(10.0f);
         setSoundType(SoundType.METAL);
