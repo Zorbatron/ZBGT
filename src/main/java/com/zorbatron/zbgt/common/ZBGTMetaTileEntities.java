@@ -121,9 +121,11 @@ public class ZBGTMetaTileEntities {
         YOTTANK = registerMetaTileEntity(18059,
                 new MetaTileEntityYOTTank(zbgtId("yottank")));
 
-        for (int x = 1; x <= 3; x++) {
-            MEGA_FUSION[x - 1] = registerMetaTileEntity(18059 + x,
-                    new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_" + x), x));
-        }
+        MEGA_FUSION[0] = registerMetaTileEntity(18060,
+                new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_1"), 1));
+        MEGA_FUSION[1] = registerMetaTileEntity(18061,
+                new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_2"), 2));
+        MEGA_FUSION[2] = registerMetaTileEntity(18062,
+                new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_3"), 3));
     }
 }
