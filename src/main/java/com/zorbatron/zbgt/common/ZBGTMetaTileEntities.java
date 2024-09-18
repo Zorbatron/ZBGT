@@ -34,6 +34,7 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityMegaOCU MEGA_OCU;
     public static MetaTileEntityMegaABS MEGA_ABS;
     public static MetaTileEntityPreciseAssembler PRASS;
+    public static MetaTileEntityMegaFusionReactor[] MEGA_FUSION = new MetaTileEntityMegaFusionReactor[3];
 
     public static MetaTileEntityCoAL CoAL;
 
@@ -119,5 +120,10 @@ public class ZBGTMetaTileEntities {
 
         YOTTANK = registerMetaTileEntity(18059,
                 new MetaTileEntityYOTTank(zbgtId("yottank")));
+
+        for (int x = 1; x <= 3; x++) {
+            MEGA_FUSION[x - 1] = registerMetaTileEntity(18059 + x,
+                    new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_" + x), x));
+        }
     }
 }
