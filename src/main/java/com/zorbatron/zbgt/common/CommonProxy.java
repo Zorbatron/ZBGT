@@ -30,7 +30,6 @@ import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.VariantItemBlock;
 import gregtech.api.cover.CoverDefinition;
-import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
 import gregtech.api.unification.material.event.MaterialEvent;
 
 @Mod.EventBusSubscriber(modid = ZBGTCore.MODID)
@@ -52,9 +51,6 @@ public class CommonProxy {
         for (int i = 1; i < GTValues.VN.length; i++) {
             CoALProperty.registerCasingTier(i, GTValues.VN[i]);
         }
-
-        FusionEUToStartProperty.registerFusionTier(GTValues.UHV, "(MK4)");
-        FusionEUToStartProperty.registerFusionTier(GTValues.UEV, "(MK5)");
 
         ZBGTRecipeMaps.modifyMaps();
 
