@@ -517,6 +517,11 @@ public class MetaTileEntityMegaFusionReactor extends RecipeMapMultiblockControll
         }
 
         @Override
+        public long getMaximumOverclockVoltage() {
+            return energyContainer.getInputVoltage();
+        }
+
+        @Override
         public void updateWorkable() {
             super.updateWorkable();
             // Drain heat when the reactor is not active, is paused via soft mallet, or does not have enough energy and
