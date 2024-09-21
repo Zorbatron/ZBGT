@@ -1,8 +1,5 @@
 package com.zorbatron.zbgt;
 
-import static gregtech.api.unification.material.Materials.*;
-import static gregtech.common.items.MetaItems.*;
-
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.items.IItemHandler;
