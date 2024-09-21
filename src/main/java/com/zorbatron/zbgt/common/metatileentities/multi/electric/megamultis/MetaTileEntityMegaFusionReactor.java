@@ -1,15 +1,22 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis;
 
+import java.util.Collections;
+import java.util.List;
+
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.google.common.collect.Lists;
 import com.zorbatron.zbgt.api.metatileentity.LaserCapableRecipeMapMultiblockController;
 
 import gregtech.api.GTValues;
+import gregtech.api.capability.GregtechDataCodes;
+import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.impl.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -17,6 +24,8 @@ import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
@@ -32,10 +41,12 @@ import gregtech.common.blocks.MetaBlocks;
 public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultiblockController {
 
     private final int tier;
+    private EnergyContainerList inputEnergyContainers;
+    private long heat = 0;
 
     public MetaTileEntityMegaFusionReactor(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, RecipeMaps.FUSION_RECIPES);
-        this.recipeMapWorkable = new FusionRecipeLogic(this);
+        this.recipeMapWorkable = new MegaFusionRecipeLogic(this);
         this.tier = tier;
     }
 
@@ -58,18 +69,21 @@ public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultib
                 .where('C', states(getCasingState()))
                 .where('H', states(getCoilState()))
                 .where('B', states(getGlassState()))
-                .where('I', abilities(MultiblockAbility.IMPORT_FLUIDS, MultiblockAbility.EXPORT_FLUIDS))
+                .where('I', abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1)
+                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1))
+                        .or(states(getGlassState())))
                 .where('E', autoEnergyInputs(1, 32, 32)
                         .or(states(getCasingState())))
                 .where('F', frames(getFrameMaterial()))
+                .where('#', air())
                 .build();
     }
 
     protected IBlockState getCasingState() {
         BlockFusionCasing.CasingType casingType;
         casingType = switch (tier) {
-            case (2) -> BlockFusionCasing.CasingType.FUSION_CASING_MK2;
-            case (3) -> BlockFusionCasing.CasingType.FUSION_CASING_MK3;
+            case (GTValues.ZPM) -> BlockFusionCasing.CasingType.FUSION_CASING_MK2;
+            case (GTValues.UV) -> BlockFusionCasing.CasingType.FUSION_CASING_MK3;
             default -> BlockFusionCasing.CasingType.FUSION_CASING;
         };
 
@@ -78,7 +92,7 @@ public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultib
 
     protected IBlockState getCoilState() {
         BlockFusionCasing.CasingType casingType;
-        if (tier == 1) {
+        if (tier == GTValues.LuV) {
             casingType = BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL;
         } else {
             casingType = BlockFusionCasing.CasingType.FUSION_COIL;
@@ -93,8 +107,8 @@ public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultib
 
     protected Material getFrameMaterial() {
         return switch (tier) {
-            case (2) -> Materials.Duranium;
-            case (3) -> Materials.Neutronium;
+            case (GTValues.ZPM) -> Materials.Duranium;
+            case (GTValues.UV) -> Materials.Neutronium;
             default -> Materials.NaquadahAlloy;
         };
     }
@@ -151,9 +165,9 @@ public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultib
     protected static final String[] Layer1 = {
             "                                               ",
             "                    FCBBBCF                    ",
-            "                   CC     CC                   ",
-            "                CCCCC     CCCCC                ",
-            "              CCCCCCC     CCCCCCC              ",
+            "                   CC#####CC                   ",
+            "                CCCCC#####CCCCC                ",
+            "              CCCCCCC#####CCCCCCC              ",
             "            CCCCCCC FCBBBCF CCCCCCC            ",
             "           CCCCC               CCCCC           ",
             "          CCCC                   CCCC          ",
@@ -170,11 +184,11 @@ public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultib
             "   CCC                                   CCC   ",
             "  CCC                                     CCC  ",
             " FCCCF                                   FCCCF ",
-            " C   C                                   C   C ",
-            " B   B                                   B   B ",
-            " B   B                                   B   B ",
-            " B   B                                   B   B ",
-            " C   C                                   C   C ",
+            " C###C                                   C###C ",
+            " B###B                                   B###B ",
+            " B###B                                   B###B ",
+            " B###B                                   B###B ",
+            " C###C                                   C###C ",
             " FCCCF                                   FCCCF ",
             "  CCC                                     CCC  ",
             "   CCC                                   CCC   ",
@@ -191,19 +205,19 @@ public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultib
             "          CCCC                   CCCC          ",
             "           CCCCC               CCCCC           ",
             "            CCCCCCC FCBBBCF CCCCCCC            ",
-            "              CCCCCCC     CCCCCCC              ",
-            "                CCCCC     CCCCC                ",
-            "                   CC     CC                   ",
+            "              CCCCCCC#####CCCCCCC              ",
+            "                CCCCC#####CCCCC                ",
+            "                   CC#####CC                   ",
             "                    FCBBBCF                    ",
             "                                               " };
 
     protected static final String[] Layer2 = {
             "                    FCCCCCF                    ",
-            "                   CC     CC                   ",
-            "                CCCCC     CCCCC                ",
+            "                   CC#####CC                   ",
+            "                CCCCC#####CCCCC                ",
             "              CCCCCHHHHHHHHHCCCCC              ",
-            "            CCCCHHHCC     CCHHHCCCC            ",
-            "           CCCHHCCCCC     CCCCCHHCCC           ",
+            "            CCCCHHHCC#####CCHHHCCCC            ",
+            "           CCCHHCCCCC#####CCCCCHHCCC           ",
             "          ECHHCCCCC FCCCCCF CCCCCHHCE          ",
             "         CCHCCCC               CCCCHCC         ",
             "        CCHCCC                   CCCHCC        ",
@@ -219,11 +233,11 @@ public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultib
             "  CCHCC                                 CCHCC  ",
             " CCHCC                                   CCHCC ",
             "FCCHCCF                                 FCCHCCF",
-            "C  H  C                                 C  H  C",
-            "C  H  C                                 C  H  C",
-            "C  H  C                                 C  H  C",
-            "C  H  C                                 C  H  C",
-            "C  H  C                                 C  H  C",
+            "C##H##C                                 C##H##C",
+            "C##H##C                                 C##H##C",
+            "C##H##C                                 C##H##C",
+            "C##H##C                                 C##H##C",
+            "C##H##C                                 C##H##C",
             "FCCHCCF                                 FCCHCCF",
             " CCHCC                                   CCHCC ",
             "  CCHCC                                 CCHCC  ",
@@ -239,20 +253,20 @@ public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultib
             "        CCHCCC                   CCCHCC        ",
             "         CCHCCCC               CCCCHCC         ",
             "          ECHHCCCCC FCCCCCF CCCCCHHCE          ",
-            "           CCCHHCCCCC     CCCCCHHCCC           ",
-            "            CCCCHHHCC     CCHHHCCCC            ",
+            "           CCCHHCCCCC#####CCCCCHHCCC           ",
+            "            CCCCHHHCC#####CCHHHCCCC            ",
             "              CCCCCHHHHHHHHHCCCCC              ",
-            "                CCCCC     CCCCC                ",
-            "                   CC     CC                   ",
+            "                CCCCC#####CCCCC                ",
+            "                   CC#####CC                   ",
             "                    FCCCCCF                    ", };
 
     protected static final String[] Layer3 = {
             "                    FCIBICF                    ",
-            "                   CC     CC                   ",
+            "                   CC#####CC                   ",
             "                CCCHHHHHHHHHCCC                ",
             "              CCHHHHHHHHHHHHHHHCC              ",
             "            CCHHHHHHHHHHHHHHHHHHHCC            ",
-            "           CHHHHHHHCC     CCHHHHHHHC           ",
+            "           CHHHHHHHCC#####CCHHHHHHHC           ",
             "          CHHHHHCCC FCIBICF CCCHHHHHC          ",
             "         CHHHHCC               CCHHHHC         ",
             "        CHHHCC                   CCHHHC        ",
@@ -268,11 +282,11 @@ public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultib
             "  CHHHC                                 CHHHC  ",
             " CHHHC                                   CHHHC ",
             "FCHHHCF                                 FCHHHCF",
-            "C HHH C                                 C HHH C",
-            "I HHH I                                 I HHH I",
-            "B HHH B                                 B HHH B",
-            "I HHH I                                 I HHH I",
-            "C HHH C                                 C HHH C",
+            "C#HHH#C                                 C#HHH#C",
+            "I#HHH#I                                 I#HHH#I",
+            "B#HHH#B                                 B#HHH#B",
+            "I#HHH#I                                 I#HHH#I",
+            "C#HHH#C                                 C#HHH#C",
             "FCHHHCF                                 FCHHHCF",
             " CHHHC                                   CHHHC ",
             "  CHHHC                                 CHHHC  ",
@@ -288,11 +302,11 @@ public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultib
             "        CHHHCC                   CCHHHC        ",
             "         CHHHHCC               CCHHHHC         ",
             "          CHHHHHCCC FCIBICF CCCHHHHHC          ",
-            "           CHHHHHHHCC     CCHHHHHHHC           ",
+            "           CHHHHHHHCC#####CCHHHHHHHC           ",
             "            CCHHHHHHHHHHHHHHHHHHHCC            ",
             "              CCHHHHHHHHHHHHHHHCC              ",
             "                CCCHHHHHHHHHCCC                ",
-            "                   CC     CC                   ",
+            "                   CC#####CC                   ",
             "                    FCISICF                    ", };
 
     @SideOnly(Side.CLIENT)
@@ -317,25 +331,133 @@ public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultib
         return false;
     }
 
-    private class FusionRecipeLogic extends MultiblockRecipeLogic {
+    @Override
+    protected void formStructure(PatternMatchContext context) {
+        long energyStored = this.energyContainer.getEnergyStored();
+        super.formStructure(context);
+        this.initializeAbilities();
+        this.energyContainer.changeEnergy(this.energyContainer.getEnergyStored());
+        this.energyContainer.changeEnergy(energyStored);
+    }
 
-        public FusionRecipeLogic(MetaTileEntityMegaFusionReactor tileEntity) {
+    @Override
+    public void invalidateStructure() {
+        super.invalidateStructure();
+        this.energyContainer = new EnergyContainerHandler(this, 0, 0, 0, 0, 0) {
+
+            @NotNull
+            @Override
+            public String getName() {
+                return GregtechDataCodes.FUSION_REACTOR_ENERGY_CONTAINER_TRAIT;
+            }
+        };
+        this.inputEnergyContainers = new EnergyContainerList(Lists.newArrayList());
+        this.heat = 0;
+    }
+
+    @Override
+    protected void initializeAbilities() {
+        this.inputInventory = new ItemHandlerList(getAbilities(MultiblockAbility.IMPORT_ITEMS));
+        this.inputFluidInventory = new FluidTankList(true, getAbilities(MultiblockAbility.IMPORT_FLUIDS));
+        this.outputInventory = new ItemHandlerList(getAbilities(MultiblockAbility.EXPORT_ITEMS));
+        this.outputFluidInventory = new FluidTankList(true, getAbilities(MultiblockAbility.EXPORT_FLUIDS));
+        List<IEnergyContainer> energyInputs = getAbilities(MultiblockAbility.INPUT_ENERGY);
+        this.inputEnergyContainers = new EnergyContainerList(energyInputs);
+        long euCapacity = calculateEnergyStorageFactor(energyInputs.size());
+        this.energyContainer = new EnergyContainerList(Collections
+                .singletonList(new EnergyContainerHandler(this, euCapacity, GTValues.V[tier], 2L * energyInputs.size(),
+                        0, 0) {
+
+                    @NotNull
+                    @Override
+                    public String getName() {
+                        return GregtechDataCodes.FUSION_REACTOR_ENERGY_CONTAINER_TRAIT;
+                    }
+                }));
+    }
+
+    private long calculateEnergyStorageFactor(int energyInputAmount) {
+        return energyInputAmount * (long) Math.pow(2, tier - 6) * 10000000L;
+    }
+
+    @Override
+    protected void updateFormedValid() {
+        if (this.inputEnergyContainers.getEnergyStored() > 0) {
+            long energyAdded = this.energyContainer.addEnergy(this.inputEnergyContainers.getEnergyStored());
+            if (energyAdded > 0) this.inputEnergyContainers.removeEnergy(energyAdded);
+        }
+        super.updateFormedValid();
+    }
+
+    private class MegaFusionRecipeLogic extends MultiblockRecipeLogic {
+
+        public MegaFusionRecipeLogic(MetaTileEntityMegaFusionReactor tileEntity) {
             super(tileEntity);
         }
 
         @Override
         protected double getOverclockingDurationDivisor() {
-            return 2.0D;
+            return tier < GTValues.UHV ? 2.0D : 4.0D;
         }
 
         @Override
         protected double getOverclockingVoltageMultiplier() {
-            return 2.0D;
+            return tier < GTValues.UHV ? 2.0D : 4.0D;
         }
 
         @Override
         public long getMaxVoltage() {
-            return Math.min(GTValues.V[tier + 5], super.getMaxVoltage());
+            return Math.min(GTValues.V[tier], super.getMaxVoltage());
+        }
+
+        @Override
+        public void updateWorkable() {
+            super.updateWorkable();
+            // Drain heat when the reactor is not active, is paused via soft mallet, or does not have enough energy and
+            // has fully wiped recipe progress
+            // Don't drain heat when there is not enough energy and there is still some recipe progress, as that makes
+            // it doubly hard to complete the recipe
+            // (Will have to recover heat and recipe progress)
+            if (heat > 0) {
+                if (!isActive || !workingEnabled || (hasNotEnoughEnergy && progressTime == 0)) {
+                    heat = heat <= 10000 ? 0 : (heat - 10000);
+                }
+            }
+        }
+
+        @Override
+        public boolean checkRecipe(@NotNull Recipe recipe) {
+            if (!super.checkRecipe(recipe)) return false;
+
+            // if the reactor is not able to hold enough energy for it, do not run the recipe
+            if (recipe.getProperty(FusionEUToStartProperty.getInstance(), 0L) > energyContainer.getEnergyCapacity()) {
+                return false;
+            }
+
+            long euToStart = recipe.getProperty(FusionEUToStartProperty.getInstance(), 0L);
+
+            long heatDiff = euToStart - heat;
+            // if the stored heat is >= required energy, recipe is okay to run
+            if (heatDiff <= 0) {
+                return true;
+            }
+
+            // if the remaining energy needed is more than stored, do not run
+            if (energyContainer.getEnergyStored() < heatDiff) {
+                return false;
+            }
+
+            // remove the energy needed
+            energyContainer.removeEnergy(heatDiff);
+            // increase the stored heat
+            heat += heatDiff;
+
+            int fusionTier = FusionEUToStartProperty.getFusionTier(euToStart);
+            int parallelLimit = 64 * (tier + 1 - fusionTier);
+
+            setParallelLimit(parallelLimit);
+
+            return true;
         }
 
         @Override
@@ -349,6 +471,20 @@ public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultib
             int fusionTier = FusionEUToStartProperty.getFusionTier(euToStart);
             if (fusionTier != 0) fusionTier = tier - fusionTier;
             values[2] = Math.min(fusionTier, values[2]);
+        }
+
+        @NotNull
+        @Override
+        public NBTTagCompound serializeNBT() {
+            NBTTagCompound tag = super.serializeNBT();
+            tag.setLong("Heat", heat);
+            return tag;
+        }
+
+        @Override
+        public void deserializeNBT(@NotNull NBTTagCompound compound) {
+            super.deserializeNBT(compound);
+            heat = compound.getLong("Heat");
         }
     }
 }

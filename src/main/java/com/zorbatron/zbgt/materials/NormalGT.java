@@ -48,7 +48,7 @@ public class NormalGT {
     }
 
     private static void frameBoxes() {
-        Material[] materials = { NaquadahAlloy, RhodiumPlatedPalladium, Darmstadtium, WroughtIron };
+        Material[] materials = { NaquadahAlloy, RhodiumPlatedPalladium, Darmstadtium, WroughtIron, Duranium };
 
         setFlags(materials, GENERATE_FRAME);
     }

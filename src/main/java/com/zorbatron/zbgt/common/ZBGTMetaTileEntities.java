@@ -122,10 +122,10 @@ public class ZBGTMetaTileEntities {
                 new MetaTileEntityYOTTank(zbgtId("yottank")));
 
         MEGA_FUSION[0] = registerMetaTileEntity(18060,
-                new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_1"), 1));
+                new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_1"), GTValues.LuV));
         MEGA_FUSION[1] = registerMetaTileEntity(18061,
-                new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_2"), 2));
+                new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_2"), GTValues.ZPM));
         MEGA_FUSION[2] = registerMetaTileEntity(18062,
-                new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_3"), 3));
+                new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_3"), GTValues.UV));
     }
 }
