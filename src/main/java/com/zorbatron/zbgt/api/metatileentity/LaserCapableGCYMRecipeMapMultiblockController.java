@@ -1,7 +1,6 @@
 package com.zorbatron.zbgt.api.metatileentity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.client.resources.I18n;
@@ -60,7 +59,7 @@ public abstract class LaserCapableGCYMRecipeMapMultiblockController extends GCYM
             list.addAll(getAbilities(MultiblockAbility.SUBSTATION_INPUT_ENERGY));
         }
 
-        this.energyContainer = new EnergyContainerList(Collections.unmodifiableList(list));
+        this.energyContainer = new EnergyContainerList(list);
     }
 
     @Override
