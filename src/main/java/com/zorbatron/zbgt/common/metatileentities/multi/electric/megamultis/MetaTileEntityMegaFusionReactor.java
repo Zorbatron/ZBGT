@@ -1,27 +1,38 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
 import com.google.common.collect.Lists;
-import com.zorbatron.zbgt.api.metatileentity.LaserCapableRecipeMapMultiblockController;
 
 import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.impl.*;
+import gregtech.api.gui.GuiTextures;
+import gregtech.api.gui.ModularUI;
+import gregtech.api.gui.widgets.AdvancedTextWidget;
+import gregtech.api.gui.widgets.ImageCycleButtonWidget;
+import gregtech.api.gui.widgets.ImageWidget;
+import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
+import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -32,22 +43,30 @@ import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.RelativeDirection;
+import gregtech.api.util.TextComponentUtil;
+import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockFusionCasing;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.MetaTileEntities;
 
-public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultiblockController {
+public class MetaTileEntityMegaFusionReactor extends RecipeMapMultiblockController {
 
-    private final int tier;
     private EnergyContainerList inputEnergyContainers;
-    private long heat = 0;
+    private final int tier;
+    private long heat;
+
+    private long previouslyStoredEnergy;
 
     public MetaTileEntityMegaFusionReactor(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, RecipeMaps.FUSION_RECIPES);
         this.recipeMapWorkable = new MegaFusionRecipeLogic(this);
+        this.recipeMapWorkable.setParallelLimit(64 * (tier - GTValues.IV));
         this.tier = tier;
+        this.heat = 0;
+        this.previouslyStoredEnergy = 0;
     }
 
     @Override
@@ -72,9 +91,15 @@ public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultib
                 .where('I', abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1)
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1))
                         .or(states(getGlassState())))
-                .where('E', autoEnergyInputs(1, 32, 32)
-                        .or(states(getCasingState())))
+                .where('E', metaTileEntities(Arrays
+                        .stream(MetaTileEntities.ENERGY_INPUT_HATCH)
+                        .filter(mte -> mte != null && tier <= mte.getTier())
+                        .toArray(MetaTileEntity[]::new))
+                                .setMinGlobalLimited(1).setPreviewCount(32)
+                                .or(states(getCasingState())))
                 .where('F', frames(getFrameMaterial()))
+                .where('M', autoAbilities(true, false)
+                        .or(states(getCasingState())))
                 .where('#', air())
                 .build();
     }
@@ -258,7 +283,7 @@ public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultib
             "              CCCCCHHHHHHHHHCCCCC              ",
             "                CCCCC#####CCCCC                ",
             "                   CC#####CC                   ",
-            "                    FCCCCCF                    ", };
+            "                    FCCMCCF                    ", };
 
     protected static final String[] Layer3 = {
             "                    FCIBICF                    ",
@@ -327,22 +352,86 @@ public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultib
     }
 
     @Override
-    public boolean hasMaintenanceMechanics() {
-        return false;
+    protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 198, 236);
+        builder.image(4, 4, 190, 138, GuiTextures.DISPLAY);
+
+        builder.label(9, 9, getMetaFullName(), 0xFFFFFF);
+        builder.widget(new AdvancedTextWidget(9, 20, this::addDisplayText, 0xFFFFFF)
+                .setMaxWidthLimit(181)
+                .setClickHandler(this::handleDisplayClick));
+
+        builder.widget(new ProgressWidget(
+                () -> energyContainer.getEnergyCapacity() > 0 ?
+                        1.0 * energyContainer.getEnergyStored() / energyContainer.getEnergyCapacity() : 0,
+                4, 144, 94, 7,
+                GuiTextures.PROGRESS_BAR_FUSION_ENERGY, ProgressWidget.MoveType.HORIZONTAL)
+                        .setHoverTextConsumer(this::addEnergyBarHoverText));
+
+        builder.widget(new ProgressWidget(
+                () -> energyContainer.getEnergyCapacity() > 0 ? 1.0 * heat / energyContainer.getEnergyCapacity() : 0,
+                100, 144, 94, 7,
+                GuiTextures.PROGRESS_BAR_FUSION_HEAT, ProgressWidget.MoveType.HORIZONTAL)
+                        .setHoverTextConsumer(this::addHeatBarHoverText));
+
+        // Power Button + Detail
+        builder.widget(new ImageCycleButtonWidget(173, 211, 18, 18, GuiTextures.BUTTON_POWER,
+                recipeMapWorkable::isWorkingEnabled, recipeMapWorkable::setWorkingEnabled));
+        builder.widget(new ImageWidget(173, 229, 18, 6, GuiTextures.BUTTON_POWER_DETAIL));
+
+        // Voiding Mode Button
+        builder.widget(new ImageCycleButtonWidget(173, 189, 18, 18, GuiTextures.BUTTON_VOID_MULTIBLOCK,
+                4, this::getVoidingMode, this::setVoidingMode)
+                        .setTooltipHoverString(MultiblockWithDisplayBase::getVoidingModeTooltip));
+
+        // Distinct Buses Unavailable Image
+        builder.widget(new ImageWidget(173, 171, 18, 18, GuiTextures.BUTTON_NO_DISTINCT_BUSES)
+                .setTooltip("gregtech.multiblock.universal.distinct_not_supported"));
+
+        // Flex Unavailable Image
+        builder.widget(getFlexButton(173, 153, 18, 18));
+
+        // Player Inventory
+        builder.bindPlayerInventory(entityPlayer.inventory, 153);
+
+        return builder;
+    }
+
+    private void addEnergyBarHoverText(List<ITextComponent> hoverList) {
+        ITextComponent energyInfo = TextComponentUtil.stringWithColor(
+                TextFormatting.AQUA,
+                TextFormattingUtil.formatNumbers(energyContainer.getEnergyStored()) + " / " +
+                        TextFormattingUtil.formatNumbers(energyContainer.getEnergyCapacity()) + " EU");
+        hoverList.add(TextComponentUtil.translationWithColor(
+                TextFormatting.GRAY,
+                "gregtech.multiblock.energy_stored",
+                energyInfo));
+    }
+
+    private void addHeatBarHoverText(List<ITextComponent> hoverList) {
+        ITextComponent heatInfo = TextComponentUtil.stringWithColor(
+                TextFormatting.RED,
+                TextFormattingUtil.formatNumbers(heat) + " / " +
+                        TextFormattingUtil.formatNumbers(energyContainer.getEnergyCapacity()));
+        hoverList.add(TextComponentUtil.translationWithColor(
+                TextFormatting.GRAY,
+                "gregtech.multiblock.fusion_reactor.heat",
+                heatInfo));
     }
 
     @Override
     protected void formStructure(PatternMatchContext context) {
-        long energyStored = this.energyContainer.getEnergyStored();
         super.formStructure(context);
-        this.initializeAbilities();
-        this.energyContainer.changeEnergy(this.energyContainer.getEnergyStored());
-        this.energyContainer.changeEnergy(energyStored);
+
+        this.energyContainer.changeEnergy(previouslyStoredEnergy);
     }
 
     @Override
     public void invalidateStructure() {
+        this.previouslyStoredEnergy = energyContainer.getEnergyStored();
+
         super.invalidateStructure();
+
         this.energyContainer = new EnergyContainerHandler(this, 0, 0, 0, 0, 0) {
 
             @NotNull
@@ -351,6 +440,7 @@ public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultib
                 return GregtechDataCodes.FUSION_REACTOR_ENERGY_CONTAINER_TRAIT;
             }
         };
+
         this.inputEnergyContainers = new EnergyContainerList(Lists.newArrayList());
         this.heat = 0;
     }
@@ -361,12 +451,13 @@ public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultib
         this.inputFluidInventory = new FluidTankList(true, getAbilities(MultiblockAbility.IMPORT_FLUIDS));
         this.outputInventory = new ItemHandlerList(getAbilities(MultiblockAbility.EXPORT_ITEMS));
         this.outputFluidInventory = new FluidTankList(true, getAbilities(MultiblockAbility.EXPORT_FLUIDS));
+
         List<IEnergyContainer> energyInputs = getAbilities(MultiblockAbility.INPUT_ENERGY);
         this.inputEnergyContainers = new EnergyContainerList(energyInputs);
+
         long euCapacity = calculateEnergyStorageFactor(energyInputs.size());
-        this.energyContainer = new EnergyContainerList(Collections
-                .singletonList(new EnergyContainerHandler(this, euCapacity, GTValues.V[tier], 2L * energyInputs.size(),
-                        0, 0) {
+        this.energyContainer = new EnergyContainerList(Collections.singletonList(
+                new EnergyContainerHandler(this, euCapacity, GTValues.V[tier], 2L * energyInputs.size(), 0, 0) {
 
                     @NotNull
                     @Override
@@ -386,7 +477,22 @@ public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultib
             long energyAdded = this.energyContainer.addEnergy(this.inputEnergyContainers.getEnergyStored());
             if (energyAdded > 0) this.inputEnergyContainers.removeEnergy(energyAdded);
         }
+
         super.updateFormedValid();
+    }
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setLong("StoredEnergy", this.energyContainer.getEnergyStored());
+
+        return super.writeToNBT(data);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+
+        this.previouslyStoredEnergy = data.getLong("StoredEnergy");
     }
 
     private class MegaFusionRecipeLogic extends MultiblockRecipeLogic {
@@ -429,33 +535,25 @@ public class MetaTileEntityMegaFusionReactor extends LaserCapableRecipeMapMultib
         public boolean checkRecipe(@NotNull Recipe recipe) {
             if (!super.checkRecipe(recipe)) return false;
 
-            // if the reactor is not able to hold enough energy for it, do not run the recipe
-            if (recipe.getProperty(FusionEUToStartProperty.getInstance(), 0L) > energyContainer.getEnergyCapacity()) {
-                return false;
-            }
-
             long euToStart = recipe.getProperty(FusionEUToStartProperty.getInstance(), 0L);
+            int fusionTier = FusionEUToStartProperty.getFusionTier(euToStart);
+
+            setParallelLimit(64 * (tier + 1 - fusionTier));
+
+            // if the reactor is not able to hold enough energy for it, do not run the recipe
+            if (euToStart > energyContainer.getEnergyCapacity()) return false;
 
             long heatDiff = euToStart - heat;
             // if the stored heat is >= required energy, recipe is okay to run
-            if (heatDiff <= 0) {
-                return true;
-            }
+            if (heatDiff <= 0) return true;
 
             // if the remaining energy needed is more than stored, do not run
-            if (energyContainer.getEnergyStored() < heatDiff) {
-                return false;
-            }
+            if (energyContainer.getEnergyStored() < heatDiff) return false;
 
             // remove the energy needed
             energyContainer.removeEnergy(heatDiff);
             // increase the stored heat
             heat += heatDiff;
-
-            int fusionTier = FusionEUToStartProperty.getFusionTier(euToStart);
-            int parallelLimit = 64 * (tier + 1 - fusionTier);
-
-            setParallelLimit(parallelLimit);
 
             return true;
         }
