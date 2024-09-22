@@ -18,7 +18,6 @@ public final class ZBGTMaterials {
     public static Material TanmolyiumBetaC;
     public static Material AdamantiumAlloy;
     public static Material Artherium_Sn;
-    public static Material Zeron100;
 
     // Second degree materials
     public static Material MAR_CE_M200;

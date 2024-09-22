@@ -49,14 +49,5 @@ public class ZBGTSecondDegreeMaterials {
                         .temp(6500, BlastProperty.GasTier.HIGHEST)
                         .blastStats(VA[IV], 20 * 23 + 16))
                 .build();
-
-        Zeron100 = new Material.Builder(id++, zbgtId("zeron_100"))
-                .liquid(new FluidBuilder().temperature(6375))
-                .color(0xB4B414).iconSet(MaterialIconSet.METALLIC)
-                .components(Chrome, 13, Nickel, 3, Molybdenum, 2, Copper, 10, Tungsten, 2, Steel, 20)
-                .blast(b -> b
-                        .temp(6375, BlastProperty.GasTier.HIGH)
-                        .blastStats(VA[LuV], 20 * 50))
-                .build();
     }
 }
