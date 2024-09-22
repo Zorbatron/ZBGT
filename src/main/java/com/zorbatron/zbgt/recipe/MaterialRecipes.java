@@ -11,6 +11,7 @@ public class MaterialRecipes {
 
     protected static void init() {
         alloyBlast();
+        mixer();
         ebf();
     }
 
@@ -22,13 +23,18 @@ public class MaterialRecipes {
                 .output(ingotHot, MAR_CE_M200, 19)
                 .EUt(VA[ZPM]).duration(20 * 75)
                 .buildAndRegister();
+    }
 
-        BLAST_RECIPES.recipeBuilder()
-                .input(ingot, MAR_M200, 18)
-                .input(ingot, Cerium)
-                .fluidInputs(LithiumChloride.getFluid(L))
-                .output(ingotHot, MAR_CE_M200, 19)
-                .EUt(VA[ZPM]).duration(1004)
+    private static void mixer() {
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, TungstenSteel, 12)
+                .input(dust, HSSE, 9)
+                .input(dust, HSSG, 6)
+                .input(dust, Ruridit, 3)
+                .input(dust, Titanium, 2)
+                .input(dust, Plutonium239)
+                .output(dust, HDCS, 33)
+                .EUt(VA[LuV]).duration(20 * 25)
                 .buildAndRegister();
     }
 

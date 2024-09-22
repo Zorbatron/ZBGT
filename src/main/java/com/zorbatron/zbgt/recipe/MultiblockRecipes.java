@@ -1,5 +1,6 @@
 package com.zorbatron.zbgt.recipe;
 
+import static com.zorbatron.zbgt.api.unification.ZBGTMaterials.*;
 import static com.zorbatron.zbgt.recipe.helpers.RecipeAssists.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
@@ -119,6 +120,57 @@ public class MultiblockRecipes {
                 .fluidInputs(Palladium.getFluid(L * 8))
                 .output(ZBGTMetaTileEntities.PRASS)
                 .EUt(VA[IV]).duration(20 * 18)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(MetaTileEntities.FUSION_REACTOR[0], 48)
+                .input(plate, MAR_CE_M200, 32)
+                .input(circuit, getMarkerMaterialByTier(LuV), 8)
+                .input(MetaItems.HIGH_POWER_INTEGRATED_CIRCUIT_WAFER, 16)
+                .input(getFieldGeneratorByTier(LuV), 4)
+                .input(stickLong, MAR_CE_M200, 8)
+                .fluidInputs(Polyethylene.getFluid(L * 64))
+                .output(ZBGTMetaTileEntities.MEGA_FUSION[0])
+                .EUt(VA[LuV]).duration(20 * 60)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(ZBGTMetaTileEntities.MEGA_FUSION[0], 48)
+                .input(circuit, getMarkerMaterialByTier(ZPM))
+                .input(circuit, getMarkerMaterialByTier(ZPM))
+                .input(circuit, getMarkerMaterialByTier(ZPM))
+                .input(circuit, getMarkerMaterialByTier(ZPM))
+                .input(MetaItems.ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT_WAFER, 32)
+                .input(MetaItems.VOLTAGE_COIL_LuV, 16)
+                .input(MetaItems.NEUTRON_REFLECTOR, 16)
+                .input(getFieldGeneratorByTier(ZPM), 8)
+                .input(gearSmall, Osmiridium, 32)
+                .fluidInputs(Indalloy140.getFluid(L * 32))
+                .fluidInputs(MAR_CE_M200.getFluid(L * 16))
+                .fluidInputs(HDCS.getFluid(L * 8))
+                .scannerResearch(ZBGTMetaTileEntities.MEGA_FUSION[0].getStackForm())
+                .output(ZBGTMetaTileEntities.MEGA_FUSION[1])
+                .EUt(VA[ZPM]).duration(20 * 150)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(ZBGTMetaTileEntities.MEGA_FUSION[1], 48)
+                .input(circuit, getMarkerMaterialByTier(UV))
+                .input(circuit, getMarkerMaterialByTier(UV))
+                .input(circuit, getMarkerMaterialByTier(UV))
+                .input(circuit, getMarkerMaterialByTier(UV))
+                .input(MetaItems.ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT_WAFER, 64)
+                .input(MetaItems.ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT_WAFER, 64)
+                .input(MetaItems.VOLTAGE_COIL_UV, 16)
+                .input(MetaItems.NEUTRON_REFLECTOR, 64)
+                .input(getFieldGeneratorByTier(UV), 8)
+                .input(gearSmall, HDCS, 64)
+                .fluidInputs(Indalloy140.getFluid(L * 64))
+                .stationResearch(scanner -> scanner
+                        .researchStack(ZBGTMetaTileEntities.MEGA_FUSION[1].getStackForm())
+                        .EUt(VA[UV]).CWUt(128))
+                .output(ZBGTMetaTileEntities.MEGA_FUSION[2])
+                .EUt(VA[UV]).duration(20 * 300)
                 .buildAndRegister();
     }
 
