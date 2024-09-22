@@ -1,6 +1,6 @@
 package com.zorbatron.zbgt.recipe;
 
-import static com.zorbatron.zbgt.api.unification.ZBGTMaterials.*;
+import static com.zorbatron.zbgt.api.unification.material.ZBGTMaterials.*;
 import static com.zorbatron.zbgt.recipe.helpers.RecipeAssists.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
@@ -148,6 +148,7 @@ public class MultiblockRecipes {
                 .fluidInputs(Indalloy140.getFluid(L * 32))
                 .fluidInputs(MAR_CE_M200.getFluid(L * 16))
                 .fluidInputs(HDCS.getFluid(L * 8))
+                .fluidInputs(Artherium_Sn.getFluid(L * 2))
                 .scannerResearch(ZBGTMetaTileEntities.MEGA_FUSION[0].getStackForm())
                 .output(ZBGTMetaTileEntities.MEGA_FUSION[1])
                 .EUt(VA[ZPM]).duration(20 * 150)
@@ -166,6 +167,8 @@ public class MultiblockRecipes {
                 .input(getFieldGeneratorByTier(UV), 8)
                 .input(gearSmall, HDCS, 64)
                 .fluidInputs(Indalloy140.getFluid(L * 64))
+                .fluidInputs(TanmolyiumBetaC.getFluid(L * 16))
+                .fluidInputs(Americium.getFluid(L * 4))
                 .stationResearch(scanner -> scanner
                         .researchStack(ZBGTMetaTileEntities.MEGA_FUSION[1].getStackForm())
                         .EUt(VA[UV]).CWUt(128))

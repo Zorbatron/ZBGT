@@ -19,6 +19,9 @@ public class ZBGTUtility {
         return new ResourceLocation("zbgt", path);
     }
 
+    public static final int[] intV = { 8, 32, 128, 512, 2048, 8192, 32768, 131072, 524288, 2097152, 8388608, 33554432,
+            134217728, 536870912, Integer.MAX_VALUE };
+
     public static void getCircuitSlotTooltip(@NotNull SlotWidget widget,
                                              GhostCircuitItemStackHandler circuitItemStackHandler) {
         String configString;

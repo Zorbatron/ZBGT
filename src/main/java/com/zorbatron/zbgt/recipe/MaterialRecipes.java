@@ -1,6 +1,6 @@
 package com.zorbatron.zbgt.recipe;
 
-import static com.zorbatron.zbgt.api.unification.ZBGTMaterials.*;
+import static com.zorbatron.zbgt.api.unification.material.ZBGTMaterials.*;
 import static gregicality.multiblocks.api.recipes.GCYMRecipeMaps.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -34,7 +34,25 @@ public class MaterialRecipes {
                 .input(dust, Titanium, 2)
                 .input(dust, Plutonium239)
                 .output(dust, HDCS, 33)
-                .EUt(VA[LuV]).duration(20 * 25)
+                .EUt(VA[IV]).duration(20 * 25)
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Adamantium, 5)
+                .input(dust, Naquadah, 2)
+                .input(dust, Lanthanum, 3)
+                .output(dust, AdamantiumAlloy, 10)
+                .EUt(VA[IV]).duration(20 * 10 + 14)
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, AdamantiumAlloy, 12)
+                .input(dust, Tin, 8)
+                .input(dust, Arsenic, 7)
+                .input(dust, Caesium, 4)
+                .input(dust, Osmiridium, 3)
+                .output(dust, Artherium_Sn, 34)
+                .EUt(VA[ZPM]).duration(20 * 15 + 9)
                 .buildAndRegister();
     }
 

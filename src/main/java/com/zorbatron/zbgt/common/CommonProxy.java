@@ -19,7 +19,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import com.zorbatron.zbgt.ZBGTCore;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 import com.zorbatron.zbgt.api.recipes.properties.CoALProperty;
-import com.zorbatron.zbgt.api.unification.ZBGTMaterials;
+import com.zorbatron.zbgt.api.unification.material.ZBGTMaterials;
 import com.zorbatron.zbgt.api.util.ZBGTLog;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.covers.ZBGTCovers;
