@@ -184,18 +184,28 @@ zbgt.machine.yottank.none=None
 zbgt.machine.yottank.next=None. Will lock to the next fluid
 zbgt.machine.yottank.tick_rate=Tick rate:
 
+zbgt.machine.mega_fusion_1.name=Compact Fusion Computer Mk-I Prototype
+zbgt.machine.mega_fusion_1.tooltip.1=Max parallels: 64x
+zbgt.machine.mega_fusion_2.name=Compact Fusion Computer Mk-II
+zbgt.machine.mega_fusion_2.tooltip.1=Fusion tier < Mk-I: 128 parallels
+zbgt.machine.mega_fusion_2.tooltip.2=Fusion tier >= Mk=II: 64 parallels
+zbgt.machine.mega_fusion_3.name=Compact Fusion Computer Mk-III
+zbgt.machine.mega_fusion_3.tooltip.1=Fusion tier < Mk-I: 192 parallels
+zbgt.machine.mega_fusion_3.tooltip.2=Fusion tier < Mk-II: 128 parallels
+zbgt.machine.mega_fusion_3.tooltip.3=Fusion tier >= Mk=III: 64 parallels
+
 
 # Multiblock Casings
 tile.multiblock_casing.precise_0.name=Imprecise Electronic Unit Casing
-tile.multiblock_casing.precise_1.name=Precise Electronic Unit Casing MK-I
-tile.multiblock_casing.precise_2.name=Precise Electronic Unit Casing MK-II
-tile.multiblock_casing.precise_3.name=Precise Electronic Unit Casing MK-III
-tile.multiblock_casing.precise_4.name=Precise Electronic Unit Casing MK-IV
+tile.multiblock_casing.precise_1.name=Precise Electronic Unit Casing Mk-I
+tile.multiblock_casing.precise_2.name=Precise Electronic Unit Casing Mk-II
+tile.multiblock_casing.precise_3.name=Precise Electronic Unit Casing Mk-III
+tile.multiblock_casing.precise_4.name=Precise Electronic Unit Casing Mk-IV
 tile.multiblock_casing.precise_0.name.short=Imprecise
-tile.multiblock_casing.precise_1.name.short=MK-I
-tile.multiblock_casing.precise_2.name.short=MK-II
-tile.multiblock_casing.precise_3.name.short=MK-III
-tile.multiblock_casing.precise_4.name.short=MK-IV
+tile.multiblock_casing.precise_1.name.short=Mk-I
+tile.multiblock_casing.precise_2.name.short=Mk-II
+tile.multiblock_casing.precise_3.name.short=Mk-III
+tile.multiblock_casing.precise_4.name.short=Mk-IV
 
 tile.material_casing.iridium.name=Advanced Iridium Plated Machine Casing
 zbgt.multiblock.pattern.precise_tier=§cAll casings must be the same tier§r
@@ -268,3 +278,4 @@ zbgt.material.artherium_sn=Artherium-Sn
 
 zbgt.material.mar_ce_m_200=MAR-Ce-M200
 zbgt.material.hdcs=High Durability Compound Steel
+zbgt.material.dalisenite=Dalisenite

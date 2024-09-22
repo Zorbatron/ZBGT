@@ -22,6 +22,7 @@ public final class ZBGTMaterials {
     // Second degree materials
     public static Material MAR_CE_M200;
     public static Material HDCS;
+    public static Material Dalisenite;
 
     public static void init() {
         ZBGTMaterialExtraFlags.register();

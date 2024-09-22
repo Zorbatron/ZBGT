@@ -42,12 +42,22 @@ public class ZBGTSecondDegreeMaterials {
 
         Artherium_Sn = new Material.Builder(id++, zbgtId("artherium_sn"))
                 .liquid(new FluidBuilder().temperature(6500))
-                .flags(DISABLE_DECOMPOSITION)
+                .flags(DISABLE_DECOMPOSITION, GENERATE_SMALL_GEAR)
                 .color(0x6036F7).iconSet(MaterialIconSet.SHINY)
                 .components(AdamantiumAlloy, 12, Tin, 8, Arsenic, 7, Caesium, 4, Osmiridium, 3)
                 .blast(b -> b
                         .temp(6500, BlastProperty.GasTier.HIGHEST)
                         .blastStats(VA[IV], 20 * 23 + 16))
+                .build();
+
+        Dalisenite = new Material.Builder(id++, zbgtId("dalisenite"))
+                .liquid(new FluidBuilder().temperature(8700))
+                .color(0xB0B812).iconSet(MaterialIconSet.SHINY)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(TanmolyiumBetaC, 14, Tungsten, 10, NiobiumTitanium, 9, RhodiumPlatedPalladium, 8)
+                .blast(b -> b
+                        .temp(8700, BlastProperty.GasTier.HIGH)
+                        .blastStats(VA[UV], 20 * 46 + 8))
                 .build();
     }
 }

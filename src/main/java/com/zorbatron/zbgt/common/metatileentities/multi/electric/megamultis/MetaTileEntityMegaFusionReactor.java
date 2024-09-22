@@ -5,15 +5,19 @@ import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.google.common.collect.Lists;
 
@@ -47,6 +51,7 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockFusionCasing;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
@@ -468,7 +473,7 @@ public class MetaTileEntityMegaFusionReactor extends RecipeMapMultiblockControll
     }
 
     private long calculateEnergyStorageFactor(int energyInputAmount) {
-        return energyInputAmount * (long) Math.pow(2, tier - 6) * 10000000L;
+        return (energyInputAmount * (long) Math.pow(2, tier - 6) * 10000000L) / 2;
     }
 
     @Override
@@ -493,6 +498,30 @@ public class MetaTileEntityMegaFusionReactor extends RecipeMapMultiblockControll
         super.readFromNBT(data);
 
         this.previouslyStoredEnergy = data.getLong("StoredEnergy");
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World world, @NotNull List<String> tooltip,
+                               boolean advanced) {
+        super.addInformation(stack, world, tooltip, advanced);
+
+        tooltip.add(tier < GTValues.UHV ?
+                I18n.format("gregtech.machine.fusion_reactor.overclocking") :
+                TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc"));
+
+        if (tier == GTValues.LuV) {
+            tooltip.add(
+                    I18n.format("zbgt.machine.mega_fusion_1.tooltip.1"));
+        } else if (tier == GTValues.ZPM) {
+            tooltip.addAll(Arrays.asList(
+                    I18n.format("zbgt.machine.mega_fusion_2.tooltip.1"),
+                    I18n.format("zbgt.machine.mega_fusion_2.tooltip.2")));
+        } else if (tier == GTValues.UV) {
+            tooltip.addAll(Arrays.asList(
+                    I18n.format("zbgt.machine.mega_fusion_3.tooltip.1"),
+                    I18n.format("zbgt.machine.mega_fusion_3.tooltip.2"),
+                    I18n.format("zbgt.machine.mega_fusion_3.tooltip.3")));
+        }
     }
 
     private class MegaFusionRecipeLogic extends MultiblockRecipeLogic {

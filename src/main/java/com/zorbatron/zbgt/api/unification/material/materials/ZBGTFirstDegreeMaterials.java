@@ -18,7 +18,7 @@ public class ZBGTFirstDegreeMaterials {
     public static void register() {
         Indalloy140 = new Material.Builder(id++, zbgtId("indalloy_140"))
                 .liquid(new FluidBuilder().temperature(5475))
-                .color(0x59536E)
+                .color(0x59536E).iconSet(MaterialIconSet.SHINY)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Bismuth, 47, Lead, 25, Tin, 13, Cadmium, 10, Indium, 5)
                 .build();
