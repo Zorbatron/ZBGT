@@ -1,0 +1,37 @@
+package com.zorbatron.zbgt.api.unification;
+
+import static com.zorbatron.zbgt.ZBGTUtility.zbgtId;
+import static com.zorbatron.zbgt.api.unification.ZBGTMaterials.*;
+import static gregtech.api.GTValues.*;
+import static gregtech.api.unification.material.Materials.*;
+import static gregtech.api.unification.material.info.MaterialFlags.*;
+
+import gregtech.api.fluids.FluidBuilder;
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.info.MaterialIconSet;
+import gregtech.api.unification.material.properties.BlastProperty;
+
+public class ZBGTFirstDegreeMaterials {
+
+    private static int id = 0;
+
+    protected static void init() {
+        Indalloy140 = new Material.Builder(id++, zbgtId("indalloy_140"))
+                .dust().liquid(new FluidBuilder().temperature(5475))
+                .color(0x59536E)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Bismuth, 47, Lead, 25, Tin, 13, Cadmium, 10, Indium, 5)
+                .build();
+
+        MAR_M200 = new Material.Builder(id++, zbgtId("mar_200"))
+                .dust().ingot().liquid(new FluidBuilder().temperature(5000))
+                .color(0x515151).iconSet(MaterialIconSet.SHINY)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Niobium, 2, Chrome, 9, Aluminium, 5, Titanium, 2, Cobalt, 10, Tungsten, 13, Nickel, 18)
+                .blast(b -> b
+                        .temp(5000, BlastProperty.GasTier.MID)
+                        .blastStats(VA[IV], 205)
+                        .vacuumStats(VA[MV], 246))
+                .build();
+    }
+}

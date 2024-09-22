@@ -19,11 +19,11 @@ import net.minecraftforge.registries.IForgeRegistry;
 import com.zorbatron.zbgt.ZBGTCore;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 import com.zorbatron.zbgt.api.recipes.properties.CoALProperty;
+import com.zorbatron.zbgt.api.unification.ZBGTMaterials;
 import com.zorbatron.zbgt.api.util.ZBGTLog;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.covers.ZBGTCovers;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
-import com.zorbatron.zbgt.materials.ZBGTMaterialOverrides;
 import com.zorbatron.zbgt.recipe.ZBGTRecipes;
 
 import gregtech.api.GTValues;
@@ -31,6 +31,7 @@ import gregtech.api.GregTechAPI;
 import gregtech.api.block.VariantItemBlock;
 import gregtech.api.cover.CoverDefinition;
 import gregtech.api.unification.material.event.MaterialEvent;
+import gregtech.api.unification.material.event.MaterialRegistryEvent;
 
 @Mod.EventBusSubscriber(modid = ZBGTCore.MODID)
 public class CommonProxy {
@@ -75,7 +76,12 @@ public class CommonProxy {
 
     @SubscribeEvent(priority = EventPriority.NORMAL)
     public static void registerMaterials(MaterialEvent event) {
-        ZBGTMaterialOverrides.init();
+        ZBGTMaterials.init();
+    }
+
+    @SubscribeEvent
+    public static void createMaterialRegistry(MaterialRegistryEvent event) {
+        GregTechAPI.materialManager.createRegistry(ZBGTCore.MODID);
     }
 
     private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {

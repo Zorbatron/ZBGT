@@ -11,6 +11,7 @@ public class ZBGTRecipes {
         CoALRecipes.init();
         MiscRecipes.init();
         CasingRecipes.init();
+        MaterialRecipes.init();
 
         if (Mods.AppliedEnergistics2.isModLoaded()) {
             AE2Recipes.init();

@@ -23,12 +23,22 @@ import gregtech.common.metatileentities.MetaTileEntities;
 public class MultiblockRecipes {
 
     protected static void init() {
-        craftingTableRecipes();
-        assemblerRecipes();
-        assemblyLineRecipes();
+        quads();
+        megas();
+        misc();
     }
 
-    private static void craftingTableRecipes() {
+    private static void quads() {
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(MetaTileEntities.ELECTRIC_BLAST_FURNACE, 4)
+                .input(plate, Invar, 4)
+                .input(circuit, getMarkerMaterialByTier(HV))
+                .fluidInputs(SolderingAlloy.getFluid(L * 4))
+                .circuitMeta(4)
+                .output(ZBGTMetaTileEntities.QUAD_EBF)
+                .duration(20 * 5).EUt(VA[HV])
+                .buildAndRegister();
+
         ModHandler.addShapedRecipe("quad_ebf", ZBGTMetaTileEntities.QUAD_EBF.getStackForm(),
                 "PBP",
                 "BCB",
@@ -37,6 +47,16 @@ public class MultiblockRecipes {
                 'B', MetaTileEntities.ELECTRIC_BLAST_FURNACE.getStackForm(),
                 'C', new UnificationEntry(circuit, getMarkerMaterialByTier(HV)));
 
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(MetaTileEntities.VACUUM_FREEZER, 4)
+                .input(plate, Aluminium, 4)
+                .input(circuit, getMarkerMaterialByTier(HV))
+                .fluidInputs(SolderingAlloy.getFluid(L * 4))
+                .circuitMeta(4)
+                .output(ZBGTMetaTileEntities.QUEEZER)
+                .duration(20 * 5).EUt(VA[HV])
+                .buildAndRegister();
+
         ModHandler.addShapedRecipe("queezer", ZBGTMetaTileEntities.QUEEZER.getStackForm(),
                 "PBP",
                 "BCB",
@@ -44,19 +64,9 @@ public class MultiblockRecipes {
                 'P', new UnificationEntry(plateDouble, Aluminium),
                 'B', MetaTileEntities.VACUUM_FREEZER.getStackForm(),
                 'C', new UnificationEntry(circuit, getMarkerMaterialByTier(HV)));
-
-        ModHandler.addShapedRecipe("yottank", ZBGTMetaTileEntities.YOTTANK.getStackForm(),
-                "STS",
-                "CYC",
-                "SPS",
-                'S', new UnificationEntry(screw, BlueSteel),
-                'Y', ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.YOTTANK_CASING),
-                'C', new UnificationEntry(circuit, getMarkerMaterialByTier(EV)),
-                'T', MetaItems.COVER_SCREEN,
-                'P', new UnificationEntry(pipeNormalFluid, TungstenSteel));
     }
 
-    private static void assemblerRecipes() {
+    private static void megas() {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(GCYMMetaTileEntities.ALLOY_BLAST_SMELTER, 64)
                 .fluidInputs(SolderingAlloy.getFluid(L * 64))
@@ -98,16 +108,6 @@ public class MultiblockRecipes {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.ELECTRIC_BLAST_FURNACE, 4)
-                .input(plate, Invar, 4)
-                .input(circuit, getMarkerMaterialByTier(HV))
-                .fluidInputs(SolderingAlloy.getFluid(L * 4))
-                .circuitMeta(4)
-                .output(ZBGTMetaTileEntities.QUAD_EBF)
-                .duration(20 * 5).EUt(VA[HV])
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
                 .input(getRobotArmByTier(IV))
                 .input(circuit, getMarkerMaterialByTier(IV), 4)
                 .input(MetaItems.TOOL_DATA_ORB, 3)
@@ -120,19 +120,9 @@ public class MultiblockRecipes {
                 .output(ZBGTMetaTileEntities.PRASS)
                 .EUt(VA[IV]).duration(20 * 18)
                 .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.VACUUM_FREEZER, 4)
-                .input(plate, Aluminium, 4)
-                .input(circuit, getMarkerMaterialByTier(HV))
-                .fluidInputs(SolderingAlloy.getFluid(L * 4))
-                .circuitMeta(4)
-                .output(ZBGTMetaTileEntities.QUEEZER)
-                .duration(20 * 5).EUt(VA[HV])
-                .buildAndRegister();
     }
 
-    private static void assemblyLineRecipes() {
+    private static void misc() {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(MetaTileEntities.ASSEMBLY_LINE, 16)
                 .inputs(MetaBlocks.MULTIBLOCK_CASING
@@ -158,5 +148,15 @@ public class MultiblockRecipes {
                 .output(ZBGTMetaTileEntities.CoAL)
                 .EUt(VA[UV]).duration(20 * 30)
                 .buildAndRegister();
+
+        ModHandler.addShapedRecipe("yottank", ZBGTMetaTileEntities.YOTTANK.getStackForm(),
+                "STS",
+                "CYC",
+                "SPS",
+                'S', new UnificationEntry(screw, BlueSteel),
+                'Y', ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.YOTTANK_CASING),
+                'C', new UnificationEntry(circuit, getMarkerMaterialByTier(EV)),
+                'T', MetaItems.COVER_SCREEN,
+                'P', new UnificationEntry(pipeNormalFluid, TungstenSteel));
     }
 }
