@@ -279,3 +279,7 @@ zbgt.material.artherium_sn=Artherium-Sn
 zbgt.material.mar_ce_m_200=MAR-Ce-M200
 zbgt.material.hdcs=High Durability Compound Steel
 zbgt.material.dalisenite=Dalisenite
+
+
+# Ore veins
+zbgt.vein.adamantium=Adamantium vein
