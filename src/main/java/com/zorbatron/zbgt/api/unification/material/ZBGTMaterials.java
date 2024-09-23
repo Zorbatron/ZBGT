@@ -1,9 +1,6 @@
 package com.zorbatron.zbgt.api.unification.material;
 
-import com.zorbatron.zbgt.api.unification.material.materials.ZBGTElementMaterials;
-import com.zorbatron.zbgt.api.unification.material.materials.ZBGTFirstDegreeMaterials;
-import com.zorbatron.zbgt.api.unification.material.materials.ZBGTMaterialExtraFlags;
-import com.zorbatron.zbgt.api.unification.material.materials.ZBGTSecondDegreeMaterials;
+import com.zorbatron.zbgt.api.unification.material.materials.*;
 
 import gregtech.api.unification.material.Material;
 
@@ -25,6 +22,7 @@ public final class ZBGTMaterials {
     public static Material Dalisenite;
 
     public static void init() {
+        ZBGTMaterialExtraProperties.register();
         ZBGTMaterialExtraFlags.register();
 
         ZBGTElementMaterials.register();

@@ -14,12 +14,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.zorbatron.zbgt.ZBGTUtility;
 
-import gregtech.api.fluids.FluidBuilder;
-import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialFlag;
-import gregtech.api.unification.material.properties.FluidProperty;
-import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.material.properties.WireProperties;
 
 public class ZBGTMaterialExtraFlags {
@@ -35,10 +31,9 @@ public class ZBGTMaterialExtraFlags {
         densePlates();
         frameBoxes();
         longRods();
-        fluids();
+        screws();
         gears();
         wires();
-        screws();
     }
 
     private static void doublePlates() {
@@ -64,21 +59,6 @@ public class ZBGTMaterialExtraFlags {
         Material[] materials = { Chrome, IronMagnetic, SteelMagnetic, NeodymiumMagnetic, SamariumMagnetic };
 
         setFlags(materials, GENERATE_LONG_ROD);
-    }
-
-    private static void fluids() {
-        List<Pair<Material, Integer>> materialList = new ArrayList<>();
-
-        materialList.add(new ImmutablePair<>(IronMagnetic, 1811));
-        materialList.add(new ImmutablePair<>(SteelMagnetic, 2046));
-        materialList.add(new ImmutablePair<>(NeodymiumMagnetic, 1297));
-        materialList.add(new ImmutablePair<>(SamariumMagnetic, 1345));
-        materialList.add(new ImmutablePair<>(LithiumChloride, 1123));
-
-        for (Pair<Material, Integer> materialPair : materialList) {
-            materialPair.getLeft().setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID,
-                    new FluidBuilder().temperature(materialPair.getRight())));
-        }
     }
 
     private static void gears() {

@@ -14,7 +14,7 @@ public class ZBGTElementMaterials {
     public static void register() {
         Adamantium = new Material.Builder(id++, zbgtId("adamantium"))
                 .dust(7).iconSet(MaterialIconSet.SHINY)
-                .ore()
+                .ore(true)
                 .element(Ad)
                 .build();
     }

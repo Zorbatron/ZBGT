@@ -6,6 +6,7 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 
+import gregicality.multiblocks.api.unification.GCYMMaterialFlags;
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialIconSet;
@@ -19,7 +20,7 @@ public class ZBGTSecondDegreeMaterials {
         MAR_CE_M200 = new Material.Builder(id++, zbgtId("mar_ce_m_200"))
                 .liquid(new FluidBuilder().temperature(5000))
                 .color(0x383030).iconSet(MaterialIconSet.METALLIC)
-                .flags(GENERATE_PLATE, GENERATE_LONG_ROD)
+                .flags(GENERATE_PLATE, GENERATE_LONG_ROD, GCYMMaterialFlags.NO_ALLOY_BLAST_RECIPES)
                 .components(MAR_M200, 18, Cerium, 1)
                 .blast(5000, BlastProperty.GasTier.HIGH)
                 .build();
