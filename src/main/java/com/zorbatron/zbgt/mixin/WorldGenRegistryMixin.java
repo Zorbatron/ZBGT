@@ -20,8 +20,6 @@ import gregtech.api.worldgen.config.WorldGenRegistry;
 @Mixin(value = WorldGenRegistry.class, remap = false)
 public class WorldGenRegistryMixin {
 
-    // @Inject(at = @At("HEAD"), method = "addAddonFiles", cancellable = true)
-
     /**
      * @author Zorbatron
      * @reason The ore gen code is icky
