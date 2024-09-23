@@ -1,5 +1,6 @@
 package com.zorbatron.zbgt.common;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.function.Function;
 
@@ -21,6 +22,7 @@ import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 import com.zorbatron.zbgt.api.recipes.properties.CoALProperty;
 import com.zorbatron.zbgt.api.unification.material.ZBGTMaterials;
 import com.zorbatron.zbgt.api.util.ZBGTLog;
+import com.zorbatron.zbgt.api.worldgen.WorldGenRegister;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.covers.ZBGTCovers;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
@@ -36,9 +38,14 @@ import gregtech.api.unification.material.event.MaterialRegistryEvent;
 @Mod.EventBusSubscriber(modid = ZBGTCore.MODID)
 public class CommonProxy {
 
-    public void preInit() {
+    public void preInit() throws IOException {
         ZBGTMetaItems.init();
+        WorldGenRegister.init();
     }
+
+    // public void onLoad() throws IOException {
+    // WorldGenRegister.init();
+    // }
 
     @SubscribeEvent
     public static void registerCovers(GregTechAPI.RegisterEvent<CoverDefinition> event) {
