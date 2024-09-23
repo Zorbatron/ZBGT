@@ -9,6 +9,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import com.zorbatron.zbgt.api.util.ZBGTLog;
@@ -45,7 +46,7 @@ public class ZBGTCore {
     public static CommonProxy proxy;
 
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event) throws IOException {
+    public void preInit(FMLPreInitializationEvent event) {
         // register to the event bus so that we can listen to events
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -79,8 +80,8 @@ public class ZBGTCore {
         proxy.preInit();
     }
 
-    // @EventHandler
-    // public void init(FMLInitializationEvent event) throws IOException {
-    // proxy.onLoad();
-    // }
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event) throws IOException {
+        proxy.postInit();
+    }
 }

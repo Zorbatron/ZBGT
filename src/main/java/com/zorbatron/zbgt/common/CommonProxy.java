@@ -17,12 +17,13 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import com.zorbatron.zbgt.ZBGTConfig;
 import com.zorbatron.zbgt.ZBGTCore;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 import com.zorbatron.zbgt.api.recipes.properties.CoALProperty;
 import com.zorbatron.zbgt.api.unification.material.ZBGTMaterials;
 import com.zorbatron.zbgt.api.util.ZBGTLog;
-import com.zorbatron.zbgt.api.worldgen.WorldGenRegister;
+import com.zorbatron.zbgt.api.worldgen.CustomOreVeins;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.covers.ZBGTCovers;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
@@ -38,17 +39,18 @@ import gregtech.api.unification.material.event.MaterialRegistryEvent;
 @Mod.EventBusSubscriber(modid = ZBGTCore.MODID)
 public class CommonProxy {
 
-    public void preInit() throws IOException {
+    public void preInit() {
         ZBGTMetaItems.init();
-        WorldGenRegister.init();
     }
 
-    // public void onLoad() throws IOException {
-    // WorldGenRegister.init();
-    // }
+    public void postInit() throws IOException {
+        if (ZBGTConfig.worldGenerationSettings.enableOreGeneration) {
+            CustomOreVeins.init();
+        }
+    }
 
     @SubscribeEvent
-    public static void registerCovers(GregTechAPI.RegisterEvent<CoverDefinition> event) {
+    public static void registerCovers(GregTechAPI.RegisterEvent<CoverDefinition> event) throws IOException {
         ZBGTCovers.init();
     }
 

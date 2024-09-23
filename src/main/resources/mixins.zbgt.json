@@ -1,0 +1,12 @@
+{
+  "package": "com.zorbatron.zbgt.mixin",
+  "refmap": "mixins.zbgt.refmap.json",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "WorldGenRegistryMixin"
+  ],
+  "client": [],
+  "server": []
+}
