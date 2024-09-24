@@ -54,7 +54,7 @@ public final class ZBGTMaterialExtraFlags {
     }
 
     private static void screwsBolts() {
-        List<Material> materials = new ArrayList<>(Arrays.asList(BlueSteel, CertusQuartz, Ruthenium));
+        List<Material> materials = new ArrayList<>(Arrays.asList(BlueSteel, CertusQuartz, Ruthenium, NaquadahEnriched));
 
         if (ZBGTAPI.nomiLabsCompat) {
             materials.add(LabsMaterials.Signalum);
@@ -70,7 +70,7 @@ public final class ZBGTMaterialExtraFlags {
     }
 
     private static void smallGears() {
-        Material[] materials = { Platinum };
+        Material[] materials = { Platinum, Naquadria };
 
         setFlags(materials, GENERATE_SMALL_GEAR);
     }

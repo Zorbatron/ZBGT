@@ -209,8 +209,8 @@ public class CasingRecipes {
                 .input(cableGtQuadruple, NetherStar, 8)
                 .input(ZBGTMetaItems.GG_CIRCUIT_4)
                 .inputs(casing3)
-                // BOLT!??
-                // GEAR!?
+                .input(bolt, NaquadahEnriched, 32)
+                .input(gearSmall, Naquadria, 8)
                 .fluidInputs(PreciousMetalsAlloy.getFluid(L * 8))
                 .outputs(casing4WithAmount)
                 .EUt(VA[UHV]).duration(20 * 40)
