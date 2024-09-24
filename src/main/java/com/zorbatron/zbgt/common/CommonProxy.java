@@ -13,7 +13,6 @@ import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -83,7 +82,7 @@ public class CommonProxy {
         ZBGTMetaBlocks.ALL_CASINGS.forEach(casing -> registry.register(createItemBlock(casing, VariantItemBlock::new)));
     }
 
-    @SubscribeEvent(priority = EventPriority.LOW)
+    @SubscribeEvent()
     public static void registerMaterials(MaterialEvent event) {
         ZBGTMaterials.init();
     }
