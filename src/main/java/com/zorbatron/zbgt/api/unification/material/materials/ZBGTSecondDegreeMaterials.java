@@ -66,7 +66,7 @@ public class ZBGTSecondDegreeMaterials {
                             .blastStats(VA[IV], 1400)
                             .vacuumStats(VA[HV], 500))
                     .flags(GENERATE_BOLT_SCREW)
-                    .components(AnnealedCopper, 4, Ardite, 2, RedAlloy, 2)
+                    .components(AnnealedCopper, 4, Ardite, 2, RedAlloy, 2, Redstone, 1)
                     .build();
 
             FluxedElectrum = new Material.Builder(id++, zbgtId("fluxed_electrum"))

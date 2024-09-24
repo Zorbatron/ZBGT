@@ -9,6 +9,7 @@ import static gregtech.api.unification.material.info.MaterialIconSet.*;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
 
+import gregicality.multiblocks.api.unification.GCYMMaterialFlags;
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialIconSet;
@@ -125,7 +126,7 @@ public class ZBGTFirstDegreeMaterials {
                             .temp(6400, BlastProperty.GasTier.HIGHEST)
                             .blastStats(VA[LuV], 1600)
                             .vacuumStats(VA[EV], 600))
-                    .components(Lead, 4, Platinum, 2, BlueSteel, 1, Osmium, 1)
+                    .components(Lead, 4, Platinum, 2, BlueSteel, 1, Osmium, 1, EnderPearl, 1)
                     .build();
 
             EnergeticAlloy = new Material.Builder(id++, zbgtId("energetic_alloy"))

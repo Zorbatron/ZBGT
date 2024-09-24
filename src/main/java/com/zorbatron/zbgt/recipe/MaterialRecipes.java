@@ -7,6 +7,8 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 
+import com.zorbatron.zbgt.api.ZBGTAPI;
+import com.zorbatron.zbgt.api.util.ZBGTLog;
 import net.minecraftforge.fluids.FluidStack;
 
 import gregtech.api.recipes.RecipeBuilder;
@@ -14,6 +16,8 @@ import gregtech.api.recipes.builders.BlastRecipeBuilder;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.api.unification.material.properties.BlastProperty;
 import gregtech.loaders.recipe.CraftingComponent;
+
+import java.util.List;
 
 public class MaterialRecipes {
 
@@ -113,6 +117,71 @@ public class MaterialRecipes {
         specialCeramicsBuilder.copy()
                 .input(dust, Uraninite, 5)
                 .buildAndRegister();
+
+        if (!ZBGTAPI.nomiLabsCompat) {
+            MIXER_RECIPES.recipeBuilder()
+                    .input(dust, RedSteel, 3)
+                    .input(dust, Blaze)
+                    .output(dust, Ardite, 4)
+                    .EUt(VA[LV]).duration(20 * 10)
+                    .buildAndRegister();
+
+            MIXER_RECIPES.recipeBuilder()
+                    .input(dust, TinAlloy, 4)
+                    .input(dust, SterlingSilver, 2)
+                    .output(dust, Lumium, 4)
+                    .EUt(VA[EV]).duration(20 * 15)
+                    .buildAndRegister();
+
+            MIXER_RECIPES.recipeBuilder()
+                    .input(dust, Lead, 4)
+                    .input(dust, Platinum, 2)
+                    .input(dust, TungstenSteel)
+                    .input(dust, Osmium)
+                    .input(dust, EnderPearl)
+                    .output(dust, Enderium, 4)
+                    .EUt(VA[EV]).duration(20 * 15)
+                    .buildAndRegister();
+
+            MIXER_RECIPES.recipeBuilder()
+                    .input(dust, Gold, 2)
+                    .input(dust, Redstone)
+                    .input(dust, Glowstone)
+                    .output(dust, EnergeticAlloy, 2)
+                    .EUt(VA[LV]).duration(20 * 7)
+                    .buildAndRegister();
+
+            MIXER_RECIPES.recipeBuilder()
+                    .input(dust, Ardite, 4)
+                    .input(dust, Osmium, 4)
+                    .output(dust, Manyullyn, 4)
+                    .EUt(VA[LV]).duration(20 * 20)
+                    .buildAndRegister();
+
+            MIXER_RECIPES.recipeBuilder()
+                    .input(dust, AnnealedCopper, 4)
+                    .input(dust, Ardite, 2)
+                    .input(dust, RedAlloy, 2)
+                    .input(dust, Redstone)
+                    .output(dust, Signalum, 4)
+                    .EUt(VA[EV]).duration(20 * 15)
+                    .buildAndRegister();
+
+            MIXER_RECIPES.recipeBuilder()
+                    .input(dust, Electrum, 6)
+                    .input(dust, Lumium)
+                    .input(dust, Signalum)
+                    .output(dust, FluxedElectrum, 9)
+                    .EUt(VA[MV]).duration(20 * 50)
+                    .buildAndRegister();
+
+            MIXER_RECIPES.recipeBuilder()
+                    .input(dust, EnergeticAlloy)
+                    .input(dust, EnderPearl)
+                    .output(dust, VibrantAlloy)
+                    .EUt(VA[LV]).duration(20 * 13)
+                    .buildAndRegister();
+        }
     }
 
     private static void ebf() {
