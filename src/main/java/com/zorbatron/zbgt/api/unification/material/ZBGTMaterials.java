@@ -35,6 +35,7 @@ public final class ZBGTMaterials {
     public static Material FluxedElectrum;
 
     public static Material EnergeticAlloy;
+    public static Material VibrantAlloy;
 
     // Unknown Composition Materials
     public static Material SpecialCeramics;

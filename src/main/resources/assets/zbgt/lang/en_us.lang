@@ -307,11 +307,19 @@ zbgt.material.adamantium_alloy=Adamantium Alloy
 zbgt.material.alumina=Alumina
 zbgt.material.aluminum_nitride=Aluminum Nitride
 zbgt.material.yttrium_oxide=Yttrium Oxide
+zbgt.material.hdcs=High Durability Compound Steel
+zbgt.material.ardite=Ardite
+zbgt.material.lumium=Lumium
+zbgt.material.enderium=Enderium
+zbgt.material.energetic_alloy=Energetic Alloy
 
 zbgt.material.mar_ce_m_200=MAR-Ce-M200
-zbgt.material.hdcs=High Durability Compound Steel
 zbgt.material.artherium_sn=Artherium-Sn
 zbgt.material.dalisenite=Dalisenite
+zbgt.material.manyullyn=Manyullyn
+zbgt.material.signalum=Signalum
+zbgt.material.fluxed_electrum=Fluxed Electrum
+zbgt.material.vibrant_alloy=Vibrant Alloy
 
 zbgt.material.special_ceramics=Special Ceramics
 

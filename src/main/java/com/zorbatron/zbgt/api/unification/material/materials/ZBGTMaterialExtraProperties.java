@@ -63,8 +63,9 @@ public class ZBGTMaterialExtraProperties {
         wirePairs.add(new ImmutablePair<>(Osmiridium, new Integer[] { ZBGTUtility.intV[LuV], 8, 2 }));
 
         if (ZBGTAPI.nomiLabsCompat) {
-            wirePairs
-                    .add(new ImmutablePair<>(LabsMaterials.ElectrumFlux, new Integer[] { ZBGTUtility.intV[IV], 3, 2 }));
+            wirePairs.add(new ImmutablePair<>(
+                    LabsMaterials.ElectrumFlux,
+                    new Integer[] { ZBGTUtility.intV[IV], 3, 2 }));
         }
 
         for (Pair<Material, Integer[]> materialPair : wirePairs) {

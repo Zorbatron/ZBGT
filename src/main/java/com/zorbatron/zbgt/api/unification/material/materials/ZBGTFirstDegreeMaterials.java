@@ -5,6 +5,7 @@ import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
+import static gregtech.api.unification.material.info.MaterialIconSet.*;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
 
@@ -84,30 +85,60 @@ public class ZBGTFirstDegreeMaterials {
                 .components(Yttrium, 2, Oxygen, 3)
                 .build();
 
+        HDCS = new Material.Builder(id++, zbgtId("hdcs"))
+                .liquid(new FluidBuilder().temperature(9000))
+                .color(0x334433).iconSet(MaterialIconSet.SHINY)
+                .flags(GENERATE_SMALL_GEAR)
+                .components(TungstenSteel, 12, HSSE, 9, HSSG, 6, Ruridit, 6, Titanium, 2, Plutonium239, 1)
+                .blast(b -> b
+                        .temp(9000, BlastProperty.GasTier.HIGHER)
+                        .blastStats(VA[IV], 20 * 95))
+                .build();
+
         if (!ZBGTAPI.nomiLabsCompat) {
-            // TODO: Finish these xD
+            // Copied from Nomi Labs
             Ardite = new Material.Builder(id++, zbgtId("ardite"))
-                    .build();
-
-            Manyullyn = new Material.Builder(id++, zbgtId("manyullyn"))
-                    .build();
-
-            Signalum = new Material.Builder(id++, zbgtId("signalum"))
+                    .ingot().liquid()
+                    .color(0xad2f05).iconSet(DULL)
+                    .flags()
+                    .components(RedSteel, 3, Blaze, 1)
                     .build();
 
             Lumium = new Material.Builder(id++, zbgtId("lumium"))
+                    .ingot()
+                    .liquid()
+                    .color(0xf6ff99).iconSet(BRIGHT)
+                    .flags()
+                    .blast(builder -> builder
+                            .temp(4500, BlastProperty.GasTier.MID)
+                            .blastStats(VA[IV], 1600)
+                            .vacuumStats(VA[HV], 600))
+                    .components(TinAlloy, 4, SterlingSilver, 2)
+                    .cableProperties(V[IV], 1, 0, true)
                     .build();
 
             Enderium = new Material.Builder(id++, zbgtId("enderium"))
-                    .build();
-
-            FluxedElectrum = new Material.Builder(id++, zbgtId("fluxed_electrum"))
+                    .ingot().liquid()
+                    .color(0x1f6b62).iconSet(SHINY)
+                    .flags()
+                    .blast(builder -> builder
+                            .temp(6400, BlastProperty.GasTier.HIGHEST)
+                            .blastStats(VA[LuV], 1600)
+                            .vacuumStats(VA[EV], 600))
+                    .components(Lead, 4, Platinum, 2, BlueSteel, 1, Osmium, 1)
                     .build();
 
             EnergeticAlloy = new Material.Builder(id++, zbgtId("energetic_alloy"))
+                    .ingot().liquid()
+                    .color(0xffb545).iconSet(SHINY)
+                    .flags(GENERATE_ROTOR)
+                    .blast(builder -> builder
+                            .temp(1250, BlastProperty.GasTier.LOW)
+                            .blastStats(VA[MV], 400))
+                    .components(Gold, 2, Redstone, 1, Glowstone, 1)
                     .build();
         } else {
-            id += 7;
+            id += 4;
         }
     }
 }
