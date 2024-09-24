@@ -190,7 +190,7 @@ public class MultiblockRecipes {
                 .input(getConveyorByTier(ZPM), 32)
                 .input(getMotorByTier(ZPM), 32)
                 .input(pipeNormalFluid, Polybenzimidazole, 16)
-                .input(plateDense, Iridium, 32)
+                .input(plateDouble, Iridium, 32)
                 .input(MetaTileEntities.FLUID_SOLIDIFIER[ZPM - 1], 16)
                 .input(circuit, getMarkerMaterialByTier(ZPM), 16)
                 .input(circuit, getMarkerMaterialByTier(ZPM - 1), 20)

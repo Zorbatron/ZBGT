@@ -104,12 +104,12 @@ public class MiscRecipes {
                 .EUt(VA[EV]).duration(20 * 20);
 
         radiationPlateBuilder.copy()
-                .input(plateDense, Iridium, 8)
-                .input(plate, NaquadahAlloy, 8)
+                .input(plateDense, Iridium, 6)
+                .input(plate, NaquadahAlloy, 6)
                 .buildAndRegister();
         radiationPlateBuilder.copy()
-                .input(plate, Lanthanum, 4)
-                .input(plate, NaquadahAlloy, 8)
+                .input(plate, Lanthanum, 3)
+                .input(plate, NaquadahAlloy, 6)
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
