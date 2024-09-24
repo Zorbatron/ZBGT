@@ -59,6 +59,11 @@ public class ZBGTMetaItems {
     public static MetaItem<?>.MetaValueItem ENGRAVED_ENERGY_CHIP;
     public static MetaItem<?>.MetaValueItem ENGRAVED_MANYULLYN_CHIP;
 
+    public static MetaItem<?>.MetaValueItem SPECIAL_CERAMICS_PLATE;
+    public static MetaItem<?>.MetaValueItem QUARTZ_WAFER;
+    public static MetaItem<?>.MetaValueItem MICRO_HEATER;
+    public static MetaItem<?>.MetaValueItem QUARTZ_CRYSTAL_RESONATOR;
+
     public static void init() {
         ZBGTMetaItem item = new ZBGTMetaItem();
         item.setRegistryName("zbgt_meta_item");

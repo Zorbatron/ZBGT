@@ -10,6 +10,8 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import net.minecraftforge.fluids.FluidStack;
 
 import gregtech.api.recipes.RecipeBuilder;
+import gregtech.api.recipes.builders.BlastRecipeBuilder;
+import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.api.unification.material.properties.BlastProperty;
 import gregtech.loaders.recipe.CraftingComponent;
 
@@ -17,6 +19,7 @@ public class MaterialRecipes {
 
     protected static void init() {
         chemicalReactor();
+        vacuumFreezer();
         alloyBlast();
         mixer();
         ebf();
@@ -28,6 +31,29 @@ public class MaterialRecipes {
                 .fluidInputs(Chlorine.getFluid(L))
                 .output(dust, LithiumChloride)
                 .EUt(VA[MV]).duration(56)
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .input(dust, Aluminium, 2)
+                .fluidInputs(Oxygen.getFluid(3000))
+                .output(dust, Alumina, 5)
+                .EUt(VA[MV]).duration(45)
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .input(dust, Yttrium, 2)
+                .fluidInputs(Oxygen.getFluid(3000))
+                .circuitMeta(5)
+                .output(dust, YttriumOxide, 5)
+                .EUt(VA[HV]).duration(20 * 14)
+                .buildAndRegister();
+    }
+
+    private static void vacuumFreezer() {
+        VACUUM_RECIPES.recipeBuilder()
+                .fluidInputs(Nitrogen.getFluid(1000))
+                .fluidOutputs(LiquidNitrogen.getFluid(1000))
+                .EUt(VA[HV]).duration(15)
                 .buildAndRegister();
     }
 
@@ -41,18 +67,7 @@ public class MaterialRecipes {
                 .fluidOutputs(Indalloy140.getFluid(L * 100))
                 .blastFurnaceTemp(5475)
                 .EUt(VA[IV]),
-                20 * 40, BlastProperty.GasTier.MID);
-
-        // blastHelper(ALLOY_BLAST_RECIPES.recipeBuilder()
-        // .input(dust, Ruthenium)
-        // .input(dust, Rhodium)
-        // .input(dust, Palladium)
-        // .input(dust, Platinum)
-        // .input(dust, Osmium)
-        // .input(dust, Iridium)
-        // .fluidOutputs(PreciousMetalsAlloy.getFluid(L * 6))
-        // .EUt(VA[UV]),
-        // 20 * 95 + 5, BlastProperty.GasTier.HIGHEST);
+                20 * 40, BlastProperty.GasTier.MID, 5, 10);
     }
 
     private static void mixer() {
@@ -84,6 +99,20 @@ public class MaterialRecipes {
                 .output(dust, Artherium_Sn, 34)
                 .EUt(VA[IV]).duration(20 * 15 + 9)
                 .buildAndRegister();
+
+        RecipeBuilder<SimpleRecipeBuilder> specialCeramicsBuilder = MIXER_RECIPES.recipeBuilder()
+                .input(dust, AluminumNitride, 4)
+                .fluidInputs(Glue.getFluid(1000))
+                .circuitMeta(9)
+                .output(dust, SpecialCeramics, 9)
+                .EUt(VA[EV]).duration(20 * 5);
+
+        specialCeramicsBuilder.copy()
+                .input(dust, YttriumOxide, 5)
+                .buildAndRegister();
+        specialCeramicsBuilder.copy()
+                .input(dust, Uraninite, 5)
+                .buildAndRegister();
     }
 
     private static void ebf() {
@@ -94,10 +123,44 @@ public class MaterialRecipes {
                 .output(ingotHot, MAR_CE_M200, 19)
                 .EUt(VA[ZPM]).duration(20 * 75)
                 .buildAndRegister();
-    }
 
-    private static void blastHelper(RecipeBuilder<?> blastBuilder, int duration, BlastProperty.GasTier gasTier) {
-        blastHelper(blastBuilder, duration, gasTier, 1, 2);
+        RecipeBuilder<BlastRecipeBuilder> aluminumNitrideBuilder = BLAST_RECIPES.recipeBuilder()
+                .fluidInputs(LiquidNitrogen.getFluid(2000))
+                .output(dust, AluminumNitride, 2)
+                .fluidOutputs(CarbonMonoxide.getFluid(3000))
+                .EUt(VA[EV]).duration(20 * 10)
+                .blastFurnaceTemp(4600);
+
+        aluminumNitrideBuilder.copy()
+                .input(dust, Sapphire, 5)
+                .input(dust, Coal, 3)
+                .circuitMeta(5)
+                .buildAndRegister();
+        aluminumNitrideBuilder.copy()
+                .input(dust, Sapphire, 5)
+                .input(dust, Carbon, 3)
+                .circuitMeta(5)
+                .buildAndRegister();
+        aluminumNitrideBuilder.copy()
+                .input(dust, GreenSapphire, 5)
+                .input(dust, Coal, 3)
+                .circuitMeta(5)
+                .buildAndRegister();
+        aluminumNitrideBuilder.copy()
+                .input(dust, GreenSapphire, 5)
+                .input(dust, Carbon, 3)
+                .circuitMeta(5)
+                .buildAndRegister();
+        aluminumNitrideBuilder.copy()
+                .input(dust, Alumina, 5)
+                .input(dust, Coal, 3)
+                .circuitMeta(5)
+                .buildAndRegister();
+        aluminumNitrideBuilder.copy()
+                .input(dust, Alumina, 5)
+                .input(dust, Carbon, 3)
+                .circuitMeta(5)
+                .buildAndRegister();
     }
 
     private static void blastHelper(RecipeBuilder<?> blastBuilder, int duration, BlastProperty.GasTier gasTier,
@@ -105,12 +168,12 @@ public class MaterialRecipes {
         FluidStack gas = CraftingComponent.EBF_GASES.get(gasTier).copy();
 
         blastBuilder.copy()
-                .circuitMeta(1)
+                .circuitMeta(circ1)
                 .duration(duration)
                 .buildAndRegister();
 
         blastBuilder.copy()
-                .circuitMeta(2)
+                .circuitMeta(circ2)
                 .fluidInputs(gas)
                 .duration((int) (duration * 0.67))
                 .buildAndRegister();

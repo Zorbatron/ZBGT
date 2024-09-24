@@ -197,5 +197,10 @@ public class ZBGTMetaItem extends StandardMetaItem {
         ENGRAVED_DIAMOND_CHIP = addItem(47, "engraved_diamond_chip");
         ENGRAVED_ENERGY_CHIP = addItem(48, "engraved_energy_chip");
         ENGRAVED_MANYULLYN_CHIP = addItem(49, "engraved_manyullyn_chip");
+
+        SPECIAL_CERAMICS_PLATE = addItem(50, "special_ceramics_plate");
+        QUARTZ_WAFER = addItem(51, "quartz_wafer");
+        MICRO_HEATER = addItem(52, "micro_heater");
+        QUARTZ_CRYSTAL_RESONATOR = addItem(53, "quartz_crystal_resonator");
     }
 }

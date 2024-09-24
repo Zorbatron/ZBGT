@@ -8,6 +8,7 @@ public final class ZBGTMaterials {
 
     // Elements
     public static Material Adamantium;
+    public static Material LiquidNitrogen;
 
     // First degree materials
     public static Material Indalloy140;
@@ -16,6 +17,9 @@ public final class ZBGTMaterials {
     public static Material AdamantiumAlloy;
     public static Material Artherium_Sn;
     public static Material PreciousMetalsAlloy;
+    public static Material Alumina;
+    public static Material AluminumNitride;
+    public static Material YttriumOxide;
 
     // Second degree materials
     public static Material MAR_CE_M200;
@@ -32,10 +36,14 @@ public final class ZBGTMaterials {
 
     public static Material EnergeticAlloy;
 
+    // Unknown Composition Materials
+    public static Material SpecialCeramics;
+
     public static void init() {
         ZBGTElementMaterials.register();
         ZBGTFirstDegreeMaterials.register();
         ZBGTSecondDegreeMaterials.register();
+        ZBGTUnknownCompositionMaterials.register();
 
         ZBGTMaterialExtraProperties.register();
         ZBGTMaterialExtraFlags.register();

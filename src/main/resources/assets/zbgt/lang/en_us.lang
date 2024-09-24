@@ -143,6 +143,11 @@ metaitem.engraved_diamond_chip.name=Engraved Diamond Chip
 metaitem.engraved_energy_chip.name=Engraved Energy Chip
 metaitem.engraved_manyullyn_chip.name=Engraved Manyullyn Chip
 
+metaitem.special_ceramics_plate.name=Special Ceramics Plate
+metaitem.quartz_wafer.name=Quartz Wafer
+metaitem.micro_heater.name=Micro Heater
+metaitem.quartz_crystal_resonator.name=Quartz Crystal Resonator
+
 
 # Widgets
 zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s
@@ -273,6 +278,12 @@ tile.yottank_cell.yottank_cell_9.tooltip=Capacity: 100,000,000,000,000,00,000,00
 tile.yottank_cell.yottank_cell_10.name=Fluid Cell Block T10
 tile.yottank_cell.yottank_cell_10.tooltip=Capacity: 1,000,000,000,000,000,000,000,000 L
 
+tile.misc_casing.ameliorated_superconductor_coil.name=Ameliorated Superconductor Coil
+tile.misc_casing.compact_fusion_coil_1.name=Compact Fusion Coil
+tile.misc_casing.compact_fusion_coil_2.name=Advanced Compact Fusion Coil
+tile.misc_casing.compact_fusion_coil_3.name=Compact Fusion Coil MK-II Prototype
+tile.misc_casing.compact_fusion_coil_4.name=Compact Fusion Coil MK-II Finaltype
+
 
 # Misc
 zbgt.laser_enabled.1=Can use
@@ -286,17 +297,23 @@ zbgt.subtitle.fx_lo_freq=Low Frequency Buzzing
 
 # Materials
 zbgt.material.adamantium=Adamantium
+zbgt.material.liquid_nitrogen=Liquid Nitrogen
 
 zbgt.material.indalloy_140=Indalloy 140
 zbgt.material.mar_200=MAR-M200 Steel
 zbgt.material.tanmolyium_beta_c=Tanmolyium Beta-C
 zbgt.material.precious_metals_alloy=Precious Metals Alloy
 zbgt.material.adamantium_alloy=Adamantium Alloy
+zbgt.material.alumina=Alumina
+zbgt.material.aluminum_nitride=Aluminum Nitride
+zbgt.material.yttrium_oxide=Yttrium Oxide
 
 zbgt.material.mar_ce_m_200=MAR-Ce-M200
 zbgt.material.hdcs=High Durability Compound Steel
 zbgt.material.artherium_sn=Artherium-Sn
 zbgt.material.dalisenite=Dalisenite
+
+zbgt.material.special_ceramics=Special Ceramics
 
 
 # Ore veins

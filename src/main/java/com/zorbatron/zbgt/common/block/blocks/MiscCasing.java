@@ -22,7 +22,12 @@ public class MiscCasing extends VariantBlock<MiscCasing.CasingType> {
 
     public enum CasingType implements IStringSerializable {
 
-        YOTTANK_CASING("yottank_casing");
+        YOTTANK_CASING("yottank_casing"),
+        AMELIORATED_SUPERCONDUCTOR_COIL("ameliorated_superconductor_coil"),
+        COMPACT_FUSION_COIL_1("compact_fusion_coil_1"),
+        COMPACT_FUSION_COIL_2("compact_fusion_coil_2"),
+        COMPACT_FUSION_COIL_3("compact_fusion_coil_3"),
+        COMPACT_FUSION_COIL_4("compact_fusion_coil_4");
 
         private final String name;
 

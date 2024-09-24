@@ -12,14 +12,16 @@ import com.zorbatron.zbgt.ZBGTConfig;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
 
+import gregtech.api.recipes.RecipeBuilder;
+import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.common.items.MetaItems;
 
 public class MiscRecipes {
 
     protected static void init() {
-        magneticFluids();
         genericCircuits();
+        magneticFluids();
 
         if (ZBGTConfig.recipeSettings.enableSillyRecipes) {
             sillyRecipes();
@@ -27,6 +29,53 @@ public class MiscRecipes {
 
         ggCircuits();
         engraver();
+
+        EXTRUDER_RECIPES.recipeBuilder()
+                .input(dust, SpecialCeramics, 2)
+                .notConsumable(MetaItems.SHAPE_EXTRUDER_PLATE)
+                .output(SPECIAL_CERAMICS_PLATE)
+                .EUt(VA[HV]).duration(20 * 15)
+                .buildAndRegister();
+
+        RecipeBuilder<SimpleRecipeBuilder> quartzWaferBuilder = AUTOCLAVE_RECIPES.recipeBuilder()
+                .input(plate, Quartzite)
+                .input(dust, Sodium, 4)
+                .EUt(VA[LV]);
+
+        quartzWaferBuilder.copy()
+                .fluidInputs(DistilledWater.getFluid(1000))
+                .output(QUARTZ_WAFER)
+                .duration(20 * 60)
+                .buildAndRegister();
+        quartzWaferBuilder.copy()
+                .fluidInputs(Water.getFluid(1000))
+                .chancedOutput(QUARTZ_WAFER, 3333, 750)
+                .duration(20 * 110)
+                .buildAndRegister();
+
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(MetaItems.PLASTIC_CIRCUIT_BOARD)
+                .input(MetaItems.ULTRA_LOW_POWER_INTEGRATED_CIRCUIT)
+                .input(MetaItems.VOLTAGE_COIL_ULV, 2)
+                .input(MetaItems.BATTERY_ULV_TANTALUM)
+                .fluidInputs(RedAlloy.getFluid(L))
+                .fluidInputs(Aluminium.getFluid(L))
+                .output(MICRO_HEATER)
+                .casingTier(1)
+                .EUt(VA[HV]).duration(20 * 3)
+                .buildAndRegister();
+
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(QUARTZ_WAFER)
+                .input(SPECIAL_CERAMICS_PLATE, 2)
+                .input(MICRO_HEATER)
+                .input(MetaItems.INTEGRATED_LOGIC_CIRCUIT, 4)
+                .fluidInputs(EnergeticAlloy.getFluid(72))
+                .fluidInputs(Silver.getFluid(18))
+                .output(QUARTZ_CRYSTAL_RESONATOR)
+                .casingTier(1)
+                .EUt(VA[HV]).duration(20 * 5)
+                .buildAndRegister();
     }
 
     private static void magneticFluids() {

@@ -20,6 +20,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.google.common.collect.Lists;
+import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
+import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
 
 import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechDataCodes;
@@ -121,14 +123,15 @@ public class MetaTileEntityMegaFusionReactor extends RecipeMapMultiblockControll
     }
 
     protected IBlockState getCoilState() {
-        BlockFusionCasing.CasingType casingType;
-        if (tier == GTValues.LuV) {
-            casingType = BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL;
-        } else {
-            casingType = BlockFusionCasing.CasingType.FUSION_COIL;
-        }
+        MiscCasing.CasingType casingType = switch (tier) {
+            case (GTValues.ZPM) -> MiscCasing.CasingType.COMPACT_FUSION_COIL_1;
+            case (GTValues.UV) -> MiscCasing.CasingType.COMPACT_FUSION_COIL_2;
+            case (GTValues.UHV) -> MiscCasing.CasingType.COMPACT_FUSION_COIL_3;
+            case (GTValues.UEV) -> MiscCasing.CasingType.COMPACT_FUSION_COIL_4;
+            default -> MiscCasing.CasingType.AMELIORATED_SUPERCONDUCTOR_COIL;
+        };
 
-        return MetaBlocks.FUSION_CASING.getState(casingType);
+        return ZBGTMetaBlocks.MISC_CASING.getState(casingType);
     }
 
     protected IBlockState getGlassState() {

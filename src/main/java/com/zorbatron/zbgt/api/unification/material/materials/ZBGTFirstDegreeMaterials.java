@@ -67,6 +67,24 @@ public class ZBGTFirstDegreeMaterials {
                         .blastStats(VA[EV], 20 * 56))
                 .build();
 
+        Alumina = new Material.Builder(id++, zbgtId("alumina"))
+                .dust()
+                .color(0xDAE8ED).iconSet(MaterialIconSet.FINE)
+                .components(Aluminium, 2, Oxygen, 3)
+                .build();
+
+        AluminumNitride = new Material.Builder(id++, zbgtId("aluminum_nitride"))
+                .dust()
+                .color(0xA4DED3).iconSet(MaterialIconSet.FINE)
+                .components(Aluminium, 1, Nitrogen, 1)
+                .build();
+
+        YttriumOxide = new Material.Builder(id++, zbgtId("yttrium_oxide"))
+                .dust()
+                .color(0xFFFFFF).iconSet(MaterialIconSet.DULL)
+                .components(Yttrium, 2, Oxygen, 3)
+                .build();
+
         if (ZBGTAPI.nomiLabsCompat) {
             Ardite = LabsMaterials.Ardite;
             Manyullyn = LabsMaterials.Manyullyn;

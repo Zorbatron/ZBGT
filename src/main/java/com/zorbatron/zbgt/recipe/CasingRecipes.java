@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 
 import com.filostorm.ulvcovers.items.ULVCoverMetaItems;
+import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 import com.zorbatron.zbgt.api.util.ZBGTMods;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
@@ -29,6 +30,8 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import gregtech.common.ConfigHolder;
+import gregtech.common.blocks.BlockFusionCasing;
+import gregtech.common.blocks.MetaBlocks;
 
 public class CasingRecipes {
 
@@ -36,8 +39,9 @@ public class CasingRecipes {
 
     protected static void init() {
         materialCasings();
-        coALCasings();
         preciseCasings();
+        fusionCasings();
+        coALCasings();
         miscCasings();
     }
 
@@ -185,7 +189,7 @@ public class CasingRecipes {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(getMachineCasingByTier(UV, 3))
                 .input(getFieldGeneratorByTier(ZPM), 2)
-                // CABLE
+                .input(wireGtQuadruple, RutheniumTriniumAmericiumNeutronate, 4)
                 .input(ZBGTMetaItems.GG_CIRCUIT_3)
                 .inputs(casing2)
                 .input(bolt, TanmolyiumBetaC, 32)
@@ -207,6 +211,35 @@ public class CasingRecipes {
                 .fluidInputs(PreciousMetalsAlloy.getFluid(L * 8))
                 .outputs(casing4WithAmount)
                 .EUt(VA[UHV]).duration(20 * 40)
+                .buildAndRegister();
+    }
+
+    private static void fusionCasings() {
+        ItemStack superconductorCoilWithAmount = GTUtility.copy(3,
+                MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL));
+        ZBGTRecipeMaps.PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(superconductorCoilWithAmount)
+                .input(ZBGTMetaItems.GG_CIRCUIT_2)
+                .input(ZBGTMetaItems.SPECIAL_CERAMICS_PLATE, 2)
+                .fluidInputs(MAR_M200.getFluid(L * 8))
+                .fluidInputs(Chrome.getFluid(L * 2))
+                .casingTier(1)
+                .outputs(ZBGTMetaBlocks.MISC_CASING
+                        .getItemVariant(MiscCasing.CasingType.AMELIORATED_SUPERCONDUCTOR_COIL))
+                .EUt(VA[LuV]).duration(20 * 45)
+                .buildAndRegister();
+
+        ItemStack fusionCoilWithAmount = GTUtility.copy(3,
+                MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.FUSION_COIL));
+        ZBGTRecipeMaps.PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(fusionCoilWithAmount)
+                .input(ZBGTMetaItems.QUARTZ_CRYSTAL_RESONATOR, 2)
+                .input(ZBGTMetaItems.GG_CIRCUIT_3)
+                .fluidInputs(Artherium_Sn.getFluid(L * 4))
+                .fluidInputs(TanmolyiumBetaC.getFluid(L))
+                .casingTier(2)
+                .outputs(ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.COMPACT_FUSION_COIL_1))
+                .EUt(VA[LuV]).duration(20 * 34)
                 .buildAndRegister();
     }
 
