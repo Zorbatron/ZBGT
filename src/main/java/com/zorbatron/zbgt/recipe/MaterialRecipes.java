@@ -7,17 +7,15 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 
-import com.zorbatron.zbgt.api.ZBGTAPI;
-import com.zorbatron.zbgt.api.util.ZBGTLog;
 import net.minecraftforge.fluids.FluidStack;
+
+import com.zorbatron.zbgt.api.ZBGTAPI;
 
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.builders.BlastRecipeBuilder;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.api.unification.material.properties.BlastProperty;
 import gregtech.loaders.recipe.CraftingComponent;
-
-import java.util.List;
 
 public class MaterialRecipes {
 

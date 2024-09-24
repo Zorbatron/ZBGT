@@ -9,7 +9,6 @@ import static gregtech.api.unification.material.info.MaterialIconSet.*;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
 
-import gregicality.multiblocks.api.unification.GCYMMaterialFlags;
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialIconSet;
