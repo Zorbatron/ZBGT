@@ -56,8 +56,8 @@ import gregtech.common.metatileentities.MetaTileEntities;
 
 public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblockController {
 
-    private int preciseCasingTier = -1;
-    private int machineCasingTier = -1;
+    private int preciseCasingTier = 0;
+    private int machineCasingTier = 0;
 
     public MetaTileEntityPreciseAssembler(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new gregtech.api.recipes.RecipeMap[] { RecipeMaps.ASSEMBLER_RECIPES,
@@ -228,8 +228,8 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
-        this.preciseCasingTier = -1;
-        this.machineCasingTier = -1;
+        this.preciseCasingTier = 0;
+        this.machineCasingTier = 0;
     }
 
     public int getPreciseCasingTier() {
@@ -289,6 +289,14 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
         }
 
         @Override
+        public long getMaxVoltage() {
+            int casingTier = getMachineCasingTier();
+            long maxVoltage = super.getMaxVoltage();
+
+            return casingTier >= GTValues.UHV ? maxVoltage : Math.min(maxVoltage, GTValues.V[casingTier]);
+        }
+
+        @Override
         protected void modifyOverclockPre(int @NotNull [] values, @NotNull IRecipePropertyStorage storage) {
             if (getRecipeMapIndex() == 0) {
                 values[1] = (int) (values[1] * 0.5);
@@ -304,18 +312,9 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
 
         @Override
         public boolean checkRecipe(@NotNull Recipe recipe) {
-            if (!super.checkRecipe(recipe)) return false;
-
-            boolean meetsPreciseTier = recipe.getProperty(PreciseAssemblerProperty.getInstance(), 0) <=
-                    getPreciseCasingTier();
-            boolean meetsCasingTier = Math.min(GTUtility.getTierByVoltage(recipe.getEUt()), GTValues.UHV) <=
-                    getMachineCasingTier();
-
-            if (getRecipeMapIndex() == 1) {
-                return meetsCasingTier && meetsPreciseTier;
-            } else {
-                return meetsCasingTier;
-            }
+            return getRecipeMapIndex() == 0 ? super.checkRecipe(recipe) :
+                    super.checkRecipe(recipe) &&
+                            recipe.getProperty(PreciseAssemblerProperty.getInstance(), 0) <= getPreciseCasingTier();
         }
     }
 }
