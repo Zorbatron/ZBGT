@@ -14,6 +14,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 
 import com.filostorm.ulvcovers.items.ULVCoverMetaItems;
+import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 import com.zorbatron.zbgt.api.util.ZBGTMods;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
@@ -161,10 +163,10 @@ public class CasingRecipes {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(getMachineCasingByTier(LuV, 3))
                 .input(getRobotArmByTier(IV), 2)
-                .input(wireGtQuadruple, Lumium, 2)
+                .input(wireGtQuadruple, ZBGTAPI.nomiLabsCompat ? LabsMaterials.Lumium : Lumium, 2)
                 .input(plateDouble, MAR_CE_M200, 2)
                 .input(ZBGTMetaItems.GG_CIRCUIT_1)
-                .input(bolt, Signalum, 32)
+                .input(bolt, ZBGTAPI.nomiLabsCompat ? LabsMaterials.Signalum : Signalum, 32)
                 .input(gearSmall, TanmolyiumBetaC, 8)
                 .fluidInputs(BlackSteel.getFluid(L * 4))
                 .outputs(casing1WithAmount)
@@ -175,7 +177,7 @@ public class CasingRecipes {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(getMachineCasingByTier(ZPM, 3))
                 .input(getRobotArmByTier(LuV), 2)
-                .input(cableGtQuadruple, FluxedElectrum, 4)
+                .input(cableGtQuadruple, ZBGTAPI.nomiLabsCompat ? LabsMaterials.ElectrumFlux : FluxedElectrum, 4)
                 .input(ZBGTMetaItems.GG_CIRCUIT_2)
                 .inputs(casing1)
                 .input(bolt, MAR_CE_M200, 32)

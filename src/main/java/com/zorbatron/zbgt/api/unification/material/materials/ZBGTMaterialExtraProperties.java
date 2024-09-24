@@ -1,6 +1,5 @@
 package com.zorbatron.zbgt.api.unification.material.materials;
 
-import static com.zorbatron.zbgt.api.unification.material.ZBGTMaterials.FluxedElectrum;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.LithiumChloride;
@@ -13,6 +12,8 @@ import java.util.List;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.util.ZBGTUtility;
 
 import gregtech.api.fluids.FluidBuilder;
@@ -60,7 +61,11 @@ public class ZBGTMaterialExtraProperties {
         wirePairs.add(new ImmutablePair<>(Titanium, new Integer[] { ZBGTUtility.intV[EV], 4, 2 }));
         wirePairs.add(new ImmutablePair<>(NetherStar, new Integer[] { ZBGTUtility.intV[UIV], 4, 16 }));
         wirePairs.add(new ImmutablePair<>(Osmiridium, new Integer[] { ZBGTUtility.intV[LuV], 8, 2 }));
-        wirePairs.add(new ImmutablePair<>(FluxedElectrum, new Integer[] { ZBGTUtility.intV[IV], 3, 2 }));
+
+        if (ZBGTAPI.nomiLabsCompat) {
+            wirePairs
+                    .add(new ImmutablePair<>(LabsMaterials.ElectrumFlux, new Integer[] { ZBGTUtility.intV[IV], 3, 2 }));
+        }
 
         for (Pair<Material, Integer[]> materialPair : wirePairs) {
             materialPair.getLeft().setProperty(WIRE, new WireProperties(

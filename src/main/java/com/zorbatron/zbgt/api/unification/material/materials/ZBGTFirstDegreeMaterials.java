@@ -6,7 +6,6 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 
-import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
 import com.zorbatron.zbgt.api.ZBGTAPI;
 
 import gregtech.api.fluids.FluidBuilder;
@@ -85,17 +84,7 @@ public class ZBGTFirstDegreeMaterials {
                 .components(Yttrium, 2, Oxygen, 3)
                 .build();
 
-        if (ZBGTAPI.nomiLabsCompat) {
-            Ardite = LabsMaterials.Ardite;
-            Manyullyn = LabsMaterials.Manyullyn;
-            Signalum = LabsMaterials.Signalum;
-            Lumium = LabsMaterials.Lumium;
-            Enderium = LabsMaterials.Enderium;
-            FluxedElectrum = LabsMaterials.ElectrumFlux;
-            EnergeticAlloy = LabsMaterials.EnergeticAlloy;
-
-            id += 7;
-        } else {
+        if (!ZBGTAPI.nomiLabsCompat) {
             // TODO: Finish these xD
             Ardite = new Material.Builder(id++, zbgtId("ardite"))
                     .build();
@@ -117,6 +106,8 @@ public class ZBGTFirstDegreeMaterials {
 
             EnergeticAlloy = new Material.Builder(id++, zbgtId("energetic_alloy"))
                     .build();
+        } else {
+            id += 7;
         }
     }
 }

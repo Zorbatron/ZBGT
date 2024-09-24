@@ -26,7 +26,7 @@ public final class ZBGTMaterials {
     public static Material HDCS;
     public static Material Dalisenite;
 
-    // Nomifactory alternate materials
+    // Nomifactory materials
     public static Material Ardite;
     public static Material Manyullyn;
     public static Material Signalum;

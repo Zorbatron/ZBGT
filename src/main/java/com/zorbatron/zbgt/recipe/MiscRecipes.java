@@ -8,7 +8,9 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 
+import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
 import com.zorbatron.zbgt.ZBGTConfig;
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
 
@@ -70,7 +72,7 @@ public class MiscRecipes {
                 .input(SPECIAL_CERAMICS_PLATE, 2)
                 .input(MICRO_HEATER)
                 .input(MetaItems.INTEGRATED_LOGIC_CIRCUIT, 4)
-                .fluidInputs(EnergeticAlloy.getFluid(72))
+                .fluidInputs((ZBGTAPI.nomiLabsCompat ? LabsMaterials.EnergeticAlloy : EnergeticAlloy).getFluid(72))
                 .fluidInputs(Silver.getFluid(18))
                 .output(QUARTZ_CRYSTAL_RESONATOR)
                 .casingTier(1)
@@ -130,7 +132,7 @@ public class MiscRecipes {
                 .input(ZBGTMetaItems.ENGRAVED_GOLD_CHIP, 16)
                 .input(MetaItems.ADVANCED_SYSTEM_ON_CHIP, 8)
                 .input(MetaItems.NOR_MEMORY_CHIP, 32)
-                .input(bolt, Signalum, 32)
+                .input(bolt, ZBGTAPI.nomiLabsCompat ? LabsMaterials.Signalum : Signalum, 32)
                 .input(wireGtSingle, Aluminium, 8)
                 .input(rotor, TinAlloy)
                 .fluidInputs(SolderingAlloy.getFluid(L * 2))
@@ -144,9 +146,9 @@ public class MiscRecipes {
                 .input(MetaItems.NOR_MEMORY_CHIP, 16)
                 .input(rotor, Aluminium, 2)
                 .fluidInputs(Polyethylene.getFluid(L * 2))
-                .fluidInputs(Signalum.getFluid(144))
-                .fluidInputs(Lumium.getFluid(72))
-                .fluidInputs(Enderium.getFluid(72))
+                .fluidInputs((ZBGTAPI.nomiLabsCompat ? LabsMaterials.Signalum : Signalum).getFluid(144))
+                .fluidInputs((ZBGTAPI.nomiLabsCompat ? LabsMaterials.Lumium : Lumium).getFluid(72))
+                .fluidInputs((ZBGTAPI.nomiLabsCompat ? LabsMaterials.Enderium : Enderium).getFluid(72))
                 .output(GG_CIRCUIT_2)
                 .casingTier(1)
                 .EUt(VA[LuV]).duration(20 * 8)
@@ -158,8 +160,8 @@ public class MiscRecipes {
                 .input(MetaItems.CRYSTAL_CENTRAL_PROCESSING_UNIT)
                 .input(rotor, StainlessSteel, 2)
                 .fluidInputs(AdamantiumAlloy.getFluid(L * 4))
-                .fluidInputs(Signalum.getFluid(L * 2))
-                .fluidInputs(Lumium.getFluid(L))
+                .fluidInputs((ZBGTAPI.nomiLabsCompat ? LabsMaterials.Signalum : Signalum).getFluid(L * 2))
+                .fluidInputs((ZBGTAPI.nomiLabsCompat ? LabsMaterials.Lumium : Lumium).getFluid(L))
                 .fluidInputs(TungstenCarbide.getFluid(72))
                 .output(GG_CIRCUIT_3)
                 .casingTier(2)
@@ -172,8 +174,8 @@ public class MiscRecipes {
                 .input(MetaItems.QUBIT_CENTRAL_PROCESSING_UNIT, 16)
                 .input(rotor, EnergeticAlloy, 2)
                 .fluidInputs(MAR_M200.getFluid(L * 8))
-                .fluidInputs(Signalum.getFluid(L * 4))
-                .fluidInputs(Lumium.getFluid(L * 2))
+                .fluidInputs((ZBGTAPI.nomiLabsCompat ? LabsMaterials.Signalum : Signalum).getFluid(L * 4))
+                .fluidInputs((ZBGTAPI.nomiLabsCompat ? LabsMaterials.Lumium : Lumium).getFluid(L * 2))
                 .fluidInputs(Artherium_Sn.getFluid(L))
                 .output(GG_CIRCUIT_4)
                 .casingTier(3)
@@ -186,8 +188,8 @@ public class MiscRecipes {
                 .input(MetaItems.NEURO_PROCESSOR)
                 .input(rotor, TungstenCarbide, 2)
                 .fluidInputs(TanmolyiumBetaC.getFluid(L * 12))
-                .fluidInputs(Signalum.getFluid(L * 8))
-                .fluidInputs(Lumium.getFluid(L * 4))
+                .fluidInputs((ZBGTAPI.nomiLabsCompat ? LabsMaterials.Signalum : Signalum).getFluid(L * 8))
+                .fluidInputs((ZBGTAPI.nomiLabsCompat ? LabsMaterials.Lumium : Lumium).getFluid(L * 4))
                 .fluidInputs(Dalisenite.getFluid(L * 2))
                 .output(GG_CIRCUIT_5)
                 .casingTier(3)
@@ -219,7 +221,7 @@ public class MiscRecipes {
 
         LASER_ENGRAVER_RECIPES.recipeBuilder()
                 .notConsumable(craftingLens, MarkerMaterials.Color.Pink)
-                .input(plate, Manyullyn, 4)
+                .input(plate, ZBGTAPI.nomiLabsCompat ? LabsMaterials.Manyullyn : Manyullyn, 4)
                 .output(ZBGTMetaItems.ENGRAVED_MANYULLYN_CHIP)
                 .EUt(VA[IV]).duration(20 * 30)
                 .buildAndRegister();

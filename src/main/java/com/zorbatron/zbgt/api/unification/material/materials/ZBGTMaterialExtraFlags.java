@@ -1,9 +1,15 @@
 package com.zorbatron.zbgt.api.unification.material.materials;
 
-import static com.zorbatron.zbgt.api.unification.material.ZBGTMaterials.*;
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
+import com.zorbatron.zbgt.api.ZBGTAPI;
 
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialFlag;
@@ -11,6 +17,12 @@ import gregtech.api.unification.material.info.MaterialFlag;
 public class ZBGTMaterialExtraFlags {
 
     public static void setFlags(Material[] materials, MaterialFlag... flags) {
+        for (Material material : materials) {
+            material.addFlags(flags);
+        }
+    }
+
+    public static void setFlags(List<Material> materials, MaterialFlag... flags) {
         for (Material material : materials) {
             material.addFlags(flags);
         }
@@ -41,7 +53,11 @@ public class ZBGTMaterialExtraFlags {
     }
 
     private static void screwsBolts() {
-        Material[] materials = { BlueSteel, CertusQuartz, Ruthenium, Signalum };
+        List<Material> materials = new ArrayList<>(Arrays.asList(BlueSteel, CertusQuartz, Ruthenium));
+
+        if (ZBGTAPI.nomiLabsCompat) {
+            materials.add(LabsMaterials.Signalum);
+        }
 
         setFlags(materials, GENERATE_BOLT_SCREW);
     }
@@ -65,7 +81,11 @@ public class ZBGTMaterialExtraFlags {
     }
 
     private static void rotors() {
-        Material[] materials = { TinAlloy, Aluminium, TungstenCarbide, EnergeticAlloy };
+        List<Material> materials = new ArrayList<>(Arrays.asList(TinAlloy, Aluminium, TungstenCarbide));
+
+        if (ZBGTAPI.nomiLabsCompat) {
+            materials.add(LabsMaterials.EnergeticAlloy);
+        }
 
         setFlags(materials, GENERATE_ROTOR);
     }
