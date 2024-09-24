@@ -9,6 +9,7 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 
 import net.minecraftforge.fluids.FluidStack;
 
+import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
 import com.zorbatron.zbgt.api.ZBGTAPI;
 
 import gregtech.api.recipes.RecipeBuilder;
@@ -182,6 +183,14 @@ public class MaterialRecipes {
                     .EUt(VA[LV]).duration(20 * 13)
                     .buildAndRegister();
         }
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, ZBGTAPI.nomiLabsCompat ? LabsMaterials.Lumium : Lumium, 18)
+                .input(dust, Silver, 8)
+                .circuitMeta(3)
+                .output(dust, Hikarium, 26)
+                .EUt(VA[LuV]).duration(20 * 13)
+                .buildAndRegister();
     }
 
     private static void ebf() {

@@ -27,6 +27,9 @@ public final class ZBGTMaterials {
     public static Material HDCS;
     public static Material Dalisenite;
 
+    // Third degree materials
+    public static Material Hikarium;
+
     // Nomifactory materials
     public static Material Ardite;
     public static Material Manyullyn;

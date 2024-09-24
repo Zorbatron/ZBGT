@@ -320,9 +320,11 @@ zbgt.material.artherium_sn=Artherium-Sn
 zbgt.material.dalisenite=Dalisenite
 zbgt.material.manyullyn=Manyullyn
 zbgt.material.signalum=Signalum
-zbgt.material.fluxed_electrum=Fluxed Electrum
 zbgt.material.vibrant_alloy=Vibrant Alloy
 zbgt.material.lumium=Lumium
+
+zbgt.material.fluxed_electrum=Fluxed Electrum
+zbgt.material.hikarium=Hikarium
 
 zbgt.material.special_ceramics=Special Ceramics
 

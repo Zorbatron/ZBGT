@@ -34,6 +34,7 @@ import gregtech.api.util.GTUtility;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockFusionCasing;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.items.MetaItems;
 
 public class CasingRecipes {
 
@@ -242,6 +243,18 @@ public class CasingRecipes {
                 .casingTier(2)
                 .outputs(ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.COMPACT_FUSION_COIL_1))
                 .EUt(VA[LuV]).duration(20 * 34)
+                .buildAndRegister();
+
+        ZBGTRecipeMaps.PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(fusionCoilWithAmount)
+                .input(ZBGTMetaItems.RADIATION_PROTECTION_PLATE, 2)
+                .input(MetaItems.QUANTUM_STAR, 4)
+                .input(ZBGTMetaItems.GG_CIRCUIT_4)
+                .fluidInputs(Dalisenite.getFluid(L * 4))
+                .fluidInputs(Hikarium.getFluid(L))
+                .outputs(ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.COMPACT_FUSION_COIL_2))
+                .casingTier(3)
+                .EUt(VA[ZPM]).duration(20 * 35)
                 .buildAndRegister();
     }
 
