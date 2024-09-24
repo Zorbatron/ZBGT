@@ -75,6 +75,7 @@ public final class ZBGTSecondDegreeMaterials {
                     .blast(builder -> builder
                             .temp(3000, BlastProperty.GasTier.LOW)
                             .blastStats(VA[MV], 400))
+                    .flags(GENERATE_PLATE)
                     .components(EnergeticAlloy, 1, EnderPearl, 1)
                     .build();
 

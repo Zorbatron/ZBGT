@@ -203,8 +203,9 @@ public class ZBGTMetaItem extends StandardMetaItem {
         QUARTZ_WAFER = addItem(51, "quartz_wafer");
         MICRO_HEATER = addItem(52, "micro_heater");
         QUARTZ_CRYSTAL_RESONATOR = addItem(53, "quartz_crystal_resonator");
-
         HIGH_ENERGY_MIXTURE = addItem(54, "high_energy_mixture")
                 .setInvisibleIf(ZBGTAPI.nomiLabsCompat);
+        RADIATION_PROTECTION_PLATE = addItem(55, "radiation_protection_plate");
+        ADVANCED_RADIATION_PROTECTION_PLATE = addItem(56, "advanced_radiation_protection_plate");
     }
 }

@@ -15,6 +15,7 @@ import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
 
 import gregtech.api.recipes.RecipeBuilder;
+import gregtech.api.recipes.builders.AssemblerRecipeBuilder;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.common.items.MetaItems;
@@ -95,6 +96,37 @@ public class MiscRecipes {
                     .EUt(VA[HV]).duration(20 * 24)
                     .buildAndRegister();
         }
+
+        RecipeBuilder<AssemblerRecipeBuilder> radiationPlateBuilder = ASSEMBLER_RECIPES.recipeBuilder()
+                .fluidInputs(Lead.getFluid(L * 8))
+                .circuitMeta(1)
+                .output(RADIATION_PROTECTION_PLATE)
+                .EUt(VA[EV]).duration(20 * 20);
+
+        radiationPlateBuilder.copy()
+                .input(plateDense, Iridium, 8)
+                .input(plate, NaquadahAlloy, 8)
+                .buildAndRegister();
+        radiationPlateBuilder.copy()
+                .input(plate, Lanthanum, 4)
+                .input(plate, NaquadahAlloy, 8)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(RADIATION_PROTECTION_PLATE)
+                .input(plate, ZBGTAPI.nomiLabsCompat ? LabsMaterials.ElectrumFlux : FluxedElectrum, 4)
+                .input(plate, Trinium, 4)
+                .input(plate, NaquadahAlloy, 4)
+                .input(plate, Osmiridium, 4)
+                .input(plate, ZBGTAPI.nomiLabsCompat ? LabsMaterials.VibrantAlloy : VibrantAlloy, 4)
+                .input(RADIATION_PROTECTION_PLATE)
+                .fluidInputs(Indalloy140.getFluid(L * 8))
+                .stationResearch(research -> research
+                        .researchStack(RADIATION_PROTECTION_PLATE.getStackForm())
+                        .EUt(VA[ZPM]).CWUt(128))
+                .output(ADVANCED_RADIATION_PROTECTION_PLATE)
+                .EUt(VA[ZPM]).duration(20 * 50)
+                .buildAndRegister();
     }
 
     private static void magneticFluids() {

@@ -12,6 +12,7 @@ import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
 import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
+import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 
 import gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities;
 import gregtech.api.recipes.ModHandler;
@@ -163,7 +164,7 @@ public class MultiblockRecipes {
                 .input(MetaItems.ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT_WAFER, 64)
                 .input(MetaItems.ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT_WAFER, 64)
                 .input(MetaItems.VOLTAGE_COIL_UV, 16)
-                .input(MetaItems.NEUTRON_REFLECTOR, 64)
+                .input(ZBGTMetaItems.ADVANCED_RADIATION_PROTECTION_PLATE, 8)
                 .input(getFieldGeneratorByTier(UV), 8)
                 .input(gearSmall, HDCS, 64)
                 .fluidInputs(Indalloy140.getFluid(L * 128))

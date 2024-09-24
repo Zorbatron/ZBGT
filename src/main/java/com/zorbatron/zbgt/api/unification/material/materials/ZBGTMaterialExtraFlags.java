@@ -36,6 +36,7 @@ public final class ZBGTMaterialExtraFlags {
         smallGears();
         longRods();
         rotors();
+        plates();
         gears();
     }
 
@@ -88,6 +89,12 @@ public final class ZBGTMaterialExtraFlags {
         }
 
         setFlags(materials, GENERATE_ROTOR);
+    }
+
+    private static void plates() {
+        Material[] materials = { Lanthanum };
+
+        setFlags(materials, GENERATE_PLATE);
     }
 
     private static void gears() {

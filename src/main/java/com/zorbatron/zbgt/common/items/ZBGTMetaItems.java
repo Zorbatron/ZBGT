@@ -58,13 +58,13 @@ public class ZBGTMetaItems {
     public static MetaItem<?>.MetaValueItem ENGRAVED_DIAMOND_CHIP;
     public static MetaItem<?>.MetaValueItem ENGRAVED_ENERGY_CHIP;
     public static MetaItem<?>.MetaValueItem ENGRAVED_MANYULLYN_CHIP;
-
     public static MetaItem<?>.MetaValueItem SPECIAL_CERAMICS_PLATE;
     public static MetaItem<?>.MetaValueItem QUARTZ_WAFER;
     public static MetaItem<?>.MetaValueItem MICRO_HEATER;
     public static MetaItem<?>.MetaValueItem QUARTZ_CRYSTAL_RESONATOR;
-
     public static MetaItem<?>.MetaValueItem HIGH_ENERGY_MIXTURE;
+    public static MetaItem<?>.MetaValueItem RADIATION_PROTECTION_PLATE;
+    public static MetaItem<?>.MetaValueItem ADVANCED_RADIATION_PROTECTION_PLATE;
 
     public static void init() {
         ZBGTMetaItem item = new ZBGTMetaItem();

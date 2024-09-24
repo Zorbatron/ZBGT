@@ -142,12 +142,13 @@ metaitem.engraved_gold_chip.name=Engraved Gold Chip
 metaitem.engraved_diamond_chip.name=Engraved Diamond Chip
 metaitem.engraved_energy_chip.name=Engraved Energy Chip
 metaitem.engraved_manyullyn_chip.name=Engraved Manyullyn Chip
-
 metaitem.special_ceramics_plate.name=Special Ceramics Plate
 metaitem.quartz_wafer.name=Quartz Wafer
 metaitem.micro_heater.name=Micro Heater
 metaitem.quartz_crystal_resonator.name=Quartz Crystal Resonator
 metaitem.high_energy_mixture.name=High Energy Mixture
+metaitem.radiation_protection_plate.name=Radiation Proof Plate
+metaitem.advanced_radiation_protection_plate.name=Advanced Radiation Proof Plate
 
 
 # Widgets
