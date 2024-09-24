@@ -59,7 +59,7 @@ public final class ZBGTSecondDegreeMaterials {
                     .build();
 
             Signalum = new Material.Builder(id++, zbgtId("signalum"))
-                    .ingot().liquid()
+                    .ingot().liquid(new FluidBuilder().temperature(4000))
                     .color(0xff7f0f).iconSet(SHINY)
                     .blast(builder -> builder
                             .temp(4000, BlastProperty.GasTier.MID)
@@ -70,20 +70,20 @@ public final class ZBGTSecondDegreeMaterials {
                     .build();
 
             VibrantAlloy = new Material.Builder(id++, zbgtId("vibrant_alloy"))
-                    .ingot().liquid()
+                    .ingot().liquid(new FluidBuilder().temperature(3300))
                     .color(0xa4ff70).iconSet(SHINY)
                     .blast(builder -> builder
-                            .temp(1350, BlastProperty.GasTier.LOW)
+                            .temp(3000, BlastProperty.GasTier.LOW)
                             .blastStats(VA[MV], 400))
                     .components(EnergeticAlloy, 1, EnderPearl, 1)
                     .build();
 
             Lumium = new Material.Builder(id++, zbgtId("lumium"))
-                    .ingot()
-                    .liquid()
+                    .ingot().liquid(new FluidBuilder().temperature(4000))
+                    .flags(DISABLE_DECOMPOSITION)
                     .color(0xf6ff99).iconSet(BRIGHT)
                     .blast(builder -> builder
-                            .temp(4500, BlastProperty.GasTier.MID)
+                            .temp(4000, BlastProperty.GasTier.MID)
                             .blastStats(VA[IV], 1600)
                             .vacuumStats(VA[HV], 600))
                     .components(TinAlloy, 4, SterlingSilver, 2, Luminessence, 2)

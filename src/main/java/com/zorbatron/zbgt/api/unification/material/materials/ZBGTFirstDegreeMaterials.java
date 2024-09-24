@@ -104,21 +104,21 @@ public final class ZBGTFirstDegreeMaterials {
                     .build();
 
             Enderium = new Material.Builder(id++, zbgtId("enderium"))
-                    .ingot().liquid()
+                    .ingot().liquid(new FluidBuilder().temperature(4500))
                     .color(0x1f6b62).iconSet(SHINY)
                     .blast(builder -> builder
-                            .temp(6400, BlastProperty.GasTier.HIGHEST)
+                            .temp(4500, BlastProperty.GasTier.HIGHEST)
                             .blastStats(VA[LuV], 1600)
                             .vacuumStats(VA[EV], 600))
                     .components(Lead, 4, Platinum, 2, BlueSteel, 1, Osmium, 1, EnderPearl, 1)
                     .build();
 
             EnergeticAlloy = new Material.Builder(id++, zbgtId("energetic_alloy"))
-                    .ingot().liquid()
+                    .ingot().liquid(new FluidBuilder().temperature(1424))
                     .color(0xffb545).iconSet(SHINY)
                     .flags(GENERATE_ROTOR)
                     .blast(builder -> builder
-                            .temp(1250, BlastProperty.GasTier.LOW)
+                            .temp(2200, BlastProperty.GasTier.LOW)
                             .blastStats(VA[MV], 400))
                     .components(Gold, 2, Redstone, 1, Glowstone, 1)
                     .build();
