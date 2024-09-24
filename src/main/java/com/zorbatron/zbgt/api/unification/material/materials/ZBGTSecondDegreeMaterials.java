@@ -15,9 +15,9 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialIconSet;
 import gregtech.api.unification.material.properties.BlastProperty;
 
-public class ZBGTSecondDegreeMaterials {
+public final class ZBGTSecondDegreeMaterials {
 
-    private static int id = 5000;
+    private static int id = 5_000;
 
     public static void register() {
         MAR_CE_M200 = new Material.Builder(id++, zbgtId("mar_ce_m_200"))
@@ -69,26 +69,25 @@ public class ZBGTSecondDegreeMaterials {
                     .components(AnnealedCopper, 4, Ardite, 2, RedAlloy, 2, Redstone, 1)
                     .build();
 
-            FluxedElectrum = new Material.Builder(id++, zbgtId("fluxed_electrum"))
-                    .ingot().liquid()
-                    .color(0xf7be20).iconSet(BRIGHT)
-                    .flags()
-                    .blast(builder -> builder
-                            .temp(1100, BlastProperty.GasTier.LOW)
-                            .blastStats(VA[EV], 1600)
-                            .vacuumStats(VA[MV], 600))
-                    .components(Electrum, 6, Lumium, 1, Signalum, 1)
-                    .cableProperties(V[IV], 3, 2)
-                    .build();
-
             VibrantAlloy = new Material.Builder(id++, zbgtId("vibrant_alloy"))
                     .ingot().liquid()
                     .color(0xa4ff70).iconSet(SHINY)
-                    .flags()
                     .blast(builder -> builder
                             .temp(1350, BlastProperty.GasTier.LOW)
                             .blastStats(VA[MV], 400))
                     .components(EnergeticAlloy, 1, EnderPearl, 1)
+                    .build();
+
+            Lumium = new Material.Builder(id++, zbgtId("lumium"))
+                    .ingot()
+                    .liquid()
+                    .color(0xf6ff99).iconSet(BRIGHT)
+                    .blast(builder -> builder
+                            .temp(4500, BlastProperty.GasTier.MID)
+                            .blastStats(VA[IV], 1600)
+                            .vacuumStats(VA[HV], 600))
+                    .components(TinAlloy, 4, SterlingSilver, 2, Luminessence, 2)
+                    .cableProperties(V[IV], 1, 0, true)
                     .build();
         } else {
             id += 4;

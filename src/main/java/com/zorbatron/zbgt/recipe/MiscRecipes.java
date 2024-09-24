@@ -78,6 +78,23 @@ public class MiscRecipes {
                 .casingTier(1)
                 .EUt(VA[HV]).duration(20 * 5)
                 .buildAndRegister();
+
+        if (!ZBGTAPI.nomiLabsCompat) {
+            MIXER_RECIPES.recipeBuilder()
+                    .input(dust, Glowstone, 4)
+                    .input(dust, Redstone, 2)
+                    .input(dust, Aluminium)
+                    .output(HIGH_ENERGY_MIXTURE, 4)
+                    .EUt(VA[MV]).duration(20 * 12)
+                    .buildAndRegister();
+
+            FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
+                    .input(HIGH_ENERGY_MIXTURE, 2)
+                    .fluidInputs(PhosphoricAcid.getFluid(4000))
+                    .output(dust, Luminessence)
+                    .EUt(VA[HV]).duration(20 * 24)
+                    .buildAndRegister();
+        }
     }
 
     private static void magneticFluids() {

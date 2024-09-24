@@ -127,6 +127,8 @@ public class MaterialRecipes {
             MIXER_RECIPES.recipeBuilder()
                     .input(dust, TinAlloy, 4)
                     .input(dust, SterlingSilver, 2)
+                    .input(dust, Luminessence, 2)
+                    .fluidInputs(Glowstone.getFluid(L * 2))
                     .output(dust, Lumium, 4)
                     .EUt(VA[EV]).duration(20 * 15)
                     .buildAndRegister();

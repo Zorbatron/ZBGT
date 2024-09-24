@@ -6,6 +6,7 @@ import static gregtech.api.GTValues.*;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.util.ZBGTUtility;
 import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
 
@@ -202,5 +203,8 @@ public class ZBGTMetaItem extends StandardMetaItem {
         QUARTZ_WAFER = addItem(51, "quartz_wafer");
         MICRO_HEATER = addItem(52, "micro_heater");
         QUARTZ_CRYSTAL_RESONATOR = addItem(53, "quartz_crystal_resonator");
+
+        HIGH_ENERGY_MIXTURE = addItem(54, "high_energy_mixture")
+                .setInvisibleIf(ZBGTAPI.nomiLabsCompat);
     }
 }

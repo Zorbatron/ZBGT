@@ -14,7 +14,7 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialIconSet;
 import gregtech.api.unification.material.properties.BlastProperty;
 
-public class ZBGTFirstDegreeMaterials {
+public final class ZBGTFirstDegreeMaterials {
 
     private static int id = 500;
 
@@ -100,27 +100,12 @@ public class ZBGTFirstDegreeMaterials {
             Ardite = new Material.Builder(id++, zbgtId("ardite"))
                     .ingot().liquid()
                     .color(0xad2f05).iconSet(DULL)
-                    .flags()
                     .components(RedSteel, 3, Blaze, 1)
-                    .build();
-
-            Lumium = new Material.Builder(id++, zbgtId("lumium"))
-                    .ingot()
-                    .liquid()
-                    .color(0xf6ff99).iconSet(BRIGHT)
-                    .flags()
-                    .blast(builder -> builder
-                            .temp(4500, BlastProperty.GasTier.MID)
-                            .blastStats(VA[IV], 1600)
-                            .vacuumStats(VA[HV], 600))
-                    .components(TinAlloy, 4, SterlingSilver, 2)
-                    .cableProperties(V[IV], 1, 0, true)
                     .build();
 
             Enderium = new Material.Builder(id++, zbgtId("enderium"))
                     .ingot().liquid()
                     .color(0x1f6b62).iconSet(SHINY)
-                    .flags()
                     .blast(builder -> builder
                             .temp(6400, BlastProperty.GasTier.HIGHEST)
                             .blastStats(VA[LuV], 1600)
@@ -136,6 +121,11 @@ public class ZBGTFirstDegreeMaterials {
                             .temp(1250, BlastProperty.GasTier.LOW)
                             .blastStats(VA[MV], 400))
                     .components(Gold, 2, Redstone, 1, Glowstone, 1)
+                    .build();
+
+            Luminessence = new Material.Builder(id++, zbgtId("luminessence"))
+                    .dust()
+                    .color(0xe8f224).iconSet(DULL)
                     .build();
         } else {
             id += 4;

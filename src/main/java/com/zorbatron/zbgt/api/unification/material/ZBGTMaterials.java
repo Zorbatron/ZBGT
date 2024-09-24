@@ -20,6 +20,7 @@ public final class ZBGTMaterials {
     public static Material Alumina;
     public static Material AluminumNitride;
     public static Material YttriumOxide;
+    public static Material Luminessence;
 
     // Second degree materials
     public static Material MAR_CE_M200;
@@ -44,6 +45,7 @@ public final class ZBGTMaterials {
         ZBGTElementMaterials.register();
         ZBGTFirstDegreeMaterials.register();
         ZBGTSecondDegreeMaterials.register();
+        ZBGTThirdDegreeMaterials.register();
         ZBGTUnknownCompositionMaterials.register();
 
         ZBGTMaterialExtraProperties.register();

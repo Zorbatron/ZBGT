@@ -64,6 +64,8 @@ public class ZBGTMetaItems {
     public static MetaItem<?>.MetaValueItem MICRO_HEATER;
     public static MetaItem<?>.MetaValueItem QUARTZ_CRYSTAL_RESONATOR;
 
+    public static MetaItem<?>.MetaValueItem HIGH_ENERGY_MIXTURE;
+
     public static void init() {
         ZBGTMetaItem item = new ZBGTMetaItem();
         item.setRegistryName("zbgt_meta_item");

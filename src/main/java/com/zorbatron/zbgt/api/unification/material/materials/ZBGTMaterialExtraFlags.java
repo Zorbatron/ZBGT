@@ -14,7 +14,7 @@ import com.zorbatron.zbgt.api.ZBGTAPI;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialFlag;
 
-public class ZBGTMaterialExtraFlags {
+public final class ZBGTMaterialExtraFlags {
 
     public static void setFlags(Material[] materials, MaterialFlag... flags) {
         for (Material material : materials) {

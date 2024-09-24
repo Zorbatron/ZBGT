@@ -24,7 +24,7 @@ import gregtech.api.unification.material.properties.IngotProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.material.properties.WireProperties;
 
-public class ZBGTMaterialExtraProperties {
+public final class ZBGTMaterialExtraProperties {
 
     public static void register() {
         ingots();

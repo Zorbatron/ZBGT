@@ -9,7 +9,7 @@ import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialIconSet;
 
-public class ZBGTElementMaterials {
+public final class ZBGTElementMaterials {
 
     private static int id = 0;
 
