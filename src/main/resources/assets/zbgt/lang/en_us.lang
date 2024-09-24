@@ -299,7 +299,7 @@ zbgt.subtitle.fx_lo_freq=Low Frequency Buzzing
 
 # Materials
 zbgt.material.adamantium=Adamantium
-zbgt.material.liquid_nitrogen=Liquid Nitrogen
+zbgt.material.zb_liquid_nitrogen=Liquid Nitrogen
 
 zbgt.material.indalloy_140=Indalloy 140
 zbgt.material.mar_200=MAR-M200 Steel
