@@ -50,7 +50,7 @@ public class CommonProxy {
     }
 
     @SubscribeEvent
-    public static void registerCovers(GregTechAPI.RegisterEvent<CoverDefinition> event) throws IOException {
+    public static void registerCovers(GregTechAPI.RegisterEvent<CoverDefinition> event) {
         ZBGTCovers.init();
     }
 
@@ -83,7 +83,7 @@ public class CommonProxy {
         ZBGTMetaBlocks.ALL_CASINGS.forEach(casing -> registry.register(createItemBlock(casing, VariantItemBlock::new)));
     }
 
-    @SubscribeEvent(priority = EventPriority.NORMAL)
+    @SubscribeEvent(priority = EventPriority.LOW)
     public static void registerMaterials(MaterialEvent event) {
         ZBGTMaterials.init();
     }

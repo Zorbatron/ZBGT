@@ -48,6 +48,17 @@ public class ZBGTMetaItems {
     public static MetaItem<?>.MetaValueItem GENERIC_CIRCUIT_OpV;
     public static MetaItem<?>.MetaValueItem GENERIC_CIRCUIT_MAX;
 
+    public static MetaItem<?>.MetaValueItem GG_CIRCUIT_1;
+    public static MetaItem<?>.MetaValueItem GG_CIRCUIT_2;
+    public static MetaItem<?>.MetaValueItem GG_CIRCUIT_3;
+    public static MetaItem<?>.MetaValueItem GG_CIRCUIT_4;
+    public static MetaItem<?>.MetaValueItem GG_CIRCUIT_5;
+
+    public static MetaItem<?>.MetaValueItem ENGRAVED_GOLD_CHIP;
+    public static MetaItem<?>.MetaValueItem ENGRAVED_DIAMOND_CHIP;
+    public static MetaItem<?>.MetaValueItem ENGRAVED_ENERGY_CHIP;
+    public static MetaItem<?>.MetaValueItem ENGRAVED_MANYULLYN_CHIP;
+
     public static void init() {
         ZBGTMetaItem item = new ZBGTMetaItem();
         item.setRegistryName("zbgt_meta_item");

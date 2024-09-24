@@ -44,6 +44,9 @@ dependencies {
     api("gregicality:GregicalityMultiblocks:1.2.11")
     compileOnly rfg.deobf("curse.maven:ulv-covers-635555:4912949")
 
+    implementation rfg.deobf("curse.maven:nomi-labs-932060:5677263")
+    implementation rfg.deobf("curse.maven:configanytime-870276:5212709")
+
     //For easier testing
     runtimeOnlyNonPublishable("curse.maven:nae2-884359:5380800")
     runtimeOnlyNonPublishable("curse.maven:spark-361579:3542217")

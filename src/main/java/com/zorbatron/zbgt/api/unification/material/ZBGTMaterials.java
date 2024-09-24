@@ -15,18 +15,29 @@ public final class ZBGTMaterials {
     public static Material TanmolyiumBetaC;
     public static Material AdamantiumAlloy;
     public static Material Artherium_Sn;
+    public static Material PreciousMetalsAlloy;
 
     // Second degree materials
     public static Material MAR_CE_M200;
     public static Material HDCS;
     public static Material Dalisenite;
 
-    public static void init() {
-        ZBGTMaterialExtraProperties.register();
-        ZBGTMaterialExtraFlags.register();
+    // Nomifactory alternate materials
+    public static Material Ardite;
+    public static Material Manyullyn;
+    public static Material Signalum;
+    public static Material Lumium;
+    public static Material Enderium;
+    public static Material FluxedElectrum;
 
+    public static Material EnergeticAlloy;
+
+    public static void init() {
         ZBGTElementMaterials.register();
         ZBGTFirstDegreeMaterials.register();
         ZBGTSecondDegreeMaterials.register();
+
+        ZBGTMaterialExtraProperties.register();
+        ZBGTMaterialExtraFlags.register();
     }
 }

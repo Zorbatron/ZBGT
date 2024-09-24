@@ -48,15 +48,15 @@ zbgt.machine.super_input_bus.soft_mallet=§8use Soft mallet to toggle auto pulli
 zbgt.machine.parallel_hatch.uev.name=UEV Parallel Hatch
 zbgt.machine.parallel_hatch.uiv.name=UIV Parallel Hatch
 zbgt.machine.parallel_hatch.uxv.name=UXV Parallel Hatch
-zbgt.machine.parallel_hatch.uxv.tooltip=Warning, very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag
+zbgt.machine.parallel_hatch.uxv.tooltip=Warning! Very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag!
 zbgt.machine.parallel_hatch.opv.name=OpV Parallel Hatch
-zbgt.machine.parallel_hatch.opv.tooltip=Warning, very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag
+zbgt.machine.parallel_hatch.opv.tooltip=Warning! Very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag!
 zbgt.machine.parallel_hatch.max.name=MAX Parallel Hatch
-zbgt.machine.parallel_hatch.max.tooltip=Warning, very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag
+zbgt.machine.parallel_hatch.max.tooltip=Warning! Very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag!
 zbgt.machine.parallel_hatch.max.1.name=MAX+1 Parallel Hatch
-zbgt.machine.parallel_hatch.max.1.tooltip=Warning, very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag
+zbgt.machine.parallel_hatch.max.1.tooltip=Warning! Very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag!
 zbgt.machine.parallel_hatch.final.name=The Final Parallel Hatch
-zbgt.machine.parallel_hatch.final.tooltip=Warning, very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag
+zbgt.machine.parallel_hatch.final.tooltip=Warning! Very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag!
 
 zbgt.machine.yottank_me_hatch.name=YOTHatch
 zbgt.machine.yottank_me_hatch.tooltip=Connects your YOTTank directly to your ME network
@@ -109,6 +109,7 @@ metaitem.cover.dual.tooltip.transfer_rate.stacks=§bTransfer Rate: §f%,d stacks
 
 cover.dual_cover.mode_changer=Click to change between the item and fluid settings
 
+
 # Items
 metaitem.generic_circuit.ulv.name=Generic ULV Circuit
 metaitem.generic_circuit.lv.name=Generic LV Circuit
@@ -125,6 +126,22 @@ metaitem.generic_circuit.uiv.name=Generic UIV Circuit
 metaitem.generic_circuit.uxv.name=Generic UXV Circuit
 metaitem.generic_circuit.opv.name=Generic OpV Circuit
 metaitem.generic_circuit.max.name=Generic MAX Circuit
+
+metaitem.gg_circuit_1.name=Hi-Computation Station Mk-I
+metaitem.gg_circuit_1.tooltip=§b93015 TFlops§r
+metaitem.gg_circuit_2.name=Hi-Computation Station Mk-II
+metaitem.gg_circuit_2.tooltip=§e76M Processor Units§r
+metaitem.gg_circuit_3.name=Hi-Computation Station Mk-II
+metaitem.gg_circuit_3.tooltip=§aInvalidate RSA§r
+metaitem.gg_circuit_4.name=Hi-Computation Station Mk-IV Prototype
+metaitem.gg_circuit_4.tooltip=§c56th Mersenne Prime§r
+metaitem.gg_circuit_5.name=Hi-Computation Station Mk-V Finaltype
+metaitem.gg_circuit_5.tooltip=§5Paradox§r
+
+metaitem.engraved_gold_chip.name=Engraved Gold Chip
+metaitem.engraved_diamond_chip.name=Engraved Diamond Chip
+metaitem.engraved_energy_chip.name=Engraved Energy Chip
+metaitem.engraved_manyullyn_chip.name=Engraved Manyullyn Chip
 
 
 # Widgets
@@ -273,11 +290,12 @@ zbgt.material.adamantium=Adamantium
 zbgt.material.indalloy_140=Indalloy 140
 zbgt.material.mar_200=MAR-M200 Steel
 zbgt.material.tanmolyium_beta_c=Tanmolyium Beta-C
+zbgt.material.precious_metals_alloy=Precious Metals Alloy
 zbgt.material.adamantium_alloy=Adamantium Alloy
-zbgt.material.artherium_sn=Artherium-Sn
 
 zbgt.material.mar_ce_m_200=MAR-Ce-M200
 zbgt.material.hdcs=High Durability Compound Steel
+zbgt.material.artherium_sn=Artherium-Sn
 zbgt.material.dalisenite=Dalisenite
 
 

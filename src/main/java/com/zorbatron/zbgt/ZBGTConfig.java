@@ -53,4 +53,14 @@ public class ZBGTConfig {
         @Config.Name("Enable ore vein generation")
         public boolean enableOreGeneration = true;
     }
+
+    public static CompatibilitySettings compatibilitySettings = new CompatibilitySettings();
+
+    public static class CompatibilitySettings {
+
+        @Config.Comment({ "Force disable Nomi Labs compatibility",
+                "Default: false" })
+        @Config.Name("Force disable Nomifactory compat")
+        public boolean disableNomiLabsCompatibility = false;
+    }
 }

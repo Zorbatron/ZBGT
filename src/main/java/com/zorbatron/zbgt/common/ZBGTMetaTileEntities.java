@@ -1,6 +1,6 @@
 package com.zorbatron.zbgt.common;
 
-import static com.zorbatron.zbgt.ZBGTUtility.zbgtId;
+import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 
 import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;

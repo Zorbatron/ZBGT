@@ -1,4 +1,4 @@
-package com.zorbatron.zbgt;
+package com.zorbatron.zbgt.api.util;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;

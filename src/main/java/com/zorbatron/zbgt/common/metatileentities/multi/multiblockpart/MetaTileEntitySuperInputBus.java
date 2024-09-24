@@ -22,9 +22,9 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import com.zorbatron.zbgt.ZBGTUtility;
 import com.zorbatron.zbgt.api.capability.impl.LargeSlotItemStackHandler;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
+import com.zorbatron.zbgt.api.util.ZBGTUtility;
 import com.zorbatron.zbgt.client.widgets.ItemSlotTinyAmountTextWidget;
 
 import codechicken.lib.raytracer.CuboidRayTraceResult;

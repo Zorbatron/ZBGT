@@ -1,6 +1,6 @@
 package com.zorbatron.zbgt.common.covers;
 
-import static com.zorbatron.zbgt.ZBGTUtility.zbgtId;
+import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 
 import com.zorbatron.zbgt.api.util.ZBGTLog;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;

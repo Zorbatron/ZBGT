@@ -16,9 +16,9 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.zorbatron.zbgt.ZBGTUtility;
 import com.zorbatron.zbgt.api.capability.impl.InfiniteItemStackHandler;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
+import com.zorbatron.zbgt.api.util.ZBGTUtility;
 import com.zorbatron.zbgt.client.widgets.PhantomSlotNoTextWidget;
 
 import codechicken.lib.render.CCRenderState;

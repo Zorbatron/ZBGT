@@ -5,7 +5,8 @@ import net.minecraftforge.fml.common.Loader;
 public enum ZBGTMods {
 
     GCYM(Names.GCYM),
-    ULV_COVERS(Names.ULV_COVERS);
+    ULV_COVERS(Names.ULV_COVERS),
+    NOMI_LABS(Names.NOMI_LABS);
 
     private final String ID;
     private Boolean modLoaded;
@@ -25,5 +26,6 @@ public enum ZBGTMods {
 
         public static final String GCYM = "gcym";
         public static final String ULV_COVERS = "ulv_covers";
+        public static final String NOMI_LABS = "nomilabs";
     }
 }
