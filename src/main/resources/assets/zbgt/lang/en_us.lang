@@ -218,6 +218,12 @@ zbgt.machine.mega_fusion_3.tooltip.1=Fusion tier < Mk-I: 192 parallels
 zbgt.machine.mega_fusion_3.tooltip.2=Fusion tier < Mk-II: 128 parallels
 zbgt.machine.mega_fusion_3.tooltip.3=Fusion tier >= Mk=III: 64 parallels
 
+zbgt.machine.large_rock_breaker.name=Large Rock Breaker
+zbgt.machine.large_rock_breaker.tooltip=Rock Atomizer
+
+zbgt.machine.large_air_collector.name=Large Air Collector
+zbgt.machine.large_air_collector.tooltip=Atmosphere Vacuum
+
 
 # Multiblock Casings
 tile.multiblock_casing.precise_0.name=Imprecise Electronic Unit Casing
