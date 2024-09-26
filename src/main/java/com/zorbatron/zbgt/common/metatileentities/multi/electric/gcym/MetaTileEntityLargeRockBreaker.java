@@ -2,6 +2,8 @@ package com.zorbatron.zbgt.common.metatileentities.multi.electric.gcym;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -9,6 +11,7 @@ import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockControl
 import gregicality.multiblocks.api.render.GCYMTextures;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockLargeMultiblockCasing;
+import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -18,9 +21,7 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.common.blocks.BlockGlassCasing;
-import gregtech.common.blocks.BlockTurbineCasing;
-import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.blocks.*;
 
 public class MetaTileEntityLargeRockBreaker extends GCYMRecipeMapMultiblockController {
 
@@ -36,14 +37,29 @@ public class MetaTileEntityLargeRockBreaker extends GCYMRecipeMapMultiblockContr
     @Override
     protected @NotNull BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("TTTTT   TTSTT", "TTTTG   F   F", "F   TT  FTTTF", "F   FTT FLLLF", "FHHHF TTTTTTT",
-                        "FHHHF  TGTTTT", "FHHHF   TTTTT")
+                .aisle("TTTTT   OOOOO", "TTTTG   F   F", "F   TT  FTTTF", "F   FTT FLLLF", "FHHHF TTTTTTT",
+                        "FHHHF  TGTTTT", "FHHHF   TTTTT", "             ")
+                .aisle("TPPPT   OPPPO", "T   T        ", "     T  TRRRT", "  P   T L   L", "HPBPH  TTMMMT",
+                        "H   H   T   T", "H   H       T", " HHH         ")
+                .aisle("TPPPT   OPPPO", "T   P        ", "     P  TRRRT", " P P  P L   L", "HB BH  PTMMMT",
+                        "H   H   P   T", "H   H       T", " HIH         ")
+                .aisle("TPPPT   OPPPO", "T   T        ", "     T  TRRRT", "  P   T L   L", "HPBPH  TTMMMT",
+                        "H   H   T   T", "H   H       T", " HHH         ")
+                .aisle("TTTTT   OOSOO", "TTTTG   F   F", "F   TT  FTTTF", "F   FTT FLLLF", "FHHHF TTTTTTT",
+                        "FHHHF  TGTTTT", "FHHHF   TTTTT", "             ")
                 .where('S', selfPredicate())
                 .where('T', states(getStressProofCasingState()))
                 .where('G', states(getGearBoxState()))
                 .where('L', states(getGlassState()))
                 .where('H', states(getHeatProofCasingState()))
                 .where('F', frames(getFrameMaterial()))
+                .where('R', states(getGrateState()))
+                .where('P', states(getPipeCasingState()))
+                .where('B', states(getFireBoxState()))
+                .where('M', states(getCrushingWheelState()))
+                .where('I', states(getIntakeState()))
+                .where('O', states(getStressProofCasingState())
+                        .or(autoAbilities(true, true, true, true, true, true, false)))
                 .where(' ', any())
                 .build();
     }
@@ -72,6 +88,32 @@ public class MetaTileEntityLargeRockBreaker extends GCYMRecipeMapMultiblockContr
         return Materials.Steel;
     }
 
+    protected IBlockState getGrateState() {
+        return MetaBlocks.MULTIBLOCK_CASING.getState(
+                BlockMultiblockCasing.MultiblockCasingType.GRATE_CASING);
+    }
+
+    protected IBlockState getPipeCasingState() {
+        return MetaBlocks.BOILER_CASING.getState(
+                BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
+    }
+
+    protected IBlockState getFireBoxState() {
+        return MetaBlocks.BOILER_FIREBOX_CASING.getState(
+                BlockFireboxCasing.FireboxCasingType.TUNGSTENSTEEL_FIREBOX);
+    }
+
+    protected IBlockState getCrushingWheelState() {
+        return GCYMMetaBlocks.UNIQUE_CASING.getState(
+                BlockUniqueCasing.UniqueCasingType.CRUSHING_WHEELS);
+    }
+
+    protected IBlockState getIntakeState() {
+        return MetaBlocks.MULTIBLOCK_CASING.getState(
+                BlockMultiblockCasing.MultiblockCasingType.EXTREME_ENGINE_INTAKE_CASING);
+    }
+
+    @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return GCYMTextures.STRESS_PROOF_CASING;
