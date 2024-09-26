@@ -56,8 +56,8 @@ import gregtech.common.metatileentities.MetaTileEntities;
 
 public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblockController {
 
-    private int preciseCasingTier = 0;
-    private int machineCasingTier = 0;
+    private int preciseCasingTier = -1;
+    private int machineCasingTier = -1;
 
     public MetaTileEntityPreciseAssembler(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new gregtech.api.recipes.RecipeMap[] { RecipeMaps.ASSEMBLER_RECIPES,
@@ -228,8 +228,8 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
-        this.preciseCasingTier = 0;
-        this.machineCasingTier = 0;
+        this.preciseCasingTier = -1;
+        this.machineCasingTier = -1;
     }
 
     public int getPreciseCasingTier() {
@@ -290,7 +290,7 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
 
         @Override
         public long getMaxVoltage() {
-            int casingTier = getMachineCasingTier();
+            int casingTier = getMachineCasingTier() == -1 ? GTValues.ULV : getMachineCasingTier();
             long maxVoltage = super.getMaxVoltage();
 
             return casingTier >= GTValues.UHV ? maxVoltage : Math.min(maxVoltage, GTValues.V[casingTier]);
