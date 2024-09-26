@@ -7,8 +7,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.zorbatron.zbgt.api.render.ZBGTTextures;
-
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -81,11 +79,5 @@ public class MetaTileEntityLargeAirCollector extends GCYMRecipeMapMultiblockCont
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return Textures.ROBUST_TUNGSTENSTEEL_CASING;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    protected @NotNull ICubeRenderer getFrontOverlay() {
-        return ZBGTTextures.GTPP_MACHINE_OVERLAY;
     }
 }
