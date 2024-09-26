@@ -7,9 +7,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
-import codechicken.lib.render.CCRenderState;
-import codechicken.lib.render.pipeline.IVertexOperation;
-import codechicken.lib.vec.Matrix4;
+import com.zorbatron.zbgt.api.render.ZBGTTextures;
+
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -17,11 +16,10 @@ import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.util.RelativeDirection;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.common.blocks.BlockMultiblockCasing;
-import gregtech.common.blocks.BlockTurbineCasing;
-import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.blocks.*;
 
 public class MetaTileEntityLargeAirCollector extends GCYMRecipeMapMultiblockController {
 
@@ -36,21 +34,47 @@ public class MetaTileEntityLargeAirCollector extends GCYMRecipeMapMultiblockCont
 
     @Override
     protected @NotNull BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start()
-                .aisle(" XXX ", "XIXIX", "XXSXX", "XIXIX", " XXX ")
+        return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.FRONT, RelativeDirection.UP)
+                .aisle(" XSX ", "XIXIX", "XXXXX", "XIXIX", " XXX ")
+                .aisle(" LGL ", "L I L", "GIPIG", "L I L", " LGL ")
+                .aisle(" LGL ", "L I L", "GIPIG", "L I L", " LGL ")
+                .aisle(" LGL ", "L I L", "GIPIG", "L I L", " LGL ")
+                .aisle(" LGL ", "L I L", "GIPIG", "L I L", " LGL ")
+                .aisle(" LGL ", "L I L", "GIPIG", "L I L", " LGL ")
+                .aisle(" XXX ", "XIXIX", "XXPXX", "XIXIX", " XXX ")
                 .where('S', selfPredicate())
-                .where('X', states(getCasingState()))
+                .where('X', states(getCasingState())
+                        .or(autoAbilities(true, true, true, true, true, true, false)))
                 .where('I', states(getIntakeState()))
+                .where('L', states(getGlassState()))
+                .where('G', states(getGrateState()))
+                .where('P', states(getPipeCasingState()))
                 .build();
     }
 
     protected IBlockState getCasingState() {
-        return MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_TURBINE_CASING);
+        return MetaBlocks.TURBINE_CASING.getState(
+                BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_TURBINE_CASING);
     }
 
     protected IBlockState getIntakeState() {
-        return MetaBlocks.MULTIBLOCK_CASING
-                .getState(BlockMultiblockCasing.MultiblockCasingType.EXTREME_ENGINE_INTAKE_CASING);
+        return MetaBlocks.MULTIBLOCK_CASING.getState(
+                BlockMultiblockCasing.MultiblockCasingType.EXTREME_ENGINE_INTAKE_CASING);
+    }
+
+    protected IBlockState getGlassState() {
+        return MetaBlocks.TRANSPARENT_CASING.getState(
+                BlockGlassCasing.CasingType.TEMPERED_GLASS);
+    }
+
+    protected IBlockState getGrateState() {
+        return MetaBlocks.MULTIBLOCK_CASING.getState(
+                BlockMultiblockCasing.MultiblockCasingType.GRATE_CASING);
+    }
+
+    protected IBlockState getPipeCasingState() {
+        return MetaBlocks.BOILER_CASING.getState(
+                BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
     }
 
     @SideOnly(Side.CLIENT)
@@ -61,15 +85,7 @@ public class MetaTileEntityLargeAirCollector extends GCYMRecipeMapMultiblockCont
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
-        super.renderMetaTileEntity(renderState, translation, pipeline);
-        Textures.LARGE_TURBINE_ROTOR_RENDERER.renderSided(renderState, translation, pipeline, getFrontFacing(), false,
-                true, true, 0xFFFFFF);
+    protected @NotNull ICubeRenderer getFrontOverlay() {
+        return ZBGTTextures.GTPP_MACHINE_OVERLAY;
     }
-
-    // @SideOnly(Side.CLIENT)
-    // @Override
-    // protected @NotNull ICubeRenderer getFrontOverlay() {
-    // return ZBGTTextures.GTPP_MACHINE_OVERLAY;
-    // }
 }
