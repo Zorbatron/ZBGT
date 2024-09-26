@@ -5,9 +5,11 @@ import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTile
 
 import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.*;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis.*;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.quads.MetaTileEntityQuadEBF;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.quads.MetaTileEntityQueezer;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.gcym.MetaTileEntityLargeAirCollector;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.gcym.MetaTileEntityLargeRockBreaker;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.mega.*;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.quad.MetaTileEntityQuadEBF;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.quad.MetaTileEntityQueezer;
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.*;
 import com.zorbatron.zbgt.common.metatileentities.storage.MetaTileEntityCreativeComputationProvider;
 
@@ -41,6 +43,9 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityQueezer QUEEZER;
 
     public static MetaTileEntityYOTTank YOTTANK;
+
+    public static MetaTileEntityLargeRockBreaker LARGE_ROCK_BREAKER;
+    public static MetaTileEntityLargeAirCollector LARGE_AIR_COLLECTOR;
 
     public static void init() {
         // 18000-18049 (50) reserved for multiblock parts
@@ -125,5 +130,10 @@ public class ZBGTMetaTileEntities {
                 new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_2"), GTValues.ZPM));
         MEGA_FUSION[2] = registerMetaTileEntity(18062,
                 new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_3"), GTValues.UV));
+
+        LARGE_ROCK_BREAKER = registerMetaTileEntity(18060,
+                new MetaTileEntityLargeRockBreaker(zbgtId("large_rock_breaker")));
+        LARGE_AIR_COLLECTOR = registerMetaTileEntity(18061,
+                new MetaTileEntityLargeAirCollector(zbgtId("large_air_collector")));
     }
 }

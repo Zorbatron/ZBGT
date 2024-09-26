@@ -1,4 +1,4 @@
-package com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis;
+package com.zorbatron.zbgt.common.metatileentities.multi.electric.mega;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
