@@ -8,12 +8,17 @@ import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 
+import net.minecraft.init.Items;
+
 import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
 import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 
+import gregicality.multiblocks.api.unification.GCYMMaterials;
+import gregicality.multiblocks.common.block.GCYMMetaBlocks;
+import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.stack.UnificationEntry;
@@ -40,9 +45,23 @@ public class MultiblockRecipes {
                 'F', MetaBlocks.CLEANROOM_CASING.getItemVariant(BlockCleanroomCasing.CasingType.FILTER_CASING),
                 'C', new UnificationEntry(circuit, getMarkerMaterialByTier(IV)),
                 'R', new UnificationEntry(rotor, TungstenSteel),
-                'G', MetaTileEntities.GAS_COLLECTOR[5].getStackForm(),
+                'G', MetaTileEntities.GAS_COLLECTOR[IV].getStackForm(),
                 'M', getMotorByTier(IV),
                 'W', new UnificationEntry(cableGtSingle, Platinum));
+
+        ModHandler.addShapedRecipe("large_rock_breaker", ZBGTMetaTileEntities.LARGE_ROCK_BREAKER.getStackForm(),
+                "ABC",
+                "DEF",
+                "GHI",
+                'A', new UnificationEntry(plateDouble, GCYMMaterials.MaragingSteel300),
+                'B', new UnificationEntry(circuit, getMarkerMaterialByTier(IV)),
+                'C', new UnificationEntry(plateDouble, GCYMMaterials.HSLASteel),
+                'D', Items.WATER_BUCKET,
+                'E', MetaTileEntities.ROCK_BREAKER[IV].getStackForm(),
+                'F', Items.LAVA_BUCKET,
+                'G', getConveyorByTier(IV),
+                'H', new UnificationEntry(cableGtSingle, Platinum),
+                'I', GCYMMetaBlocks.UNIQUE_CASING.getItemVariant(BlockUniqueCasing.UniqueCasingType.CRUSHING_WHEELS));
     }
 
     private static void quads() {
