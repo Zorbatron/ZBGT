@@ -17,6 +17,7 @@ import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 import gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.stack.UnificationEntry;
+import gregtech.common.blocks.BlockCleanroomCasing;
 import gregtech.common.blocks.BlockMultiblockCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
@@ -25,9 +26,23 @@ import gregtech.common.metatileentities.MetaTileEntities;
 public class MultiblockRecipes {
 
     protected static void init() {
+        gcyms();
         quads();
         megas();
         misc();
+    }
+
+    private static void gcyms() {
+        ModHandler.addShapedRecipe("large_gas_collector", ZBGTMetaTileEntities.LARGE_AIR_COLLECTOR.getStackForm(),
+                "FCF",
+                "RGR",
+                "MWM",
+                'F', MetaBlocks.CLEANROOM_CASING.getItemVariant(BlockCleanroomCasing.CasingType.FILTER_CASING),
+                'C', new UnificationEntry(circuit, getMarkerMaterialByTier(IV)),
+                'R', new UnificationEntry(rotor, TungstenSteel),
+                'G', MetaTileEntities.GAS_COLLECTOR[5].getStackForm(),
+                'M', getMotorByTier(IV),
+                'W', new UnificationEntry(cableGtSingle, Platinum));
     }
 
     private static void quads() {
