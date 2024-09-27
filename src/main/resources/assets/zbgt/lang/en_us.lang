@@ -132,22 +132,22 @@ zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s
 
 
 # Multiblocks
-zbgt.machine.mega_ebf.name=Mega Electric Blast Furnace (mEBF)
+zbgt.machine.mega_ebf.name=Mega Electric Blast Furnace
 zbgt.machine.mega_ebf.tooltip=Hold on, let them cook..
 
-zbgt.machine.mega_lcr.name=Mega LCR (mLCR)
+zbgt.machine.mega_lcr.name=Mega LCR
 zbgt.machine.mega_lcr.tooltip=Turn your goo into more goo!
 
-zbgt.machine.mega_vf.name=Mega Vacuum Freezer (mVF)
+zbgt.machine.mega_vf.name=Mega Vacuum Freezer
 zbgt.machine.mega_vf.tooltip=Cool those ingots §lreally §r§7fast!
 
-zbgt.machine.mega_ocu.name=Mega Oil Cracking Unit (mOCU)
+zbgt.machine.mega_ocu.name=Mega Oil Cracking Unit
 zbgt.machine.mega_ocu.tooltip=Release those hydrocarbons!
 
-zbgt.machine.mega_abs.name=Mega Alloy Blast Smelter (mABS)
+zbgt.machine.mega_abs.name=Mega Alloy Blast Smelter
 zbgt.machine.mega_abs.tooltip=Mix and melt everything!
 
-zbgt.machine.precise_assembler.name=Precise Assembler (PRASS)
+zbgt.machine.precise_assembler.name=Precise Assembler
 zbgt.machine.precise_assembler.tooltip.1=Recipe voltage limited to the tier of the machine casings.
 zbgt.machine.precise_assembler.tooltip.2=UHV machine casings remove the above limit.
 zbgt.machine.precise_assembler.tooltip.3=Gains a 100%% speed boost in the normal assembler mode.
@@ -159,10 +159,10 @@ zbgt.machine.precise_assembler.machine_casing.tier=Machine casing tier: %s
 zbgt.machine.precise_assembler.machine_casing.tier.hover=Recipes are limited to this voltage, regardless of the energy hatch
 recipemap.precise_assembler_recipes.name=Precise Assembler
 
-zbgt.machine.quad_ebf.name=Quad EBF (qEBF)
+zbgt.machine.quad_ebf.name=Quad EBF
 zbgt.machine.quad_ebf.tooltip=The same shape as a quad EBF, and thus has 4 innate parallels!
 
-zbgt.machine.coal.name=Component Assembly Line (CoAL)
+zbgt.machine.coal.name=Component Assembly Line
 zbgt.machine.coal.description.1=Creates large batches of §fComponents§7 for §e75%%§7 of the Cost.
 zbgt.machine.coal.description.2=Recipes are limited by §bCasing Tier§7.
 zbgt.machine.coal.max_recipe_tier=Max Component Tier: %s
