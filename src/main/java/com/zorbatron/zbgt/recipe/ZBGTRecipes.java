@@ -1,7 +1,5 @@
 package com.zorbatron.zbgt.recipe;
 
-import gregtech.api.util.Mods;
-
 public class ZBGTRecipes {
 
     public static void init() {
@@ -12,9 +10,6 @@ public class ZBGTRecipes {
         MiscRecipes.init();
         CasingRecipes.init();
         MaterialRecipes.init();
-
-        if (Mods.AppliedEnergistics2.isModLoaded()) {
-            AE2Recipes.init();
-        }
+        AE2Recipes.init();
     }
 }

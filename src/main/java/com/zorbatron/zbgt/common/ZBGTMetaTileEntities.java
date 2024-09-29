@@ -12,7 +12,6 @@ import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.*;
 import com.zorbatron.zbgt.common.metatileentities.storage.MetaTileEntityCreativeComputationProvider;
 
 import gregtech.api.GTValues;
-import gregtech.api.util.Mods;
 
 public class ZBGTMetaTileEntities {
 
@@ -86,10 +85,9 @@ public class ZBGTMetaTileEntities {
                 1_048_576));
         ZBGT_PARALLEL_HATCHES[6] = registerMetaTileEntity(18016, new MetaTileEntityLargeParallelHatch(
                 zbgtId("parallel_hatch.final"), GTValues.MAX, Integer.MAX_VALUE));
-        if (Mods.AppliedEnergistics2.isModLoaded()) {
-            YOTTANK_ME_HATCH = registerMetaTileEntity(18017,
-                    new MetaTileEntityYOTTankMEHatch(zbgtId("yottank_me_hatch"), GTValues.IV));
-        }
+
+        YOTTANK_ME_HATCH = registerMetaTileEntity(18017,
+                new MetaTileEntityYOTTankMEHatch(zbgtId("yottank_me_hatch"), GTValues.IV));
 
         // 18050-18099 (50) reserved for multiblocks
         MEGA_EBF = registerMetaTileEntity(18050,
