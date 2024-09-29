@@ -4,12 +4,10 @@ import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 
 import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.*;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.gcym.MetaTileEntityLargeAirCollector;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.gcym.MetaTileEntityLargeRockBreaker;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCoAL;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.gcym.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.mega.*;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.quad.MetaTileEntityQuadEBF;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.quad.MetaTileEntityQueezer;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.quad.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.*;
 import com.zorbatron.zbgt.common.metatileentities.storage.MetaTileEntityCreativeComputationProvider;
 
