@@ -128,10 +128,11 @@ public class ZBGTMetaTileEntities {
                 new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_2"), GTValues.ZPM));
         MEGA_FUSION[2] = registerMetaTileEntity(18062,
                 new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_3"), GTValues.UV));
+        // Reserve 18063 and 18064 for the mega fusion 4 and 5 if I ever do them
 
-        LARGE_ROCK_BREAKER = registerMetaTileEntity(18060,
+        LARGE_ROCK_BREAKER = registerMetaTileEntity(18065,
                 new MetaTileEntityLargeRockBreaker(zbgtId("large_rock_breaker")));
-        LARGE_AIR_COLLECTOR = registerMetaTileEntity(18061,
+        LARGE_AIR_COLLECTOR = registerMetaTileEntity(18066,
                 new MetaTileEntityLargeAirCollector(zbgtId("large_air_collector")));
     }
 }
