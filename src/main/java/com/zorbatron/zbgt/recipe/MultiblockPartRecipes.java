@@ -47,7 +47,7 @@ public class MultiblockPartRecipes {
                 .fluidInputs(Materials.SolderingAlloy.getFluid(L * 128))
                 .fluidInputs(Materials.Polyethylene.getFluid(L * 96))
                 .output(ZBGTMetaTileEntities.ZBGT_PARALLEL_HATCHES[0])
-                .CasingTier(0)
+                .casingTier(0)
                 .EUt(VA[LuV]).duration(20 * 30)
                 .buildAndRegister();
 
@@ -59,7 +59,7 @@ public class MultiblockPartRecipes {
                     .fluidInputs(tier > 2 ? Materials.Polybenzimidazole.getFluid(t2FluidAmount) :
                             Materials.Polytetrafluoroethylene.getFluid(t2FluidAmount))
                     .output(ZBGTMetaTileEntities.ZBGT_PARALLEL_HATCHES[tier + 1])
-                    .CasingTier(tier)
+                    .casingTier(tier)
                     .EUt(VA[tier + 7]).duration(20 * 30)
                     .buildAndRegister();
         }
@@ -73,7 +73,7 @@ public class MultiblockPartRecipes {
                 .fluidInputs(Materials.PolychlorinatedBiphenyl.getFluid(L * 512))
                 .output(ZBGTMetaTileEntities.ZBGT_PARALLEL_HATCHES[6])
                 .EUt(VA[MAX]).duration(20 * 3600)
-                .CasingTier(4)
+                .casingTier(4)
                 .buildAndRegister();
     }
 }

@@ -1,6 +1,6 @@
 package com.zorbatron.zbgt.common;
 
-import static com.zorbatron.zbgt.ZBGTUtility.zbgtId;
+import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 
 import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
@@ -33,6 +33,7 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityMegaOCU MEGA_OCU;
     public static MetaTileEntityMegaABS MEGA_ABS;
     public static MetaTileEntityPreciseAssembler PRASS;
+    public static MetaTileEntityMegaFusionReactor[] MEGA_FUSION = new MetaTileEntityMegaFusionReactor[3];
 
     public static MetaTileEntityCoAL CoAL;
 
@@ -117,5 +118,12 @@ public class ZBGTMetaTileEntities {
 
         YOTTANK = registerMetaTileEntity(18059,
                 new MetaTileEntityYOTTank(zbgtId("yottank")));
+
+        MEGA_FUSION[0] = registerMetaTileEntity(18060,
+                new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_1"), GTValues.LuV));
+        MEGA_FUSION[1] = registerMetaTileEntity(18061,
+                new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_2"), GTValues.ZPM));
+        MEGA_FUSION[2] = registerMetaTileEntity(18062,
+                new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_3"), GTValues.UV));
     }
 }

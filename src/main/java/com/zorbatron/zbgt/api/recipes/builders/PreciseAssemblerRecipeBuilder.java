@@ -31,14 +31,14 @@ public class PreciseAssemblerRecipeBuilder extends RecipeBuilder<PreciseAssemble
     @Override
     public boolean applyProperty(@NotNull String key, Object value) {
         if (key.equals(PreciseAssemblerProperty.KEY)) {
-            this.CasingTier(((Number) value).intValue());
+            this.casingTier(((Number) value).intValue());
             return true;
         }
 
         return super.applyProperty(key, value);
     }
 
-    public PreciseAssemblerRecipeBuilder CasingTier(int tier) {
+    public PreciseAssemblerRecipeBuilder casingTier(int tier) {
         if (tier < 0) {
             ZBGTLog.logger.error("Precise casing tier cannot be less than 0 (Imprecise)!",
                     new IllegalArgumentException());

@@ -27,6 +27,7 @@ public final class ZBGTRecipeMaps {
         List<RecipeIOMod> recipeModList = new ArrayList<>();
         recipeModList.add(new RecipeIOMod(POLARIZER_RECIPES, 0, 0, 1, 1));
         recipeModList.add(new RecipeIOMod(COMPRESSOR_RECIPES, 0, 0, 1, 1));
+        // recipeModList.add(new RecipeIOMod(MIXER_RECIPES, 9, 0, 0, 0));
 
         recipeModList.forEach(recipeIOMod -> {
             recipeIOMod.recipeMap().setMaxInputs(recipeIOMod.minItemInputs());

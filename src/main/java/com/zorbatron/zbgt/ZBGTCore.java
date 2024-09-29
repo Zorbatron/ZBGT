@@ -3,10 +3,13 @@ package com.zorbatron.zbgt;
 import static com.zorbatron.zbgt.api.ZBGTAPI.*;
 import static com.zorbatron.zbgt.common.block.ZBGTMetaBlocks.*;
 
+import java.io.IOException;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import com.zorbatron.zbgt.api.util.ZBGTLog;
@@ -75,5 +78,10 @@ public class ZBGTCore {
         ZBGTSoundEvents.register();
 
         proxy.preInit();
+    }
+
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event) throws IOException {
+        proxy.postInit();
     }
 }

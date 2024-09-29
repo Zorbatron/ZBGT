@@ -41,4 +41,26 @@ public class ZBGTConfig {
         @Config.Name("Parallel Hatch Recipes")
         public boolean enableParallelHatchRecipes = true;
     }
+
+    @Config.Name("World Generation Settings")
+    @Config.RequiresMcRestart
+    public static WorldGenerationSettings worldGenerationSettings = new WorldGenerationSettings();
+
+    public static class WorldGenerationSettings {
+
+        @Config.Comment({ "Enable ore vein generation",
+                "Default: true" })
+        @Config.Name("Enable ore vein generation")
+        public boolean enableOreGeneration = true;
+    }
+
+    public static CompatibilitySettings compatibilitySettings = new CompatibilitySettings();
+
+    public static class CompatibilitySettings {
+
+        @Config.Comment({ "Force disable Nomi Labs compatibility",
+                "Default: false" })
+        @Config.Name("Force disable Nomifactory compat")
+        public boolean disableNomiLabsCompatibility = false;
+    }
 }

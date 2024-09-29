@@ -9,6 +9,7 @@ public class ZBGTRecipes {
         CoALRecipes.init();
         MiscRecipes.init();
         CasingRecipes.init();
+        MaterialRecipes.init();
         AE2Recipes.init();
     }
 }

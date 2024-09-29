@@ -6,7 +6,8 @@ import static gregtech.api.GTValues.*;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
-import com.zorbatron.zbgt.ZBGTUtility;
+import com.zorbatron.zbgt.api.ZBGTAPI;
+import com.zorbatron.zbgt.api.util.ZBGTUtility;
 import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
 
 import gregtech.api.GregTechAPI;
@@ -184,5 +185,27 @@ public class ZBGTMetaItem extends StandardMetaItem {
         GENERIC_CIRCUIT_MAX = addItem(40, "generic_circuit.max")
                 .setUnificationData(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(MAX))
                 .setInvisibleIf(!GregTechAPI.isHighTier());
+
+        // GoodGenerator Circuits: 41-45
+        GG_CIRCUIT_1 = addItem(41, "gg_circuit_1");
+        GG_CIRCUIT_2 = addItem(42, "gg_circuit_2");
+        GG_CIRCUIT_3 = addItem(43, "gg_circuit_3");
+        GG_CIRCUIT_4 = addItem(44, "gg_circuit_4");
+        GG_CIRCUIT_5 = addItem(45, "gg_circuit_5");
+
+        // Misc chips: 46-49
+        ENGRAVED_GOLD_CHIP = addItem(46, "engraved_gold_chip");
+        ENGRAVED_DIAMOND_CHIP = addItem(47, "engraved_diamond_chip");
+        ENGRAVED_ENERGY_CHIP = addItem(48, "engraved_energy_chip");
+        ENGRAVED_MANYULLYN_CHIP = addItem(49, "engraved_manyullyn_chip");
+
+        SPECIAL_CERAMICS_PLATE = addItem(50, "special_ceramics_plate");
+        QUARTZ_WAFER = addItem(51, "quartz_wafer");
+        MICRO_HEATER = addItem(52, "micro_heater");
+        QUARTZ_CRYSTAL_RESONATOR = addItem(53, "quartz_crystal_resonator");
+        HIGH_ENERGY_MIXTURE = addItem(54, "high_energy_mixture")
+                .setInvisibleIf(ZBGTAPI.nomiLabsCompat);
+        RADIATION_PROTECTION_PLATE = addItem(55, "radiation_protection_plate");
+        ADVANCED_RADIATION_PROTECTION_PLATE = addItem(56, "advanced_radiation_protection_plate");
     }
 }

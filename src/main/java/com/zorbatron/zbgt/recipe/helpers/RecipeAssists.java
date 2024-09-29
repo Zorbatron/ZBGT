@@ -351,6 +351,12 @@ public class RecipeAssists {
         return MetaBlocks.MACHINE_CASING.getItemVariant(getMachineCasingTypeByTier(tier));
     }
 
+    public static ItemStack getMachineCasingByTier(int tier, int amount) {
+        ItemStack casing = getMachineCasingByTier(tier);
+        casing.setCount(amount);
+        return casing;
+    }
+
     public static BlockMachineCasing.MachineCasingType getMachineCasingTypeByTier(int tier) {
         return switch (tier) {
             case (LV) -> BlockMachineCasing.MachineCasingType.LV;
