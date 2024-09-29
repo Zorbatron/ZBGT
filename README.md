@@ -23,7 +23,7 @@ Ported the following multiblocks from GT:NH:
 - Mega Vacuum Freezer (mVF)
 - Mega Oil Cracking Unit (mOCU)
 - Mega Alloy Blast Smelter (mABS)
-- Precise Assembler (PRASS) (Does Assembler, Circuit Assembler, and Assembly Line recipes xD)
+- Precise Assembler (PRASS)
 - Component Assembly Line (CoAL)
 - YOTTank and YOTHatch
 
