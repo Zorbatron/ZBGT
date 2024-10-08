@@ -1,5 +1,6 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.electric.quads;
 
+import com.zorbatron.zbgt.ZBGTConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -39,12 +40,14 @@ public class MetaTileEntityQuacker extends MetaTileEntityCrackingUnit {
     protected void updateFormedValid() {
         super.updateFormedValid();
 
-        if (isActive() && quackTimer == 0) {
-            playQuack();
-            // Only quack every 1 to 5 minutes.
-            quackTimer = calculateQuackInterval();
-        } else if (quackTimer > 0) {
-            quackTimer--;
+        if (ZBGTConfig.multiblockSettings.quackerQuacks && isActive()) {
+            if (quackTimer == 0) {
+                playQuack();
+                // Only quack every 1 to 5 minutes.
+                quackTimer = calculateQuackInterval();
+            } else if (quackTimer > 0) {
+                quackTimer--;
+            }
         }
     }
 
