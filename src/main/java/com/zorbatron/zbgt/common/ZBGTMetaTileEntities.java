@@ -126,7 +126,7 @@ public class ZBGTMetaTileEntities {
         MEGA_FUSION[2] = registerMetaTileEntity(18062,
                 new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_3"), GTValues.UV));
 
-        QUACKER = registerMetaTileEntity(18068,
+        QUACKER = registerMetaTileEntity(18069,
                 new MetaTileEntityQuacker(zbgtId("quacker")));
     }
 }
