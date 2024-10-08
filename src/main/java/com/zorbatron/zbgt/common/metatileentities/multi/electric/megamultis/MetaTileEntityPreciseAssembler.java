@@ -142,7 +142,7 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
                                     "zbgt.machine.precise_assembler.precise_casing.tier",
                                     new TextComponentTranslation(PreciseCasing.CasingType
                                             .getUntranslatedShortNameByTier(preciseCasingTier))
-                                            .getUnformattedComponentText());
+                                                    .getUnformattedComponentText());
                         }
 
                         ITextComponent preciseCasingHoverText = TextComponentUtil.translationWithColor(
