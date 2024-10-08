@@ -44,6 +44,7 @@ public class ZBGTMetaTileEntities {
 
     public static MetaTileEntityLargeRockBreaker LARGE_ROCK_BREAKER;
     public static MetaTileEntityLargeAirCollector LARGE_AIR_COLLECTOR;
+    public static MetaTileEntityLargeAlloySmelter LARGE_ALLOY_SMELTER;
 
     public static void init() {
         // 18000-18049 (50) reserved for multiblock parts
@@ -134,5 +135,7 @@ public class ZBGTMetaTileEntities {
                 new MetaTileEntityLargeRockBreaker(zbgtId("large_rock_breaker")));
         LARGE_AIR_COLLECTOR = registerMetaTileEntity(18066,
                 new MetaTileEntityLargeAirCollector(zbgtId("large_air_collector")));
+        LARGE_ALLOY_SMELTER = registerMetaTileEntity(18068,
+                new MetaTileEntityLargeAlloySmelter(zbgtId("large_alloy_smelter")));
     }
 }

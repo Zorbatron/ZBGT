@@ -37,6 +37,11 @@
         "textures": {
           "all": "gregtech:blocks/casings/misc/5"
         }
+      },
+      "inconel_reinforced_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/misc/texture_metal_panel_d"
+        }
       }
     }
   }
