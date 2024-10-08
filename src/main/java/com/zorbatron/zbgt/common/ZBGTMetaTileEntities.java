@@ -112,7 +112,7 @@ public class ZBGTMetaTileEntities {
                 new MetaTileEntityCoAL(zbgtId("coal")));
 
         QUAD_EBF = registerMetaTileEntity(18057,
-                new MetaTileEntityQueebf(zbgtId("queebf")));
+                new MetaTileEntityQueebf(zbgtId("quad_ebf")));
         QUEEZER = registerMetaTileEntity(18058,
                 new MetaTileEntityQueezer(zbgtId("queezer")));
 
