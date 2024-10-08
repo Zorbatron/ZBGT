@@ -66,6 +66,24 @@ public class MultiblockRecipes {
                 'P', new UnificationEntry(plateDouble, Aluminium),
                 'B', MetaTileEntities.VACUUM_FREEZER.getStackForm(),
                 'C', new UnificationEntry(circuit, getMarkerMaterialByTier(HV)));
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(MetaTileEntities.CRACKER, 4)
+                .input(plate, StainlessSteel, 4)
+                .input(circuit, getMarkerMaterialByTier(HV))
+                .fluidInputs(SolderingAlloy.getFluid(L * 4))
+                .circuitMeta(4)
+                .output(ZBGTMetaTileEntities.QUACKER)
+                .duration(20 * 5).EUt(VA[HV])
+                .buildAndRegister();
+
+        ModHandler.addShapedRecipe("quacker", ZBGTMetaTileEntities.QUACKER.getStackForm(),
+                "PBP",
+                "BCB",
+                "PBP",
+                'P', new UnificationEntry(plateDouble, StainlessSteel),
+                'B', MetaTileEntities.CRACKER.getStackForm(),
+                'C', new UnificationEntry(circuit, getMarkerMaterialByTier(HV)));
     }
 
     private static void megas() {
