@@ -1,6 +1,5 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.electric.quads;
 
-import com.zorbatron.zbgt.ZBGTConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -12,6 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.zorbatron.zbgt.ZBGTConfig;
 import com.zorbatron.zbgt.core.sound.ZBGTSoundEvents;
 
 import gregtech.api.GTValues;
