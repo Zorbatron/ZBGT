@@ -53,18 +53,18 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 
-public class MetaTileEntityQuadEBF extends RecipeMapMultiblockController implements IHeatingCoil {
+public class MetaTileEntityQueebf extends RecipeMapMultiblockController implements IHeatingCoil {
 
     private int blastFurnaceTemperature;
 
-    public MetaTileEntityQuadEBF(ResourceLocation metaTileEntityId) {
+    public MetaTileEntityQueebf(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.BLAST_RECIPES);
         this.recipeMapWorkable.setParallelLimit(4);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityQuadEBF(metaTileEntityId);
+        return new MetaTileEntityQueebf(metaTileEntityId);
     }
 
     @Override
