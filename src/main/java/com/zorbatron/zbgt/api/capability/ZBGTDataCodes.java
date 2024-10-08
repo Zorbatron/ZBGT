@@ -14,4 +14,7 @@ public class ZBGTDataCodes {
     public static final int RATE_ACTIVATE = assignId();
     public static final int AUTOMATIC_RATE_CHANGE = assignId();
     public static final int STICKY_CHANGE = assignId();
+
+    public static final int UPDATE_COVER_MODE_1 = assignId();
+    public static final int UPDATE_COVER_MODE_2 = assignId();
 }
