@@ -72,7 +72,6 @@ public class MultiblockRecipes {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(GCYMMetaTileEntities.ALLOY_BLAST_SMELTER, 64)
                 .fluidInputs(SolderingAlloy.getFluid(L * 64))
-                .circuitMeta(17)
                 .output(ZBGTMetaTileEntities.MEGA_ABS)
                 .duration(20 * 30).EUt(VA[HV])
                 .buildAndRegister();
@@ -80,7 +79,6 @@ public class MultiblockRecipes {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(MetaTileEntities.ELECTRIC_BLAST_FURNACE, 64)
                 .fluidInputs(SolderingAlloy.getFluid(L * 64))
-                .circuitMeta(17)
                 .output(ZBGTMetaTileEntities.MEGA_EBF)
                 .duration(20 * 30).EUt(VA[HV])
                 .buildAndRegister();
@@ -88,7 +86,6 @@ public class MultiblockRecipes {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(MetaTileEntities.LARGE_CHEMICAL_REACTOR, 64)
                 .fluidInputs(SolderingAlloy.getFluid(L * 64))
-                .circuitMeta(17)
                 .output(ZBGTMetaTileEntities.MEGA_LCR)
                 .duration(20 * 30).EUt(VA[HV])
                 .buildAndRegister();
@@ -96,7 +93,6 @@ public class MultiblockRecipes {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(MetaTileEntities.CRACKER, 64)
                 .fluidInputs(SolderingAlloy.getFluid(L * 64))
-                .circuitMeta(17)
                 .output(ZBGTMetaTileEntities.MEGA_OCU)
                 .duration(20 * 30).EUt(VA[HV])
                 .buildAndRegister();
@@ -104,7 +100,6 @@ public class MultiblockRecipes {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(MetaTileEntities.VACUUM_FREEZER, 64)
                 .fluidInputs(SolderingAlloy.getFluid(L * 64))
-                .circuitMeta(17)
                 .output(ZBGTMetaTileEntities.MEGA_VF)
                 .duration(20 * 30).EUt(VA[HV])
                 .buildAndRegister();
