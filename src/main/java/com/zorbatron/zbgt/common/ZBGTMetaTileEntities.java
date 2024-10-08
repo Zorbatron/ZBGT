@@ -6,8 +6,7 @@ import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTile
 import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis.*;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.quads.MetaTileEntityQuadEBF;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.quads.MetaTileEntityQueezer;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.quads.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.*;
 import com.zorbatron.zbgt.common.metatileentities.storage.MetaTileEntityCreativeComputationProvider;
 
@@ -39,6 +38,7 @@ public class ZBGTMetaTileEntities {
 
     public static MetaTileEntityQuadEBF QUAD_EBF;
     public static MetaTileEntityQueezer QUEEZER;
+    public static MetaTileEntityQuacker QUACKER;
 
     public static MetaTileEntityYOTTank YOTTANK;
 
@@ -125,5 +125,8 @@ public class ZBGTMetaTileEntities {
                 new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_2"), GTValues.ZPM));
         MEGA_FUSION[2] = registerMetaTileEntity(18062,
                 new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_3"), GTValues.UV));
+
+        QUACKER = registerMetaTileEntity(18063,
+                new MetaTileEntityQuacker(zbgtId("quacker")));
     }
 }

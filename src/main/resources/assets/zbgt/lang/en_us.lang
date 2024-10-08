@@ -186,6 +186,12 @@ recipemap.precise_assembler_recipes.name=Precise Assembler
 zbgt.machine.quad_ebf.name=Quad EBF
 zbgt.machine.quad_ebf.tooltip=The same shape as a quad EBF, and thus has 4 innate parallels!
 
+zbgt.machine.queezer.name=Queezer
+zbgt.machine.queezer.tooltip=A quad freezer that has 4 innate parallels
+
+zbgt.machine.quacker.name=Quacker
+zbgt.machine.quacker.tooltip=A slightly larger oil cracker, although it may sometimes act like a duck...
+
 zbgt.machine.coal.name=Component Assembly Line
 zbgt.machine.coal.description.1=Creates large batches of §fComponents§7 for §e75%%§7 of the Cost.
 zbgt.machine.coal.description.2=Recipes are limited by §bCasing Tier§7.
@@ -195,9 +201,6 @@ zbgt.machine.coal.computation_tier=Max Computation Available: %s
 zbgt.machine.coal.computation_tier.hover=Maximum amount of computation available for recipes
 zbgt.recipe.coal_casing_tier=Casing Tier:
 recipemap.coal_recipes.name=Component Assembly Line
-
-zbgt.machine.queezer.name=Queezer
-zbgt.machine.queezer.tooltip=A quad freezer that has 4 innate parallels
 
 zbgt.machine.yottank.name=YOTTank
 zbgt.machine.yottank.max_capacity=Capacity: %s
@@ -294,7 +297,8 @@ zbgt.substation_enabled= and Substation Hatches
 
 
 # Sound subtitles
-zbgt.subtitle.fx_lo_freq=Low Frequency Buzzing
+zbgt.subtitle.yottank_pulse=YOTTank Pulsed
+zbgt.subtitle.quack=Quacker Quacked
 
 
 # Materials
