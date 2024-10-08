@@ -102,7 +102,8 @@ Single Item Input Bus
 
 
 ## Credited Works
-- [GT:NH](https://github.com/GTNewHorizons/) for many of the multiblocks and 
+- [GT:NH](https://github.com/GTNewHorizons/) for many of it's multiblocks.
 - Ursamina for the dual cover textures and the icon! :heart:
 - [Synthitic](https://github.com/Synthitic/) for porting GT:NH's CoAL to [GCYL: CEu](https://github.com/Synthitic/GCYL-CEu), which I more or less directly copied.
 - [GT:CEu](https://github.com/GregTechCEu/GregTech) for much code inspiration.
+- Quacker quack from https://freesound.org/people/WavJunction.com/sounds/456770/.
