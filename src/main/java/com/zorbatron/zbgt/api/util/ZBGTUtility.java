@@ -6,6 +6,8 @@ import net.minecraftforge.items.IItemHandler;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.zorbatron.zbgt.ZBGTCore;
+
 import gregtech.api.capability.INotifiableHandler;
 import gregtech.api.capability.impl.GhostCircuitItemStackHandler;
 import gregtech.api.capability.impl.ItemHandlerList;
@@ -16,7 +18,7 @@ import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 public class ZBGTUtility {
 
     public static @NotNull ResourceLocation zbgtId(@NotNull String path) {
-        return new ResourceLocation("zbgt", path);
+        return new ResourceLocation(ZBGTCore.MODID, path);
     }
 
     public static final int[] intV = { 8, 32, 128, 512, 2048, 8192, 32768, 131072, 524288, 2097152, 8388608, 33554432,

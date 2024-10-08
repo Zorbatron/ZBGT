@@ -37,8 +37,9 @@ public class ZBGTMetaTileEntities {
 
     public static MetaTileEntityCoAL CoAL;
 
-    public static MetaTileEntityQuadEBF QUAD_EBF;
+    public static MetaTileEntityQueebf QUAD_EBF;
     public static MetaTileEntityQueezer QUEEZER;
+    public static MetaTileEntityQuacker QUACKER;
 
     public static MetaTileEntityYOTTank YOTTANK;
 
@@ -116,7 +117,7 @@ public class ZBGTMetaTileEntities {
                 new MetaTileEntityCoAL(zbgtId("coal")));
 
         QUAD_EBF = registerMetaTileEntity(18057,
-                new MetaTileEntityQuadEBF(zbgtId("quad_ebf")));
+                new MetaTileEntityQueebf(zbgtId("quad_ebf")));
         QUEEZER = registerMetaTileEntity(18058,
                 new MetaTileEntityQueezer(zbgtId("queezer")));
 
@@ -137,5 +138,8 @@ public class ZBGTMetaTileEntities {
                 new MetaTileEntityLargeAirCollector(zbgtId("large_air_collector")));
         LARGE_ALLOY_SMELTER = registerMetaTileEntity(18068,
                 new MetaTileEntityLargeAlloySmelter(zbgtId("large_alloy_smelter")));
+
+        QUACKER = registerMetaTileEntity(18069,
+                new MetaTileEntityQuacker(zbgtId("quacker")));
     }
 }

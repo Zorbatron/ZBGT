@@ -19,10 +19,16 @@ public class ZBGTConfig {
         public boolean allowSubstationHatches = false;
 
         @Config.Comment({ "Let YOTTanks play their \"whoomp\" \"whoomp\" noise",
-                "Default: false" })
+                "Default: true" })
         @Config.RequiresWorldRestart
         @Config.Name("YOTTank Sounds")
-        public boolean yottankSound = false;
+        public boolean yottankSound = true;
+
+        @Config.Comment({ "Let Quackers quack",
+                "Default: true" })
+        @Config.RequiresWorldRestart
+        @Config.Name("Quacker Quacks")
+        public boolean quackerQuacks = true;
     }
 
     @Config.Name("Recipe Settings")
@@ -30,11 +36,6 @@ public class ZBGTConfig {
     public static RecipeSettings recipeSettings = new RecipeSettings();
 
     public static class RecipeSettings {
-
-        @Config.Comment({ "How silly are you?",
-                "Default: true" })
-        @Config.Name("Silly Recipes")
-        public boolean enableSillyRecipes = true;
 
         @Config.Comment({ "Enable recipes for the large parallel hatches.",
                 "Default: true" })
