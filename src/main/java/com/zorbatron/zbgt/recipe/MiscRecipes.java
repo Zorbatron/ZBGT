@@ -9,7 +9,6 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 
 import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
-import com.zorbatron.zbgt.ZBGTConfig;
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
@@ -25,11 +24,6 @@ public class MiscRecipes {
     protected static void init() {
         genericCircuits();
         magneticFluids();
-
-        if (ZBGTConfig.recipeSettings.enableSillyRecipes) {
-            sillyRecipes();
-        }
-
         ggCircuits();
         engraver();
 
@@ -164,15 +158,6 @@ public class MiscRecipes {
                     .EUt(8).duration(20)
                     .buildAndRegister();
         }
-    }
-
-    private static void sillyRecipes() {
-        COMPRESSOR_RECIPES.recipeBuilder()
-                .fluidInputs(Water.getFluid(Integer.MAX_VALUE))
-                .fluidOutputs(Neutronium.getFluid(1))
-                .circuitMeta(1)
-                .EUt(Integer.MAX_VALUE).duration(Integer.MAX_VALUE)
-                .buildAndRegister();
     }
 
     private static void ggCircuits() {

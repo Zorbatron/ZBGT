@@ -31,11 +31,6 @@ public class ZBGTConfig {
 
     public static class RecipeSettings {
 
-        @Config.Comment({ "How silly are you?",
-                "Default: true" })
-        @Config.Name("Silly Recipes")
-        public boolean enableSillyRecipes = true;
-
         @Config.Comment({ "Enable recipes for the large parallel hatches.",
                 "Default: true" })
         @Config.Name("Parallel Hatch Recipes")
