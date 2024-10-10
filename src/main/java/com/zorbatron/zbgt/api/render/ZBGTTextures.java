@@ -34,6 +34,7 @@ public class ZBGTTextures {
     public static SimpleOverlayRenderer PRECISE_CASING_4;
 
     public static SimpleOverlayRenderer IRIDIUM_CASING;
+
     public static ICubeRenderer YOTTANK_CASING;
 
     public static void preInit() {
@@ -59,6 +60,7 @@ public class ZBGTTextures {
         PRECISE_CASING_4 = new SimpleOverlayRenderer("casings/precise/precise_4");
 
         IRIDIUM_CASING = new SimpleOverlayRenderer("casings/material/iridium");
+
         YOTTANK_CASING = new SidedCubeRenderer("casings/yottank");
     }
 

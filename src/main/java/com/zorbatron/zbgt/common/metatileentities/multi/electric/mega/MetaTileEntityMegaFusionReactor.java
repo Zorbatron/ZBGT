@@ -1,4 +1,4 @@
-package com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis;
+package com.zorbatron.zbgt.common.metatileentities.multi.electric.mega;
 
 import java.util.Arrays;
 import java.util.Collections;

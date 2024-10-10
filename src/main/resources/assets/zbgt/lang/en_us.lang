@@ -183,8 +183,8 @@ zbgt.machine.precise_assembler.machine_casing.tier=Machine casing tier: %s
 zbgt.machine.precise_assembler.machine_casing.tier.hover=Recipes are limited to this voltage, regardless of the energy hatch
 recipemap.precise_assembler_recipes.name=Precise Assembler
 
-zbgt.machine.queebf.name=Queebf
-zbgt.machine.queebf.tooltip=The same shape as a quad EBF, and thus has 4 innate parallels!
+zbgt.machine.quad_ebf.name=Queebf
+zbgt.machine.quad_ebf.tooltip=The same shape as a quad EBF, and thus has 4 innate parallels!
 
 zbgt.machine.queezer.name=Queezer
 zbgt.machine.queezer.tooltip=A quad freezer that has 4 innate parallels
@@ -220,6 +220,15 @@ zbgt.machine.mega_fusion_3.name=Compact Fusion Computer Mk-III
 zbgt.machine.mega_fusion_3.tooltip.1=Fusion tier < Mk-I: 192 parallels
 zbgt.machine.mega_fusion_3.tooltip.2=Fusion tier < Mk-II: 128 parallels
 zbgt.machine.mega_fusion_3.tooltip.3=Fusion tier >= Mk=III: 64 parallels
+
+zbgt.machine.large_rock_breaker.name=Large Rock Breaker
+zbgt.machine.large_rock_breaker.tooltip=Rock Atomizer
+
+zbgt.machine.large_air_collector.name=Large Air Collector
+zbgt.machine.large_air_collector.tooltip=Atmosphere Vacuum
+
+zbgt.machine.large_alloy_smelter.name=Zyngen
+zbgt.machine.large_alloy_smelter.tooltip=Gains a 5%% energy discount per coil tier
 
 
 # Multiblock Casings
@@ -289,6 +298,7 @@ tile.misc_casing.compact_fusion_coil_2.name=Advanced Compact Fusion Coil
 tile.misc_casing.compact_fusion_coil_3.name=Compact Fusion Coil MK-II Prototype
 tile.misc_casing.compact_fusion_coil_4.name=Compact Fusion Coil MK-II Finaltype
 
+tile.misc_casing.inconel_reinforced_casing.name=Inconel Reinforced Casing
 
 # Misc
 zbgt.laser_enabled.1=Can use

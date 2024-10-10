@@ -106,4 +106,5 @@ Single Item Input Bus
 - Ursamina for the dual cover textures and the icon! :heart:
 - [Synthitic](https://github.com/Synthitic/) for porting GT:NH's CoAL to [GCYL: CEu](https://github.com/Synthitic/GCYL-CEu), which I more or less directly copied.
 - [GT:CEu](https://github.com/GregTechCEu/GregTech) for much code inspiration.
+- MkcTao/[D-Alessian](https://github.com/D-Alessian/) for the Large Air Collector multiblock shape.
 - Quacker quack from https://freesound.org/people/WavJunction.com/sounds/456770/.

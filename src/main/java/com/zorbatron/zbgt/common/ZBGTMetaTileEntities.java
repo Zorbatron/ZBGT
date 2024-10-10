@@ -4,9 +4,10 @@ import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 
 import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.*;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis.*;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.quads.*;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCoAL;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.large.*;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.mega.*;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.quad.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.*;
 import com.zorbatron.zbgt.common.metatileentities.storage.MetaTileEntityCreativeComputationProvider;
 
@@ -41,6 +42,10 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityQuacker QUACKER;
 
     public static MetaTileEntityYOTTank YOTTANK;
+
+    public static MetaTileEntityLargeRockBreaker LARGE_ROCK_BREAKER;
+    public static MetaTileEntityLargeAirCollector LARGE_AIR_COLLECTOR;
+    public static MetaTileEntityLargeAlloySmelter LARGE_ALLOY_SMELTER;
 
     public static void init() {
         // 18000-18049 (50) reserved for multiblock parts
@@ -125,6 +130,14 @@ public class ZBGTMetaTileEntities {
                 new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_2"), GTValues.ZPM));
         MEGA_FUSION[2] = registerMetaTileEntity(18062,
                 new MetaTileEntityMegaFusionReactor(zbgtId("mega_fusion_3"), GTValues.UV));
+        // Reserve 18063 and 18064 for the mega fusion 4 and 5 if I ever do them
+
+        LARGE_ROCK_BREAKER = registerMetaTileEntity(18065,
+                new MetaTileEntityLargeRockBreaker(zbgtId("large_rock_breaker")));
+        LARGE_AIR_COLLECTOR = registerMetaTileEntity(18066,
+                new MetaTileEntityLargeAirCollector(zbgtId("large_air_collector")));
+        LARGE_ALLOY_SMELTER = registerMetaTileEntity(18068,
+                new MetaTileEntityLargeAlloySmelter(zbgtId("large_alloy_smelter")));
 
         QUACKER = registerMetaTileEntity(18069,
                 new MetaTileEntityQuacker(zbgtId("quacker")));

@@ -11,6 +11,7 @@ import java.util.List;
 import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
 import com.zorbatron.zbgt.api.ZBGTAPI;
 
+import gregicality.multiblocks.api.unification.GCYMMaterials;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialFlag;
 
@@ -41,14 +42,14 @@ public final class ZBGTMaterialExtraFlags {
     }
 
     private static void doublePlates() {
-        Material[] materials = { Invar };
+        Material[] materials = { Invar, GCYMMaterials.MaragingSteel300 };
 
         setFlags(materials, GENERATE_DOUBLE_PLATE);
     }
 
     private static void densePlates() {
         Material[] materials = { Steel, Aluminium, StainlessSteel, Titanium, TungstenSteel, Tritanium, HSSS,
-                Osmiridium, NiobiumTitanium, Iridium, WroughtIron, Trinaquadalloy };
+                Osmiridium, NiobiumTitanium, Iridium, WroughtIron, Trinaquadalloy, GCYMMaterials.Trinaquadalloy };
 
         setFlags(materials, GENERATE_DENSE);
     }

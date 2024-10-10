@@ -8,15 +8,21 @@ import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 
+import net.minecraft.init.Items;
+
 import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
 import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 
+import gregicality.multiblocks.api.unification.GCYMMaterials;
+import gregicality.multiblocks.common.block.GCYMMetaBlocks;
+import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.stack.UnificationEntry;
+import gregtech.common.blocks.BlockCleanroomCasing;
 import gregtech.common.blocks.BlockMultiblockCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
@@ -25,9 +31,48 @@ import gregtech.common.metatileentities.MetaTileEntities;
 public class MultiblockRecipes {
 
     protected static void init() {
+        gcyms();
         quads();
         megas();
         misc();
+    }
+
+    private static void gcyms() {
+        ModHandler.addShapedRecipe("large_gas_collector", ZBGTMetaTileEntities.LARGE_AIR_COLLECTOR.getStackForm(),
+                "FCF",
+                "RGR",
+                "MWM",
+                'F', MetaBlocks.CLEANROOM_CASING.getItemVariant(BlockCleanroomCasing.CasingType.FILTER_CASING),
+                'C', new UnificationEntry(circuit, getMarkerMaterialByTier(IV)),
+                'R', new UnificationEntry(rotor, TungstenSteel),
+                'G', MetaTileEntities.GAS_COLLECTOR[IV].getStackForm(),
+                'M', getMotorByTier(IV),
+                'W', new UnificationEntry(cableGtSingle, Platinum));
+
+        ModHandler.addShapedRecipe("large_rock_breaker", ZBGTMetaTileEntities.LARGE_ROCK_BREAKER.getStackForm(),
+                "ABC",
+                "DEF",
+                "GHI",
+                'A', new UnificationEntry(plateDouble, GCYMMaterials.MaragingSteel300),
+                'B', new UnificationEntry(circuit, getMarkerMaterialByTier(IV)),
+                'C', new UnificationEntry(plateDouble, GCYMMaterials.HSLASteel),
+                'D', Items.WATER_BUCKET,
+                'E', MetaTileEntities.ROCK_BREAKER[IV].getStackForm(),
+                'F', Items.LAVA_BUCKET,
+                'G', getConveyorByTier(IV),
+                'H', new UnificationEntry(cableGtSingle, Platinum),
+                'I', GCYMMetaBlocks.UNIQUE_CASING.getItemVariant(BlockUniqueCasing.UniqueCasingType.CRUSHING_WHEELS));
+
+        ModHandler.addShapedRecipe("large_alloy_smelter", ZBGTMetaTileEntities.LARGE_ALLOY_SMELTER.getStackForm(),
+                "CVC",
+                "WMW",
+                "PAP",
+                'C', new UnificationEntry(circuit, getMarkerMaterialByTier(IV)),
+                'V', GCYMMetaBlocks.UNIQUE_CASING.getItemVariant(BlockUniqueCasing.UniqueCasingType.HEAT_VENT),
+                'W', new UnificationEntry(wireGtQuadruple, RTMAlloy),
+                'M', MetaTileEntities.ALLOY_SMELTER[IV].getStackForm(),
+                'P', new UnificationEntry(plateDouble, GCYMMaterials.HSLASteel),
+                'A', MetaItems.VOLTAGE_COIL_IV);
     }
 
     private static void quads() {

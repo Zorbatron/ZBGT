@@ -1,4 +1,4 @@
-package com.zorbatron.zbgt.common.metatileentities.multi.electric.quads;
+package com.zorbatron.zbgt.common.metatileentities.multi.electric.quad;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;

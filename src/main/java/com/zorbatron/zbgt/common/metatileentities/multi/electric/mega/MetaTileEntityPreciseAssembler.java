@@ -1,4 +1,4 @@
-package com.zorbatron.zbgt.common.metatileentities.multi.electric.megamultis;
+package com.zorbatron.zbgt.common.metatileentities.multi.electric.mega;
 
 import static com.zorbatron.zbgt.api.capability.ZBGTDataCodes.MULTIBLOCK_TIER_CHANGE_1;
 import static com.zorbatron.zbgt.api.capability.ZBGTDataCodes.MULTIBLOCK_TIER_CHANGE_2;
