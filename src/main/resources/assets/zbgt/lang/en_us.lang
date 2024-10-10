@@ -183,8 +183,8 @@ zbgt.machine.precise_assembler.machine_casing.tier=Machine casing tier: %s
 zbgt.machine.precise_assembler.machine_casing.tier.hover=Recipes are limited to this voltage, regardless of the energy hatch
 recipemap.precise_assembler_recipes.name=Precise Assembler
 
-zbgt.machine.queebf.name=Queebf
-zbgt.machine.queebf.tooltip=The same shape as a quad EBF, and thus has 4 innate parallels!
+zbgt.machine.quad_ebf.name=Queebf
+zbgt.machine.quad_ebf.tooltip=The same shape as a quad EBF, and thus has 4 innate parallels!
 
 zbgt.machine.queezer.name=Queezer
 zbgt.machine.queezer.tooltip=A quad freezer that has 4 innate parallels
