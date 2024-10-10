@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 import zone.rong.mixinbooter.ILateMixinLoader;
 
 @IFMLLoadingPlugin.MCVersion(ForgeVersion.mcVersion)
-@IFMLLoadingPlugin.Name("MGTCEuA-Core")
+@IFMLLoadingPlugin.Name("ZBGTCore")
 @Optional.Interface(iface = "zone.rong.mixinbooter.ILateMixinLoader", modid = "mixinbooter")
 public class ZBGTMixinPlugin implements IFMLLoadingPlugin, ILateMixinLoader {
 
@@ -44,7 +44,6 @@ public class ZBGTMixinPlugin implements IFMLLoadingPlugin, ILateMixinLoader {
     @Override
     @Optional.Method(modid = "mixinbooter")
     public List<String> getMixinConfigs() {
-        System.out.println("getMixinConfigs ZBGT");
         ArrayList<String> mixins = new ArrayList<>();
         mixins.add("mixins.zbgt.json");
         return mixins;
