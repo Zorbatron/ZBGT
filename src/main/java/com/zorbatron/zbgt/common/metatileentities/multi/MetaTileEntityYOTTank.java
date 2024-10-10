@@ -28,9 +28,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.zorbatron.zbgt.ZBGTConfig;
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
+import com.zorbatron.zbgt.common.ZBGTConfig;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
 import com.zorbatron.zbgt.common.block.blocks.YOTTankCell;
