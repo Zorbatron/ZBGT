@@ -62,6 +62,17 @@ public class MultiblockRecipes {
                 'G', getConveyorByTier(IV),
                 'H', new UnificationEntry(cableGtSingle, Platinum),
                 'I', GCYMMetaBlocks.UNIQUE_CASING.getItemVariant(BlockUniqueCasing.UniqueCasingType.CRUSHING_WHEELS));
+
+        ModHandler.addShapedRecipe("large_alloy_smelter", ZBGTMetaTileEntities.LARGE_ALLOY_SMELTER.getStackForm(),
+                "CVC",
+                "WMW",
+                "PAP",
+                'C', new UnificationEntry(circuit, getMarkerMaterialByTier(IV)),
+                'V', GCYMMetaBlocks.UNIQUE_CASING.getItemVariant(BlockUniqueCasing.UniqueCasingType.HEAT_VENT),
+                'W', new UnificationEntry(wireGtQuadruple, RTMAlloy),
+                'M', MetaTileEntities.ALLOY_SMELTER[IV].getStackForm(),
+                'P', new UnificationEntry(plateDouble, GCYMMaterials.HSLASteel),
+                'A', MetaItems.VOLTAGE_COIL_IV);
     }
 
     private static void quads() {
