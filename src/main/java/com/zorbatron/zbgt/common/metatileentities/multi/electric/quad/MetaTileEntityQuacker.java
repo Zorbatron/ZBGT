@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.zorbatron.zbgt.ZBGTConfig;
+import com.zorbatron.zbgt.common.ZBGTConfig;
 import com.zorbatron.zbgt.core.sound.ZBGTSoundEvents;
 
 import gregtech.api.GTValues;

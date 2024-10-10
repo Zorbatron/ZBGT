@@ -1,6 +1,8 @@
-package com.zorbatron.zbgt;
+package com.zorbatron.zbgt.common;
 
 import net.minecraftforge.common.config.Config;
+
+import com.zorbatron.zbgt.ZBGTCore;
 
 @Config(modid = ZBGTCore.MODID)
 public class ZBGTConfig {

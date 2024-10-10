@@ -2,8 +2,8 @@ package com.zorbatron.zbgt.api;
 
 import net.minecraft.block.state.IBlockState;
 
-import com.zorbatron.zbgt.ZBGTConfig;
 import com.zorbatron.zbgt.api.util.ZBGTMods;
+import com.zorbatron.zbgt.common.ZBGTConfig;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
 import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
 import com.zorbatron.zbgt.common.block.blocks.YOTTankCell;

@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.zorbatron.zbgt.ZBGTConfig;
+import com.zorbatron.zbgt.common.ZBGTConfig;
 
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.impl.EnergyContainerList;

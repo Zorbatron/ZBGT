@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.zorbatron.zbgt.ZBGTConfig;
+import com.zorbatron.zbgt.common.ZBGTConfig;
 
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregtech.api.capability.IEnergyContainer;

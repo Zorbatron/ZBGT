@@ -3,8 +3,8 @@ package com.zorbatron.zbgt.recipe;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 
-import com.zorbatron.zbgt.ZBGTConfig;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
+import com.zorbatron.zbgt.common.ZBGTConfig;
 import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
 
