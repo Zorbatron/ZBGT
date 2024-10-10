@@ -23,7 +23,7 @@ import com.zorbatron.zbgt.api.capability.impl.HeatingCoilGCYMMultiblockRecipeLog
 import com.zorbatron.zbgt.api.metatileentity.LaserCapableGCYMRecipeMapMultiblockController;
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
-import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
+import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 
 import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
 import gregicality.multiblocks.api.render.GCYMTextures;

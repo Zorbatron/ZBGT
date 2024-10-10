@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 import com.zorbatron.zbgt.api.metatileentity.LaserCapableGCYMRecipeMapMultiblockController;
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
-import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
+import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 
 import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
 import gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities;

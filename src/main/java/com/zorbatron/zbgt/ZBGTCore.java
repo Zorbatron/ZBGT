@@ -14,11 +14,11 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import com.zorbatron.zbgt.api.util.ZBGTLog;
 import com.zorbatron.zbgt.common.CommonProxy;
-import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
 import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
 import com.zorbatron.zbgt.common.block.blocks.YOTTankCell;
+import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.core.sound.ZBGTSoundEvents;
 
 import gregtech.GTInternalTags;

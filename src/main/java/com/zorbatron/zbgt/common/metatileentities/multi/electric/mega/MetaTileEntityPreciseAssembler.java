@@ -30,9 +30,9 @@ import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 import com.zorbatron.zbgt.api.recipes.properties.PreciseAssemblerProperty;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
-import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
+import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 
 import gregtech.api.GTValues;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;

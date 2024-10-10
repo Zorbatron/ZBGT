@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
-import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
+import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
