@@ -1,4 +1,4 @@
-package com.zorbatron.zbgt.common;
+package com.zorbatron.zbgt.common.metatileentities;
 
 import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;

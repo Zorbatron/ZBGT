@@ -31,10 +31,10 @@ import org.jetbrains.annotations.NotNull;
 import com.zorbatron.zbgt.ZBGTConfig;
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
-import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
 import com.zorbatron.zbgt.common.block.blocks.YOTTankCell;
+import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityYOTTankMEHatch;
 import com.zorbatron.zbgt.core.sound.ZBGTSoundEvents;
 

@@ -5,7 +5,7 @@ import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 
 import com.zorbatron.zbgt.ZBGTConfig;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
-import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
+import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
 
 import gregicality.multiblocks.api.unification.GCYMMaterials;

@@ -7,7 +7,7 @@ import static net.minecraft.init.Blocks.COBBLESTONE;
 
 import net.minecraft.item.ItemStack;
 
-import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
+import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 
 import appeng.api.AEApi;
 import appeng.api.definitions.IMaterials;
