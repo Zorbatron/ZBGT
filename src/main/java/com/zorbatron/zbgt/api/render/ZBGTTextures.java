@@ -36,7 +36,6 @@ public class ZBGTTextures {
     public static SimpleOverlayRenderer IRIDIUM_CASING;
 
     public static ICubeRenderer YOTTANK_CASING;
-    public static SimpleOverlayRenderer INCONEL_REINFORCED_CASING;
 
     public static void preInit() {
         WATER_OVERLAY_INFINITY = new SimpleOverlayRenderer("overlay/machine/water_infinity");
@@ -63,7 +62,6 @@ public class ZBGTTextures {
         IRIDIUM_CASING = new SimpleOverlayRenderer("casings/material/iridium");
 
         YOTTANK_CASING = new SidedCubeRenderer("casings/yottank");
-        INCONEL_REINFORCED_CASING = new SimpleOverlayRenderer("casings/misc/texture_metal_panel_d");
     }
 
     public static SimpleOverlayRenderer getPrassTextureByTier(int tier) {

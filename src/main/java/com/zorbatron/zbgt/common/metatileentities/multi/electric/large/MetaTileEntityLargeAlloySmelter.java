@@ -11,13 +11,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.zorbatron.zbgt.api.render.ZBGTTextures;
-import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
-import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
-
 import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
+import gregicality.multiblocks.api.render.GCYMTextures;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
+import gregicality.multiblocks.common.block.blocks.BlockLargeMultiblockCasing;
 import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -64,7 +62,8 @@ public class MetaTileEntityLargeAlloySmelter extends GCYMRecipeMapMultiblockCont
     }
 
     protected IBlockState getCasingState() {
-        return ZBGTMetaBlocks.MISC_CASING.getState(MiscCasing.CasingType.INCONEL_REINFORCED_CASING);
+        return GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING
+                .getState(BlockLargeMultiblockCasing.CasingType.HIGH_TEMPERATURE_CASING);
     }
 
     protected IBlockState getVentState() {
@@ -127,7 +126,7 @@ public class MetaTileEntityLargeAlloySmelter extends GCYMRecipeMapMultiblockCont
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-        return ZBGTTextures.INCONEL_REINFORCED_CASING;
+        return GCYMTextures.BLAST_CASING;
     }
 
     protected int getCoilTier() {

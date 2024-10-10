@@ -27,8 +27,7 @@ public class MiscCasing extends VariantBlock<MiscCasing.CasingType> {
         COMPACT_FUSION_COIL_1("compact_fusion_coil_1"),
         COMPACT_FUSION_COIL_2("compact_fusion_coil_2"),
         COMPACT_FUSION_COIL_3("compact_fusion_coil_3"),
-        COMPACT_FUSION_COIL_4("compact_fusion_coil_4"),
-        INCONEL_REINFORCED_CASING("inconel_reinforced_casing");
+        COMPACT_FUSION_COIL_4("compact_fusion_coil_4");
 
         private final String name;
 
