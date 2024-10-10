@@ -15,6 +15,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -139,8 +140,9 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
                             preciseCasingText = TextComponentUtil.translationWithColor(
                                     TextFormatting.GRAY,
                                     "zbgt.machine.precise_assembler.precise_casing.tier",
-                                    I18n.format(PreciseCasing.CasingType
-                                            .getUntranslatedShortNameByTier(preciseCasingTier)));
+                                    new TextComponentTranslation(PreciseCasing.CasingType
+                                            .getUntranslatedShortNameByTier(preciseCasingTier))
+                                                    .getUnformattedComponentText());
                         }
 
                         ITextComponent preciseCasingHoverText = TextComponentUtil.translationWithColor(

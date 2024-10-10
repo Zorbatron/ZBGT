@@ -15,8 +15,10 @@ import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.capability.impl.ZBGT_GCYMMultiblockRecipeLogic;
 import com.zorbatron.zbgt.api.metatileentity.LaserCapableGCYMRecipeMapMultiblockController;
+import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 
+import gregicality.multiblocks.api.metatileentity.GCYMMultiblockAbility;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -43,7 +45,7 @@ public class MetaTileEntityMegaLCR extends LaserCapableGCYMRecipeMapMultiblockCo
     @Override
     protected @NotNull BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("XXXXX", "XEEEX", "XEMEX", "XEEEX", "XXXXX")
+                .aisle("XXXXX", "XEEEX", "XEEEX", "XEEEX", "XXXXX")
                 .aisle("HPXPH", "#GGG#", "#GFG#", "#GGG#", "HPXPH")
                 .aisle("HPXPH", "#GGG#", "#GFG#", "#GGG#", "HPXPH")
                 .aisle("HPXPH", "#GGG#", "#GFG#", "#GGG#", "HPXPH")
@@ -58,11 +60,12 @@ public class MetaTileEntityMegaLCR extends LaserCapableGCYMRecipeMapMultiblockCo
                 .where('#', air())
                 .where('G', states(getGlassState()))
                 .where('F', states(getCoilState()))
-                .where('M', maintenancePredicate())
                 .where('E', states(getCasingState())
-                        .or(autoEnergyInputs(1, 8)))
+                        .or(autoEnergyInputs(1, 8))
+                        .or(abilities(GCYMMultiblockAbility.PARALLEL_HATCH).setMaxGlobalLimited(1))
+                        .or(maintenancePredicate()))
                 .where('H', states(getCasingState())
-                        .or(autoAbilities(false, false, true, true, true, true, false)))
+                        .or(TraceabilityPredicates.autoBusesAndHatches(getRecipeMap())))
                 .build();
     }
 
