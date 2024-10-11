@@ -131,7 +131,7 @@ metaitem.gg_circuit_1.name=Hi-Computation Station Mk-I
 metaitem.gg_circuit_1.tooltip=§b93015 TFlops§r
 metaitem.gg_circuit_2.name=Hi-Computation Station Mk-II
 metaitem.gg_circuit_2.tooltip=§e76M Processor Units§r
-metaitem.gg_circuit_3.name=Hi-Computation Station Mk-II
+metaitem.gg_circuit_3.name=Hi-Computation Station Mk-III
 metaitem.gg_circuit_3.tooltip=§aInvalidate RSA§r
 metaitem.gg_circuit_4.name=Hi-Computation Station Mk-IV Prototype
 metaitem.gg_circuit_4.tooltip=§c56th Mersenne Prime§r
@@ -215,11 +215,11 @@ zbgt.machine.mega_fusion_1.name=Compact Fusion Computer Mk-I Prototype
 zbgt.machine.mega_fusion_1.tooltip.1=Max parallels: 64x
 zbgt.machine.mega_fusion_2.name=Compact Fusion Computer Mk-II
 zbgt.machine.mega_fusion_2.tooltip.1=Fusion tier < Mk-I: 128 parallels
-zbgt.machine.mega_fusion_2.tooltip.2=Fusion tier >= Mk=II: 64 parallels
+zbgt.machine.mega_fusion_2.tooltip.2=Fusion tier >= Mk-II: 64 parallels
 zbgt.machine.mega_fusion_3.name=Compact Fusion Computer Mk-III
 zbgt.machine.mega_fusion_3.tooltip.1=Fusion tier < Mk-I: 192 parallels
 zbgt.machine.mega_fusion_3.tooltip.2=Fusion tier < Mk-II: 128 parallels
-zbgt.machine.mega_fusion_3.tooltip.3=Fusion tier >= Mk=III: 64 parallels
+zbgt.machine.mega_fusion_3.tooltip.3=Fusion tier >= Mk-III: 64 parallels
 
 zbgt.machine.large_rock_breaker.name=Large Rock Breaker
 zbgt.machine.large_rock_breaker.tooltip=Rock Atomizer
