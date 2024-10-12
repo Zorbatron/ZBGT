@@ -129,11 +129,6 @@ public class CasingRecipes {
                             Materials.Polybenzimidazole.getFluid((10 + fluidAdditive) * L * 2) :
                             Materials.Polyethylene.getFluid((10 + fluidAdditive) * L * 2))
                     .outputs(ZBGTMetaBlocks.CoAL_CASING.getItemVariant(CoALCasing.CasingType.getCasingByTier(tier)))
-                    .stationResearch(research -> research
-                            .researchStack(ZBGTMetaBlocks.CoAL_CASING
-                                    .getItemVariant(CoALCasing.CasingType.getCasingByTier(finalTier - 1)))
-                            .CWUt((int) Math.pow(2, finalTier))
-                            .EUt(VA[finalTier]))
                     .EUt(VA[tier]).duration(20 * 15);
 
             ItemStack researchItemStack = ZBGTMetaBlocks.CoAL_CASING
