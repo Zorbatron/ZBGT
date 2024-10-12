@@ -196,6 +196,7 @@ zbgt.machine.coal.name=Component Assembly Line
 zbgt.machine.coal.description.1=Creates large batches of §fComponents§7 for §e75%%§7 of the Cost.
 zbgt.machine.coal.description.2=Recipes are limited by §bCasing Tier§7.
 zbgt.machine.coal.description.3=Each casing tier above the recipe §eHalves the recipe time§r.
+zbgt.machine.coal.max_recipe_tier=Max Component Tier: %s
 zbgt.machine.coal.max_recipe_tier.hover=The highest component tier that can be assembled
 zbgt.machine.coal.computation_tier=Max Computation Available: %s
 zbgt.machine.coal.computation_tier.hover=Maximum amount of computation available for recipes
