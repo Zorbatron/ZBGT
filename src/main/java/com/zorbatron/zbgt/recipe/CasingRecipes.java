@@ -151,7 +151,7 @@ public class CasingRecipes {
             }
 
             if (tier > ZPM) {
-                    tempBuilder.fluidInputs(Naquadria.getFluid((10 + fluidAdditive) * L * 2));
+                tempBuilder.fluidInputs(Naquadria.getFluid((10 + fluidAdditive) * L * 2));
             }
 
             tempBuilder.buildAndRegister();
