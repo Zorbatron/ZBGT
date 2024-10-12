@@ -324,10 +324,9 @@ public class RecipeAssists {
 
     public static Material getLowEmitterSensorStarMaterial(int tier) {
         return switch (tier) {
-            case (LV) -> Quartzite;
             case (MV) -> Emerald;
             case (HV) -> EnderEye;
-            default -> null;
+            default -> Quartzite;
         };
     }
 
