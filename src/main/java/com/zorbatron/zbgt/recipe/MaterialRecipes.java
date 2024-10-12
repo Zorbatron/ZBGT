@@ -31,8 +31,8 @@ public class MaterialRecipes {
     private static void chemicalReactor() {
         CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust, Lithium)
-                .fluidInputs(Chlorine.getFluid(L))
-                .output(dust, LithiumChloride)
+                .fluidInputs(Chlorine.getFluid(1000))
+                .output(dust, LithiumChloride, 2)
                 .EUt(VA[MV]).duration(56)
                 .buildAndRegister();
 
