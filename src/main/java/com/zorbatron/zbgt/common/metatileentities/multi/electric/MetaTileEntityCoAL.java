@@ -251,8 +251,9 @@ public class MetaTileEntityCoAL extends LaserCapableRecipeMapMultiblockControlle
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
 
-        tooltip.add(I18n.format("zbgt.machine.coal.description.1"));
-        tooltip.add(I18n.format("zbgt.machine.coal.description.2"));
+        for (int i = 1; i <= 3; i++) {
+            tooltip.add(I18n.format(String.format("zbgt.machine.coal.description.%d", i)));
+        }
     }
 
     @Override
@@ -262,18 +263,19 @@ public class MetaTileEntityCoAL extends LaserCapableRecipeMapMultiblockControlle
 
     protected class CoALRecipeLogic extends ComputationRecipeLogic {
 
-        MetaTileEntityCoAL CoAL;
-
         public CoALRecipeLogic(MetaTileEntityCoAL metaTileEntity) {
             super(metaTileEntity, ComputationType.STEADY);
-            this.CoAL = metaTileEntity;
         }
 
         @Override
         public boolean checkRecipe(@NotNull Recipe recipe) {
             if (!super.checkRecipe(recipe)) return false;
 
-            return recipe.getProperty(CoALProperty.getInstance(), 0) <= tier;
+            int recipeCasingTier = recipe.getProperty(CoALProperty.getInstance(), 0);
+
+            setSpeedBonus(1 / Math.pow(2, tier - recipeCasingTier));
+
+            return recipeCasingTier <= tier;
         }
     }
 }
