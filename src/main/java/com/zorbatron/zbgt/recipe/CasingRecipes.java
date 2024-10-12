@@ -27,6 +27,7 @@ import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 
 import gregtech.api.block.VariantBlock;
 import gregtech.api.recipes.ModHandler;
+import gregtech.api.recipes.builders.AssemblyLineRecipeBuilder;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
@@ -112,7 +113,7 @@ public class CasingRecipes {
             int fluidAdditive = (tier - ZPM) * 2;
             int finalTier = tier;
 
-            ASSEMBLY_LINE_RECIPES.recipeBuilder()
+            AssemblyLineRecipeBuilder tempBuilder = ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .input(frameGt, getMaterialByTier(tier))
                     .input(plateDense, getMaterialByTier(tier), 6)
                     .input(getRobotArmByTier(tier), 8)
@@ -127,15 +128,33 @@ public class CasingRecipes {
                     .fluidInputs(tier > ZPM ?
                             Materials.Polybenzimidazole.getFluid((10 + fluidAdditive) * L * 2) :
                             Materials.Polyethylene.getFluid((10 + fluidAdditive) * L * 2))
-                    .fluidInputs(tier > ZPM ? Naquadria.getFluid((10 + fluidAdditive) * L * 2) : null)
                     .outputs(ZBGTMetaBlocks.CoAL_CASING.getItemVariant(CoALCasing.CasingType.getCasingByTier(tier)))
                     .stationResearch(research -> research
                             .researchStack(ZBGTMetaBlocks.CoAL_CASING
                                     .getItemVariant(CoALCasing.CasingType.getCasingByTier(finalTier - 1)))
-                            .CWUt((int) Math.pow(16, finalTier - IV))
+                            .CWUt((int) Math.pow(2, finalTier))
                             .EUt(VA[finalTier]))
-                    .EUt(VA[tier]).duration(20 * 15)
-                    .buildAndRegister();
+                    .EUt(VA[tier]).duration(20 * 15);
+
+            ItemStack researchItemStack = ZBGTMetaBlocks.CoAL_CASING
+                    .getItemVariant(CoALCasing.CasingType.getCasingByTier(finalTier - 1));
+            if (tier == LuV) {
+                tempBuilder.scannerResearch(research -> research
+                        .researchStack(researchItemStack)
+                        .EUt(VA[IV])
+                        .duration(20 * 30));
+            } else {
+                tempBuilder.stationResearch(research -> research
+                        .researchStack(researchItemStack)
+                        .CWUt((int) Math.pow(2, finalTier - 1))
+                        .EUt(VA[finalTier]));
+            }
+
+            if (tier > ZPM) {
+                    tempBuilder.fluidInputs(Naquadria.getFluid((10 + fluidAdditive) * L * 2));
+            }
+
+            tempBuilder.buildAndRegister();
         }
     }
 
