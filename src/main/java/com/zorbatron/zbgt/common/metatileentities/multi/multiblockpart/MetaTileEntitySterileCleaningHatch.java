@@ -1,8 +1,9 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart;
 
+import net.minecraft.util.ResourceLocation;
+
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityCleaningMaintenanceHatch;
-import net.minecraft.util.ResourceLocation;
 
 public class MetaTileEntitySterileCleaningHatch extends MetaTileEntityCleaningMaintenanceHatch {
 
