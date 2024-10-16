@@ -136,7 +136,7 @@ public class MetaTileEntityMegaEBF extends LaserCapableGCYMRecipeMapMultiblockCo
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState()).setMinGlobalLimited(420)
                         .or(autoAbilities(false, true, true, true, true, true, false))
-                        .or(autoEnergyInputs(1, 8)))
+                        .or(autoEnergyInputsMega()))
                 .where('G', states(getGlassState()))
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('C', heatingCoils())
