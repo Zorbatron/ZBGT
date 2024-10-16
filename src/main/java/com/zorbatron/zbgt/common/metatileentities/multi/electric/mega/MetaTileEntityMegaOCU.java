@@ -93,7 +93,7 @@ public class MetaTileEntityMegaOCU extends LaserCapableGCYMRecipeMapMultiblockCo
                 .where('O', abilities(MultiblockAbility.EXPORT_FLUIDS))
                 .where('E', states(getCasingState())
                         .or(autoAbilities(false, true, true, true, false, false, false))
-                        .or(autoEnergyInputs(1, 8)))
+                        .or(autoEnergyInputsMega()))
                 .where('G', states(getGlassState()))
                 .where('#', air())
                 .build();

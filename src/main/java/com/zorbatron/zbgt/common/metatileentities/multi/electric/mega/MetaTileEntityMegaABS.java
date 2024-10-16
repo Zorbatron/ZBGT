@@ -120,7 +120,7 @@ public class MetaTileEntityMegaABS extends LaserCapableGCYMRecipeMapMultiblockCo
                 .where('B',
                         states(getCasingState())
                                 .or(TraceabilityPredicates.autoBusesAndHatches(getAvailableRecipeMaps()))
-                                .or(autoEnergyInputs(1, 8)))
+                                .or(autoEnergyInputsMega()))
                 .where('X', states(getCasingState()))
                 .where('V', states(getVentState()))
                 .where('G', states(getGlassState()))

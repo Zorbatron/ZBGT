@@ -84,7 +84,7 @@ public class MetaTileEntityMegaVF extends LaserCapableGCYMRecipeMapMultiblockCon
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState()).setMinGlobalLimited(1150)
                         .or(autoAbilities(false, true, true, true, true, true, false))
-                        .or(autoEnergyInputs(1, 8)))
+                        .or(autoEnergyInputsMega()))
                 .build();
     }
 

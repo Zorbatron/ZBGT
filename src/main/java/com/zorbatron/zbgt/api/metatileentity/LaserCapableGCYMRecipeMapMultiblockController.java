@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.common.ZBGTConfig;
 
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
@@ -70,29 +71,10 @@ public abstract class LaserCapableGCYMRecipeMapMultiblockController extends GCYM
                 checkFluidIn, checkFluidOut, checkMuffler);
 
         if (checkEnergyIn) {
-            predicate = predicate.or(autoEnergyInputs());
+            predicate = predicate.or(autoEnergyInputsMega());
         }
 
         return predicate;
-    }
-
-    public TraceabilityPredicate autoEnergyInputs(int min, int max, int previewCount) {
-        if (allowsSubstationHatches()) {
-            return new TraceabilityPredicate(abilities(MultiblockAbility.INPUT_ENERGY, MultiblockAbility.INPUT_LASER,
-                    MultiblockAbility.SUBSTATION_INPUT_ENERGY)
-                            .setMinGlobalLimited(min).setMaxGlobalLimited(max).setPreviewCount(previewCount));
-        } else {
-            return new TraceabilityPredicate(abilities(MultiblockAbility.INPUT_ENERGY, MultiblockAbility.INPUT_LASER)
-                    .setMinGlobalLimited(min).setMaxGlobalLimited(max).setPreviewCount(previewCount));
-        }
-    }
-
-    public TraceabilityPredicate autoEnergyInputs(int min, int max) {
-        return autoEnergyInputs(min, max, 2);
-    }
-
-    public TraceabilityPredicate autoEnergyInputs() {
-        return autoEnergyInputs(1, 3);
     }
 
     @Override
@@ -101,5 +83,9 @@ public abstract class LaserCapableGCYMRecipeMapMultiblockController extends GCYM
         tooltip.add(I18n.format(I18n.format("zbgt.laser_enabled.1") +
                 TooltipHelper.RAINBOW + I18n.format("zbgt.laser_enabled.2")) +
                 (allowsSubstationHatches() ? I18n.format("zbgt.substation_enabled") : ""));
+    }
+
+    protected TraceabilityPredicate autoEnergyInputsMega() {
+        return TraceabilityPredicates.autoEnergyInputs(1, 8, 2, true, allowsSubstationHatches(), true);
     }
 }
