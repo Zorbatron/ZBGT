@@ -10,9 +10,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.api.render.ZBGTTextures;
+
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.pipeline.IVertexOperation;
+import codechicken.lib.vec.Matrix4;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.*;
@@ -36,9 +43,9 @@ public class MetaTileEntitySterileCleaningHatch extends MetaTileEntityAutoMainte
     @Override
     public void addToMultiBlock(MultiblockControllerBase controllerBase) {
         super.addToMultiBlock(controllerBase);
-        if (controllerBase instanceof ICleanroomReceiver &&
-                ((ICleanroomReceiver) controllerBase).getCleanroom() == null) {
-            ((ICleanroomReceiver) controllerBase).setCleanroom(DUMMY_CLEANROOM);
+        if (controllerBase instanceof ICleanroomReceiver cleanroomReceiver &&
+                cleanroomReceiver.getCleanroom() == null) {
+            cleanroomReceiver.setCleanroom(DUMMY_CLEANROOM);
         }
     }
 
@@ -49,5 +56,14 @@ public class MetaTileEntitySterileCleaningHatch extends MetaTileEntityAutoMainte
         tooltip.add(I18n.format("gregtech.machine.maintenance_hatch.cleanroom_auto.tooltip.2"));
         tooltip.add(String.format("  %s%s", TextFormatting.GREEN, I18n.format(CLEANROOM.getTranslationKey())));
         tooltip.add(String.format("  %s%s", TextFormatting.GREEN, I18n.format(STERILE_CLEANROOM.getTranslationKey())));
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
+        super.renderMetaTileEntity(renderState, translation, pipeline);
+        if (shouldRenderOverlay()) {
+            ZBGTTextures.MAINTENANCE_OVERLAY_STERILE.renderSided(getFrontFacing(), renderState, translation, pipeline);
+        }
     }
 }
