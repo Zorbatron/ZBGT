@@ -6,7 +6,9 @@ import static gregtech.api.metatileentity.multiblock.CleanroomType.STERILE_CLEAN
 import java.util.List;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -16,6 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
+import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
@@ -82,5 +85,10 @@ public class MetaTileEntitySterileCleaningHatch extends MetaTileEntityAutoMainte
         } else {
             return Textures.VOLTAGE_CASINGS[GTValues.UHV];
         }
+    }
+
+    @Override
+    public void getSubItems(CreativeTabs creativeTab, NonNullList<ItemStack> subItems) {
+        subItems.add(ZBGTMetaTileEntities.STERILE_CLEANING_HATCH.getStackForm());
     }
 }
