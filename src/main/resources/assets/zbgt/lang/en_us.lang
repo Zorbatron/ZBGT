@@ -70,6 +70,8 @@ zbgt.machine.yottank_me_hatch.priority=Priority
 zbgt.machine.yottank_me_hatch.sticky.enabled=Disable sticky mode
 zbgt.machine.yottank_me_hatch.sticky.disabled=Enable sticky mode
 
+zbgt.machine.sterile_cleaning_hatch.name=Automatic Sterilization Maintenance Hatch
+
 
 # Covers
 metaitem.cover.dual_cover.lv.name=LV Dual Cover

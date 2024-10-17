@@ -5,6 +5,9 @@ import static gregtech.api.metatileentity.multiblock.CleanroomType.STERILE_CLEAN
 
 import java.util.List;
 
+import gregtech.api.GTValues;
+import gregtech.client.renderer.ICubeRenderer;
+import gregtech.client.renderer.texture.Textures;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -64,6 +67,21 @@ public class MetaTileEntitySterileCleaningHatch extends MetaTileEntityAutoMainte
         super.renderMetaTileEntity(renderState, translation, pipeline);
         if (shouldRenderOverlay()) {
             ZBGTTextures.MAINTENANCE_OVERLAY_STERILE.renderSided(getFrontFacing(), renderState, translation, pipeline);
+        }
+    }
+
+    @Override
+    public ICubeRenderer getBaseTexture() {
+        MultiblockControllerBase controller = getController();
+        if (controller != null) {
+            return this.hatchTexture = controller.getBaseTexture(this);
+        } else if (this.hatchTexture != null) {
+            if (hatchTexture != Textures.getInactiveTexture(hatchTexture)) {
+                return this.hatchTexture = Textures.getInactiveTexture(hatchTexture);
+            }
+            return this.hatchTexture;
+        } else {
+            return Textures.VOLTAGE_CASINGS[GTValues.UHV];
         }
     }
 }
