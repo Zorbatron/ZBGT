@@ -71,6 +71,7 @@ zbgt.machine.yottank_me_hatch.sticky.enabled=Disable sticky mode
 zbgt.machine.yottank_me_hatch.sticky.disabled=Enable sticky mode
 
 zbgt.machine.sterile_cleaning_hatch.name=Automatic Sterilization Maintenance Hatch
+zbgt.machine.sterile_cleaning_hatch.tooltip=For automatically maintaining Multiblocks with Cleaning, but sterile!
 
 
 # Covers

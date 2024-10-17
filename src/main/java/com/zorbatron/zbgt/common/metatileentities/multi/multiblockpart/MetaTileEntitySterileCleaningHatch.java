@@ -5,9 +5,6 @@ import static gregtech.api.metatileentity.multiblock.CleanroomType.STERILE_CLEAN
 
 import java.util.List;
 
-import gregtech.api.GTValues;
-import gregtech.client.renderer.ICubeRenderer;
-import gregtech.client.renderer.texture.Textures;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -23,9 +20,12 @@ import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+import gregtech.api.GTValues;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.*;
+import gregtech.client.renderer.ICubeRenderer;
+import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityAutoMaintenanceHatch;
 
 public class MetaTileEntitySterileCleaningHatch extends MetaTileEntityAutoMaintenanceHatch {
@@ -55,7 +55,6 @@ public class MetaTileEntitySterileCleaningHatch extends MetaTileEntityAutoMainte
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gregtech.machine.maintenance_hatch_cleanroom_auto.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.maintenance_hatch.cleanroom_auto.tooltip.2"));
         tooltip.add(String.format("  %s%s", TextFormatting.GREEN, I18n.format(CLEANROOM.getTranslationKey())));
         tooltip.add(String.format("  %s%s", TextFormatting.GREEN, I18n.format(STERILE_CLEANROOM.getTranslationKey())));
