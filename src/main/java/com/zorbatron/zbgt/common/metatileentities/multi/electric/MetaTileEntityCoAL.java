@@ -69,71 +69,71 @@ public class MetaTileEntityCoAL extends LaserCapableRecipeMapMultiblockControlle
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start(RIGHT, UP, FRONT)
                 .aisle("CCCCCCCCC", "C##F#F##C", "C##CCC##C", "C##CCC##C", "C#######C", "C#######C", "CC#CCC#CC",
-                        "#CCCSCCC#", "###CCC###", "#########")
+                        " CCCSCCC ", "   CCC   ", "         ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#######G", "G#######G", "G#######G", "C#######C",
-                        "T#######T", "#TCCCCCT#", "#########")
+                        "T#######T", " TCCCCCT ", "         ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#A###A#G", "GB#####BG", "GB#####BG", "CB#####BC",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#######G", "G#######G", "G#######G", "C#######C",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "GP#####PG", "GP#CCC#PG", "GP#####PG", "GP#####PG", "GP##B##PG", "CPP#A#PPC",
-                        "T#PPAPP#T", "#TC###CT#", "###III###")
+                        "T#PPAPP#T", " TC###CT ", "   III   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#######G", "G#######G", "G#######G", "C#######C",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#A###A#G", "GB#####BG", "GB#####BG", "CB#####BC",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#######G", "G#######G", "G#######G", "C#######C",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "CP#####PC", "CP#CCC#PC", "CP#####PC", "CP#####PC", "CP##B##PC", "CPP#A#PPC",
-                        "T#PPAPP#T", "#TC###CT#", "###III###")
+                        "T#PPAPP#T", " TC###CT ", "   III   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#######G", "G#######G", "G#######G", "C#######C",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#A###A#G", "GB#####BG", "GB#####BG", "CB#####BC",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#######G", "G#######G", "G#######G", "C#######C",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "GP#####PG", "GP#CCC#PG", "GP#####PG", "GP#####PG", "GP##B##PG", "CPP#A#PPC",
-                        "T#PPAPP#T", "#TC###CT#", "###III###")
+                        "T#PPAPP#T", " TC###CT ", "   III   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#######G", "G#######G", "G#######G", "C#######C",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#A###A#G", "GB#####BG", "GB#####BG", "CB#####BC",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#######G", "G#######G", "G#######G", "C#######C",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "CP#####PC", "CP#CCC#PC", "CP#####PC", "CP#####PC", "CP##B##PC", "CPP#A#PPC",
-                        "T#PPAPP#T", "#TC###CT#", "###III###")
+                        "T#PPAPP#T", " TC###CT ", "   III   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#######G", "G#######G", "G#######G", "C#######C",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#A###A#G", "GB#####BG", "GB#####BG", "CB#####BC",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#######G", "G#######G", "G#######G", "C#######C",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "GP#####PG", "GP#CCC#PG", "GP#####PG", "GP#####PG", "GP##B##PG", "CPP#A#PPC",
-                        "T#PPAPP#T", "#TC###CT#", "###III###")
+                        "T#PPAPP#T", " TC###CT ", "   III   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#######G", "G#######G", "G#######G", "C#######C",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#A###A#G", "GB#####BG", "GB#####BG", "CB#####BC",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#######G", "G#######G", "G#######G", "C#######C",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "CP#####PC", "CP#CCC#PC", "CP#####PC", "CP#####PC", "CP##B##PC", "CPP#A#PPC",
-                        "T#PPAPP#T", "#TC###CT#", "###III###")
+                        "T#PPAPP#T", " TC###CT ", "   III   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#######G", "G#######G", "G#######G", "C#######C",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#A###A#G", "GB#####BG", "GB#####BG", "CB#####BC",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#######G", "G#######G", "G#######G", "C#######C",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "GP#####PG", "GP#CCC#PG", "GP#####PG", "GP#####PG", "GP##B##PG", "CPP#A#PPC",
-                        "T#PPAPP#T", "#TC###CT#", "###III###")
+                        "T#PPAPP#T", " TC###CT ", "   III   ")
                 .aisle("CCCCCCCCC", "G##F#F##G", "G##CCC##G", "G#######G", "G#######G", "G#######G", "C#######C",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#A###A#G", "GB#####BG", "GB#####BG", "CB#####BC",
-                        "T#######T", "#TC###CT#", "###CIC###")
+                        "T#######T", " TC###CT ", "   CIC   ")
                 .aisle("CCCCCCCCC", "G#######G", "G##CCC##G", "G#######G", "G#######G", "G#######G", "C#######C",
-                        "T#######T", "#TCCCCCT#", "#########")
+                        "T#######T", " TCCCCCT ", "         ")
                 .aisle("CCCCCCCCC", "C##CCC##C", "C#######C", "C#######C", "C#######C", "C#######C", "CC#####CC",
-                        "#CCCCCCC#", "#########", "#########")
+                        " CCCCCCC ", "         ", "         ")
                 .where('S', selfPredicate())
                 .where('F', frames(TungstenSteel))
                 .where('G', states(getGlassState()))
@@ -146,6 +146,7 @@ public class MetaTileEntityCoAL extends LaserCapableRecipeMapMultiblockControlle
                         .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1))
                         .or(autoAbilities(true, true, true, true, true, true, false)))
                 .where('#', air())
+                .where(' ', any())
                 .build();
     }
 
