@@ -13,6 +13,7 @@ public class ZBGTTextures {
     public static SimpleOverlayRenderer ITEM_OVERLAY_INFINITY;
     public static SimpleOverlayRenderer SWIRLY_INFINITY;
     public static SimpleOverlayRenderer YOTTANK_ME_HATCH;
+    public static SimpleOverlayRenderer MAINTENANCE_OVERLAY_STERILE;
 
     // GUI overlays
     public static TextureArea ITEM_FLUID_OVERLAY;
@@ -42,6 +43,7 @@ public class ZBGTTextures {
         ITEM_OVERLAY_INFINITY = new SimpleOverlayRenderer("overlay/machine/item_infinity");
         SWIRLY_INFINITY = new SimpleOverlayRenderer("overlay/machine/swirly_infinity");
         YOTTANK_ME_HATCH = new SimpleOverlayRenderer("overlay/machine/yottank_me_hatch");
+        MAINTENANCE_OVERLAY_STERILE = new SimpleOverlayRenderer("overlay/machine/overlay_maintenance_sterile");
 
         ITEM_FLUID_OVERLAY = TextureArea.fullImage("textures/gui/widget/item_fluid.png");
         AUTO_PULL = TextureArea.fullImage("textures/gui/widget/auto_pull.png");
