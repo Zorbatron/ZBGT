@@ -234,6 +234,10 @@ zbgt.machine.large_air_collector.tooltip=Atmosphere Vacuum
 zbgt.machine.large_alloy_smelter.name=Zyngen
 zbgt.machine.large_alloy_smelter.tooltip=Gains a 5%% energy discount per coil tier
 
+zbgt.machine.cal.name=Circuit Assembly Line
+zbgt.machine.cal.tooltip=
+recipemap.circuit_assembly_line_recipes.name=Circuit Assembly Line
+
 
 # Multiblock Casings
 tile.multiblock_casing.precise_0.name=Imprecise Electronic Unit Casing
