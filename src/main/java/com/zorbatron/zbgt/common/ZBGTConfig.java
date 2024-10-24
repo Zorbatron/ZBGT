@@ -37,7 +37,8 @@ public class ZBGTConfig {
         @Config.Name("Override PSS Height")
         public boolean overridePSSHeight = false;
 
-        @Config.Comment({ "How many layers should the PSS battery layer be, if \"Override PSS Height\" is set to true.",
+        @Config.Comment({ "Maximum layer count of batteries in PSSs.",
+                "Does nothing if \"Override PSS Height\" is false",
                 "Default: 18" })
         @Config.RangeInt(min = 1, max = 255)
         @Config.Name("Overridden PSS Height")
