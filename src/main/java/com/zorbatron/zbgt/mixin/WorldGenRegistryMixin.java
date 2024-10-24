@@ -18,7 +18,7 @@ import gregtech.api.worldgen.config.OreDepositDefinition;
 import gregtech.api.worldgen.config.WorldGenRegistry;
 
 @Mixin(value = WorldGenRegistry.class, remap = false)
-public class WorldGenRegistryMixin {
+public abstract class WorldGenRegistryMixin {
 
     /**
      * @author Zorbatron
