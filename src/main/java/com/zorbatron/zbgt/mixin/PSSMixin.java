@@ -32,7 +32,7 @@ public abstract class PSSMixin {
                             value = "INVOKE",
                             target = "Ljava/util/List;add(Ljava/lang/Object;)Z",
                             ordinal = 2))
-    private boolean add(List<String> instance, Object e, Operation<Boolean> original) {
+    private boolean add(List<Object> instance, Object e, Operation<Boolean> original) {
         if (ZBGTConfig.multiblockSettings.overridePSSHeight) {
             return instance.add(I18n.format("gregtech.machine.power_substation.tooltip3",
                     TextFormattingUtil.formatNumbers(ZBGTConfig.multiblockSettings.overriddenPSSHeight)));
