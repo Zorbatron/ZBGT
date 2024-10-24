@@ -17,12 +17,12 @@ import gregtech.api.util.TextFormattingUtil;
 import gregtech.common.metatileentities.multi.electric.MetaTileEntityPowerSubstation;
 
 @Mixin(value = MetaTileEntityPowerSubstation.class, remap = false)
-public abstract class PSSMixin {
+public class PSSMixin {
 
     @Redirect(method = "createStructurePattern",
               at = @At(value = "INVOKE",
                        target = "Lgregtech/api/pattern/FactoryBlockPattern;setRepeatable(II)Lgregtech/api/pattern/FactoryBlockPattern;"))
-    public FactoryBlockPattern setRepeatable(FactoryBlockPattern instance, int minRepeat, int maxRepeat) {
+    private FactoryBlockPattern setRepeatable(FactoryBlockPattern instance, int minRepeat, int maxRepeat) {
         return instance.setRepeatable(minRepeat, ZBGTConfig.multiblockSettings.overridePSSHeight ?
                 ZBGTConfig.multiblockSettings.overriddenPSSHeight : maxRepeat);
     }
