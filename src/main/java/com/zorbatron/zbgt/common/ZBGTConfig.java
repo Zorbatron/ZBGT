@@ -31,6 +31,18 @@ public class ZBGTConfig {
         @Config.RequiresWorldRestart
         @Config.Name("Quacker Quacks")
         public boolean quackerQuacks = true;
+
+        @Config.Comment({ "Override the PSS battery section count.",
+                "Default: false" })
+        @Config.Name("Override PSS Height")
+        public boolean overridePSSHeight = false;
+
+        @Config.Comment({ "Maximum layer count of batteries in PSSs.",
+                "Does nothing if \"Override PSS Height\" is false",
+                "Default: 18" })
+        @Config.RangeInt(min = 1, max = 255)
+        @Config.Name("Overridden PSS Height")
+        public int overriddenPSSHeight = 18;
     }
 
     @Config.Name("Recipe Settings")

@@ -44,7 +44,7 @@ public class ZBGTMixinPlugin implements IFMLLoadingPlugin, ILateMixinLoader {
     @Override
     @Optional.Method(modid = "mixinbooter")
     public List<String> getMixinConfigs() {
-        ArrayList<String> mixins = new ArrayList<>();
+        List<String> mixins = new ArrayList<>();
         mixins.add("mixins.zbgt.json");
         return mixins;
     }
