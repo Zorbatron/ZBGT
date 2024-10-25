@@ -207,5 +207,27 @@ public class ZBGTMetaItem extends StandardMetaItem {
                 .setInvisibleIf(ZBGTAPI.nomiLabsCompat);
         RADIATION_PROTECTION_PLATE = addItem(55, "radiation_protection_plate");
         ADVANCED_RADIATION_PROTECTION_PLATE = addItem(56, "advanced_radiation_protection_plate");
+
+        // Wrapped circuits 57-71
+        CIRCUIT_WRAP_ULV = addItem(57, "circuit_wrap_");
+        CIRCUIT_WRAP_LV = addItem(58, "circuit_wrap_");
+        CIRCUIT_WRAP_MV = addItem(59, "circuit_wrap_");
+        CIRCUIT_WRAP_HV = addItem(60, "circuit_wrap_");
+        CIRCUIT_WRAP_EV = addItem(61, "circuit_wrap_");
+        CIRCUIT_WRAP_IV = addItem(62, "circuit_wrap_");
+        CIRCUIT_WRAP_LuV = addItem(63, "circuit_wrap_");
+        CIRCUIT_WRAP_ZPM = addItem(64, "circuit_wrap_");
+        CIRCUIT_WRAP_UV = addItem(65, "circuit_wrap_");
+        CIRCUIT_WRAP_UHV = addItem(66, "circuit_wrap_");
+        CIRCUIT_WRAP_UEV = addItem(67, "circuit_wrap_")
+                .setInvisibleIf(!GregTechAPI.isHighTier());;
+        CIRCUIT_WRAP_UIV = addItem(68, "circuit_wrap_")
+                .setInvisibleIf(!GregTechAPI.isHighTier());;
+        CIRCUIT_WRAP_UXV = addItem(69, "circuit_wrap_")
+                .setInvisibleIf(!GregTechAPI.isHighTier());;
+        CIRCUIT_WRAP_OpV = addItem(70, "circuit_wrap_")
+                .setInvisibleIf(!GregTechAPI.isHighTier());;
+        CIRCUIT_WRAP_MAX = addItem(71, "circuit_wrap_")
+                .setInvisibleIf(!GregTechAPI.isHighTier());;
     }
 }
