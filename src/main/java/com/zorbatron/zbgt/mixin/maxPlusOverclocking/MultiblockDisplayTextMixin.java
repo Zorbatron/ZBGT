@@ -21,19 +21,19 @@ public class MultiblockDisplayTextMixin {
 
     @ModifyArg(method = "addEnergyUsageExactLine",
                at = @At(value = "NEW", target = "(Ljava/lang/String;)Lnet/minecraft/util/text/TextComponentString;"))
-    private String addEnergyUsageExactLine(@Local long energyUsage) {
+    private String addEnergyUsageExactLine(long energyUsage) {
         return ZBGTValues.VOCNF[GTUtility.getFloorTierByVoltage(energyUsage)];
     }
 
     @ModifyArg(method = "addEnergyProductionLine",
                at = @At(value = "NEW", target = "(Ljava/lang/String;)Lnet/minecraft/util/text/TextComponentString;"))
-    private String addEnergyProductionLine(@Local long maxVoltage) {
+    private String addEnergyProductionLine(long maxVoltage) {
         return ZBGTValues.VOCNF[GTUtility.getFloorTierByVoltage(maxVoltage)];
     }
 
     @ModifyArg(method = "addEnergyProductionAmpsLine",
                at = @At(value = "NEW", target = "(Ljava/lang/String;)Lnet/minecraft/util/text/TextComponentString;"))
-    private String addEnergyProductionAmpsLine(@Local long maxVoltage) {
+    private String addEnergyProductionAmpsLine(long maxVoltage) {
         return ZBGTValues.VOCNF[GTUtility.getFloorTierByVoltage(maxVoltage)];
     }
 }
