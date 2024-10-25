@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import gregtech.api.GTValues;
 
 @Mixin(value = GTValues.class, remap = false)
-public class GTValuesMixin {
+public abstract class GTValuesMixin {
 
     @Shadow
     @Final

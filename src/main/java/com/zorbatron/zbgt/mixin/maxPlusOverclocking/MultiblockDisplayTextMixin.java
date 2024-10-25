@@ -22,7 +22,7 @@ import gregtech.api.util.TextFormattingUtil;
 // I think I have to overwrite it all because if GTValues.VNF[foo] gets run with a max+ tier, it'll result in an Array
 // Out of Bounds. ModifyArg and ModifyArgs seem to both execute the original line and provide it, which is bad.
 @Mixin(value = MultiblockDisplayText.Builder.class, remap = false)
-public class MultiblockDisplayTextMixin {
+public abstract class MultiblockDisplayTextMixin {
 
     @Shadow
     @Final
