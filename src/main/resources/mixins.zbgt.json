@@ -5,8 +5,15 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    ",",
     "PSSMixin",
-    "WorldGenRegistryMixin"
+    "WorldGenRegistryMixin",
+    "maxPlusOverclocking.AbstractRecipeLogicMixin",
+    "maxPlusOverclocking.GTUtilityMixin",
+    "maxPlusOverclocking.MetaTileEntityCleanroomMixin",
+    "maxPlusOverclocking.MultiblockDisplayTextMixin",
+    "maxPlusOverclocking.MultiblockRecipeLogicMixin",
+    "maxPlusOverclocking.RecipeLogicInfoProviderMixin"
   ],
   "client": [],
   "server": []

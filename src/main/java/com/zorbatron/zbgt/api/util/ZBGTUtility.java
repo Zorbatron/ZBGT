@@ -1,5 +1,9 @@
 package com.zorbatron.zbgt.api.util;
 
+import static com.zorbatron.zbgt.api.ZBGTValues.MAX_TRUE;
+import static com.zorbatron.zbgt.api.ZBGTValues.VOC;
+import static gregtech.api.util.GTUtility.nearestLesser;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.items.IItemHandler;
@@ -72,5 +76,9 @@ public class ZBGTUtility {
     public static void removeNotifiableFromMTE(INotifiableHandler notifiableHandler,
                                                MultiblockControllerBase controllerBase) {
         notifiableHandler.removeNotifiableMetaTileEntity(controllerBase);
+    }
+
+    public static byte getOCTierByVoltage(long voltage) {
+        return (byte) Math.min(MAX_TRUE, nearestLesser(VOC, voltage) + 1);
     }
 }
