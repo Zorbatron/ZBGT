@@ -9,6 +9,7 @@
     "WorldGenRegistryMixin",
     "maxPlusOverclocking.AbstractRecipeLogicMixin",
     "maxPlusOverclocking.GTUtilityMixin",
+    "maxPlusOverclocking.GTValuesMixin",
     "maxPlusOverclocking.MetaTileEntityCleanroomMixin",
     "maxPlusOverclocking.MultiblockDisplayTextMixin",
     "maxPlusOverclocking.MultiblockRecipeLogicMixin",

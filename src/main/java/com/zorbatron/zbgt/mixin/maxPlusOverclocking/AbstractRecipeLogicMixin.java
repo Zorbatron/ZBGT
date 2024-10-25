@@ -4,7 +4,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.zorbatron.zbgt.api.util.ZBGTUtility;
 
 import gregtech.api.capability.impl.AbstractRecipeLogic;
@@ -18,8 +17,10 @@ public class AbstractRecipeLogicMixin {
         return ZBGTUtility.getOCTierByVoltage(voltage);
     }
 
-    @ModifyReturnValue(method = "getOverclockForTier", at = @At("RETURN"))
-    private int getOverClockForTier(int original) {
-        return ZBGTUtility.getOCTierByVoltage(original);
+    @Redirect(method = "getNumberOfOCs",
+              at = @At(value = "INVOKE",
+                       target = "Lgregtech/api/capability/impl/AbstractRecipeLogic;getOverclockForTier(J)I"))
+    private int getOverClockForTier(AbstractRecipeLogic instance, long voltage) {
+        return ZBGTUtility.getOCTierByVoltage(voltage);
     }
 }
