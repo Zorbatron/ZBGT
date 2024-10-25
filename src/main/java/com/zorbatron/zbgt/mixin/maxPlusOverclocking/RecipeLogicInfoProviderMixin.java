@@ -14,7 +14,7 @@ import gregtech.api.util.TextFormattingUtil;
 import gregtech.integration.theoneprobe.provider.RecipeLogicInfoProvider;
 import mcjty.theoneprobe.api.TextStyleClass;
 
-@Mixin(value = RecipeLogicInfoProvider.class)
+@Mixin(value = RecipeLogicInfoProvider.class, remap = false)
 public class RecipeLogicInfoProviderMixin {
 
     @ModifyVariable(method = "addProbeInfo(Lgregtech/api/capability/impl/AbstractRecipeLogic;Lmcjty/theoneprobe/api/IProbeInfo;Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/tileentity/TileEntity;Lmcjty/theoneprobe/api/IProbeHitData;)V",
