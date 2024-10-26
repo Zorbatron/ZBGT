@@ -66,21 +66,21 @@ public class ZBGTMetaItems {
     public static MetaItem<?>.MetaValueItem RADIATION_PROTECTION_PLATE;
     public static MetaItem<?>.MetaValueItem ADVANCED_RADIATION_PROTECTION_PLATE;
 
-    public static MetaItem<?>.MetaValueItem CIRCUIT_WRAP_ULV;
-    public static MetaItem<?>.MetaValueItem CIRCUIT_WRAP_LV;
-    public static MetaItem<?>.MetaValueItem CIRCUIT_WRAP_MV;
-    public static MetaItem<?>.MetaValueItem CIRCUIT_WRAP_HV;
-    public static MetaItem<?>.MetaValueItem CIRCUIT_WRAP_EV;
-    public static MetaItem<?>.MetaValueItem CIRCUIT_WRAP_IV;
-    public static MetaItem<?>.MetaValueItem CIRCUIT_WRAP_LuV;
-    public static MetaItem<?>.MetaValueItem CIRCUIT_WRAP_ZPM;
-    public static MetaItem<?>.MetaValueItem CIRCUIT_WRAP_UV;
-    public static MetaItem<?>.MetaValueItem CIRCUIT_WRAP_UHV;
-    public static MetaItem<?>.MetaValueItem CIRCUIT_WRAP_UEV;
-    public static MetaItem<?>.MetaValueItem CIRCUIT_WRAP_UIV;
-    public static MetaItem<?>.MetaValueItem CIRCUIT_WRAP_UXV;
-    public static MetaItem<?>.MetaValueItem CIRCUIT_WRAP_OpV;
-    public static MetaItem<?>.MetaValueItem CIRCUIT_WRAP_MAX;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_ULV;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_LV;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_MV;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_HV;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_EV;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_IV;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_LuV;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_ZPM;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_UV;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_UHV;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_UEV;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_UIV;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_UXV;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_OpV;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_MAX;
 
     public static void init() {
         ZBGTMetaItem item = new ZBGTMetaItem();

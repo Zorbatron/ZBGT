@@ -11,5 +11,6 @@ public class ZBGTRecipes {
         CasingRecipes.init();
         MaterialRecipes.init();
         AE2Recipes.init();
+        WrapRecipes.init();
     }
 }
