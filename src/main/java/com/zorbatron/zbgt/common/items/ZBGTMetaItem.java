@@ -209,25 +209,25 @@ public class ZBGTMetaItem extends StandardMetaItem {
         ADVANCED_RADIATION_PROTECTION_PLATE = addItem(56, "advanced_radiation_protection_plate");
 
         // Wrapped circuits 57-71
-        CIRCUIT_WRAP_ULV = addItem(57, "circuit_wrap_");
-        CIRCUIT_WRAP_LV = addItem(58, "circuit_wrap_");
-        CIRCUIT_WRAP_MV = addItem(59, "circuit_wrap_");
-        CIRCUIT_WRAP_HV = addItem(60, "circuit_wrap_");
-        CIRCUIT_WRAP_EV = addItem(61, "circuit_wrap_");
-        CIRCUIT_WRAP_IV = addItem(62, "circuit_wrap_");
-        CIRCUIT_WRAP_LuV = addItem(63, "circuit_wrap_");
-        CIRCUIT_WRAP_ZPM = addItem(64, "circuit_wrap_");
-        CIRCUIT_WRAP_UV = addItem(65, "circuit_wrap_");
-        CIRCUIT_WRAP_UHV = addItem(66, "circuit_wrap_");
-        CIRCUIT_WRAP_UEV = addItem(67, "circuit_wrap_")
-                .setInvisibleIf(!GregTechAPI.isHighTier());;
-        CIRCUIT_WRAP_UIV = addItem(68, "circuit_wrap_")
-                .setInvisibleIf(!GregTechAPI.isHighTier());;
-        CIRCUIT_WRAP_UXV = addItem(69, "circuit_wrap_")
-                .setInvisibleIf(!GregTechAPI.isHighTier());;
-        CIRCUIT_WRAP_OpV = addItem(70, "circuit_wrap_")
-                .setInvisibleIf(!GregTechAPI.isHighTier());;
-        CIRCUIT_WRAP_MAX = addItem(71, "circuit_wrap_")
-                .setInvisibleIf(!GregTechAPI.isHighTier());;
+        CIRCUIT_WRAP_ULV = addItem(57, "wrapped.circuit.ulv");
+        CIRCUIT_WRAP_LV = addItem(58, "wrapped.circuit.lv");
+        CIRCUIT_WRAP_MV = addItem(59, "wrapped.circuit.mv");
+        CIRCUIT_WRAP_HV = addItem(60, "wrapped.circuit.hv");
+        CIRCUIT_WRAP_EV = addItem(61, "wrapped.circuit.ev");
+        CIRCUIT_WRAP_IV = addItem(62, "wrapped.circuit.iv");
+        CIRCUIT_WRAP_LuV = addItem(63, "wrapped.circuit.luv");
+        CIRCUIT_WRAP_ZPM = addItem(64, "wrapped.circuit.zpm");
+        CIRCUIT_WRAP_UV = addItem(65, "wrapped.circuit.uv");
+        CIRCUIT_WRAP_UHV = addItem(66, "wrapped.circuit.uhv");
+        CIRCUIT_WRAP_UEV = addItem(67, "wrapped.circuit.uev")
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        CIRCUIT_WRAP_UIV = addItem(68, "wrapped.circuit.uiv")
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        CIRCUIT_WRAP_UXV = addItem(69, "wrapped.circuit.uxv")
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        CIRCUIT_WRAP_OpV = addItem(70, "wrapped.circuit.opv")
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        CIRCUIT_WRAP_MAX = addItem(71, "wrapped.circuit.max")
+                .setInvisibleIf(!GregTechAPI.isHighTier());
     }
 }
