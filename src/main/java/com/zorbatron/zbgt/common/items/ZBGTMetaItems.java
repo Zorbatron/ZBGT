@@ -82,6 +82,26 @@ public class ZBGTMetaItems {
     public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_OpV;
     public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_MAX;
 
+    public static MetaItem<?>.MetaValueItem WRAPPED_SMD_TRANSISTOR;
+    public static MetaItem<?>.MetaValueItem WRAPPED_SMD_RESISTOR;
+    public static MetaItem<?>.MetaValueItem WRAPPED_SMD_INDUCTOR;
+    public static MetaItem<?>.MetaValueItem WRAPPED_SMD_DIODE;
+    public static MetaItem<?>.MetaValueItem WRAPPED_SMD_CAPACITOR;
+
+    public static MetaItem<?>.MetaValueItem WRAPPED_ADVANCED_SMD_TRANSISTOR;
+    public static MetaItem<?>.MetaValueItem WRAPPED_ADVANCED_SMD_RESISTOR;
+    public static MetaItem<?>.MetaValueItem WRAPPED_ADVANCED_SMD_INDUCTOR;
+    public static MetaItem<?>.MetaValueItem WRAPPED_ADVANCED_SMD_DIODE;
+    public static MetaItem<?>.MetaValueItem WRAPPED_ADVANCED_SMD_CAPACITOR;
+
+    public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_BASIC;
+    public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_GOOD;
+    public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_PLASTIC;
+    public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_ADVANCED;
+    public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_ELITE;
+    public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_EXTREME;
+    public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_WETWARE;
+
     public static void init() {
         ZBGTMetaItem item = new ZBGTMetaItem();
         item.setRegistryName("zbgt_meta_item");

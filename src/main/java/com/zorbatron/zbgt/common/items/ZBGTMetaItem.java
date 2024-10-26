@@ -229,5 +229,18 @@ public class ZBGTMetaItem extends StandardMetaItem {
                 .setInvisibleIf(!GregTechAPI.isHighTier());
         WRAPPED_CIRCUIT_MAX = addItem(71, "wrapped.circuit.max")
                 .setInvisibleIf(!GregTechAPI.isHighTier());
+
+        // Wrapped SMDs 72-81
+        WRAPPED_SMD_TRANSISTOR = addItem(72, "wrapped.smd.transistor");
+        WRAPPED_SMD_RESISTOR = addItem(73, "wrapped.smd.resistor");
+        WRAPPED_SMD_INDUCTOR = addItem(74, "wrapped.smd.inductor");
+        WRAPPED_SMD_DIODE = addItem(75, "wrapped.smd.diode");
+        WRAPPED_SMD_CAPACITOR = addItem(76, "wrapped.smd.capacitor");
+
+        WRAPPED_ADVANCED_SMD_TRANSISTOR = addItem(77, "wrapped.smd.advanced_transistor");
+        WRAPPED_ADVANCED_SMD_RESISTOR = addItem(78, "wrapped.smd.advanced_resistor");
+        WRAPPED_ADVANCED_SMD_INDUCTOR = addItem(79, "wrapped.smd.advanced_inductor");
+        WRAPPED_ADVANCED_SMD_DIODE = addItem(80, "wrapped.smd.advanced_diode");
+        WRAPPED_ADVANCED_SMD_CAPACITOR = addItem(81, "wrapped.smd.advanced_capacitor");
     }
 }

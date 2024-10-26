@@ -169,6 +169,18 @@ metaitem.wrapped.circuit.uxv.name=Wrap of UXV Circuits
 metaitem.wrapped.circuit.opv.name=Wrap of OpV Circuits
 metaitem.wrapped.circuit.max.name=Wrap of MAX Circuits
 
+metaitem.wrapped.smd.transistor.name=Wrap of SMD Transistors
+metaitem.wrapped.smd.resistor.name=Wrap of SMD Resistors
+metaitem.wrapped.smd.inductor.name=Wrap of SMD Inductors
+metaitem.wrapped.smd.diode.name=Wrap of SMD Diodes
+metaitem.wrapped.smd.capacitor.name=Wrap of SMD Capacitors
+
+metaitem.wrapped.smd.advanced_transistor.name=Wrap of Advanced SMD Transistors
+metaitem.wrapped.smd.advanced_resistor.name=Wrap of Advanced SMD Resistors
+metaitem.wrapped.smd.advanced_inductor.name=Wrap of Advanced SMD Inductors
+metaitem.wrapped.smd.advanced_diode.name=Wrap of Advanced SMD Diodes
+metaitem.wrapped.smd.advanced_capacitor.name=Wrap of Advanced SMD Capacitors
+
 
 # Widgets
 zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s
