@@ -153,6 +153,22 @@ metaitem.high_energy_mixture.name=High Energy Mixture
 metaitem.radiation_protection_plate.name=Radiation Proof Plate
 metaitem.advanced_radiation_protection_plate.name=Advanced Radiation Proof Plate
 
+metaitem.wrapped.circuit.ulv.name=Wrap of ULV Circuits
+metaitem.wrapped.circuit.lv.name=Wrap of LV Circuits
+metaitem.wrapped.circuit.mv.name=Wrap of MV Circuits
+metaitem.wrapped.circuit.hv.name=Wrap of HV Circuits
+metaitem.wrapped.circuit.ev.name=Wrap of EV Circuits
+metaitem.wrapped.circuit.iv.name=Wrap of IV Circuits
+metaitem.wrapped.circuit.luv.name=Wrap of LuV Circuits
+metaitem.wrapped.circuit.zpm.name=Wrap of ZPM Circuits
+metaitem.wrapped.circuit.uv.name=Wrap of UV Circuits
+metaitem.wrapped.circuit.uhv.name=Wrap of UHV Circuits
+metaitem.wrapped.circuit.uev.name=Wrap of UEV Circuits
+metaitem.wrapped.circuit.uiv.name=Wrap of UIV Circuits
+metaitem.wrapped.circuit.uxv.name=Wrap of UXV Circuits
+metaitem.wrapped.circuit.opv.name=Wrap of OpV Circuits
+metaitem.wrapped.circuit.max.name=Wrap of MAX Circuits
+
 
 # Widgets
 zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s
