@@ -181,6 +181,14 @@ metaitem.wrapped.smd.advanced_inductor.name=Wrap of Advanced SMD Inductors
 metaitem.wrapped.smd.advanced_diode.name=Wrap of Advanced SMD Diodes
 metaitem.wrapped.smd.advanced_capacitor.name=Wrap of Advanced SMD Capacitors
 
+metaitem.wrapped.board.basic.name=Wrap of Basic Circuit Boards
+metaitem.wrapped.board.good.name=Wrap of Good Circuit Boards
+metaitem.wrapped.board.plastic.name=Wrap of Plastic Circuit Boards
+metaitem.wrapped.board.advanced.name=Wrap of Advanced Circuit Boards
+metaitem.wrapped.board.elite.name=Wrap of Elite Circuit Boards
+metaitem.wrapped.board.extreme.name=Wrap of Extreme Circuit Boards
+metaitem.wrapped.board.wetware.name=Wrap of Master Circuit Boards
+
 
 # Widgets
 zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s

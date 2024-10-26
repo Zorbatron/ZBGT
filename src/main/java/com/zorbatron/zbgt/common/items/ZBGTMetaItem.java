@@ -231,16 +231,25 @@ public class ZBGTMetaItem extends StandardMetaItem {
                 .setInvisibleIf(!GregTechAPI.isHighTier());
 
         // Wrapped SMDs 72-81
-        WRAPPED_SMD_TRANSISTOR = addItem(72, "wrapped.smd.transistor");
-        WRAPPED_SMD_RESISTOR = addItem(73, "wrapped.smd.resistor");
+        WRAPPED_SMD_CAPACITOR = addItem(72, "wrapped.smd.capacitor");
+        WRAPPED_SMD_DIODE = addItem(73, "wrapped.smd.diode");
         WRAPPED_SMD_INDUCTOR = addItem(74, "wrapped.smd.inductor");
-        WRAPPED_SMD_DIODE = addItem(75, "wrapped.smd.diode");
-        WRAPPED_SMD_CAPACITOR = addItem(76, "wrapped.smd.capacitor");
+        WRAPPED_SMD_RESISTOR = addItem(75, "wrapped.smd.resistor");
+        WRAPPED_SMD_TRANSISTOR = addItem(76, "wrapped.smd.transistor");
 
-        WRAPPED_ADVANCED_SMD_TRANSISTOR = addItem(77, "wrapped.smd.advanced_transistor");
-        WRAPPED_ADVANCED_SMD_RESISTOR = addItem(78, "wrapped.smd.advanced_resistor");
+        WRAPPED_ADVANCED_SMD_CAPACITOR = addItem(77, "wrapped.smd.advanced_capacitor");
+        WRAPPED_ADVANCED_SMD_DIODE = addItem(78, "wrapped.smd.advanced_diode");
         WRAPPED_ADVANCED_SMD_INDUCTOR = addItem(79, "wrapped.smd.advanced_inductor");
-        WRAPPED_ADVANCED_SMD_DIODE = addItem(80, "wrapped.smd.advanced_diode");
-        WRAPPED_ADVANCED_SMD_CAPACITOR = addItem(81, "wrapped.smd.advanced_capacitor");
+        WRAPPED_ADVANCED_SMD_RESISTOR = addItem(80, "wrapped.smd.advanced_resistor");
+        WRAPPED_ADVANCED_SMD_TRANSISTOR = addItem(81, "wrapped.smd.advanced_transistor");
+
+        // Wrapped circuit boards 82-88
+        WRAPPED_BOARD_BASIC = addItem(82, "wrapped.board.basic");
+        WRAPPED_BOARD_GOOD = addItem(83, "wrapped.board.good");
+        WRAPPED_BOARD_PLASTIC = addItem(84, "wrapped.board.plastic");
+        WRAPPED_BOARD_ADVANCED = addItem(85, "wrapped.board.advanced");
+        WRAPPED_BOARD_ELITE = addItem(86, "wrapped.board.elite");
+        WRAPPED_BOARD_EXTREME = addItem(87, "wrapped.board.extreme");
+        WRAPPED_BOARD_WETWARE = addItem(88, "wrapped.board.wetware");
     }
 }
