@@ -31,8 +31,8 @@ public final class ZBGTRecipeMaps {
     public static final RecipeMap<CALRecipeBuilder> CIRCUIT_ASSEMBLY_LINE_RECIPES = new RecipeMapCAL<>(
             "circuit_assembly_line_recipes",
             new CALRecipeBuilder())
-            .setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT_ASSEMBLER, ProgressWidget.MoveType.HORIZONTAL)
-            .setSound(GTSoundEvents.ASSEMBLER);
+                    .setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT_ASSEMBLER, ProgressWidget.MoveType.HORIZONTAL)
+                    .setSound(GTSoundEvents.ASSEMBLER);
 
     public static void modifyMaps() {
         List<RecipeIOMod> recipeModList = new ArrayList<>();

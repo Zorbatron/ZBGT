@@ -2,7 +2,6 @@ package com.zorbatron.zbgt.common.metatileentities.multi.electric;
 
 import static gregtech.api.util.RelativeDirection.*;
 
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 
@@ -10,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 
+import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
