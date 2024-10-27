@@ -32,6 +32,7 @@ public final class ZBGTElementMaterials {
                 .secondaryColor(0x888888)
                 .blastTemp(10500)
                 .gasTier('highest')
+                .cableProperties(8388608,12,1)
                 .element(Elements.SpNt)
                 .build();
     }
