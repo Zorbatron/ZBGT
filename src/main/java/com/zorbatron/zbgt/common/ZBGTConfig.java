@@ -43,6 +43,15 @@ public class ZBGTConfig {
         @Config.RangeInt(min = 1, max = 255)
         @Config.Name("Overridden PSS Height")
         public int overriddenPSSHeight = 18;
+
+        @Config.RequiresMcRestart
+        @Config.Comment({
+                "Require mega multiblocks to have muffler hatches.",
+                "Due to how muffler hatches are implemented, it rolls the byproduct chance per parallel.",
+                "So if you have 1 million parallels, its going to loop a randomizer function 1 million times which is quite bad for TPS.",
+                "Default: true" })
+        @Config.Name("Megas Need Mufflers")
+        public boolean megasNeedMufflers = true;
     }
 
     @Config.Name("Recipe Settings")
