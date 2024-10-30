@@ -94,13 +94,21 @@ public class ZBGTMetaItems {
     public static MetaItem<?>.MetaValueItem WRAPPED_ADVANCED_SMD_RESISTOR;
     public static MetaItem<?>.MetaValueItem WRAPPED_ADVANCED_SMD_TRANSISTOR;
 
-    public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_BASIC;
-    public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_GOOD;
+    public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_COATED;
+    public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_PHENOLIC;
     public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_PLASTIC;
-    public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_ADVANCED;
-    public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_ELITE;
-    public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_EXTREME;
+    public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_EPOXY;
+    public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_MULTILAYER_FIBER_REINFORCED;
+    public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_FIBER_REINFORCED;
     public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_WETWARE;
+
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_BOARD_BASIC;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_BOARD_GOOD;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_BOARD_PLASTIC;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_BOARD_ADVANCED;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_BOARD_ELITE;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_BOARD_EXTREME;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_BOARD_WETWARE;
 
     public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_SOC_SIMPLE;
     public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_SOC;
@@ -121,6 +129,8 @@ public class ZBGTMetaItems {
     public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_NOR;
     public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_NAND;
     public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_INTEGRATED_LOGIC;
+
+    public static MetaItem<?>.MetaValueItem WRAPPED_NEURO_PROCESSOR;
 
     public static void init() {
         ZBGTMetaItem item = new ZBGTMetaItem();

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gregtech:items/metaitems/wraps/components/ul_pic"
+    "layer0": "gregtech:items/metaitems/wraps/chip/ulpic"
   }
 }
