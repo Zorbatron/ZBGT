@@ -214,6 +214,11 @@ metaitem.wrapped.chip.pic_high.name=Wrap of High Power ICs
 metaitem.wrapped.chip.pic_ultra_high.name=Wrap of Ultra High Power ICs
 metaitem.wrapped.chip.integrated_logic.name=Wrap of Integrated Circuit chips
 
+metaitem.wrapped.misc.neuro_processor.name=Wrap of Neuro Processor Units
+metaitem.wrapped.misc.engraved_crystal_chip.name=Wrap of Engraved Crystal Chips
+metaitem.wrapped.misc.crystal_cpu.name=Wrap of Crystal CPUs
+metaitem.wrapped.misc.crystal_soc.name=Wrap of Crystal SoCs
+
 
 # Widgets
 zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s

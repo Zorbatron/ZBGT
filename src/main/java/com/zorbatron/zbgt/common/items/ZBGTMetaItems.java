@@ -131,6 +131,9 @@ public class ZBGTMetaItems {
     public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_INTEGRATED_LOGIC;
 
     public static MetaItem<?>.MetaValueItem WRAPPED_NEURO_PROCESSOR;
+    public static MetaItem<?>.MetaValueItem WRAPPED_ENGRAVED_CRYSTAL_CHIP;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CRYSTAL_CPU;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CRYSTAL_SOC;
 
     public static void init() {
         ZBGTMetaItem item = new ZBGTMetaItem();

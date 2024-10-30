@@ -40,6 +40,13 @@ public class WrapRecipes {
                 new MetaItem<?>.MetaValueItem[] { WRAPPED_ADVANCED_SMD_CAPACITOR, WRAPPED_ADVANCED_SMD_DIODE,
                         WRAPPED_ADVANCED_SMD_RESISTOR, WRAPPED_ADVANCED_SMD_TRANSISTOR,
                         WRAPPED_ADVANCED_SMD_INDUCTOR });
+
+        registerWrappingRecipe(
+                new MetaItem<?>.MetaValueItem[] { COATED_BOARD, PHENOLIC_BOARD, PLASTIC_BOARD, EPOXY_BOARD, FIBER_BOARD,
+                        MULTILAYER_FIBER_BOARD, WETWARE_BOARD },
+                new MetaItem<?>.MetaValueItem[] { WRAPPED_BOARD_COATED, WRAPPED_BOARD_PHENOLIC, WRAPPED_BOARD_PLASTIC,
+                        WRAPPED_BOARD_EPOXY, WRAPPED_BOARD_FIBER_REINFORCED, WRAPPED_BOARD_MULTILAYER_FIBER_REINFORCED,
+                        WRAPPED_BOARD_WETWARE });
         registerWrappingRecipe(
                 new MetaItem<?>.MetaValueItem[] { BASIC_CIRCUIT_BOARD, GOOD_CIRCUIT_BOARD, PLASTIC_CIRCUIT_BOARD,
                         ADVANCED_CIRCUIT_BOARD, ELITE_CIRCUIT_BOARD, EXTREME_CIRCUIT_BOARD, WETWARE_CIRCUIT_BOARD },
@@ -59,6 +66,13 @@ public class WrapRecipes {
                         WRAPPED_CHIP_CPU_QUBIT, WRAPPED_CHIP_PIC_ULTRA_LOW, WRAPPED_CHIP_PIC_LOW, WRAPPED_CHIP_PIC,
                         WRAPPED_CHIP_PIC_HIGH, WRAPPED_CHIP_PIC_ULTRA_HIGH, WRAPPED_CHIP_RAM, WRAPPED_CHIP_NOR,
                         WRAPPED_CHIP_NAND, WRAPPED_CHIP_INTEGRATED_LOGIC });
+
+        registerWrappingRecipe(
+                new MetaItem<?>.MetaValueItem[] { NEURO_PROCESSOR, ENGRAVED_CRYSTAL_CHIP,
+                        CRYSTAL_CENTRAL_PROCESSING_UNIT, CRYSTAL_SYSTEM_ON_CHIP },
+                new MetaItem<?>.MetaValueItem[] { WRAPPED_NEURO_PROCESSOR, WRAPPED_ENGRAVED_CRYSTAL_CHIP,
+                        WRAPPED_CRYSTAL_CPU,
+                        WRAPPED_CRYSTAL_SOC });
     }
 
     private static void registerWrappingRecipe(MetaItem<?>.MetaValueItem[] unwrapped,

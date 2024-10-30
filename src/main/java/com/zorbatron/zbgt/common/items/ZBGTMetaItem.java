@@ -283,5 +283,8 @@ public class ZBGTMetaItem extends StandardMetaItem {
         WRAPPED_CHIP_INTEGRATED_LOGIC = addItem(111, "wrapped.chip.integrated_logic");
 
         WRAPPED_NEURO_PROCESSOR = addItem(112, "wrapped.misc.neuro_processor");
+        WRAPPED_ENGRAVED_CRYSTAL_CHIP = addItem(113, "wrapped.misc.engraved_crystal_chip");
+        WRAPPED_CRYSTAL_CPU = addItem(114, "wrapped.misc.crystal_cpu");
+        WRAPPED_CRYSTAL_SOC = addItem(115, "wrapped.misc.crystal_soc");
     }
 }
