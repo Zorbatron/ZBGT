@@ -251,5 +251,23 @@ public class ZBGTMetaItem extends StandardMetaItem {
         WRAPPED_BOARD_ELITE = addItem(86, "wrapped.board.elite");
         WRAPPED_BOARD_EXTREME = addItem(87, "wrapped.board.extreme");
         WRAPPED_BOARD_WETWARE = addItem(88, "wrapped.board.wetware");
+
+        // Wrapped chips 89-104
+        WRAPPED_CHIP_SOC_SIMPLE = addItem(89, "wrapped.chip.soc_simple");
+        WRAPPED_CHIP_SOC = addItem(90, "wrapped.chip.soc");
+        WRAPPED_CHIP_SOC_ADVANCED = addItem(91, "wrapped.chip.soc_advanced");
+        WRAPPED_CHIP_SOC_HIGHLY_ADVANCED = addItem(92, "wrapped.chip.soc_highly_advanced");
+        WRAPPED_CHIP_CPU = addItem(93, "wrapped.chip.cpu");
+        WRAPPED_CHIP_CPU_NANO = addItem(94, "wrapped.chip.cpu_nano");
+        WRAPPED_CHIP_CPU_QBIT = addItem(95, "wrapped.chip.cpu_qbit");
+        WRAPPED_CHIP_RAM = addItem(96, "wrapped.chip.ram");
+        WRAPPED_CHIP_NOR = addItem(97, "wrapped.chip.nor");
+        WRAPPED_CHIP_NAND = addItem(98, "wrapped.chip.nand");
+        WRAPPED_CHIP_PIC_ULTRA_LOW = addItem(99, "wrapped.chip.pic_ultra_low");
+        WRAPPED_CHIP_PIC_LOW = addItem(100, "wrapped.chip.pic_low");
+        WRAPPED_CHIP_PIC = addItem(101, "wrapped.chip.pic");
+        WRAPPED_CHIP_PIC_HIGH = addItem(102, "wrapped.chip.pic_high");
+        WRAPPED_CHIP_PIC_ULTRA_HIGH = addItem(103, "wrapped.chip.pic_ultra_high");
+        WRAPPED_CHIP_INTEGRATED_LOGIC = addItem(104, "wrapped.chip.integrated_logic");
     }
 }

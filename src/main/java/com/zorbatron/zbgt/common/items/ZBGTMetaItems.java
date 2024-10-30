@@ -102,6 +102,23 @@ public class ZBGTMetaItems {
     public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_EXTREME;
     public static MetaItem<?>.MetaValueItem WRAPPED_BOARD_WETWARE;
 
+    public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_SOC_SIMPLE;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_SOC;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_SOC_ADVANCED;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_SOC_HIGHLY_ADVANCED;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_CPU;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_CPU_NANO;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_CPU_QBIT;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_RAM;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_NOR;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_NAND;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_PIC_ULTRA_LOW;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_PIC_LOW;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_PIC;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_PIC_HIGH;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_PIC_ULTRA_HIGH;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_INTEGRATED_LOGIC;
+
     public static void init() {
         ZBGTMetaItem item = new ZBGTMetaItem();
         item.setRegistryName("zbgt_meta_item");

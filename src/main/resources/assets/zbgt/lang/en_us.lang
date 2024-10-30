@@ -189,6 +189,23 @@ metaitem.wrapped.board.elite.name=Wrap of Elite Circuit Boards
 metaitem.wrapped.board.extreme.name=Wrap of Extreme Circuit Boards
 metaitem.wrapped.board.wetware.name=Wrap of Master Circuit Boards
 
+metaitem.wrapped.chip.soc_simple.name=Wrap of Simple SOCs
+metaitem.wrapped.chip.soc.name=Wrap of SOCs
+metaitem.wrapped.chip.soc_advanced.name=Wrap of Advanced SOCs
+metaitem.wrapped.chip.soc_highly_advanced.name=Wrap of Highly Advanced SOCs
+metaitem.wrapped.chip.cpu.name=Wrap of CPUs
+metaitem.wrapped.chip.cpu_nano.name=Wrap of Nano CPUs
+metaitem.wrapped.chip.cpu_qbit.name=Wrap of QBit CPUs
+metaitem.wrapped.chip.ram.name=Wrap of RAM chips
+metaitem.wrapped.chip.nor.name=Wrap of NOR chips
+metaitem.wrapped.chip.nand.name=Wrap of NAND chips
+metaitem.wrapped.chip.pic_ultra_low.name=Wrap of Ultra Low Power ICs
+metaitem.wrapped.chip.pic_low.name=Wrap of Low Power Power ICs
+metaitem.wrapped.chip.pic.name=Wrap of Power ICs
+metaitem.wrapped.chip.pic_high.name=Wrap of High Power ICs
+metaitem.wrapped.chip.pic_ultra_high.name=Wrap of Ultra High Power ICs
+metaitem.wrapped.chip.integrated_logic.name=Wrap of Integrated Logic Circuits
+
 
 # Widgets
 zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s
