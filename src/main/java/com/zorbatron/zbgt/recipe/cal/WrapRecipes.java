@@ -1,4 +1,4 @@
-package com.zorbatron.zbgt.recipe;
+package com.zorbatron.zbgt.recipe.cal;
 
 import static com.zorbatron.zbgt.common.items.ZBGTMetaItems.*;
 import static com.zorbatron.zbgt.recipe.helpers.RecipeAssists.getMarkerMaterialByTier;
@@ -16,7 +16,7 @@ import gregtech.api.unification.ore.OrePrefix;
 
 public class WrapRecipes {
 
-    protected static void init() {
+    public static void init() {
         RecipeMapTrollery.clearAssemblerOnBuild();
         for (int tier = ULV; tier <= MAX; tier++) {
             ASSEMBLER_RECIPES.recipeBuilder()
