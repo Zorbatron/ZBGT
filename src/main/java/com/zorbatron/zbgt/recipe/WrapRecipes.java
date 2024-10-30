@@ -66,6 +66,7 @@ public class WrapRecipes {
             ASSEMBLER_RECIPES.recipeBuilder()
                     .input(unwrapped[x], 16)
                     .fluidInputs(Polyethylene.getFluid(L / 2))
+                    .circuitMeta(16)
                     .output(wrapped[x])
                     .EUt(VA[LV]).duration(20 * 5)
                     .buildAndRegister();
