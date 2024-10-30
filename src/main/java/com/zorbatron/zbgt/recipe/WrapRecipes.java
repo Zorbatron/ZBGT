@@ -71,8 +71,7 @@ public class WrapRecipes {
                 new MetaItem<?>.MetaValueItem[] { NEURO_PROCESSOR, ENGRAVED_CRYSTAL_CHIP,
                         CRYSTAL_CENTRAL_PROCESSING_UNIT, CRYSTAL_SYSTEM_ON_CHIP },
                 new MetaItem<?>.MetaValueItem[] { WRAPPED_NEURO_PROCESSOR, WRAPPED_ENGRAVED_CRYSTAL_CHIP,
-                        WRAPPED_CRYSTAL_CPU,
-                        WRAPPED_CRYSTAL_SOC });
+                        WRAPPED_CRYSTAL_CPU, WRAPPED_CRYSTAL_SOC });
     }
 
     private static void registerWrappingRecipe(MetaItem<?>.MetaValueItem[] unwrapped,
