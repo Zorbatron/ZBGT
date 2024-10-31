@@ -9,6 +9,6 @@ import gregtech.api.unification.ore.OrePrefix;
 
 public class ZBGTOrePrefix {
 
-    public static final OrePrefix nanite = new OrePrefix("nanite", -1, null, ZBGTMaterialIconType.nanite,
+    public static final OrePrefix nanites = new OrePrefix("nanites", -1, null, ZBGTMaterialIconType.nanites,
             ENABLE_UNIFICATION, mat -> mat.hasFlag(ZBGTMaterialFlags.GENERATE_NANITES));
 }

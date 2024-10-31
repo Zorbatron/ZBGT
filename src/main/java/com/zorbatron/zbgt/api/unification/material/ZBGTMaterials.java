@@ -47,7 +47,7 @@ public final class ZBGTMaterials {
     public static Material SpecialCeramics;
 
     public static void init() {
-        MetaItems.addOrePrefix(ZBGTOrePrefix.nanite);
+        MetaItems.addOrePrefix(ZBGTOrePrefix.nanites);
 
         ZBGTElementMaterials.register();
         ZBGTFirstDegreeMaterials.register();
