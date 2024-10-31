@@ -1,8 +1,10 @@
 package com.zorbatron.zbgt.api.unification.material;
 
 import com.zorbatron.zbgt.api.unification.material.materials.*;
+import com.zorbatron.zbgt.api.unification.ore.ZBGTOrePrefix;
 
 import gregtech.api.unification.material.Material;
+import gregtech.common.items.MetaItems;
 
 public final class ZBGTMaterials {
 
@@ -45,6 +47,8 @@ public final class ZBGTMaterials {
     public static Material SpecialCeramics;
 
     public static void init() {
+        MetaItems.addOrePrefix(ZBGTOrePrefix.nanite);
+
         ZBGTElementMaterials.register();
         ZBGTFirstDegreeMaterials.register();
         ZBGTSecondDegreeMaterials.register();
