@@ -147,7 +147,7 @@ public class ZBGTMetaTileEntities {
         QUACKER = registerMetaTileEntity(18069,
                 new MetaTileEntityQuacker(zbgtId("quacker")));
 
-        // NANO_FORGE = registerMetaTileEntity(18070,
-        // new MetaTileEntityNanoForge(zbgtId("nano_forge")));
+        NANO_FORGE = registerMetaTileEntity(18070,
+                new MetaTileEntityNanoForge(zbgtId("nano_forge")));
     }
 }
