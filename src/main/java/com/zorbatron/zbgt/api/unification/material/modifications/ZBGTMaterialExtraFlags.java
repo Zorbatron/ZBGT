@@ -85,7 +85,7 @@ public final class ZBGTMaterialExtraFlags {
     }
 
     private static void nanites() {
-        Material[] materials = { Carbon };
+        Material[] materials = { Carbon, Iron, Copper, Silver, Gold, Neutronium, Glowstone };
 
         setFlags(materials, ZBGTMaterialFlags.GENERATE_NANITES);
     }
