@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.zorbatron.zbgt.api.recipes.builders.CoALRecipeBuilder;
+import com.zorbatron.zbgt.api.recipes.builders.NanoForgeRecipeBuilder;
 import com.zorbatron.zbgt.api.recipes.builders.PreciseAssemblerRecipeBuilder;
 import com.zorbatron.zbgt.api.recipes.helpers.RecipeIOMod;
 import com.zorbatron.zbgt.api.recipes.maps.RecipeMapCoAL;
+import com.zorbatron.zbgt.api.recipes.maps.RecipeMapNanoForge;
 import com.zorbatron.zbgt.api.recipes.maps.RecipeMapPreciseAssembler;
 
 import gregtech.api.recipes.RecipeMap;
@@ -22,6 +24,10 @@ public final class ZBGTRecipeMaps {
     public static final RecipeMap<PreciseAssemblerRecipeBuilder> PRECISE_ASSEMBLER_RECIPES = new RecipeMapPreciseAssembler<>(
             "precise_assembler_recipes",
             new PreciseAssemblerRecipeBuilder());
+
+    public static final RecipeMap<NanoForgeRecipeBuilder> NANO_FORGE_RECIPES = new RecipeMapNanoForge<>(
+            "nano_forge_recipes",
+            new NanoForgeRecipeBuilder());
 
     public static void modifyMaps() {
         List<RecipeIOMod> recipeModList = new ArrayList<>();

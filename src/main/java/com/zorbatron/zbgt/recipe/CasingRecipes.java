@@ -281,5 +281,13 @@ public class CasingRecipes {
                 'P', OreDictUnifier.get(pipeNormalFluid, StainlessSteel),
                 'F', OreDictUnifier.get(frameGt, BlackSteel),
                 'T', OreDictUnifier.get(plate, Polytetrafluoroethylene));
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate, NaquadahAlloy, 8)
+                .input(frameGt, NaquadahAlloy)
+                .outputs(ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.RADIANT_NAQUADAH,
+                        casingsPerCraft))
+                .EUt(VA[UV]).duration(10)
+                .buildAndRegister();
     }
 }

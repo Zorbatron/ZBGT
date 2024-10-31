@@ -234,6 +234,8 @@ zbgt.machine.large_air_collector.tooltip=Atmosphere Vacuum
 zbgt.machine.large_alloy_smelter.name=Zyngen
 zbgt.machine.large_alloy_smelter.tooltip=Gains a 5%% energy discount per coil tier
 
+zbgt.machine.nano_forge.name=Nano Forge
+
 
 # Multiblock Casings
 tile.multiblock_casing.precise_0.name=Imprecise Electronic Unit Casing
@@ -303,6 +305,7 @@ tile.misc_casing.compact_fusion_coil_3.name=Compact Fusion Coil MK-II Prototype
 tile.misc_casing.compact_fusion_coil_4.name=Compact Fusion Coil MK-II Finaltype
 
 tile.misc_casing.inconel_reinforced_casing.name=Inconel Reinforced Casing
+tile.misc_casing.radiant_naquadah.name=Radiant Naquadah Alloy Casing
 
 # Misc
 zbgt.laser_enabled.1=Can use

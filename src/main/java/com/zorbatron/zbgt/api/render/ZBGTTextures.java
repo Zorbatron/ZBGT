@@ -37,6 +37,7 @@ public class ZBGTTextures {
     public static SimpleOverlayRenderer IRIDIUM_CASING;
 
     public static ICubeRenderer YOTTANK_CASING;
+    public static SimpleOverlayRenderer RADIANT_NAQUADAH_CASING;
 
     public static void preInit() {
         WATER_OVERLAY_INFINITY = new SimpleOverlayRenderer("overlay/machine/water_infinity");
@@ -64,6 +65,7 @@ public class ZBGTTextures {
         IRIDIUM_CASING = new SimpleOverlayRenderer("casings/material/iridium");
 
         YOTTANK_CASING = new SidedCubeRenderer("casings/yottank");
+        RADIANT_NAQUADAH_CASING = new SimpleOverlayRenderer("casings/misc/radiant_naquadah");
     }
 
     public static SimpleOverlayRenderer getPrassTextureByTier(int tier) {
