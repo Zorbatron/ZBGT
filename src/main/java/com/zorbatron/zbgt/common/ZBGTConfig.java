@@ -87,4 +87,23 @@ public class ZBGTConfig {
         @Config.Name("Force disable Nomifactory compat")
         public boolean disableNomiLabsCompatibility = false;
     }
+
+    @Config.Name("Creative Coil Settings")
+    @Config.RequiresMcRestart
+    public static CreativeCoilSettings creativeCoilSettings = new CreativeCoilSettings();
+
+    public static class CreativeCoilSettings {
+
+        @Config.Comment({ "Default: 1" })
+        @Config.Name("Coil Temperature")
+        public int temperature = 1;
+
+        @Config.Comment({ "Default: 1" })
+        @Config.Name("Coil Level")
+        public int level = 1;
+
+        @Config.Comment({ "Default: 1" })
+        @Config.Name("Energy Discount")
+        public int energyDiscount = 1;
+    }
 }

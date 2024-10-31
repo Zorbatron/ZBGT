@@ -304,6 +304,9 @@ tile.misc_casing.compact_fusion_coil_4.name=Compact Fusion Coil MK-II Finaltype
 
 tile.misc_casing.inconel_reinforced_casing.name=Inconel Reinforced Casing
 
+tile.creative_heating_coil.creative_heating_coil.name=Creative Heating Coil
+
+
 # Misc
 zbgt.laser_enabled.1=Can use
 zbgt.laser_enabled.2= Laser Hatches
