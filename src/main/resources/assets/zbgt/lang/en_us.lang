@@ -349,3 +349,7 @@ zbgt.material.special_ceramics=Special Ceramics
 
 # Ore veins
 zbgt.vein.adamantium=Adamantium vein
+
+
+# Ore prefixes
+item.material.oreprefix.nanites=%s Nanites
