@@ -1,36 +1,61 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.electric;
 
-import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
-import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
-import gregtech.api.pattern.MultiblockShapeInfo;
-import gregtech.api.unification.material.Materials;
-import gregtech.api.util.RelativeDirection;
+import static gregtech.api.util.RelativeDirection.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
+import com.zorbatron.zbgt.api.unification.ore.ZBGTOrePrefix;
+import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
+import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
+import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 
+import gregtech.api.GTValues;
+import gregtech.api.gui.GuiTextures;
+import gregtech.api.gui.Widget;
+import gregtech.api.gui.widgets.SlotWidget;
+import gregtech.api.items.itemhandlers.GTItemStackHandler;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.MultiblockShapeInfo;
+import gregtech.api.recipes.ingredients.GTRecipeOreInput;
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.Materials;
+import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
-
-import java.util.ArrayList;
-import java.util.List;
+import gregtech.common.blocks.BlockMultiblockCasing;
+import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.MetaTileEntities;
 
 public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
 
-    private int tier;
+    protected IItemHandlerModifiable controllerSlot;
+
+    protected BlockPattern MAIN_STRUCTURE;
+    protected BlockPattern SUB_STRUCTURE_1;
+    protected BlockPattern SUB_STRUCTURE_2;
 
     public MetaTileEntityNanoForge(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, ZBGTRecipeMaps.NANO_FORGE_RECIPES);
-        tier = 0;
     }
 
     @Override
@@ -39,60 +64,184 @@ public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
     }
 
     @Override
-    protected @NotNull BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.BACK, RelativeDirection.DOWN)
-                .aisle("         ","         ","    F    ","    C    ","    C    ","    C    ","    C    ","    F    ","         ","         ")
-                .aisle("         ","         ","    F    ","    C    ","    C    ","    C    ","    C    ","    F    ","         ","         ")
-                .aisle("         ","         ","    F    ","    C    ","    C    ","    C    ","    C    ","    F    ","         ","         ")
-                .aisle("         ","         ","    F    ","    C    ","    C    ","    C    ","    C    ","    F    ","         ","         ")
-                .aisle("         ","         ","    F    ","    C    ","    C    ","    C    ","    C    ","    F    ","         ","         ")
-                .aisle("         ","         ","   FCF   ","   C C   ","   C C   ","   C C   ","   C C   ","   FCF   ","         ","         ")
-                .aisle("         ","         ","   FCF   ","   C C   ","   C C   ","   C C   ","   C C   ","   FCF   ","         ","         ")
-                .aisle("         ","         ","   FCF   ","   C C   ","   C C   ","   C C   ","   C C   ","   FCF   ","         ","         ")
-                .aisle("         ","         ","   FCF   ","   C C   ","   C C   ","   C C   ","   C C   ","   FCF   ","         ","         ")
-                .aisle("         ","         ","   FCF   ","   C C   ","   C C   ","   C C   ","   C C   ","   FCF   ","         ","         ")
-                .aisle("         ","         ","   FCF   ","   C C   ","   C C   ","   C C   ","   C C   ","   FCF   ","         ","         ")
-                .aisle("         ","         ","   FCF   ","   C C   ","   C C   ","   C C   ","   C C   ","   FCF   ","         ","         ")
-                .aisle("         ","         ","   FCF   ","   C C   ","   C C   ","   C C   ","   C C   ","   FCF   ","         ","         ")
-                .aisle("         ","         ","   FCF   ","   C C   ","   C C   ","   C C   ","   C C   ","   FCF   ","         ","         ")
-                .aisle("         ","   FCF   ","  FC CF  ","   C C   ","   C C   ","   C C   ","   C C   ","  FC CF  ","   FCF   ","         ")
-                .aisle("         ","   FCF   ","  FC CF  ","   C C   ","   C C   ","   C C   ","   C C   ","  FC CF  ","   FCF   ","         ")
-                .aisle("         ","   FCF   ","  FC CF  ","  C   C  ","  C   C  ","  C   C  ","  C   C  ","  FC CF  ","   FCF   ","         ")
-                .aisle("         ","   FCF   ","  FC CF  ","  C   C  ","  C   C  ","  C   C  ","  C   C  ","  FC CF  ","   FCF   ","         ")
-                .aisle("    C    ","   FCF   ","  CC CC  ","  C   C  ","  C   C  ","  C   C  ","  C   C  ","  CC CC  ","   FCF   ","    C    ")
-                .aisle("    C    ","   FCF   ","  CC CC  ","  C   C  ","  C   C  ","  C   C  ","  C   C  ","  CC CC  ","   FCF   ","    C    ")
-                .aisle("    C    ","   FCF   ","  CC CC  ","  C   C  ","  C   C  ","  C   C  ","  C   C  ","  CC CC  ","   FCF   ","    C    ")
-                .aisle("    C    ","   FCF   ","  CC CC  "," CC   CC "," CC   CC "," CC   CC "," CC   CC ","  CC CC  ","   FCF   ","    C    ")
-                .aisle("    C    ","   FCF   ","  CC CC  "," CC   CC "," CC   CC "," CC   CC "," CC   CC ","  CC CC  ","   FCF   ","    C    ")
-                .aisle("    C    ","   FCF   ","  CC CC  ","  C   C  ","  C   C  ","  C   C  ","  C   C  ","  CC CC  ","   FCF   ","    C    ")
-                .aisle("    C    ","   FCF   ","  CC CC  ","  C   C  ","  C   C  ","  C   C  ","  C   C  ","  CC CC  ","   FCF   ","    C    ")
-                .aisle("    C    ","   FCF   ","  CC CC  ","  C   C  ","  C   C  ","  C   C  ","  C   C  ","  CC CC  ","   FCF   ","    C    ")
-                .aisle("         ","   FCF   ","  FC CF  ","  C   C  ","  C   C  ","  C   C  ","  C   C  ","  FC CF  ","   FCF   ","         ")
-                .aisle("         ","   FCF   ","  FC CF  ","  C   C  ","  C   C  ","  C   C  ","  C   C  ","  FC CF  ","   FCF   ","         ")
-                .aisle("         ","   FCF   ","  FC CF  ","   C C   ","   C C   ","   C C   ","   C C   ","  FC CF  ","   FCF   ","         ")
-                .aisle("         ","   FCF   ","  FC CF  ","   C C   ","   C C   ","   C C   ","   C C   ","  FC CF  ","   FCF   ","         ")
-                .aisle("         ","         ","   FCF   ","   C C   ","   C C   ","   C C   ","   C C   ","   FCF   ","         ","         ")
-                .aisle("         ","         ","   FCF   ","   C C   ","   C C   ","   C C   ","   C C   ","   FCF   ","         ","         ")
-                .aisle("         ","         ","   FCF   ","   C C   ","   C C   ","   C C   ","   C C   ","   FCF   ","         ","         ")
-                .aisle("         ","         ","   FCF   ","   C C   ","   C C   ","   C C   ","   C C   ","   FCF   ","         ","         ")
-                .aisle("         ","         ","   FCF   ","   C C   ","   C C   ","   C C   ","   C C   ","   FCF   ","         ","         ")
-                .aisle("         ","         ","   FCF   ","   C C   ","   C C   ","   C C   ","   C C   ","   FCF   ","         ","         ")
-                .aisle("         ","         ","   FCF   ","   C C   ","   C C   ","   C C   ","   C C   ","   FCF   ","         ","         ")
-                .aisle("         ","  BBSBB  "," BBBBBBB ","BBBBBBBBB","BBBBBBBBB","BBBBBBBBB","BBBBBBBBB"," BBBBBBB ","  BBBBB  ","         ")
-                .where('S', selfPredicate())
-                .where('B', states(getCasingState())
-                        .or(autoAbilities(true, false)))
-                .where('C', states(getCasingState()))
-                .where('F', frames(Materials.Neutronium))
-                .build();
+    protected void initializeInventory() {
+        super.initializeInventory();
+
+        this.controllerSlot = new GTItemStackHandler(this) {
+
+            @Override
+            public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+                GTRecipeOreInput carbonNanite = new GTRecipeOreInput(ZBGTOrePrefix.nanites, Materials.Carbon);
+                GTRecipeOreInput neutroniumNanite = new GTRecipeOreInput(ZBGTOrePrefix.nanites, Materials.Neutronium);
+
+                return carbonNanite.acceptsStack(stack) || neutroniumNanite.acceptsStack(stack);
+            }
+        };
     }
 
-    public IBlockState getCasingState() {
+    @Override
+    protected @NotNull BlockPattern createStructurePattern() {
+        // spotless:off
+
+        MAIN_STRUCTURE = FactoryBlockPattern.start(RIGHT, FRONT, DOWN)
+                .aisle("         ", "         ", "    F    ", "    C    ", "    C    ", "    C    ", "    C    ", "    F    ", "         ", "         ")
+                .aisle("         ", "         ", "    F    ", "    C    ", "    C    ", "    C    ", "    C    ", "    F    ", "         ", "         ")
+                .aisle("         ", "         ", "    F    ", "    C    ", "    C    ", "    C    ", "    C    ", "    F    ", "         ", "         ")
+                .aisle("         ", "         ", "    F    ", "    C    ", "    C    ", "    C    ", "    C    ", "    F    ", "         ", "         ")
+                .aisle("         ", "         ", "    F    ", "    C    ", "    C    ", "    C    ", "    C    ", "    F    ", "         ", "         ")
+                .aisle("         ", "         ", "   FCF   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   FCF   ", "         ", "         ")
+                .aisle("         ", "         ", "   FCF   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   FCF   ", "         ", "         ")
+                .aisle("         ", "         ", "   FCF   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   FCF   ", "         ", "         ")
+                .aisle("         ", "         ", "   FCF   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   FCF   ", "         ", "         ")
+                .aisle("         ", "         ", "   FCF   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   FCF   ", "         ", "         ")
+                .aisle("         ", "         ", "   FCF   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   FCF   ", "         ", "         ")
+                .aisle("         ", "         ", "   FCF   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   FCF   ", "         ", "         ")
+                .aisle("         ", "         ", "   FCF   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   FCF   ", "         ", "         ")
+                .aisle("         ", "         ", "   FCF   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   FCF   ", "         ", "         ")
+                .aisle("         ", "   FCF   ", "  FC CF  ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "  FC CF  ", "   FCF   ", "         ")
+                .aisle("         ", "   FCF   ", "  FC CF  ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "  FC CF  ", "   FCF   ", "         ")
+                .aisle("         ", "   FCF   ", "  FC CF  ", "  C   C  ", "  C   C  ", "  C   C  ", "  C   C  ", "  FC CF  ", "   FCF   ", "         ")
+                .aisle("         ", "   FCF   ", "  FC CF  ", "  C   C  ", "  C   C  ", "  C   C  ", "  C   C  ", "  FC CF  ", "   FCF   ", "         ")
+                .aisle("    C    ", "   FCF   ", "  CC CC  ", "  C   C  ", "  C   C  ", "  C   C  ", "  C   C  ", "  CC CC  ", "   FCF   ", "    C    ")
+                .aisle("    C    ", "   FCF   ", "  CC CC  ", "  C   C  ", "  C   C  ", "  C   C  ", "  C   C  ", "  CC CC  ", "   FCF   ", "    C    ")
+                .aisle("    C    ", "   FCF   ", "  CC CC  ", "  C   C  ", "  C   C  ", "  C   C  ", "  C   C  ", "  CC CC  ", "   FCF   ", "    C    ")
+                .aisle("    C    ", "   FCF   ", "  CC CC  ", " CC   CC ", " CC   CC ", " CC   CC ", " CC   CC ", "  CC CC  ", "   FCF   ", "    C    ")
+                .aisle("    C    ", "   FCF   ", "  CC CC  ", " CC   CC ", " CC   CC ", " CC   CC ", " CC   CC ", "  CC CC  ", "   FCF   ", "    C    ")
+                .aisle("    C    ", "   FCF   ", "  CC CC  ", "  C   C  ", "  C   C  ", "  C   C  ", "  C   C  ", "  CC CC  ", "   FCF   ", "    C    ")
+                .aisle("    C    ", "   FCF   ", "  CC CC  ", "  C   C  ", "  C   C  ", "  C   C  ", "  C   C  ", "  CC CC  ", "   FCF   ", "    C    ")
+                .aisle("    C    ", "   FCF   ", "  CC CC  ", "  C   C  ", "  C   C  ", "  C   C  ", "  C   C  ", "  CC CC  ", "   FCF   ", "    C    ")
+                .aisle("         ", "   FCF   ", "  FC CF  ", "  C   C  ", "  C   C  ", "  C   C  ", "  C   C  ", "  FC CF  ", "   FCF   ", "         ")
+                .aisle("         ", "   FCF   ", "  FC CF  ", "  C   C  ", "  C   C  ", "  C   C  ", "  C   C  ", "  FC CF  ", "   FCF   ", "         ")
+                .aisle("         ", "   FCF   ", "  FC CF  ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "  FC CF  ", "   FCF   ", "         ")
+                .aisle("         ", "   FCF   ", "  FC CF  ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "  FC CF  ", "   FCF   ", "         ")
+                .aisle("         ", "         ", "   FCF   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   FCF   ", "         ", "         ")
+                .aisle("         ", "         ", "   FCF   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   FCF   ", "         ", "         ")
+                .aisle("         ", "         ", "   FCF   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   FCF   ", "         ", "         ")
+                .aisle("         ", "         ", "   FCF   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   FCF   ", "         ", "         ")
+                .aisle("         ", "         ", "   FCF   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   FCF   ", "         ", "         ")
+                .aisle("         ", "         ", "   FCF   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   FCF   ", "         ", "         ")
+                .aisle("         ", "         ", "   FCF   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   FCF   ", "         ", "         ")
+                .aisle("         ", "  BBSBB  ", " BBBBBBB ", "BBBBBBBBB", "BBBBBBBBB", "BBBBBBBBB", "BBBBBBBBB", " BBBBBBB ", "  BBBBB  ", "         ")
+                .where('S', selfPredicate())
+                .where('B', states(getCasingState())
+                        .or(autoAbilities()))
+                .where('C', states(getCasingState()))
+                .where('F', frames(getFrameMaterial()))
+                .where(' ', any())
+                .build();
+
+        SUB_STRUCTURE_1 = FactoryBlockPattern.start(RIGHT, FRONT, DOWN)
+                .aisle("        ", "        ", "   CC   ", "  CCCC  ", "  CCCC  ", "   CC   ", "        ", "        ")
+                .aisle("        ", "        ", "   AA   ", "  ACCA  ", "  ACCA  ", "   AA   ", "        ", "        ")
+                .aisle("        ", "        ", "   CC   ", "  CCCC  ", "  CCCC  ", "   CC   ", "        ", "        ")
+                .aisle("        ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "        ")
+                .aisle("        ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "        ")
+                .aisle("        ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "        ")
+                .aisle("        ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "        ")
+                .aisle("        ", "        ", "   CC   ", "  CCCC  ", "  CCCC  ", "   CC   ", "        ", "        ")
+                .aisle("        ", "        ", "   AA   ", "  ACCA  ", "  ACCA  ", "   AA   ", "        ", "        ")
+                .aisle("        ", "        ", "   CC   ", "  CCCC  ", "  CCCC  ", "   CC   ", "        ", "        ")
+                .aisle("        ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "        ")
+                .aisle("        ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "        ")
+                .aisle("        ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "        ")
+                .aisle("        ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "        ")
+                .aisle(" TCCCCC ", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", " CCCCCC ")
+                .where('C', states(getCasingState()))
+                .where('F', frames(getFrameMaterial()))
+                .where('A', states(MetaBlocks.MULTIBLOCK_CASING
+                        .getState(BlockMultiblockCasing.MultiblockCasingType.ASSEMBLY_CONTROL)))
+                .where('T', states(getCasingState()).setCenter())
+                .where(' ', any())
+                .build();
+
+        //spotless:on
+
+        return MAIN_STRUCTURE;
+    }
+
+    @Override
+    public List<MultiblockShapeInfo> getMatchingShapes() {
+        List<MultiblockShapeInfo> shapes = new ArrayList<>();
+
+        // spotless:off
+        String[] front    = new String[] { "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "    C    ", "    C    ", "    C    ", "    C    ", "    C    ", "    C    ", "    C    ", "    C    ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         " };
+        String[] second   = new String[] { "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "  CESMC  " };
+        String[] third    = new String[] { "    F    ", "    F    ", "    F    ", "    F    ", "    F    ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "  FC CF  ", "  FC CF  ", "  FC CF  ", "  FC CF  ", "  CC CC  ", "  CC CC  ", "  CC CC  ", "  CC CC  ", "  CC CC  ", "  CC CC  ", "  CC CC  ", "  CC CC  ", "  FC CF  ", "  FC CF  ", "  FC CF  ", "  FC CF  ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", " CCCCCCC " };
+        String[] middle   = new String[] { "    C    ", "    C    ", "    C    ", "    C    ", "    C    ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "  C   C  ", "  C   C  ", "  C   C  ", "  C   C  ", "  C   C  ", " CC   CC ", " CC   CC ", "  C   C  ", "  C   C  ", "  C   C  ", "  C   C  ", "  C   C  ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "   C C   ", "CCCCCCCCC" };
+        String[] secondNC = new String[] { "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "   FCF   ", "         ", "         ", "         ", "         ", "         ", "         ", "         ", "  CCCCC  " };
+        //spotless:on
+
+        List<String> frontList = Arrays.asList(front);
+        List<String> secondList = Arrays.asList(second);
+        List<String> thirdList = Arrays.asList(third);
+        List<String> middleList = Arrays.asList(middle);
+        List<String> secondNCList = Arrays.asList(secondNC);
+
+        Collections.reverse(frontList);
+        Collections.reverse(secondList);
+        Collections.reverse(thirdList);
+        Collections.reverse(middleList);
+        Collections.reverse(secondNCList);
+
+        String[] frontReversed = frontList.toArray(new String[0]);
+        String[] secondReversed = secondList.toArray(new String[0]);
+        String[] thirdReversed = thirdList.toArray(new String[0]);
+        String[] middleReversed = middleList.toArray(new String[0]);
+        String[] secondNCReversed = secondNCList.toArray(new String[0]);
+
+        shapes.add(
+                MultiblockShapeInfo.builder()
+                        .aisle(frontReversed)
+                        .aisle(secondNCReversed)
+                        .aisle(thirdReversed)
+                        .aisle(middleReversed)
+                        .aisle(middleReversed)
+                        .aisle(middleReversed)
+                        .aisle(middleReversed)
+                        .aisle(thirdReversed)
+                        .aisle(secondReversed)
+                        .aisle(frontReversed)
+                        .where('S', ZBGTMetaTileEntities.NANO_FORGE, EnumFacing.SOUTH)
+                        .where('C', getCasingState())
+                        .where('F', MetaBlocks.FRAMES.get(getFrameMaterial()).getBlock(getFrameMaterial()))
+                        .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.UHV], EnumFacing.SOUTH)
+                        .where('M', TraceabilityPredicates.getMaintenanceHatchMTE(getCasingState()), EnumFacing.SOUTH)
+                        .where(' ', Blocks.AIR.getDefaultState())
+                        .build());
+
+        return shapes;
+    }
+
+    protected IBlockState getCasingState() {
         return ZBGTMetaBlocks.MISC_CASING.getState(MiscCasing.CasingType.RADIANT_NAQUADAH);
+    }
+
+    protected Material getFrameMaterial() {
+        // TODO: Implement stellar alloy
+        return Materials.Neutronium;
     }
 
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return ZBGTTextures.RADIANT_NAQUADAH_CASING;
+    }
+
+    @Override
+    protected @NotNull Widget getFlexButton(int x, int y, int width, int height) {
+        return new SlotWidget(controllerSlot, 0, x, y, true, true, true)
+                .setBackgroundTexture(GuiTextures.SLOT);
+    }
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        super.writeToNBT(data);
+        GTUtility.writeItems(controllerSlot, "ControllerSlot", data);
+        return data;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        GTUtility.readItems(controllerSlot, "ControllerSlot", data);
     }
 }

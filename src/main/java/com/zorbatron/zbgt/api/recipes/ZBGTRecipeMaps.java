@@ -13,6 +13,8 @@ import com.zorbatron.zbgt.api.recipes.maps.RecipeMapCoAL;
 import com.zorbatron.zbgt.api.recipes.maps.RecipeMapNanoForge;
 import com.zorbatron.zbgt.api.recipes.maps.RecipeMapPreciseAssembler;
 
+import gregtech.api.gui.GuiTextures;
+import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.recipes.RecipeMap;
 
 public final class ZBGTRecipeMaps {
@@ -27,7 +29,8 @@ public final class ZBGTRecipeMaps {
 
     public static final RecipeMap<NanoForgeRecipeBuilder> NANO_FORGE_RECIPES = new RecipeMapNanoForge<>(
             "nano_forge_recipes",
-            new NanoForgeRecipeBuilder());
+            new NanoForgeRecipeBuilder())
+                    .setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT, ProgressWidget.MoveType.HORIZONTAL);
 
     public static void modifyMaps() {
         List<RecipeIOMod> recipeModList = new ArrayList<>();

@@ -235,6 +235,8 @@ zbgt.machine.large_alloy_smelter.name=Zyngen
 zbgt.machine.large_alloy_smelter.tooltip=Gains a 5%% energy discount per coil tier
 
 zbgt.machine.nano_forge.name=Nano Forge
+recipemap.nano_forge_recipes.name=Nano Forge
+zbgt.machine.nano_forge.tier=Tier: %s
 
 
 # Multiblock Casings

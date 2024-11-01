@@ -1,5 +1,15 @@
 package com.zorbatron.zbgt.recipe;
 
+import static gregtech.api.GTValues.UIV;
+import static gregtech.api.GTValues.VA;
+import static gregtech.api.unification.material.Materials.*;
+
+import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
+import com.zorbatron.zbgt.api.unification.ore.ZBGTOrePrefix;
+
+import gregtech.api.unification.ore.OrePrefix;
+import gregtech.common.items.MetaItems;
+
 public class ZBGTRecipes {
 
     public static void init() {
@@ -11,5 +21,15 @@ public class ZBGTRecipes {
         CasingRecipes.init();
         MaterialRecipes.init();
         AE2Recipes.init();
+
+        ZBGTRecipeMaps.NANO_FORGE_RECIPES.recipeBuilder()
+                .notConsumable(OrePrefix.lens, NetherStar)
+                .input(OrePrefix.block, Carbon, 8)
+                .input(MetaItems.SYSTEM_ON_CHIP, 64)
+                .fluidInputs(UUMatter.getFluid(200_000))
+                .output(ZBGTOrePrefix.nanites, Carbon, 64)
+                .EUt(VA[UIV]).duration(20 * 500)
+                .nanoForgeTier(1)
+                .buildAndRegister();
     }
 }
