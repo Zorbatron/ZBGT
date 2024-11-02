@@ -9,6 +9,7 @@ public final class ZBGTMaterials {
     // Elements
     public static Material Adamantium;
     public static Material LiquidNitrogen;
+    public static Material Quantium;
 
     // First degree materials
     public static Material Indalloy140;

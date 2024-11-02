@@ -27,6 +27,7 @@ public final class ZBGTMaterialExtraProperties {
         fluids();
         wires();
         dusts();
+        ores();
     }
 
     private static void ingots() {
@@ -79,5 +80,15 @@ public final class ZBGTMaterialExtraProperties {
         for (Material material : materials) {
             material.setProperty(DUST, new DustProperty());
         }
+    }
+
+    private static void ores() {
+        Ytterbium.setProperty(ORE, new OreProperty());
+
+        OreProperty titaniumOre = new OreProperty();
+        titaniumOre.addOreByProducts(Almandine);
+        Titanium.setProperty(ORE, titaniumOre);
+
+        Niobium.setProperty(ORE, new OreProperty());
     }
 }

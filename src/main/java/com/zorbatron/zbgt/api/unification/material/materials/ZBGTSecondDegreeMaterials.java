@@ -43,7 +43,8 @@ public final class ZBGTSecondDegreeMaterials {
                 .liquid(new FluidBuilder().temperature(8700))
                 .color(0xB0B812).iconSet(MaterialIconSet.SHINY)
                 .flags(DISABLE_DECOMPOSITION, GENERATE_SMALL_GEAR)
-                .components(TanmolyiumBetaC, 14, Tungsten, 10, NiobiumTitanium, 9, RhodiumPlatedPalladium, 8)
+                .components(TanmolyiumBetaC, 14, Tungsten, 10, NiobiumTitanium, 9, RhodiumPlatedPalladium, 8, Quantium,
+                        7)
                 .blast(b -> b
                         .temp(8700, BlastProperty.GasTier.HIGH)
                         .blastStats(VA[UV], 20 * 46 + 8))

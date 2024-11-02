@@ -321,6 +321,7 @@ zbgt.subtitle.quack=Quacker Quacked
 # Materials
 zbgt.material.adamantium=Adamantium
 zbgt.material.zb_liquid_nitrogen=Liquid Nitrogen
+zbgt.material.quantium=Quantium
 
 zbgt.material.indalloy_140=Indalloy 140
 zbgt.material.mar_200=MAR-M200 Steel
@@ -356,3 +357,4 @@ zbgt.material.special_ceramics=Special Ceramics
 
 # Ore veins
 zbgt.vein.adamantium=Adamantium vein
+zbgt.vein.quantium=Quantium Vein

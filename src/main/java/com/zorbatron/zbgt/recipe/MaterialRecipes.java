@@ -182,6 +182,17 @@ public class MaterialRecipes {
                     .output(dust, VibrantAlloy)
                     .EUt(VA[LV]).duration(20 * 13)
                     .buildAndRegister();
+
+            MIXER_RECIPES.recipeBuilder()
+                    .input(dust, TanmolyiumBetaC, 14)
+                    .input(dust, Tungsten, 10)
+                    .input(dust, NiobiumTitanium, 9)
+                    .input(dust, RhodiumPlatedPalladium, 8)
+                    .input(dust, Quantium, 7)
+                    .circuitMeta(6)
+                    .output(dust, Dalisenite, 48)
+                    .EUt(VA[UV]).duration((int) (20 * 14.6))
+                    .buildAndRegister();
         }
 
         MIXER_RECIPES.recipeBuilder()
