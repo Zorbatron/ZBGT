@@ -130,5 +130,21 @@ public final class ZBGTFirstDegreeMaterials {
         } else {
             id += 4;
         }
+
+        EglinSteelBase = new Material.Builder(id++, zbgtId("egline_steel_base"))
+                .dust()
+                .color(0xbfc4b5).iconSet(METALLIC)
+                .components(Iron, 4, Kanthal, 1, Invar, 5)
+                .build();
+
+        Inconel792 = new Material.Builder(id++, zbgtId("inconel_792"))
+                .ingot().liquid(new FluidBuilder().temperature(3700))
+                .color(0x6cf076).iconSet(METALLIC)
+                .flags(EXT_METAL)
+                .blast(b -> b
+                        .temp(3700, BlastProperty.GasTier.MID)
+                        .blastStats(VA[HV], (int) (20 * 37.5)))
+                .components(Nickel, 2, Niobium, 1, Aluminium, 2, Nichrome, 1)
+                .build();
     }
 }

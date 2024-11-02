@@ -3,10 +3,8 @@ package com.zorbatron.zbgt.api.unification.material.materials;
 import static com.zorbatron.zbgt.api.unification.material.ZBGTMaterials.*;
 import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 import static gregtech.api.GTValues.*;
-import static gregtech.api.unification.material.Materials.Electrum;
-import static gregtech.api.unification.material.Materials.Silver;
-import static gregtech.api.unification.material.info.MaterialIconSet.BRIGHT;
-import static gregtech.api.unification.material.info.MaterialIconSet.SHINY;
+import static gregtech.api.unification.material.Materials.*;
+import static gregtech.api.unification.material.info.MaterialIconSet.*;
 
 import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
 import com.zorbatron.zbgt.api.ZBGTAPI;
@@ -44,6 +42,17 @@ public final class ZBGTThirdDegreeMaterials {
                 .blast(b -> b
                         .temp(5400, BlastProperty.GasTier.HIGH)
                         .blastStats(VA[LuV], 20 * 34))
+                .build();
+
+        Pikyonium64b = new Material.Builder(id++, zbgtId("pikyonium_64_b"))
+                .ingot().liquid(new FluidBuilder().temperature(7125))
+                .color(0x3467ba).iconSet(METALLIC)
+                .flags(EXT2_METAL)
+                .blast(b -> b
+                        .temp(7125, BlastProperty.GasTier.HIGH)
+                        .blastStats(VA[ZPM], 20 * 150))
+                .components(Inconel792, 8, EglinSteel, 5, NaquadahEnriched, 4, Cerium, 3, Antimony, 2, Platinum, 2,
+                        Ytterbium, 1, TungstenSteel, 4)
                 .build();
     }
 }

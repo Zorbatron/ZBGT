@@ -15,10 +15,11 @@ public class CustomOreVeins {
         ZBGTLog.logger.info("Registering ore veins...");
 
         JsonParser parser = new JsonParser();
-        JsonObject definition = parser.parse("""
+
+        JsonObject adamantiumDefinition = parser.parse("""
                 {
                   "name": "zbgt.vein.adamantium",
-                  "weight": 40,
+                  "weight": 25,
                   "density": 0.05,
                   "min_height": 10,
                   "max_height": 80,
@@ -42,21 +43,60 @@ public class CustomOreVeins {
                         "secondary": "ore:zbgt:adamantium"
                       },
                       {
-                        "between": "ore:zbgt:adamantium"
+                        "between": "ore:gregtech:naquadah"
                       },
                       {
-                        "sporadic": "ore:zbgt:adamantium"
+                        "sporadic": "ore:gregtech:titanium"
                       }
                     ]
                   }
                 }
                 """).getAsJsonObject();
+        OreDepositDefinition adamantiumDeposit = new OreDepositDefinition("adamantium");
+        adamantiumDeposit.initializeFromConfig(adamantiumDefinition);
 
-        OreDepositDefinition depositDefinition = new OreDepositDefinition("adamantium");
-        depositDefinition.initializeFromConfig(definition);
+        JsonObject quantiumDefinition = parser.parse("""
+                {
+                  "name": "zbgt.vein.quantium",
+                  "weight": 20,
+                  "density": 0.04,
+                  "min_height": 10,
+                  "max_height": 60,
+                  "dimension_filter": [
+                    "name:the_end"
+                  ],
+                  "generator": {
+                    "type": "layered",
+                    "radius": [
+                      16,
+                      24
+                    ]
+                  },
+                  "filler": {
+                    "type": "layered",
+                    "values": [
+                      {
+                        "primary": "ore:gregtech:niobium"
+                      },
+                      {
+                        "secondary": "ore:zbgt:quantium"
+                      },
+                      {
+                        "between": "ore:gregtech:ytterbium"
+                      },
+                      {
+                        "sporadic": "ore:gregtech:ytterbium"
+                      }
+                    ]
+                  }
+                }
+                """).getAsJsonObject();
+        OreDepositDefinition quantiumDeposit = new OreDepositDefinition("quantium");
+        quantiumDeposit.initializeFromConfig(quantiumDefinition);
 
         WorldGenRegistry worldGenRegistry = WorldGenRegistry.INSTANCE;
-        worldGenRegistry.addVeinDefinitions(depositDefinition);
+        worldGenRegistry.addVeinDefinitions(adamantiumDeposit);
+        worldGenRegistry.addVeinDefinitions(quantiumDeposit);
 
         worldGenRegistry.reinitializeRegisteredVeins();
     }
