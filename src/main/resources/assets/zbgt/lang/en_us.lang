@@ -237,6 +237,8 @@ zbgt.machine.large_alloy_smelter.tooltip=Gains a 5%% energy discount per coil ti
 zbgt.machine.nano_forge.name=Nano Forge
 recipemap.nano_forge_recipes.name=Nano Forge
 zbgt.machine.nano_forge.tier=Tier: %s
+zbgt.machine.nano_forge.nanite_tier=Nanite Tier: %s
+zbgt.machine.nano_forge.structure_tier=Structure Tier: %s
 
 
 # Multiblock Casings

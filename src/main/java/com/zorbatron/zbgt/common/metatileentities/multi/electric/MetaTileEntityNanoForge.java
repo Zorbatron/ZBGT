@@ -8,17 +8,23 @@ import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
+import com.zorbatron.zbgt.api.recipes.properties.NanoForgeProperty;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.api.unification.ore.ZBGTOrePrefix;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
@@ -26,21 +32,26 @@ import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
 import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 
 import gregtech.api.GTValues;
+import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
-import gregtech.api.gui.widgets.SlotWidget;
+import gregtech.api.gui.widgets.BlockableSlotWidget;
 import gregtech.api.items.itemhandlers.GTItemStackHandler;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
+import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.ingredients.GTRecipeOreInput;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.common.blocks.BlockMultiblockCasing;
 import gregtech.common.blocks.MetaBlocks;
@@ -48,14 +59,21 @@ import gregtech.common.metatileentities.MetaTileEntities;
 
 public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
 
-    protected IItemHandlerModifiable controllerSlot;
+    private final Material[] nanites = new Material[3];
 
-    protected BlockPattern MAIN_STRUCTURE;
-    protected BlockPattern SUB_STRUCTURE_1;
-    protected BlockPattern SUB_STRUCTURE_2;
+    private IItemHandlerModifiable controllerSlot;
+    private int naniteTier = 0;
+    private int structureTier = 0;
+
+    private BlockPattern MAIN_STRUCTURE;
+    private BlockPattern SUB_STRUCTURE_1;
+    private BlockPattern SUB_STRUCTURE_2;
 
     public MetaTileEntityNanoForge(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, ZBGTRecipeMaps.NANO_FORGE_RECIPES);
+        this.recipeMapWorkable = new NanoForgeRecipeLogic(this);
+        this.nanites[0] = Materials.Carbon;
+        this.nanites[1] = Materials.Neutronium;
     }
 
     @Override
@@ -69,14 +87,41 @@ public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
 
         this.controllerSlot = new GTItemStackHandler(this) {
 
+            private int checkNanite(@NotNull ItemStack stack) {
+                for (int tier = 0; tier < nanites.length; tier++) {
+                    if (nanites[tier] == null) continue;
+
+                    if (new GTRecipeOreInput(ZBGTOrePrefix.nanites, nanites[tier]).acceptsStack(stack)) {
+                        return tier + 1;
+                    }
+                }
+
+                return 0;
+            }
+
             @Override
             public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-                GTRecipeOreInput carbonNanite = new GTRecipeOreInput(ZBGTOrePrefix.nanites, Materials.Carbon);
-                GTRecipeOreInput neutroniumNanite = new GTRecipeOreInput(ZBGTOrePrefix.nanites, Materials.Neutronium);
+                return checkNanite(stack) > 0;
+            }
 
-                return carbonNanite.acceptsStack(stack) || neutroniumNanite.acceptsStack(stack);
+            @Override
+            protected void onContentsChanged(int slot) {
+                super.onContentsChanged(slot);
+                naniteTier = checkNanite(getStackInSlot(0));
             }
         };
+    }
+
+    @Override
+    protected void formStructure(PatternMatchContext context) {
+        super.formStructure(context);
+        structureTier = 1;
+    }
+
+    @Override
+    public void invalidateStructure() {
+        super.invalidateStructure();
+        structureTier = 0;
     }
 
     @Override
@@ -145,6 +190,42 @@ public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
                 .aisle("        ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "        ")
                 .aisle("        ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "        ")
                 .aisle("        ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "        ")
+                .aisle(" TCCCCC ", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", " CCCCCC ")
+                .where('C', states(getCasingState()))
+                .where('F', frames(getFrameMaterial()))
+                .where('A', states(MetaBlocks.MULTIBLOCK_CASING
+                        .getState(BlockMultiblockCasing.MultiblockCasingType.ASSEMBLY_CONTROL)))
+                .where('T', states(getCasingState()).setCenter())
+                .where(' ', any())
+                .build();
+
+        SUB_STRUCTURE_2 = FactoryBlockPattern.start()
+                .aisle("        ", "        ", "   CC   ", "  CCCC  ", "  CCCC  ", "   CC   ", "        ", "        ")
+                .aisle("        ", "        ", " FFAA   ", "  ACCA  ", "  ACCA  ", "   AAFF ", "        ", "        ")
+                .aisle("        ", "        ", "F  CC   ", "F CCCC  ", "  CCCC F", "   CC  F", "        ", "        ")
+                .aisle("        ", "        ", "       F", "   CC  F", "F  CC   ", "F       ", "        ", "        ")
+                .aisle("        ", "      F ", "        ", "   CC   ", "   CC   ", "        ", " F      ", "        ")
+                .aisle("    FF  ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "  FF    ")
+                .aisle("  FF    ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "    FF  ")
+                .aisle("        ", " F      ", "        ", "   CC   ", "   CC   ", "        ", "      F ", "        ")
+                .aisle("        ", "        ", "F       ", "F  CC   ", "   CC  F", "       F", "        ", "        ")
+                .aisle("        ", "        ", "   CC  F", "  CCCC F", "F CCCC  ", "F  CC   ", "        ", "        ")
+                .aisle("        ", "      F ", "   CC   ", "  CCCC  ", "  CCCC  ", "   CC   ", " F      ", "        ")
+                .aisle("    FF  ", "        ", "   CC   ", "  CCCC  ", "  CCCC  ", "   CC   ", "        ", "  FF    ")
+                .aisle("  FF    ", "        ", "   CC   ", "  CCCC  ", "  CCCC  ", "   CC   ", "        ", "    FF  ")
+                .aisle("        ", " F      ", "        ", "   CC   ", "   CC   ", "        ", "      F ", "        ")
+                .aisle("        ", "        ", "F       ", "F  CC   ", "   CC  F", "       F", "        ", "        ")
+                .aisle("        ", "        ", "       F", "   CC  F", "F  CC   ", "F       ", "        ", "        ")
+                .aisle("        ", "      F ", "        ", "   CC   ", "   CC   ", "        ", " F      ", "        ")
+                .aisle("    FF  ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "  FF    ")
+                .aisle("  FF    ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "    FF  ")
+                .aisle("        ", " F      ", "        ", "   CC   ", "   CC   ", "        ", "      F ", "        ")
+                .aisle("        ", "        ", "F  CC   ", "F CCCC  ", "  CCCC F", "   CC  F", "        ", "        ")
+                .aisle("        ", "        ", "   AA  F", "  ACCA F", "F ACCA  ", "F  AA   ", "        ", "        ")
+                .aisle("        ", "      F ", "   CC   ", "  CCCC  ", "  CCCC  ", "   CC   ", " F      ", "        ")
+                .aisle("    FF  ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "  FF    ")
+                .aisle("  FF    ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "    FF  ")
+                .aisle("        ", " F      ", "        ", "   CC   ", "   CC   ", "        ", "      F ", "        ")
                 .aisle(" TCCCCC ", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", " CCCCCC ")
                 .where('C', states(getCasingState()))
                 .where('F', frames(getFrameMaterial()))
@@ -227,9 +308,34 @@ public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
     }
 
     @Override
+    protected void addDisplayText(List<ITextComponent> textList) {
+        MultiblockDisplayText.builder(textList, isStructureFormed())
+                .setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addEnergyUsageLine(recipeMapWorkable.getEnergyContainer())
+                .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
+                .addParallelsLine(recipeMapWorkable.getParallelLimit())
+                .addWorkingStatusLine()
+                .addProgressLine(recipeMapWorkable.getProgressPercent())
+                .addCustom(list -> {
+                    list.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY,
+                            "zbgt.machine.nano_forge.nanite_tier",
+                            TextComponentUtil.stringWithColor(TextFormatting.WHITE, String.valueOf(naniteTier))));
+                    list.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY,
+                            "zbgt.machine.nano_forge.structure_tier",
+                            TextComponentUtil.stringWithColor(TextFormatting.WHITE, String.valueOf(structureTier))));
+                });
+    }
+
+    @Override
     protected @NotNull Widget getFlexButton(int x, int y, int width, int height) {
-        return new SlotWidget(controllerSlot, 0, x, y, true, true, true)
+        return new BlockableSlotWidget(controllerSlot, 0, x, y)
+                .setIsBlocked(this::isActive)
                 .setBackgroundTexture(GuiTextures.SLOT);
+    }
+
+    @Override
+    public void getDrops(NonNullList<ItemStack> dropsList, @Nullable EntityPlayer harvester) {
+        dropsList.add(controllerSlot.getStackInSlot(0));
     }
 
     @Override
@@ -243,5 +349,28 @@ public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         GTUtility.readItems(controllerSlot, "ControllerSlot", data);
+    }
+
+    public int getForgeTier() {
+        return Math.min(naniteTier, structureTier);
+    }
+
+    @SuppressWarnings("InnerClassMayBeStatic")
+    private class NanoForgeRecipeLogic extends MultiblockRecipeLogic {
+
+        public NanoForgeRecipeLogic(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        @Override
+        public boolean checkRecipe(@NotNull Recipe recipe) {
+            if (!super.checkRecipe(recipe)) return false;
+
+            int recipeTier = recipe.getProperty(NanoForgeProperty.getInstance(), 0);
+
+            this.hasPerfectOC = recipeTier < getForgeTier();
+
+            return recipeTier <= getForgeTier();
+        }
     }
 }
