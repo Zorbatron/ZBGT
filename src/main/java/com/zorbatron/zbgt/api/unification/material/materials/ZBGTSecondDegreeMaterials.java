@@ -93,5 +93,12 @@ public final class ZBGTSecondDegreeMaterials {
         } else {
             id += 4;
         }
+
+        EglinSteel = new Material.Builder(id++, zbgtId("eglin_steel"))
+                .ingot().liquid(new FluidBuilder().temperature(1320))
+                .color(0x8b4513).iconSet(METALLIC)
+                .flags(EXT_METAL, DECOMPOSITION_BY_CENTRIFUGING)
+                .components(EglinSteelBase, 10, Sulfur, 1, Silicon, 4, Carbon, 1)
+                .build();
     }
 }

@@ -191,6 +191,33 @@ public class MaterialRecipes {
                 .output(dust, Hikarium, 26)
                 .EUt(VA[LuV]).duration(20 * 13)
                 .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Iron, 4)
+                .input(dust, Kanthal)
+                .input(dust, Invar, 5)
+                .circuitMeta(20)
+                .output(dust, EglinSteelBase, 10)
+                .EUt(VA[MV]).duration((int) (20 * 5.1))
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, EglinSteelBase, 10)
+                .input(dust, Sulfur)
+                .input(dust, Silicon, 4)
+                .input(dust, Carbon)
+                .output(dust, EglinSteel, 16)
+                .EUt(VA[HV]).duration((int) (20 * 1.4))
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Nickel, 2)
+                .input(dust, Niobium)
+                .input(dust, Aluminium, 2)
+                .input(dust, Nichrome)
+                .output(dust, Inconel792, 6)
+                .EUt(VA[HV]).duration((int) (20 * 2.6))
+                .buildAndRegister();
     }
 
     private static void ebf() {
