@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,7 +19,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
@@ -45,7 +43,6 @@ import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
-import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.ingredients.GTRecipeOreInput;
 import gregtech.api.unification.material.Material;
@@ -53,7 +50,6 @@ import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.common.blocks.BlockMultiblockCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 
@@ -63,11 +59,6 @@ public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
 
     private IItemHandlerModifiable controllerSlot;
     private int naniteTier = 0;
-    private int structureTier = 0;
-
-    private BlockPattern MAIN_STRUCTURE;
-    private BlockPattern SUB_STRUCTURE_1;
-    private BlockPattern SUB_STRUCTURE_2;
 
     public MetaTileEntityNanoForge(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, ZBGTRecipeMaps.NANO_FORGE_RECIPES);
@@ -113,22 +104,10 @@ public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
     }
 
     @Override
-    protected void formStructure(PatternMatchContext context) {
-        super.formStructure(context);
-        structureTier = 1;
-    }
-
-    @Override
-    public void invalidateStructure() {
-        super.invalidateStructure();
-        structureTier = 0;
-    }
-
-    @Override
     protected @NotNull BlockPattern createStructurePattern() {
         // spotless:off
 
-        MAIN_STRUCTURE = FactoryBlockPattern.start(RIGHT, FRONT, DOWN)
+        return FactoryBlockPattern.start(RIGHT, FRONT, DOWN)
                 .aisle("         ", "         ", "    F    ", "    C    ", "    C    ", "    C    ", "    C    ", "    F    ", "         ", "         ")
                 .aisle("         ", "         ", "    F    ", "    C    ", "    C    ", "    C    ", "    C    ", "    F    ", "         ", "         ")
                 .aisle("         ", "         ", "    F    ", "    C    ", "    C    ", "    C    ", "    C    ", "    F    ", "         ", "         ")
@@ -174,70 +153,6 @@ public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
                 .where('F', frames(getFrameMaterial()))
                 .where(' ', any())
                 .build();
-
-        SUB_STRUCTURE_1 = FactoryBlockPattern.start(RIGHT, FRONT, DOWN)
-                .aisle("        ", "        ", "   CC   ", "  CCCC  ", "  CCCC  ", "   CC   ", "        ", "        ")
-                .aisle("        ", "        ", "   AA   ", "  ACCA  ", "  ACCA  ", "   AA   ", "        ", "        ")
-                .aisle("        ", "        ", "   CC   ", "  CCCC  ", "  CCCC  ", "   CC   ", "        ", "        ")
-                .aisle("        ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "        ")
-                .aisle("        ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "        ")
-                .aisle("        ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "        ")
-                .aisle("        ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "        ")
-                .aisle("        ", "        ", "   CC   ", "  CCCC  ", "  CCCC  ", "   CC   ", "        ", "        ")
-                .aisle("        ", "        ", "   AA   ", "  ACCA  ", "  ACCA  ", "   AA   ", "        ", "        ")
-                .aisle("        ", "        ", "   CC   ", "  CCCC  ", "  CCCC  ", "   CC   ", "        ", "        ")
-                .aisle("        ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "        ")
-                .aisle("        ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "        ")
-                .aisle("        ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "        ")
-                .aisle("        ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "        ")
-                .aisle(" TCCCCC ", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", " CCCCCC ")
-                .where('C', states(getCasingState()))
-                .where('F', frames(getFrameMaterial()))
-                .where('A', states(MetaBlocks.MULTIBLOCK_CASING
-                        .getState(BlockMultiblockCasing.MultiblockCasingType.ASSEMBLY_CONTROL)))
-                .where('T', states(getCasingState()).setCenter())
-                .where(' ', any())
-                .build();
-
-        SUB_STRUCTURE_2 = FactoryBlockPattern.start()
-                .aisle("        ", "        ", "   CC   ", "  CCCC  ", "  CCCC  ", "   CC   ", "        ", "        ")
-                .aisle("        ", "        ", " FFAA   ", "  ACCA  ", "  ACCA  ", "   AAFF ", "        ", "        ")
-                .aisle("        ", "        ", "F  CC   ", "F CCCC  ", "  CCCC F", "   CC  F", "        ", "        ")
-                .aisle("        ", "        ", "       F", "   CC  F", "F  CC   ", "F       ", "        ", "        ")
-                .aisle("        ", "      F ", "        ", "   CC   ", "   CC   ", "        ", " F      ", "        ")
-                .aisle("    FF  ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "  FF    ")
-                .aisle("  FF    ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "    FF  ")
-                .aisle("        ", " F      ", "        ", "   CC   ", "   CC   ", "        ", "      F ", "        ")
-                .aisle("        ", "        ", "F       ", "F  CC   ", "   CC  F", "       F", "        ", "        ")
-                .aisle("        ", "        ", "   CC  F", "  CCCC F", "F CCCC  ", "F  CC   ", "        ", "        ")
-                .aisle("        ", "      F ", "   CC   ", "  CCCC  ", "  CCCC  ", "   CC   ", " F      ", "        ")
-                .aisle("    FF  ", "        ", "   CC   ", "  CCCC  ", "  CCCC  ", "   CC   ", "        ", "  FF    ")
-                .aisle("  FF    ", "        ", "   CC   ", "  CCCC  ", "  CCCC  ", "   CC   ", "        ", "    FF  ")
-                .aisle("        ", " F      ", "        ", "   CC   ", "   CC   ", "        ", "      F ", "        ")
-                .aisle("        ", "        ", "F       ", "F  CC   ", "   CC  F", "       F", "        ", "        ")
-                .aisle("        ", "        ", "       F", "   CC  F", "F  CC   ", "F       ", "        ", "        ")
-                .aisle("        ", "      F ", "        ", "   CC   ", "   CC   ", "        ", " F      ", "        ")
-                .aisle("    FF  ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "  FF    ")
-                .aisle("  FF    ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "    FF  ")
-                .aisle("        ", " F      ", "        ", "   CC   ", "   CC   ", "        ", "      F ", "        ")
-                .aisle("        ", "        ", "F  CC   ", "F CCCC  ", "  CCCC F", "   CC  F", "        ", "        ")
-                .aisle("        ", "        ", "   AA  F", "  ACCA F", "F ACCA  ", "F  AA   ", "        ", "        ")
-                .aisle("        ", "      F ", "   CC   ", "  CCCC  ", "  CCCC  ", "   CC   ", " F      ", "        ")
-                .aisle("    FF  ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "  FF    ")
-                .aisle("  FF    ", "        ", "        ", "   CC   ", "   CC   ", "        ", "        ", "    FF  ")
-                .aisle("        ", " F      ", "        ", "   CC   ", "   CC   ", "        ", "      F ", "        ")
-                .aisle(" TCCCCC ", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", "CCCCCCCC", " CCCCCC ")
-                .where('C', states(getCasingState()))
-                .where('F', frames(getFrameMaterial()))
-                .where('A', states(MetaBlocks.MULTIBLOCK_CASING
-                        .getState(BlockMultiblockCasing.MultiblockCasingType.ASSEMBLY_CONTROL)))
-                .where('T', states(getCasingState()).setCenter())
-                .where(' ', any())
-                .build();
-
-        //spotless:on
-
-        return MAIN_STRUCTURE;
     }
 
     @Override
@@ -316,14 +231,9 @@ public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()
                 .addProgressLine(recipeMapWorkable.getProgressPercent())
-                .addCustom(list -> {
-                    list.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY,
-                            "zbgt.machine.nano_forge.nanite_tier",
-                            TextComponentUtil.stringWithColor(TextFormatting.WHITE, String.valueOf(naniteTier))));
-                    list.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY,
-                            "zbgt.machine.nano_forge.structure_tier",
-                            TextComponentUtil.stringWithColor(TextFormatting.WHITE, String.valueOf(structureTier))));
-                });
+                .addCustom(list -> list.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY,
+                        "zbgt.machine.nano_forge.nanite_tier",
+                        TextComponentUtil.stringWithColor(TextFormatting.WHITE, String.valueOf(naniteTier)))));
     }
 
     @Override
@@ -334,8 +244,8 @@ public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
     }
 
     @Override
-    public void getDrops(NonNullList<ItemStack> dropsList, @Nullable EntityPlayer harvester) {
-        dropsList.add(controllerSlot.getStackInSlot(0));
+    public void clearMachineInventory(NonNullList<ItemStack> itemBuffer) {
+        itemBuffer.add(controllerSlot.getStackInSlot(0));
     }
 
     @Override
@@ -351,10 +261,6 @@ public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
         GTUtility.readItems(controllerSlot, "ControllerSlot", data);
     }
 
-    public int getForgeTier() {
-        return Math.min(naniteTier, structureTier);
-    }
-
     @SuppressWarnings("InnerClassMayBeStatic")
     private class NanoForgeRecipeLogic extends MultiblockRecipeLogic {
 
@@ -368,9 +274,9 @@ public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
 
             int recipeTier = recipe.getProperty(NanoForgeProperty.getInstance(), 0);
 
-            this.hasPerfectOC = recipeTier < getForgeTier();
+            this.hasPerfectOC = recipeTier < naniteTier;
 
-            return recipeTier <= getForgeTier();
+            return recipeTier <= naniteTier;
         }
     }
 }
