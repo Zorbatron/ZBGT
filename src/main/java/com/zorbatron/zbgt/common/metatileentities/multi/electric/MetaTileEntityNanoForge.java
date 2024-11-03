@@ -229,11 +229,11 @@ public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
                 .addEnergyUsageLine(recipeMapWorkable.getEnergyContainer())
                 .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
-                .addWorkingStatusLine()
-                .addProgressLine(recipeMapWorkable.getProgressPercent())
                 .addCustom(list -> list.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY,
                         "zbgt.machine.nano_forge.nanite_tier",
-                        TextComponentUtil.stringWithColor(TextFormatting.WHITE, String.valueOf(naniteTier)))));
+                        TextComponentUtil.stringWithColor(TextFormatting.WHITE, String.valueOf(naniteTier)))))
+                .addWorkingStatusLine()
+                .addProgressLine(recipeMapWorkable.getProgressPercent());
     }
 
     @Override
