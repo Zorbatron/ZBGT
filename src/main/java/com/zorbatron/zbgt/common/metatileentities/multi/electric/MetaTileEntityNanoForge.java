@@ -108,7 +108,6 @@ public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
     @Override
     protected @NotNull BlockPattern createStructurePattern() {
         // spotless:off
-
         return FactoryBlockPattern.start(RIGHT, FRONT, DOWN)
                 .aisle("         ", "         ", "    F    ", "    C    ", "    C    ", "    C    ", "    C    ", "    F    ", "         ", "         ")
                 .aisle("         ", "         ", "    F    ", "    C    ", "    C    ", "    C    ", "    C    ", "    F    ", "         ", "         ")
@@ -155,7 +154,6 @@ public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
                 .where('F', frames(getFrameMaterial()))
                 .where(' ', any())
                 .build();
-
         //spotless:on
     }
 
