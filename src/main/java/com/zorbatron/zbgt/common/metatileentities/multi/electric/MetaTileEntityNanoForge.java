@@ -154,6 +154,7 @@ public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
                 .where('F', frames(getFrameMaterial()))
                 .where(' ', any())
                 .build();
+
         //spotless:on
     }
 
