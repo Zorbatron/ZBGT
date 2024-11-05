@@ -3,8 +3,8 @@ package com.zorbatron.zbgt.api.unification.material;
 import com.zorbatron.zbgt.api.unification.material.materials.*;
 import com.zorbatron.zbgt.api.unification.material.modifications.ZBGTMaterialExtraFlags;
 import com.zorbatron.zbgt.api.unification.material.modifications.ZBGTMaterialExtraProperties;
-
 import com.zorbatron.zbgt.api.unification.ore.ZBGTOrePrefix;
+
 import gregtech.api.unification.material.Material;
 import gregtech.common.items.MetaItems;
 
