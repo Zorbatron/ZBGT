@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,17 +17,22 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 import com.zorbatron.zbgt.api.recipes.properties.NanoForgeProperty;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
+import com.zorbatron.zbgt.api.unification.material.info.ZBGTMaterialFlags;
 import com.zorbatron.zbgt.api.unification.ore.ZBGTOrePrefix;
+import com.zorbatron.zbgt.api.util.ZBGTLog;
+import com.zorbatron.zbgt.common.ZBGTConfig;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
 import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
@@ -54,19 +60,41 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
+import gregtech.core.unification.material.internal.MaterialRegistryManager;
 
 public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
 
-    private final Material[] nanites = new Material[3];
+    private static final List<Material> nanites = new ArrayList<>();
 
     private IItemHandlerModifiable controllerSlot;
     private int naniteTier = 0;
 
+    static {
+        for (String materialName : ZBGTConfig.multiblockSettings.nanoForgeNanites) {
+            Material material = MaterialRegistryManager.getInstance().getMaterial(materialName);
+            if (material != null) {
+                if (material.hasFlag(ZBGTMaterialFlags.GENERATE_NANITES)) {
+                    nanites.add(material);
+                } else {
+                    ZBGTLog.logger.error(
+                            "Material {} does not generate a nanite! Either remove it from the \"Nano Forge nanite tiered materials\" config or add the required Nanite flag!",
+                            material, new IllegalArgumentException());
+                }
+            } else {
+                ZBGTLog.logger.error(
+                        "Material {} does not exist! Please remove it from the \"Nano Forge nanite tiered materials\" config.",
+                        materialName, new IllegalArgumentException());
+            }
+        }
+    }
+
+    public static List<Material> getNaniteTiers() {
+        return Collections.unmodifiableList(nanites);
+    }
+
     public MetaTileEntityNanoForge(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, ZBGTRecipeMaps.NANO_FORGE_RECIPES);
         this.recipeMapWorkable = new NanoForgeRecipeLogic(this);
-        this.nanites[0] = Materials.Carbon;
-        this.nanites[1] = Materials.Neutronium;
     }
 
     @Override
@@ -81,10 +109,8 @@ public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
         this.controllerSlot = new GTItemStackHandler(this) {
 
             private int checkNanite(@NotNull ItemStack stack) {
-                for (int tier = 0; tier < nanites.length; tier++) {
-                    if (nanites[tier] == null) continue;
-
-                    if (new GTRecipeOreInput(ZBGTOrePrefix.nanites, nanites[tier]).acceptsStack(stack)) {
+                for (int tier = 0; tier < nanites.size(); tier++) {
+                    if (new GTRecipeOreInput(ZBGTOrePrefix.nanites, nanites.get(tier)).acceptsStack(stack)) {
                         return tier + 1;
                     }
                 }
@@ -154,7 +180,6 @@ public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
                 .where('F', frames(getFrameMaterial()))
                 .where(' ', any())
                 .build();
-
         //spotless:on
     }
 
@@ -245,6 +270,21 @@ public class MetaTileEntityNanoForge extends RecipeMapMultiblockController {
         return new BlockableSlotWidget(controllerSlot, 0, x, y)
                 .setIsBlocked(this::isActive)
                 .setBackgroundTexture(GuiTextures.SLOT);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World world, @NotNull List<String> tooltip,
+                               boolean advanced) {
+        super.addInformation(stack, world, tooltip, advanced);
+
+        tooltip.add(I18n.format("zbgt.machine.nano_forge.bar"));
+        for (int x = 0; x < nanites.size(); x++) {
+            tooltip.add(I18n.format("zbgt.machine.nano_forge.nanite_description", x + 1,
+                    nanites.get(x).getLocalizedName()));
+        }
+        tooltip.add(I18n.format("zbgt.machine.nano_forge.bar"));
+        tooltip.add(I18n.format("zbgt.machine.nano_forge.tooltip.2"));
     }
 
     @Override

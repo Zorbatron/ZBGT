@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.recipes.properties.NanoForgeProperty;
 import com.zorbatron.zbgt.api.util.ZBGTLog;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityNanoForge;
 
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
@@ -40,12 +41,14 @@ public class NanoForgeRecipeBuilder extends RecipeBuilder<NanoForgeRecipeBuilder
     }
 
     public NanoForgeRecipeBuilder nanoForgeTier(int tier) {
+        int tiers = MetaTileEntityNanoForge.getNaniteTiers().size();
         if (tier < 1) {
             ZBGTLog.logger.error("Nano forge tier cannot be less than 1!",
                     new IllegalArgumentException());
             this.recipeStatus = EnumValidationResult.INVALID;
-        } else if (tier > 3) {
-            ZBGTLog.logger.error("Nano forge tier cannot be more than 3!", new IllegalArgumentException());
+        } else if (tier > tiers) {
+            ZBGTLog.logger.error("Nano forge tier cannot be more than {}!",
+                    tiers, new IllegalArgumentException());
             this.recipeStatus = EnumValidationResult.INVALID;
         }
 
