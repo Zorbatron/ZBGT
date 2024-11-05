@@ -2,6 +2,7 @@ package com.zorbatron.zbgt;
 
 import static com.zorbatron.zbgt.api.ZBGTAPI.*;
 import static com.zorbatron.zbgt.common.block.ZBGTMetaBlocks.*;
+import static gregtech.api.GregTechAPI.HEATING_COILS;
 
 import java.io.IOException;
 
@@ -16,6 +17,7 @@ import com.zorbatron.zbgt.api.util.ZBGTLog;
 import com.zorbatron.zbgt.common.CommonProxy;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
+import com.zorbatron.zbgt.common.block.blocks.CreativeHeatingCoil;
 import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
 import com.zorbatron.zbgt.common.block.blocks.YOTTankCell;
 import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
@@ -74,6 +76,9 @@ public class ZBGTCore {
         for (YOTTankCell.CasingType type : YOTTankCell.CasingType.values()) {
             YOTTANK_CELLS.put(YOTTANK_CELL.getState(type), type);
         }
+
+        HEATING_COILS.put(CREATIVE_HEATING_COIL.getState(CreativeHeatingCoil.CoilType.CREATIVE_COIL),
+                CreativeHeatingCoil.CoilType.CREATIVE_COIL);
 
         ZBGTSoundEvents.register();
 
