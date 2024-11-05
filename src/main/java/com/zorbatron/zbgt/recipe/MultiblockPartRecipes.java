@@ -3,15 +3,22 @@ package com.zorbatron.zbgt.recipe;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 
-import com.zorbatron.zbgt.ZBGTConfig;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
+import com.zorbatron.zbgt.api.unification.material.ZBGTMaterials;
+import com.zorbatron.zbgt.common.ZBGTConfig;
+import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
 
 import gregicality.multiblocks.api.unification.GCYMMaterials;
 import gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities;
+import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
+import gregtech.api.unification.stack.UnificationEntry;
+import gregtech.common.blocks.BlockMultiblockCasing;
+import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 
 public class MultiblockPartRecipes {
@@ -39,6 +46,40 @@ public class MultiblockPartRecipes {
                 .output(ZBGTMetaTileEntities.SUPER_INPUT_BUS)
                 .duration(20 * 5).EUt(VA[HV])
                 .buildAndRegister();
+
+        ZBGTRecipeMaps.PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(MetaTileEntities.CLEANING_MAINTENANCE_HATCH)
+                .input(MetaItems.BLACKLIGHT, 8)
+                .input(ZBGTMetaItems.GG_CIRCUIT_3, 2)
+                .input(OrePrefix.rotor, Materials.NaquadahAlloy)
+                .fluidInputs(ZBGTMaterials.Indalloy140.getFluid(L * 4))
+                .fluidInputs(Materials.Lubricant.getFluid(L * 2))
+                .output(ZBGTMetaTileEntities.STERILE_CLEANING_HATCH)
+                .casingTier(2)
+                .EUt(VA[UHV]).duration(20 * 15)
+                .buildAndRegister();
+
+        ModHandler.addShapedRecipe("air_intake_hatch", ZBGTMetaTileEntities.AIR_INTAKE_HATCH.getStackForm(),
+                "PGP",
+                "PUP",
+                "CHC",
+                'P', new UnificationEntry(OrePrefix.plate, Materials.Redstone),
+                'G', MetaBlocks.MULTIBLOCK_CASING.getItemVariant(
+                        BlockMultiblockCasing.MultiblockCasingType.GRATE_CASING),
+                'U', MetaItems.ELECTRIC_PUMP_IV,
+                'C', new UnificationEntry(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(IV)),
+                'H', MetaTileEntities.FLUID_IMPORT_HATCH[IV].getStackForm());
+
+        ModHandler.addShapedRecipe("extreme_air_intake_hatch",
+                ZBGTMetaTileEntities.EXTREME_AIR_INTAKE_HATCH.getStackForm(),
+                "PGP",
+                "PUP",
+                "CHC",
+                'P', new UnificationEntry(OrePrefix.plate, ZBGTMaterials.Pikyonium64b),
+                'G', ZBGTMetaTileEntities.AIR_INTAKE_HATCH.getStackForm(),
+                'U', MetaItems.ELECTRIC_PUMP_ZPM,
+                'C', new UnificationEntry(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(ZPM)),
+                'H', MetaTileEntities.FLUID_IMPORT_HATCH[ZPM].getStackForm());
     }
 
     private static void largeParallelHatches() {

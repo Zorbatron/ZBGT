@@ -70,6 +70,9 @@ zbgt.machine.yottank_me_hatch.priority=Priority
 zbgt.machine.yottank_me_hatch.sticky.enabled=Disable sticky mode
 zbgt.machine.yottank_me_hatch.sticky.disabled=Enable sticky mode
 
+zbgt.machine.sterile_cleaning_hatch.name=Automatic Sterilization Maintenance Hatch
+zbgt.machine.sterile_cleaning_hatch.tooltip=For automatically maintaining Multiblocks with Cleaning, but sterile!
+
 zbgt.machine.laser_hatch.source_16384a.iv.name=IV 16,384A Laser Source Hatch
 zbgt.machine.laser_hatch.source_16384a.luv.name=LuV 16,384A Laser Source Hatch
 zbgt.machine.laser_hatch.source_16384a.zpm.name=ZPM 16,384A Laser Source Hatch
@@ -241,7 +244,7 @@ metaitem.gg_circuit_1.name=Hi-Computation Station Mk-I
 metaitem.gg_circuit_1.tooltip=§b93015 TFlops§r
 metaitem.gg_circuit_2.name=Hi-Computation Station Mk-II
 metaitem.gg_circuit_2.tooltip=§e76M Processor Units§r
-metaitem.gg_circuit_3.name=Hi-Computation Station Mk-II
+metaitem.gg_circuit_3.name=Hi-Computation Station Mk-III
 metaitem.gg_circuit_3.tooltip=§aInvalidate RSA§r
 metaitem.gg_circuit_4.name=Hi-Computation Station Mk-IV Prototype
 metaitem.gg_circuit_4.tooltip=§c56th Mersenne Prime§r
@@ -305,6 +308,7 @@ zbgt.machine.quacker.tooltip=A slightly larger oil cracker, although it may some
 zbgt.machine.coal.name=Component Assembly Line
 zbgt.machine.coal.description.1=Creates large batches of §fComponents§7 for §e75%%§7 of the Cost.
 zbgt.machine.coal.description.2=Recipes are limited by §bCasing Tier§7.
+zbgt.machine.coal.description.3=Each casing tier above the recipe §eHalves the recipe time§r.
 zbgt.machine.coal.max_recipe_tier=Max Component Tier: %s
 zbgt.machine.coal.max_recipe_tier.hover=The highest component tier that can be assembled
 zbgt.machine.coal.computation_tier=Max Computation Available: %s
@@ -325,11 +329,11 @@ zbgt.machine.mega_fusion_1.name=Compact Fusion Computer Mk-I Prototype
 zbgt.machine.mega_fusion_1.tooltip.1=Max parallels: 64x
 zbgt.machine.mega_fusion_2.name=Compact Fusion Computer Mk-II
 zbgt.machine.mega_fusion_2.tooltip.1=Fusion tier < Mk-I: 128 parallels
-zbgt.machine.mega_fusion_2.tooltip.2=Fusion tier >= Mk=II: 64 parallels
+zbgt.machine.mega_fusion_2.tooltip.2=Fusion tier >= Mk-II: 64 parallels
 zbgt.machine.mega_fusion_3.name=Compact Fusion Computer Mk-III
 zbgt.machine.mega_fusion_3.tooltip.1=Fusion tier < Mk-I: 192 parallels
 zbgt.machine.mega_fusion_3.tooltip.2=Fusion tier < Mk-II: 128 parallels
-zbgt.machine.mega_fusion_3.tooltip.3=Fusion tier >= Mk=III: 64 parallels
+zbgt.machine.mega_fusion_3.tooltip.3=Fusion tier >= Mk-III: 64 parallels
 
 zbgt.machine.large_rock_breaker.name=Large Rock Breaker
 zbgt.machine.large_rock_breaker.tooltip=Rock Atomizer
@@ -410,6 +414,9 @@ tile.misc_casing.compact_fusion_coil_4.name=Compact Fusion Coil MK-II Finaltype
 
 tile.misc_casing.inconel_reinforced_casing.name=Inconel Reinforced Casing
 
+tile.creative_heating_coil.creative_heating_coil.name=Creative Heating Coil
+
+
 # Misc
 zbgt.laser_enabled.1=Can use
 zbgt.laser_enabled.2= Laser Hatches
@@ -424,6 +431,7 @@ zbgt.subtitle.quack=Quacker Quacked
 # Materials
 zbgt.material.adamantium=Adamantium
 zbgt.material.zb_liquid_nitrogen=Liquid Nitrogen
+zbgt.material.quantium=Quantium
 
 zbgt.material.indalloy_140=Indalloy 140
 zbgt.material.mar_200=MAR-M200 Steel
@@ -438,6 +446,8 @@ zbgt.material.ardite=Ardite
 zbgt.material.enderium=Enderium
 zbgt.material.energetic_alloy=Energetic Alloy
 zbgt.material.luminessence=Luminessence
+zbgt.material.egline_steel_base=Egline Steel Base Compound
+zbgt.material.inconel_792=Inconel-792
 
 zbgt.material.mar_ce_m_200=MAR-Ce-M200
 zbgt.material.artherium_sn=Artherium-Sn
@@ -446,12 +456,15 @@ zbgt.material.manyullyn=Manyullyn
 zbgt.material.signalum=Signalum
 zbgt.material.vibrant_alloy=Vibrant Alloy
 zbgt.material.lumium=Lumium
+zbgt.material.eglin_steel=Eglin Steel
 
 zbgt.material.fluxed_electrum=Fluxed Electrum
 zbgt.material.hikarium=Hikarium
+zbgt.material.pikyonium_64_b=Pikyonium 64B
 
 zbgt.material.special_ceramics=Special Ceramics
 
 
 # Ore veins
 zbgt.vein.adamantium=Adamantium vein
+zbgt.vein.quantium=Quantium Vein

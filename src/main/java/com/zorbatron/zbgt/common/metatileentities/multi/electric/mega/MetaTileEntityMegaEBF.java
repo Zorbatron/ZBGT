@@ -25,6 +25,7 @@ import com.zorbatron.zbgt.api.capability.impl.HeatingCoilGCYMMultiblockRecipeLog
 import com.zorbatron.zbgt.api.metatileentity.LaserCapableGCYMRecipeMapMultiblockController;
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
+import com.zorbatron.zbgt.common.ZBGTConfig;
 import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 
 import gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities;
@@ -72,7 +73,7 @@ public class MetaTileEntityMegaEBF extends LaserCapableGCYMRecipeMapMultiblockCo
 
     @Override
     protected @NotNull BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start()
+        FactoryBlockPattern pattern = FactoryBlockPattern.start()
                 .aisle("XXXXXXXXXXXXXXX", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG",
                         "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG",
                         "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG",
@@ -136,12 +137,18 @@ public class MetaTileEntityMegaEBF extends LaserCapableGCYMRecipeMapMultiblockCo
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState()).setMinGlobalLimited(420)
                         .or(autoAbilities(false, true, true, true, true, true, false))
-                        .or(autoEnergyInputs(1, 8)))
+                        .or(autoEnergyInputsMega()))
                 .where('G', states(getGlassState()))
-                .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('C', heatingCoils())
-                .where('#', air())
-                .build();
+                .where('#', air());
+
+        if (ZBGTConfig.multiblockSettings.megasNeedMufflers) {
+            pattern.where('M', abilities(MultiblockAbility.MUFFLER_HATCH));
+        } else {
+            pattern.where('M', states(getCasingState()));
+        }
+
+        return pattern.build();
     }
 
     protected IBlockState getCasingState() {
@@ -220,12 +227,17 @@ public class MetaTileEntityMegaEBF extends LaserCapableGCYMRecipeMapMultiblockCo
                 .where('S', ZBGTMetaTileEntities.MEGA_EBF, EnumFacing.SOUTH)
                 .where('X', getCasingState())
                 .where('G', getGlassState())
-                .where('M', MetaTileEntities.MUFFLER_HATCH[1], EnumFacing.UP)
                 .where('Z', TraceabilityPredicates.getMaintenanceHatchMTE(getCasingState()), EnumFacing.SOUTH)
                 .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[1], EnumFacing.NORTH)
                 .where('I', MetaTileEntities.ITEM_IMPORT_BUS[1], EnumFacing.SOUTH)
                 .where('O', MetaTileEntities.ITEM_EXPORT_BUS[1], EnumFacing.SOUTH)
                 .where('P', GCYMMetaTileEntities.PARALLEL_HATCH[0], EnumFacing.SOUTH);
+
+        if (ZBGTConfig.multiblockSettings.megasNeedMufflers) {
+            builder.where('M', MetaTileEntities.MUFFLER_HATCH[1], EnumFacing.UP);
+        } else {
+            builder.where('M', getCasingState());
+        }
 
         GregTechAPI.HEATING_COILS.entrySet().stream()
                 .sorted(Comparator.comparingInt(entry -> entry.getValue().getTier()))
@@ -290,7 +302,7 @@ public class MetaTileEntityMegaEBF extends LaserCapableGCYMRecipeMapMultiblockCo
 
     @Override
     public boolean hasMufflerMechanics() {
-        return true;
+        return ZBGTConfig.multiblockSettings.megasNeedMufflers;
     }
 
     @Override

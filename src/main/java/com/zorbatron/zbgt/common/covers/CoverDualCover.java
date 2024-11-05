@@ -811,4 +811,10 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
         }
         return result;
     }
+
+    @Override
+    public void onRemoval() {
+        dropInventoryContents(itemFilterContainer.getFilterInventory());
+        dropInventoryContents(fluidFilterContainer.getFilterInventory());
+    }
 }

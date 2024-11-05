@@ -2,8 +2,7 @@ package com.zorbatron.zbgt.api.pattern;
 
 import static gregtech.api.metatileentity.multiblock.MultiblockControllerBase.abilities;
 
-import java.util.Comparator;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.function.Supplier;
 
 import net.minecraft.block.state.IBlockState;
@@ -172,5 +171,36 @@ public class TraceabilityPredicates {
 
     public static Supplier<?> getMaintenanceHatchMTE(IBlockState defaultCasing) {
         return () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : defaultCasing;
+    }
+
+    public static TraceabilityPredicate autoEnergyInputs(int min, int max, int previewCount, boolean allowEnergyHatches,
+                                                         boolean allowSubstationHatches, boolean allowLaserHatches) {
+        List<MultiblockAbility<?>> allowedAbilities = new ArrayList<>();
+
+        if (allowEnergyHatches) allowedAbilities.add(MultiblockAbility.INPUT_ENERGY);
+        if (allowSubstationHatches) allowedAbilities.add(MultiblockAbility.SUBSTATION_INPUT_ENERGY);
+        if (allowLaserHatches) allowedAbilities.add(MultiblockAbility.INPUT_LASER);
+
+        return new TraceabilityPredicate(abilities(allowedAbilities.stream().toArray(MultiblockAbility<?>[]::new))
+                .setMinGlobalLimited(min)
+                .setMaxGlobalLimited(max)
+                .setPreviewCount(previewCount));
+    }
+
+    public static TraceabilityPredicate autoEnergyInputs(int min, int max, boolean allowEnergyHatches,
+                                                         boolean allowSubstationHatches, boolean allowLaserHatches) {
+        return autoEnergyInputs(min, max, 2, allowEnergyHatches, allowSubstationHatches, allowLaserHatches);
+    }
+
+    public static TraceabilityPredicate autoEnergyInputs(int min, int max, int previewCount) {
+        return autoEnergyInputs(min, max, previewCount, true, false, false);
+    }
+
+    public static TraceabilityPredicate autoEnergyInputs(int min, int max) {
+        return autoEnergyInputs(min, max, 2);
+    }
+
+    public static TraceabilityPredicate autoEnergyInputs() {
+        return autoEnergyInputs(1, 3);
     }
 }

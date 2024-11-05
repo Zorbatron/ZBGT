@@ -16,6 +16,7 @@ import gregtech.api.unification.material.Material;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.MetaBlocks;
 
+@SuppressWarnings("unused")
 public class RecipeAssists {
 
     public static int getCWUt(int tier) {
@@ -195,6 +196,19 @@ public class RecipeAssists {
         };
     }
 
+    public static MetaItem<?>.MetaValueItem getFluidRegulatorByTier(int tier) {
+        return switch (tier) {
+            case (MV)  -> FLUID_REGULATOR_MV;
+            case (HV)  -> FLUID_REGULATOR_HV;
+            case (EV)  -> FLUID_REGULATOR_EV;
+            case (IV)  -> FLUID_REGULATOR_IV;
+            case (LuV) -> FLUID_REGULATOR_LUV;
+            case (ZPM) -> FLUID_REGULATOR_ZPM;
+            case (UV)  -> FLUID_REGULATOR_UV;
+            default    -> FLUID_REGULATOR_LV;
+        };
+    }
+
     public static MetaItem<?>.MetaValueItem getEmitterByTier(int tier) {
         return switch (tier) {
             case (MV)  -> EMITTER_MV;
@@ -310,10 +324,9 @@ public class RecipeAssists {
 
     public static Material getLowEmitterSensorStarMaterial(int tier) {
         return switch (tier) {
-            case (LV) -> Quartzite;
             case (MV) -> Emerald;
             case (HV) -> EnderEye;
-            default -> null;
+            default -> Quartzite;
         };
     }
 
@@ -383,6 +396,42 @@ public class RecipeAssists {
             case (3) -> PreciseCasing.CasingType.PRECISE_CASING_3;
             case (4) -> PreciseCasing.CasingType.PRECISE_CASING_4;
             default -> PreciseCasing.CasingType.PRECISE_CASING_0;
+        };
+    }
+
+    public static MetaItem<?>.MetaValueItem getDualCoverByTier(int tier) {
+        return switch (tier) {
+            case (MV)   -> DUAL_COVER_MV;
+            case (HV)   -> DUAL_COVER_HV;
+            case (EV)   -> DUAL_COVER_EV;
+            case (IV)   -> DUAL_COVER_IV;
+            case (LuV)  -> DUAL_COVER_LuV;
+            case (ZPM)  -> DUAL_COVER_ZPM;
+            case (UV)   -> DUAL_COVER_UV;
+            case (UHV)  -> DUAL_COVER_UHV;
+            case (UEV)  -> DUAL_COVER_UEV;
+            case (UIV)  -> DUAL_COVER_UIV;
+            case (UXV)  -> DUAL_COVER_UXV;
+            case (OpV)  -> DUAL_COVER_OpV;
+            default     -> DUAL_COVER_LV;
+        };
+    }
+
+    public static MetaItem<?>.MetaValueItem getPreciseDualCoverByTier(int tier) {
+        return switch (tier) {
+            case (MV)   -> PRECISE_DUAL_COVER_MV;
+            case (HV)   -> PRECISE_DUAL_COVER_HV;
+            case (EV)   -> PRECISE_DUAL_COVER_EV;
+            case (IV)   -> PRECISE_DUAL_COVER_IV;
+            case (LuV)  -> PRECISE_DUAL_COVER_LuV;
+            case (ZPM)  -> PRECISE_DUAL_COVER_ZPM;
+            case (UV)   -> PRECISE_DUAL_COVER_UV;
+            case (UHV)  -> PRECISE_DUAL_COVER_UHV;
+            case (UEV)  -> PRECISE_DUAL_COVER_UEV;
+            case (UIV)  -> PRECISE_DUAL_COVER_UIV;
+            case (UXV)  -> PRECISE_DUAL_COVER_UXV;
+            case (OpV)  -> PRECISE_DUAL_COVER_OpV;
+            default     -> PRECISE_DUAL_COVER_LV;
         };
     }
 }

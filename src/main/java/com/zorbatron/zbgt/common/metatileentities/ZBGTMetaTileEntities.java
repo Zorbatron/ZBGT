@@ -28,6 +28,7 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntitySuperInputBus SUPER_INPUT_BUS;
     public static MetaTileEntityLargeParallelHatch[] ZBGT_PARALLEL_HATCHES = new MetaTileEntityLargeParallelHatch[7];
     public static MetaTileEntityYOTTankMEHatch YOTTANK_ME_HATCH;
+    public static MetaTileEntitySterileCleaningHatch STERILE_CLEANING_HATCH;
 
     public static MetaTileEntityLaserHatch[] LASER_INPUT_HATCH_16384 = new MetaTileEntityLaserHatch[10]; // IV+
     public static MetaTileEntityLaserHatch[] LASER_INPUT_HATCH_65536 = new MetaTileEntityLaserHatch[10]; // IV+
@@ -106,6 +107,9 @@ public class ZBGTMetaTileEntities {
 
         YOTTANK_ME_HATCH = registerMetaTileEntity(18017,
                 new MetaTileEntityYOTTankMEHatch(zbgtId("yottank_me_hatch"), GTValues.IV));
+
+        STERILE_CLEANING_HATCH = registerMetaTileEntity(18018,
+                new MetaTileEntitySterileCleaningHatch(zbgtId("sterile_cleaning_hatch")));
 
         // 18050-18099 (50) reserved for multiblocks
         MEGA_EBF = registerMetaTileEntity(18050,

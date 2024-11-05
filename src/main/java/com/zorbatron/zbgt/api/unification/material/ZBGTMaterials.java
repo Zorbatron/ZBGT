@@ -9,6 +9,7 @@ public final class ZBGTMaterials {
     // Elements
     public static Material Adamantium;
     public static Material LiquidNitrogen;
+    public static Material Quantium;
 
     // First degree materials
     public static Material Indalloy140;
@@ -21,14 +22,18 @@ public final class ZBGTMaterials {
     public static Material AluminumNitride;
     public static Material YttriumOxide;
     public static Material Luminessence;
+    public static Material EglinSteelBase;
+    public static Material Inconel792;
 
     // Second degree materials
     public static Material MAR_CE_M200;
     public static Material HDCS;
     public static Material Dalisenite;
+    public static Material EglinSteel;
 
     // Third degree materials
     public static Material Hikarium;
+    public static Material Pikyonium64b;
 
     // Nomifactory materials
     public static Material Ardite;

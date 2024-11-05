@@ -61,7 +61,7 @@ public class MetaTileEntityMegaLCR extends LaserCapableGCYMRecipeMapMultiblockCo
                 .where('G', states(getGlassState()))
                 .where('F', states(getCoilState()))
                 .where('E', states(getCasingState())
-                        .or(autoEnergyInputs(1, 8))
+                        .or(autoEnergyInputsMega())
                         .or(abilities(GCYMMultiblockAbility.PARALLEL_HATCH).setMaxGlobalLimited(1))
                         .or(maintenancePredicate()))
                 .where('H', states(getCasingState())

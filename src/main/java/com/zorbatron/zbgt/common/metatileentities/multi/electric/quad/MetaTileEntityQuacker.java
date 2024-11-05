@@ -1,5 +1,7 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.electric.quad;
 
+import static com.zorbatron.zbgt.api.pattern.TraceabilityPredicates.autoEnergyInputs;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -11,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.zorbatron.zbgt.ZBGTConfig;
+import com.zorbatron.zbgt.common.ZBGTConfig;
 import com.zorbatron.zbgt.core.sound.ZBGTSoundEvents;
 
 import gregtech.api.GTValues;
@@ -79,7 +81,8 @@ public class MetaTileEntityQuacker extends MetaTileEntityCrackingUnit {
                 .where('S', selfPredicate())
                 .where('C', heatingCoils())
                 .where('X', states(getCasingState()).setMinGlobalLimited(25)
-                        .or(autoAbilities()))
+                        .or(autoAbilities(false, true, true, true, true, true, false))
+                        .or(autoEnergyInputs(1, 8)))
                 .where('T', states(getCasingState()))
                 .where('#', air())
                 .build();

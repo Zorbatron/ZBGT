@@ -30,6 +30,7 @@ public class ZBGTMetaBlocks {
     public static PreciseCasing PRECISE_CASING;
     public static YOTTankCell YOTTANK_CELL;
     public static MiscCasing MISC_CASING;
+    public static CreativeHeatingCoil CREATIVE_HEATING_COIL;
 
     public static List<VariantBlock<?>> ALL_CASINGS = new ArrayList<>();
 
@@ -49,7 +50,11 @@ public class ZBGTMetaBlocks {
         MISC_CASING = new MiscCasing();
         MISC_CASING.setRegistryName("misc_casing");
 
-        ALL_CASINGS.addAll(Arrays.asList(MATERIAL_CASINGS, CoAL_CASING, PRECISE_CASING, YOTTANK_CELL, MISC_CASING));
+        CREATIVE_HEATING_COIL = new CreativeHeatingCoil();
+        CREATIVE_HEATING_COIL.setRegistryName("creative_heating_coil");
+
+        ALL_CASINGS.addAll(Arrays.asList(MATERIAL_CASINGS, CoAL_CASING, PRECISE_CASING, YOTTANK_CELL, MISC_CASING,
+                CREATIVE_HEATING_COIL));
     }
 
     @SideOnly(Side.CLIENT)

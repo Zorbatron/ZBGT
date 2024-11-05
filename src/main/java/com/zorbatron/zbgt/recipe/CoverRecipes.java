@@ -6,6 +6,8 @@ import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
 import static gregtech.common.items.MetaItems.*;
 
+import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
+
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
@@ -18,55 +20,17 @@ public class CoverRecipes {
     }
 
     private static void dualCovers() {
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(CONVEYOR_MODULE_LV)
-                .input(ELECTRIC_PUMP_LV)
-                .input(OrePrefix.circuit, MarkerMaterials.Tier.LV)
-                .circuitMeta(2)
-                .fluidInputs(Materials.Tin.getFluid(L))
-                .output(DUAL_COVER_LV)
-                .EUt(VA[LV]).duration(20)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(CONVEYOR_MODULE_MV)
-                .input(ELECTRIC_PUMP_MV)
-                .input(OrePrefix.circuit, MarkerMaterials.Tier.MV)
-                .circuitMeta(2)
-                .fluidInputs(Materials.Tin.getFluid(L))
-                .output(DUAL_COVER_MV)
-                .EUt(VA[MV]).duration(20)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(CONVEYOR_MODULE_HV)
-                .input(ELECTRIC_PUMP_HV)
-                .input(OrePrefix.circuit, MarkerMaterials.Tier.HV)
-                .circuitMeta(2)
-                .fluidInputs(Materials.Tin.getFluid(L))
-                .output(DUAL_COVER_HV)
-                .EUt(VA[HV]).duration(20)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(CONVEYOR_MODULE_EV)
-                .input(ELECTRIC_PUMP_EV)
-                .input(OrePrefix.circuit, MarkerMaterials.Tier.EV)
-                .circuitMeta(2)
-                .fluidInputs(Materials.Tin.getFluid(L))
-                .output(DUAL_COVER_EV)
-                .EUt(VA[EV]).duration(20)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(CONVEYOR_MODULE_IV)
-                .input(ELECTRIC_PUMP_IV)
-                .input(OrePrefix.circuit, MarkerMaterials.Tier.IV)
-                .circuitMeta(2)
-                .fluidInputs(Materials.Tin.getFluid(L))
-                .output(DUAL_COVER_IV)
-                .EUt(VA[IV]).duration(20)
-                .buildAndRegister();
+        for (int tier = LV; tier < LuV; tier++) {
+            ASSEMBLER_RECIPES.recipeBuilder()
+                    .input(RecipeAssists.getConveyorByTier(tier))
+                    .input(RecipeAssists.getPumpByTier(tier))
+                    .input(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(tier))
+                    .circuitMeta(2)
+                    .fluidInputs(Materials.SolderingAlloy.getFluid(L / 2))
+                    .output(RecipeAssists.getDualCoverByTier(tier))
+                    .EUt(VA[tier]).duration(20)
+                    .buildAndRegister();
+        }
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CONVEYOR_MODULE_LuV)
@@ -113,60 +77,17 @@ public class CoverRecipes {
     }
 
     private static void preciseDualCovers() {
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(ROBOT_ARM_LV)
-                .input(FLUID_REGULATOR_LV)
-                .input(SENSOR_LV)
-                .input(OrePrefix.circuit, MarkerMaterials.Tier.LV)
-                .circuitMeta(2)
-                .fluidInputs(Materials.Tin.getFluid(L))
-                .output(PRECISE_DUAL_COVER_LV)
-                .EUt(VA[LV]).duration(20)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(ROBOT_ARM_MV)
-                .input(FLUID_REGULATOR_MV)
-                .input(SENSOR_MV)
-                .input(OrePrefix.circuit, MarkerMaterials.Tier.MV)
-                .circuitMeta(2)
-                .fluidInputs(Materials.Tin.getFluid(L))
-                .output(PRECISE_DUAL_COVER_MV)
-                .EUt(VA[MV]).duration(20)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(ROBOT_ARM_HV)
-                .input(FLUID_REGULATOR_HV)
-                .input(SENSOR_HV)
-                .input(OrePrefix.circuit, MarkerMaterials.Tier.HV)
-                .circuitMeta(2)
-                .fluidInputs(Materials.Tin.getFluid(L))
-                .output(PRECISE_DUAL_COVER_HV)
-                .EUt(VA[HV]).duration(20)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(ROBOT_ARM_EV)
-                .input(FLUID_REGULATOR_EV)
-                .input(SENSOR_EV)
-                .input(OrePrefix.circuit, MarkerMaterials.Tier.EV)
-                .circuitMeta(2)
-                .fluidInputs(Materials.Tin.getFluid(L))
-                .output(PRECISE_DUAL_COVER_EV)
-                .EUt(VA[EV]).duration(20)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(ROBOT_ARM_IV)
-                .input(FLUID_REGULATOR_IV)
-                .input(SENSOR_IV)
-                .input(OrePrefix.circuit, MarkerMaterials.Tier.IV)
-                .circuitMeta(2)
-                .fluidInputs(Materials.Tin.getFluid(L))
-                .output(PRECISE_DUAL_COVER_IV)
-                .EUt(VA[IV]).duration(20)
-                .buildAndRegister();
+        for (int tier = LV; tier < LuV; tier++) {
+            ASSEMBLER_RECIPES.recipeBuilder()
+                    .input(RecipeAssists.getRobotArmByTier(tier))
+                    .input(RecipeAssists.getFluidRegulatorByTier(tier))
+                    .input(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(tier))
+                    .circuitMeta(2)
+                    .fluidInputs(Materials.SolderingAlloy.getFluid(L / 2))
+                    .output(RecipeAssists.getPreciseDualCoverByTier(tier))
+                    .EUt(VA[tier]).duration(20)
+                    .buildAndRegister();
+        }
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(ROBOT_ARM_LuV)
