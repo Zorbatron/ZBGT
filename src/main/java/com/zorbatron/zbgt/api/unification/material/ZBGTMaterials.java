@@ -1,6 +1,8 @@
 package com.zorbatron.zbgt.api.unification.material;
 
 import com.zorbatron.zbgt.api.unification.material.materials.*;
+import com.zorbatron.zbgt.api.unification.material.modifications.ZBGTMaterialExtraFlags;
+import com.zorbatron.zbgt.api.unification.material.modifications.ZBGTMaterialExtraProperties;
 
 import gregtech.api.unification.material.Material;
 
