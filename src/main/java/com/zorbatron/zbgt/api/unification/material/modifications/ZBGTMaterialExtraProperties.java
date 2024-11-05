@@ -1,4 +1,4 @@
-package com.zorbatron.zbgt.api.unification.material.materials;
+package com.zorbatron.zbgt.api.unification.material.modifications;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
