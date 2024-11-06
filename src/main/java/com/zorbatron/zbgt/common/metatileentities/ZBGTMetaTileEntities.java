@@ -4,6 +4,7 @@ import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 
 import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityChemicalPlant;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCoAL;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.large.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.mega.*;
@@ -27,6 +28,7 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityLargeParallelHatch[] ZBGT_PARALLEL_HATCHES = new MetaTileEntityLargeParallelHatch[7];
     public static MetaTileEntityYOTTankMEHatch YOTTANK_ME_HATCH;
     public static MetaTileEntitySterileCleaningHatch STERILE_CLEANING_HATCH;
+    public static MetaTileEntityCatalystHatch CATALYST_HATCH;
 
     public static MetaTileEntityMegaEBF MEGA_EBF;
     public static MetaTileEntityMegaLCR MEGA_LCR;
@@ -35,6 +37,7 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityMegaABS MEGA_ABS;
     public static MetaTileEntityPreciseAssembler PRASS;
     public static MetaTileEntityMegaFusionReactor[] MEGA_FUSION = new MetaTileEntityMegaFusionReactor[3];
+    public static MetaTileEntityChemicalPlant CHEM_PLANT;
 
     public static MetaTileEntityCoAL CoAL;
 
@@ -98,6 +101,9 @@ public class ZBGTMetaTileEntities {
         STERILE_CLEANING_HATCH = registerMetaTileEntity(18018,
                 new MetaTileEntitySterileCleaningHatch(zbgtId("sterile_cleaning_hatch")));
 
+        CATALYST_HATCH = registerMetaTileEntity(18019,
+                new MetaTileEntityCatalystHatch(zbgtId("catalyst_hatch")));
+
         // 18050-18099 (50) reserved for multiblocks
         MEGA_EBF = registerMetaTileEntity(18050,
                 new MetaTileEntityMegaEBF(zbgtId("mega_ebf")));
@@ -145,5 +151,12 @@ public class ZBGTMetaTileEntities {
 
         QUACKER = registerMetaTileEntity(18069,
                 new MetaTileEntityQuacker(zbgtId("quacker")));
+
+        // nano forge
+        // pcb factory
+        // CAL
+
+        CHEM_PLANT = registerMetaTileEntity(18071,
+                new MetaTileEntityChemicalPlant(zbgtId("chem_plant")));
     }
 }
