@@ -6,33 +6,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.zorbatron.zbgt.api.capability.ICreativePart;
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 
+import gregtech.api.GTValues;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.*;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.util.BlockInfo;
-import gregtech.api.util.RelativeDirection;
+import gregtech.api.util.*;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 
 public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
 
@@ -52,6 +58,7 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
         casings.add(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE));
         casings.add(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST));
 
+        pipes.add(MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.BRONZE_PIPE));
         pipes.add(MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE));
         pipes.add(MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TITANIUM_PIPE));
         pipes.add(MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE));
@@ -82,7 +89,7 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
                 .where('X', casingPredicate)
                 .where('C', casingPredicate
                         .or(autoAbilities())
-                        .or(metaTileEntities(ZBGTMetaTileEntities.CATALYST_HATCH)))
+                        .or(metaTileEntities(ZBGTMetaTileEntities.CATALYST_HATCH).setPreviewCount(1)))
                 .where('M', TraceabilityPredicates.machineCasings())
                 .where('H', heatingCoils())
                 .where('P', pipePredicate)
@@ -153,6 +160,15 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
             this.coilTier = heatingCoilBlockStats.getTier();
         }
 
+        for (IMultiblockPart part : getMultiblockParts()) {
+            if (part instanceof MetaTileEntityMultiblockPart multiblockPart && !(part instanceof ICreativePart)) {
+                if (multiblockPart.getTier() > machineCasingTier) {
+                    invalidateStructure();
+                    return;
+                }
+            }
+        }
+
         writeCustomData(MULTIBLOCK_TIER_CHANGE_1, buf -> buf.writeInt(casingTier));
         writeCustomData(MULTIBLOCK_TIER_CHANGE_2, buf -> buf.writeInt(machineCasingTier));
         writeCustomData(MULTIBLOCK_TIER_CHANGE_3, buf -> buf.writeInt(pipeCasingTier));
@@ -202,6 +218,31 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
         this.machineCasingTier = buf.readInt();
         this.pipeCasingTier = buf.readInt();
         this.coilTier = buf.readInt();
+    }
+
+    @Override
+    protected void addDisplayText(List<ITextComponent> textList) {
+        MultiblockDisplayText.builder(textList, isStructureFormed())
+                .setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addEnergyUsageLine(recipeMapWorkable.getEnergyContainer())
+                .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
+                .addParallelsLine(recipeMapWorkable.getParallelLimit())
+                .addCustom(text -> {
+                    text.add(TextComponentUtil.stringWithColor(TextFormatting.GRAY,
+                            I18n.format("zbgt.machine.chem_plant.casing",
+                                    I18n.format(String.format("zbgt.machine.chem_plant.casing.%d", casingTier)))));
+                    text.add(TextComponentUtil.stringWithColor(TextFormatting.GRAY,
+                            I18n.format("zbgt.machine.chem_plant.machine_casing",
+                                    GTValues.VNF[machineCasingTier])));
+                    text.add(TextComponentUtil.stringWithColor(TextFormatting.GRAY,
+                            I18n.format("zbgt.machine.chem_plant.pipe",
+                                    I18n.format(String.format("zbgt.machine.chem_plant.pipe.%d", pipeCasingTier)))));
+                    text.add(TextComponentUtil.stringWithColor(TextFormatting.GRAY,
+                            I18n.format("zbgt.machine.chem_plant.coil",
+                                    TextFormattingUtil.formatNumbers(coilTier))));
+                })
+                .addWorkingStatusLine()
+                .addProgressLine(recipeMapWorkable.getProgressPercent());
     }
 
     @SideOnly(Side.CLIENT)

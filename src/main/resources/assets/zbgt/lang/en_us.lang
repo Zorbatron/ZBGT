@@ -73,6 +73,8 @@ zbgt.machine.yottank_me_hatch.sticky.disabled=Enable sticky mode
 zbgt.machine.sterile_cleaning_hatch.name=Automatic Sterilization Maintenance Hatch
 zbgt.machine.sterile_cleaning_hatch.tooltip=For automatically maintaining Multiblocks with Cleaning, but sterile!
 
+zbgt.machine.catalyst_hatch.name=Catalyst Housing
+
 
 # Covers
 metaitem.cover.dual_cover.lv.name=LV Dual Cover
@@ -233,6 +235,22 @@ zbgt.machine.large_air_collector.tooltip=Atmosphere Vacuum
 
 zbgt.machine.large_alloy_smelter.name=Zyngen
 zbgt.machine.large_alloy_smelter.tooltip=Gains a 5%% energy discount per coil tier
+
+zbgt.machine.chem_plant.name=ExxonMobil Chemical Plant
+zbgt.machine.chem_plant.casing=Casing: %s
+zbgt.machine.chem_plant.casing.0=Bronze
+zbgt.machine.chem_plant.casing.1=Steel
+zbgt.machine.chem_plant.casing.2=Aluminum
+zbgt.machine.chem_plant.casing.3=Stainless Steel
+zbgt.machine.chem_plant.casing.4=Titanium
+zbgt.machine.chem_plant.casing.5=Tungstensteel
+zbgt.machine.chem_plant.machine_casing=Machine Casing: %s
+zbgt.machine.chem_plant.pipe=Pipe: %s
+zbgt.machine.chem_plant.pipe.0=Bronze
+zbgt.machine.chem_plant.pipe.1=Steel
+zbgt.machine.chem_plant.pipe.2=Titanium
+zbgt.machine.chem_plant.pipe.3=Tungstensteel
+zbgt.machine.chem_plant.coil=Coil Tier: %s
 
 
 # Multiblock Casings
