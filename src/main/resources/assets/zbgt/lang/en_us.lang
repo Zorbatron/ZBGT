@@ -246,10 +246,6 @@ zbgt.machine.chem_plant.casing.4=Titanium
 zbgt.machine.chem_plant.casing.5=Tungstensteel
 zbgt.machine.chem_plant.machine_casing=Machine Casing: %s
 zbgt.machine.chem_plant.pipe=Pipe: %s
-zbgt.machine.chem_plant.pipe.0=Bronze
-zbgt.machine.chem_plant.pipe.1=Steel
-zbgt.machine.chem_plant.pipe.2=Titanium
-zbgt.machine.chem_plant.pipe.3=Tungstensteel
 zbgt.machine.chem_plant.coil=Coil Tier: %s
 
 

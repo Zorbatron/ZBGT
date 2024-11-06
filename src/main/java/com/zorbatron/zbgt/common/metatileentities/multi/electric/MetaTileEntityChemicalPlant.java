@@ -3,11 +3,12 @@ package com.zorbatron.zbgt.common.metatileentities.multi.electric;
 import static com.zorbatron.zbgt.api.capability.ZBGTDataCodes.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -16,12 +17,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.capability.ICreativePart;
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
+import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
+import com.zorbatron.zbgt.common.block.blocks.CreativeHeatingCoil;
 import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 
-import gregtech.api.GTValues;
+import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -31,6 +35,7 @@ import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.*;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.util.*;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -38,6 +43,7 @@ import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 
 public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
@@ -89,7 +95,7 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
                 .where('X', casingPredicate)
                 .where('C', casingPredicate
                         .or(autoAbilities())
-                        .or(metaTileEntities(ZBGTMetaTileEntities.CATALYST_HATCH).setPreviewCount(1)))
+                        .or(metaTileEntities(ZBGTMetaTileEntities.CATALYST_HATCH)))
                 .where('M', TraceabilityPredicates.machineCasings())
                 .where('H', heatingCoils())
                 .where('P', pipePredicate)
@@ -135,6 +141,57 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
     }, () -> pipes.stream()
             .map(entry -> new BlockInfo(entry, null))
             .toArray(BlockInfo[]::new)).addTooltip("gregtech.multiblock.pattern.error.chem_plant_pipe");
+
+    @Override
+    public List<MultiblockShapeInfo> getMatchingShapes() {
+        List<MultiblockShapeInfo> shapes = new ArrayList<>();
+
+        MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
+                .aisle("XEXZXEX", "X     X", "X     X", "X     X", "X     X", "X     X", "XXXXXXX")
+                .aisle("XMMMMMX", " MMMMM ", "       ", "       ", "       ", " MMMMM ", "XXXXXXX")
+                .aisle("XMMMMMX", " MHHHM ", "  PPP  ", "  HHH  ", "  PPP  ", " MHHHM ", "XXXXXXX")
+                .aisle("XMMMMMX", " MHHHM ", "  PPP  ", "  HHH  ", "  PPP  ", " MHHHM ", "XXXXXXX")
+                .aisle("XMMMMMX", " MHHHM ", "  PPP  ", "  HHH  ", "  PPP  ", " MHHHM ", "XXXXXXX")
+                .aisle("XMMMMMX", " MMMMM ", "       ", "       ", "       ", " MMMMM ", "XXXXXXX")
+                .aisle("TABSCDX", "X     X", "X     X", "X     X", "X     X", "X     X", "XXXXXXX")
+                .where('S', ZBGTMetaTileEntities.CHEM_PLANT, EnumFacing.SOUTH)
+                .where('T', ZBGTMetaTileEntities.CATALYST_HATCH, EnumFacing.SOUTH)
+                .where('Z', MetaTileEntities.MAINTENANCE_HATCH, EnumFacing.NORTH)
+                .where('A', MetaTileEntities.ITEM_IMPORT_BUS[0], EnumFacing.SOUTH)
+                .where('B', MetaTileEntities.FLUID_IMPORT_HATCH[0], EnumFacing.SOUTH)
+                .where('C', MetaTileEntities.FLUID_EXPORT_HATCH[0], EnumFacing.SOUTH)
+                .where('D', MetaTileEntities.ITEM_EXPORT_BUS[0], EnumFacing.SOUTH)
+                .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[0], EnumFacing.NORTH);
+
+        IBlockState creativeCoil = ZBGTMetaBlocks.CREATIVE_HEATING_COIL
+                .getState(CreativeHeatingCoil.CoilType.CREATIVE_COIL);
+        List<IBlockState> coilStates = new ArrayList<>();
+        GregTechAPI.HEATING_COILS.entrySet().stream()
+                .sorted(Comparator.comparingInt(entry -> entry.getValue().getTier())).forEachOrdered(entry -> {
+                    IBlockState coilState = entry.getKey();
+                    if (!coilState.equals(creativeCoil)) {
+                        coilStates.add(coilState);
+                    }
+                });
+        coilStates.add(creativeCoil);
+
+        ZBGTAPI.MACHINE_CASINGS.entrySet().stream()
+                .sorted(Comparator.comparingInt(entry -> entry.getValue().ordinal()))
+                .filter(entry -> entry.getValue().ordinal() > 0)
+                .forEach(entry -> {
+                    int tier = entry.getValue().ordinal() - 1;
+                    shapes.add(builder
+                            .where('H',
+                                    tier >= coilStates.size() ? coilStates.get(coilStates.size() - 1) :
+                                            coilStates.get(tier))
+                            .where('X', tier >= casings.size() ? casings.get(casings.size() - 1) : casings.get(tier))
+                            .where('P', tier >= pipes.size() ? pipes.get(pipes.size() - 1) : pipes.get(tier))
+                            .where('M', entry.getKey())
+                            .build());
+                });
+
+        return shapes;
+    }
 
     @Override
     protected void formStructure(PatternMatchContext context) {
@@ -226,34 +283,51 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
                 .setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
                 .addEnergyUsageLine(recipeMapWorkable.getEnergyContainer())
                 .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
-                .addParallelsLine(recipeMapWorkable.getParallelLimit())
-                .addCustom(text -> {
-                    text.add(TextComponentUtil.stringWithColor(TextFormatting.GRAY,
-                            I18n.format("zbgt.machine.chem_plant.casing",
-                                    I18n.format(String.format("zbgt.machine.chem_plant.casing.%d", casingTier)))));
-                    text.add(TextComponentUtil.stringWithColor(TextFormatting.GRAY,
-                            I18n.format("zbgt.machine.chem_plant.machine_casing",
-                                    GTValues.VNF[machineCasingTier])));
-                    text.add(TextComponentUtil.stringWithColor(TextFormatting.GRAY,
-                            I18n.format("zbgt.machine.chem_plant.pipe",
-                                    I18n.format(String.format("zbgt.machine.chem_plant.pipe.%d", pipeCasingTier)))));
-                    text.add(TextComponentUtil.stringWithColor(TextFormatting.GRAY,
-                            I18n.format("zbgt.machine.chem_plant.coil",
-                                    TextFormattingUtil.formatNumbers(coilTier))));
+                .addCustom(tl -> {
+                    if (isStructureFormed()) {
+                        int processingSpeed = coilTier == 0 ? 75 : 50 * (coilTier + 1);
+                        ITextComponent speedIncrease = TextComponentUtil.stringWithColor(
+                                getSpeedColor(processingSpeed),
+                                processingSpeed + "%");
+
+                        ITextComponent base = TextComponentUtil.translationWithColor(
+                                TextFormatting.GRAY,
+                                "gregtech.multiblock.pyrolyse_oven.speed",
+                                speedIncrease);
+
+                        ITextComponent hover = TextComponentUtil.translationWithColor(
+                                TextFormatting.GRAY,
+                                "gregtech.multiblock.pyrolyse_oven.speed_hover");
+
+                        tl.add(TextComponentUtil.setHover(base, hover));
+                    }
                 })
+                .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()
                 .addProgressLine(recipeMapWorkable.getProgressPercent());
+    }
+
+    private TextFormatting getSpeedColor(int speed) {
+        if (speed < 100) {
+            return TextFormatting.RED;
+        } else if (speed == 100) {
+            return TextFormatting.GRAY;
+        } else if (speed < 250) {
+            return TextFormatting.GREEN;
+        } else {
+            return TextFormatting.LIGHT_PURPLE;
+        }
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return switch (casingTier) {
-            case (2) -> Textures.SOLID_STEEL_CASING;
-            case (3) -> Textures.FROST_PROOF_CASING;
-            case (4) -> Textures.CLEAN_STAINLESS_STEEL_CASING;
-            case (5) -> Textures.STABLE_TITANIUM_CASING;
-            case (6) -> Textures.ROBUST_TUNGSTENSTEEL_CASING;
+            case (1) -> Textures.SOLID_STEEL_CASING;
+            case (2) -> Textures.FROST_PROOF_CASING;
+            case (3) -> Textures.CLEAN_STAINLESS_STEEL_CASING;
+            case (4) -> Textures.STABLE_TITANIUM_CASING;
+            case (5) -> Textures.ROBUST_TUNGSTENSTEEL_CASING;
             default -> Textures.BRONZE_PLATED_BRICKS;
         };
     }
@@ -270,6 +344,29 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
 
         public ChemicalPlantRecipeLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
+        }
+
+        @Override
+        protected void modifyOverclockPost(int[] resultOverclock, @NotNull IRecipePropertyStorage storage) {
+            super.modifyOverclockPost(resultOverclock, storage);
+
+            if (coilTier == -1)
+                return;
+
+            if (coilTier == 0) {
+                // 75% speed with cupronickel (coilTier = 0)
+                resultOverclock[1] = 4 * resultOverclock[1] / 3;
+            } else {
+                // each coil above kanthal (coilTier = 1) is 50% faster
+                resultOverclock[1] = resultOverclock[1] * 2 / (coilTier + 1);
+            }
+
+            resultOverclock[1] = Math.max(1, resultOverclock[1]);
+        }
+
+        @Override
+        public int getParallelLimit() {
+            return 2 * (pipeCasingTier + 1);
         }
     }
 }
