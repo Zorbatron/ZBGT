@@ -3,6 +3,8 @@ package com.zorbatron.zbgt.mixin;
 import java.util.List;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
@@ -27,6 +29,7 @@ public class PSSMixin {
                 ZBGTConfig.multiblockSettings.overriddenPSSHeight : maxRepeat);
     }
 
+    @SideOnly(Side.CLIENT)
     @WrapOperation(method = "addInformation",
                    at = @At(
                             value = "INVOKE",
