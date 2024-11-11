@@ -9,9 +9,11 @@ import com.zorbatron.zbgt.api.recipes.maps.RecipeMapCAL;
 import com.zorbatron.zbgt.api.recipes.maps.RecipeMapCoAL;
 import com.zorbatron.zbgt.api.recipes.maps.RecipeMapPreciseAssembler;
 
+import gregtech.api.GTValues;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.unification.material.Materials;
 import gregtech.core.sound.GTSoundEvents;
 
 public final class ZBGTRecipeMaps {
@@ -28,7 +30,12 @@ public final class ZBGTRecipeMaps {
             "circuit_assembly_line_recipes",
             new CALRecipeBuilder())
                     .setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT_ASSEMBLER, ProgressWidget.MoveType.HORIZONTAL)
-                    .setSound(GTSoundEvents.ASSEMBLER);
+                    .setSound(GTSoundEvents.ASSEMBLER)
+                    .onRecipeBuild(recipeBuilder -> {
+                        if (recipeBuilder.getFluidInputs().isEmpty()) {
+                            recipeBuilder.fluidInputs(Materials.SolderingAlloy.getFluid(GTValues.L / 2));
+                        }
+                    });
 
     public static void modifyMaps() {
         POLARIZER_RECIPES.setMaxFluidInputs(1);

@@ -96,7 +96,8 @@ public class MetaTileEntityCircuitAssemblyLine extends MultiMapMultiblockControl
 
     @Override
     public boolean checkRecipe(@NotNull Recipe recipe, boolean consumeIfSuccess) {
-        if (consumeIfSuccess) return true; // don't check twice
+        if (consumeIfSuccess || getRecipeMapIndex() == 1) return true; // don't check twice and don't check ordered-ness
+                                                                       // when in normal circuit assembler mode
         // check ordered items
         if (ConfigHolder.machines.orderedAssembly) {
             List<GTRecipeInput> inputs = recipe.getInputs();

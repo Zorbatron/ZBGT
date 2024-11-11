@@ -302,6 +302,7 @@ zbgt.machine.large_alloy_smelter.tooltip=Gains a 5%% energy discount per coil ti
 
 zbgt.machine.cal.name=Circuit Assembly Line
 zbgt.machine.cal.tooltip=Does not lose efficiency when overclocked
+zbgt.machine.cal.tooltip_ordered_items=When in Circuit Assembly Line mode, §fitems§7 must be in the correct order to run.
 recipemap.circuit_assembly_line_recipes.name=Circuit Assembly Line
 
 
