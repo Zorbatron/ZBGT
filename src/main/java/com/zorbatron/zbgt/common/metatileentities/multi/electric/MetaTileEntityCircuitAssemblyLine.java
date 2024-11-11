@@ -127,7 +127,7 @@ public class MetaTileEntityCircuitAssemblyLine extends MultiMapMultiblockControl
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         if (ConfigHolder.machines.orderedAssembly) {
-            tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_items"));
+            tooltip.add(I18n.format("zbgt.machine.cal.tooltip_ordered_items"));
         }
     }
 }
