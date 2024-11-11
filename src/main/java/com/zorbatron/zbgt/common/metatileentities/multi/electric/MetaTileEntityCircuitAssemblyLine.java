@@ -64,12 +64,11 @@ public class MetaTileEntityCircuitAssemblyLine extends MultiMapMultiblockControl
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setExactLimit(1)))
                 .where('R', states(getGlassState()))
                 .where('T', states(getAssemblyCasingState()))
-                .where('F', states(getCasingState())
-                        .or(autoAbilities(true, false)))
                 .where('I', abilities(MultiblockAbility.IMPORT_ITEMS))
                 .where('O', abilities(MultiblockAbility.EXPORT_ITEMS))
                 .where('F', states(getCasingState())
-                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setPreviewCount(1)))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                        .or(autoAbilities(true, false)))
                 .build();
     }
 
