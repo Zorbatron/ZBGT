@@ -29,6 +29,7 @@ import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IHeatingCoil;
+import gregtech.api.capability.IMufflerHatch;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -218,5 +219,23 @@ public class MetaTileEntityQueebf extends RecipeMapMultiblockController implemen
                 new TextComponentTranslation(TextFormattingUtil.formatNumbers(blastFurnaceTemperature) + "K")
                         .setStyle(new Style().setColor(TextFormatting.RED))));
         return list;
+    }
+
+    @Override
+    public void outputRecoveryItems() {
+        List<IMufflerHatch> mufflers = getAbilities(MultiblockAbility.MUFFLER_HATCH);
+        for (IMufflerHatch muffler : mufflers) {
+            muffler.recoverItemsTable(recoveryItems);
+        }
+    }
+
+    @Override
+    public void outputRecoveryItems(int parallel) {
+        List<IMufflerHatch> mufflers = getAbilities(MultiblockAbility.MUFFLER_HATCH);
+        for (IMufflerHatch muffler : mufflers) {
+            for (int i = 0; i < parallel; i++) {
+                muffler.recoverItemsTable(recoveryItems);
+            }
+        }
     }
 }

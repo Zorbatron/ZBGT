@@ -194,7 +194,7 @@ public class MultiblockRecipes {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(ZBGTMetaTileEntities.MEGA_FUSION[0], 48)
+                .input(MetaTileEntities.FUSION_REACTOR[1], 48)
                 .input(circuit, getMarkerMaterialByTier(ZPM))
                 .input(circuit, getMarkerMaterialByTier(ZPM))
                 .input(circuit, getMarkerMaterialByTier(ZPM))
@@ -214,7 +214,7 @@ public class MultiblockRecipes {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(ZBGTMetaTileEntities.MEGA_FUSION[1], 48)
+                .input(MetaTileEntities.FUSION_REACTOR[2], 48)
                 .input(circuit, getMarkerMaterialByTier(UV))
                 .input(circuit, getMarkerMaterialByTier(UV))
                 .input(circuit, getMarkerMaterialByTier(UV))

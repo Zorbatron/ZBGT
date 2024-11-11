@@ -1,10 +1,9 @@
-package com.zorbatron.zbgt.api.unification.material.materials;
+package com.zorbatron.zbgt.api.unification.material.modifications;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.LithiumChloride;
-import static gregtech.api.unification.material.properties.PropertyKey.INGOT;
-import static gregtech.api.unification.material.properties.PropertyKey.WIRE;
+import static gregtech.api.unification.material.properties.PropertyKey.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +18,7 @@ import com.zorbatron.zbgt.api.util.ZBGTUtility;
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.properties.FluidProperty;
-import gregtech.api.unification.material.properties.IngotProperty;
-import gregtech.api.unification.material.properties.PropertyKey;
-import gregtech.api.unification.material.properties.WireProperties;
+import gregtech.api.unification.material.properties.*;
 
 public final class ZBGTMaterialExtraProperties {
 
@@ -30,6 +26,8 @@ public final class ZBGTMaterialExtraProperties {
         ingots();
         fluids();
         wires();
+        dusts();
+        ores();
     }
 
     private static void ingots() {
@@ -74,5 +72,23 @@ public final class ZBGTMaterialExtraProperties {
                     materialPair.getRight()[1],
                     materialPair.getRight()[2]));
         }
+    }
+
+    private static void dusts() {
+        Material[] materials = { Ytterbium };
+
+        for (Material material : materials) {
+            material.setProperty(DUST, new DustProperty());
+        }
+    }
+
+    private static void ores() {
+        Ytterbium.setProperty(ORE, new OreProperty());
+
+        OreProperty titaniumOre = new OreProperty();
+        titaniumOre.addOreByProducts(Almandine);
+        Titanium.setProperty(ORE, titaniumOre);
+
+        Niobium.setProperty(ORE, new OreProperty());
     }
 }

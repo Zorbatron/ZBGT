@@ -374,6 +374,9 @@ tile.misc_casing.compact_fusion_coil_4.name=Compact Fusion Coil MK-II Finaltype
 
 tile.misc_casing.inconel_reinforced_casing.name=Inconel Reinforced Casing
 
+tile.creative_heating_coil.creative_heating_coil.name=Creative Heating Coil
+
+
 # Misc
 zbgt.laser_enabled.1=Can use
 zbgt.laser_enabled.2= Laser Hatches
@@ -388,6 +391,7 @@ zbgt.subtitle.quack=Quacker Quacked
 # Materials
 zbgt.material.adamantium=Adamantium
 zbgt.material.zb_liquid_nitrogen=Liquid Nitrogen
+zbgt.material.quantium=Quantium
 
 zbgt.material.indalloy_140=Indalloy 140
 zbgt.material.mar_200=MAR-M200 Steel
@@ -402,6 +406,8 @@ zbgt.material.ardite=Ardite
 zbgt.material.enderium=Enderium
 zbgt.material.energetic_alloy=Energetic Alloy
 zbgt.material.luminessence=Luminessence
+zbgt.material.egline_steel_base=Egline Steel Base Compound
+zbgt.material.inconel_792=Inconel-792
 
 zbgt.material.mar_ce_m_200=MAR-Ce-M200
 zbgt.material.artherium_sn=Artherium-Sn
@@ -410,12 +416,15 @@ zbgt.material.manyullyn=Manyullyn
 zbgt.material.signalum=Signalum
 zbgt.material.vibrant_alloy=Vibrant Alloy
 zbgt.material.lumium=Lumium
+zbgt.material.eglin_steel=Eglin Steel
 
 zbgt.material.fluxed_electrum=Fluxed Electrum
 zbgt.material.hikarium=Hikarium
+zbgt.material.pikyonium_64_b=Pikyonium 64B
 
 zbgt.material.special_ceramics=Special Ceramics
 
 
 # Ore veins
 zbgt.vein.adamantium=Adamantium vein
+zbgt.vein.quantium=Quantium Vein

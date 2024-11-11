@@ -43,7 +43,8 @@ public final class ZBGTSecondDegreeMaterials {
                 .liquid(new FluidBuilder().temperature(8700))
                 .color(0xB0B812).iconSet(MaterialIconSet.SHINY)
                 .flags(DISABLE_DECOMPOSITION, GENERATE_SMALL_GEAR)
-                .components(TanmolyiumBetaC, 14, Tungsten, 10, NiobiumTitanium, 9, RhodiumPlatedPalladium, 8)
+                .components(TanmolyiumBetaC, 14, Tungsten, 10, NiobiumTitanium, 9, RhodiumPlatedPalladium, 8, Quantium,
+                        7)
                 .blast(b -> b
                         .temp(8700, BlastProperty.GasTier.HIGH)
                         .blastStats(VA[UV], 20 * 46 + 8))
@@ -93,5 +94,12 @@ public final class ZBGTSecondDegreeMaterials {
         } else {
             id += 4;
         }
+
+        EglinSteel = new Material.Builder(id++, zbgtId("eglin_steel"))
+                .ingot().liquid(new FluidBuilder().temperature(1320))
+                .color(0x8b4513).iconSet(METALLIC)
+                .flags(EXT_METAL, DECOMPOSITION_BY_CENTRIFUGING)
+                .components(EglinSteelBase, 10, Sulfur, 1, Silicon, 4, Carbon, 1)
+                .build();
     }
 }
