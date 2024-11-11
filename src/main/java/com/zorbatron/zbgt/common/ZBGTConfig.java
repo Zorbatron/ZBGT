@@ -64,6 +64,16 @@ public class ZBGTConfig {
                 "Default: true" })
         @Config.Name("Parallel Hatch Recipes")
         public boolean enableParallelHatchRecipes = true;
+
+        @Config.Comment({ "Register 16 -> 1 recipes for wraps",
+                "Default: true" })
+        @Config.Name("Wrap Recipes")
+        public boolean wrapRecipes = true;
+
+        @Config.Comment({ "Register CAL circuit recipes",
+                "Default: true" })
+        @Config.Name("CAL Circuit Recipes")
+        public boolean calCircuitRecipes = true;
     }
 
     @Config.Name("World Generation Settings")

@@ -207,5 +207,84 @@ public class ZBGTMetaItem extends StandardMetaItem {
                 .setInvisibleIf(ZBGTAPI.nomiLabsCompat);
         RADIATION_PROTECTION_PLATE = addItem(55, "radiation_protection_plate");
         ADVANCED_RADIATION_PROTECTION_PLATE = addItem(56, "advanced_radiation_protection_plate");
+
+        // Wrapped circuits 57-71
+        WRAPPED_CIRCUIT_ULV = addItem(57, "wrapped.circuit.ulv");
+        WRAPPED_CIRCUIT_LV = addItem(58, "wrapped.circuit.lv");
+        WRAPPED_CIRCUIT_MV = addItem(59, "wrapped.circuit.mv");
+        WRAPPED_CIRCUIT_HV = addItem(60, "wrapped.circuit.hv");
+        WRAPPED_CIRCUIT_EV = addItem(61, "wrapped.circuit.ev");
+        WRAPPED_CIRCUIT_IV = addItem(62, "wrapped.circuit.iv");
+        WRAPPED_CIRCUIT_LuV = addItem(63, "wrapped.circuit.luv");
+        WRAPPED_CIRCUIT_ZPM = addItem(64, "wrapped.circuit.zpm");
+        WRAPPED_CIRCUIT_UV = addItem(65, "wrapped.circuit.uv");
+        WRAPPED_CIRCUIT_UHV = addItem(66, "wrapped.circuit.uhv");
+        WRAPPED_CIRCUIT_UEV = addItem(67, "wrapped.circuit.uev")
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        WRAPPED_CIRCUIT_UIV = addItem(68, "wrapped.circuit.uiv")
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        WRAPPED_CIRCUIT_UXV = addItem(69, "wrapped.circuit.uxv")
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        WRAPPED_CIRCUIT_OpV = addItem(70, "wrapped.circuit.opv")
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        WRAPPED_CIRCUIT_MAX = addItem(71, "wrapped.circuit.max")
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+
+        // Wrapped SMDs 72-81
+        WRAPPED_SMD_CAPACITOR = addItem(72, "wrapped.smd.capacitor");
+        WRAPPED_SMD_DIODE = addItem(73, "wrapped.smd.diode");
+        WRAPPED_SMD_INDUCTOR = addItem(74, "wrapped.smd.inductor");
+        WRAPPED_SMD_RESISTOR = addItem(75, "wrapped.smd.resistor");
+        WRAPPED_SMD_TRANSISTOR = addItem(76, "wrapped.smd.transistor");
+
+        WRAPPED_ADVANCED_SMD_CAPACITOR = addItem(77, "wrapped.smd.advanced_capacitor");
+        WRAPPED_ADVANCED_SMD_DIODE = addItem(78, "wrapped.smd.advanced_diode");
+        WRAPPED_ADVANCED_SMD_INDUCTOR = addItem(79, "wrapped.smd.advanced_inductor");
+        WRAPPED_ADVANCED_SMD_RESISTOR = addItem(80, "wrapped.smd.advanced_resistor");
+        WRAPPED_ADVANCED_SMD_TRANSISTOR = addItem(81, "wrapped.smd.advanced_transistor");
+
+        // Wrapped boards 82-88
+        WRAPPED_BOARD_COATED = addItem(82, "wrapped.board.coated");
+        WRAPPED_BOARD_PHENOLIC = addItem(83, "wrapped.board.phenolic");
+        WRAPPED_BOARD_PLASTIC = addItem(84, "wrapped.board.plastic");
+        WRAPPED_BOARD_EPOXY = addItem(85, "wrapped.board.epoxy");
+        WRAPPED_BOARD_FIBER_REINFORCED = addItem(86, "wrapped.board.fiber_reinforced");
+        WRAPPED_BOARD_MULTILAYER_FIBER_REINFORCED = addItem(87, "wrapped.board.multilayer_fiber_reinforced");
+        WRAPPED_BOARD_WETWARE = addItem(88, "wrapped.board.wetware");
+
+        // Wrapped circuit boards 89-95
+        WRAPPED_CIRCUIT_BOARD_BASIC = addItem(89, "wrapped.circuit_board.basic");
+        WRAPPED_CIRCUIT_BOARD_GOOD = addItem(90, "wrapped.circuit_board.good");
+        WRAPPED_CIRCUIT_BOARD_PLASTIC = addItem(91, "wrapped.circuit_board.plastic");
+        WRAPPED_CIRCUIT_BOARD_ADVANCED = addItem(92, "wrapped.circuit_board.advanced");
+        WRAPPED_CIRCUIT_BOARD_ELITE = addItem(93, "wrapped.circuit_board.elite");
+        WRAPPED_CIRCUIT_BOARD_EXTREME = addItem(94, "wrapped.circuit_board.extreme");
+        WRAPPED_CIRCUIT_BOARD_WETWARE = addItem(95, "wrapped.circuit_board.wetware");
+
+        // Wrapped chips 96-111
+        WRAPPED_CHIP_SOC_SIMPLE = addItem(96, "wrapped.chip.soc_simple");
+        WRAPPED_CHIP_SOC = addItem(97, "wrapped.chip.soc");
+        WRAPPED_CHIP_SOC_ADVANCED = addItem(98, "wrapped.chip.soc_advanced");
+        WRAPPED_CHIP_SOC_HIGHLY_ADVANCED = addItem(99, "wrapped.chip.soc_highly_advanced");
+
+        WRAPPED_CHIP_CPU = addItem(100, "wrapped.chip.cpu");
+        WRAPPED_CHIP_CPU_NANO = addItem(101, "wrapped.chip.cpu_nano");
+        WRAPPED_CHIP_CPU_QUBIT = addItem(102, "wrapped.chip.cpu_qubit");
+
+        WRAPPED_CHIP_PIC_ULTRA_LOW = addItem(103, "wrapped.chip.pic_ultra_low");
+        WRAPPED_CHIP_PIC_LOW = addItem(104, "wrapped.chip.pic_low");
+        WRAPPED_CHIP_PIC = addItem(105, "wrapped.chip.pic");
+        WRAPPED_CHIP_PIC_HIGH = addItem(106, "wrapped.chip.pic_high");
+        WRAPPED_CHIP_PIC_ULTRA_HIGH = addItem(107, "wrapped.chip.pic_ultra_high");
+
+        WRAPPED_CHIP_RAM = addItem(108, "wrapped.chip.ram");
+        WRAPPED_CHIP_NOR = addItem(109, "wrapped.chip.nor");
+        WRAPPED_CHIP_NAND = addItem(110, "wrapped.chip.nand");
+        WRAPPED_CHIP_INTEGRATED_LOGIC = addItem(111, "wrapped.chip.integrated_logic");
+
+        WRAPPED_NEURO_PROCESSOR = addItem(112, "wrapped.misc.neuro_processor");
+        WRAPPED_ENGRAVED_CRYSTAL_CHIP = addItem(113, "wrapped.misc.engraved_crystal_chip");
+        WRAPPED_CRYSTAL_CPU = addItem(114, "wrapped.misc.crystal_cpu");
+        WRAPPED_CRYSTAL_SOC = addItem(115, "wrapped.misc.crystal_soc");
     }
 }
