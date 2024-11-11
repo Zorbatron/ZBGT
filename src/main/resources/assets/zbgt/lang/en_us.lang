@@ -301,7 +301,7 @@ zbgt.machine.large_alloy_smelter.name=Zyngen
 zbgt.machine.large_alloy_smelter.tooltip=Gains a 5%% energy discount per coil tier
 
 zbgt.machine.cal.name=Circuit Assembly Line
-zbgt.machine.cal.tooltip=
+zbgt.machine.cal.tooltip=Does not lose efficiency when overclocked
 recipemap.circuit_assembly_line_recipes.name=Circuit Assembly Line
 
 

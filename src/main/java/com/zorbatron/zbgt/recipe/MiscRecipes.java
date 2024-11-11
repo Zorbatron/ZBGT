@@ -8,11 +8,8 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 
-import net.minecraft.init.Blocks;
-
 import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
 import com.zorbatron.zbgt.api.ZBGTAPI;
-import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
 
@@ -25,12 +22,6 @@ import gregtech.common.items.MetaItems;
 public class MiscRecipes {
 
     protected static void init() {
-        ZBGTRecipeMaps.CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(Blocks.DIRT)
-                .output(Blocks.DIAMOND_BLOCK)
-                .EUt(VA[EV]).duration(20 * 60)
-                .buildAndRegister();
-
         genericCircuits();
         magneticFluids();
         ggCircuits();

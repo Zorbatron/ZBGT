@@ -2,10 +2,21 @@ package com.zorbatron.zbgt.common.metatileentities.multi.electric;
 
 import static gregtech.api.util.RelativeDirection.*;
 
+import java.util.List;
+import java.util.function.Function;
+
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 
@@ -17,9 +28,13 @@ import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.ingredients.GTRecipeInput;
+import gregtech.api.util.RelativeDirection;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockMultiblockCasing;
@@ -42,7 +57,7 @@ public class MetaTileEntityCircuitAssemblyLine extends MultiMapMultiblockControl
     protected @NotNull BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start(FRONT, UP, RIGHT)
                 .aisle("FIF", "RTR", "SGG")
-                .aisle("FIF", "RTR", "GGG").setRepeatable(3, 7)
+                .aisle("FIF", "RTR", "GGG").setRepeatable(5)
                 .aisle("FOF", "RTR", "GGG")
                 .where('S', selfPredicate())
                 .where('G', states(getGrateState())
@@ -74,7 +89,44 @@ public class MetaTileEntityCircuitAssemblyLine extends MultiMapMultiblockControl
     }
 
     @Override
+    protected Function<BlockPos, Integer> multiblockPartSorter() {
+        // player's right when looking at the controller, but the controller's left
+        return RelativeDirection.LEFT.getSorter(getFrontFacing(), getUpwardsFacing(), isFlipped());
+    }
+
+    @Override
+    public boolean checkRecipe(@NotNull Recipe recipe, boolean consumeIfSuccess) {
+        if (consumeIfSuccess) return true; // don't check twice
+        // check ordered items
+        if (ConfigHolder.machines.orderedAssembly) {
+            List<GTRecipeInput> inputs = recipe.getInputs();
+            List<IItemHandlerModifiable> itemInputInventory = getAbilities(MultiblockAbility.IMPORT_ITEMS);
+
+            // slot count is not enough, so don't try to match it
+            if (itemInputInventory.size() < inputs.size()) return false;
+
+            for (int i = 0; i < inputs.size(); i++) {
+                if (!inputs.get(i).acceptsStack(itemInputInventory.get(i).getStackInSlot(0))) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return Textures.SOLID_STEEL_CASING;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        if (ConfigHolder.machines.orderedAssembly) {
+            tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_items"));
+        }
     }
 }
