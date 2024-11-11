@@ -33,7 +33,8 @@ public final class ZBGTRecipeMaps {
                     .setSound(GTSoundEvents.ASSEMBLER)
                     .onRecipeBuild(recipeBuilder -> {
                         if (recipeBuilder.getFluidInputs().isEmpty()) {
-                            recipeBuilder.fluidInputs(Materials.SolderingAlloy.getFluid(GTValues.L / 2));
+                            recipeBuilder.fluidInputs(Materials.SolderingAlloy
+                                    .getFluid(Math.max(1, (GTValues.L / 2) * recipeBuilder.getSolderMultiplier())));
                         }
                     });
 
