@@ -10,7 +10,7 @@ import static gregtech.common.items.MetaItems.*;
 public class CALCircuits {
 
     public static void init() {
-        // LV
+        // T1
         CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(WRAPPED_CIRCUIT_BOARD_PLASTIC)
                 .input(WRAPPED_CHIP_CPU)
@@ -31,7 +31,7 @@ public class CALCircuits {
                 .EUt(VA[EV]).duration((int) (12 * (2.5 * 20)))
                 .buildAndRegister();
 
-        // MV
+        // T2
         CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(WRAPPED_CIRCUIT_BOARD_PLASTIC)
                 .input(WRAPPED_CHIP_CPU)
@@ -52,7 +52,30 @@ public class CALCircuits {
                 .EUt(VA[IV]).duration((int) (12 * (2.5 * 20)))
                 .buildAndRegister();
 
-        // HV
+        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(WRAPPED_CIRCUIT_BOARD_PLASTIC)
+                .input(PROCESSOR_MV, 16 * 2)
+                .input(WRAPPED_SMD_INDUCTOR, 4)
+                .input(WRAPPED_SMD_CAPACITOR, 8)
+                .input(WRAPPED_CHIP_RAM, 4)
+                .input(wireGtHex, RedAlloy)
+                .solderMultiplier(2)
+                .output(PROCESSOR_ASSEMBLY_HV, 16)
+                .EUt(VA[MV]).duration(12 * (20 * 20))
+                .buildAndRegister();
+
+        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(WRAPPED_CIRCUIT_BOARD_PLASTIC)
+                .input(PROCESSOR_ASSEMBLY_HV, 16 * 2)
+                .input(WRAPPED_SMD_DIODE, 4)
+                .input(WRAPPED_CHIP_RAM, 4)
+                .input(wireGtHex, Electrum, 2)
+                .input(stick, BlueAlloy, 16 * 4)
+                .output(WORKSTATION_EV, 16)
+                .EUt(VA[MV]).duration(12 * (20 * 20))
+                .buildAndRegister();
+
+        // T3
         CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(WRAPPED_CIRCUIT_BOARD_ADVANCED)
                 .input(WRAPPED_CHIP_CPU_NANO)
@@ -61,7 +84,7 @@ public class CALCircuits {
                 .input(WRAPPED_SMD_TRANSISTOR, 8)
                 .input(wireGtHex, Electrum)
                 .output(NANO_PROCESSOR_HV, 16 * 2)
-                .EUt(VA[EV]).duration((10 * 20) * 12)
+                .EUt(VA[EV]).duration(12 * (10 * 20))
                 .buildAndRegister();
 
         CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -72,7 +95,7 @@ public class CALCircuits {
                 .input(WRAPPED_ADVANCED_SMD_TRANSISTOR, 2)
                 .input(wireGtHex, Electrum)
                 .output(NANO_PROCESSOR_HV, 16 * 2)
-                .EUt(VA[EV]).duration((5 * 20) * 12)
+                .EUt(VA[EV]).duration(12 * (5 * 20))
                 .buildAndRegister();
 
         CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -84,7 +107,67 @@ public class CALCircuits {
                 .EUt(VA[LuV]).duration((int) (12 * (2.5 * 20)))
                 .buildAndRegister();
 
-        // EV
+        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(WRAPPED_CIRCUIT_BOARD_ADVANCED)
+                .input(NANO_PROCESSOR_HV, 16 * 2)
+                .input(WRAPPED_SMD_INDUCTOR, 4)
+                .input(WRAPPED_SMD_CAPACITOR, 8)
+                .input(WRAPPED_CHIP_RAM, 8)
+                .input(wireGtHex, Electrum, 2)
+                .solderMultiplier(2)
+                .output(NANO_PROCESSOR_ASSEMBLY_EV, 16)
+                .EUt(VA[EV]).duration(12 * (20 * 20))
+                .buildAndRegister();
+
+        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(WRAPPED_CIRCUIT_BOARD_ADVANCED)
+                .input(NANO_PROCESSOR_ASSEMBLY_EV, 16 * 2)
+                .input(WRAPPED_SMD_DIODE, 8)
+                .input(WRAPPED_CHIP_NOR, 4)
+                .input(WRAPPED_CHIP_RAM, 16)
+                .input(wireGtHex, Electrum, 2)
+                .solderMultiplier(2)
+                .output(NANO_COMPUTER_IV, 16)
+                .EUt(VA[EV]).duration(12 * (20 * 20))
+                .buildAndRegister();
+
+        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(WRAPPED_CIRCUIT_BOARD_ADVANCED)
+                .input(NANO_PROCESSOR_ASSEMBLY_EV, 16 * 2)
+                .input(WRAPPED_ADVANCED_SMD_DIODE, 2)
+                .input(WRAPPED_CHIP_NOR, 4)
+                .input(WRAPPED_CHIP_RAM, 16)
+                .input(wireGtHex, Electrum, 2)
+                .solderMultiplier(2)
+                .output(NANO_COMPUTER_IV, 16)
+                .EUt(VA[EV]).duration(12 * (10 * 20))
+                .buildAndRegister();
+
+        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, Aluminium, 16 * 2)
+                .input(NANO_COMPUTER_IV, 16 * 2)
+                .input(WRAPPED_SMD_INDUCTOR, 16)
+                .input(WRAPPED_SMD_CAPACITOR, 32)
+                .input(WRAPPED_CHIP_RAM, 16)
+                .input(wireGtHex, AnnealedCopper, 16)
+                .solderMultiplier(4)
+                .output(NANO_MAINFRAME_LUV, 16)
+                .EUt(VA[EV]).duration(12 * (20 * 20))
+                .buildAndRegister();
+
+        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, Aluminium, 16 * 2)
+                .input(NANO_COMPUTER_IV, 16 * 2)
+                .input(WRAPPED_ADVANCED_SMD_INDUCTOR, 4)
+                .input(WRAPPED_ADVANCED_SMD_CAPACITOR, 8)
+                .input(WRAPPED_CHIP_RAM, 16)
+                .input(wireGtHex, AnnealedCopper, 16)
+                .solderMultiplier(4)
+                .output(NANO_MAINFRAME_LUV, 16)
+                .EUt(VA[EV]).duration(12 * (10 * 20))
+                .buildAndRegister();
+
+        // T4
         CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(WRAPPED_CIRCUIT_BOARD_EXTREME)
                 .input(WRAPPED_CHIP_CPU_QUBIT)
@@ -104,7 +187,7 @@ public class CALCircuits {
                 .input(WRAPPED_ADVANCED_SMD_TRANSISTOR, 3)
                 .input(wireGtOctal, Platinum, 3)
                 .output(QUANTUM_PROCESSOR_EV, 16 * 2)
-                .EUt(VA[IV]).duration(12 * (10 * 20))
+                .EUt(VA[IV]).duration(12 * (5 * 20))
                 .buildAndRegister();
 
         CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -116,7 +199,79 @@ public class CALCircuits {
                 .EUt(VA[ZPM]).duration((int) (12 * (2.5 * 20)))
                 .buildAndRegister();
 
-        // IV
+        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(WRAPPED_CIRCUIT_BOARD_EXTREME)
+                .input(QUANTUM_PROCESSOR_EV, 16 * 2)
+                .input(WRAPPED_SMD_INDUCTOR, 8)
+                .input(WRAPPED_SMD_CAPACITOR, 16)
+                .input(WRAPPED_CHIP_RAM, 4)
+                .input(wireGtHex, Platinum, 2)
+                .solderMultiplier(2)
+                .output(QUANTUM_ASSEMBLY_IV, 16)
+                .EUt(VA[IV]).duration(12 * (20 * 20))
+                .buildAndRegister();
+
+        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(WRAPPED_CIRCUIT_BOARD_EXTREME)
+                .input(QUANTUM_PROCESSOR_EV, 16 * 2)
+                .input(WRAPPED_ADVANCED_SMD_INDUCTOR, 2)
+                .input(WRAPPED_ADVANCED_SMD_CAPACITOR, 4)
+                .input(WRAPPED_CHIP_RAM, 4)
+                .input(wireGtHex, Platinum, 2)
+                .solderMultiplier(2)
+                .output(QUANTUM_ASSEMBLY_IV, 16)
+                .EUt(VA[IV]).duration(12 * (10 * 20))
+                .buildAndRegister();
+
+        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(WRAPPED_CIRCUIT_BOARD_EXTREME)
+                .input(QUANTUM_ASSEMBLY_IV, 16 * 2)
+                .input(WRAPPED_SMD_DIODE, 8)
+                .input(WRAPPED_CHIP_NOR, 4)
+                .input(WRAPPED_CHIP_RAM, 16)
+                .input(wireGtHex, Platinum, 4)
+                .solderMultiplier(2)
+                .output(QUANTUM_COMPUTER_LUV)
+                .EUt(VA[IV]).duration(12 * (20 * 20))
+                .buildAndRegister();
+
+        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(WRAPPED_CIRCUIT_BOARD_EXTREME)
+                .input(QUANTUM_ASSEMBLY_IV, 16 * 2)
+                .input(WRAPPED_ADVANCED_SMD_DIODE, 2)
+                .input(WRAPPED_CHIP_NOR, 4)
+                .input(WRAPPED_CHIP_RAM, 16)
+                .input(wireGtHex, Platinum, 4)
+                .solderMultiplier(2)
+                .output(QUANTUM_COMPUTER_LUV)
+                .EUt(VA[IV]).duration(12 * (10 * 20))
+                .buildAndRegister();
+
+        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, HSSG, 16 * 2)
+                .input(QUANTUM_COMPUTER_LUV, 16 * 2)
+                .input(WRAPPED_SMD_INDUCTOR, 24)
+                .input(WRAPPED_SMD_CAPACITOR, 48)
+                .input(WRAPPED_CHIP_RAM, 24)
+                .input(wireGtHex, AnnealedCopper, 48)
+                .solderMultiplier(4)
+                .output(QUANTUM_MAINFRAME_ZPM, 16)
+                .EUt(VA[IV]).duration(12 * (40 * 20))
+                .buildAndRegister();
+
+        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, HSSG, 16 * 2)
+                .input(QUANTUM_COMPUTER_LUV, 16 * 2)
+                .input(WRAPPED_ADVANCED_SMD_INDUCTOR, 6)
+                .input(WRAPPED_ADVANCED_SMD_CAPACITOR, 12)
+                .input(WRAPPED_CHIP_RAM, 24)
+                .input(wireGtHex, AnnealedCopper, 48)
+                .solderMultiplier(4)
+                .output(QUANTUM_MAINFRAME_ZPM, 16)
+                .EUt(VA[IV]).duration(12 * (20 * 20))
+                .buildAndRegister();
+
+        // T5
         CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(WRAPPED_CIRCUIT_BOARD_ELITE)
                 .input(WRAPPED_CRYSTAL_CPU)
@@ -137,7 +292,31 @@ public class CALCircuits {
                 .EUt(VA[ZPM]).duration(12 * (5 * 20))
                 .buildAndRegister();
 
-        // LuV
+        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(WRAPPED_CIRCUIT_BOARD_ELITE)
+                .input(CRYSTAL_PROCESSOR_IV, 16 * 2)
+                .input(WRAPPED_ADVANCED_SMD_INDUCTOR, 4)
+                .input(WRAPPED_ADVANCED_SMD_CAPACITOR, 8)
+                .input(WRAPPED_CHIP_RAM, 24)
+                .input(wireGtHex, NiobiumTitanium, 2)
+                .solderMultiplier(2)
+                .output(CRYSTAL_ASSEMBLY_LUV, 16)
+                .EUt(VA[LuV]).duration(12 * (20 * 20))
+                .buildAndRegister();
+
+        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(WRAPPED_CIRCUIT_BOARD_ELITE)
+                .input(CRYSTAL_ASSEMBLY_LUV, 16 * 2)
+                .input(WRAPPED_CHIP_RAM, 4)
+                .input(WRAPPED_CHIP_NOR, 32)
+                .input(WRAPPED_CHIP_NAND, 64)
+                .input(wireGtHex, NiobiumTitanium, 4)
+                .solderMultiplier(2)
+                .output(CRYSTAL_COMPUTER_ZPM, 16)
+                .EUt(VA[LuV]).duration(12 * (20 * 20))
+                .buildAndRegister();
+
+        // T6
         CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(WRAPPED_NEURO_PROCESSOR)
                 .input(WRAPPED_CRYSTAL_CPU)
@@ -156,6 +335,18 @@ public class CALCircuits {
                 .input(stick, Naquadah, 16 * 2)
                 .output(WETWARE_PROCESSOR_LUV, 16 * 4)
                 .EUt(VA[UV]).duration(12 * (5 * 20))
+                .buildAndRegister();
+
+        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(WRAPPED_CIRCUIT_BOARD_WETWARE)
+                .input(WETWARE_PROCESSOR_LUV, 16 * 2)
+                .input(WRAPPED_ADVANCED_SMD_INDUCTOR, 6)
+                .input(WRAPPED_ADVANCED_SMD_CAPACITOR, 12)
+                .input(WRAPPED_CHIP_RAM, 24)
+                .input(wireGtHex, YttriumBariumCuprate, 2)
+                .solderMultiplier(2)
+                .output(WETWARE_PROCESSOR_ASSEMBLY_ZPM, 16)
+                .EUt(VA[ZPM]).duration(12 * (20 * 20))
                 .buildAndRegister();
     }
 }
