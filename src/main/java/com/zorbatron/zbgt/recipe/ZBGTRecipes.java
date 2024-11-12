@@ -41,7 +41,7 @@ public class ZBGTRecipes {
                 .fluidInputs(UUMatter.getFluid(200_000))
                 .output(ZBGTOrePrefix.nanites, Carbon, 64)
                 .EUt(VA[UIV]).duration(20 * 500)
-                .nanoForgeTier(3)
+                .nanoForgeTier(1)
                 .buildAndRegister();
     }
 }
