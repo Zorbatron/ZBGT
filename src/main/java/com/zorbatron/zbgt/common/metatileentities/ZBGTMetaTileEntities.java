@@ -4,6 +4,8 @@ import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 
 import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityChemicalPlant;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCircuitAssemblyLine;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCoAL;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.large.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.mega.*;
