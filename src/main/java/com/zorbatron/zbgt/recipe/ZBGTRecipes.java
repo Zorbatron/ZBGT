@@ -3,6 +3,8 @@ package com.zorbatron.zbgt.recipe;
 import com.zorbatron.zbgt.common.ZBGTConfig;
 import com.zorbatron.zbgt.recipe.cal.CALCircuits;
 import com.zorbatron.zbgt.recipe.cal.WrapRecipes;
+import com.zorbatron.zbgt.recipe.chemplant.CatalystRecipes;
+import com.zorbatron.zbgt.recipe.chemplant.ChemPlantRecipes;
 
 public class ZBGTRecipes {
 
@@ -23,5 +25,8 @@ public class ZBGTRecipes {
         if (ZBGTConfig.recipeSettings.calCircuitRecipes) {
             CALCircuits.init();
         }
+
+        CatalystRecipes.init();
+        ChemPlantRecipes.init();
     }
 }

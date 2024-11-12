@@ -1,14 +1,15 @@
 package com.zorbatron.zbgt.api.recipes.builders;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.zorbatron.zbgt.api.recipes.properties.ChemPlantProperty;
 import com.zorbatron.zbgt.api.recipes.properties.PreciseAssemblerProperty;
 import com.zorbatron.zbgt.api.util.ZBGTLog;
+
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.EnumValidationResult;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class ChemPlantRecipeBuilder extends RecipeBuilder<ChemPlantRecipeBuilder> {
 
@@ -28,7 +29,7 @@ public class ChemPlantRecipeBuilder extends RecipeBuilder<ChemPlantRecipeBuilder
     }
 
     @Override
-    public boolean applyProperty(@NotNull String key, @Nullable Object value) {
+    public boolean applyProperty(@NotNull String key, Object value) {
         if (key.equals(ChemPlantProperty.KEY)) {
             this.casingTier(((Number) value).intValue());
             return true;
@@ -43,7 +44,8 @@ public class ChemPlantRecipeBuilder extends RecipeBuilder<ChemPlantRecipeBuilder
                     new IllegalArgumentException());
             this.recipeStatus = EnumValidationResult.INVALID;
         } else if (tier > 4) {
-            ZBGTLog.logger.error("Precise casing tier cannot be more than 4 (Tungstensteel)!", new IllegalArgumentException());
+            ZBGTLog.logger.error("Precise casing tier cannot be more than 4 (Tungstensteel)!",
+                    new IllegalArgumentException());
             this.recipeStatus = EnumValidationResult.INVALID;
         }
 

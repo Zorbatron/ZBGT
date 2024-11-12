@@ -222,6 +222,17 @@ metaitem.wrapped.misc.engraved_crystal_chip.name=Wrap of Engraved Crystal Chips
 metaitem.wrapped.misc.crystal_cpu.name=Wrap of Crystal CPUs
 metaitem.wrapped.misc.crystal_soc.name=Wrap of Crystal SoCs
 
+metaitem.catalyst_carrier.tooltip=Active Reagent Agent
+metaitem.empty_catalyst.name=Catalyst Carrier
+metaitem.green_catalyst.name=Green Metal Catalyst
+metaitem.red_catalyst.name=Red Metal Catalyst
+metaitem.yellow_catalyst.name=Yellow Metal Catalyst
+metaitem.blue_catalyst.name=Blue Metal Catalyst
+metaitem.orange_catalyst.name=Orange Metal Catalyst
+metaitem.purple_catalyst.name=Purple Metal Catalyst
+metaitem.brown_catalyst.name=Brown Metal Catalyst
+metaitem.pink_catalyst.name=Pink Metal Catalyst
+
 
 # Widgets
 zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s
