@@ -156,6 +156,72 @@ metaitem.high_energy_mixture.name=High Energy Mixture
 metaitem.radiation_protection_plate.name=Radiation Proof Plate
 metaitem.advanced_radiation_protection_plate.name=Advanced Radiation Proof Plate
 
+metaitem.wrapped.circuit.ulv.name=Wrap of ULV Circuits
+metaitem.wrapped.circuit.lv.name=Wrap of LV Circuits
+metaitem.wrapped.circuit.mv.name=Wrap of MV Circuits
+metaitem.wrapped.circuit.hv.name=Wrap of HV Circuits
+metaitem.wrapped.circuit.ev.name=Wrap of EV Circuits
+metaitem.wrapped.circuit.iv.name=Wrap of IV Circuits
+metaitem.wrapped.circuit.luv.name=Wrap of LuV Circuits
+metaitem.wrapped.circuit.zpm.name=Wrap of ZPM Circuits
+metaitem.wrapped.circuit.uv.name=Wrap of UV Circuits
+metaitem.wrapped.circuit.uhv.name=Wrap of UHV Circuits
+metaitem.wrapped.circuit.uev.name=Wrap of UEV Circuits
+metaitem.wrapped.circuit.uiv.name=Wrap of UIV Circuits
+metaitem.wrapped.circuit.uxv.name=Wrap of UXV Circuits
+metaitem.wrapped.circuit.opv.name=Wrap of OpV Circuits
+metaitem.wrapped.circuit.max.name=Wrap of MAX Circuits
+
+metaitem.wrapped.smd.transistor.name=Wrap of SMD Transistors
+metaitem.wrapped.smd.resistor.name=Wrap of SMD Resistors
+metaitem.wrapped.smd.inductor.name=Wrap of SMD Inductors
+metaitem.wrapped.smd.diode.name=Wrap of SMD Diodes
+metaitem.wrapped.smd.capacitor.name=Wrap of SMD Capacitors
+
+metaitem.wrapped.smd.advanced_transistor.name=Wrap of Advanced SMD Transistors
+metaitem.wrapped.smd.advanced_resistor.name=Wrap of Advanced SMD Resistors
+metaitem.wrapped.smd.advanced_inductor.name=Wrap of Advanced SMD Inductors
+metaitem.wrapped.smd.advanced_diode.name=Wrap of Advanced SMD Diodes
+metaitem.wrapped.smd.advanced_capacitor.name=Wrap of Advanced SMD Capacitors
+
+metaitem.wrapped.board.coated.name=Wrap of Coated Boards
+metaitem.wrapped.board.phenolic.name=Wrap of Phenolic Boards
+metaitem.wrapped.board.plastic.name=Wrap of Plastic Boards
+metaitem.wrapped.board.epoxy.name=Wrap of Epoxy Boards
+metaitem.wrapped.board.fiber_reinforced.name=Wrap of Fiber-Reinforced Boards
+metaitem.wrapped.board.multilayer_fiber_reinforced.name=Wrap of Multi-layer Fiber-Reinforced Boards
+metaitem.wrapped.board.wetware.name=Wrap of Master Boards
+
+metaitem.wrapped.circuit_board.basic.name=Wrap of Basic Circuit Boards
+metaitem.wrapped.circuit_board.good.name=Wrap of Good Circuit Boards
+metaitem.wrapped.circuit_board.plastic.name=Wrap of Plastic Circuit Boards
+metaitem.wrapped.circuit_board.advanced.name=Wrap of Advanced Circuit Boards
+metaitem.wrapped.circuit_board.elite.name=Wrap of Elite Circuit Boards
+metaitem.wrapped.circuit_board.extreme.name=Wrap of Extreme Circuit Boards
+metaitem.wrapped.circuit_board.wetware.name=Wrap of Master Circuit Boards
+
+metaitem.wrapped.chip.soc_simple.name=Wrap of Simple SoCs
+metaitem.wrapped.chip.soc.name=Wrap of SoCs
+metaitem.wrapped.chip.soc_advanced.name=Wrap of Advanced SoCs
+metaitem.wrapped.chip.soc_highly_advanced.name=Wrap of Highly Advanced SoCs
+metaitem.wrapped.chip.cpu.name=Wrap of CPUs
+metaitem.wrapped.chip.cpu_nano.name=Wrap of Nano CPUs
+metaitem.wrapped.chip.cpu_qubit.name=Wrap of Qubit CPUs
+metaitem.wrapped.chip.ram.name=Wrap of RAM chips
+metaitem.wrapped.chip.nor.name=Wrap of NOR chips
+metaitem.wrapped.chip.nand.name=Wrap of NAND chips
+metaitem.wrapped.chip.pic_ultra_low.name=Wrap of Ultra Low Power ICs
+metaitem.wrapped.chip.pic_low.name=Wrap of Low Power ICs
+metaitem.wrapped.chip.pic.name=Wrap of Power ICs
+metaitem.wrapped.chip.pic_high.name=Wrap of High Power ICs
+metaitem.wrapped.chip.pic_ultra_high.name=Wrap of Ultra High Power ICs
+metaitem.wrapped.chip.integrated_logic.name=Wrap of Integrated Circuit chips
+
+metaitem.wrapped.misc.neuro_processor.name=Wrap of Neuro Processor Units
+metaitem.wrapped.misc.engraved_crystal_chip.name=Wrap of Engraved Crystal Chips
+metaitem.wrapped.misc.crystal_cpu.name=Wrap of Crystal CPUs
+metaitem.wrapped.misc.crystal_soc.name=Wrap of Crystal SoCs
+
 
 # Widgets
 zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s
@@ -236,6 +302,11 @@ zbgt.machine.large_air_collector.tooltip=Atmosphere Vacuum
 
 zbgt.machine.large_alloy_smelter.name=Zyngen
 zbgt.machine.large_alloy_smelter.tooltip=Gains a 5%% energy discount per coil tier
+
+zbgt.machine.cal.name=Circuit Assembly Line
+zbgt.machine.cal.tooltip=Does not lose efficiency when overclocked
+zbgt.machine.cal.tooltip_ordered_items=When in §eCircuit Assembly Line§7 mode, §fitems§7 must be in the correct order to run.
+recipemap.circuit_assembly_line_recipes.name=Circuit Assembly Line
 
 zbgt.machine.chem_plant.name=ExxonMobil Chemical Plant
 zbgt.machine.chem_plant.casing=Casing: %s
