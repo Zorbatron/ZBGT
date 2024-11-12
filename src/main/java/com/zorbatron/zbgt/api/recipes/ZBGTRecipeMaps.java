@@ -14,8 +14,6 @@ import com.zorbatron.zbgt.api.recipes.maps.RecipeMapPreciseAssembler;
 import gregtech.api.GTValues;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.widgets.ProgressWidget;
-import gregtech.api.gui.GuiTextures;
-import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.unification.material.Materials;
 import gregtech.core.sound.GTSoundEvents;
@@ -33,20 +31,19 @@ public final class ZBGTRecipeMaps {
     public static final RecipeMap<CALRecipeBuilder> CIRCUIT_ASSEMBLY_LINE_RECIPES = new RecipeMapCAL<>(
             "circuit_assembly_line_recipes",
             new CALRecipeBuilder())
-            .setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT_ASSEMBLER, ProgressWidget.MoveType.HORIZONTAL)
-            .setSound(GTSoundEvents.ASSEMBLER)
-            .onRecipeBuild(recipeBuilder -> {
-                if (recipeBuilder.getFluidInputs().isEmpty()) {
-                    recipeBuilder.fluidInputs(Materials.SolderingAlloy
-                            .getFluid(Math.max(1, (GTValues.L / 2) * recipeBuilder.getSolderMultiplier())));
-                }
-            });
+                    .setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT_ASSEMBLER, ProgressWidget.MoveType.HORIZONTAL)
+                    .setSound(GTSoundEvents.ASSEMBLER)
+                    .onRecipeBuild(recipeBuilder -> {
+                        if (recipeBuilder.getFluidInputs().isEmpty()) {
+                            recipeBuilder.fluidInputs(Materials.SolderingAlloy
+                                    .getFluid(Math.max(1, (GTValues.L / 2) * recipeBuilder.getSolderMultiplier())));
+                        }
+                    });
 
     public static final RecipeMap<NanoForgeRecipeBuilder> NANO_FORGE_RECIPES = new RecipeMapNanoForge<>(
             "nano_forge_recipes",
             new NanoForgeRecipeBuilder())
-            .setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT, ProgressWidget.MoveType.HORIZONTAL);
-
+                    .setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT, ProgressWidget.MoveType.HORIZONTAL);
 
     public static void modifyMaps() {
         POLARIZER_RECIPES.setMaxFluidInputs(1);

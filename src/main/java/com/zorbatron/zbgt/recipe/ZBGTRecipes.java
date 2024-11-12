@@ -1,18 +1,18 @@
 package com.zorbatron.zbgt.recipe;
 
-import com.zorbatron.zbgt.common.ZBGTConfig;
-import com.zorbatron.zbgt.recipe.cal.CALCircuits;
-import com.zorbatron.zbgt.recipe.cal.WrapRecipes;
-
-import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
-import com.zorbatron.zbgt.api.unification.ore.ZBGTOrePrefix;
-import gregtech.api.unification.ore.OrePrefix;
-import gregtech.common.items.MetaItems;
-
 import static gregtech.api.GTValues.UIV;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.Carbon;
+
+import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
+import com.zorbatron.zbgt.api.unification.ore.ZBGTOrePrefix;
+import com.zorbatron.zbgt.common.ZBGTConfig;
+import com.zorbatron.zbgt.recipe.cal.CALCircuits;
+import com.zorbatron.zbgt.recipe.cal.WrapRecipes;
+
+import gregtech.api.unification.ore.OrePrefix;
+import gregtech.common.items.MetaItems;
 
 public class ZBGTRecipes {
 
