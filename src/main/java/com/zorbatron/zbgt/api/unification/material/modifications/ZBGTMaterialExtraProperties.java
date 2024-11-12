@@ -34,6 +34,7 @@ public final class ZBGTMaterialExtraProperties {
         Material[] materials = { Cerium };
 
         for (Material material : materials) {
+            if (material.hasProperty(INGOT)) continue;
             material.setProperty(INGOT, new IngotProperty());
         }
     }
@@ -48,7 +49,8 @@ public final class ZBGTMaterialExtraProperties {
         materialList.add(new ImmutablePair<>(LithiumChloride, 1123));
 
         for (Pair<Material, Integer> materialPair : materialList) {
-            materialPair.getLeft().setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID,
+            if (materialPair.getLeft().hasProperty(FLUID)) continue;
+            materialPair.getLeft().setProperty(FLUID, new FluidProperty(FluidStorageKeys.LIQUID,
                     new FluidBuilder().temperature(materialPair.getRight())));
         }
     }
@@ -67,6 +69,7 @@ public final class ZBGTMaterialExtraProperties {
         }
 
         for (Pair<Material, Integer[]> materialPair : wirePairs) {
+            if (materialPair.getLeft().hasProperty(WIRE)) continue;
             materialPair.getLeft().setProperty(WIRE, new WireProperties(
                     materialPair.getRight()[0],
                     materialPair.getRight()[1],
@@ -78,17 +81,23 @@ public final class ZBGTMaterialExtraProperties {
         Material[] materials = { Ytterbium };
 
         for (Material material : materials) {
+            if (material.hasProperty(DUST)) continue;
             material.setProperty(DUST, new DustProperty());
         }
     }
 
     private static void ores() {
-        Ytterbium.setProperty(ORE, new OreProperty());
+        Material[] materials = { Ytterbium, Titanium, Niobium };
 
-        OreProperty titaniumOre = new OreProperty();
-        titaniumOre.addOreByProducts(Almandine);
-        Titanium.setProperty(ORE, titaniumOre);
+        for (Material material : materials) {
+            if (material.hasProperty(ORE)) continue;
 
-        Niobium.setProperty(ORE, new OreProperty());
+            OreProperty oreProperty = new OreProperty();
+            if (material == Titanium) {
+                oreProperty.addOreByProducts(Almandine);
+            }
+
+            material.setProperty(ORE, oreProperty);
+        }
     }
 }
