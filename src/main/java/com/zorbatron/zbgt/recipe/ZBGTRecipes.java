@@ -1,14 +1,18 @@
 package com.zorbatron.zbgt.recipe;
 
-import static gregtech.api.GTValues.UIV;
-import static gregtech.api.GTValues.VA;
-import static gregtech.api.unification.material.Materials.*;
+import com.zorbatron.zbgt.common.ZBGTConfig;
+import com.zorbatron.zbgt.recipe.cal.CALCircuits;
+import com.zorbatron.zbgt.recipe.cal.WrapRecipes;
 
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 import com.zorbatron.zbgt.api.unification.ore.ZBGTOrePrefix;
-
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.items.MetaItems;
+
+import static gregtech.api.GTValues.UIV;
+import static gregtech.api.GTValues.VA;
+import static gregtech.api.unification.material.Materials.*;
+import static gregtech.api.unification.material.Materials.Carbon;
 
 public class ZBGTRecipes {
 
@@ -21,6 +25,14 @@ public class ZBGTRecipes {
         CasingRecipes.init();
         MaterialRecipes.init();
         AE2Recipes.init();
+
+        if (ZBGTConfig.recipeSettings.wrapRecipes) {
+            WrapRecipes.init();
+        }
+
+        if (ZBGTConfig.recipeSettings.calCircuitRecipes) {
+            CALCircuits.init();
+        }
 
         ZBGTRecipeMaps.NANO_FORGE_RECIPES.recipeBuilder()
                 .notConsumable(OrePrefix.lens, NetherStar)

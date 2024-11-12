@@ -4,6 +4,7 @@ import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 
 import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCircuitAssemblyLine;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCoAL;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityNanoForge;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.large.*;
@@ -39,6 +40,7 @@ public class ZBGTMetaTileEntities {
 
     public static MetaTileEntityYOTTank YOTTANK;
     public static MetaTileEntityCoAL CoAL;
+    public static MetaTileEntityCircuitAssemblyLine CAL;
     public static MetaTileEntityNanoForge NANO_FORGE;
 
     public static MetaTileEntityQueebf QUAD_EBF;
@@ -147,7 +149,13 @@ public class ZBGTMetaTileEntities {
         QUACKER = registerMetaTileEntity(18069,
                 new MetaTileEntityQuacker(zbgtId("quacker")));
 
-        NANO_FORGE = registerMetaTileEntity(18070,
+        CAL = registerMetaTileEntity(18070,
+                new MetaTileEntityCircuitAssemblyLine(zbgtId("cal")));
+
+        NANO_FORGE = registerMetaTileEntity(18071,
                 new MetaTileEntityNanoForge(zbgtId("nano_forge")));
+
+        // PCB Factory - 18072
+        // Chem Plant - 18073
     }
 }
