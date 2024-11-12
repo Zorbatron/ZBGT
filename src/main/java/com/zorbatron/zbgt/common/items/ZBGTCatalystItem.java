@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -35,7 +36,8 @@ public class ZBGTCatalystItem extends StandardMetaItem {
 
     @Override
     public void registerSubItems() {
-        EMPTY_CATALYST = addItem(0, "empty_catalyst");
+        EMPTY_CATALYST = addItem(0, "empty_catalyst")
+                .addComponents(new ItemColorProvider(0));
 
         PINK_CATALYST = addItem(1, "pink_catalyst")
                 .addComponents(new ItemColorProvider(0xE05ED5));
@@ -72,5 +74,13 @@ public class ZBGTCatalystItem extends StandardMetaItem {
         }
 
         return 0xFFFFFF;
+    }
+
+    public static boolean isItemCatalyst(ItemStack itemStack) {
+        return isItemCatalyst(itemStack.getItem());
+    }
+
+    public static boolean isItemCatalyst(Item item) {
+        return item instanceof ZBGTCatalystItem;
     }
 }

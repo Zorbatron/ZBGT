@@ -74,6 +74,7 @@ zbgt.machine.sterile_cleaning_hatch.name=Automatic Sterilization Maintenance Hat
 zbgt.machine.sterile_cleaning_hatch.tooltip=For automatically maintaining Multiblocks with Cleaning, but sterile!
 
 zbgt.machine.catalyst_hatch.name=Catalyst Housing
+zbgt.machine.catalyst_hatch.tooltip=Dedicated Catalyst Storage
 
 
 # Covers
