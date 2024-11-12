@@ -330,6 +330,8 @@ zbgt.machine.chem_plant.casing.5=Tungstensteel
 zbgt.machine.chem_plant.machine_casing=Machine Casing: %s
 zbgt.machine.chem_plant.pipe=Pipe: %s
 zbgt.machine.chem_plant.coil=Coil Tier: %s
+recipemap.chem_plant_recipes.name=Chemical Plant
+recipemap.chem_plant.tier=Tier: %s - %s
 
 
 # Multiblock Casings

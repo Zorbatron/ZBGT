@@ -3,7 +3,6 @@ package com.zorbatron.zbgt.api.recipes.builders;
 import org.jetbrains.annotations.NotNull;
 
 import com.zorbatron.zbgt.api.recipes.properties.ChemPlantProperty;
-import com.zorbatron.zbgt.api.recipes.properties.PreciseAssemblerProperty;
 import com.zorbatron.zbgt.api.util.ZBGTLog;
 
 import gregtech.api.recipes.Recipe;
@@ -49,7 +48,7 @@ public class ChemPlantRecipeBuilder extends RecipeBuilder<ChemPlantRecipeBuilder
             this.recipeStatus = EnumValidationResult.INVALID;
         }
 
-        this.applyProperty(PreciseAssemblerProperty.getInstance(), tier);
+        this.applyProperty(ChemPlantProperty.getInstance(), tier);
 
         return this;
     }
