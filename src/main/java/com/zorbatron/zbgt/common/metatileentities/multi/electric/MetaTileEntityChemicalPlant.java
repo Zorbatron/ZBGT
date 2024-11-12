@@ -20,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.capability.ICreativePart;
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
+import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.CreativeHeatingCoil;
@@ -34,7 +35,6 @@ import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.*;
-import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.util.*;
 import gregtech.client.renderer.ICubeRenderer;
@@ -71,8 +71,7 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
     }
 
     public MetaTileEntityChemicalPlant(ResourceLocation metaTileEntityId) {
-        // TODO: recipe map!!1!11!
-        super(metaTileEntityId, RecipeMaps.LARGE_CHEMICAL_RECIPES);
+        super(metaTileEntityId, ZBGTRecipeMaps.CHEM_PLANT_RECIPES);
         this.recipeMapWorkable = new ChemicalPlantRecipeLogic(this);
     }
 

@@ -3,9 +3,11 @@ package com.zorbatron.zbgt.api.recipes;
 import static gregtech.api.recipes.RecipeMaps.*;
 
 import com.zorbatron.zbgt.api.recipes.builders.CALRecipeBuilder;
+import com.zorbatron.zbgt.api.recipes.builders.ChemPlantRecipeBuilder;
 import com.zorbatron.zbgt.api.recipes.builders.CoALRecipeBuilder;
 import com.zorbatron.zbgt.api.recipes.builders.PreciseAssemblerRecipeBuilder;
 import com.zorbatron.zbgt.api.recipes.maps.RecipeMapCAL;
+import com.zorbatron.zbgt.api.recipes.maps.RecipeMapChemPlant;
 import com.zorbatron.zbgt.api.recipes.maps.RecipeMapCoAL;
 import com.zorbatron.zbgt.api.recipes.maps.RecipeMapPreciseAssembler;
 
@@ -37,6 +39,10 @@ public final class ZBGTRecipeMaps {
                                     .getFluid(Math.max(1, (GTValues.L / 2) * recipeBuilder.getSolderMultiplier())));
                         }
                     });
+
+    public static final RecipeMap<ChemPlantRecipeBuilder> CHEM_PLANT_RECIPES = new RecipeMapChemPlant<>(
+            "chem_plant_recipes",
+            new ChemPlantRecipeBuilder());
 
     public static void modifyMaps() {
         POLARIZER_RECIPES.setMaxFluidInputs(1);
