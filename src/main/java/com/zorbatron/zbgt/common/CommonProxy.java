@@ -24,6 +24,7 @@ import com.zorbatron.zbgt.api.util.ZBGTLog;
 import com.zorbatron.zbgt.api.worldgen.CustomOreVeins;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.covers.ZBGTCovers;
+import com.zorbatron.zbgt.common.items.ZBGTCatalystItems;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 import com.zorbatron.zbgt.recipe.ZBGTRecipes;
 
@@ -39,6 +40,7 @@ public class CommonProxy {
 
     public void preInit() {
         ZBGTMetaItems.init();
+        ZBGTCatalystItems.init();
     }
 
     public void postInit() throws IOException {
