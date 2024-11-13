@@ -80,7 +80,7 @@ public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockNotifia
 
     @Override
     public void registerAbilities(List<IItemHandlerModifiable> abilityList) {
-        abilityList.add(importItems);
+        abilityList.add(exportItems);
     }
 
     @Override
