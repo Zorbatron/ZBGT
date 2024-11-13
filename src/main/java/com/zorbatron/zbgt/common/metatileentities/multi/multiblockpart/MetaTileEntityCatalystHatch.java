@@ -65,11 +65,15 @@ public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockNotifia
 
     @Override
     public void addToMultiBlock(MultiblockControllerBase controllerBase) {
+        super.addToMultiBlock(controllerBase);
+
         ZBGTUtility.addNotifiableToMTE((INotifiableHandler) exportItems, controllerBase, this, false);
     }
 
     @Override
     public void removeFromMultiBlock(MultiblockControllerBase controllerBase) {
+        super.removeFromMultiBlock(controllerBase);
+
         ZBGTUtility.removeNotifiableFromMTE((INotifiableHandler) exportItems, controllerBase);
     }
 
