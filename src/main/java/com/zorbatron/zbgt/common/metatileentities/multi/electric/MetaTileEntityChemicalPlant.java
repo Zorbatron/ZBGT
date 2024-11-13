@@ -3,10 +3,13 @@ package com.zorbatron.zbgt.common.metatileentities.multi.electric;
 import static com.zorbatron.zbgt.api.capability.ZBGTDataCodes.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -14,20 +17,26 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
+import com.zorbatron.zbgt.api.capability.ICatalystProvider;
 import com.zorbatron.zbgt.api.capability.ICreativePart;
+import com.zorbatron.zbgt.api.metatileentity.ZBGTMultiblockAbility;
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.CreativeHeatingCoil;
+import com.zorbatron.zbgt.common.items.ZBGTCatalystItem;
 import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
+import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -35,6 +44,9 @@ import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.*;
+import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.RecipeBuilder;
+import gregtech.api.recipes.ingredients.GTRecipeInput;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.util.*;
 import gregtech.client.renderer.ICubeRenderer;
@@ -52,6 +64,8 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
     private int machineCasingTier = -1;
     private int pipeCasingTier = -1;
     private int coilTier = -1;
+
+    private List<ICatalystProvider> catalystProviders;
 
     private static final List<IBlockState> casings = new ArrayList<>();
     private static final List<IBlockState> pipes = new ArrayList<>();
@@ -94,7 +108,7 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
                 .where('X', casingPredicate)
                 .where('C', casingPredicate
                         .or(autoAbilities())
-                        .or(metaTileEntities(ZBGTMetaTileEntities.CATALYST_HATCH)))
+                        .or(abilities(ZBGTMultiblockAbility.CATALYST_PROVIDER)))
                 .where('M', TraceabilityPredicates.machineCasings())
                 .where('H', heatingCoils())
                 .where('P', pipePredicate)
@@ -229,6 +243,8 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
         writeCustomData(MULTIBLOCK_TIER_CHANGE_2, buf -> buf.writeInt(machineCasingTier));
         writeCustomData(MULTIBLOCK_TIER_CHANGE_3, buf -> buf.writeInt(pipeCasingTier));
         writeCustomData(MULTIBLOCK_TIER_CHANGE_4, buf -> buf.writeInt(coilTier));
+
+        this.catalystProviders = getAbilities(ZBGTMultiblockAbility.CATALYST_PROVIDER);
     }
 
     @Override
@@ -239,6 +255,8 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
         machineCasingTier = 0;
         pipeCasingTier = 0;
         coilTier = 0;
+
+        this.catalystProviders = new ArrayList<>();
     }
 
     @Override
@@ -366,6 +384,31 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
         @Override
         public int getParallelLimit() {
             return 2 * (pipeCasingTier + 1);
+        }
+
+        @Override
+        protected @Nullable Recipe findRecipe(long maxVoltage, IItemHandlerModifiable inputs,
+                                              IMultipleTankHandler fluidInputs) {
+            List<ItemStack> validCatalysts = new ArrayList<>();
+            for (ICatalystProvider catalystProvider : catalystProviders) {
+                validCatalysts.addAll(GTUtility.itemHandlerToList(catalystProvider.getCatalysts()).stream()
+                        .filter(itemStack -> !itemStack.isEmpty())
+                        .collect(Collectors.toList()));
+            }
+
+            return ZBGTRecipeMaps.CHEM_PLANT_RECIPES.findRecipe(maxVoltage, inputs, fluidInputs, validCatalysts);
+        }
+
+        @Override
+        public boolean prepareRecipe(Recipe recipe) {
+            RecipeBuilder<?> builder = new RecipeBuilder<>(recipe, recipeMap);
+
+            builder.clearInputs();
+            builder.inputs(recipe.getInputs().stream()
+                    .filter(ri -> Arrays.stream(ri.getInputStacks()).noneMatch(ZBGTCatalystItem::isItemCatalyst))
+                    .toArray(GTRecipeInput[]::new));
+
+            return super.prepareRecipe(builder.build().getResult());
         }
     }
 }

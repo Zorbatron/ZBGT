@@ -1,9 +1,17 @@
 package com.zorbatron.zbgt.api.recipes.maps;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.common.items.ZBGTCatalystItem;
+
+import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
@@ -11,8 +19,10 @@ import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.gui.widgets.RecipeProgressWidget;
 import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.gui.widgets.TankWidget;
+import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.util.GTUtility;
 
 public class RecipeMapChemPlant<R extends RecipeBuilder<R>> extends RecipeMap<R> {
 
@@ -47,5 +57,16 @@ public class RecipeMapChemPlant<R extends RecipeBuilder<R>> extends RecipeMap<R>
         }
 
         return builder;
+    }
+
+    public @Nullable Recipe findRecipe(long voltage, IItemHandlerModifiable inputs, IMultipleTankHandler fluidInputs,
+                                       List<ItemStack> validCatalysts) {
+        List<ItemStack> prunedItems = GTUtility.itemHandlerToList(inputs).stream()
+                .filter(stack -> !ZBGTCatalystItem.isItemCatalyst(stack))
+                .collect(Collectors.toList());
+
+        prunedItems.addAll(validCatalysts);
+
+        return findRecipe(voltage, prunedItems, GTUtility.fluidHandlerToList(fluidInputs));
     }
 }

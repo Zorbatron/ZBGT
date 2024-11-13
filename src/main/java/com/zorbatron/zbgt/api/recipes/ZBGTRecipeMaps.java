@@ -40,7 +40,7 @@ public final class ZBGTRecipeMaps {
                         }
                     });
 
-    public static final RecipeMap<ChemPlantRecipeBuilder> CHEM_PLANT_RECIPES = new RecipeMapChemPlant<>(
+    public static final RecipeMapChemPlant<ChemPlantRecipeBuilder> CHEM_PLANT_RECIPES = new RecipeMapChemPlant<>(
             "chem_plant_recipes",
             new ChemPlantRecipeBuilder());
 

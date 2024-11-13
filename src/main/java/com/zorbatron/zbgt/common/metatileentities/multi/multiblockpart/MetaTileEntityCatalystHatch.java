@@ -7,6 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
+import com.zorbatron.zbgt.api.capability.ICatalystProvider;
+import com.zorbatron.zbgt.api.metatileentity.ZBGTMultiblockAbility;
 import com.zorbatron.zbgt.api.render.ZBGTGuiTextures;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.api.util.ZBGTLog;
@@ -32,7 +34,7 @@ import gregtech.api.util.GTUtility;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
 public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockNotifiablePart implements
-                                         IMultiblockAbilityPart<IItemHandlerModifiable> {
+                                         IMultiblockAbilityPart<ICatalystProvider>, ICatalystProvider {
 
     public MetaTileEntityCatalystHatch(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTValues.ULV, false);
@@ -78,13 +80,18 @@ public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockNotifia
     }
 
     @Override
-    public MultiblockAbility<IItemHandlerModifiable> getAbility() {
-        return MultiblockAbility.IMPORT_ITEMS;
+    public MultiblockAbility<ICatalystProvider> getAbility() {
+        return ZBGTMultiblockAbility.CATALYST_PROVIDER;
     }
 
     @Override
-    public void registerAbilities(List<IItemHandlerModifiable> abilityList) {
-        abilityList.add(exportItems);
+    public void registerAbilities(List<ICatalystProvider> abilityList) {
+        abilityList.add(this);
+    }
+
+    @Override
+    public IItemHandlerModifiable getCatalysts() {
+        return exportItems;
     }
 
     @Override
