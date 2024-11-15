@@ -131,7 +131,7 @@ public final class ZBGTFirstDegreeMaterials {
             id += 4;
         }
 
-        EglinSteelBase = new Material.Builder(id++, zbgtId("egline_steel_base"))
+        EglinSteelBase = new Material.Builder(id++, zbgtId("eglin_steel_base"))
                 .dust()
                 .color(0xbfc4b5).iconSet(METALLIC)
                 .components(Iron, 4, Kanthal, 1, Invar, 5)
