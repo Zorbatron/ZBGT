@@ -43,10 +43,10 @@ public class CustomOreVeins {
                         "secondary": "ore:zbgt:adamantium"
                       },
                       {
-                        "between": "ore:gregtech:naquadah"
+                        "between": "ore:gregtech:cooperite"
                       },
                       {
-                        "sporadic": "ore:gregtech:titanium"
+                        "sporadic": "ore:zbgt:adamantium"
                       }
                     ]
                   }
@@ -76,7 +76,7 @@ public class CustomOreVeins {
                     "type": "layered",
                     "values": [
                       {
-                        "primary": "ore:gregtech:niobium"
+                        "primary": "ore:gregtech:tantalite"
                       },
                       {
                         "secondary": "ore:zbgt:quantium"
@@ -85,7 +85,7 @@ public class CustomOreVeins {
                         "between": "ore:gregtech:ytterbium"
                       },
                       {
-                        "sporadic": "ore:gregtech:ytterbium"
+                        "sporadic": "ore:gregtech:electrotine"
                       }
                     ]
                   }
