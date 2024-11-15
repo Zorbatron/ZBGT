@@ -81,8 +81,9 @@ public class CommonProxy {
         ZBGTMetaBlocks.ALL_CASINGS.forEach(casing -> registry.register(createItemBlock(casing, VariantItemBlock::new)));
     }
 
-    @SubscribeEvent()
+    @SubscribeEvent
     public static void registerMaterials(MaterialEvent event) {
+        ZBGTLog.logger.info("Registering materials and material modifications...");
         ZBGTMaterials.init();
     }
 
