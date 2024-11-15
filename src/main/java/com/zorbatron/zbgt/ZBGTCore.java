@@ -52,8 +52,6 @@ public class ZBGTCore {
         // register to the event bus so that we can listen to events
         MinecraftForge.EVENT_BUS.register(this);
 
-        ZBGTLog.init(event.getModLog());
-
         ZBGTLog.logger.info("I am " + Tags.MODNAME + " + at version " + Tags.VERSION);
 
         ZBGTMetaTileEntities.init();
