@@ -290,5 +290,14 @@ public class MultiblockRecipes {
                 .output(ZBGTMetaTileEntities.CAL)
                 .EUt(VA[LuV]).duration(20 * 45)
                 .buildAndRegister();
+
+        ModHandler.addShapedRecipe("zhuhai", ZBGTMetaTileEntities.FISHING_PORT.getStackForm(),
+                "PCP",
+                "WAW",
+                "PCP",
+                'P', new UnificationEntry(plate, GCYMMaterials.WatertightSteel),
+                'C', new UnificationEntry(circuit, getMarkerMaterialByTier(IV)),
+                'W', new UnificationEntry(wireFine, Electrum),
+                'A', ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.AQUATIC_CASING));
     }
 }

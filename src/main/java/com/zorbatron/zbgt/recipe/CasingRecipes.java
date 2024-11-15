@@ -25,12 +25,14 @@ import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
 import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 
+import gregicality.multiblocks.api.unification.GCYMMaterials;
 import gregtech.api.block.VariantBlock;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.builders.AssemblyLineRecipeBuilder;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.api.util.GTUtility;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockFusionCasing;
@@ -276,10 +278,22 @@ public class CasingRecipes {
         ModHandler.addShapedRecipe("yottank_casing",
                 ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.YOTTANK_CASING,
                         casingsPerCraft),
-                "BPB", "TFT", "BPB",
+                "BPB",
+                "TFT",
+                "BPB",
                 'B', OreDictUnifier.get(plate, BlackSteel),
                 'P', OreDictUnifier.get(pipeNormalFluid, StainlessSteel),
                 'F', OreDictUnifier.get(frameGt, BlackSteel),
                 'T', OreDictUnifier.get(plate, Polytetrafluoroethylene));
+
+        ModHandler.addShapedRecipe("aquatic_casing",
+                ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.AQUATIC_CASING,
+                        casingsPerCraft),
+                "WhW",
+                "EFE",
+                "WwW",
+                'W', new UnificationEntry(plate, GCYMMaterials.WatertightSteel),
+                'E', new UnificationEntry(plate, EglinSteel),
+                'F', new UnificationEntry(frameGt, EglinSteel));
     }
 }

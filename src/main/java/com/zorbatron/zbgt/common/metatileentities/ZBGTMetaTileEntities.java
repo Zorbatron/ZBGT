@@ -6,6 +6,7 @@ import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTile
 import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCircuitAssemblyLine;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCoAL;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityFishingPort;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.large.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.mega.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.quad.*;
@@ -39,6 +40,7 @@ public class ZBGTMetaTileEntities {
 
     public static MetaTileEntityCoAL CoAL;
     public static MetaTileEntityCircuitAssemblyLine CAL;
+    public static MetaTileEntityFishingPort FISHING_PORT;
 
     public static MetaTileEntityQueebf QUAD_EBF;
     public static MetaTileEntityQueezer QUEEZER;
@@ -150,5 +152,8 @@ public class ZBGTMetaTileEntities {
 
         CAL = registerMetaTileEntity(18070,
                 new MetaTileEntityCircuitAssemblyLine(zbgtId("cal")));
+
+        FISHING_PORT = registerMetaTileEntity(18074,
+                new MetaTileEntityFishingPort(zbgtId("fishing_port")));
     }
 }
