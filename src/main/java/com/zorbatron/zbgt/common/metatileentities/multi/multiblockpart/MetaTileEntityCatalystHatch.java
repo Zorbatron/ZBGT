@@ -163,7 +163,7 @@ public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockNotifia
             }
 
             if (didSet) {
-                srcStack.setCount(srcStack.getCount() - 1);
+                srcStack.shrink(1);
             }
         }
     }
