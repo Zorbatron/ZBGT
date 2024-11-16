@@ -66,25 +66,18 @@ public class MetaTileEntityMegaOCU extends LaserCapableGCYMRecipeMapMultiblockCo
 
     @Override
     protected @NotNull BlockPattern createStructurePattern() {
+        // spotless:off
         return FactoryBlockPattern.start()
-                .aisle("XXEEEEEEEEEXX", "#X#########X#", "#X#########X#", "#X#########X#", "#X#########X#",
-                        "#X#########X#", "#X#########X#")
-                .aisle("XXXXXXXXXXXXX", "XGGGGGGGGGGGX", "XGGGGGGGGGGGX", "XGGGGGGGGGGGX", "XGGGGGGGGGGGX",
-                        "XGGGGGGGGGGGX", "XXGGGGGGGGGXX")
-                .aisle("XXXXXXXXXXXXX", "#G#C#C#C#C#G#", "#G#C#C#C#C#G#", "#G#C#C#C#C#G#", "#G#C#C#C#C#G#",
-                        "#G#C#C#C#C#G#", "#XGGGGGGGGGX#")
-                .aisle("XXXXXXXXXXXXX", "#G#C#C#C#C#G#", "#X###C###C#X#", "#X#C#C#C#C#X#", "#X###C###C#X#",
-                        "#G#C#C#C#C#G#", "#XGGGXXXGGGX#")
-                .aisle("XXXXXXXXXXXXX", "#G#C#C#C#C#G#", "#X#C#C#C#C#X#", "#I#C#C#C#C#O#", "#X#C#C#C#C#X#",
-                        "#G#C#C#C#C#G#", "#XGGGXTXGGGX#")
-                .aisle("XXXXXXXXXXXXX", "#G#C#C#C#C#G#", "#X###C###C#X#", "#X#C#C#C#C#X#", "#X###C###C#X#",
-                        "#G#C#C#C#C#G#", "#XGGGXXXGGGX#")
-                .aisle("XXXXXXXXXXXXX", "#G#C#C#C#C#G#", "#G#C#C#C#C#G#", "#G#C#C#C#C#G#", "#G#C#C#C#C#G#",
-                        "#G#C#C#C#C#G#", "#XGGGGGGGGGX#")
-                .aisle("XXXXXXXXXXXXX", "XGGGGGGGGGGGX", "XGGGGGGGGGGGX", "XGGGGGGGGGGGX", "XGGGGGGGGGGGX",
-                        "XGGGGGGGGGGGX", "XXGGGGGGGGGXX")
-                .aisle("XXEEEESEEEEXX", "#X#########X#", "#X#########X#", "#X#########X#", "#X#########X#",
-                        "#X#########X#", "#X#########X#")
+                .aisle("XXEEEEEEEEEXX", " X         X ", " X         X ", " X         X ", " X         X ", " X         X ", " X         X ")
+                .aisle("XXXXXXXXXXXXX", "XGGGGGGGGGGGX", "XGGGGGGGGGGGX", "XGGGGGGGGGGGX", "XGGGGGGGGGGGX", "XGGGGGGGGGGGX", "XXGGGGGGGGGXX")
+                .aisle("XXXXXXXXXXXXX", " G#C#C#C#C#G ", " G#C#C#C#C#G ", " G#C#C#C#C#G ", " G#C#C#C#C#G ", " G#C#C#C#C#G ", " XGGGGGGGGGX ")
+                .aisle("XXXXXXXXXXXXX", " G#C#C#C#C#G ", " X###C###C#X ", " X#C#C#C#C#X ", " X###C###C#X ", " G#C#C#C#C#G ", " XGGGXXXGGGX ")
+                .aisle("XXXXXXXXXXXXX", " G#C#C#C#C#G ", " X#C#C#C#C#X ", " I#C#C#C#C#O ", " X#C#C#C#C#X ", " G#C#C#C#C#G ", " XGGGXTXGGGX ")
+                .aisle("XXXXXXXXXXXXX", " G#C#C#C#C#G ", " X###C###C#X ", " X#C#C#C#C#X ", " X###C###C#X ", " G#C#C#C#C#G ", " XGGGXXXGGGX ")
+                .aisle("XXXXXXXXXXXXX", " G#C#C#C#C#G ", " G#C#C#C#C#G ", " G#C#C#C#C#G ", " G#C#C#C#C#G ", " G#C#C#C#C#G ", " XGGGGGGGGGX ")
+                .aisle("XXXXXXXXXXXXX", "XGGGGGGGGGGGX", "XGGGGGGGGGGGX", "XGGGGGGGGGGGX", "XGGGGGGGGGGGX", "XGGGGGGGGGGGX", "XXGGGGGGGGGXX")
+                .aisle("XXEEEESEEEEXX", " X         X ", " X         X ", " X         X ", " X         X ", " X         X ", " X         X ")
+                // spotless:on
                 .where('S', selfPredicate())
                 .where('C', heatingCoils())
                 .where('X', states(getCasingState()))

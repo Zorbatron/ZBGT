@@ -73,67 +73,24 @@ public class MetaTileEntityMegaEBF extends LaserCapableGCYMRecipeMapMultiblockCo
 
     @Override
     protected @NotNull BlockPattern createStructurePattern() {
+        // spotless:off
         FactoryBlockPattern pattern = FactoryBlockPattern.start()
-                .aisle("XXXXXXXXXXXXXXX", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG",
-                        "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG",
-                        "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG",
-                        "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG",
-                        "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG",
-                        "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG",
-                        "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXMXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG",
-                        "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG",
-                        "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG",
-                        "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG",
-                        "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "GGGGGGGGGGGGGGG", "GGGGGGGSGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG",
-                        "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG",
-                        "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG",
-                        "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXMXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "GC###########CG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "GCCCCCCCCCCCCCG", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "GGGGGGGGGGGGGGG", "GGGGGGGSGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "XXXXXXXXXXXXXXX")
+                // spotless:on
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState()).setMinGlobalLimited(420)
                         .or(autoAbilities(false, true, true, true, true, true, false))

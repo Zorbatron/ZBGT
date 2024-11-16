@@ -72,51 +72,20 @@ public class MetaTileEntityMegaABS extends LaserCapableGCYMRecipeMapMultiblockCo
 
     @Override
     protected @NotNull BlockPattern createStructurePattern() {
+        // spotless:off
         FactoryBlockPattern pattern = FactoryBlockPattern.start()
-                .aisle("###BBBBB###", "###VVVVV###", "###GGGGG###", "###GGGGG###", "###GGGGG###", "###VVVVV###",
-                        "###XXXXX###", "###########", "###########", "###########", "###########", "###########",
-                        "###########", "###########", "###########", "###########", "###########", "###########",
-                        "###########", "###########")
-                .aisle("##BBBBBBB##", "##V#####V##", "##G#####G##", "##G#####G##", "##G#####G##", "##V#####V##",
-                        "##X#####X##", "###XXXXX###", "###GGGGG###", "###GGGGG###", "###GGGGG###", "###GGGGG###",
-                        "###GGGGG###", "###GGGGG###", "###GGGGG###", "###GGGGG###", "###GGGGG###", "###GGGGG###",
-                        "###GGGGG###", "###XXXXX###")
-                .aisle("#BBBBBBBBB#", "#V#CCCCC#V#", "#G#CCCCC#G#", "#G#CCCCC#G#", "#G#CCCCC#G#", "#V#CCCCC#V#",
-                        "#X#CCCCC#X#", "##XCCCCCX##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##",
-                        "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##",
-                        "##GCCCCCG##", "##XXXXXXX##")
-                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V",
-                        "X#C#####C#X", "#XC#####CX#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#XXXXXXXXX#")
-                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V",
-                        "X#C#####C#X", "#XC#####CX#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#XXXXXXXXX#")
-                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V",
-                        "X#C#####C#X", "#XC#####CX#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#XXXXMXXXX#")
-                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V",
-                        "X#C#####C#X", "#XC#####CX#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#XXXXXXXXX#")
-                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V",
-                        "X#C#####C#X", "#XC#####CX#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#XXXXXXXXX#")
-                .aisle("#BBBBBBBBB#", "#V#CCCCC#V#", "#G#CCCCC#G#", "#G#CCCCC#G#", "#G#CCCCC#G#", "#V#CCCCC#V#",
-                        "#X#CCCCC#X#", "##XCCCCCX##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##",
-                        "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##",
-                        "##GCCCCCG##", "##XXXXXXX##")
-                .aisle("##BBBBBBB##", "##V#####V##", "##G#####G##", "##G#####G##", "##G#####G##", "##V#####V##",
-                        "##X#####X##", "###XXXXX###", "###GGGGG###", "###GGGGG###", "###GGGGG###", "###GGGGG###",
-                        "###GGGGG###", "###GGGGG###", "###GGGGG###", "###GGGGG###", "###GGGGG###", "###GGGGG###",
-                        "###GGGGG###", "###XXXXX###")
-                .aisle("###BBBBB###", "###VVVVV###", "###GWWWG###", "###GWSWG###", "###GWWWG###", "###VVVVV###",
-                        "###XXXXX###", "###########", "###########", "###########", "###########", "###########",
-                        "###########", "###########", "###########", "###########", "###########", "###########",
-                        "###########", "###########")
+                .aisle("   BBBBB   ", "   VVVVV   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   VVVVV   ", "   XXXXX   ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ")
+                .aisle("  BBBBBBB  ", "  V#####V  ", "  G#####G  ", "  G#####G  ", "  G#####G  ", "  V#####V  ", "  X#####X  ", "   XXXXX   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   XXXXX   ")
+                .aisle(" BBBBBBBBB ", " V#CCCCC#V ", " G#CCCCC#G ", " G#CCCCC#G ", " G#CCCCC#G ", " V#CCCCC#V ", " X#CCCCC#X ", "  XCCCCCX  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  XXXXXXX  ")
+                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V", "X#C#####C#X", " XC#####CX ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " XXXXXXXXX ")
+                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V", "X#C#####C#X", " XC#####CX ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " XXXXXXXXX ")
+                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V", "X#C#####C#X", " XC#####CX ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " XXXXMXXXX ")
+                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V", "X#C#####C#X", " XC#####CX ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " XXXXXXXXX ")
+                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V", "X#C#####C#X", " XC#####CX ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " XXXXXXXXX ")
+                .aisle(" BBBBBBBBB ", " V#CCCCC#V ", " G#CCCCC#G ", " G#CCCCC#G ", " G#CCCCC#G#", " V#CCCCC#V ", " X#CCCCC#X ", "  XCCCCCX  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  XXXXXXX  ")
+                .aisle("  BBBBBBB  ", "  V#####V  ", "  G#####G  ", "  G#####G  ", "  G#####G  ", "  V#####V  ", "  X#####X  ", "   XXXXX   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   XXXXX   ")
+                .aisle("   BBBBB   ", "   VVVVV   ", "   GWWWG   ", "   GWSWG   ", "   GWWWG   ", "   VVVVV   ", "   XXXXX   ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ")
+                // spotless:on
                 .where('S', selfPredicate())
                 .where('B', states(getCasingState())
                         .or(TraceabilityPredicates.autoBusesAndHatches(getAvailableRecipeMaps()))
