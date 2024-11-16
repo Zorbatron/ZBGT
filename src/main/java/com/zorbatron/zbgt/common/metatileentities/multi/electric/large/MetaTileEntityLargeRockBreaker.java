@@ -37,16 +37,13 @@ public class MetaTileEntityLargeRockBreaker extends GCYMRecipeMapMultiblockContr
     @Override
     protected @NotNull BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("TTTTT   OOOOO", "TTTTG   F   F", "F   TT  FTTTF", "F   FTT FLLLF", "FHHHF TTTTTTT",
-                        "FHHHF  TGTTTT", "FHHHF   TTTTT", "             ")
-                .aisle("TPPPT   OPPPO", "T   T        ", "     T  TRRRT", "  P   T L   L", "HPBPH  TTMMMT",
-                        "H   H   T   T", "H   H       T", " HHH         ")
-                .aisle("TPPPT   OPPPO", "T   P        ", "     P  TRRRT", " P P  P L   L", "HB BH  PTMMMT",
-                        "H   H   P   T", "H   H       T", " HIH         ")
-                .aisle("TPPPT   OPPPO", "T   T        ", "     T  TRRRT", "  P   T L   L", "HPBPH  TTMMMT",
-                        "H   H   T   T", "H   H       T", " HHH         ")
-                .aisle("TTTTT   OOSOO", "TTTTG   F   F", "F   TT  FTTTF", "F   FTT FLLLF", "FHHHF TTTTTTT",
-                        "FHHHF  TGTTTT", "FHHHF   TTTTT", "             ")
+                // spotless:off
+                .aisle("TTTTT   OOOOO", "TTTTG   F   F", "F   TT  FTTTF", "F   FTT FLLLF", "FHHHF TTTTTTT", "FHHHF  TGTTTT", "FHHHF   TTTTT", "             ")
+                .aisle("TPPPT   OPPPO", "T   T        ", "     T  TRRRT", "  P   T L   L", "HPBPH  TTMMMT", "H   H   T   T", "H   H       T", " HHH         ")
+                .aisle("TPPPT   OPPPO", "T   P        ", "     P  TRRRT", " P P  P L   L", "HB BH  PTMMMT", "H   H   P   T", "H   H       T", " HIH         ")
+                .aisle("TPPPT   OPPPO", "T   T        ", "     T  TRRRT", "  P   T L   L", "HPBPH  TTMMMT", "H   H   T   T", "H   H       T", " HHH         ")
+                .aisle("TTTTT   OOSOO", "TTTTG   F   F", "F   TT  FTTTF", "F   FTT FLLLF", "FHHHF TTTTTTT", "FHHHF  TGTTTT", "FHHHF   TTTTT", "             ")
+                // spotless:on
                 .where('S', selfPredicate())
                 .where('T', states(getStressProofCasingState()))
                 .where('G', states(getGearBoxState()))

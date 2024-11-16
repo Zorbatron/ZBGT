@@ -34,52 +34,24 @@ public class MetaTileEntityMegaVF extends LaserCapableGCYMRecipeMapMultiblockCon
 
     @Override
     protected @NotNull BlockPattern createStructurePattern() {
+        // spotless:off
         return FactoryBlockPattern.start()
-                .aisle("XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX",
-                        "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX",
-                        "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "X#############X",
-                        "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
-                .aisle("XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX",
-                        "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXSXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX",
-                        "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX")
+                .aisle("XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXSXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX")
+                // spotless:on
                 .where('#', air())
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState()).setMinGlobalLimited(1150)
