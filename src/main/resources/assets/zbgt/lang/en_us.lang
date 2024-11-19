@@ -332,8 +332,8 @@ zbgt.machine.chem_plant.pipe=Pipe: %s
 zbgt.machine.chem_plant.coil=Coil Tier: %s
 recipemap.chem_plant_recipes.name=Chemical Plant
 recipemap.chem_plant.tier=Tier: %s - %s
-recipemap.chem_plant.catalyst.0=Does not always get consumed in the process
-recipemap.chem_plant.catalyst.1=Higher tier pipe casings allow this item to last longer
+recipemap.chem_plant.catalyst.0=§7Does not always get consumed in the process
+recipemap.chem_plant.catalyst.1=§7Higher tier pipe casings allow this item to last longer
 
 
 # Multiblock Casings
