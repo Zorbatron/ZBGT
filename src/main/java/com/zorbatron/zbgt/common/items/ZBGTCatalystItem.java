@@ -12,7 +12,9 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -31,6 +33,8 @@ import gregtech.api.unification.material.info.MaterialIconSet;
 import it.unimi.dsi.fastutil.shorts.Short2ObjectOpenHashMap;
 
 public class ZBGTCatalystItem extends StandardMetaItem {
+
+    private final static int maxDurability = 50;
 
     public ZBGTCatalystItem() {
         super();
@@ -100,6 +104,23 @@ public class ZBGTCatalystItem extends StandardMetaItem {
                                @NotNull ITooltipFlag tooltipFlag) {
         super.addInformation(itemStack, worldIn, lines, tooltipFlag);
         lines.add(I18n.format("metaitem.catalyst_carrier.tooltip"));
+
+        int maxDamage = getCatalystMaxDamage(itemStack);
+        int damageSegment = maxDamage / 5;
+        int damage = maxDamage - getCatalystDamage(itemStack);
+
+        TextFormatting color = TextFormatting.GRAY;
+        if (damage > damageSegment * 3) {
+            color = TextFormatting.GREEN;
+        } else if (damage > damageSegment * 2) {
+            color = TextFormatting.YELLOW;
+        } else if (damage > damageSegment) {
+            color = TextFormatting.GOLD;
+        } else if (damage >= 0) {
+            color = TextFormatting.RED;
+        }
+
+        lines.add(String.format("%s%s%s / %s", color, damage, TextFormatting.GRAY, maxDamage));
     }
 
     public static boolean isItemCatalyst(ItemStack itemStack) {
@@ -108,5 +129,36 @@ public class ZBGTCatalystItem extends StandardMetaItem {
 
     public static boolean isItemCatalyst(Item item) {
         return item instanceof ZBGTCatalystItem;
+    }
+
+    public static void createCatalystNBT(ItemStack rStack) {
+        final NBTTagCompound tagMain = new NBTTagCompound();
+        final NBTTagCompound tagNBT = new NBTTagCompound();
+        tagNBT.setInteger("Damage", 0);
+        tagNBT.setInteger("MaxDamage", maxDurability);
+        tagMain.setTag("Catalyst", tagNBT);
+        rStack.setTagCompound(tagMain);
+    }
+
+    public static int getCatalystDamage(ItemStack itemStack) {
+        if (!itemStack.hasTagCompound() || itemStack.getTagCompound().isEmpty()) {
+            createCatalystNBT(itemStack);
+        }
+        NBTTagCompound nbt = itemStack.getTagCompound();
+        return nbt.getCompoundTag("Catalyst").getInteger("Damage");
+    }
+
+    public static int getCatalystMaxDamage(ItemStack itemStack) {
+        if (!itemStack.hasTagCompound() || itemStack.getTagCompound().isEmpty()) {
+            createCatalystNBT(itemStack);
+        }
+        NBTTagCompound nbt = itemStack.getTagCompound();
+        return nbt.getCompoundTag("Catalyst").getInteger("MaxDamage");
+    }
+
+    public static void setCatalystDamage(ItemStack itemStack, int amount) {
+        NBTTagCompound nbt = itemStack.getTagCompound();
+        nbt = nbt.getCompoundTag("Catalyst");
+        nbt.setInteger("Damage", amount);
     }
 }

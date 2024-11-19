@@ -1,6 +1,7 @@
 package com.zorbatron.zbgt.mixin.chem_plant;
 
 import java.util.Collection;
+import java.util.List;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -32,8 +33,8 @@ public abstract class GTRecipeWrapperMixin {
                                  @Nullable Object ingredient, @Nullable Object ingredient2, CallbackInfo ci) {
         if (recipeMap instanceof RecipeMapChemPlant<?> && ingredient instanceof ItemStack stack &&
                 stack.getItem() instanceof ZBGTCatalystItem) {
-            tooltip.add(I18n.format("recipemap.chem_plant.catalyst.0"));
-            tooltip.add(I18n.format("recipemap.chem_plant.catalyst.1"));
+            ((List<String>) tooltip).add(3, I18n.format("recipemap.chem_plant.catalyst.0"));
+            ((List<String>) tooltip).add(4, I18n.format("recipemap.chem_plant.catalyst.1"));
         }
     }
 }
