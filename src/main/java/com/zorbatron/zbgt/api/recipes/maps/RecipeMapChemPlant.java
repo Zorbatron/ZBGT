@@ -65,8 +65,16 @@ public class RecipeMapChemPlant<R extends RecipeBuilder<R>> extends RecipeMap<R>
                 .filter(stack -> !ZBGTCatalystItem.isItemCatalyst(stack))
                 .collect(Collectors.toList());
 
+        // Clear damage NBT from catalysts to not mess up recipe search
+        for (int i = 0; i < validCatalysts.size(); i++) {
+            ItemStack freshCatalyst = GTUtility.copy(validCatalysts.get(i));
+            freshCatalyst.setTagCompound(null);
+            validCatalysts.set(i, freshCatalyst);
+        }
+
         prunedItems.addAll(validCatalysts);
 
-        return findRecipe(voltage, prunedItems, GTUtility.fluidHandlerToList(fluidInputs));
+        Recipe recipe = findRecipe(voltage, prunedItems, GTUtility.fluidHandlerToList(fluidInputs));
+        return recipe;
     }
 }

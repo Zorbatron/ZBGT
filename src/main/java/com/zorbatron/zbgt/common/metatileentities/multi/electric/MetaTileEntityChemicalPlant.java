@@ -2,10 +2,7 @@ package com.zorbatron.zbgt.common.metatileentities.multi.electric;
 
 import static com.zorbatron.zbgt.api.capability.ZBGTDataCodes.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import net.minecraft.block.state.IBlockState;
@@ -32,8 +29,10 @@ import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.CreativeHeatingCoil;
 import com.zorbatron.zbgt.common.items.ZBGTCatalystItem;
+import com.zorbatron.zbgt.common.items.ZBGTCatalystItems;
 import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 
+import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IMultipleTankHandler;
@@ -356,8 +355,52 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
         return ZBGTTextures.GTPP_MACHINE_OVERLAY;
     }
 
+    private List<ItemStack> getCatalysts() {
+        List<ItemStack> validCatalysts = new ArrayList<>();
+        for (ICatalystProvider catalystProvider : catalystProviders) {
+            validCatalysts.addAll(GTUtility.itemHandlerToList(catalystProvider.getCatalysts()).stream()
+                    .filter(itemStack -> !itemStack.isEmpty())
+                    .collect(Collectors.toList()));
+        }
+        return validCatalysts;
+    }
+
+    private boolean isCatalystDamageable() {
+        return coilTier < 7 || pipeCasingTier < 3;
+    }
+
+    private boolean damageCatalyst(ItemStack itemStack, int minParallel) {
+        if (!isCatalystDamageable()) return false;
+        for (int i = 0; i < minParallel; i++) {
+            if (GTValues.RNG.nextInt(10000000) / 10000000f < (1.2f - (0.2 * pipeCasingTier))) {
+                int damage = ZBGTCatalystItem.getCatalystDamage(itemStack) + 1;
+                if (damage >= ZBGTCatalystItem.maxDurability) {
+                    GTTransferUtils.addItemsToItemHandler(getOutputInventory(), false,
+                            Collections.singletonList(ZBGTCatalystItems.EMPTY_CATALYST.getStackForm()));
+                    itemStack.shrink(1);
+                    return !itemStack.isEmpty();
+                } else {
+                    ZBGTCatalystItem.setCatalystDamage(itemStack, damage);
+                }
+            }
+        }
+        return false;
+    }
+
+    private ItemStack findCatalyst(List<ItemStack> catalysts, ItemStack itemToFind) {
+        for (ItemStack catalyst : catalysts) {
+            if (itemToFind.isItemEqual(catalyst)) {
+                return catalyst;
+            }
+        }
+
+        return ItemStack.EMPTY;
+    }
+
     @SuppressWarnings("InnerClassMayBeStatic")
     private class ChemicalPlantRecipeLogic extends MultiblockRecipeLogic {
+
+        private ItemStack catalyst;
 
         public ChemicalPlantRecipeLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
@@ -389,26 +432,49 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
         @Override
         protected @Nullable Recipe findRecipe(long maxVoltage, IItemHandlerModifiable inputs,
                                               IMultipleTankHandler fluidInputs) {
-            List<ItemStack> validCatalysts = new ArrayList<>();
-            for (ICatalystProvider catalystProvider : catalystProviders) {
-                validCatalysts.addAll(GTUtility.itemHandlerToList(catalystProvider.getCatalysts()).stream()
-                        .filter(itemStack -> !itemStack.isEmpty())
-                        .collect(Collectors.toList()));
-            }
-
-            return ZBGTRecipeMaps.CHEM_PLANT_RECIPES.findRecipe(maxVoltage, inputs, fluidInputs, validCatalysts);
+            return ZBGTRecipeMaps.CHEM_PLANT_RECIPES.findRecipe(maxVoltage, inputs, fluidInputs, getCatalysts());
         }
 
         @Override
         public boolean prepareRecipe(Recipe recipe) {
             RecipeBuilder<?> builder = new RecipeBuilder<>(recipe, recipeMap);
-
             builder.clearInputs();
-            builder.inputs(recipe.getInputs().stream()
-                    .filter(ri -> Arrays.stream(ri.getInputStacks()).noneMatch(ZBGTCatalystItem::isItemCatalyst))
-                    .toArray(GTRecipeInput[]::new));
+            ItemStack catalystInRecipe = ItemStack.EMPTY;
+            List<GTRecipeInput> newInputs = new ArrayList<>();
+
+            for (GTRecipeInput recipeInput : recipe.getInputs()) {
+                boolean catalystFound = false;
+
+                for (ItemStack itemStack : recipeInput.getInputStacks()) {
+                    if (ZBGTCatalystItem.isItemCatalyst(itemStack)) {
+                        catalystFound = true;
+                        catalystInRecipe = itemStack;
+                    }
+                }
+
+                if (!catalystFound) {
+                    newInputs.add(recipeInput);
+                }
+            }
+
+            builder.inputs(newInputs.stream().toArray(GTRecipeInput[]::new));
+
+            if (!catalystInRecipe.isEmpty()) {
+                catalyst = findCatalyst(getCatalysts(), catalystInRecipe);
+            } else {
+                catalyst = ItemStack.EMPTY;
+            }
 
             return super.prepareRecipe(builder.build().getResult());
+        }
+
+        @Override
+        protected void setupRecipe(Recipe recipe) {
+            super.setupRecipe(recipe);
+
+            if (!catalyst.isEmpty() && damageCatalyst(catalyst, parallelRecipesPerformed)) {
+                catalyst = ItemStack.EMPTY;
+            }
         }
     }
 }

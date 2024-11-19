@@ -34,7 +34,7 @@ import it.unimi.dsi.fastutil.shorts.Short2ObjectOpenHashMap;
 
 public class ZBGTCatalystItem extends StandardMetaItem {
 
-    private final static int maxDurability = 50;
+    public final static int maxDurability = 50;
 
     public ZBGTCatalystItem() {
         super();
@@ -104,6 +104,9 @@ public class ZBGTCatalystItem extends StandardMetaItem {
                                @NotNull ITooltipFlag tooltipFlag) {
         super.addInformation(itemStack, worldIn, lines, tooltipFlag);
         lines.add(I18n.format("metaitem.catalyst_carrier.tooltip"));
+
+        // Don't add the damage tooltip to the empty catalyst
+        if (itemStack.isItemEqual(EMPTY_CATALYST.getStackForm())) return;
 
         int maxDamage = getCatalystMaxDamage(itemStack);
         int damageSegment = maxDamage / 5;
