@@ -8,7 +8,7 @@
     "PSSMixin",
     "WorldGenRegistryMixin",
     "chem_plant.GTRecipeWrapperMixin",
-    "chem_plant.ItemStackTextRendererMixin"
+    "chem_plant.RecipeMapCategoryMixin"
   ],
   "client": [],
   "server": []

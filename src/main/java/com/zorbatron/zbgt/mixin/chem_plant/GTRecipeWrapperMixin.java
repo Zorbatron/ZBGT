@@ -21,7 +21,7 @@ import gregtech.api.recipes.RecipeMap;
 import gregtech.integration.jei.recipe.GTRecipeWrapper;
 
 @Mixin(value = GTRecipeWrapper.class, remap = false)
-public class GTRecipeWrapperMixin {
+public abstract class GTRecipeWrapperMixin {
 
     @Shadow
     @Final
