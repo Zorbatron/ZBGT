@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.zorbatron.zbgt.api.recipes.maps.RecipeMapChemPlant;
+import com.zorbatron.zbgt.common.items.ZBGTCatalystItem;
 import com.zorbatron.zbgt.integration.jei.utils.render.SpecializedItemStackTextRenderer;
 
 import gregtech.api.recipes.RecipeMap;
@@ -32,7 +33,7 @@ public class RecipeMapCategoryMixin {
     private void injectCustomRenderer(Args args, @Local SlotItemHandler handle,
                                       @Local(argsOnly = true) @NotNull GTRecipeWrapper recipeWrapper) {
         if (recipeMap instanceof RecipeMapChemPlant<?> && !recipeWrapper.isNotConsumedItem(handle.getSlotIndex())) {
-            args.set(2, new SpecializedItemStackTextRenderer("NC*"));
+            args.set(2, new SpecializedItemStackTextRenderer("NC*", ZBGTCatalystItem::isItemCatalyst));
         }
     }
 }
