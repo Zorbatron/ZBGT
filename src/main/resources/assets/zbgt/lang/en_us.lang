@@ -73,6 +73,10 @@ zbgt.machine.yottank_me_hatch.sticky.disabled=Enable sticky mode
 zbgt.machine.sterile_cleaning_hatch.name=Automatic Sterilization Maintenance Hatch
 zbgt.machine.sterile_cleaning_hatch.tooltip=For automatically maintaining Multiblocks with Cleaning, but sterile!
 
+zbgt.machine.rf_hatch.all_side_access=Use a §fScrewdriver§7 to toggle RF access from §fall sides§7 or only the §ffront§7 face
+zbgt.machine.rf_hatch.all_side_access.on=Hatch allows RF access from all sides
+zbgt.machine.rf_hatch.all_side_access.off=Hatch only allows RF access from the front face
+
 
 # Covers
 metaitem.cover.dual_cover.lv.name=LV Dual Cover

@@ -1,23 +1,37 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart;
 
 import static gregtech.api.capability.FeCompat.*;
+import static gregtech.api.capability.GregtechDataCodes.SYNC_TILE_MODE;
 
 import java.util.List;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import codechicken.lib.raytracer.CuboidRayTraceResult;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.capability.FeCompat;
+import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -32,6 +46,7 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
                                          implements IMultiblockAbilityPart<IEnergyContainer> {
 
     private final boolean isExportHatch;
+    private boolean allSideAccess;
 
     private final EUContainer euContainer;
     private final FEContainer feContainer;
@@ -42,6 +57,7 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
     public MetaTileEntityRFEnergyHatch(ResourceLocation metaTileEntityId, boolean isExportHatch) {
         super(metaTileEntityId, GTValues.LV);
         this.isExportHatch = isExportHatch;
+        this.allSideAccess = true;
 
         euContainer = new EUContainer();
         feContainer = new FEContainer();
@@ -57,12 +73,22 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
         super.update();
 
         if (isExportHatch) {
-            TileEntity te = getNeighbor(getFrontFacing());
-            if (te == null) return;
-            IEnergyStorage energyStorage = te.getCapability(CapabilityEnergy.ENERGY, getFrontFacing().getOpposite());
-            if (energyStorage == null) return;
-            euContainer.removeEnergy(FeCompat.insertEu(energyStorage, storedEU));
+            if (allSideAccess) {
+                for (EnumFacing side : EnumFacing.values()) {
+                    pushEnergy(side);
+                }
+            } else {
+                pushEnergy(getFrontFacing());
+            }
         }
+    }
+
+    private void pushEnergy(EnumFacing direction) {
+        TileEntity te = getNeighbor(direction);
+        if (te == null) return;
+        IEnergyStorage energyStorage = te.getCapability(CapabilityEnergy.ENERGY, direction.getOpposite());
+        if (energyStorage == null) return;
+        euContainer.removeEnergy(FeCompat.insertEu(energyStorage, storedEU));
     }
 
     @Override
@@ -79,8 +105,11 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
         if (shouldRenderOverlay()) {
-            (isExportHatch ? Textures.CONVERTER_FE_OUT : Textures.CONVERTER_FE_IN).renderSided(getFrontFacing(),
-                    renderState, translation, PipelineUtil.color(pipeline, GTValues.VC[getTier()]));
+            for (EnumFacing facing : EnumFacing.values()) {
+                if (!allSideAccess && facing != getFrontFacing()) continue;
+                (isExportHatch ? Textures.CONVERTER_FE_OUT : Textures.CONVERTER_FE_IN).renderSided(facing, renderState,
+                        translation, PipelineUtil.color(pipeline, GTValues.VC[getTier()]));
+            }
         }
     }
 
@@ -97,10 +126,68 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing side) {
         if (capability == CapabilityEnergy.ENERGY) {
-            return CapabilityEnergy.ENERGY.cast(feContainer);
+            if (allSideAccess || side == null || side == getFrontFacing()) {
+                return CapabilityEnergy.ENERGY.cast(feContainer);
+            }
         }
 
         return super.getCapability(capability, side);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World world, @NotNull List<String> tooltip,
+                               boolean advanced) {
+        super.addInformation(stack, world, tooltip, advanced);
+
+        tooltip.add(I18n.format("zbgt.machine.rf_hatch.all_side_access"));
+    }
+
+    @Override
+    public boolean onScrewdriverClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+                                      CuboidRayTraceResult hitResult) {
+        if (getWorld().isRemote) {
+            scheduleRenderUpdate();
+            return true;
+        }
+
+        if (allSideAccess) {
+            setSideAccess(false);
+            playerIn.sendMessage(new TextComponentTranslation("zbgt.machine.rf_hatch.all_side_access.off"));
+        } else {
+            setSideAccess(true);
+            playerIn.sendMessage(new TextComponentTranslation("zbgt.machine.rf_hatch.all_side_access.on"));
+        }
+
+        return true;
+    }
+
+    private void setSideAccess(boolean allSideAccess) {
+        this.allSideAccess = allSideAccess;
+        if (!getWorld().isRemote) {
+            writeCustomData(GregtechDataCodes.SYNC_TILE_MODE, b -> b.writeBoolean(allSideAccess));
+        }
+    }
+
+    @Override
+    public void receiveCustomData(int dataId, PacketBuffer buf) {
+        if (dataId == SYNC_TILE_MODE) {
+            this.allSideAccess = buf.readBoolean();
+            scheduleRenderUpdate();
+        }
+        super.receiveCustomData(dataId, buf);
+    }
+
+    @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        buf.writeBoolean(allSideAccess);
+        super.writeInitialSyncData(buf);
+    }
+
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        this.allSideAccess = buf.readBoolean();
+        super.receiveInitialSyncData(buf);
     }
 
     @Override
@@ -108,6 +195,7 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
         super.readFromNBT(data);
 
         storedEU = data.getLong("StoredEU");
+        allSideAccess = data.getBoolean("AllSideAccess");
     }
 
     @Override
@@ -115,6 +203,7 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
         super.writeToNBT(data);
 
         data.setLong("StoredEU", storedEU);
+        data.setBoolean("AllSideAccess", allSideAccess);
 
         return data;
     }
@@ -168,6 +257,8 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
             return maxStoredEU;
         }
 
+        // Because PSSs and ATs just gobble the whole energy buffer without checking the volt*amp limit of the energy
+        // container, these can just be 0 (makes my life easier yay!)
         @Override
         public long getInputAmperage() {
             return 0;
