@@ -13,6 +13,7 @@ import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.*;
 import com.zorbatron.zbgt.common.metatileentities.storage.MetaTileEntityCreativeComputationProvider;
 
 import gregtech.api.GTValues;
+import gregtech.api.GregTechAPI;
 
 public class ZBGTMetaTileEntities {
 
@@ -102,10 +103,15 @@ public class ZBGTMetaTileEntities {
         STERILE_CLEANING_HATCH = registerMetaTileEntity(18018,
                 new MetaTileEntitySterileCleaningHatch(zbgtId("sterile_cleaning_hatch")));
 
-        RF_ENERGY_HATCH_INPUT = registerMetaTileEntity(18019,
-                new MetaTileEntityRFEnergyHatch(zbgtId("rf_input_hatch"), false));
-        RF_ENERGY_HATCH_OUTPUT = registerMetaTileEntity(18020,
-                new MetaTileEntityRFEnergyHatch(zbgtId("rf_output_hatch"), true));
+        for (int i = 0; i <= (GregTechAPI.isHighTier() ? GTValues.OpV : GTValues.UHV); i++) {
+            RF_ENERGY_HATCH_INPUT = registerMetaTileEntity(18019 + i, new MetaTileEntityRFEnergyHatch(
+                    zbgtId(String.format("rf_input_hatch_%s", GTValues.VN[i].toLowerCase())), i, false));
+        }
+
+        for (int i = 0; i <= (GregTechAPI.isHighTier() ? GTValues.OpV : GTValues.UHV); i++) {
+            RF_ENERGY_HATCH_OUTPUT = registerMetaTileEntity(18033 + i, new MetaTileEntityRFEnergyHatch(
+                    zbgtId(String.format("rf_output_hatch_%s", GTValues.VN[i].toLowerCase())), i, true));
+        }
 
         // 18050-18099 (50) reserved for multiblocks
         MEGA_EBF = registerMetaTileEntity(18050,

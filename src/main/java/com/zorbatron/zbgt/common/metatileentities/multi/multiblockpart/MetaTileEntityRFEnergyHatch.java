@@ -39,7 +39,6 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.client.utils.PipelineUtil;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 
 public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
@@ -52,12 +51,14 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
     private final FEContainer feContainer;
 
     private long storedEU = 0;
-    private final long maxStoredEU = 10_000_000;
+    private final long maxStoredEU;
 
-    public MetaTileEntityRFEnergyHatch(ResourceLocation metaTileEntityId, boolean isExportHatch) {
-        super(metaTileEntityId, GTValues.LV);
+    public MetaTileEntityRFEnergyHatch(ResourceLocation metaTileEntityId, int tier, boolean isExportHatch) {
+        super(metaTileEntityId, tier);
+
         this.isExportHatch = isExportHatch;
         this.allSideAccess = true;
+        this.maxStoredEU = GTValues.V[tier];
 
         euContainer = new EUContainer();
         feContainer = new FEContainer();
@@ -65,7 +66,7 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityRFEnergyHatch(metaTileEntityId, isExportHatch);
+        return new MetaTileEntityRFEnergyHatch(metaTileEntityId, getTier(), isExportHatch);
     }
 
     @Override
@@ -88,7 +89,17 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
         if (te == null) return;
         IEnergyStorage energyStorage = te.getCapability(CapabilityEnergy.ENERGY, direction.getOpposite());
         if (energyStorage == null) return;
-        euContainer.removeEnergy(FeCompat.insertEu(energyStorage, storedEU));
+        euContainer.removeEnergy(insertEuBounded(energyStorage, storedEU, Integer.MAX_VALUE));
+    }
+
+    /**
+     * Copied from {@link FeCompat#insertEu(IEnergyStorage, long)} but with {@link FeCompat#toFeBounded(long, int, int)}
+     * instead of {@link FeCompat#toFe(long, int)}.
+     */
+    private long insertEuBounded(IEnergyStorage storage, long amountEU, int max) {
+        int euToFeRatio = ratio(false);
+        int feSent = storage.receiveEnergy(toFeBounded(amountEU, euToFeRatio, max), true);
+        return toEu(storage.receiveEnergy(feSent - (feSent % euToFeRatio), false), euToFeRatio);
     }
 
     @Override
@@ -107,8 +118,8 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
         if (shouldRenderOverlay()) {
             for (EnumFacing facing : EnumFacing.values()) {
                 if (!allSideAccess && facing != getFrontFacing()) continue;
-                (isExportHatch ? Textures.CONVERTER_FE_OUT : Textures.CONVERTER_FE_IN).renderSided(facing, renderState,
-                        translation, PipelineUtil.color(pipeline, GTValues.VC[getTier()]));
+                (isExportHatch ? Textures.CONVERTER_FE_OUT : Textures.CONVERTER_FE_IN)
+                        .renderSided(facing, renderState, translation, pipeline);
             }
         }
     }
