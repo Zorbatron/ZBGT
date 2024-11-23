@@ -152,6 +152,17 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
         super.addInformation(stack, world, tooltip, advanced);
 
         tooltip.add(I18n.format("zbgt.machine.rf_hatch.all_side_access"));
+
+        if (isExportHatch) {
+            tooltip.add(I18n.format("zbgt.machine.rf_hatch.fe_out", feContainer.getMaxEnergyStored()));
+        } else {
+            tooltip.add(I18n.format("gregtech.universal.tooltip.voltage_in", GTValues.V[getTier()],
+                    GTValues.VNF[getTier()]));
+            tooltip.add(I18n.format("gregtech.universal.tooltip.amperage_in", 1));
+        }
+
+        tooltip.add(I18n.format("zbgt.machine.rf_hatch.energy_storage_capacity", feContainer.getMaxEnergyStored()));
+        tooltip.add(I18n.format("gregtech.universal.disabled"));
     }
 
     @Override
@@ -219,6 +230,11 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
         return data;
     }
 
+    @Override
+    public boolean canPartShare() {
+        return false;
+    }
+
     @SuppressWarnings("InnerClassMayBeStatic")
     public class EUContainer implements IEnergyContainer {
 
@@ -268,16 +284,14 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
             return maxStoredEU;
         }
 
-        // Because PSSs and ATs just gobble the whole energy buffer without checking the volt*amp limit of the energy
-        // container, these can just be 0 (makes my life easier yay!)
         @Override
         public long getInputAmperage() {
-            return 0;
+            return 1;
         }
 
         @Override
         public long getInputVoltage() {
-            return 0;
+            return GTValues.V[getTier()];
         }
     }
 
