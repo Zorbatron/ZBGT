@@ -4,6 +4,7 @@ import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 
 import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCircuitAssemblyLine;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCoAL;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.large.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.mega.*;
@@ -37,6 +38,7 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityMegaFusionReactor[] MEGA_FUSION = new MetaTileEntityMegaFusionReactor[3];
 
     public static MetaTileEntityCoAL CoAL;
+    public static MetaTileEntityCircuitAssemblyLine CAL;
 
     public static MetaTileEntityQueebf QUAD_EBF;
     public static MetaTileEntityQueezer QUEEZER;
@@ -145,5 +147,8 @@ public class ZBGTMetaTileEntities {
 
         QUACKER = registerMetaTileEntity(18069,
                 new MetaTileEntityQuacker(zbgtId("quacker")));
+
+        CAL = registerMetaTileEntity(18070,
+                new MetaTileEntityCircuitAssemblyLine(zbgtId("cal")));
     }
 }

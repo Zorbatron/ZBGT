@@ -23,6 +23,7 @@ import com.zorbatron.zbgt.api.capability.impl.HeatingCoilGCYMMultiblockRecipeLog
 import com.zorbatron.zbgt.api.metatileentity.LaserCapableGCYMRecipeMapMultiblockController;
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
+import com.zorbatron.zbgt.common.ZBGTConfig;
 import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 
 import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
@@ -71,65 +72,39 @@ public class MetaTileEntityMegaABS extends LaserCapableGCYMRecipeMapMultiblockCo
 
     @Override
     protected @NotNull BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start()
-                .aisle("###BBBBB###", "###VVVVV###", "###GGGGG###", "###GGGGG###", "###GGGGG###", "###VVVVV###",
-                        "###XXXXX###", "###########", "###########", "###########", "###########", "###########",
-                        "###########", "###########", "###########", "###########", "###########", "###########",
-                        "###########", "###########")
-                .aisle("##BBBBBBB##", "##V#####V##", "##G#####G##", "##G#####G##", "##G#####G##", "##V#####V##",
-                        "##X#####X##", "###XXXXX###", "###GGGGG###", "###GGGGG###", "###GGGGG###", "###GGGGG###",
-                        "###GGGGG###", "###GGGGG###", "###GGGGG###", "###GGGGG###", "###GGGGG###", "###GGGGG###",
-                        "###GGGGG###", "###XXXXX###")
-                .aisle("#BBBBBBBBB#", "#V#CCCCC#V#", "#G#CCCCC#G#", "#G#CCCCC#G#", "#G#CCCCC#G#", "#V#CCCCC#V#",
-                        "#X#CCCCC#X#", "##XCCCCCX##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##",
-                        "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##",
-                        "##GCCCCCG##", "##XXXXXXX##")
-                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V",
-                        "X#C#####C#X", "#XC#####CX#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#XXXXXXXXX#")
-                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V",
-                        "X#C#####C#X", "#XC#####CX#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#XXXXXXXXX#")
-                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V",
-                        "X#C#####C#X", "#XC#####CX#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#XXXXMXXXX#")
-                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V",
-                        "X#C#####C#X", "#XC#####CX#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#XXXXXXXXX#")
-                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V",
-                        "X#C#####C#X", "#XC#####CX#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#", "#GC#####CG#",
-                        "#GC#####CG#", "#XXXXXXXXX#")
-                .aisle("#BBBBBBBBB#", "#V#CCCCC#V#", "#G#CCCCC#G#", "#G#CCCCC#G#", "#G#CCCCC#G#", "#V#CCCCC#V#",
-                        "#X#CCCCC#X#", "##XCCCCCX##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##",
-                        "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##", "##GCCCCCG##",
-                        "##GCCCCCG##", "##XXXXXXX##")
-                .aisle("##BBBBBBB##", "##V#####V##", "##G#####G##", "##G#####G##", "##G#####G##", "##V#####V##",
-                        "##X#####X##", "###XXXXX###", "###GGGGG###", "###GGGGG###", "###GGGGG###", "###GGGGG###",
-                        "###GGGGG###", "###GGGGG###", "###GGGGG###", "###GGGGG###", "###GGGGG###", "###GGGGG###",
-                        "###GGGGG###", "###XXXXX###")
-                .aisle("###BBBBB###", "###VVVVV###", "###GWWWG###", "###GWSWG###", "###GWWWG###", "###VVVVV###",
-                        "###XXXXX###", "###########", "###########", "###########", "###########", "###########",
-                        "###########", "###########", "###########", "###########", "###########", "###########",
-                        "###########", "###########")
+        // spotless:off
+        FactoryBlockPattern pattern = FactoryBlockPattern.start()
+                .aisle("   BBBBB   ", "   VVVVV   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   VVVVV   ", "   XXXXX   ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ")
+                .aisle("  BBBBBBB  ", "  V#####V  ", "  G#####G  ", "  G#####G  ", "  G#####G  ", "  V#####V  ", "  X#####X  ", "   XXXXX   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   XXXXX   ")
+                .aisle(" BBBBBBBBB ", " V#CCCCC#V ", " G#CCCCC#G ", " G#CCCCC#G ", " G#CCCCC#G ", " V#CCCCC#V ", " X#CCCCC#X ", "  XCCCCCX  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  XXXXXXX  ")
+                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V", "X#C#####C#X", " XC#####CX ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " XXXXXXXXX ")
+                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V", "X#C#####C#X", " XC#####CX ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " XXXXXXXXX ")
+                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V", "X#C#####C#X", " XC#####CX ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " XXXXMXXXX ")
+                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V", "X#C#####C#X", " XC#####CX ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " XXXXXXXXX ")
+                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V", "X#C#####C#X", " XC#####CX ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " XXXXXXXXX ")
+                .aisle(" BBBBBBBBB ", " V#CCCCC#V ", " G#CCCCC#G ", " G#CCCCC#G ", " G#CCCCC#G#", " V#CCCCC#V ", " X#CCCCC#X ", "  XCCCCCX  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  XXXXXXX  ")
+                .aisle("  BBBBBBB  ", "  V#####V  ", "  G#####G  ", "  G#####G  ", "  G#####G  ", "  V#####V  ", "  X#####X  ", "   XXXXX   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   XXXXX   ")
+                .aisle("   BBBBB   ", "   VVVVV   ", "   GWWWG   ", "   GWSWG   ", "   GWWWG   ", "   VVVVV   ", "   XXXXX   ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ")
+                // spotless:on
                 .where('S', selfPredicate())
-                .where('B',
-                        states(getCasingState())
-                                .or(TraceabilityPredicates.autoBusesAndHatches(getAvailableRecipeMaps()))
-                                .or(autoEnergyInputsMega()))
+                .where('B', states(getCasingState())
+                        .or(TraceabilityPredicates.autoBusesAndHatches(getAvailableRecipeMaps()))
+                        .or(autoEnergyInputsMega()))
                 .where('X', states(getCasingState()))
                 .where('V', states(getVentState()))
                 .where('G', states(getGlassState()))
-                .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('C', heatingCoils())
                 .where('W', states(getCasingState())
                         .or(autoAbilities(false, true, false, false, false, false, false)))
-                .where('#', air())
-                .build();
+                .where('#', air());
+
+        if (ZBGTConfig.multiblockSettings.megasNeedMufflers) {
+            pattern.where('M', abilities(MultiblockAbility.MUFFLER_HATCH));
+        } else {
+            pattern.where('M', states(getCasingState()));
+        }
+
+        return pattern.build();
     }
 
     protected IBlockState getCasingState() {
@@ -200,7 +175,6 @@ public class MetaTileEntityMegaABS extends LaserCapableGCYMRecipeMapMultiblockCo
                 .where('X', getCasingState())
                 .where('V', getVentState())
                 .where('G', getGlassState())
-                .where('M', MetaTileEntities.MUFFLER_HATCH[1], EnumFacing.UP)
                 .where('W', getCasingState())
                 .where('X', getCasingState())
                 .where('I', MetaTileEntities.ITEM_IMPORT_BUS[1], EnumFacing.SOUTH)
@@ -209,6 +183,12 @@ public class MetaTileEntityMegaABS extends LaserCapableGCYMRecipeMapMultiblockCo
                 .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[1], EnumFacing.EAST)
                 .where('D', MetaTileEntities.ENERGY_INPUT_HATCH[1], EnumFacing.WEST)
                 .where('#', Blocks.AIR.getDefaultState());
+
+        if (ZBGTConfig.multiblockSettings.megasNeedMufflers) {
+            builder.where('M', MetaTileEntities.MUFFLER_HATCH[1], EnumFacing.UP);
+        } else {
+            builder.where('M', getCasingState());
+        }
 
         GregTechAPI.HEATING_COILS.entrySet().stream()
                 .sorted(Comparator.comparingInt(entry -> entry.getValue().getTier()))
@@ -284,7 +264,7 @@ public class MetaTileEntityMegaABS extends LaserCapableGCYMRecipeMapMultiblockCo
 
     @Override
     public boolean hasMufflerMechanics() {
-        return true;
+        return ZBGTConfig.multiblockSettings.megasNeedMufflers;
     }
 
     @Override

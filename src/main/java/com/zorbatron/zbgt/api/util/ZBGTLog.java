@@ -1,13 +1,11 @@
 package com.zorbatron.zbgt.api.util;
 
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jetbrains.annotations.NotNull;
+
+import com.zorbatron.zbgt.ZBGTCore;
 
 public class ZBGTLog {
 
-    public static Logger logger;
-
-    public static void init(@NotNull Logger modLogger) {
-        logger = modLogger;
-    }
+    public static Logger logger = LogManager.getLogger(ZBGTCore.MODID);
 }

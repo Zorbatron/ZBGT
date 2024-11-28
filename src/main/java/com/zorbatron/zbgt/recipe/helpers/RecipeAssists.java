@@ -434,4 +434,24 @@ public class RecipeAssists {
             default     -> PRECISE_DUAL_COVER_LV;
         };
     }
+
+    public static MetaItem<?>.MetaValueItem getWrappedCircuitByTier(int tier) {
+        return switch (tier) {
+            case (LV)   -> WRAPPED_CIRCUIT_LV;
+            case (MV)   -> WRAPPED_CIRCUIT_MV;
+            case (HV)   -> WRAPPED_CIRCUIT_HV;
+            case (EV)   -> WRAPPED_CIRCUIT_EV;
+            case (IV)   -> WRAPPED_CIRCUIT_IV;
+            case (LuV)  -> WRAPPED_CIRCUIT_LuV;
+            case (ZPM)  -> WRAPPED_CIRCUIT_ZPM;
+            case (UV)   -> WRAPPED_CIRCUIT_UV;
+            case (UHV)  -> WRAPPED_CIRCUIT_UHV;
+            case (UEV)  -> WRAPPED_CIRCUIT_UEV;
+            case (UIV)  -> WRAPPED_CIRCUIT_UIV;
+            case (UXV)  -> WRAPPED_CIRCUIT_UXV;
+            case (OpV)  -> WRAPPED_CIRCUIT_OpV;
+            case (MAX)  -> WRAPPED_CIRCUIT_MAX;
+            default     -> WRAPPED_CIRCUIT_ULV;
+        };
+    }
 }

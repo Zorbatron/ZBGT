@@ -194,7 +194,7 @@ public class MultiblockRecipes {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(ZBGTMetaTileEntities.MEGA_FUSION[0], 48)
+                .input(MetaTileEntities.FUSION_REACTOR[1], 48)
                 .input(circuit, getMarkerMaterialByTier(ZPM))
                 .input(circuit, getMarkerMaterialByTier(ZPM))
                 .input(circuit, getMarkerMaterialByTier(ZPM))
@@ -214,7 +214,7 @@ public class MultiblockRecipes {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(ZBGTMetaTileEntities.MEGA_FUSION[1], 48)
+                .input(MetaTileEntities.FUSION_REACTOR[2], 48)
                 .input(circuit, getMarkerMaterialByTier(UV))
                 .input(circuit, getMarkerMaterialByTier(UV))
                 .input(circuit, getMarkerMaterialByTier(UV))
@@ -273,5 +273,22 @@ public class MultiblockRecipes {
                 'C', new UnificationEntry(circuit, getMarkerMaterialByTier(EV)),
                 'T', MetaItems.COVER_SCREEN,
                 'P', new UnificationEntry(pipeNormalFluid, TungstenSteel));
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(MetaTileEntities.CIRCUIT_ASSEMBLER[LuV])
+                .input(getRobotArmByTier(LuV), 4)
+                .input(getMotorByTier(LuV), 4)
+                .input(getFieldGeneratorByTier(LuV))
+                .input(getEmitterByTier(LuV))
+                .input(getSensorByTier(LuV))
+                .input(plate, RhodiumPlatedPalladium, 8)
+                .scannerResearch(research -> research
+                        .researchStack(MetaTileEntities.CIRCUIT_ASSEMBLER[5].getStackForm())
+                        .duration(600)
+                        .EUt(VA[IV]))
+                .fluidInputs(Indalloy140.getFluid(L * 10))
+                .output(ZBGTMetaTileEntities.CAL)
+                .EUt(VA[LuV]).duration(20 * 45)
+                .buildAndRegister();
     }
 }

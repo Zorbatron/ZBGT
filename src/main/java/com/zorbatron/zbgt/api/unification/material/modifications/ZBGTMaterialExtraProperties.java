@@ -1,10 +1,9 @@
-package com.zorbatron.zbgt.api.unification.material.materials;
+package com.zorbatron.zbgt.api.unification.material.modifications;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.LithiumChloride;
-import static gregtech.api.unification.material.properties.PropertyKey.INGOT;
-import static gregtech.api.unification.material.properties.PropertyKey.WIRE;
+import static gregtech.api.unification.material.properties.PropertyKey.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +18,7 @@ import com.zorbatron.zbgt.api.util.ZBGTUtility;
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.properties.FluidProperty;
-import gregtech.api.unification.material.properties.IngotProperty;
-import gregtech.api.unification.material.properties.PropertyKey;
-import gregtech.api.unification.material.properties.WireProperties;
+import gregtech.api.unification.material.properties.*;
 
 public final class ZBGTMaterialExtraProperties {
 
@@ -30,12 +26,15 @@ public final class ZBGTMaterialExtraProperties {
         ingots();
         fluids();
         wires();
+        dusts();
+        ores();
     }
 
     private static void ingots() {
         Material[] materials = { Cerium };
 
         for (Material material : materials) {
+            if (material.hasProperty(INGOT)) continue;
             material.setProperty(INGOT, new IngotProperty());
         }
     }
@@ -50,7 +49,8 @@ public final class ZBGTMaterialExtraProperties {
         materialList.add(new ImmutablePair<>(LithiumChloride, 1123));
 
         for (Pair<Material, Integer> materialPair : materialList) {
-            materialPair.getLeft().setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID,
+            if (materialPair.getLeft().hasProperty(FLUID)) continue;
+            materialPair.getLeft().setProperty(FLUID, new FluidProperty(FluidStorageKeys.LIQUID,
                     new FluidBuilder().temperature(materialPair.getRight())));
         }
     }
@@ -69,10 +69,35 @@ public final class ZBGTMaterialExtraProperties {
         }
 
         for (Pair<Material, Integer[]> materialPair : wirePairs) {
+            if (materialPair.getLeft().hasProperty(WIRE)) continue;
             materialPair.getLeft().setProperty(WIRE, new WireProperties(
                     materialPair.getRight()[0],
                     materialPair.getRight()[1],
                     materialPair.getRight()[2]));
+        }
+    }
+
+    private static void dusts() {
+        Material[] materials = { Ytterbium };
+
+        for (Material material : materials) {
+            if (material.hasProperty(DUST)) continue;
+            material.setProperty(DUST, new DustProperty());
+        }
+    }
+
+    private static void ores() {
+        Material[] materials = { Ytterbium, Titanium, Niobium };
+
+        for (Material material : materials) {
+            if (material.hasProperty(ORE)) continue;
+
+            OreProperty oreProperty = new OreProperty();
+            if (material == Titanium) {
+                oreProperty.addOreByProducts(Almandine);
+            }
+
+            material.setProperty(ORE, oreProperty);
         }
     }
 }
