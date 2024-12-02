@@ -16,6 +16,7 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.api.capability.ICreativePart;
 import com.zorbatron.zbgt.api.capability.impl.InfiniteItemStackHandler;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.api.util.ZBGTUtility;
@@ -47,7 +48,7 @@ import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMulti
 
 public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotifiablePart implements
                                            IMultiblockAbilityPart<IItemHandlerModifiable>, IGhostSlotConfigurable,
-                                           IDataStickIntractable {
+                                           IDataStickIntractable, ICreativePart {
 
     private InfiniteItemStackHandler infiniteItemStackHandler;
     private GhostCircuitItemStackHandler circuitItemStackHandler;

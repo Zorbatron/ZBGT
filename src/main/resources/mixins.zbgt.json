@@ -6,7 +6,9 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "PSSMixin",
-    "WorldGenRegistryMixin"
+    "WorldGenRegistryMixin",
+    "chem_plant.GTRecipeWrapperMixin",
+    "chem_plant.RecipeMapCategoryMixin"
   ],
   "client": [],
   "server": []

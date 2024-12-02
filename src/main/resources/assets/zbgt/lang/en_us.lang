@@ -73,6 +73,9 @@ zbgt.machine.yottank_me_hatch.sticky.disabled=Enable sticky mode
 zbgt.machine.sterile_cleaning_hatch.name=Automatic Sterilization Maintenance Hatch
 zbgt.machine.sterile_cleaning_hatch.tooltip=For automatically maintaining Multiblocks with Cleaning, but sterile!
 
+zbgt.machine.catalyst_hatch.name=Catalyst Housing
+zbgt.machine.catalyst_hatch.tooltip=Dedicated Catalyst Storage
+
 
 # Covers
 metaitem.cover.dual_cover.lv.name=LV Dual Cover
@@ -219,6 +222,17 @@ metaitem.wrapped.misc.engraved_crystal_chip.name=Wrap of Engraved Crystal Chips
 metaitem.wrapped.misc.crystal_cpu.name=Wrap of Crystal CPUs
 metaitem.wrapped.misc.crystal_soc.name=Wrap of Crystal SoCs
 
+metaitem.catalyst_carrier.tooltip=Active Reagent Agent
+metaitem.empty_catalyst.name=Catalyst Carrier
+metaitem.green_catalyst.name=Green Metal Catalyst
+metaitem.red_catalyst.name=Red Metal Catalyst
+metaitem.yellow_catalyst.name=Yellow Metal Catalyst
+metaitem.blue_catalyst.name=Blue Metal Catalyst
+metaitem.orange_catalyst.name=Orange Metal Catalyst
+metaitem.purple_catalyst.name=Purple Metal Catalyst
+metaitem.brown_catalyst.name=Brown Metal Catalyst
+metaitem.pink_catalyst.name=Pink Metal Catalyst
+
 
 # Widgets
 zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s
@@ -304,6 +318,22 @@ zbgt.machine.cal.name=Circuit Assembly Line
 zbgt.machine.cal.tooltip=Does not lose efficiency when overclocked
 zbgt.machine.cal.tooltip_ordered_items=When in §eCircuit Assembly Line§7 mode, §fitems§7 must be in the correct order to run.
 recipemap.circuit_assembly_line_recipes.name=Circuit Assembly Line
+
+zbgt.machine.chem_plant.name=ExxonMobil Chemical Plant
+zbgt.machine.chem_plant.casing=Casing: %s
+zbgt.machine.chem_plant.casing.0=Bronze
+zbgt.machine.chem_plant.casing.1=Steel
+zbgt.machine.chem_plant.casing.2=Aluminum
+zbgt.machine.chem_plant.casing.3=Stainless Steel
+zbgt.machine.chem_plant.casing.4=Titanium
+zbgt.machine.chem_plant.casing.5=Tungstensteel
+zbgt.machine.chem_plant.machine_casing=Machine Casing: %s
+zbgt.machine.chem_plant.pipe=Pipe: %s
+zbgt.machine.chem_plant.coil=Coil Tier: %s
+recipemap.chem_plant_recipes.name=Chemical Plant
+recipemap.chem_plant.tier=Tier: %s - %s
+recipemap.chem_plant.catalyst.0=§7Does not always get consumed in the process
+recipemap.chem_plant.catalyst.1=§7Higher tier pipe casings allow this item to last longer
 
 
 # Multiblock Casings

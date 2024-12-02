@@ -23,6 +23,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.api.capability.ICreativePart;
 import com.zorbatron.zbgt.api.capability.impl.InfiniteFluidTank;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 
@@ -45,7 +46,7 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
 public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNotifiablePart implements
-                                              IMultiblockAbilityPart<IFluidTank>, IDataStickIntractable {
+                                              IMultiblockAbilityPart<IFluidTank>, IDataStickIntractable, ICreativePart {
 
     private final InfiniteFluidTank fluidTank;
 

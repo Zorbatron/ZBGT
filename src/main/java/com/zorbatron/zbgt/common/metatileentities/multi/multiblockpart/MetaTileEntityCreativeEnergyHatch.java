@@ -21,6 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.api.capability.ICreativePart;
 import com.zorbatron.zbgt.api.capability.impl.InfiniteEnergyContainer;
 
 import codechicken.lib.render.CCRenderState;
@@ -47,7 +48,7 @@ import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMulti
 
 public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockPart implements
                                                IMultiblockAbilityPart<IEnergyContainer>, IControllable,
-                                               IDataStickIntractable {
+                                               IDataStickIntractable, ICreativePart {
 
     protected InfiniteEnergyContainer energyContainer;
 
