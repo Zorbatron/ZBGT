@@ -1,7 +1,10 @@
 package com.zorbatron.zbgt.api.util;
 
+import static net.minecraft.util.text.TextFormatting.*;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.items.IItemHandler;
 
 import org.jetbrains.annotations.NotNull;
@@ -23,6 +26,45 @@ public class ZBGTUtility {
 
     public static final int[] intV = { 8, 32, 128, 512, 2048, 8192, 32768, 131072, 524288, 2097152, 8388608, 33554432,
             134217728, 536870912, Integer.MAX_VALUE };
+
+    /**
+     * If using MAX (13), don't forget to use {@link TextFormatting#BOLD}!
+     */
+    public static final TextFormatting[] tierColors = {
+            DARK_GRAY,
+            GRAY,
+            AQUA,
+            GOLD,
+            DARK_PURPLE,
+            DARK_BLUE,
+            LIGHT_PURPLE,
+            RED,
+            DARK_AQUA,
+            DARK_RED,
+            GREEN,
+            DARK_GREEN,
+            YELLOW,
+            BLUE,
+            RED
+    };
+
+    public static final String[] tierColorsString = {
+            DARK_GRAY.toString(),
+            GRAY.toString(),
+            AQUA.toString(),
+            GOLD.toString(),
+            DARK_PURPLE.toString(),
+            DARK_BLUE.toString(),
+            LIGHT_PURPLE.toString(),
+            RED.toString(),
+            DARK_AQUA.toString(),
+            DARK_RED.toString(),
+            GREEN.toString(),
+            DARK_GREEN.toString(),
+            YELLOW.toString(),
+            BLUE.toString(),
+            RED.toString() + BOLD.toString()
+    };
 
     public static void getCircuitSlotTooltip(@NotNull SlotWidget widget,
                                              GhostCircuitItemStackHandler circuitItemStackHandler) {
