@@ -31,7 +31,7 @@ public final class ZBGTMaterialExtraProperties {
     }
 
     private static void ingots() {
-        Material[] materials = { Cerium };
+        Material[] materials = { Cerium, Carbon };
 
         for (Material material : materials) {
             if (material.hasProperty(INGOT)) continue;

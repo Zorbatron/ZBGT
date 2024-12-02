@@ -52,6 +52,15 @@ public class ZBGTConfig {
                 "Default: true" })
         @Config.Name("Megas Need Mufflers")
         public boolean megasNeedMufflers = true;
+
+        @Config.RequiresMcRestart
+        @Config.Comment({ "What nanites should be used to control the Nano Forge tier",
+                "Default: gregtech:carbon, gregtech:neutronium" })
+        @Config.Name("Nano Forge nanite tiered materials")
+        public String[] nanoForgeNanites = {
+                "gregtech:carbon",
+                "gregtech:neutronium"
+        };
     }
 
     @Config.Name("Recipe Settings")

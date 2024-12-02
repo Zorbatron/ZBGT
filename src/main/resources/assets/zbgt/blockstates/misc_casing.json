@@ -37,6 +37,11 @@
         "textures": {
           "all": "gregtech:blocks/casings/misc/5"
         }
+      },
+      "radiant_naquadah": {
+        "textures": {
+          "all": "gregtech:blocks/casings/misc/radiant_naquadah"
+        }
       }
     }
   }

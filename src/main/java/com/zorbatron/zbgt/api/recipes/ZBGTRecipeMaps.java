@@ -4,9 +4,11 @@ import static gregtech.api.recipes.RecipeMaps.*;
 
 import com.zorbatron.zbgt.api.recipes.builders.CALRecipeBuilder;
 import com.zorbatron.zbgt.api.recipes.builders.CoALRecipeBuilder;
+import com.zorbatron.zbgt.api.recipes.builders.NanoForgeRecipeBuilder;
 import com.zorbatron.zbgt.api.recipes.builders.PreciseAssemblerRecipeBuilder;
 import com.zorbatron.zbgt.api.recipes.maps.RecipeMapCAL;
 import com.zorbatron.zbgt.api.recipes.maps.RecipeMapCoAL;
+import com.zorbatron.zbgt.api.recipes.maps.RecipeMapNanoForge;
 import com.zorbatron.zbgt.api.recipes.maps.RecipeMapPreciseAssembler;
 
 import gregtech.api.GTValues;
@@ -37,6 +39,11 @@ public final class ZBGTRecipeMaps {
                                     .getFluid(Math.max(1, (GTValues.L / 2) * recipeBuilder.getSolderMultiplier())));
                         }
                     });
+
+    public static final RecipeMap<NanoForgeRecipeBuilder> NANO_FORGE_RECIPES = new RecipeMapNanoForge<>(
+            "nano_forge_recipes",
+            new NanoForgeRecipeBuilder())
+                    .setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT, ProgressWidget.MoveType.HORIZONTAL);
 
     public static void modifyMaps() {
         POLARIZER_RECIPES.setMaxFluidInputs(1);

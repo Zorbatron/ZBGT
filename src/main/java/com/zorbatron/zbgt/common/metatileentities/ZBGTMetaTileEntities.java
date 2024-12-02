@@ -6,6 +6,7 @@ import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTile
 import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCircuitAssemblyLine;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCoAL;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityNanoForge;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.large.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.mega.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.quad.*;
@@ -37,14 +38,14 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityPreciseAssembler PRASS;
     public static MetaTileEntityMegaFusionReactor[] MEGA_FUSION = new MetaTileEntityMegaFusionReactor[3];
 
+    public static MetaTileEntityYOTTank YOTTANK;
     public static MetaTileEntityCoAL CoAL;
     public static MetaTileEntityCircuitAssemblyLine CAL;
+    public static MetaTileEntityNanoForge NANO_FORGE;
 
     public static MetaTileEntityQueebf QUAD_EBF;
     public static MetaTileEntityQueezer QUEEZER;
     public static MetaTileEntityQuacker QUACKER;
-
-    public static MetaTileEntityYOTTank YOTTANK;
 
     public static MetaTileEntityLargeRockBreaker LARGE_ROCK_BREAKER;
     public static MetaTileEntityLargeAirCollector LARGE_AIR_COLLECTOR;
@@ -150,5 +151,11 @@ public class ZBGTMetaTileEntities {
 
         CAL = registerMetaTileEntity(18070,
                 new MetaTileEntityCircuitAssemblyLine(zbgtId("cal")));
+
+        NANO_FORGE = registerMetaTileEntity(18071,
+                new MetaTileEntityNanoForge(zbgtId("nano_forge")));
+
+        // PCB Factory - 18072
+        // Chem Plant - 18073
     }
 }

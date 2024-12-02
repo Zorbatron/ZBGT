@@ -305,6 +305,16 @@ zbgt.machine.cal.tooltip=Does not lose efficiency when overclocked
 zbgt.machine.cal.tooltip_ordered_items=When in §eCircuit Assembly Line§7 mode, §fitems§7 must be in the correct order to run.
 recipemap.circuit_assembly_line_recipes.name=Circuit Assembly Line
 
+zbgt.machine.nano_forge.name=Nano Forge
+zbgt.machine.nano_forge.tooltip=Requires insane power to create nanites. The nanite in the controller slot controls the tier. Does not have the extra tiered structures due to lack of code support.
+zbgt.machine.nano_forge.tooltip.2=If a recipe's tier is lower than the tier of the Nano Forge it gains §cperfect overclocks§r.
+recipemap.nano_forge_recipes.name=Nano Forge
+zbgt.machine.nano_forge.tier=Tier: %s
+zbgt.machine.nano_forge.nanite_tier=Nanite Tier: %s
+zbgt.machine.nano_forge.structure_tier=Structure Tier: %s
+zbgt.machine.nano_forge.nanite_description=Tier §5%s§7 requires a §r%s§7 Nanite
+zbgt.machine.nano_forge.bar=--------------------------------
+
 
 # Multiblock Casings
 tile.multiblock_casing.precise_0.name=Imprecise Electronic Unit Casing
@@ -374,6 +384,7 @@ tile.misc_casing.compact_fusion_coil_3.name=Compact Fusion Coil MK-II Prototype
 tile.misc_casing.compact_fusion_coil_4.name=Compact Fusion Coil MK-II Finaltype
 
 tile.misc_casing.inconel_reinforced_casing.name=Inconel Reinforced Casing
+tile.misc_casing.radiant_naquadah.name=Radiant Naquadah Alloy Casing
 
 tile.creative_heating_coil.creative_heating_coil.name=Creative Heating Coil
 
@@ -429,3 +440,7 @@ zbgt.material.special_ceramics=Special Ceramics
 # Ore veins
 zbgt.vein.adamantium=Adamantium vein
 zbgt.vein.quantium=Quantium Vein
+
+
+# Ore prefixes
+item.material.oreprefix.nanites=%s Nanites
