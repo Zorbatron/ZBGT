@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,6 +22,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.zorbatron.zbgt.api.ZBGTAPI;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.ColourMultiplier;
@@ -188,5 +191,10 @@ public class MetaTileEntityCreativeComputationProvider extends MetaTileEntity
         this.maxCWUt = data.getInteger("MaxCWUt");
         this.isWorkingEnabled = data.getBoolean("IsWorkingEnabled");
         super.readFromNBT(data);
+    }
+
+    @Override
+    public boolean isInCreativeTab(CreativeTabs creativeTab) {
+        return creativeTab == CreativeTabs.SEARCH || creativeTab == ZBGTAPI.TAB_ZBGT;
     }
 }

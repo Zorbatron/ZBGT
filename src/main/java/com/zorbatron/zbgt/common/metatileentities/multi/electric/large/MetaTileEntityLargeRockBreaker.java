@@ -1,11 +1,14 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.electric.large;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
+
+import com.zorbatron.zbgt.api.ZBGTAPI;
 
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregicality.multiblocks.api.render.GCYMTextures;
@@ -114,5 +117,10 @@ public class MetaTileEntityLargeRockBreaker extends GCYMRecipeMapMultiblockContr
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return GCYMTextures.STRESS_PROOF_CASING;
+    }
+
+    @Override
+    public boolean isInCreativeTab(CreativeTabs creativeTab) {
+        return creativeTab == CreativeTabs.SEARCH || creativeTab == ZBGTAPI.TAB_ZBGT;
     }
 }

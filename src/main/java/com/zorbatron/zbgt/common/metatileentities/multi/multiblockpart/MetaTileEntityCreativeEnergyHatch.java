@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,6 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.capability.impl.InfiniteEnergyContainer;
 
 import codechicken.lib.render.CCRenderState;
@@ -330,5 +332,10 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         setAmps(tag.getLong("Amperage"));
         setVoltageTier(tag.getInteger("Tier"));
         setWorkingEnabled(tag.getBoolean("IsWorkingEnabled"));
+    }
+
+    @Override
+    public boolean isInCreativeTab(CreativeTabs creativeTab) {
+        return creativeTab == CreativeTabs.SEARCH || creativeTab == ZBGTAPI.TAB_ZBGT;
     }
 }

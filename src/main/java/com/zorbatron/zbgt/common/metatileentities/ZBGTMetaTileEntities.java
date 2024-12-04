@@ -3,6 +3,7 @@ package com.zorbatron.zbgt.common.metatileentities;
 import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCircuitAssemblyLine;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCoAL;
@@ -13,6 +14,7 @@ import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.*;
 import com.zorbatron.zbgt.common.metatileentities.storage.MetaTileEntityCreativeComputationProvider;
 
 import gregtech.api.GTValues;
+import gregtech.api.block.machines.MachineItemBlock;
 
 public class ZBGTMetaTileEntities {
 
@@ -51,6 +53,8 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityLargeAlloySmelter LARGE_ALLOY_SMELTER;
 
     public static void init() {
+        MachineItemBlock.addCreativeTab(ZBGTAPI.TAB_ZBGT);
+
         // 18000-18049 (50) reserved for multiblock parts
         CREATIVE_ENERGY_SOURCE = registerMetaTileEntity(18000,
                 new MetaTileEntityCreativeEnergyHatch(zbgtId("creative_energy_source"), false));

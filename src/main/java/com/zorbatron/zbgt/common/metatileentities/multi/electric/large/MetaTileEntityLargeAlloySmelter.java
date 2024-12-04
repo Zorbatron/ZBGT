@@ -3,6 +3,7 @@ package com.zorbatron.zbgt.common.metatileentities.multi.electric.large;
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -10,6 +11,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
+
+import com.zorbatron.zbgt.api.ZBGTAPI;
 
 import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
@@ -149,5 +152,10 @@ public class MetaTileEntityLargeAlloySmelter extends GCYMRecipeMapMultiblockCont
 
             overclockResults[0] = (int) Math.max(1, overclockResults[0] * (1.0f - coilTier * 0.1));
         }
+    }
+
+    @Override
+    public boolean isInCreativeTab(CreativeTabs creativeTab) {
+        return creativeTab == CreativeTabs.SEARCH || creativeTab == ZBGTAPI.TAB_ZBGT;
     }
 }

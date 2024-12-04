@@ -9,6 +9,7 @@ import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
@@ -318,5 +319,10 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
                     super.checkRecipe(recipe) &&
                             recipe.getProperty(PreciseAssemblerProperty.getInstance(), 0) <= getPreciseCasingTier();
         }
+    }
+
+    @Override
+    public boolean isInCreativeTab(CreativeTabs creativeTab) {
+        return creativeTab == CreativeTabs.SEARCH || creativeTab == ZBGTAPI.TAB_ZBGT;
     }
 }

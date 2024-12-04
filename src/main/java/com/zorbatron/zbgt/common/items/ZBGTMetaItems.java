@@ -4,6 +4,8 @@ import gregtech.api.items.metaitem.MetaItem;
 
 public class ZBGTMetaItems {
 
+    public static MetaItem<?>.MetaValueItem ZBGT_ITEM;
+
     public static MetaItem<?>.MetaValueItem DUAL_COVER_LV;
     public static MetaItem<?>.MetaValueItem DUAL_COVER_MV;
     public static MetaItem<?>.MetaValueItem DUAL_COVER_HV;

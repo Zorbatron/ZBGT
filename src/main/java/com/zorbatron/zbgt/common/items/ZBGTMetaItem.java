@@ -20,6 +20,7 @@ public class ZBGTMetaItem extends StandardMetaItem {
 
     public ZBGTMetaItem() {
         super();
+        setCreativeTab(ZBGTAPI.TAB_ZBGT);
     }
 
     @Override
@@ -286,5 +287,7 @@ public class ZBGTMetaItem extends StandardMetaItem {
         WRAPPED_ENGRAVED_CRYSTAL_CHIP = addItem(113, "wrapped.misc.engraved_crystal_chip");
         WRAPPED_CRYSTAL_CPU = addItem(114, "wrapped.misc.crystal_cpu");
         WRAPPED_CRYSTAL_SOC = addItem(115, "wrapped.misc.crystal_soc");
+
+        ZBGT_ITEM = addItem(116, "zbgt").setInvisible();
     }
 }
