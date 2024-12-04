@@ -9,6 +9,8 @@ import net.minecraft.world.IBlockAccess;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.zorbatron.zbgt.api.ZBGTAPI;
+
 import gregtech.api.block.VariantBlock;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
@@ -23,6 +25,7 @@ public class MaterialCasing extends VariantBlock<MaterialCasing.CasingType> {
         setSoundType(SoundType.METAL);
         setHarvestLevel("wrench", 2);
         setDefaultState(getState(CasingType.values()[0]));
+        setCreativeTab(ZBGTAPI.TAB_ZBGT);
     }
 
     @Override

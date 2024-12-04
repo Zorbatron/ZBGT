@@ -21,6 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.common.ZBGTConfig;
 
 import gregtech.api.block.IHeatingCoilBlockStats;
@@ -38,6 +39,7 @@ public class CreativeHeatingCoil extends VariantBlock<CreativeHeatingCoil.CoilTy
         setResistance(10.0f);
         setSoundType(SoundType.METAL);
         setHarvestLevel("wrench", 2);
+        setCreativeTab(ZBGTAPI.TAB_ZBGT);
     }
 
     @NotNull

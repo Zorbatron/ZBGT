@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,6 +24,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.capability.impl.InfiniteFluidTank;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 
@@ -207,5 +209,10 @@ public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNo
 
     private void readConfigFromTag(NBTTagCompound tag) {
         fluidTank.setFluid(FluidStack.loadFluidStackFromNBT(tag));
+    }
+
+    @Override
+    public boolean isInCreativeTab(CreativeTabs creativeTab) {
+        return creativeTab == CreativeTabs.SEARCH || creativeTab == ZBGTAPI.TAB_ZBGT;
     }
 }

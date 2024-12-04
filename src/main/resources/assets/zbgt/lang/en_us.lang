@@ -429,3 +429,7 @@ zbgt.material.special_ceramics=Special Ceramics
 # Ore veins
 zbgt.vein.adamantium=Adamantium vein
 zbgt.vein.quantium=Quantium Vein
+
+
+# Creative tab
+itemGroup.ZBGT=ZBGT

@@ -5,6 +5,7 @@ import static com.zorbatron.zbgt.api.pattern.TraceabilityPredicates.autoEnergyIn
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -13,6 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.common.ZBGTConfig;
 import com.zorbatron.zbgt.core.sound.ZBGTSoundEvents;
 
@@ -86,5 +88,10 @@ public class MetaTileEntityQuacker extends MetaTileEntityCrackingUnit {
                 .where('T', states(getCasingState()))
                 .where('#', air())
                 .build();
+    }
+
+    @Override
+    public boolean isInCreativeTab(CreativeTabs creativeTab) {
+        return creativeTab == CreativeTabs.SEARCH || creativeTab == ZBGTAPI.TAB_ZBGT;
     }
 }

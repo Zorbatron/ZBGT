@@ -8,6 +8,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -22,6 +23,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
 
@@ -604,5 +606,10 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         setOverriddenTickRate(tag.getInteger("OverriddenTickRate"));
         setTickRateOverride(tag.getBoolean("TickRateOverride"));
         setSticky(tag.getBoolean("Sticky"));
+    }
+
+    @Override
+    public boolean isInCreativeTab(CreativeTabs creativeTab) {
+        return creativeTab == CreativeTabs.SEARCH || creativeTab == ZBGTAPI.TAB_ZBGT;
     }
 }
