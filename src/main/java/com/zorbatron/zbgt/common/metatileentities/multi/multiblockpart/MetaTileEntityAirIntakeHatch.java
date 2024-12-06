@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
@@ -24,10 +25,14 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
 import org.jetbrains.annotations.Nullable;
+
+import com.zorbatron.zbgt.api.ZBGTAPI;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
@@ -198,6 +203,7 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
         };
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("zbgt.machine.air_intake_universal.rate", this.fillAmount, this.tickRate));
@@ -213,6 +219,7 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
         abilityList.add(fluidTank);
     }
 
+    @SideOnly(Side.CLIENT)
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
 
@@ -297,5 +304,10 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
                 xSpd,
                 -ySpd,
                 zSpd);
+    }
+
+    @Override
+    public boolean isInCreativeTab(CreativeTabs creativeTab) {
+        return creativeTab == CreativeTabs.SEARCH || creativeTab == ZBGTAPI.TAB_ZBGT;
     }
 }

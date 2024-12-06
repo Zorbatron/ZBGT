@@ -6,28 +6,30 @@ import java.util.List;
 import java.util.function.Function;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.capability.impl.InfiniteEnergyContainer;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
-import gregtech.api.capability.GregtechDataCodes;
-import gregtech.api.capability.GregtechTileCapabilities;
-import gregtech.api.capability.IControllable;
-import gregtech.api.capability.IEnergyContainer;
+import gregtech.api.capability.*;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.*;
@@ -46,7 +48,8 @@ import gregtech.common.metatileentities.multi.electric.MetaTileEntityPowerSubsta
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 
 public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockPart implements
-                                               IMultiblockAbilityPart<IEnergyContainer>, IControllable {
+                                               IMultiblockAbilityPart<IEnergyContainer>, IControllable,
+                                               IDataStickIntractable {
 
     protected InfiniteEnergyContainer energyContainer;
 
@@ -68,6 +71,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         return new MetaTileEntityCreativeEnergyHatch(metaTileEntityId, isExportHatch);
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
@@ -85,14 +89,17 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
                 controllerBase instanceof MetaTileEntityActiveTransformer);
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gregtech.creative_tooltip.1") + TooltipHelper.RAINBOW +
                 I18n.format("gregtech.creative_tooltip.2") + I18n.format("gregtech.creative_tooltip.3"));
-        tooltip.add(I18n.format("gregtech.universal.enabled"));
+        tooltip.add(I18n.format("gregtech.machine.me.copy_paste.tooltip"));
         tooltip.add(I18n.format("zbgt.machine.creative_energy.warning.1"));
+        tooltip.add(I18n.format("gregtech.universal.enabled"));
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void addToolUsages(ItemStack stack, @Nullable World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gregtech.tool_action.screwdriver.access_covers"));
@@ -104,7 +111,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         return this.voltage;
     }
 
-    public void setVoltage(long voltage) {
+    protected void setVoltage(long voltage) {
         this.voltage = voltage;
     }
 
@@ -112,8 +119,16 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         return this.amps;
     }
 
-    public void setAmps(long amps) {
+    protected void setAmps(long amps) {
         this.amps = amps;
+    }
+
+    public int getVoltageTier() {
+        return this.setTier;
+    }
+
+    protected void setVoltageTier(int tier) {
+        this.setTier = tier;
     }
 
     @NotNull
@@ -137,8 +152,8 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         // Voltage selector
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 138 + yOffset)
                 .widget(new CycleButtonWidget(7, 7 + yOffset, 30, 20, GTValues.VNF, () -> setTier, tier -> {
-                    setTier = tier;
-                    voltage = GTValues.V[setTier];
+                    setVoltageTier(tier);
+                    setVoltage(GTValues.V[getVoltageTier()]);
                 }));
         builder.label(6, 6, getMetaFullName());
 
@@ -147,19 +162,19 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         builder.widget(new TextFieldWidget2(9, 50 + yOffset, 152, 16, () -> String.valueOf(voltage), value -> {
             if (!value.isEmpty()) {
                 setVoltage(Long.parseLong(value));
-                setTier = GTUtility.getTierByVoltage(voltage);
+                setVoltageTier(GTUtility.getTierByVoltage(getVoltage()));
             }
         }).setAllowedChars(TextFieldWidget2.NATURAL_NUMS).setMaxLength(19).setValidator(getTextFieldValidator()));
 
         builder.label(7, 74 + yOffset, "gregtech.creative.energy.amperage");
         builder.widget(new ClickButtonWidget(7, 87 + yOffset, 20, 20, "-", data -> {
-            if (amps > 0) {
-                setAmps(amps - 1);
+            if (getAmps() > 0) {
+                setAmps(getAmps() - 1);
             }
         }));
         builder.widget(new ClickButtonWidget(7, 111 + yOffset, 20, 20, "÷4", clickData -> {
-            if (amps / 4 > 0) {
-                setAmps(amps / 4);
+            if (getAmps() / 4 > 0) {
+                setAmps(getAmps() / 4);
             } else {
                 setAmps(1);
             }
@@ -171,19 +186,19 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
             }
         }).setMaxLength(10).setNumbersOnly(0, Integer.MAX_VALUE));
         builder.widget(new ClickButtonWidget(149, 87 + yOffset, 20, 20, "+", data -> {
-            if (amps < Integer.MAX_VALUE) {
-                setAmps(amps + 1);
+            if (getAmps() < Integer.MAX_VALUE) {
+                setAmps(getAmps() + 1);
             }
         }));
         builder.widget(new ClickButtonWidget(149, 111 + yOffset, 20, 20, "x4", data -> {
-            if (amps * 4 <= Integer.MAX_VALUE) {
-                setAmps(amps * 4);
+            if (getAmps() * 4 <= Integer.MAX_VALUE) {
+                setAmps(getAmps() * 4);
             }
         }));
 
-        builder.widget(
-                new ImageCycleButtonWidget(149, 8 + yOffset, 18, 18, GuiTextures.BUTTON_POWER, this::isWorkingEnabled,
-                        this::setWorkingEnabled));
+        builder.widget(new ImageCycleButtonWidget(149, 8 + yOffset, 18, 18, GuiTextures.BUTTON_POWER,
+                this::isWorkingEnabled,
+                this::setWorkingEnabled));
 
         return builder.build(getHolder(), entityPlayer);
     }
@@ -242,17 +257,17 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setLong("Voltage", this.voltage);
-        data.setLong("Amps", this.amps);
-        data.setByte("Tier", (byte) this.setTier);
+        data.setLong("Voltage", getVoltage());
+        data.setLong("Amps", getAmps());
+        data.setByte("Tier", (byte) getVoltageTier());
         return super.writeToNBT(data);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound data) {
-        this.voltage = data.getLong("Voltage");
-        this.amps = data.getLong("Amps");
-        this.setTier = data.getByte("Tier");
+        setVoltage(data.getLong("Voltage"));
+        setAmps(data.getLong("Amps"));
+        setVoltageTier(data.getByte("Tier"));
         super.readFromNBT(data);
         setInitialEnergyConfiguration();
     }
@@ -262,6 +277,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
         if (capability == GregtechTileCapabilities.CAPABILITY_CONTROLLABLE) {
             return GregtechTileCapabilities.CAPABILITY_CONTROLLABLE.cast(this);
         }
+
         return super.getCapability(capability, side);
     }
 
@@ -275,5 +291,51 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
     public void receiveInitialSyncData(@NotNull PacketBuffer buf) {
         super.receiveInitialSyncData(buf);
         this.isWorkingEnabled = buf.readBoolean();
+    }
+
+    @Override
+    public void onDataStickLeftClick(EntityPlayer player, ItemStack dataStick) {
+        NBTTagCompound tag = new NBTTagCompound();
+        tag.setTag(isExportHatch ? "CreativeEnergySink" : "CreativeEnergySource", writeConfigToTag());
+        dataStick.setTagCompound(tag);
+        dataStick.setTranslatableName("zbgt.machine.creative_energy_source.data_stick.name");
+        player.sendStatusMessage(new TextComponentTranslation("gregtech.machine.me.import_copy_settings"), true);
+    }
+
+    private NBTTagCompound writeConfigToTag() {
+        NBTTagCompound tag = new NBTTagCompound();
+
+        tag.setLong("Voltage", getVoltage());
+        tag.setLong("Amperage", getAmps());
+        tag.setInteger("Tier", getVoltageTier());
+        tag.setBoolean("IsWorkingEnabled", isWorkingEnabled());
+
+        return tag;
+    }
+
+    @Override
+    public boolean onDataStickRightClick(EntityPlayer player, ItemStack dataStick) {
+        NBTTagCompound tag = dataStick.getTagCompound();
+
+        if (tag == null) return false;
+        if (!(tag.hasKey("CreativeEnergySink") || tag.hasKey("CreativeEnergySource"))) return false;
+
+        readConfigFromTag(
+                isExportHatch ? tag.getCompoundTag("CreativeEnergySink") : tag.getCompoundTag("CreativeEnergySource"));
+        player.sendStatusMessage(new TextComponentTranslation("gregtech.machine.me.import_paste_settings"), true);
+
+        return true;
+    }
+
+    private void readConfigFromTag(NBTTagCompound tag) {
+        setVoltage(tag.getLong("Voltage"));
+        setAmps(tag.getLong("Amperage"));
+        setVoltageTier(tag.getInteger("Tier"));
+        setWorkingEnabled(tag.getBoolean("IsWorkingEnabled"));
+    }
+
+    @Override
+    public boolean isInCreativeTab(CreativeTabs creativeTab) {
+        return creativeTab == CreativeTabs.SEARCH || creativeTab == ZBGTAPI.TAB_ZBGT;
     }
 }

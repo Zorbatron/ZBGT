@@ -23,7 +23,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.google.common.math.IntMath;
-import com.zorbatron.zbgt.client.ClientHandler;
+import com.zorbatron.zbgt.api.capability.ZBGTDataCodes;
+import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.client.widgets.HideableFluidFilterContainer;
 import com.zorbatron.zbgt.client.widgets.HideableItemFilterContainer;
 
@@ -33,7 +34,6 @@ import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
-import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.capability.IControllable;
 import gregtech.api.capability.impl.FluidHandlerDelegate;
@@ -127,7 +127,7 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
         primaryGroup.addWidget(new LabelWidget(10, 5, getUITitle(), GTValues.VN[tier]));
 
         primaryGroup
-                .addWidget(new ImageCycleButtonWidget(176 - 16 - 4, 166, 16, 16, ClientHandler.ITEM_FLUID_OVERLAY, 2,
+                .addWidget(new ImageCycleButtonWidget(176 - 16 - 4, 166, 16, 16, ZBGTTextures.ITEM_FLUID_OVERLAY, 2,
                         () -> dualMode.ordinal(), val -> dualMode = DualMode.values()[val])
                                 .setTooltipHoverString("cover.dual_cover.mode_changer"));
 
@@ -223,7 +223,7 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
 
     public void setPumpMode(CoverPump.PumpMode pumpMode) {
         this.pumpMode = pumpMode;
-        writeCustomData(GregtechDataCodes.UPDATE_COVER_MODE, buf -> buf.writeEnumValue(pumpMode));
+        writeCustomData(ZBGTDataCodes.UPDATE_COVER_MODE_1, buf -> buf.writeEnumValue(pumpMode));
         markDirty();
     }
 
@@ -241,7 +241,7 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
 
     public void setConveyorMode(CoverConveyor.ConveyorMode conveyorMode) {
         this.conveyorMode = conveyorMode;
-        writeCustomData(GregtechDataCodes.UPDATE_COVER_MODE, buf -> buf.writeEnumValue(conveyorMode));
+        writeCustomData(ZBGTDataCodes.UPDATE_COVER_MODE_2, buf -> buf.writeEnumValue(conveyorMode));
         markDirty();
     }
 
@@ -293,8 +293,11 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
     @Override
     public void readCustomData(int discriminator, @NotNull PacketBuffer buf) {
         super.readCustomData(discriminator, buf);
-        if (discriminator == GregtechDataCodes.UPDATE_COVER_MODE) {
+
+        if (discriminator == ZBGTDataCodes.UPDATE_COVER_MODE_1) {
             this.pumpMode = buf.readEnumValue(CoverPump.PumpMode.class);
+            scheduleRenderUpdate();
+        } else if (discriminator == ZBGTDataCodes.UPDATE_COVER_MODE_2) {
             this.conveyorMode = buf.readEnumValue(CoverConveyor.ConveyorMode.class);
             scheduleRenderUpdate();
         }
@@ -807,5 +810,11 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
             }
         }
         return result;
+    }
+
+    @Override
+    public void onRemoval() {
+        dropInventoryContents(itemFilterContainer.getFilterInventory());
+        dropInventoryContents(fluidFilterContainer.getFilterInventory());
     }
 }

@@ -1,15 +1,17 @@
-# Multiblock Parts
+# Multiblock parts
 zbgt.machine.creative_energy_source.name=Creative Energy Source
 zbgt.machine.creative_energy_source.tooltip=Infinite Energy Source for Multiblocks
+zbgt.machine.creative_energy_source.data_stick.name=§oCreative Energy Source Configuration Data
 
 zbgt.machine.creative_energy_sink.name=Creative Energy Sink
 zbgt.machine.creative_energy_sink.tooltip=Infinite Energy Sink for Multiblocks
 
 zbgt.machine.creative_energy.apply_button=Apply Settings
-zbgt.machine.creative_energy.warning.1=The connected multiblock needs to be reformed to accept the changes!
+zbgt.machine.creative_energy.warning.1=Changing settings requires the multiblock to be reformed!
 
 zbgt.machine.creative_reservoir_hatch.name=Creative Fluid Hatch
 zbgt.machine.creative_reservoir_hatch.tooltip=Infinite fluid source for multiblocks
+zbgt.machine.creative_reservoir_hatch.data_stick.name=§oCreative Fluid Hatch Configuration Data
 
 zbgt.machine.creative_computation_provider.name=Creative Computation Provider
 zbgt.machine.creative_computation_provider.tooltip=Infinite source of computation for CWU consumers
@@ -18,6 +20,7 @@ zbgt.machine.creative_computation_provider.cwut=Maximum Requestable CWU/t
 
 zbgt.machine.creative_item_bus.name=Creative Item Bus
 zbgt.machine.creative_item_bus.tooltip=Infinite item source for multiblocks
+zbgt.machine.creative_item_bus.data_stick.name=§oCreative Item Bus Configuration Data
 
 zbgt.machine.air_intake_universal.rate=Collects %,d mB of air every %,d ticks
 
@@ -29,6 +32,46 @@ zbgt.machine.extreme_air_intake_hatch.tooltip=Collects air from the world for mu
 
 zbgt.machine.single_item_input_bus.name=Single Item Input Bus
 zbgt.machine.single_item_input_bus.stack_size=§6Max stack size: §f%,d
+
+zbgt.machine.super_input_bus.name=Super Input Bus
+zbgt.machine.super_input_bus.tooltip=Has 16 slots but can hold up to MAX_INT items per slot!
+zbgt.machine.super_input_bus.return_items.button.enabled=Stop returning items
+zbgt.machine.super_input_bus.return_items.button.disabled=Click to return items to the faced block
+zbgt.machine.super_input_bus.return_items.screwdriver.enabled=Started returning items
+zbgt.machine.super_input_bus.return_items.screwdriver.disabled=Stopped returning items
+zbgt.machine.super_input_bus.auto_pull.enabled=Item auto pulling enabled
+zbgt.machine.super_input_bus.auto_pull.disabled=Item auto pulling disabled
+zbgt.machine.super_input_bus.slot_limit=Set slot limit
+zbgt.machine.super_input_bus.screwdriver=§8Use Screwdriver to toggle sending item back to the faced block
+zbgt.machine.super_input_bus.soft_mallet=§8use Soft mallet to toggle auto pulling items
+
+zbgt.machine.parallel_hatch.uev.name=UEV Parallel Hatch
+zbgt.machine.parallel_hatch.uiv.name=UIV Parallel Hatch
+zbgt.machine.parallel_hatch.uxv.name=UXV Parallel Hatch
+zbgt.machine.parallel_hatch.uxv.tooltip=Warning! Very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag!
+zbgt.machine.parallel_hatch.opv.name=OpV Parallel Hatch
+zbgt.machine.parallel_hatch.opv.tooltip=Warning! Very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag!
+zbgt.machine.parallel_hatch.max.name=MAX Parallel Hatch
+zbgt.machine.parallel_hatch.max.tooltip=Warning! Very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag!
+zbgt.machine.parallel_hatch.max.1.name=MAX+1 Parallel Hatch
+zbgt.machine.parallel_hatch.max.1.tooltip=Warning! Very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag!
+zbgt.machine.parallel_hatch.final.name=The Final Parallel Hatch
+zbgt.machine.parallel_hatch.final.tooltip=Warning! Very high parallel counts on multiblocks with muffler hatches currently causes §4§lEXTREME §7lag!
+
+zbgt.machine.yottank_me_hatch.name=YOTHatch
+zbgt.machine.yottank_me_hatch.tooltip=Connects your YOTTank directly to your ME network
+zbgt.machine.yottank_me_hatch.data_stick.name=§YOTTHatch Configuration Data
+zbgt.machine.yottank_me_hatch.automatic_rate=Automatic report rate: %d ticks
+zbgt.machine.yottank_me_hatch.override_rate.enabled=Stop overriding the automatic report rate
+zbgt.machine.yottank_me_hatch.override_rate.disabled=Override the automatic report rate
+zbgt.machine.yottank_me_hatch.set_override_rate=Overridden report rate
+zbgt.machine.yottank_me_hatch.visibility=Set visibility
+zbgt.machine.yottank_me_hatch.priority=Priority
+zbgt.machine.yottank_me_hatch.sticky.enabled=Disable sticky mode
+zbgt.machine.yottank_me_hatch.sticky.disabled=Enable sticky mode
+
+zbgt.machine.sterile_cleaning_hatch.name=Automatic Sterilization Maintenance Hatch
+zbgt.machine.sterile_cleaning_hatch.tooltip=For automatically maintaining Multiblocks with Cleaning, but sterile!
 
 zbgt.machine.budget_crib.name=Budget CRIB
 zbgt.machine.budget_crib.tooltip=A Crafting Input Bus on a budget
@@ -81,3 +124,325 @@ metaitem.cover.dual.tooltip.transfer_rate=§bTransfer Rate: §f%,d items/s§7 an
 metaitem.cover.dual.tooltip.transfer_rate.stacks=§bTransfer Rate: §f%,d stacks/s§7 and §f%,d L/t
 
 cover.dual_cover.mode_changer=Click to change between the item and fluid settings
+
+
+# Items
+metaitem.generic_circuit.ulv.name=Generic ULV Circuit
+metaitem.generic_circuit.lv.name=Generic LV Circuit
+metaitem.generic_circuit.mv.name=Generic MV Circuit
+metaitem.generic_circuit.hv.name=Generic HV Circuit
+metaitem.generic_circuit.ev.name=Generic EV Circuit
+metaitem.generic_circuit.iv.name=Generic IV Circuit
+metaitem.generic_circuit.luv.name=Generic LuV Circuit
+metaitem.generic_circuit.zpm.name=Generic ZPM Circuit
+metaitem.generic_circuit.uv.name=Generic UV Circuit
+metaitem.generic_circuit.uhv.name=Generic UHV Circuit
+metaitem.generic_circuit.uev.name=Generic UEV Circuit
+metaitem.generic_circuit.uiv.name=Generic UIV Circuit
+metaitem.generic_circuit.uxv.name=Generic UXV Circuit
+metaitem.generic_circuit.opv.name=Generic OpV Circuit
+metaitem.generic_circuit.max.name=Generic MAX Circuit
+
+metaitem.gg_circuit_1.name=Hi-Computation Station Mk-I
+metaitem.gg_circuit_1.tooltip=§b93015 TFlops§r
+metaitem.gg_circuit_2.name=Hi-Computation Station Mk-II
+metaitem.gg_circuit_2.tooltip=§e76M Processor Units§r
+metaitem.gg_circuit_3.name=Hi-Computation Station Mk-III
+metaitem.gg_circuit_3.tooltip=§aInvalidate RSA§r
+metaitem.gg_circuit_4.name=Hi-Computation Station Mk-IV Prototype
+metaitem.gg_circuit_4.tooltip=§c56th Mersenne Prime§r
+metaitem.gg_circuit_5.name=Hi-Computation Station Mk-V Finaltype
+metaitem.gg_circuit_5.tooltip=§5Paradox§r
+
+metaitem.engraved_gold_chip.name=Engraved Gold Chip
+metaitem.engraved_diamond_chip.name=Engraved Diamond Chip
+metaitem.engraved_energy_chip.name=Engraved Energy Chip
+metaitem.engraved_manyullyn_chip.name=Engraved Manyullyn Chip
+metaitem.special_ceramics_plate.name=Special Ceramics Plate
+metaitem.quartz_wafer.name=Quartz Wafer
+metaitem.micro_heater.name=Micro Heater
+metaitem.quartz_crystal_resonator.name=Quartz Crystal Resonator
+metaitem.high_energy_mixture.name=High Energy Mixture
+metaitem.radiation_protection_plate.name=Radiation Proof Plate
+metaitem.advanced_radiation_protection_plate.name=Advanced Radiation Proof Plate
+
+metaitem.wrapped.circuit.ulv.name=Wrap of ULV Circuits
+metaitem.wrapped.circuit.lv.name=Wrap of LV Circuits
+metaitem.wrapped.circuit.mv.name=Wrap of MV Circuits
+metaitem.wrapped.circuit.hv.name=Wrap of HV Circuits
+metaitem.wrapped.circuit.ev.name=Wrap of EV Circuits
+metaitem.wrapped.circuit.iv.name=Wrap of IV Circuits
+metaitem.wrapped.circuit.luv.name=Wrap of LuV Circuits
+metaitem.wrapped.circuit.zpm.name=Wrap of ZPM Circuits
+metaitem.wrapped.circuit.uv.name=Wrap of UV Circuits
+metaitem.wrapped.circuit.uhv.name=Wrap of UHV Circuits
+metaitem.wrapped.circuit.uev.name=Wrap of UEV Circuits
+metaitem.wrapped.circuit.uiv.name=Wrap of UIV Circuits
+metaitem.wrapped.circuit.uxv.name=Wrap of UXV Circuits
+metaitem.wrapped.circuit.opv.name=Wrap of OpV Circuits
+metaitem.wrapped.circuit.max.name=Wrap of MAX Circuits
+
+metaitem.wrapped.smd.transistor.name=Wrap of SMD Transistors
+metaitem.wrapped.smd.resistor.name=Wrap of SMD Resistors
+metaitem.wrapped.smd.inductor.name=Wrap of SMD Inductors
+metaitem.wrapped.smd.diode.name=Wrap of SMD Diodes
+metaitem.wrapped.smd.capacitor.name=Wrap of SMD Capacitors
+
+metaitem.wrapped.smd.advanced_transistor.name=Wrap of Advanced SMD Transistors
+metaitem.wrapped.smd.advanced_resistor.name=Wrap of Advanced SMD Resistors
+metaitem.wrapped.smd.advanced_inductor.name=Wrap of Advanced SMD Inductors
+metaitem.wrapped.smd.advanced_diode.name=Wrap of Advanced SMD Diodes
+metaitem.wrapped.smd.advanced_capacitor.name=Wrap of Advanced SMD Capacitors
+
+metaitem.wrapped.board.coated.name=Wrap of Coated Boards
+metaitem.wrapped.board.phenolic.name=Wrap of Phenolic Boards
+metaitem.wrapped.board.plastic.name=Wrap of Plastic Boards
+metaitem.wrapped.board.epoxy.name=Wrap of Epoxy Boards
+metaitem.wrapped.board.fiber_reinforced.name=Wrap of Fiber-Reinforced Boards
+metaitem.wrapped.board.multilayer_fiber_reinforced.name=Wrap of Multi-layer Fiber-Reinforced Boards
+metaitem.wrapped.board.wetware.name=Wrap of Master Boards
+
+metaitem.wrapped.circuit_board.basic.name=Wrap of Basic Circuit Boards
+metaitem.wrapped.circuit_board.good.name=Wrap of Good Circuit Boards
+metaitem.wrapped.circuit_board.plastic.name=Wrap of Plastic Circuit Boards
+metaitem.wrapped.circuit_board.advanced.name=Wrap of Advanced Circuit Boards
+metaitem.wrapped.circuit_board.elite.name=Wrap of Elite Circuit Boards
+metaitem.wrapped.circuit_board.extreme.name=Wrap of Extreme Circuit Boards
+metaitem.wrapped.circuit_board.wetware.name=Wrap of Master Circuit Boards
+
+metaitem.wrapped.chip.soc_simple.name=Wrap of Simple SoCs
+metaitem.wrapped.chip.soc.name=Wrap of SoCs
+metaitem.wrapped.chip.soc_advanced.name=Wrap of Advanced SoCs
+metaitem.wrapped.chip.soc_highly_advanced.name=Wrap of Highly Advanced SoCs
+metaitem.wrapped.chip.cpu.name=Wrap of CPUs
+metaitem.wrapped.chip.cpu_nano.name=Wrap of Nano CPUs
+metaitem.wrapped.chip.cpu_qubit.name=Wrap of Qubit CPUs
+metaitem.wrapped.chip.ram.name=Wrap of RAM chips
+metaitem.wrapped.chip.nor.name=Wrap of NOR chips
+metaitem.wrapped.chip.nand.name=Wrap of NAND chips
+metaitem.wrapped.chip.pic_ultra_low.name=Wrap of Ultra Low Power ICs
+metaitem.wrapped.chip.pic_low.name=Wrap of Low Power ICs
+metaitem.wrapped.chip.pic.name=Wrap of Power ICs
+metaitem.wrapped.chip.pic_high.name=Wrap of High Power ICs
+metaitem.wrapped.chip.pic_ultra_high.name=Wrap of Ultra High Power ICs
+metaitem.wrapped.chip.integrated_logic.name=Wrap of Integrated Circuit chips
+
+metaitem.wrapped.misc.neuro_processor.name=Wrap of Neuro Processor Units
+metaitem.wrapped.misc.engraved_crystal_chip.name=Wrap of Engraved Crystal Chips
+metaitem.wrapped.misc.crystal_cpu.name=Wrap of Crystal CPUs
+metaitem.wrapped.misc.crystal_soc.name=Wrap of Crystal SoCs
+
+
+# Widgets
+zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s
+
+
+# Multiblocks
+zbgt.machine.mega_ebf.name=Mega Electric Blast Furnace
+zbgt.machine.mega_ebf.tooltip=Hold on, let them cook..
+
+zbgt.machine.mega_lcr.name=Mega LCR
+zbgt.machine.mega_lcr.tooltip=Turn your goo into more goo!
+
+zbgt.machine.mega_vf.name=Mega Vacuum Freezer
+zbgt.machine.mega_vf.tooltip=Cool those ingots §lreally §r§7fast!
+
+zbgt.machine.mega_ocu.name=Mega Oil Cracking Unit
+zbgt.machine.mega_ocu.tooltip=Release those hydrocarbons!
+
+zbgt.machine.mega_abs.name=Mega Alloy Blast Smelter
+zbgt.machine.mega_abs.tooltip=Mix and melt everything!
+
+zbgt.machine.precise_assembler.name=Precise Assembler
+zbgt.machine.precise_assembler.tooltip.1=Recipe voltage limited to the tier of the machine casings.
+zbgt.machine.precise_assembler.tooltip.2=UHV machine casings remove the above limit.
+zbgt.machine.precise_assembler.tooltip.3=Gains a 100%% speed boost in the normal assembler mode.
+zbgt.machine.precise_assembler.tooltip.4=Gains parallels based on the precise casing tier.
+zbgt.machine.precise_assembler.tooltip.5=Parallels = 16 * 2^(casing tier), with imprecise casings being tier 0.
+zbgt.machine.precise_assembler.precise_casing.tier=Casing tier: %s
+zbgt.machine.precise_assembler.precise_casing.tier.hover=Highest precise tier recipe that can be run
+zbgt.machine.precise_assembler.machine_casing.tier=Machine casing tier: %s
+zbgt.machine.precise_assembler.machine_casing.tier.hover=Recipes are limited to this voltage, regardless of the energy hatch
+recipemap.precise_assembler_recipes.name=Precise Assembler
+
+zbgt.machine.quad_ebf.name=Queebf
+zbgt.machine.quad_ebf.tooltip=The same shape as a quad EBF, and thus has 4 innate parallels!
+
+zbgt.machine.queezer.name=Queezer
+zbgt.machine.queezer.tooltip=A quad freezer that has 4 innate parallels
+
+zbgt.machine.quacker.name=Quacker
+zbgt.machine.quacker.tooltip=A slightly larger oil cracker, although it may sometimes act like a duck...
+
+zbgt.machine.coal.name=Component Assembly Line
+zbgt.machine.coal.description.1=Creates large batches of §fComponents§7 for §e75%%§7 of the Cost.
+zbgt.machine.coal.description.2=Recipes are limited by §bCasing Tier§7.
+zbgt.machine.coal.description.3=Each casing tier above the recipe §eHalves the recipe time§r.
+zbgt.machine.coal.max_recipe_tier=Max Component Tier: %s
+zbgt.machine.coal.max_recipe_tier.hover=The highest component tier that can be assembled
+zbgt.machine.coal.computation_tier=Max Computation Available: %s
+zbgt.machine.coal.computation_tier.hover=Maximum amount of computation available for recipes
+zbgt.recipe.coal_casing_tier=Casing Tier:
+recipemap.coal_recipes.name=Component Assembly Line
+
+zbgt.machine.yottank.name=YOTTank
+zbgt.machine.yottank.max_capacity=Capacity: %s
+zbgt.machine.yottank.current_capacity=Stored: %s
+zbgt.machine.yottank.fluid=Current fluid: %s
+zbgt.machine.yottank.locked_fluid=Locked fluid: %s
+zbgt.machine.yottank.none=None
+zbgt.machine.yottank.next=None. Will lock to the next fluid
+zbgt.machine.yottank.tick_rate=Tick rate:
+
+zbgt.machine.mega_fusion_1.name=Compact Fusion Computer Mk-I Prototype
+zbgt.machine.mega_fusion_1.tooltip.1=Max parallels: 64x
+zbgt.machine.mega_fusion_2.name=Compact Fusion Computer Mk-II
+zbgt.machine.mega_fusion_2.tooltip.1=Fusion tier < Mk-I: 128 parallels
+zbgt.machine.mega_fusion_2.tooltip.2=Fusion tier >= Mk-II: 64 parallels
+zbgt.machine.mega_fusion_3.name=Compact Fusion Computer Mk-III
+zbgt.machine.mega_fusion_3.tooltip.1=Fusion tier < Mk-I: 192 parallels
+zbgt.machine.mega_fusion_3.tooltip.2=Fusion tier < Mk-II: 128 parallels
+zbgt.machine.mega_fusion_3.tooltip.3=Fusion tier >= Mk-III: 64 parallels
+
+zbgt.machine.large_rock_breaker.name=Large Rock Breaker
+zbgt.machine.large_rock_breaker.tooltip=Rock Atomizer
+
+zbgt.machine.large_air_collector.name=Large Air Collector
+zbgt.machine.large_air_collector.tooltip=Atmosphere Vacuum
+
+zbgt.machine.large_alloy_smelter.name=Zyngen
+zbgt.machine.large_alloy_smelter.tooltip=Gains a 5%% energy discount per coil tier
+
+zbgt.machine.cal.name=Circuit Assembly Line
+zbgt.machine.cal.tooltip=Does not lose efficiency when overclocked
+zbgt.machine.cal.tooltip_ordered_items=When in §eCircuit Assembly Line§7 mode, §fitems§7 must be in the correct order to run.
+recipemap.circuit_assembly_line_recipes.name=Circuit Assembly Line
+
+
+# Multiblock Casings
+tile.multiblock_casing.precise_0.name=Imprecise Electronic Unit Casing
+tile.multiblock_casing.precise_1.name=Precise Electronic Unit Casing Mk-I
+tile.multiblock_casing.precise_2.name=Precise Electronic Unit Casing Mk-II
+tile.multiblock_casing.precise_3.name=Precise Electronic Unit Casing Mk-III
+tile.multiblock_casing.precise_4.name=Precise Electronic Unit Casing Mk-IV
+tile.multiblock_casing.precise_0.name.short=Imprecise
+tile.multiblock_casing.precise_1.name.short=Mk-I
+tile.multiblock_casing.precise_2.name.short=Mk-II
+tile.multiblock_casing.precise_3.name.short=Mk-III
+tile.multiblock_casing.precise_4.name.short=Mk-IV
+
+tile.material_casing.iridium.name=Advanced Iridium Plated Machine Casing
+zbgt.multiblock.pattern.precise_tier=§cAll casings must be the same tier§r
+
+tile.coal_casing.ulv.name=Component Assembly Line Casing (ULV)
+tile.coal_casing.lv.name=Component Assembly Line Casing (LV)
+tile.coal_casing.mv.name=Component Assembly Line Casing (MV)
+tile.coal_casing.hv.name=Component Assembly Line Casing (HV)
+tile.coal_casing.ev.name=Component Assembly Line Casing (EV)
+tile.coal_casing.iv.name=Component Assembly Line Casing (IV)
+tile.coal_casing.luv.name=Component Assembly Line Casing (LuV)
+tile.coal_casing.zpm.name=Component Assembly Line Casing (ZPM)
+tile.coal_casing.uv.name=Component Assembly Line Casing (UV)
+tile.coal_casing.uhv.name=Component Assembly Line Casing (UHV)
+tile.coal_casing.uev.name=Component Assembly Line Casing (UEV)
+tile.coal_casing.uiv.name=Component Assembly Line Casing (UIV)
+tile.coal_casing.uxv.name=Component Assembly Line Casing (UXV)
+tile.coal_casing.opv.name=Component Assembly Line Casing (OpV)
+tile.coal_casing.max.name=Component Assembly Line Casing (MAX)
+zbgt.multiblock.pattern.coal_tier=§cAll casings must be the same tier§r
+
+zbgt.multiblock.pattern.error.casings=§cAll casings must be the same tier§r
+
+zbgt.multiblock.pattern.error.machine_casings=§cAll machine casings must be the same tier§r
+
+zbgt.multiblock.pattern.error.yottank_cells=§cThe cells do not have to be the same tier§r
+
+tile.misc_casing.yottank_casing.name=YOTTank Casing
+
+tile.yottank_cell.yottank_cell_1.name=Fluid Cell Block T1
+tile.yottank_cell.yottank_cell_1.tooltip=Capacity: 1,000,000 L
+tile.yottank_cell.yottank_cell_2.name=Fluid Cell Block T2
+tile.yottank_cell.yottank_cell_2.tooltip=Capacity: 100,000,000 L
+tile.yottank_cell.yottank_cell_3.name=Fluid Cell Block T3
+tile.yottank_cell.yottank_cell_3.tooltip=Capacity: 10,000,000,000 L
+tile.yottank_cell.yottank_cell_4.name=Fluid Cell Block T4
+tile.yottank_cell.yottank_cell_4.tooltip=Capacity: 1,000,000,000,000 L
+tile.yottank_cell.yottank_cell_5.name=Fluid Cell Block T5
+tile.yottank_cell.yottank_cell_5.tooltip=Capacity: 100,000,000,000,000 L
+tile.yottank_cell.yottank_cell_6.name=Fluid Cell Block T6
+tile.yottank_cell.yottank_cell_6.tooltip=Capacity: 10,000,000,000,000,000 L
+tile.yottank_cell.yottank_cell_7.name=Fluid Cell Block T7
+tile.yottank_cell.yottank_cell_7.tooltip=Capacity: 1,000,000,000,000,000,000 L
+tile.yottank_cell.yottank_cell_8.name=Fluid Cell Block T8
+tile.yottank_cell.yottank_cell_8.tooltip=Capacity: 100,000,000,000,000,000,000 L
+tile.yottank_cell.yottank_cell_9.name=Fluid Cell Block T9
+tile.yottank_cell.yottank_cell_9.tooltip=Capacity: 100,000,000,000,000,00,000,000 L
+tile.yottank_cell.yottank_cell_10.name=Fluid Cell Block T10
+tile.yottank_cell.yottank_cell_10.tooltip=Capacity: 1,000,000,000,000,000,000,000,000 L
+
+tile.misc_casing.ameliorated_superconductor_coil.name=Ameliorated Superconductor Coil
+tile.misc_casing.compact_fusion_coil_1.name=Compact Fusion Coil
+tile.misc_casing.compact_fusion_coil_2.name=Advanced Compact Fusion Coil
+tile.misc_casing.compact_fusion_coil_3.name=Compact Fusion Coil MK-II Prototype
+tile.misc_casing.compact_fusion_coil_4.name=Compact Fusion Coil MK-II Finaltype
+
+tile.misc_casing.inconel_reinforced_casing.name=Inconel Reinforced Casing
+
+tile.creative_heating_coil.creative_heating_coil.name=Creative Heating Coil
+
+
+# Misc
+zbgt.laser_enabled.1=Can use
+zbgt.laser_enabled.2= Laser Hatches
+zbgt.substation_enabled= and Substation Hatches
+
+
+# Sound subtitles
+zbgt.subtitle.yottank_pulse=YOTTank Pulsed
+zbgt.subtitle.quack=Quacker Quacked
+
+
+# Materials
+zbgt.material.adamantium=Adamantium
+zbgt.material.zb_liquid_nitrogen=Liquid Nitrogen
+zbgt.material.quantium=Quantium
+
+zbgt.material.indalloy_140=Indalloy 140
+zbgt.material.mar_200=MAR-M200 Steel
+zbgt.material.tanmolyium_beta_c=Tanmolyium Beta-C
+zbgt.material.precious_metals_alloy=Precious Metals Alloy
+zbgt.material.adamantium_alloy=Adamantium Alloy
+zbgt.material.alumina=Alumina
+zbgt.material.aluminum_nitride=Aluminum Nitride
+zbgt.material.yttrium_oxide=Yttrium Oxide
+zbgt.material.hdcs=High Durability Compound Steel
+zbgt.material.ardite=Ardite
+zbgt.material.enderium=Enderium
+zbgt.material.energetic_alloy=Energetic Alloy
+zbgt.material.luminessence=Luminessence
+zbgt.material.eglin_steel_base=Eglin Steel Base Compound
+zbgt.material.inconel_792=Inconel-792
+
+zbgt.material.mar_ce_m_200=MAR-Ce-M200
+zbgt.material.artherium_sn=Artherium-Sn
+zbgt.material.dalisenite=Dalisenite
+zbgt.material.manyullyn=Manyullyn
+zbgt.material.signalum=Signalum
+zbgt.material.vibrant_alloy=Vibrant Alloy
+zbgt.material.lumium=Lumium
+zbgt.material.eglin_steel=Eglin Steel
+
+zbgt.material.fluxed_electrum=Fluxed Electrum
+zbgt.material.hikarium=Hikarium
+zbgt.material.pikyonium_64_b=Pikyonium 64B
+
+zbgt.material.special_ceramics=Special Ceramics
+
+
+# Ore veins
+zbgt.vein.adamantium=Adamantium vein
+zbgt.vein.quantium=Quantium Vein
+
+
+# Creative tab
+itemGroup.ZBGT=ZBGT

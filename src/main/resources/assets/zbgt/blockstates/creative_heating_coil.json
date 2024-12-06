@@ -1,0 +1,13 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "variant": {
+      "creative_heating_coil": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "zbgt:logo"
+        }
+      }
+    }
+  }
+}
