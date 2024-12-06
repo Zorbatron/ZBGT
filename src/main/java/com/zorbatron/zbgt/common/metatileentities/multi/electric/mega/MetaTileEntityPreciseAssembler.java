@@ -75,14 +75,15 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
     @Override
     protected @NotNull BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("XXXXXXXXX", "F#######F", "F#######F", "F#######F", "XXXXXXXXX")
+                .aisle("XXXXXXXXX", "F       F", "F       F", "F       F", "XXXXXXXXX")
                 .aisle("XHHHHHHHX", "XGGGGGGGX", "XGGGGGGGX", "XGGGGGGGX", "XXXXXXXXX")
                 .aisle("XHHHHHHHX", "X#######X", "X#######X", "X#######X", "XXXXXXXXX")
                 .aisle("XHHHHHHHX", "XGGGGGGGX", "XGGGGGGGX", "XGGGGGGGX", "XXXXXXXXX")
-                .aisle("XXXXSXXXX", "F#######F", "F#######F", "F#######F", "XXXXXXXXX")
+                .aisle("XXXXSXXXX", "F       F", "F       F", "F       F", "XXXXXXXXX")
                 .where('S', selfPredicate())
                 .where('H', getMachineHull())
-                .where('X', getCasing().or(autoAbilities()))
+                .where('X', getCasing().setMinGlobalLimited(42)
+                        .or(autoAbilities()))
                 .where('F', frames(Materials.TungstenSteel))
                 .where('G', states(getGlassState()))
                 .where('#', air())
@@ -94,11 +95,11 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
 
         MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
-                .aisle("XXXXXXXXX", "F#######F", "F#######F", "F#######F", "XXXXXXXXX")
+                .aisle("XXXXXXXXX", "F       F", "F       F", "F       F", "XXXXXXXXX")
                 .aisle("XHHHHHHHX", "XGGGGGGGX", "XGGGGGGGX", "XGGGGGGGX", "XXXXXXXXX")
                 .aisle("XHHHHHHHX", "X#######X", "X#######X", "X#######X", "XXXXXXXXX")
                 .aisle("XHHHHHHHX", "XGGGGGGGX", "XGGGGGGGX", "XGGGGGGGX", "XXXXXXXXX")
-                .aisle("XXXESMXXX", "F#######F", "F#######F", "F#######F", "XXXXXXXXX")
+                .aisle("XXXESMXXX", "F       F", "F       F", "F       F", "XXXXXXXXX")
                 .where('S', ZBGTMetaTileEntities.PRASS, EnumFacing.SOUTH)
                 .where('G', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS))
                 .where('F', MetaBlocks.FRAMES.get(Materials.TungstenSteel).getBlock(Materials.TungstenSteel))
