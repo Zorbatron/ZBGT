@@ -13,11 +13,12 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
-import com.zorbatron.zbgt.client.ClientHandler;
+import com.zorbatron.zbgt.api.render.ZBGTTextures;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+import gregtech.api.GTValues;
 import gregtech.api.capability.IDataStickIntractable;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.*;
@@ -37,13 +38,13 @@ public class MetaTileEntityBudgetCRIBProxy extends MetaTileEntityMultiblockNotif
     private BlockPos mainPos;
     private boolean checkForMain = true;
 
-    public MetaTileEntityBudgetCRIBProxy(ResourceLocation metaTileEntityId, int tier) {
-        super(metaTileEntityId, tier, false);
+    public MetaTileEntityBudgetCRIBProxy(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, GTValues.LuV, false);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityBudgetCRIBProxy(metaTileEntityId, getTier());
+        return new MetaTileEntityBudgetCRIBProxy(metaTileEntityId);
     }
 
     @Override
@@ -133,11 +134,11 @@ public class MetaTileEntityBudgetCRIBProxy extends MetaTileEntityMultiblockNotif
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
 
-        ClientHandler.CRIB_PROXY.renderSided(getFrontFacing(), renderState, translation, pipeline);
+        ZBGTTextures.CRIB_PROXY.renderSided(getFrontFacing(), renderState, translation, pipeline);
     }
 
     private void tryToSetMain() {
-        if (getWorld() == null) return;
+        if (getWorld() == null || mainPos == null) return;
 
         TileEntity tileEntity = getWorld().getTileEntity(mainPos);
         if (!(tileEntity instanceof IGregTechTileEntity iGregTechTileEntity)) {
@@ -207,9 +208,10 @@ public class MetaTileEntityBudgetCRIBProxy extends MetaTileEntityMultiblockNotif
         super.writeInitialSyncData(buf);
 
         if (main != null) {
-            buf.writeInt(mainPos.getX());
-            buf.writeInt(mainPos.getY());
-            buf.writeInt(mainPos.getZ());
+            buf.writeBoolean(true);
+            buf.writeBlockPos(mainPos);
+        } else {
+            buf.writeBoolean(false);
         }
     }
 
@@ -217,8 +219,10 @@ public class MetaTileEntityBudgetCRIBProxy extends MetaTileEntityMultiblockNotif
     public void receiveInitialSyncData(PacketBuffer buf) {
         super.receiveInitialSyncData(buf);
 
-        this.mainPos = new BlockPos(buf.readInt(), buf.readInt(), buf.readInt());
+        if (buf.readBoolean()) {
+            mainPos = buf.readBlockPos();
 
-        tryToSetMain();
+            tryToSetMain();
+        }
     }
 }

@@ -27,7 +27,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import com.zorbatron.zbgt.client.ClientHandler;
+import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.client.widgets.ItemSlotTinyAmountTextWidget;
 
 import appeng.api.AEApi;
@@ -58,6 +58,7 @@ import appeng.util.item.AEItemStack;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+import gregtech.api.GTValues;
 import gregtech.api.capability.*;
 import gregtech.api.capability.impl.GhostCircuitItemStackHandler;
 import gregtech.api.capability.impl.ItemHandlerList;
@@ -95,8 +96,8 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
     private @Nullable AENetworkProxy aeProxy;
     private boolean isOnline;
 
-    public MetaTileEntityBudgetCRIB(ResourceLocation metaTileEntityId, int tier) {
-        super(metaTileEntityId, tier, false);
+    public MetaTileEntityBudgetCRIB(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, GTValues.EV, false);
     }
 
     @Override
@@ -113,6 +114,12 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
             @Override
             public boolean isItemValid(int slot, @NotNull ItemStack stack) {
                 return stack.getItem() instanceof ICraftingPatternItem;
+            }
+
+            @Override
+            protected void onContentsChanged(int slot) {
+                needPatternSync = true;
+                setPatternDetails();
             }
         };
 
@@ -180,7 +187,7 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityBudgetCRIB(metaTileEntityId, getTier());
+        return new MetaTileEntityBudgetCRIB(metaTileEntityId);
     }
 
     @Override
@@ -226,8 +233,7 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
         // Pattern slot
         buttons.addWidget(new SlotWidget(patternSlot, 0, 18 * 2, 0)
-                .setBackgroundTexture(GuiTextures.SLOT, ClientHandler.ME_PATTERN_OVERLAY)
-                .setChangeListener(this::setPatternDetails));
+                .setBackgroundTexture(GuiTextures.SLOT, ZBGTTextures.ME_PATTERN_OVERLAY));
 
         // Blocking toggle
         buttons.addWidget(new ImageCycleButtonWidget(18 * 3, 0, 18, 18, GuiTextures.BUTTON_POWER,
@@ -236,7 +242,7 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
         // Return items
         buttons.addWidget(new ClickButtonWidget(18 * 4, 0, 18, 18, "", (clickData) -> returnItems())
-                .setButtonTexture(ClientHandler.EXPORT).setTooltipText("zbgt.machine.budget_crib.return_button"));
+                .setButtonTexture(ZBGTTextures.EXPORT).setTooltipText("zbgt.machine.budget_crib.return_button"));
 
         builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 7, 18 + 18 * 5 + 12);
         return builder.widget(slots).widget(buttons).build(getHolder(), entityPlayer);
@@ -273,9 +279,9 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
         if (isOnline) {
-            ClientHandler.CRIB_ACTIVE.renderSided(getFrontFacing(), renderState, translation, pipeline);
+            ZBGTTextures.CRIB_ACTIVE.renderSided(getFrontFacing(), renderState, translation, pipeline);
         } else {
-            ClientHandler.CRIB_INACTIVE.renderSided(getFrontFacing(), renderState, translation, pipeline);
+            ZBGTTextures.CRIB_INACTIVE.renderSided(getFrontFacing(), renderState, translation, pipeline);
         }
     }
 
@@ -459,13 +465,14 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
     private void setPatternDetails() {
         ItemStack pattern = patternSlot.getStackInSlot(0);
-        if (pattern.isEmpty()) return;
+        if (pattern.isEmpty()) {
+            patternDetails = null;
+            return;
+        }
 
         if (pattern.getItem() instanceof ICraftingPatternItem patternItem) {
             this.patternDetails = patternItem.getPatternForItem(pattern, getWorld());
         }
-
-        this.needPatternSync = true;
     }
 
     @Override
