@@ -10,23 +10,26 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
+import com.zorbatron.zbgt.api.util.ZBGTUtility;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.capability.IDataStickIntractable;
+import gregtech.api.capability.impl.NotifiableItemStackHandler;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.*;
-import gregtech.api.items.itemhandlers.GTItemStackHandler;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
@@ -37,6 +40,7 @@ public class MetaTileEntityBudgetCRIBProxy extends MetaTileEntityMultiblockNotif
     private MetaTileEntityBudgetCRIB main;
     private BlockPos mainPos;
     private boolean checkForMain = true;
+    private final ProxyItemHandler proxyItemHandler = new ProxyItemHandler();
 
     public MetaTileEntityBudgetCRIBProxy(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTValues.LuV, false);
@@ -51,26 +55,9 @@ public class MetaTileEntityBudgetCRIBProxy extends MetaTileEntityMultiblockNotif
     public void update() {
         super.update();
 
-        if (getOffsetTimer() % 100 == 0 && checkForMain && getMain() == null) {
+        if (!getWorld().isRemote && getOffsetTimer() % 100 == 0 && checkForMain && !hasMain()) {
             tryToSetMain();
         }
-    }
-
-    @Override
-    public void onLoad() {
-        super.onLoad();
-
-        World world = getWorld();
-        if (world != null && !world.isRemote) {
-            tryToSetMain();
-        }
-    }
-
-    @Override
-    public IItemHandlerModifiable getImportItems() {
-        if (getMain() == null) return new GTItemStackHandler(this, 0);
-
-        return getMain().getPatternItems();
     }
 
     @Override
@@ -80,53 +67,34 @@ public class MetaTileEntityBudgetCRIBProxy extends MetaTileEntityMultiblockNotif
 
     @Override
     public void registerAbilities(List<IItemHandlerModifiable> abilityList) {
-        if (getMain() == null) return;
-
-        abilityList.add(main.getPatternItems());
+        abilityList.add(new ProxyItemHandler());
     }
 
-    // @Override
-    // protected ModularUI createUI(EntityPlayer entityPlayer) {
-    // if (getMain() == null) return null;
-    //
-    // IItemHandlerModifiable patternItems = main.getPatternItems();
-    //
-    // ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 166 + 18 * 2)
-    // .label(7, 7, getMetaFullName());
-    //
-    // // Item slots
-    // WidgetGroup slots = new WidgetGroup(new Position((int) (7 + 18 * 2.5), 20));
-    // for (int y = 0; y <= 3; y++) {
-    // for (int x = 0; x <= 3; x++) {
-    // int index = y * 4 + x;
-    // slots.addWidget(new ItemSlotTinyAmountTextWidget(patternItems, index, 18 * x, 18 * y,
-    // false, false) {
-    //
-    // @Override
-    // public void drawInForeground(int mouseX, int mouseY) {
-    // ItemStack item = patternItems.getStackInSlot(index);
-    //
-    // if (isMouseOverElement(mouseX, mouseY) && !item.isEmpty()) {
-    // List<String> tooltip = getItemToolTip(item);
-    //
-    // tooltip.add(TextFormatting.GRAY + I18n.format("zbgt.machine.budget_crib.amount_tooltip",
-    // TextFormattingUtil.formatNumbers(item.getCount())));
-    //
-    // drawHoveringText(item, tooltip, -1, mouseX, mouseY);
-    // }
-    // }
-    // }.setBackgroundTexture(GuiTextures.SLOT));
-    // }
-    // }
-    //
-    // builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 7, 18 + 18 * 5 + 12);
-    // return builder.widget(slots).build(getHolder(), entityPlayer);
-    // }
+    @Override
+    public void addToMultiBlock(MultiblockControllerBase controllerBase) {
+        super.addToMultiBlock(controllerBase);
+
+        if (hasMain()) {
+            ZBGTUtility.addNotifiableToMTE(getMain().getPatternItems(), controllerBase, this, false);
+        }
+    }
+
+    @Override
+    public void removeFromMultiBlock(MultiblockControllerBase controllerBase) {
+        super.removeFromMultiBlock(controllerBase);
+
+        if (hasMain()) {
+            ZBGTUtility.removeNotifiableFromMTE(getMain().getPatternItems(), controllerBase);
+        }
+    }
+
+    @Override
+    protected boolean openGUIOnRightClick() {
+        return getMain() != null;
+    }
 
     @Override
     protected ModularUI createUI(EntityPlayer entityPlayer) {
-        if (getMain() == null) return null;
-
         return getMain().createUI(entityPlayer);
     }
 
@@ -154,14 +122,21 @@ public class MetaTileEntityBudgetCRIBProxy extends MetaTileEntityMultiblockNotif
 
         this.main = budgetCRIB;
         this.checkForMain = false;
+
+        MultiblockControllerBase controllerBase = getController();
+        if (controllerBase != null) {
+            NotifiableItemStackHandler mainCRIBPatternItems = getMain().getPatternItems();
+            ZBGTUtility.addNotifiableToMTE(mainCRIBPatternItems, controllerBase, this, false);
+            controllerBase.addNotifiedInput(mainCRIBPatternItems);
+        }
     }
 
     private MetaTileEntityBudgetCRIB getMain() {
-        if (main == null) return null;
-
-        if (main.getHolder() == null) return null;
-
         return main;
+    }
+
+    public boolean hasMain() {
+        return main != null && main.isValid();
     }
 
     @Override
@@ -191,14 +166,23 @@ public class MetaTileEntityBudgetCRIBProxy extends MetaTileEntityMultiblockNotif
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
 
-        readLocationFromTag(data);
+        if (data.getBoolean("HasMain")) {
+            readLocationFromTag(data);
+        }
+
+        tryToSetMain();
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("MainX", mainPos.getX());
-        data.setInteger("MainY", mainPos.getY());
-        data.setInteger("MainZ", mainPos.getZ());
+        if (hasMain()) {
+            data.setBoolean("HasMain", true);
+            data.setInteger("MainX", mainPos.getX());
+            data.setInteger("MainY", mainPos.getY());
+            data.setInteger("MainZ", mainPos.getZ());
+        } else {
+            data.setBoolean("HasMain", false);
+        }
 
         return super.writeToNBT(data);
     }
@@ -223,6 +207,43 @@ public class MetaTileEntityBudgetCRIBProxy extends MetaTileEntityMultiblockNotif
             mainPos = buf.readBlockPos();
 
             tryToSetMain();
+        }
+    }
+
+    // To act as a middleman when not linked to a main crib
+    @SuppressWarnings("InnerClassMayBeStatic")
+    private class ProxyItemHandler implements IItemHandlerModifiable {
+
+        public ProxyItemHandler() {/**/}
+
+        @Override
+        public void setStackInSlot(int slot, @NotNull ItemStack stack) {
+            // I only have to worry about extracting :p
+        }
+
+        @Override
+        public int getSlots() {
+            return 18; // 16 pattern slots + catalyst slot + circuit
+        }
+
+        @Override
+        public @NotNull ItemStack getStackInSlot(int slot) {
+            return hasMain() ? getMain().getImportItems().getStackInSlot(slot) : ItemStack.EMPTY;
+        }
+
+        @Override
+        public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+            return stack;
+        }
+
+        @Override
+        public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
+            return hasMain() ? getMain().getImportItems().extractItem(slot, amount, simulate) : ItemStack.EMPTY;
+        }
+
+        @Override
+        public int getSlotLimit(int slot) {
+            return Integer.MAX_VALUE;
         }
     }
 }

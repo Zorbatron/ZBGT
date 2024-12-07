@@ -28,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
+import com.zorbatron.zbgt.api.util.ZBGTUtility;
 import com.zorbatron.zbgt.client.widgets.ItemSlotTinyAmountTextWidget;
 
 import appeng.api.AEApi;
@@ -86,7 +87,7 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
     protected GhostCircuitItemStackHandler circuitInventory;
     private ItemStackHandler patternSlot;
     private ICraftingPatternDetails patternDetails;
-    private IItemHandlerModifiable patternItems;
+    private NotifiableItemStackHandler patternItems;
     private IItemHandlerModifiable actualImportItems;
     private IItemHandlerModifiable extraItem;
     private boolean needPatternSync = true;
@@ -503,11 +504,7 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
      * @return false if items are in any slot, true if empty
      */
     private boolean checkIfEmpty() {
-        for (int i = 0; i < patternItems.getSlots(); i++) {
-            if (!patternItems.getStackInSlot(i).isEmpty()) return false;
-        }
-
-        return true;
+        return ZBGTUtility.isInventoryEmpty(patternItems);
     }
 
     @Override
@@ -650,7 +647,7 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
         return false;
     }
 
-    public IItemHandlerModifiable getPatternItems() {
+    public NotifiableItemStackHandler getPatternItems() {
         return this.patternItems;
     }
 }
