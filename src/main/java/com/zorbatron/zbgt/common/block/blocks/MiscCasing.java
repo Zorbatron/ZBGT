@@ -6,6 +6,8 @@ import net.minecraft.util.IStringSerializable;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.zorbatron.zbgt.api.ZBGTAPI;
+
 import gregtech.api.block.VariantBlock;
 
 public class MiscCasing extends VariantBlock<MiscCasing.CasingType> {
@@ -18,6 +20,7 @@ public class MiscCasing extends VariantBlock<MiscCasing.CasingType> {
         setSoundType(SoundType.METAL);
         setHarvestLevel("wrench", 2);
         setDefaultState(getState(MiscCasing.CasingType.values()[0]));
+        setCreativeTab(ZBGTAPI.TAB_ZBGT);
     }
 
     public enum CasingType implements IStringSerializable {

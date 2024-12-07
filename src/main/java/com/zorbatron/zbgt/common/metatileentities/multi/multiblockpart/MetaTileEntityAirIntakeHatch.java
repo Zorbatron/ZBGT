@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
@@ -30,6 +31,8 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
 import org.jetbrains.annotations.Nullable;
+
+import com.zorbatron.zbgt.api.ZBGTAPI;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
@@ -301,5 +304,10 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
                 xSpd,
                 -ySpd,
                 zSpd);
+    }
+
+    @Override
+    public boolean isInCreativeTab(CreativeTabs creativeTab) {
+        return creativeTab == CreativeTabs.SEARCH || creativeTab == ZBGTAPI.TAB_ZBGT;
     }
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -19,6 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.capability.impl.HeatingCoilGCYMMultiblockRecipeLogic;
 import com.zorbatron.zbgt.api.metatileentity.LaserCapableGCYMRecipeMapMultiblockController;
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
@@ -77,11 +79,11 @@ public class MetaTileEntityMegaABS extends LaserCapableGCYMRecipeMapMultiblockCo
                 .aisle("   BBBBB   ", "   VVVVV   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   VVVVV   ", "   XXXXX   ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ")
                 .aisle("  BBBBBBB  ", "  V#####V  ", "  G#####G  ", "  G#####G  ", "  G#####G  ", "  V#####V  ", "  X#####X  ", "   XXXXX   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   XXXXX   ")
                 .aisle(" BBBBBBBBB ", " V#CCCCC#V ", " G#CCCCC#G ", " G#CCCCC#G ", " G#CCCCC#G ", " V#CCCCC#V ", " X#CCCCC#X ", "  XCCCCCX  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  XXXXXXX  ")
-                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V", "X#C#####C#X", " XC#####CX ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " XXXXXXXXX ")
-                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V", "X#C#####C#X", " XC#####CX ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " XXXXXXXXX ")
-                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V", "X#C#####C#X", " XC#####CX ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " XXXXMXXXX ")
-                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V", "X#C#####C#X", " XC#####CX ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " XXXXXXXXX ")
-                .aisle("BBBBBBBBBBB", "V#C#####C#V", "G#C#####C#G", "G#C#####C#G", "G#C#####C#G", "V#C#####C#V", "X#C#####C#X", " XC#####CX ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " GC#####CG ", " XXXXXXXXX ")
+                .aisle("BBBBBBBBBBB", "V#C     C#V", "G#C     C#G", "G#C     C#G", "G#C     C#G", "V#C     C#V", "X#C     C#X", " XC     CX ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " XXXXXXXXX ")
+                .aisle("BBBBBBBBBBB", "V#C     C#V", "G#C     C#G", "G#C     C#G", "G#C     C#G", "V#C     C#V", "X#C     C#X", " XC     CX ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " XXXXXXXXX ")
+                .aisle("BBBBBBBBBBB", "V#C     C#V", "G#C     C#G", "G#C     C#G", "G#C     C#G", "V#C     C#V", "X#C     C#X", " XC     CX ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " XXXXMXXXX ")
+                .aisle("BBBBBBBBBBB", "V#C     C#V", "G#C     C#G", "G#C     C#G", "G#C     C#G", "V#C     C#V", "X#C     C#X", " XC     CX ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " XXXXXXXXX ")
+                .aisle("BBBBBBBBBBB", "V#C     C#V", "G#C     C#G", "G#C     C#G", "G#C     C#G", "V#C     C#V", "X#C     C#X", " XC     CX ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " GC     CG ", " XXXXXXXXX ")
                 .aisle(" BBBBBBBBB ", " V#CCCCC#V ", " G#CCCCC#G ", " G#CCCCC#G ", " G#CCCCC#G#", " V#CCCCC#V ", " X#CCCCC#X ", "  XCCCCCX  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  GCCCCCG  ", "  XXXXXXX  ")
                 .aisle("  BBBBBBB  ", "  V#####V  ", "  G#####G  ", "  G#####G  ", "  G#####G  ", "  V#####V  ", "  X#####X  ", "   XXXXX   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   XXXXX   ")
                 .aisle("   BBBBB   ", "   VVVVV   ", "   GWWWG   ", "   GWSWG   ", "   GWWWG   ", "   VVVVV   ", "   XXXXX   ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ")
@@ -282,5 +284,10 @@ public class MetaTileEntityMegaABS extends LaserCapableGCYMRecipeMapMultiblockCo
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return ZBGTTextures.GTPP_MACHINE_OVERLAY;
+    }
+
+    @Override
+    public boolean isInCreativeTab(CreativeTabs creativeTab) {
+        return creativeTab == CreativeTabs.SEARCH || creativeTab == ZBGTAPI.TAB_ZBGT;
     }
 }

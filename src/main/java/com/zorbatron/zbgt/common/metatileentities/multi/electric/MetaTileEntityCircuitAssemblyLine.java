@@ -7,6 +7,7 @@ import java.util.function.Function;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -18,6 +19,7 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
@@ -129,5 +131,10 @@ public class MetaTileEntityCircuitAssemblyLine extends MultiMapMultiblockControl
         if (ConfigHolder.machines.orderedAssembly) {
             tooltip.add(I18n.format("zbgt.machine.cal.tooltip_ordered_items"));
         }
+    }
+
+    @Override
+    public boolean isInCreativeTab(CreativeTabs creativeTab) {
+        return creativeTab == CreativeTabs.SEARCH || creativeTab == ZBGTAPI.TAB_ZBGT;
     }
 }

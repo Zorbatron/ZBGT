@@ -12,6 +12,8 @@ import net.minecraft.world.IBlockAccess;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.zorbatron.zbgt.api.ZBGTAPI;
+
 import gregtech.api.block.VariantBlock;
 
 public class YOTTankCell extends VariantBlock<YOTTankCell.CasingType> {
@@ -24,6 +26,7 @@ public class YOTTankCell extends VariantBlock<YOTTankCell.CasingType> {
         setSoundType(SoundType.METAL);
         setHarvestLevel("wrench", 2);
         setDefaultState(getState(YOTTankCell.CasingType.values()[0]));
+        setCreativeTab(ZBGTAPI.TAB_ZBGT);
     }
 
     @Override

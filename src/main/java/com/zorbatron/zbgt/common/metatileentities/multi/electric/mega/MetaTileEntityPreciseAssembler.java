@@ -9,6 +9,7 @@ import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
@@ -74,14 +75,15 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
     @Override
     protected @NotNull BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("XXXXXXXXX", "F#######F", "F#######F", "F#######F", "XXXXXXXXX")
+                .aisle("XXXXXXXXX", "F       F", "F       F", "F       F", "XXXXXXXXX")
                 .aisle("XHHHHHHHX", "XGGGGGGGX", "XGGGGGGGX", "XGGGGGGGX", "XXXXXXXXX")
                 .aisle("XHHHHHHHX", "X#######X", "X#######X", "X#######X", "XXXXXXXXX")
                 .aisle("XHHHHHHHX", "XGGGGGGGX", "XGGGGGGGX", "XGGGGGGGX", "XXXXXXXXX")
-                .aisle("XXXXSXXXX", "F#######F", "F#######F", "F#######F", "XXXXXXXXX")
+                .aisle("XXXXSXXXX", "F       F", "F       F", "F       F", "XXXXXXXXX")
                 .where('S', selfPredicate())
                 .where('H', getMachineHull())
-                .where('X', getCasing().or(autoAbilities()))
+                .where('X', getCasing().setMinGlobalLimited(42)
+                        .or(autoAbilities()))
                 .where('F', frames(Materials.TungstenSteel))
                 .where('G', states(getGlassState()))
                 .where('#', air())
@@ -93,11 +95,11 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
 
         MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
-                .aisle("XXXXXXXXX", "F#######F", "F#######F", "F#######F", "XXXXXXXXX")
+                .aisle("XXXXXXXXX", "F       F", "F       F", "F       F", "XXXXXXXXX")
                 .aisle("XHHHHHHHX", "XGGGGGGGX", "XGGGGGGGX", "XGGGGGGGX", "XXXXXXXXX")
                 .aisle("XHHHHHHHX", "X#######X", "X#######X", "X#######X", "XXXXXXXXX")
                 .aisle("XHHHHHHHX", "XGGGGGGGX", "XGGGGGGGX", "XGGGGGGGX", "XXXXXXXXX")
-                .aisle("XXXESMXXX", "F#######F", "F#######F", "F#######F", "XXXXXXXXX")
+                .aisle("XXXESMXXX", "F       F", "F       F", "F       F", "XXXXXXXXX")
                 .where('S', ZBGTMetaTileEntities.PRASS, EnumFacing.SOUTH)
                 .where('G', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS))
                 .where('F', MetaBlocks.FRAMES.get(Materials.TungstenSteel).getBlock(Materials.TungstenSteel))
@@ -318,5 +320,10 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
                     super.checkRecipe(recipe) &&
                             recipe.getProperty(PreciseAssemblerProperty.getInstance(), 0) <= getPreciseCasingTier();
         }
+    }
+
+    @Override
+    public boolean isInCreativeTab(CreativeTabs creativeTab) {
+        return creativeTab == CreativeTabs.SEARCH || creativeTab == ZBGTAPI.TAB_ZBGT;
     }
 }
