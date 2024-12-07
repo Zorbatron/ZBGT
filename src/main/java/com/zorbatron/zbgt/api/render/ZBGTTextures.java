@@ -14,6 +14,9 @@ public class ZBGTTextures {
     public static SimpleOverlayRenderer SWIRLY_INFINITY;
     public static SimpleOverlayRenderer YOTTANK_ME_HATCH;
     public static SimpleOverlayRenderer MAINTENANCE_OVERLAY_STERILE;
+    public static SimpleOverlayRenderer CRIB_ACTIVE;
+    public static SimpleOverlayRenderer CRIB_INACTIVE;
+    public static SimpleOverlayRenderer CRIB_PROXY;
 
     // GUI overlays
     public static TextureArea ITEM_FLUID_OVERLAY;
@@ -21,6 +24,8 @@ public class ZBGTTextures {
     public static TextureArea PME;
     public static TextureArea AE2_RW_STATES;
     public static TextureArea SLIME_BALL;
+    public static TextureArea ME_PATTERN_OVERLAY;
+    public static TextureArea EXPORT;
 
     public static TextureArea PROGRESS_BAR_CoAL;
 
@@ -44,12 +49,17 @@ public class ZBGTTextures {
         SWIRLY_INFINITY = new SimpleOverlayRenderer("overlay/machine/swirly_infinity");
         YOTTANK_ME_HATCH = new SimpleOverlayRenderer("overlay/machine/yottank_me_hatch");
         MAINTENANCE_OVERLAY_STERILE = new SimpleOverlayRenderer("overlay/machine/overlay_maintenance_sterile");
+        CRIB_ACTIVE = new SimpleOverlayRenderer("overlay/machine/OVERLAY_ME_CRAFTING_INPUT_BUFFER");
+        CRIB_INACTIVE = new SimpleOverlayRenderer("overlay/machine/OVERLAY_ME_CRAFTING_INPUT_BUS");
+        CRIB_PROXY = new SimpleOverlayRenderer("overlay/machine/OVERLAY_ME_CRAFTING_INPUT_SLAVE");
 
         ITEM_FLUID_OVERLAY = TextureArea.fullImage("textures/gui/widget/item_fluid.png");
         AUTO_PULL = TextureArea.fullImage("textures/gui/widget/auto_pull.png");
         PME = TextureArea.fullImage("textures/gui/widget/pme.png");
         AE2_RW_STATES = TextureArea.fullImage("textures/gui/widget/ae2_rw_states.png");
         SLIME_BALL = TextureArea.fullImage("textures/gui/widget/slimeball.png");
+        ME_PATTERN_OVERLAY = TextureArea.fullImage("textures/gui/widget/pattern_me.png");
+        EXPORT = TextureArea.fullImage("textures/gui/widget/export.png");
 
         PROGRESS_BAR_CoAL = TextureArea.fullImage("textures/gui/progress_bar/progress_bar_component_al.png");
 

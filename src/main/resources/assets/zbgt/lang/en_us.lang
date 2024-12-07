@@ -73,6 +73,19 @@ zbgt.machine.yottank_me_hatch.sticky.disabled=Enable sticky mode
 zbgt.machine.sterile_cleaning_hatch.name=Automatic Sterilization Maintenance Hatch
 zbgt.machine.sterile_cleaning_hatch.tooltip=For automatically maintaining Multiblocks with Cleaning, but sterile!
 
+zbgt.machine.budget_crib.name=Budget CRIB
+zbgt.machine.budget_crib.tooltip=A Crafting Input Bus on a budget
+zbgt.machine.budget_crib.blocking_button=Click to toggle blocking mode
+zbgt.machine.budget_crib.amount_tooltip=Amount: %s
+zbgt.machine.budget_crib.return_button=Click to return items back to the network
+zbgt.machine.budget_crib.extra_item=Slot for an extra item, such as a catalyst
+zbgt.machine.budget_crib.data_stick_use=Wrote location to data stick
+zbgt.machine.budget_crib.data_stick_name=Budget CRIB Location Data
+
+zbgt.machine.budget_crib_proxy.name=Budget CRIB Proxy
+zbgt.machine.budget_crib_proxy.tooltip=Shares the inventory of the linked Budget CRIB
+zbgt.machine.budget_crib_proxy.data_stick_use=Linked to Budget CRIB at X: %s, Y: %s, Z: %s
+
 
 # Covers
 metaitem.cover.dual_cover.lv.name=LV Dual Cover

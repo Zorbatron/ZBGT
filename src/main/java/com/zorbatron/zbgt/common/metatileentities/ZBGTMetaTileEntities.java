@@ -30,6 +30,8 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityLargeParallelHatch[] ZBGT_PARALLEL_HATCHES = new MetaTileEntityLargeParallelHatch[7];
     public static MetaTileEntityYOTTankMEHatch YOTTANK_ME_HATCH;
     public static MetaTileEntitySterileCleaningHatch STERILE_CLEANING_HATCH;
+    public static MetaTileEntityBudgetCRIB BUDGET_CRIB;
+    public static MetaTileEntityBudgetCRIBProxy BUDGET_CRIB_PROXY;
 
     public static MetaTileEntityMegaEBF MEGA_EBF;
     public static MetaTileEntityMegaLCR MEGA_LCR;
@@ -103,6 +105,11 @@ public class ZBGTMetaTileEntities {
 
         STERILE_CLEANING_HATCH = registerMetaTileEntity(18018,
                 new MetaTileEntitySterileCleaningHatch(zbgtId("sterile_cleaning_hatch")));
+
+        BUDGET_CRIB = registerMetaTileEntity(18019,
+                new MetaTileEntityBudgetCRIB(zbgtId("budget_crib")));
+        BUDGET_CRIB_PROXY = registerMetaTileEntity(18020,
+                new MetaTileEntityBudgetCRIBProxy(zbgtId("budget_crib_proxy")));
 
         // 18050-18099 (50) reserved for multiblocks
         MEGA_EBF = registerMetaTileEntity(18050,
