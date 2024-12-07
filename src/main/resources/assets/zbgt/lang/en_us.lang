@@ -305,6 +305,10 @@ zbgt.machine.cal.tooltip=Does not lose efficiency when overclocked
 zbgt.machine.cal.tooltip_ordered_items=When in §eCircuit Assembly Line§7 mode, §fitems§7 must be in the correct order to run.
 recipemap.circuit_assembly_line_recipes.name=Circuit Assembly Line
 
+zbgt.machine.fishing_port.name=Zhuhai - Fishing Port
+zbgt.machine.fishing_port.tooltip=Use the circuit in the controller to choose the recipe.
+recipemap.fishing_port_recipes.name=Zhuhai - Fishing Port
+
 
 # Multiblock Casings
 tile.multiblock_casing.precise_0.name=Imprecise Electronic Unit Casing
@@ -372,7 +376,7 @@ tile.misc_casing.compact_fusion_coil_1.name=Compact Fusion Coil
 tile.misc_casing.compact_fusion_coil_2.name=Advanced Compact Fusion Coil
 tile.misc_casing.compact_fusion_coil_3.name=Compact Fusion Coil MK-II Prototype
 tile.misc_casing.compact_fusion_coil_4.name=Compact Fusion Coil MK-II Finaltype
-
+tile.misc_casing.aquatic_casing.name=Aquatic Casing
 tile.misc_casing.inconel_reinforced_casing.name=Inconel Reinforced Casing
 
 tile.creative_heating_coil.creative_heating_coil.name=Creative Heating Coil

@@ -33,6 +33,7 @@ public class ZBGTTextures {
     public static SimpleOverlayRenderer PRECISE_CASING_2;
     public static SimpleOverlayRenderer PRECISE_CASING_3;
     public static SimpleOverlayRenderer PRECISE_CASING_4;
+    public static SimpleOverlayRenderer AQUATIC_CASING;
 
     public static SimpleOverlayRenderer IRIDIUM_CASING;
 
@@ -60,6 +61,7 @@ public class ZBGTTextures {
         PRECISE_CASING_2 = new SimpleOverlayRenderer("casings/precise/precise_2");
         PRECISE_CASING_3 = new SimpleOverlayRenderer("casings/precise/precise_3");
         PRECISE_CASING_4 = new SimpleOverlayRenderer("casings/precise/precise_4");
+        AQUATIC_CASING = new SimpleOverlayRenderer("casings/misc/aquatic");
 
         IRIDIUM_CASING = new SimpleOverlayRenderer("casings/material/iridium");
 

@@ -74,6 +74,11 @@ public class ZBGTConfig {
                 "Default: true" })
         @Config.Name("CAL Circuit Recipes")
         public boolean calCircuitRecipes = true;
+
+        @Config.Comment({ "Register Zhuhai recipes",
+                "Default: true" })
+        @Config.Name("Zhuhai Recipes")
+        public boolean zhuhaiRecipes = true;
     }
 
     @Config.Name("World Generation Settings")

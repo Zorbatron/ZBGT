@@ -23,5 +23,9 @@ public class ZBGTRecipes {
         if (ZBGTConfig.recipeSettings.calCircuitRecipes) {
             CALCircuits.init();
         }
+
+        if (ZBGTConfig.recipeSettings.zhuhaiRecipes) {
+            FishingPort.init();
+        }
     }
 }
