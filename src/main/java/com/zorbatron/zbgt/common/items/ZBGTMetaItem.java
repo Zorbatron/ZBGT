@@ -289,5 +289,25 @@ public class ZBGTMetaItem extends StandardMetaItem {
         WRAPPED_CRYSTAL_SOC = addItem(115, "wrapped.misc.crystal_soc");
 
         ZBGT_ITEM = addItem(116, "zbgt").setInvisible();
+
+        // Dropper Covers 117-129
+        DROPPER_COVER_LV = addItem(117, "cover.cover_dropper.lv");
+        DROPPER_COVER_MV = addItem(118, "cover.cover_dropper.mv");
+        DROPPER_COVER_HV = addItem(119, "cover.cover_dropper.hv");
+        DROPPER_COVER_EV = addItem(120, "cover.cover_dropper.ev");
+        DROPPER_COVER_IV = addItem(121, "cover.cover_dropper.iv");
+        DROPPER_COVER_LuV = addItem(122, "cover.cover_dropper.luv");
+        DROPPER_COVER_ZPM = addItem(123, "cover.cover_dropper.zpm");
+        DROPPER_COVER_UV = addItem(124, "cover.cover_dropper.uv");
+        DROPPER_COVER_UHV = addItem(125, "cover.cover_dropper.uhv")
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        DROPPER_COVER_UEV = addItem(126, "cover.cover_dropper.uev")
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        DROPPER_COVER_UIV = addItem(127, "cover.cover_dropper.uiv")
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        DROPPER_COVER_UXV = addItem(128, "cover.cover_dropper.uxv")
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        DROPPER_COVER_OpV = addItem(129, "cover.cover_dropper.opv")
+                .setInvisibleIf(!GregTechAPI.isHighTier());
     }
 }
