@@ -1,9 +1,5 @@
 package com.zorbatron.zbgt.client.widgets;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -17,9 +13,10 @@ import gregtech.api.gui.widgets.PhantomSlotWidget;
 import gregtech.api.util.Position;
 import gregtech.api.util.Size;
 
-public class PhantomSlotNoTextWidget extends PhantomSlotWidget {
+public class PhantomSlotNoAmountTextWidget extends PhantomSlotWidget {
 
-    public PhantomSlotNoTextWidget(IItemHandlerModifiable itemHandler, int slotIndex, int xPosition, int yPosition) {
+    public PhantomSlotNoAmountTextWidget(IItemHandlerModifiable itemHandler, int slotIndex, int xPosition,
+                                         int yPosition) {
         super(itemHandler, slotIndex, xPosition, yPosition);
     }
 
@@ -50,42 +47,13 @@ public class PhantomSlotNoTextWidget extends PhantomSlotWidget {
             }
         }
         if (!itemStack.isEmpty()) {
-            GlStateManager.enableBlend();
-            GlStateManager.enableDepth();
-            GlStateManager.disableRescaleNormal();
-            GlStateManager.disableLighting();
-            RenderHelper.disableStandardItemLighting();
-            RenderHelper.enableStandardItemLighting();
-            RenderHelper.enableGUIStandardItemLighting();
-            GlStateManager.pushMatrix();
-            RenderItem itemRender = Minecraft.getMinecraft().getRenderItem();
-            // itemStack.setCount(1);
-            itemRender.renderItemAndEffectIntoGUI(itemStack, pos.x + 1, pos.y + 1);
-            // itemRender.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRenderer, itemStack, pos.x + 1, pos.y +
-            // 1,
-            // null);
-            GlStateManager.enableAlpha();
-            GlStateManager.popMatrix();
-            RenderHelper.disableStandardItemLighting();
+            // Set the stack count to 1 which doesn't show the amount text
+            itemStack.setCount(1);
+            drawItemStack(itemStack, pos.x + 1, pos.y + 1, null);
         }
-        if (isActive()) {
-            if (slotReference instanceof ISlotWidget) {
-                if (isMouseOverElement(mouseX, mouseY)) {
-                    GlStateManager.disableDepth();
-                    GlStateManager.colorMask(true, true, true, false);
-                    drawSolidRect(getPosition().x + 1, getPosition().y + 1, 16, 16, -2130706433);
-                    GlStateManager.colorMask(true, true, true, true);
-                    GlStateManager.enableDepth();
-                    GlStateManager.enableBlend();
-                }
-            }
-        } else {
-            GlStateManager.disableDepth();
-            GlStateManager.colorMask(true, true, true, false);
-            drawSolidRect(getPosition().x + 1, getPosition().y + 1, 16, 16, 0xbf000000);
-            GlStateManager.colorMask(true, true, true, true);
-            GlStateManager.enableDepth();
-            GlStateManager.enableBlend();
+
+        if (isMouseOverElement(mouseX, mouseY)) {
+            drawSelectionOverlay(pos.x + 1, pos.y + 1, 16, 16);
         }
     }
 }
