@@ -13,6 +13,7 @@ import gregtech.api.GTValues;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.api.unification.material.Materials;
 import gregtech.core.sound.GTSoundEvents;
 
@@ -37,6 +38,12 @@ public final class ZBGTRecipeMaps {
                                     .getFluid(Math.max(1, (GTValues.L / 2) * recipeBuilder.getSolderMultiplier())));
                         }
                     });
+
+    public static final RecipeMap<SimpleRecipeBuilder> FISHING_PORT_RECIPES = new RecipeMap<>(
+            "fishing_port_recipes",
+            1, 16, 0, 0,
+            new SimpleRecipeBuilder(), false)
+                    .setSound(GTSoundEvents.BATH);
 
     public static void modifyMaps() {
         POLARIZER_RECIPES.setMaxFluidInputs(1);
