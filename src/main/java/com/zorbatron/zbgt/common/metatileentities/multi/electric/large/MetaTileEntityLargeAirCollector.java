@@ -16,11 +16,14 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.recipeproperties.GasCollectorDimensionProperty;
 import gregtech.api.util.RelativeDirection;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.*;
+import it.unimi.dsi.fastutil.ints.IntLists;
 
 public class MetaTileEntityLargeAirCollector extends GCYMRecipeMapMultiblockController {
 
@@ -82,6 +85,17 @@ public class MetaTileEntityLargeAirCollector extends GCYMRecipeMapMultiblockCont
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return Textures.ROBUST_TUNGSTENSTEEL_CASING;
+    }
+
+    @Override
+    public boolean checkRecipe(@NotNull Recipe recipe, boolean consumeIfSuccess) {
+        int currentDim = getWorld().provider.getDimension();
+
+        for (int recipeDim : recipe.getProperty(GasCollectorDimensionProperty.getInstance(), IntLists.EMPTY_LIST)) {
+            if (recipeDim == currentDim) return super.checkRecipe(recipe, consumeIfSuccess);
+        }
+
+        return false;
     }
 
     @Override
