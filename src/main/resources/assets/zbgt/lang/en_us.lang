@@ -112,6 +112,21 @@ metaitem.cover.dual.tooltip.transfer_rate.stacks=§bTransfer Rate: §f%,d stacks
 
 cover.dual_cover.mode_changer=Click to change between the item and fluid settings
 
+cover.cover_dropper.lv.name=LV Dropper Cover
+cover.cover_dropper.mv.name=MV Dropper Cover
+cover.cover_dropper.hv.name=HV Dropper Cover
+cover.cover_dropper.ev.name=EV Dropper Cover
+cover.cover_dropper.iv.name=IV Dropper Cover
+cover.cover_dropper.luv.name=LuV Dropper Cover
+cover.cover_dropper.zpm.name=ZPM Dropper Cover
+cover.cover_dropper.uv.name=UV Dropper Cover
+cover.cover_dropper.uhv.name=UHV Dropper Cover
+cover.cover_dropper.uev.name=UEV Dropper Cover
+cover.cover_dropper.uiv.name=UIV Dropper Cover
+cover.cover_dropper.uxv.name=UXV Dropper Cover
+cover.cover_dropper.opv.name=OpV Dropper Cover
+cover.cover_dropper.update_rate=Drop every %s ticks
+
 
 # Items
 metaitem.generic_circuit.ulv.name=Generic ULV Circuit

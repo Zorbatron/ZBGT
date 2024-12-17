@@ -1,36 +1,40 @@
 package com.zorbatron.zbgt.common.covers;
 
-import gregtech.api.capability.GregtechTileCapabilities;
 import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.dispenser.PositionImpl;
-import net.minecraft.init.Blocks;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import codechicken.lib.raytracer.CuboidRayTraceResult;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.capability.GregtechDataCodes;
+import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.capability.IControllable;
 import gregtech.api.cover.CoverBase;
 import gregtech.api.cover.CoverDefinition;
+import gregtech.api.cover.CoverWithUI;
 import gregtech.api.cover.CoverableView;
+import gregtech.api.gui.GuiTextures;
+import gregtech.api.gui.ModularUI;
+import gregtech.api.gui.widgets.SliderWidget;
 import gregtech.client.renderer.texture.Textures;
-import org.jetbrains.annotations.Nullable;
 
-public class CoverDropper extends CoverBase implements ITickable, IControllable {
+public class CoverDropper extends CoverBase implements ITickable, IControllable, CoverWithUI {
 
     private boolean isWorkingEnabled = true;
     private int itemsLeftToTransferLastSecond;
@@ -122,6 +126,25 @@ public class CoverDropper extends CoverBase implements ITickable, IControllable 
     }
 
     @Override
+    public ModularUI createUI(EntityPlayer player) {
+        return ModularUI.builder(GuiTextures.BACKGROUND, 120, 20)
+                .widget(new SliderWidget("Test", 10, 10, 100, 10, 1, 100, updateRate, val -> {
+                    updateRate = (int) val;
+                    writeCustomData(GregtechDataCodes.UPDATE_COVER_MODE, buf -> buf.writeInt(updateRate));
+                }))
+                .build(this, player);
+    }
+
+    @Override
+    public @NotNull EnumActionResult onScrewdriverClick(@NotNull EntityPlayer playerIn, @NotNull EnumHand hand,
+                                                        @NotNull CuboidRayTraceResult hitResult) {
+        if (!getCoverableView().getWorld().isRemote) {
+            openUI((EntityPlayerMP) playerIn);
+        }
+        return EnumActionResult.SUCCESS;
+    }
+
+    @Override
     public void readCustomData(int discriminator, @NotNull PacketBuffer buf) {
         super.readCustomData(discriminator, buf);
 
@@ -155,11 +178,13 @@ public class CoverDropper extends CoverBase implements ITickable, IControllable 
     public void writeToNBT(@NotNull NBTTagCompound nbt) {
         super.writeToNBT(nbt);
         nbt.setBoolean("IsWorkingEnabled", isWorkingEnabled);
+        nbt.setInteger("UpdateRate", updateRate);
     }
 
     @Override
     public void readFromNBT(@NotNull NBTTagCompound nbt) {
         super.readFromNBT(nbt);
         isWorkingEnabled = nbt.getBoolean("IsWorkingEnabled");
+        // updateRate = nbt.getInteger("UpdateRate");
     }
 }
