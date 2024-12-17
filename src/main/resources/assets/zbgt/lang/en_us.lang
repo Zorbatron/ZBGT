@@ -112,20 +112,24 @@ metaitem.cover.dual.tooltip.transfer_rate.stacks=§bTransfer Rate: §f%,d stacks
 
 cover.dual_cover.mode_changer=Click to change between the item and fluid settings
 
-cover.cover_dropper.lv.name=LV Dropper Cover
-cover.cover_dropper.mv.name=MV Dropper Cover
-cover.cover_dropper.hv.name=HV Dropper Cover
-cover.cover_dropper.ev.name=EV Dropper Cover
-cover.cover_dropper.iv.name=IV Dropper Cover
-cover.cover_dropper.luv.name=LuV Dropper Cover
-cover.cover_dropper.zpm.name=ZPM Dropper Cover
-cover.cover_dropper.uv.name=UV Dropper Cover
-cover.cover_dropper.uhv.name=UHV Dropper Cover
-cover.cover_dropper.uev.name=UEV Dropper Cover
-cover.cover_dropper.uiv.name=UIV Dropper Cover
-cover.cover_dropper.uxv.name=UXV Dropper Cover
-cover.cover_dropper.opv.name=OpV Dropper Cover
-cover.cover_dropper.update_rate=Drop every %s ticks
+metaitem.cover.cover_dropper.lv.name=LV Dropper Cover
+metaitem.cover.cover_dropper.mv.name=MV Dropper Cover
+metaitem.cover.cover_dropper.hv.name=HV Dropper Cover
+metaitem.cover.cover_dropper.ev.name=EV Dropper Cover
+metaitem.cover.cover_dropper.iv.name=IV Dropper Cover
+metaitem.cover.cover_dropper.luv.name=LuV Dropper Cover
+metaitem.cover.cover_dropper.zpm.name=ZPM Dropper Cover
+metaitem.cover.cover_dropper.uv.name=UV Dropper Cover
+metaitem.cover.cover_dropper.uhv.name=UHV Dropper Cover
+metaitem.cover.cover_dropper.uev.name=UEV Dropper Cover
+metaitem.cover.cover_dropper.uiv.name=UIV Dropper Cover
+metaitem.cover.cover_dropper.uxv.name=UXV Dropper Cover
+metaitem.cover.cover_dropper.opv.name=OpV Dropper Cover
+cover.cover_dropper.update_rate_label.1=Drop every %s ticks
+cover.cover_dropper.update_rate_label.2=Drop every tick
+cover.cover_dropper.update_rate.1=Dropping every
+cover.cover_dropper.update_rate.2=ticks
+cover.cover_dropper.update_rate.3=Dropping every tick
 
 
 # Items

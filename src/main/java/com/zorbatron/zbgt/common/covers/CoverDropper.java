@@ -1,5 +1,6 @@
 package com.zorbatron.zbgt.common.covers;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.dispenser.PositionImpl;
@@ -31,6 +32,7 @@ import gregtech.api.cover.CoverWithUI;
 import gregtech.api.cover.CoverableView;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
+import gregtech.api.gui.widgets.DynamicLabelWidget;
 import gregtech.api.gui.widgets.SliderWidget;
 import gregtech.client.renderer.texture.Textures;
 
@@ -127,11 +129,14 @@ public class CoverDropper extends CoverBase implements ITickable, IControllable,
 
     @Override
     public ModularUI createUI(EntityPlayer player) {
-        return ModularUI.builder(GuiTextures.BACKGROUND, 120, 20)
-                .widget(new SliderWidget("Test", 10, 10, 100, 10, 1, 100, updateRate, val -> {
+        return ModularUI.builder(GuiTextures.BACKGROUND, 110, 30)
+                .widget(new SliderWidget("", 5, 5, 100, 10, 1, 100, updateRate, val -> {
                     updateRate = (int) val;
                     writeCustomData(GregtechDataCodes.UPDATE_COVER_MODE, buf -> buf.writeInt(updateRate));
                 }))
+                .widget(new DynamicLabelWidget(5, 17, () -> updateRate == 1 ?
+                        I18n.format("cover.cover_dropper.update_rate_label.2") :
+                        I18n.format("cover.cover_dropper.update_rate_label.1", updateRate)))
                 .build(this, player);
     }
 
@@ -150,6 +155,8 @@ public class CoverDropper extends CoverBase implements ITickable, IControllable,
 
         if (discriminator == GregtechDataCodes.WORKING_ENABLED) {
             isWorkingEnabled = buf.readBoolean();
+        } else if (discriminator == GregtechDataCodes.UPDATE_COVER_MODE) {
+            updateRate = buf.readInt();
         }
     }
 
@@ -157,12 +164,14 @@ public class CoverDropper extends CoverBase implements ITickable, IControllable,
     public void writeInitialSyncData(@NotNull PacketBuffer packetBuffer) {
         super.writeInitialSyncData(packetBuffer);
         packetBuffer.writeBoolean(isWorkingEnabled);
+        packetBuffer.writeInt(updateRate);
     }
 
     @Override
     public void readInitialSyncData(@NotNull PacketBuffer packetBuffer) {
         super.readInitialSyncData(packetBuffer);
         isWorkingEnabled = packetBuffer.readBoolean();
+        updateRate = packetBuffer.readInt();
     }
 
     @Override
@@ -185,6 +194,10 @@ public class CoverDropper extends CoverBase implements ITickable, IControllable,
     public void readFromNBT(@NotNull NBTTagCompound nbt) {
         super.readFromNBT(nbt);
         isWorkingEnabled = nbt.getBoolean("IsWorkingEnabled");
-        // updateRate = nbt.getInteger("UpdateRate");
+        updateRate = nbt.getInteger("UpdateRate");
+    }
+
+    public int getUpdateRate() {
+        return updateRate;
     }
 }
