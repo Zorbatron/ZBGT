@@ -454,4 +454,23 @@ public class RecipeAssists {
             default     -> WRAPPED_CIRCUIT_ULV;
         };
     }
+
+    public static MetaItem<?>.MetaValueItem getDropperCoverByTier(int tier) {
+        return switch (tier) {
+            case (MV)   -> DROPPER_COVER_MV;
+            case (HV)   -> DROPPER_COVER_HV;
+            case (EV)   -> DROPPER_COVER_EV;
+            case (IV)   -> DROPPER_COVER_IV;
+            case (LuV)  -> DROPPER_COVER_LuV;
+            case (ZPM)  -> DROPPER_COVER_ZPM;
+            case (UV)   -> DROPPER_COVER_UV;
+            case (UHV)  -> DROPPER_COVER_UHV;
+            case (UEV)  -> DROPPER_COVER_UEV;
+            case (UIV)  -> DROPPER_COVER_UIV;
+            case (UXV)  -> DROPPER_COVER_UXV;
+            case (OpV)  -> DROPPER_COVER_OpV;
+            case (MAX)  -> WRAPPED_CIRCUIT_MAX;
+            default     -> DROPPER_COVER_LV;
+        };
+    }
 }
