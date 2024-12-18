@@ -115,6 +115,7 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
         return cryotheumTank.getFluidAmount() > CRYOTHEUM_DRAIN_AMOUNT;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, @NotNull List<String> tooltip,
                                boolean advanced) {

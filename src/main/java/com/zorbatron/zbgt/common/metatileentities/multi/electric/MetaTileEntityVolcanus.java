@@ -222,6 +222,7 @@ public class MetaTileEntityVolcanus extends RecipeMapMultiblockController implem
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, @NotNull List<String> tooltip,
                                boolean advanced) {
