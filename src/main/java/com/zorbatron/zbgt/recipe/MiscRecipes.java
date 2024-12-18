@@ -13,6 +13,7 @@ import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
 
+import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.builders.AssemblerRecipeBuilder;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
@@ -24,6 +25,7 @@ public class MiscRecipes {
     protected static void init() {
         genericCircuits();
         magneticFluids();
+        coolantCells();
         ggCircuits();
         engraver();
 
@@ -158,6 +160,90 @@ public class MiscRecipes {
                     .EUt(8).duration(20)
                     .buildAndRegister();
         }
+    }
+
+    private static void coolantCells() {
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(MetaItems.FLUID_CELL)
+                .input(plate, Tin, 4)
+                .circuitMeta(1)
+                .output(COOLANT_CELL_10k)
+                .EUt(VA[LV]).duration(20 * 10)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(COOLANT_CELL_10k, 3)
+                .input(plate, Tin, 6)
+                .circuitMeta(1)
+                .output(COOLANT_CELL_30k)
+                .EUt(VA[MV]).duration(20 * 15)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(MetaItems.FLUID_CELL, 3)
+                .input(plate, Aluminium, 6)
+                .circuitMeta(1)
+                .output(COOLANT_CELL_30k)
+                .EUt(VA[MV]).duration(20 * 15)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(COOLANT_CELL_30k, 2)
+                .input(plate, Tin, 8)
+                .circuitMeta(1)
+                .output(COOLANT_CELL_60k)
+                .EUt(VA[MV]).duration(20 * 20)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(MetaItems.FLUID_CELL, 6)
+                .input(plate, StainlessSteel, 8)
+                .circuitMeta(1)
+                .output(COOLANT_CELL_60k)
+                .EUt(VA[MV]).duration(20 * 20)
+                .buildAndRegister();
+
+        CANNER_RECIPES.recipeBuilder()
+                .input(COOLANT_CELL_10k)
+                .fluidInputs(Helium.getFluid(FluidStorageKeys.LIQUID, 1000))
+                .output(COOLANT_CELL_60k_He)
+                .EUt(VA[HV]).duration(16)
+                .buildAndRegister();
+
+        CANNER_RECIPES.recipeBuilder()
+                .input(COOLANT_CELL_30k)
+                .fluidInputs(Helium.getFluid(FluidStorageKeys.LIQUID, 3000))
+                .output(COOLANT_CELL_180k_He)
+                .EUt(VA[HV]).duration(48)
+                .buildAndRegister();
+
+        CANNER_RECIPES.recipeBuilder()
+                .input(COOLANT_CELL_60k)
+                .fluidInputs(Helium.getFluid(FluidStorageKeys.LIQUID, 6000))
+                .output(COOLANT_CELL_360k_He)
+                .EUt(VA[HV]).duration(96)
+                .buildAndRegister();
+
+        CANNER_RECIPES.recipeBuilder()
+                .input(COOLANT_CELL_10k)
+                .fluidInputs(SodiumPotassium.getFluid(1000))
+                .output(COOLANT_CELL_60k_NaK)
+                .EUt(VA[MV]).duration(16)
+                .buildAndRegister();
+
+        CANNER_RECIPES.recipeBuilder()
+                .input(COOLANT_CELL_30k)
+                .fluidInputs(SodiumPotassium.getFluid(3000))
+                .output(COOLANT_CELL_180k_NaK)
+                .EUt(VA[MV]).duration(48)
+                .buildAndRegister();
+
+        CANNER_RECIPES.recipeBuilder()
+                .input(COOLANT_CELL_60k)
+                .fluidInputs(SodiumPotassium.getFluid(6000))
+                .output(COOLANT_CELL_360k_NaK)
+                .EUt(VA[MV]).duration(96)
+                .buildAndRegister();
     }
 
     private static void ggCircuits() {

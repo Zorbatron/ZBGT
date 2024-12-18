@@ -173,7 +173,6 @@ public class ZBGTMetaItems {
     public static MetaItem<?>.MetaValueItem COOLANT_CELL_SPACE_540k_Sp;
     public static MetaItem<?>.MetaValueItem COOLANT_CELL_SPACE_1080k_Sp;
 
-
     public static void init() {
         ZBGTMetaItem item = new ZBGTMetaItem();
         item.setRegistryName("zbgt_meta_item");
