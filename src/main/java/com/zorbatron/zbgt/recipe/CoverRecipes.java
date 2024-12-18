@@ -160,7 +160,7 @@ public class CoverRecipes {
                 .input(Blocks.DROPPER)
                 .input(OrePrefix.circuit, getMarkerMaterialByTier(LuV))
                 .input(getPistonByTier(LuV))
-                .fluidInputs(Materials.HSSS.getFluid(250))
+                .fluidInputs(Materials.HSSS.getFluid(L))
                 .output(getDropperCoverByTier(LuV))
                 .EUt(VA[LuV]).duration(20 * 10)
                 .buildAndRegister();
@@ -170,7 +170,7 @@ public class CoverRecipes {
                 .input(Blocks.DROPPER)
                 .input(OrePrefix.circuit, getMarkerMaterialByTier(ZPM))
                 .input(getPistonByTier(ZPM))
-                .fluidInputs(Materials.Naquadria.getFluid(250 * 2))
+                .fluidInputs(Materials.Naquadria.getFluid(L * 2))
                 .output(getDropperCoverByTier(ZPM))
                 .EUt(VA[ZPM]).duration(20 * 10)
                 .buildAndRegister();
@@ -180,7 +180,7 @@ public class CoverRecipes {
                 .input(Blocks.DROPPER)
                 .input(OrePrefix.circuit, getMarkerMaterialByTier(UV))
                 .input(getPistonByTier(UV))
-                .fluidInputs(Materials.Neutronium.getFluid(250 * 4))
+                .fluidInputs(Materials.Neutronium.getFluid(L * 4))
                 .output(getDropperCoverByTier(UV))
                 .EUt(VA[UV]).duration(20 * 10)
                 .buildAndRegister();
