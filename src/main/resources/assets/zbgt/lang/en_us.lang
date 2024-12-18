@@ -442,7 +442,10 @@ zbgt.material.eglin_steel_base=Eglin Steel Base Compound
 zbgt.material.inconel_792=Inconel-792
 zbgt.material.blizz=Blizz
 zbgt.material.pyrotheum=Pyrotheum
-zbgt.material.snowpowder=Snow
+zbgt.material.snowpowder=Snow Powder
+item.zbgt.material.snowpowder.dust=Snow Powder
+item.zbgt.material.snowpowder.dustSmall=Small Pile of Snow Powder
+item.zbgt.material.snowpowder.dustTiny=Tiny Pile of Snow Powder
 
 zbgt.material.mar_ce_m_200=MAR-Ce-M200
 zbgt.material.artherium_sn=Artherium-Sn

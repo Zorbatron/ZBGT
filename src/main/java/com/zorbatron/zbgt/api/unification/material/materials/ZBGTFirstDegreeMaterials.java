@@ -168,7 +168,7 @@ public final class ZBGTFirstDegreeMaterials {
 
         SnowPowder = new Material.Builder(id++, zbgtId("snowpowder"))
                 .dust()
-                .color(0xFAFAFA)
+                .color(0xFAFAFA).iconSet(FINE)
                 .build();
     }
 }
