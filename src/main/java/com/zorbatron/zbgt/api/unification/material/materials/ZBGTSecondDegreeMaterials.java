@@ -105,7 +105,7 @@ public final class ZBGTSecondDegreeMaterials {
 
         if (!ZBGTMods.THERMAL_FOUNDATION.isModLoaded()) {
             Cryotheum = new Material.Builder(id++, zbgtId("cryotheum"))
-                    .dust().liquid(new FluidBuilder().temperature(5))
+                    .dust().liquid(new FluidBuilder().temperature(5).translation("zbgt.material.cryotheum.liquid"))
                     .color(0x0094CB).iconSet(SHINY)
                     .flags(DECOMPOSITION_BY_CENTRIFUGING)
                     .components(Redstone, 1, SnowPowder, 1, Saltpeter, 1, Blizz, 1)

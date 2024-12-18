@@ -467,6 +467,7 @@ zbgt.material.eglin_steel_base=Eglin Steel Base Compound
 zbgt.material.inconel_792=Inconel-792
 zbgt.material.blizz=Blizz
 zbgt.material.pyrotheum=Pyrotheum
+zbgt.material.pyrotheum.liquid=Blazing Pyrotheum
 zbgt.material.snowpowder=Snow Powder
 item.zbgt.material.snowpowder.dust=Snow Powder
 item.zbgt.material.snowpowder.dustSmall=Small Pile of Snow Powder
@@ -486,6 +487,7 @@ zbgt.material.vibrant_alloy=Vibrant Alloy
 zbgt.material.lumium=Lumium
 zbgt.material.eglin_steel=Eglin Steel
 zbgt.material.cryotheum=Cryotheum
+zbgt.material.cryotheum.liquid=Gelid Cryotheum
 
 zbgt.material.fluxed_electrum=Fluxed Electrum
 zbgt.material.hikarium=Hikarium
