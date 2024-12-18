@@ -350,8 +350,12 @@ zbgt.machine.cal.tooltip_ordered_items=When in §eCircuit Assembly Line§7 mode,
 recipemap.circuit_assembly_line_recipes.name=Circuit Assembly Line
 
 zbgt.machine.volcanus.name=Volcanus
+zbgt.machine.volcanus.tooltip.1=Speed: +120%% | EU Usage: 90%% | Parallel: 8
+zbgt.machine.volcanus.tooltip.2=Consumes 10L of Blazing Pyrotheum per second during operation
 
 zbgt.machine.cryogenic_freezer.name=Cryogenic Freezer
+zbgt.machine.cryogenic_freezer.tooltip.1=Speed: +100%% | EU Usage: 100%% | Parallel: 4
+zbgt.machine.cryogenic_freezer.tooltip.2=Consumes 10L of Gelid Cryotheum per second during operation
 
 
 # Multiblock Casings

@@ -226,6 +226,10 @@ public class MetaTileEntityVolcanus extends RecipeMapMultiblockController implem
     public void addInformation(ItemStack stack, @Nullable World world, @NotNull List<String> tooltip,
                                boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
+
+        tooltip.add(I18n.format("zbgt.machine.volcanus.tooltip.1"));
+        tooltip.add(I18n.format("zbgt.machine.volcanus.tooltip.2"));
+
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
