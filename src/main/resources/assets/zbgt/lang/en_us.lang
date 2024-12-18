@@ -134,6 +134,7 @@ cover.cover_dropper.update_rate_label.2=Drop every tick
 cover.cover_dropper.update_rate.1=Dropping every
 cover.cover_dropper.update_rate.2=ticks
 cover.cover_dropper.update_rate.3=Dropping every tick
+cover.cover_dropper.tooltip=Can drop up to §f%,d items/s§7
 
 
 # Items
