@@ -108,7 +108,7 @@ public final class ZBGTSecondDegreeMaterials {
                     .dust().liquid(new FluidBuilder().temperature(5))
                     .color(0x0094CB).iconSet(SHINY)
                     .flags(DECOMPOSITION_BY_CENTRIFUGING)
-                    .components(Redstone, 1, Saltpeter, 1, Blizz, 1) // TODO snow powder
+                    .components(Redstone, 1, SnowPowder, 1, Saltpeter, 1, Blizz, 1)
                     .build();
         } else {
             id++;

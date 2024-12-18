@@ -26,6 +26,7 @@ public final class ZBGTMaterials {
     public static Material Luminessence;
     public static Material EglinSteelBase;
     public static Material Inconel792;
+    public static Material SnowPowder;
 
     // Second degree materials
     public static Material MAR_CE_M200;

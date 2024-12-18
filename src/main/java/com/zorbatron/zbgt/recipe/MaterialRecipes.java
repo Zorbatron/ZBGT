@@ -7,6 +7,7 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -26,6 +27,7 @@ public class MaterialRecipes {
         chemicalReactor();
         vacuumFreezer();
         alloyBlast();
+        macerator();
         chemBath();
         mixer();
         ebf();
@@ -82,6 +84,20 @@ public class MaterialRecipes {
                 .blastFurnaceTemp(5475)
                 .EUt(VA[IV]),
                 20 * 40, BlastProperty.GasTier.MID, 5, 10);
+    }
+
+    private static void macerator() {
+        MACERATOR_RECIPES.recipeBuilder()
+                .input(Blocks.SNOW)
+                .output(dust, SnowPowder)
+                .EUt(4).duration(16)
+                .buildAndRegister();
+
+        MACERATOR_RECIPES.recipeBuilder()
+                .input(Items.SNOWBALL)
+                .output(dustSmall, SnowPowder)
+                .EUt(4).duration(16)
+                .buildAndRegister();
     }
 
     private static void chemBath() {
@@ -264,7 +280,7 @@ public class MaterialRecipes {
 
             MIXER_RECIPES.recipeBuilder()
                     .input(dust, Redstone)
-                    // .input(dust, SnowPowder) TODO snow powder
+                    .input(dust, SnowPowder)
                     .input(dust, Saltpeter)
                     .input(dust, Blizz)
                     .output(dust, Cryotheum, 4)
