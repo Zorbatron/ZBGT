@@ -261,6 +261,8 @@ metaitem.coolant_cell.360k_sp.name=360K Sp Coolant Cell
 metaitem.coolant_cell.540k_sp.name=540K Sp Coolant Cell
 metaitem.coolant_cell.1080k_sp.name=1080K Sp Coolant Cell
 
+metaitem.gregtech_computer_cube.name=GregTech Computer Cube
+
 
 # Widgets
 zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s

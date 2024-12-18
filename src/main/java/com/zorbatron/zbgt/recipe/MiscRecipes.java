@@ -19,6 +19,7 @@ import gregtech.api.recipes.builders.AssemblerRecipeBuilder;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.common.items.MetaItems;
+import gregtech.common.metatileentities.MetaTileEntities;
 
 public class MiscRecipes {
 
@@ -122,6 +123,16 @@ public class MiscRecipes {
                         .EUt(VA[ZPM]).CWUt(128))
                 .output(ADVANCED_RADIATION_PROTECTION_PLATE)
                 .EUt(VA[ZPM]).duration(20 * 50)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(MetaItems.TOOL_DATA_ORB, 4)
+                .input(MetaItems.COVER_SCREEN, 4)
+                .input(MetaTileEntities.HULL[IV])
+                .input(circuit, RecipeAssists.getMarkerMaterialByTier(ZPM))
+                .fluidInputs(Tantalum.getFluid(L * 16))
+                .output(GREGTECH_COMPUTER_CUBE)
+                .EUt(VA[IV]).duration(20 * 180)
                 .buildAndRegister();
     }
 

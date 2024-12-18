@@ -11,6 +11,7 @@ import com.zorbatron.zbgt.api.util.ZBGTUtility;
 import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
 
 import gregtech.api.GregTechAPI;
+import gregtech.api.items.metaitem.ElectricStats;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.StandardMetaItem;
 import gregtech.api.unification.ore.OrePrefix;
@@ -356,5 +357,8 @@ public class ZBGTMetaItem extends StandardMetaItem {
         COOLANT_CELL_SPACE_360k_Sp = addItem(144, "coolant_cell.360k_sp");
         COOLANT_CELL_SPACE_540k_Sp = addItem(145, "coolant_cell.540k_sp");
         COOLANT_CELL_SPACE_1080k_Sp = addItem(146, "coolant_cell.1080k_sp");
+
+        GREGTECH_COMPUTER_CUBE = addItem(147, "gregtech_computer_cube")
+                .addComponents(new ElectricStats(393_216_000, IV, true, true));
     }
 }
