@@ -6,6 +6,8 @@ import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 import com.zorbatron.zbgt.api.unification.material.ZBGTMaterials;
 import com.zorbatron.zbgt.common.ZBGTConfig;
+import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
+import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
@@ -80,6 +82,27 @@ public class MultiblockPartRecipes {
                 'U', MetaItems.ELECTRIC_PUMP_ZPM,
                 'C', new UnificationEntry(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(ZPM)),
                 'H', MetaTileEntities.FLUID_IMPORT_HATCH[ZPM].getStackForm());
+
+        ModHandler.addShapedRecipe("pyrotheum_hatch", ZBGTMetaTileEntities.PYROTHEUM_HEATING_HATCH.getStackForm(),
+                "PGP",
+                "TCT",
+                "PHP",
+                'P', new UnificationEntry(OrePrefix.plate, ZBGTMaterials.MaragingSteel250),
+                'G', new UnificationEntry(OrePrefix.gear, GCYMMaterials.MaragingSteel300),
+                'T', new UnificationEntry(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(IV)),
+                'C', ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.VOLCANUS_CASING),
+                'H', MetaTileEntities.FLUID_IMPORT_HATCH[IV].getStackForm());
+
+        ModHandler.addShapedRecipe("cryotheum_hatch", ZBGTMetaTileEntities.CRYOTHEUM_COOLING_HATCH.getStackForm(),
+                "PGP",
+                "TCT",
+                "AHA",
+                'P', new UnificationEntry(OrePrefix.plate, ZBGTMaterials.MaragingSteel250),
+                'G', new UnificationEntry(OrePrefix.gear, ZBGTMaterials.MaragingSteel250),
+                'T', new UnificationEntry(OrePrefix.circuit, RecipeAssists.getMarkerMaterialByTier(EV)),
+                'C', ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.CRYOGENIC_CASING),
+                'H', MetaTileEntities.FLUID_IMPORT_HATCH[IV].getStackForm(),
+                'A', new UnificationEntry(OrePrefix.plate, Materials.Aluminium));
     }
 
     private static void largeParallelHatches() {

@@ -294,7 +294,7 @@ public class CasingRecipes {
                 'P', new UnificationEntry(plateDouble, Grismium),
                 'G', new UnificationEntry(gear, GCYMMaterials.IncoloyMA956),
                 'H', ZBGTMetaItems.COOLANT_CELL_360k_He.getStackForm(),
-                'F', new UnificationEntry(frameGt, Nitinol_60),
+                'F', new UnificationEntry(frameGt, Nitinol60),
                 'N', ZBGTMetaItems.COOLANT_CELL_360k_NaK.getStackForm());
 
         ModHandler.addShapedRecipe("volcanus_casing",
@@ -302,9 +302,9 @@ public class CasingRecipes {
                 "PVP",
                 "VFV",
                 "PGP",
-                'P', new UnificationEntry(plateDouble, Hastelloy_N),
+                'P', new UnificationEntry(plateDouble, HastelloyN),
                 'V', GCYMMetaBlocks.UNIQUE_CASING.getItemVariant(BlockUniqueCasing.UniqueCasingType.HEAT_VENT),
                 'F', new UnificationEntry(frameGt, GCYMMaterials.HastelloyX),
-                'G', new UnificationEntry(gear, Hastelloy_W));
+                'G', new UnificationEntry(gear, HastelloyW));
     }
 }
