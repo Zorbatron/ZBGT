@@ -159,7 +159,7 @@ public final class ZBGTFirstDegreeMaterials {
             Pyrotheum = new Material.Builder(id++, zbgtId("pyrotheum"))
                     .dust().liquid(new FluidBuilder().temperature(4000))
                     .color(0xFF9000).iconSet(ZBGTMaterialIconSet.FIERY)
-                    .flags(EXT2_METAL, DECOMPOSITION_BY_CENTRIFUGING)
+                    .flags(DECOMPOSITION_BY_CENTRIFUGING)
                     .components(Redstone, 1, Blaze, 1, Sulfur, 1, Coal, 1)
                     .build();
         } else {

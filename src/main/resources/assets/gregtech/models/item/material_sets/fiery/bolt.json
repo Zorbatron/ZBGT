@@ -2,6 +2,6 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "gregtech:items/material_sets/fiery/bolt",
-    "layer1": "gregtech:items/material_sets/fiery/"
+    "layer1": "gregtech:items/material_sets/fiery/bolt_overlay"
   }
 }
