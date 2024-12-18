@@ -170,5 +170,25 @@ public final class ZBGTFirstDegreeMaterials {
                 .dust()
                 .color(0xFAFAFA).iconSet(FINE)
                 .build();
+
+        Grismium = new Material.Builder(id++, zbgtId("grisium"))
+                .ingot().liquid(new FluidBuilder().temperature(4125))
+                .color(0x355D6A)
+                .flags(STD_METAL, GENERATE_DOUBLE_PLATE)
+                .blast(b -> b
+                        .temp(4125, BlastProperty.GasTier.MID)
+                        .blastStats(VA[EV], 20 * 25))
+                .components(Titanium, 9, Carbon, 9, Potassium, 9, Lithium, 9, Sulfur, 9, Hydrogen, 5)
+                .build();
+
+        Nitinol_60 = new Material.Builder(id++, zbgtId("nitinol_60"))
+                .ingot().liquid(new FluidBuilder().temperature(5925))
+                .color(0xD2B4F5)
+                .flags(GENERATE_FRAME)
+                .blast(b -> b
+                        .temp(5925, BlastProperty.GasTier.HIGH)
+                        .blastStats(VA[IV]))
+                .components(Titanium, 3, Nickel, 2)
+                .build();
     }
 }
