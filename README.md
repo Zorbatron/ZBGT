@@ -26,10 +26,16 @@ Ported the following multiblocks from GT:NH:
 - Precise Assembler (PRASS)
 - Component Assembly Line (CoAL)
 - YOTTank and YOTHatch
+- Compact™ Fusion Reactors
+- Zyngen
+- Circuit Assembly Line
 
 My multiblocks:
-- Quad EBF (qEBF)
+- Queezer (quad EBF)
 - Queezer (quad vacuum freezer)
+- Quacker (quad oil cracker)
+- GCYM Air Collector
+- GCYM Rock Breaker
 
 ### Images (_In order with the above list_):
 ![](images/mega_ebf.png)
@@ -41,11 +47,17 @@ My multiblocks:
 ![](images/coal.png)
 ![](images/yottank.png)
 ![](images/yothatch.png)
+![](images/compact_fusion.png)
+![](images/zyngen.png)
+![](images/cal.png)
 
 <br></br>
 ### My multiblocks:
 ![](images/quad_ebf.png)
 ![](images/queezer.png)
+![](images/quacker.png)
+![](images/large_air_collector.png)
+![](images/large_rock_breaker.png)
 
 ### Multiblock Parts:
 
@@ -100,9 +112,16 @@ Air Intake Hatch
 Single Item Input Bus
 - Functionally identical to a ULV input bus, but it has a max stack size of 1.
 
+Larger parallel hatch
+- The same as normal GCYM parallel hatches, but with much larger values!
+- Will turn your Ticks Per Second into Seconds Per Tick if used when doing recipes with chanced outputs! :troll:
+
+Dropper Cover
+- Is placed on any gregtech block that accepts covers and will drop items from its inventory.
+
 
 ## Credited Works
-- [GT:NH](https://github.com/GTNewHorizons/) for many of it's multiblocks.
+- [GT:NH](https://github.com/GTNewHorizons/) for many of its multiblocks.
 - Ursamina for the dual cover textures and the icon! :heart:
 - [Synthitic](https://github.com/Synthitic/) for porting GT:NH's CoAL to [GCYL: CEu](https://github.com/Synthitic/GCYL-CEu), which I more or less directly copied.
 - [GT:CEu](https://github.com/GregTechCEu/GregTech) for much code inspiration.
