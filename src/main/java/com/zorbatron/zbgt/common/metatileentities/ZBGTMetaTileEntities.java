@@ -119,19 +119,13 @@ public class ZBGTMetaTileEntities {
         STERILE_CLEANING_HATCH = registerMetaTileEntity(18018,
                 new MetaTileEntitySterileCleaningHatch(zbgtId("sterile_cleaning_hatch")));
 
-        Supplier<FluidStack> pyrotheum = () -> ZBGTMods.THERMAL_FOUNDATION.isModLoaded() ?
-                FluidRegistry.getFluidStack("pyrotheum", 1) :
-                ZBGTMaterials.Pyrotheum.getFluid(1);
+
         PYROTHEUM_HEATING_HATCH = registerMetaTileEntity(18019,
                 new MetaTileEntityFilteredHatch(zbgtId("pyrotheum_heating_hatch"), GTValues.IV,
-                        ZBGTMultiblockAbilities.PYROTHEUM_HATCH, pyrotheum, 128_000));
-
-        Supplier<FluidStack> cryotheum = () -> ZBGTMods.THERMAL_FOUNDATION.isModLoaded() ?
-                FluidRegistry.getFluidStack("cryotheum", 1) :
-                ZBGTMaterials.Cryotheum.getFluid(1);
+                        ZBGTMultiblockAbilities.PYROTHEUM_HATCH, () -> ZBGTAPI.pyrotheum, 128_000));
         CRYOTHEUM_COOLING_HATCH = registerMetaTileEntity(18020,
                 new MetaTileEntityFilteredHatch(zbgtId("cryotheum_cooling_hatch"), GTValues.IV,
-                        ZBGTMultiblockAbilities.CRYOTHEUM_HATCH, cryotheum, 128_000));
+                        ZBGTMultiblockAbilities.CRYOTHEUM_HATCH, () -> ZBGTAPI.cryotheum, 128_000));
 
         // 18050-18099 (50) reserved for multiblocks
         MEGA_EBF = registerMetaTileEntity(18050,

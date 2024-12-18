@@ -13,6 +13,7 @@ import gregtech.api.util.BaseCreativeTab;
 import gregtech.common.blocks.BlockMachineCasing;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.minecraftforge.fluids.FluidStack;
 
 public class ZBGTAPI {
 
@@ -29,4 +30,7 @@ public class ZBGTAPI {
 
     public static final BaseCreativeTab TAB_ZBGT = new BaseCreativeTab("ZBGT",
             () -> ZBGTMetaItems.ZBGT_ITEM.getStackForm(), false);
+
+    public static FluidStack pyrotheum;
+    public static FluidStack cryotheum;
 }

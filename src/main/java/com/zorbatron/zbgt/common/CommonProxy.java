@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.function.Function;
 
+import com.zorbatron.zbgt.api.ZBGTAPI;
+import com.zorbatron.zbgt.api.util.ZBGTMods;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -11,6 +13,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -50,6 +53,13 @@ public class CommonProxy {
         if (ZBGTConfig.worldGenerationSettings.enableOreGeneration) {
             CustomOreVeins.init();
         }
+
+        ZBGTAPI.pyrotheum = ZBGTMods.THERMAL_FOUNDATION.isModLoaded() ?
+                FluidRegistry.getFluidStack("pyrotheum", 1) :
+                ZBGTMaterials.Pyrotheum.getFluid(1);
+        ZBGTAPI.cryotheum = ZBGTMods.THERMAL_FOUNDATION.isModLoaded() ?
+                FluidRegistry.getFluidStack("cryotheum", 1) :
+                ZBGTMaterials.Cryotheum.getFluid(1);
     }
 
     @SubscribeEvent
