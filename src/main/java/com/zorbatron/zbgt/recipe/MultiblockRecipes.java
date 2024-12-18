@@ -290,5 +290,28 @@ public class MultiblockRecipes {
                 .output(ZBGTMetaTileEntities.CAL)
                 .EUt(VA[LuV]).duration(20 * 45)
                 .buildAndRegister();
+
+        ModHandler.addShapedRecipe("volcanus_controller", ZBGTMetaTileEntities.VOLCANUS.getStackForm(),
+                "GCG",
+                "AVA",
+                "PBP",
+                'G', new UnificationEntry(gear, HastelloyW),
+                'C', new UnificationEntry(circuit, getMarkerMaterialByTier(LuV)),
+                'A', getRobotArmByTier(IV),
+                'V', ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.VOLCANUS_CASING),
+                'P', new UnificationEntry(plateDouble, HastelloyN),
+                'B', ZBGTMetaItems.GREGTECH_COMPUTER_CUBE);
+
+        ModHandler.addShapedRecipe("cryogenic_freezer_controller",
+                ZBGTMetaTileEntities.CRYOGENIC_FREEZER.getStackForm(),
+                "GCG",
+                "TYT",
+                "PBP",
+                'G', new UnificationEntry(gear, GCYMMaterials.IncoloyMA956),
+                'C', new UnificationEntry(circuit, getMarkerMaterialByTier(LuV)),
+                'T', getPistonByTier(IV),
+                'Y', ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.CRYOGENIC_CASING),
+                'P', new UnificationEntry(plateDouble, Grismium),
+                'B', ZBGTMetaItems.GREGTECH_COMPUTER_CUBE);
     }
 }

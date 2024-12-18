@@ -27,6 +27,11 @@ public final class ZBGTMaterials {
     public static Material EglinSteelBase;
     public static Material Inconel792;
     public static Material SnowPowder;
+    public static Material Grismium;
+    public static Material Nitinol60;
+    public static Material HastelloyN;
+    public static Material HastelloyW;
+    public static Material MaragingSteel250;
 
     // Second degree materials
     public static Material MAR_CE_M200;

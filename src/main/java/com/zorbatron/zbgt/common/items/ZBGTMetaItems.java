@@ -151,6 +151,30 @@ public class ZBGTMetaItems {
     public static MetaItem<?>.MetaValueItem DROPPER_COVER_UXV;
     public static MetaItem<?>.MetaValueItem DROPPER_COVER_OpV;
 
+    public static MetaItem<?>.MetaValueItem COOLANT_CELL_10k;
+    public static MetaItem<?>.MetaValueItem COOLANT_CELL_30k;
+    public static MetaItem<?>.MetaValueItem COOLANT_CELL_60k;
+
+    public static MetaItem<?>.MetaValueItem COOLANT_CELL_SPACE_180k;
+    public static MetaItem<?>.MetaValueItem COOLANT_CELL_SPACE_360k;
+    public static MetaItem<?>.MetaValueItem COOLANT_CELL_SPACE_540k;
+    public static MetaItem<?>.MetaValueItem COOLANT_CELL_SPACE_1080k;
+
+    public static MetaItem<?>.MetaValueItem COOLANT_CELL_60k_He;
+    public static MetaItem<?>.MetaValueItem COOLANT_CELL_180k_He;
+    public static MetaItem<?>.MetaValueItem COOLANT_CELL_360k_He;
+
+    public static MetaItem<?>.MetaValueItem COOLANT_CELL_60k_NaK;
+    public static MetaItem<?>.MetaValueItem COOLANT_CELL_180k_NaK;
+    public static MetaItem<?>.MetaValueItem COOLANT_CELL_360k_NaK;
+
+    public static MetaItem<?>.MetaValueItem COOLANT_CELL_SPACE_180k_Sp;
+    public static MetaItem<?>.MetaValueItem COOLANT_CELL_SPACE_360k_Sp;
+    public static MetaItem<?>.MetaValueItem COOLANT_CELL_SPACE_540k_Sp;
+    public static MetaItem<?>.MetaValueItem COOLANT_CELL_SPACE_1080k_Sp;
+
+    public static MetaItem<?>.MetaValueItem GREGTECH_COMPUTER_CUBE;
+
     public static void init() {
         ZBGTMetaItem item = new ZBGTMetaItem();
         item.setRegistryName("zbgt_meta_item");

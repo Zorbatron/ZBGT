@@ -170,5 +170,46 @@ public final class ZBGTFirstDegreeMaterials {
                 .dust()
                 .color(0xFAFAFA).iconSet(FINE)
                 .build();
+
+        Grismium = new Material.Builder(id++, zbgtId("grisium"))
+                .ingot().liquid(new FluidBuilder().temperature(4125))
+                .color(0x355D6A)
+                .flags(STD_METAL, GENERATE_DOUBLE_PLATE)
+                .blast(b -> b
+                        .temp(4125, BlastProperty.GasTier.MID)
+                        .blastStats(VA[EV], 20 * 25))
+                .components(Titanium, 9, Carbon, 9, Potassium, 9, Lithium, 9, Sulfur, 9, Hydrogen, 5)
+                .build();
+
+        Nitinol60 = new Material.Builder(id++, zbgtId("nitinol_60"))
+                .ingot().liquid(new FluidBuilder().temperature(5925))
+                .color(0xD2B4F5)
+                .flags(GENERATE_FRAME)
+                .blast(b -> b
+                        .temp(5925, BlastProperty.GasTier.HIGH)
+                        .blastStats(VA[IV]))
+                .components(Titanium, 3, Nickel, 2)
+                .build();
+
+        HastelloyN = new Material.Builder(id++, zbgtId("hastelloy_n"))
+                .ingot().liquid(new FluidBuilder().temperature(4625))
+                .color(0xD7CCE8)
+                .flags(GENERATE_DOUBLE_PLATE)
+                .components(Yttrium, 2, Molybdenum, 4, Chrome, 2, Titanium, 2, Nickel, 15)
+                .build();
+
+        HastelloyW = new Material.Builder(id++, zbgtId("hastelloy_w"))
+                .ingot().liquid(new FluidBuilder().temperature(3625))
+                .color(0xB7B2E6)
+                .flags(GENERATE_GEAR)
+                .components(Iron, 3, Cobalt, 1, Molybdenum, 12, Chrome, 3, Nickel, 31)
+                .build();
+
+        MaragingSteel250 = new Material.Builder(id++, zbgtId("maraging_steel_250"))
+                .ingot().liquid(new FluidBuilder().temperature(2685))
+                .color(0xA195D9)
+                .flags(GENERATE_PLATE, GENERATE_GEAR)
+                .components(Steel, 16, Molybdenum, 1, Titanium, 1, Nickel, 4, Cobalt, 2)
+                .build();
     }
 }

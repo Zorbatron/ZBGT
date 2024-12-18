@@ -287,6 +287,18 @@ public class MaterialRecipes {
                     .EUt(VA[MV]).duration(20 * 8)
                     .buildAndRegister();
         }
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Titanium, 9)
+                .input(dust, Carbon, 9)
+                .input(dust, Potassium, 9)
+                .input(dust, Lithium, 9)
+                .input(dust, Sulfur, 9)
+                .circuitMeta(2)
+                .fluidInputs(Hydrogen.getFluid(5000))
+                .output(dust, Grismium, 50)
+                .EUt(VA[EV]).duration(20 * 60)
+                .buildAndRegister();
     }
 
     private static void ebf() {

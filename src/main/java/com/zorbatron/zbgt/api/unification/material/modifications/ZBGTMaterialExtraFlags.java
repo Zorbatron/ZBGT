@@ -99,7 +99,7 @@ public final class ZBGTMaterialExtraFlags {
     }
 
     private static void gears() {
-        Material[] materials = { RhodiumPlatedPalladium, Darmstadtium };
+        Material[] materials = { RhodiumPlatedPalladium, Darmstadtium, IncoloyMA956, MaragingSteel300 };
 
         setFlags(materials, GENERATE_GEAR);
     }
