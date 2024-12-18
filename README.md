@@ -13,8 +13,6 @@
     <a href="https://github.com/Zorbatron/ZBGT/releases"><img src="https://img.shields.io/github/downloads/Zorbatron/ZBGT/total?sort=semver&logo=github&label=&style=for-the-badge&color=2d2d2d&labelColor=545454&logoColor=FFFFFF" alt="GitHub"></a>
 </h1>
 
-## Features:
-
 ### Multiblocks:
 
 Ported the following multiblocks from GT:NH:
@@ -30,7 +28,7 @@ Ported the following multiblocks from GT:NH:
 - Zyngen
 - Circuit Assembly Line
 
-My multiblocks:
+### My multiblocks:
 - Queezer (quad EBF)
 - Queezer (quad vacuum freezer)
 - Quacker (quad oil cracker)
@@ -59,7 +57,34 @@ My multiblocks:
 ![](images/large_air_collector.png)
 ![](images/large_rock_breaker.png)
 
-### Multiblock Parts:
+
+## Covers:
+
+Dual Cover
+- Combines the conveyor and pump into one cover!
+
+![](images/dual_cover_item.png)
+![](images/dual_cover_fluid.png)
+
+Precise Dual Cover
+- Combines the robot arm and fluid regulator into one cover!
+
+![](images/precise_dual_cover_item.png)
+![](images/precise_dual_cover_fluid.png)
+
+Dropper Cover
+- Is placed on any gregtech block that accepts covers and will drop items from its inventory.
+
+
+## Multiblock Parts:
+
+### From GT:NH:
+
+Air Intake Hatch
+- Ported from GT++ but it collects dimensions specific gas now!
+- Is a Gas Collector that passively generates air.
+
+### My own:
 
 Creative Energy Source
 - Configurable like the creative emitter, but as a multiblock part.
@@ -93,31 +118,12 @@ Creative Computation Provider
 
 ![](images/creative_computation_provider.png)
 
-Dual Cover
-- Combines the conveyor and pump into one cover!
-
-![](images/dual_cover_item.png)
-![](images/dual_cover_fluid.png)
-
-Precise Dual Cover
-- Combines the robot arm and fluid regulator into one cover!
-
-![](images/precise_dual_cover_item.png)
-![](images/precise_dual_cover_fluid.png)
-
-Air Intake Hatch
-- Ported from GT++ but it collects dimensions specific gas now!
-- Is a Gas Collector that passively generates air.
-
 Single Item Input Bus
 - Functionally identical to a ULV input bus, but it has a max stack size of 1.
 
 Larger parallel hatch
 - The same as normal GCYM parallel hatches, but with much larger values!
 - Will turn your Ticks Per Second into Seconds Per Tick if used when doing recipes with chanced outputs! :troll:
-
-Dropper Cover
-- Is placed on any gregtech block that accepts covers and will drop items from its inventory.
 
 
 ## Credited Works
