@@ -45,6 +45,11 @@ dependencies {
     implementation rfg.deobf("curse.maven:ulv-covers-635555:4912949")
     compileOnly rfg.deobf("curse.maven:nomi-labs-932060:5677263")
 
+    compileOnly rfg.deobf("curse.maven:thermal-foundation-222880:2926428")
+    //implementation rfg.deobf("curse.maven:cofh-world-271384:2920434")
+    //implementation rfg.deobf("curse.maven:cofh-core-69162:2920433")
+    //implementation rfg.deobf("curse.maven:redstone-flux-270789:2920436")
+
     //For easier testing
     runtimeOnlyNonPublishable("curse.maven:nae2-884359:5380800")
     runtimeOnlyNonPublishable("curse.maven:spark-361579:3542217")

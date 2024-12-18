@@ -73,6 +73,10 @@ zbgt.machine.yottank_me_hatch.sticky.disabled=Enable sticky mode
 zbgt.machine.sterile_cleaning_hatch.name=Automatic Sterilization Maintenance Hatch
 zbgt.machine.sterile_cleaning_hatch.tooltip=For automatically maintaining Multiblocks with Cleaning, but sterile!
 
+zbgt.machine.pyrotheum_heating_hatch.name=Pyrotheum Heating Vent
+
+zbgt.machine.cryotheum_cooling_hatch.name=Cryotheum Cooling Hatch
+
 
 # Covers
 metaitem.cover.dual_cover.lv.name=LV Dual Cover
@@ -324,6 +328,10 @@ zbgt.machine.cal.tooltip=Does not lose efficiency when overclocked
 zbgt.machine.cal.tooltip_ordered_items=When in §eCircuit Assembly Line§7 mode, §fitems§7 must be in the correct order to run.
 recipemap.circuit_assembly_line_recipes.name=Circuit Assembly Line
 
+zbgt.machine.volcanus.name=Volcanus
+
+zbgt.machine.cryogenic_freezer.name=Cryogenic Freezer
+
 
 # Multiblock Casings
 tile.multiblock_casing.precise_0.name=Imprecise Electronic Unit Casing
@@ -396,6 +404,10 @@ tile.misc_casing.inconel_reinforced_casing.name=Inconel Reinforced Casing
 
 tile.creative_heating_coil.creative_heating_coil.name=Creative Heating Coil
 
+tile.misc_casing.volcanus_casing.name=Volcanus Casing
+
+tile.misc_casing.cryogenic_casing.name=Advanced Cryogenic Casing
+
 
 # Misc
 zbgt.laser_enabled.1=Can use
@@ -428,6 +440,12 @@ zbgt.material.energetic_alloy=Energetic Alloy
 zbgt.material.luminessence=Luminessence
 zbgt.material.eglin_steel_base=Eglin Steel Base Compound
 zbgt.material.inconel_792=Inconel-792
+zbgt.material.blizz=Blizz
+zbgt.material.pyrotheum=Pyrotheum
+zbgt.material.snowpowder=Snow Powder
+item.zbgt.material.snowpowder.dust=Snow Powder
+item.zbgt.material.snowpowder.dustSmall=Small Pile of Snow Powder
+item.zbgt.material.snowpowder.dustTiny=Tiny Pile of Snow Powder
 
 zbgt.material.mar_ce_m_200=MAR-Ce-M200
 zbgt.material.artherium_sn=Artherium-Sn
@@ -437,6 +455,7 @@ zbgt.material.signalum=Signalum
 zbgt.material.vibrant_alloy=Vibrant Alloy
 zbgt.material.lumium=Lumium
 zbgt.material.eglin_steel=Eglin Steel
+zbgt.material.cryotheum=Cryotheum
 
 zbgt.material.fluxed_electrum=Fluxed Electrum
 zbgt.material.hikarium=Hikarium

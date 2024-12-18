@@ -11,16 +11,19 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import com.zorbatron.zbgt.ZBGTCore;
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 import com.zorbatron.zbgt.api.recipes.properties.CoALProperty;
 import com.zorbatron.zbgt.api.unification.material.ZBGTMaterials;
 import com.zorbatron.zbgt.api.util.ZBGTLog;
+import com.zorbatron.zbgt.api.util.ZBGTMods;
 import com.zorbatron.zbgt.api.worldgen.CustomOreVeins;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.covers.ZBGTCovers;
@@ -50,6 +53,13 @@ public class CommonProxy {
         if (ZBGTConfig.worldGenerationSettings.enableOreGeneration) {
             CustomOreVeins.init();
         }
+
+        ZBGTAPI.pyrotheum = ZBGTMods.THERMAL_FOUNDATION.isModLoaded() ?
+                FluidRegistry.getFluidStack("pyrotheum", 1) :
+                ZBGTMaterials.Pyrotheum.getFluid(1);
+        ZBGTAPI.cryotheum = ZBGTMods.THERMAL_FOUNDATION.isModLoaded() ?
+                FluidRegistry.getFluidStack("cryotheum", 1) :
+                ZBGTMaterials.Cryotheum.getFluid(1);
     }
 
     @SubscribeEvent

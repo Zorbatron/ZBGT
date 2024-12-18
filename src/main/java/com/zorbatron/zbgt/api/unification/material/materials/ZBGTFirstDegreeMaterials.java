@@ -8,6 +8,8 @@ import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialIconSet.*;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
+import com.zorbatron.zbgt.api.unification.material.info.ZBGTMaterialIconSet;
+import com.zorbatron.zbgt.api.util.ZBGTMods;
 
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.unification.material.Material;
@@ -145,6 +147,28 @@ public final class ZBGTFirstDegreeMaterials {
                         .temp(3700, BlastProperty.GasTier.MID)
                         .blastStats(VA[HV], (int) (20 * 37.5)))
                 .components(Nickel, 2, Niobium, 1, Aluminium, 2, Nichrome, 1)
+                .build();
+
+        if (!ZBGTMods.THERMAL_FOUNDATION.isModLoaded()) {
+            Blizz = new Material.Builder(id++, zbgtId("blizz"))
+                    .dust()
+                    .flags(GENERATE_ROD)
+                    .color(0xDCE9FF).iconSet(SHINY)
+                    .build();
+
+            Pyrotheum = new Material.Builder(id++, zbgtId("pyrotheum"))
+                    .dust().liquid(new FluidBuilder().temperature(4000))
+                    .color(0xFF9000).iconSet(ZBGTMaterialIconSet.FIERY)
+                    .flags(DECOMPOSITION_BY_CENTRIFUGING)
+                    .components(Redstone, 1, Blaze, 1, Sulfur, 1, Coal, 1)
+                    .build();
+        } else {
+            id += 2;
+        }
+
+        SnowPowder = new Material.Builder(id++, zbgtId("snowpowder"))
+                .dust()
+                .color(0xFAFAFA).iconSet(FINE)
                 .build();
     }
 }

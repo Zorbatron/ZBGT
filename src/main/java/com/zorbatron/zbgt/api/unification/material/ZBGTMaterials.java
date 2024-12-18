@@ -26,6 +26,7 @@ public final class ZBGTMaterials {
     public static Material Luminessence;
     public static Material EglinSteelBase;
     public static Material Inconel792;
+    public static Material SnowPowder;
 
     // Second degree materials
     public static Material MAR_CE_M200;
@@ -47,6 +48,10 @@ public final class ZBGTMaterials {
 
     public static Material EnergeticAlloy;
     public static Material VibrantAlloy;
+
+    public static Material Blizz;
+    public static Material Pyrotheum;
+    public static Material Cryotheum;
 
     // Unknown Composition Materials
     public static Material SpecialCeramics;
