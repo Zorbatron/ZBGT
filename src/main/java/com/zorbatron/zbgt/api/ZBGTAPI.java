@@ -1,6 +1,7 @@
 package com.zorbatron.zbgt.api;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraftforge.fluids.FluidStack;
 
 import com.zorbatron.zbgt.api.util.ZBGTMods;
 import com.zorbatron.zbgt.common.ZBGTConfig;
@@ -13,7 +14,6 @@ import gregtech.api.util.BaseCreativeTab;
 import gregtech.common.blocks.BlockMachineCasing;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import net.minecraftforge.fluids.FluidStack;
 
 public class ZBGTAPI {
 

@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.function.Function;
 
-import com.zorbatron.zbgt.api.ZBGTAPI;
-import com.zorbatron.zbgt.api.util.ZBGTMods;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -20,10 +18,12 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import com.zorbatron.zbgt.ZBGTCore;
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 import com.zorbatron.zbgt.api.recipes.properties.CoALProperty;
 import com.zorbatron.zbgt.api.unification.material.ZBGTMaterials;
 import com.zorbatron.zbgt.api.util.ZBGTLog;
+import com.zorbatron.zbgt.api.util.ZBGTMods;
 import com.zorbatron.zbgt.api.worldgen.CustomOreVeins;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.covers.ZBGTCovers;
