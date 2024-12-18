@@ -8,6 +8,7 @@ import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialIconSet.*;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
+import com.zorbatron.zbgt.api.util.ZBGTMods;
 
 import gregicality.multiblocks.api.unification.GCYMMaterialFlags;
 import gregtech.api.fluids.FluidBuilder;
@@ -101,5 +102,16 @@ public final class ZBGTSecondDegreeMaterials {
                 .flags(EXT_METAL, DECOMPOSITION_BY_CENTRIFUGING)
                 .components(EglinSteelBase, 10, Sulfur, 1, Silicon, 4, Carbon, 1)
                 .build();
+
+        if (!ZBGTMods.THERMAL_FOUNDATION.isModLoaded()) {
+            Cryotheum = new Material.Builder(id++, zbgtId("cryotheum"))
+                    .dust().liquid(new FluidBuilder().temperature(5))
+                    .color(0x0094CB).iconSet(SHINY)
+                    .flags(DECOMPOSITION_BY_CENTRIFUGING)
+                    .components(Redstone, 1, Saltpeter, 1, Blizz, 1) // TODO snow powder
+                    .build();
+        } else {
+            id++;
+        }
     }
 }

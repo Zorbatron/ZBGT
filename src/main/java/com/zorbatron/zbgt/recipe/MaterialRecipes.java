@@ -7,10 +7,12 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 
+import net.minecraft.init.Items;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
 import com.zorbatron.zbgt.api.ZBGTAPI;
+import com.zorbatron.zbgt.api.util.ZBGTMods;
 
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.builders.BlastRecipeBuilder;
@@ -24,6 +26,7 @@ public class MaterialRecipes {
         chemicalReactor();
         vacuumFreezer();
         alloyBlast();
+        chemBath();
         mixer();
         ebf();
     }
@@ -58,6 +61,12 @@ public class MaterialRecipes {
                 .fluidOutputs(LiquidNitrogen.getFluid(1000))
                 .EUt(VA[HV]).duration(15)
                 .buildAndRegister();
+
+        VACUUM_RECIPES.recipeBuilder()
+                .input(stick, Blaze)
+                .output(stick, Blizz)
+                .EUt(VA[MV]).duration(20 * 25)
+                .buildAndRegister();
     }
 
     private static void alloyBlast() {
@@ -71,6 +80,15 @@ public class MaterialRecipes {
                 .blastFurnaceTemp(5475)
                 .EUt(VA[IV]),
                 20 * 40, BlastProperty.GasTier.MID, 5, 10);
+    }
+
+    private static void chemBath() {
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(Items.SNOWBALL, 4)
+                .fluidInputs(Blaze.getFluid(L * 10))
+                .output(dust, Blizz)
+                .EUt(VA[HV]).duration(20 * 20)
+                .buildAndRegister();
     }
 
     private static void mixer() {
@@ -229,6 +247,26 @@ public class MaterialRecipes {
                 .output(dust, Inconel792, 6)
                 .EUt(VA[HV]).duration((int) (20 * 2.6))
                 .buildAndRegister();
+
+        if (!ZBGTMods.THERMAL_FOUNDATION.isModLoaded()) {
+            MIXER_RECIPES.recipeBuilder()
+                    .input(dust, Redstone)
+                    .input(dust, Blaze)
+                    .input(dust, Sulfur)
+                    .input(dust, Coal)
+                    .output(dust, Pyrotheum, 4)
+                    .EUt(VA[MV]).duration(20 * 8)
+                    .buildAndRegister();
+
+            MIXER_RECIPES.recipeBuilder()
+                    .input(dust, Redstone)
+                    // .input(dust, SnowPowder) TODO snow powder
+                    .input(dust, Saltpeter)
+                    .input(dust, Blizz)
+                    .output(dust, Cryotheum, 4)
+                    .EUt(VA[MV]).duration(20 * 8)
+                    .buildAndRegister();
+        }
     }
 
     private static void ebf() {

@@ -4,9 +4,13 @@ import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
+import com.zorbatron.zbgt.api.metatileentity.ZBGTMultiblockAbilities;
+import com.zorbatron.zbgt.api.unification.material.ZBGTMaterials;
 import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCircuitAssemblyLine;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCoAL;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCryogenicFreezer;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityVolcanus;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.large.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.mega.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.quad.*;
@@ -30,6 +34,8 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityLargeParallelHatch[] ZBGT_PARALLEL_HATCHES = new MetaTileEntityLargeParallelHatch[7];
     public static MetaTileEntityYOTTankMEHatch YOTTANK_ME_HATCH;
     public static MetaTileEntitySterileCleaningHatch STERILE_CLEANING_HATCH;
+    public static MetaTileEntityFilteredHatch PYROTHEUM_HEATING_HATCH;
+    public static MetaTileEntityFilteredHatch CRYOTHEUM_COOLING_HATCH;
 
     public static MetaTileEntityMegaEBF MEGA_EBF;
     public static MetaTileEntityMegaLCR MEGA_LCR;
@@ -51,6 +57,9 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityLargeRockBreaker LARGE_ROCK_BREAKER;
     public static MetaTileEntityLargeAirCollector LARGE_AIR_COLLECTOR;
     public static MetaTileEntityLargeAlloySmelter LARGE_ALLOY_SMELTER;
+
+    public static MetaTileEntityVolcanus VOLCANUS;
+    public static MetaTileEntityCryogenicFreezer CRYOGENIC_FREEZER;
 
     public static void init() {
         MachineItemBlock.addCreativeTab(ZBGTAPI.TAB_ZBGT);
@@ -104,6 +113,13 @@ public class ZBGTMetaTileEntities {
         STERILE_CLEANING_HATCH = registerMetaTileEntity(18018,
                 new MetaTileEntitySterileCleaningHatch(zbgtId("sterile_cleaning_hatch")));
 
+        PYROTHEUM_HEATING_HATCH = registerMetaTileEntity(18019,
+                new MetaTileEntityFilteredHatch(zbgtId("pyrotheum_heating_hatch"), GTValues.IV,
+                        ZBGTMultiblockAbilities.PYROTHEUM_HATCH, ZBGTMaterials.Pyrotheum.getFluid(1), 128_000));
+        CRYOTHEUM_COOLING_HATCH = registerMetaTileEntity(18020,
+                new MetaTileEntityFilteredHatch(zbgtId("cryotheum_cooling_hatch"), GTValues.IV,
+                        ZBGTMultiblockAbilities.CRYOTHEUM_HATCH, ZBGTMaterials.Cryotheum.getFluid(1), 128_000));
+
         // 18050-18099 (50) reserved for multiblocks
         MEGA_EBF = registerMetaTileEntity(18050,
                 new MetaTileEntityMegaEBF(zbgtId("mega_ebf")));
@@ -154,5 +170,10 @@ public class ZBGTMetaTileEntities {
 
         CAL = registerMetaTileEntity(18070,
                 new MetaTileEntityCircuitAssemblyLine(zbgtId("cal")));
+
+        VOLCANUS = registerMetaTileEntity(18071,
+                new MetaTileEntityVolcanus(zbgtId("volcanus")));
+        CRYOGENIC_FREEZER = registerMetaTileEntity(18072,
+                new MetaTileEntityCryogenicFreezer(zbgtId("cryogenic_freezer")));
     }
 }

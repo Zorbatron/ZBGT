@@ -44,6 +44,7 @@ dependencies {
     api("gregicality:GregicalityMultiblocks:1.2.11")
     implementation rfg.deobf("curse.maven:ulv-covers-635555:4912949")
     compileOnly rfg.deobf("curse.maven:nomi-labs-932060:5677263")
+    compileOnly rfg.deobf("curse.maven:thermal-foundation-222880:2926428")
 
     //For easier testing
     runtimeOnlyNonPublishable("curse.maven:nae2-884359:5380800")
