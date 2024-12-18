@@ -243,6 +243,24 @@ metaitem.wrapped.misc.engraved_crystal_chip.name=Wrap of Engraved Crystal Chips
 metaitem.wrapped.misc.crystal_cpu.name=Wrap of Crystal CPUs
 metaitem.wrapped.misc.crystal_soc.name=Wrap of Crystal SoCs
 
+metaitem.coolant_cell.10k.name=10K Cell
+metaitem.coolant_cell.30k.name=30K Cell
+metaitem.coolant_cell.60k.name=60K Cell
+metaitem.coolant_cell.180k.name=180K Space Cell
+metaitem.coolant_cell.360k.name=360K Space Cell
+metaitem.coolant_cell.540k.name=540K Space Cell
+metaitem.coolant_cell.1080k.name=1080K Space Cell
+metaitem.coolant_cell.60k.he.name=60K He Coolant Cell
+metaitem.coolant_cell.180k.he.name=180K He Coolant Cell
+metaitem.coolant_cell.360k.he.name=360K He Coolant Cell
+metaitem.coolant_cell.60k.nak.name=60K NaK Coolant Cell
+metaitem.coolant_cell.180k.nak.name=180K NaK Coolant Cell
+metaitem.coolant_cell.360k.nak.name=360K NaK Coolant Cell
+metaitem.coolant_cell.180k_sp.name=180K Sp Coolant Cell
+metaitem.coolant_cell.360k_sp.name=360K Sp Coolant Cell
+metaitem.coolant_cell.540k_sp.name=540K Sp Coolant Cell
+metaitem.coolant_cell.1080k_sp.name=1080K Sp Coolant Cell
+
 
 # Widgets
 zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s

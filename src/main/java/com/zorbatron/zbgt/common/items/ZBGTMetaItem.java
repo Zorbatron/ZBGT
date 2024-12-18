@@ -334,5 +334,27 @@ public class ZBGTMetaItem extends StandardMetaItem {
                 .addComponents(
                         new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 4096))))
                 .setInvisibleIf(!GregTechAPI.isHighTier());
+
+        COOLANT_CELL_10k = addItem(130, "coolant_cell.10k");
+        COOLANT_CELL_30k = addItem(131, "coolant_cell.30k");
+        COOLANT_CELL_60k = addItem(132, "coolant_cell.60k");
+
+        COOLANT_CELL_SPACE_180k = addItem(133, "coolant_cell.180k");
+        COOLANT_CELL_SPACE_360k = addItem(134, "coolant_cell.360k");
+        COOLANT_CELL_SPACE_540k = addItem(135, "coolant_cell.540k");
+        COOLANT_CELL_SPACE_1080k = addItem(136, "coolant_cell.1080k");
+
+        COOLANT_CELL_60k_He = addItem(137, "coolant_cell.60k.he");
+        COOLANT_CELL_180k_He = addItem(138, "coolant_cell.180k.he");
+        COOLANT_CELL_360k_He = addItem(139, "coolant_cell.360k.he");
+
+        COOLANT_CELL_60k_NaK = addItem(140, "coolant_cell.60k.nak");
+        COOLANT_CELL_180k_NaK = addItem(141, "coolant_cell.180k.nak");
+        COOLANT_CELL_360k_NaK = addItem(142, "coolant_cell.360k.nak");
+
+        COOLANT_CELL_SPACE_180k_Sp = addItem(143, "coolant_cell.180k_sp");
+        COOLANT_CELL_SPACE_360k_Sp = addItem(144, "coolant_cell.360k_sp");
+        COOLANT_CELL_SPACE_540k_Sp = addItem(145, "coolant_cell.540k_sp");
+        COOLANT_CELL_SPACE_1080k_Sp = addItem(146, "coolant_cell.1080k_sp");
     }
 }
