@@ -26,6 +26,8 @@ import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 
 import gregicality.multiblocks.api.unification.GCYMMaterials;
+import gregicality.multiblocks.common.block.GCYMMetaBlocks;
+import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregtech.api.block.VariantBlock;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.builders.AssemblyLineRecipeBuilder;
@@ -294,5 +296,15 @@ public class CasingRecipes {
                 'H', ZBGTMetaItems.COOLANT_CELL_360k_He.getStackForm(),
                 'F', new UnificationEntry(frameGt, Nitinol_60),
                 'N', ZBGTMetaItems.COOLANT_CELL_360k_NaK.getStackForm());
+
+        ModHandler.addShapedRecipe("volcanus_casing",
+                ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.VOLCANUS_CASING, casingsPerCraft),
+                "PVP",
+                "VFV",
+                "PGP",
+                'P', new UnificationEntry(plateDouble, Hastelloy_N),
+                'V', GCYMMetaBlocks.UNIQUE_CASING.getItemVariant(BlockUniqueCasing.UniqueCasingType.HEAT_VENT),
+                'F', new UnificationEntry(frameGt, GCYMMaterials.HastelloyX),
+                'G', new UnificationEntry(gear, Hastelloy_W));
     }
 }

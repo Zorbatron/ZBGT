@@ -29,6 +29,8 @@ public final class ZBGTMaterials {
     public static Material SnowPowder;
     public static Material Grismium;
     public static Material Nitinol_60;
+    public static Material Hastelloy_N;
+    public static Material Hastelloy_W;
 
     // Second degree materials
     public static Material MAR_CE_M200;

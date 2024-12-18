@@ -467,6 +467,8 @@ item.zbgt.material.snowpowder.dustSmall=Small Pile of Snow Powder
 item.zbgt.material.snowpowder.dustTiny=Tiny Pile of Snow Powder
 zbgt.material.grisium=Grisium
 zbgt.material.nitinol_60=Nitinol 60
+zbgt.material.hastelloy_n=Hastelloy-N
+zbgt.material.hastelloy_w=Hastelloy-W
 
 zbgt.material.mar_ce_m_200=MAR-Ce-M200
 zbgt.material.artherium_sn=Artherium-Sn

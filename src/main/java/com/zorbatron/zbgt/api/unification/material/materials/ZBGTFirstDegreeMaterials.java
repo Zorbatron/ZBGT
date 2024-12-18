@@ -190,5 +190,19 @@ public final class ZBGTFirstDegreeMaterials {
                         .blastStats(VA[IV]))
                 .components(Titanium, 3, Nickel, 2)
                 .build();
+
+        Hastelloy_N = new Material.Builder(id++, zbgtId("hastelloy_n"))
+                .ingot().liquid(new FluidBuilder().temperature(4625))
+                .color(0xD7CCE8)
+                .flags(GENERATE_DOUBLE_PLATE)
+                .components(Yttrium, 2, Molybdenum, 4, Chrome, 2, Titanium, 2, Nickel, 15)
+                .build();
+
+        Hastelloy_W = new Material.Builder(id++, zbgtId("hastelloy_w"))
+                .ingot().liquid(new FluidBuilder().temperature(3625))
+                .color(0xB7B2E6)
+                .flags(GENERATE_GEAR)
+                .components(Iron, 3, Cobalt, 1, Molybdenum, 12, Chrome, 3, Nickel, 31)
+                .build();
     }
 }
