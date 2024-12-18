@@ -291,23 +291,48 @@ public class ZBGTMetaItem extends StandardMetaItem {
         ZBGT_ITEM = addItem(116, "zbgt").setInvisible();
 
         // Dropper Covers 117-129
-        DROPPER_COVER_LV = addItem(117, "cover.cover_dropper.lv");
-        DROPPER_COVER_MV = addItem(118, "cover.cover_dropper.mv");
-        DROPPER_COVER_HV = addItem(119, "cover.cover_dropper.hv");
-        DROPPER_COVER_EV = addItem(120, "cover.cover_dropper.ev");
-        DROPPER_COVER_IV = addItem(121, "cover.cover_dropper.iv");
-        DROPPER_COVER_LuV = addItem(122, "cover.cover_dropper.luv");
-        DROPPER_COVER_ZPM = addItem(123, "cover.cover_dropper.zpm");
-        DROPPER_COVER_UV = addItem(124, "cover.cover_dropper.uv");
+        DROPPER_COVER_LV = addItem(117, "cover.cover_dropper.lv")
+                .addComponents(new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8))));
+        DROPPER_COVER_MV = addItem(118, "cover.cover_dropper.mv")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 2))));
+        DROPPER_COVER_HV = addItem(119, "cover.cover_dropper.hv")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 4))));
+        DROPPER_COVER_EV = addItem(120, "cover.cover_dropper.ev")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 8))));
+        DROPPER_COVER_IV = addItem(121, "cover.cover_dropper.iv")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 16))));
+        DROPPER_COVER_LuV = addItem(122, "cover.cover_dropper.luv")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 32))));
+        DROPPER_COVER_ZPM = addItem(123, "cover.cover_dropper.zpm")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 64))));
+        DROPPER_COVER_UV = addItem(124, "cover.cover_dropper.uv")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 128))));
         DROPPER_COVER_UHV = addItem(125, "cover.cover_dropper.uhv")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 256))))
                 .setInvisibleIf(!GregTechAPI.isHighTier());
         DROPPER_COVER_UEV = addItem(126, "cover.cover_dropper.uev")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 512))))
                 .setInvisibleIf(!GregTechAPI.isHighTier());
         DROPPER_COVER_UIV = addItem(127, "cover.cover_dropper.uiv")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 1024))))
                 .setInvisibleIf(!GregTechAPI.isHighTier());
         DROPPER_COVER_UXV = addItem(128, "cover.cover_dropper.uxv")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 2048))))
                 .setInvisibleIf(!GregTechAPI.isHighTier());
         DROPPER_COVER_OpV = addItem(129, "cover.cover_dropper.opv")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 4096))))
                 .setInvisibleIf(!GregTechAPI.isHighTier());
     }
 }
