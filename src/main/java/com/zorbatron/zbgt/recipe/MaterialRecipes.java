@@ -62,11 +62,13 @@ public class MaterialRecipes {
                 .EUt(VA[HV]).duration(15)
                 .buildAndRegister();
 
-        VACUUM_RECIPES.recipeBuilder()
-                .input(stick, Blaze)
-                .output(stick, Blizz)
-                .EUt(VA[MV]).duration(20 * 25)
-                .buildAndRegister();
+        if (!ZBGTMods.THERMAL_FOUNDATION.isModLoaded()) {
+            VACUUM_RECIPES.recipeBuilder()
+                    .input(stick, Blaze)
+                    .output(stick, Blizz)
+                    .EUt(VA[MV]).duration(20 * 25)
+                    .buildAndRegister();
+        }
     }
 
     private static void alloyBlast() {
@@ -83,12 +85,14 @@ public class MaterialRecipes {
     }
 
     private static void chemBath() {
-        CHEMICAL_BATH_RECIPES.recipeBuilder()
-                .input(Items.SNOWBALL, 4)
-                .fluidInputs(Blaze.getFluid(L * 10))
-                .output(dust, Blizz)
-                .EUt(VA[HV]).duration(20 * 20)
-                .buildAndRegister();
+        if (!ZBGTMods.THERMAL_FOUNDATION.isModLoaded()) {
+            CHEMICAL_BATH_RECIPES.recipeBuilder()
+                    .input(Items.SNOWBALL, 4)
+                    .fluidInputs(Blaze.getFluid(L * 10))
+                    .output(dust, Blizz)
+                    .EUt(VA[HV]).duration(20 * 20)
+                    .buildAndRegister();
+        }
     }
 
     private static void mixer() {

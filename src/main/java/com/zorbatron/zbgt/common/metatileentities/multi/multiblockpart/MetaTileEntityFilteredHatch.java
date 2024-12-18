@@ -1,6 +1,7 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -42,7 +43,7 @@ public class MetaTileEntityFilteredHatch extends MetaTileEntityMultiblockPart
                                          implements IMultiblockAbilityPart<IFluidTank>, IControllable {
 
     private final MultiblockAbility<IFluidTank> multiblockAbility;
-    private final FluidStack filter;
+    private final Supplier<FluidStack> filter;
     private final int tankCapacity;
 
     private final FluidTank tank;
@@ -50,7 +51,7 @@ public class MetaTileEntityFilteredHatch extends MetaTileEntityMultiblockPart
     private boolean workingEnabled = true;
 
     public MetaTileEntityFilteredHatch(ResourceLocation metaTileEntityId, int tier,
-                                       MultiblockAbility<IFluidTank> multiblockAbility, FluidStack filter,
+                                       MultiblockAbility<IFluidTank> multiblockAbility, Supplier<FluidStack> filter,
                                        int tankCapacity) {
         super(metaTileEntityId, tier);
         this.multiblockAbility = multiblockAbility;
@@ -61,7 +62,7 @@ public class MetaTileEntityFilteredHatch extends MetaTileEntityMultiblockPart
 
             @Override
             public boolean canFillFluidType(FluidStack fluid) {
-                return fluid.isFluidEqual(filter);
+                return fluid.isFluidEqual(filter.get());
             }
         };
 

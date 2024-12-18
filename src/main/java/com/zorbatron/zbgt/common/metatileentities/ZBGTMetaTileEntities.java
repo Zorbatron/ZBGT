@@ -3,9 +3,15 @@ package com.zorbatron.zbgt.common.metatileentities;
 import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 
+import java.util.function.Supplier;
+
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.metatileentity.ZBGTMultiblockAbilities;
 import com.zorbatron.zbgt.api.unification.material.ZBGTMaterials;
+import com.zorbatron.zbgt.api.util.ZBGTMods;
 import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCircuitAssemblyLine;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.MetaTileEntityCoAL;
@@ -113,12 +119,19 @@ public class ZBGTMetaTileEntities {
         STERILE_CLEANING_HATCH = registerMetaTileEntity(18018,
                 new MetaTileEntitySterileCleaningHatch(zbgtId("sterile_cleaning_hatch")));
 
+        Supplier<FluidStack> pyrotheum = () -> ZBGTMods.THERMAL_FOUNDATION.isModLoaded() ?
+                FluidRegistry.getFluidStack("pyrotheum", 1) :
+                ZBGTMaterials.Pyrotheum.getFluid(1);
         PYROTHEUM_HEATING_HATCH = registerMetaTileEntity(18019,
                 new MetaTileEntityFilteredHatch(zbgtId("pyrotheum_heating_hatch"), GTValues.IV,
-                        ZBGTMultiblockAbilities.PYROTHEUM_HATCH, ZBGTMaterials.Pyrotheum.getFluid(1), 128_000));
+                        ZBGTMultiblockAbilities.PYROTHEUM_HATCH, pyrotheum, 128_000));
+
+        Supplier<FluidStack> cryotheum = () -> ZBGTMods.THERMAL_FOUNDATION.isModLoaded() ?
+                FluidRegistry.getFluidStack("cryotheum", 1) :
+                ZBGTMaterials.Cryotheum.getFluid(1);
         CRYOTHEUM_COOLING_HATCH = registerMetaTileEntity(18020,
                 new MetaTileEntityFilteredHatch(zbgtId("cryotheum_cooling_hatch"), GTValues.IV,
-                        ZBGTMultiblockAbilities.CRYOTHEUM_HATCH, ZBGTMaterials.Cryotheum.getFluid(1), 128_000));
+                        ZBGTMultiblockAbilities.CRYOTHEUM_HATCH, cryotheum, 128_000));
 
         // 18050-18099 (50) reserved for multiblocks
         MEGA_EBF = registerMetaTileEntity(18050,
