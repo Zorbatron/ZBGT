@@ -195,6 +195,9 @@ public final class ZBGTFirstDegreeMaterials {
                 .ingot().liquid(new FluidBuilder().temperature(4625))
                 .color(0xD7CCE8)
                 .flags(GENERATE_DOUBLE_PLATE)
+                .blast(b -> b
+                        .temp(4625, BlastProperty.GasTier.MID)
+                        .blastStats(VA[EV]))
                 .components(Yttrium, 2, Molybdenum, 4, Chrome, 2, Titanium, 2, Nickel, 15)
                 .build();
 
@@ -202,6 +205,9 @@ public final class ZBGTFirstDegreeMaterials {
                 .ingot().liquid(new FluidBuilder().temperature(3625))
                 .color(0xB7B2E6)
                 .flags(GENERATE_GEAR)
+                .blast(b -> b
+                        .temp(3625, BlastProperty.GasTier.MID)
+                        .blastStats(VA[EV]))
                 .components(Iron, 3, Cobalt, 1, Molybdenum, 12, Chrome, 3, Nickel, 31)
                 .build();
 
@@ -209,6 +215,9 @@ public final class ZBGTFirstDegreeMaterials {
                 .ingot().liquid(new FluidBuilder().temperature(2685))
                 .color(0xA195D9)
                 .flags(GENERATE_PLATE, GENERATE_GEAR)
+                .blast(b -> b
+                        .temp(2685, BlastProperty.GasTier.MID)
+                        .blastStats(VA[EV]))
                 .components(Steel, 16, Molybdenum, 1, Titanium, 1, Nickel, 4, Cobalt, 2)
                 .build();
     }
