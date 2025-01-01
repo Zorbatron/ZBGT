@@ -81,6 +81,8 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
     private int tickRate;
     private boolean voiding;
 
+    private MetaTileEntityYOTTankMEHatch MEHatch;
+
     private static final String YOTTANK_CELL_HEADER = "YOTTANK_CELL_";
 
     public MetaTileEntityYOTTank(ResourceLocation metaTileEntityId) {
@@ -289,7 +291,14 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
 
         cells.forEach(casingType -> this.storage = this.storage.add(casingType.getCapacity()));
 
-        resetMEHatches();
+        for (IMultiblockPart multiblockPart : this.getMultiblockParts()) {
+            if (multiblockPart instanceof MetaTileEntityYOTTankMEHatch meHatch) {
+                MEHatch = meHatch;
+                break;
+            }
+        }
+
+        resetMEHatch();
     }
 
     protected void initializeAbilities() {
@@ -301,7 +310,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
     public void invalidateStructure() {
         this.storage = BigInteger.ZERO;
         resetTileAbilities();
-        resetMEHatches();
+        resetMEHatch();
 
         super.invalidateStructure();
     }
@@ -311,12 +320,8 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         this.exportFluids = new FluidTankList(true);
     }
 
-    private void resetMEHatches() {
-        for (IMultiblockPart multiblockPart : this.getMultiblockParts()) {
-            if (multiblockPart instanceof MetaTileEntityYOTTankMEHatch meHatch) {
-                meHatch.notifyME();
-            }
-        }
+    private void resetMEHatch() {
+        if (MEHatch != null) MEHatch.notifyME();
     }
 
     @Override
