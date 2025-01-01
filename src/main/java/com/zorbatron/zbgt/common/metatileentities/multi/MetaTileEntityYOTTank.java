@@ -18,7 +18,6 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.StringUtils;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.capabilities.Capability;
@@ -552,11 +551,13 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setString("StorageCurrent", this.storageCurrent.toString());
-        data.setString("Fluid", this.fluid == null ? "" : this.fluid.getFluid().getName());
-        data.setString("LockedFluid", this.lockedFluid == null ? "" : this.lockedFluid.getFluid().getName());
         data.setBoolean("IsFluidLocked", this.isFluidLocked);
         data.setBoolean("IsVoiding", this.voiding);
         data.setInteger("TickRate", this.tickRate);
+        data.setBoolean("IsWorkingEnabled", this.isWorkingEnabled);
+
+        if (fluid != null) data.setTag("FluidTag", fluid.writeToNBT(new NBTTagCompound()));
+        if (lockedFluid != null) data.setTag("LockedFluidTag", lockedFluid.writeToNBT(new NBTTagCompound()));
 
         return super.writeToNBT(data);
     }
@@ -566,13 +567,21 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         super.readFromNBT(data);
 
         String amountCurrent = data.getString("StorageCurrent");
-        if (StringUtils.isNullOrEmpty(amountCurrent)) amountCurrent = "0";
-        this.storageCurrent = new BigInteger(amountCurrent);
-        this.fluid = FluidRegistry.getFluidStack(data.getString("Fluid"), 1);
-        this.lockedFluid = FluidRegistry.getFluidStack(data.getString("LockedFluid"), 1);
+        this.storageCurrent = amountCurrent.isEmpty() ? BigInteger.ZERO : new BigInteger(amountCurrent);
         this.isFluidLocked = data.getBoolean("IsFluidLocked");
         this.voiding = data.getBoolean("IsVoiding");
         this.tickRate = data.getInteger("TickRate");
+        this.isWorkingEnabled = !data.hasKey("IsWorkingEnabled") || data.getBoolean("IsWorkingEnabled");
+
+        // Moved to using "FluidTag" when I changed how the fluid was stored to NBT.
+        // Gotta check for legacy tanks so players don't end up with empty YOTTanks!
+        if (data.hasKey("FluidTag")) {
+            this.fluid = FluidStack.loadFluidStackFromNBT(data.getCompoundTag("FluidTag"));
+            this.lockedFluid = FluidStack.loadFluidStackFromNBT(data.getCompoundTag("LockedFluidTag"));
+        } else {
+            this.fluid = FluidRegistry.getFluidStack(data.getString("Fluid"), 1);
+            this.lockedFluid = FluidRegistry.getFluidStack(data.getString("LockedFluid"), 1);
+        }
     }
 
     @Override
@@ -581,7 +590,8 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
 
         buf.writeBoolean(voiding);
         buf.writeBoolean(isFluidLocked);
-        buf.writeInt(this.tickRate);
+        buf.writeInt(tickRate);
+        buf.writeBoolean(isWorkingEnabled);
     }
 
     @Override
@@ -591,6 +601,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         this.voiding = buf.readBoolean();
         this.isFluidLocked = buf.readBoolean();
         this.tickRate = buf.readInt();
+        this.isWorkingEnabled = buf.readBoolean();
     }
 
     @SideOnly(Side.CLIENT)
