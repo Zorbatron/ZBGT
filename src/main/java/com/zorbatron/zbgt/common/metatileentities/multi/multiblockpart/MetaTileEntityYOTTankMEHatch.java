@@ -349,7 +349,9 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
     @Override
     public boolean isPrioritized(IAEFluidStack iaeFluidStack) {
         if (getController() instanceof MetaTileEntityYOTTank metaTileEntityYOTTank) {
-            return metaTileEntityYOTTank.getFluid().isFluidEqual(iaeFluidStack.getFluidStack());
+            FluidStack fluidStack = metaTileEntityYOTTank.getFluid();
+            if (fluidStack == null) return false;
+            return fluidStack.isFluidEqual(iaeFluidStack.getFluidStack());
         }
 
         return false;
@@ -406,7 +408,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
                     returned = delta.longValueExact();
                 }
 
-                if (doFill) controller.setCapacity(controllerStorageCurrent);
+                if (doFill) controller.setStored(controllerStorageCurrent);
                 return returned;
             }
         }

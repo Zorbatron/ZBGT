@@ -27,6 +27,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
@@ -161,10 +162,6 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         }
 
         this.stored = stored.add(BigInteger.valueOf(totalDrained));
-
-        if (this.stored.compareTo(BigInteger.ZERO) <= 0) {
-            this.fluid = null;
-        }
     }
 
     private void exportFluids() {
@@ -212,6 +209,10 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
                             "YOTTank drained beyond its fluid amount, indicating logic bug: " + this.stored);
                 }
             }
+
+            if (this.stored.compareTo(BigInteger.ZERO) <= 0) {
+                this.fluid = null;
+            }
         }
     }
 
@@ -224,10 +225,12 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         }
     }
 
+    @Nullable
     public FluidStack getFluid() {
         return this.fluid;
     }
 
+    @Nullable
     public FluidStack getLockedFluid() {
         return this.lockedFluid;
     }
@@ -236,8 +239,8 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         return this.capacity;
     }
 
-    public void setCapacity(BigInteger capacity) {
-        this.capacity = capacity;
+    public void setStored(BigInteger stored) {
+        this.capacity = stored;
     }
 
     public BigInteger getStored() {
