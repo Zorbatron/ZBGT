@@ -1,5 +1,7 @@
 package com.zorbatron.zbgt.api.util;
 
+import java.math.BigInteger;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.items.IItemHandler;
@@ -15,7 +17,10 @@ import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 
-public class ZBGTUtility {
+public final class ZBGTUtility {
+
+    public static final BigInteger BIGINT_MAXINT = BigInteger.valueOf(Integer.MAX_VALUE);
+    public static final BigInteger BIGINT_MAXLONG = BigInteger.valueOf(Long.MAX_VALUE);
 
     public static @NotNull ResourceLocation zbgtId(@NotNull String path) {
         return new ResourceLocation(ZBGTCore.MODID, path);

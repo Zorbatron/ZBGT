@@ -130,13 +130,13 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
     }
 
     private boolean isChanged(MetaTileEntityYOTTank metaTileEntityYOTTank) {
-        return !this.lastAmount.equals(metaTileEntityYOTTank.getStorageCurrent()) ||
+        return !this.lastAmount.equals(metaTileEntityYOTTank.getStored()) ||
                 this.lastFluid != metaTileEntityYOTTank.getFluid();
     }
 
     private void updateLast(MetaTileEntityYOTTank metaTileEntityYOTTank) {
         if (metaTileEntityYOTTank != null) {
-            this.lastAmount = metaTileEntityYOTTank.getStorageCurrent();
+            this.lastAmount = metaTileEntityYOTTank.getStored();
             this.lastFluid = metaTileEntityYOTTank.getFluid();
         } else {
             this.lastAmount = BigInteger.ZERO;
@@ -393,7 +393,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
                 controller.setFluid(iaeFluidStack.getFluidStack().copy());
             }
 
-            BigInteger controllerStorageCurrent = controller.getStorageCurrent();
+            BigInteger controllerStorageCurrent = controller.getStored();
 
             if (controller.addFluid(iaeFluidStack.getStackSize(), doFill)) {
                 return iaeFluidStack.getStackSize();
@@ -402,11 +402,11 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
                 if (controller.isVoiding()) {
                     returned = iaeFluidStack.getStackSize();
                 } else {
-                    final BigInteger delta = controller.getStorage().subtract(controllerStorageCurrent);
+                    final BigInteger delta = controller.getCapacity().subtract(controllerStorageCurrent);
                     returned = delta.longValueExact();
                 }
 
-                if (doFill) controller.setStorage(controllerStorageCurrent);
+                if (doFill) controller.setCapacity(controllerStorageCurrent);
                 return returned;
             }
         }
@@ -437,10 +437,10 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         if (controllerFluid == null || !controllerFluid.isFluidEqual(iaeFluidStack.getFluidStack())) return null;
 
         long ready;
-        if (controller.getStorageCurrent().compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) >= 0) {
+        if (controller.getStored().compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) >= 0) {
             ready = Long.MAX_VALUE;
         } else {
-            ready = controller.getStorageCurrent().longValueExact();
+            ready = controller.getStored().longValueExact();
         }
 
         ready = Math.min(ready, iaeFluidStack.getStackSize());
@@ -470,7 +470,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         if (!(getController() instanceof MetaTileEntityYOTTank controller)) return iItemList;
         if (!controller.isWorkingEnabled()) return iItemList;
 
-        final BigInteger controllerCurrent = controller.getStorageCurrent();
+        final BigInteger controllerCurrent = controller.getStored();
 
         if (controller.getFluid() == null || controllerCurrent.signum() <= 0) {
             iItemList.add(null);
