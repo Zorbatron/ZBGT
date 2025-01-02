@@ -25,6 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
+import com.zorbatron.zbgt.api.util.ZBGTUtility;
 import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
 
 import appeng.api.AEApi;
@@ -359,8 +360,15 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
 
     @Override
     public boolean canAccept(IAEFluidStack iaeFluidStack) {
-        return (fill(iaeFluidStack, false) > 0) &&
-                !(readMode.equals(AccessRestriction.NO_ACCESS) || readMode.equals(AccessRestriction.READ));
+        if (!(readMode.equals(AccessRestriction.NO_ACCESS) || readMode.equals(AccessRestriction.READ))) {
+            if (getController() instanceof MetaTileEntityYOTTank yotTank) {
+                FluidStack controllerStack = yotTank.getFluid();
+                if (controllerStack == null) return true;
+                return controllerStack.isFluidEqual(iaeFluidStack.getFluidStack());
+            }
+        }
+
+        return false;
     }
 
     @Override
@@ -464,13 +472,13 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
 
     @Override
     public IItemList<IAEFluidStack> getAvailableItems(IItemList<IAEFluidStack> iItemList) {
+        if (!(getController() instanceof MetaTileEntityYOTTank controller)) return iItemList;
+        if (!controller.isWorkingEnabled()) return iItemList;
         if (readMode.equals(AccessRestriction.NO_ACCESS)) return iItemList;
         if (readMode.equals(AccessRestriction.WRITE)) {
             iItemList.add(null);
             return iItemList;
         }
-        if (!(getController() instanceof MetaTileEntityYOTTank controller)) return iItemList;
-        if (!controller.isWorkingEnabled()) return iItemList;
 
         final BigInteger controllerCurrent = controller.getStored();
 
@@ -480,13 +488,13 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         }
 
         long ready;
-        if (controllerCurrent.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) >= 0) {
+        if (controllerCurrent.compareTo(ZBGTUtility.BIGINT_MAXLONG) >= 0) {
             ready = Long.MAX_VALUE;
         } else {
             ready = controllerCurrent.longValueExact();
         }
 
-        iItemList.add(AEFluidStack.fromFluidStack(new FluidStack(controller.getFluid(), 1)).setStackSize(ready));
+        iItemList.add(AEFluidStack.fromFluidStack(controller.getFluid()).setStackSize(ready));
         return iItemList;
     }
 
