@@ -77,7 +77,9 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
 
     private BigInteger capacity;
     private BigInteger stored;
+    @Nullable
     private FluidStack fluid;
+    @Nullable
     private FluidStack lockedFluid;
 
     private int tickRate;
@@ -133,6 +135,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         }
 
         for (IMultipleTankHandler.MultiFluidTankEntry tank : this.importFluids.getFluidTanks()) {
+            if (drainUpTo <= 0) break;
             int drainUpToInt = (int) Math.min(Integer.MAX_VALUE, drainUpTo);
 
             FluidStack tankFluid = tank.getFluid();
@@ -157,7 +160,10 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
                 }
 
                 FluidStack drainedFluid = tank.drain(drainUpToInt, true);
-                if (drainedFluid != null) totalDrained += drainedFluid.amount;
+                if (drainedFluid != null) {
+                    totalDrained += drainedFluid.amount;
+                    drainUpTo -= drainedFluid.amount;
+                }
             }
         }
 
@@ -166,16 +172,18 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
 
     private void exportFluids() {
         if (this.fluid != null) {
-            int outputAmount;
-            if (this.stored.compareTo(ZBGTUtility.BIGINT_MAXINT) >= 0) {
-                outputAmount = Integer.MAX_VALUE;
+            long outputAmount;
+            if (this.stored.compareTo(ZBGTUtility.BIGINT_MAXLONG) >= 0) {
+                outputAmount = Long.MAX_VALUE;
             } else {
-                outputAmount = this.stored.intValueExact();
+                outputAmount = this.stored.longValueExact();
             }
 
-            final int originalOutputAmount = outputAmount;
+            final long originalOutputAmount = outputAmount;
 
             for (IMultipleTankHandler.MultiFluidTankEntry tank : this.exportFluids.getFluidTanks()) {
+                if (outputAmount <= 0) break;
+                int outputAmountInt = (int) Math.min(Integer.MAX_VALUE, outputAmount);
                 final FluidStack fluidInHatch = tank.getFluid();
 
                 final int remainingHatchSpace;
@@ -190,7 +198,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
                     remainingHatchSpace = tank.getCapacity();
                 }
 
-                final int amountToFillHatch = Math.min(remainingHatchSpace, outputAmount);
+                final int amountToFillHatch = Math.min(remainingHatchSpace, outputAmountInt);
                 if (amountToFillHatch <= 0) {
                     continue;
                 }
@@ -201,9 +209,9 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
                 outputAmount -= transferredAmount;
             }
 
-            final int totalDrainedAmount = originalOutputAmount - outputAmount;
-            if (totalDrainedAmount > 0) {
-                this.stored = this.stored.subtract(BigInteger.valueOf(totalDrainedAmount));
+            final long totalOutputAmount = originalOutputAmount - outputAmount;
+            if (totalOutputAmount > 0) {
+                this.stored = this.stored.subtract(BigInteger.valueOf(totalOutputAmount));
                 if (this.stored.signum() < 0) {
                     throw new IllegalStateException(
                             "YOTTank drained beyond its fluid amount, indicating logic bug: " + this.stored);
