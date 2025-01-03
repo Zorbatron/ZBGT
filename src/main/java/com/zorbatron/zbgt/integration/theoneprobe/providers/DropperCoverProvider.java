@@ -1,4 +1,4 @@
-package com.zorbatron.zbgt.integration.theoneprobe;
+package com.zorbatron.zbgt.integration.theoneprobe.providers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;

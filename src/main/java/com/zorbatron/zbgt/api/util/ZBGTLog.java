@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.zorbatron.zbgt.ZBGTCore;
 
-public class ZBGTLog {
+public final class ZBGTLog {
 
     public static Logger logger = LogManager.getLogger(ZBGTCore.MODID);
 }
