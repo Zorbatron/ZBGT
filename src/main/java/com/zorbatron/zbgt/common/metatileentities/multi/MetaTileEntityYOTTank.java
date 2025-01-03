@@ -21,7 +21,6 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -224,18 +223,23 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         }
     }
 
-    public void setFluid(FluidStack fluid) {
+    public void setFluid(@Nullable FluidStack fluid) {
         this.fluid = fluid;
-        this.fluid.amount = 1;
 
-        if (this.lockedFluid == null && this.isFluidLocked) {
-            this.lockedFluid = this.fluid.copy();
+        if (fluid != null) {
+            if (this.lockedFluid == null && this.isFluidLocked) {
+                this.lockedFluid = fluid.copy();
+            }
         }
     }
 
     @Nullable
     public FluidStack getFluid() {
         return this.fluid;
+    }
+
+    public boolean isFluidLocked() {
+        return isFluidLocked;
     }
 
     @Nullable
@@ -289,6 +293,10 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         if (this.stored.compareTo(bigAmount) >= 0) {
             this.stored = this.stored.subtract(bigAmount);
         }
+
+        if (stored.compareTo(BigInteger.ZERO) <= 0) {
+            this.fluid = null;
+        }
     }
 
     @Override
@@ -317,7 +325,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
             }
         }
 
-        resetMEHatch();
+        notifyMEHatch();
     }
 
     protected void initializeAbilities() {
@@ -329,7 +337,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
     public void invalidateStructure() {
         this.capacity = BigInteger.ZERO;
         resetTileAbilities();
-        resetMEHatch();
+        notifyMEHatch();
 
         super.invalidateStructure();
     }
@@ -339,7 +347,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         this.exportFluids = new FluidTankList(true);
     }
 
-    private void resetMEHatch() {
+    private void notifyMEHatch() {
         if (MEHatch != null) MEHatch.notifyME();
     }
 
@@ -580,8 +588,18 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         data.setInteger("TickRate", this.tickRate);
         data.setBoolean("IsWorkingEnabled", this.isWorkingEnabled);
 
-        if (fluid != null) data.setTag("FluidTag", fluid.writeToNBT(new NBTTagCompound()));
-        if (lockedFluid != null) data.setTag("LockedFluidTag", lockedFluid.writeToNBT(new NBTTagCompound()));
+        if (fluid != null) {
+            data.setBoolean("HasFluid", true);
+            data.setTag("FluidTag", fluid.writeToNBT(new NBTTagCompound()));
+        } else {
+            data.setBoolean("HasFluid", false);
+        }
+        if (lockedFluid != null) {
+            data.setBoolean("HasLockedFluid", true);
+            data.setTag("LockedFluidTag", lockedFluid.writeToNBT(new NBTTagCompound()));
+        } else {
+            data.setBoolean("HasLockedFluid", false);
+        }
 
         return super.writeToNBT(data);
     }
@@ -597,14 +615,11 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         this.tickRate = data.getInteger("TickRate");
         this.isWorkingEnabled = !data.hasKey("IsWorkingEnabled") || data.getBoolean("IsWorkingEnabled");
 
-        // Moved to using "FluidTag" when I changed how the fluid was stored to NBT.
-        // Gotta check for legacy tanks so players don't end up with empty YOTTanks!
-        if (data.hasKey("FluidTag")) {
+        if (data.getBoolean("HasFluid")) {
             this.fluid = FluidStack.loadFluidStackFromNBT(data.getCompoundTag("FluidTag"));
+        }
+        if (data.getBoolean("HasLockedFluid")) {
             this.lockedFluid = FluidStack.loadFluidStackFromNBT(data.getCompoundTag("LockedFluidTag"));
-        } else {
-            this.fluid = FluidRegistry.getFluidStack(data.getString("Fluid"), 1);
-            this.lockedFluid = FluidRegistry.getFluidStack(data.getString("LockedFluid"), 1);
         }
     }
 

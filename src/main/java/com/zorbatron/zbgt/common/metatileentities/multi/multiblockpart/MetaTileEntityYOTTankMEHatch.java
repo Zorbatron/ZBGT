@@ -362,6 +362,11 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
     public boolean canAccept(IAEFluidStack iaeFluidStack) {
         if (!(readMode.equals(AccessRestriction.NO_ACCESS) || readMode.equals(AccessRestriction.READ))) {
             if (getController() instanceof MetaTileEntityYOTTank yotTank) {
+                if (yotTank.isFluidLocked()) {
+                    FluidStack lockedStack = yotTank.getLockedFluid();
+                    if (lockedStack != null) return lockedStack.isFluidEqual(iaeFluidStack.getFluidStack());
+                }
+
                 FluidStack controllerStack = yotTank.getFluid();
                 if (controllerStack == null) return true;
                 return controllerStack.isFluidEqual(iaeFluidStack.getFluidStack());
@@ -447,14 +452,16 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         if (controllerFluid == null || !controllerFluid.isFluidEqual(iaeFluidStack.getFluidStack())) return null;
 
         long ready;
-        if (controller.getStored().compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) >= 0) {
+        if (controller.getStored().compareTo(ZBGTUtility.BIGINT_MAXLONG) >= 0) {
             ready = Long.MAX_VALUE;
         } else {
             ready = controller.getStored().longValueExact();
         }
 
         ready = Math.min(ready, iaeFluidStack.getStackSize());
-        if (doDrain) controller.reduceFluid(ready);
+        if (doDrain) {
+            controller.reduceFluid(ready);
+        }
 
         return AEFluidStack.fromFluidStack(controllerFluid).setStackSize(ready);
     }
