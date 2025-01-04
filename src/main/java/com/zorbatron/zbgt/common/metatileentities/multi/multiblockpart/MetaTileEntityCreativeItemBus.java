@@ -8,6 +8,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -33,9 +34,7 @@ import gregtech.api.capability.impl.GhostCircuitItemStackHandler;
 import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
-import gregtech.api.gui.widgets.GhostCircuitSlotWidget;
-import gregtech.api.gui.widgets.SlotWidget;
-import gregtech.api.gui.widgets.WidgetGroup;
+import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
@@ -54,6 +53,7 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
     private InfiniteItemStackHandler infiniteItemStackHandler;
     private GhostCircuitItemStackHandler circuitItemStackHandler;
     private ItemHandlerList actualImportItems;
+    private int slotLimit = Integer.MAX_VALUE;
 
     public MetaTileEntityCreativeItemBus(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTValues.MAX, false);
@@ -66,7 +66,7 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
 
     @Override
     protected void initializeInventory() {
-        this.infiniteItemStackHandler = new InfiniteItemStackHandler(this, 16, false);
+        this.infiniteItemStackHandler = new InfiniteItemStackHandler(this, 16, () -> this.slotLimit);
         this.circuitItemStackHandler = new GhostCircuitItemStackHandler(this);
         this.actualImportItems = new ItemHandlerList(
                 Arrays.asList(this.infiniteItemStackHandler, this.circuitItemStackHandler));
@@ -76,7 +76,7 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
 
     @Override
     protected ModularUI createUI(EntityPlayer entityPlayer) {
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 18 + 18 * 4 + 94)
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 18 + 18 * 4 + 94 + 20)
                 .label(6, 6, getMetaFullName());
 
         WidgetGroup slots = new WidgetGroup(new Position(52, 18));
@@ -94,7 +94,18 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
                 .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.INT_CIRCUIT_OVERLAY)
                 .setConsumer(slotWidget -> ZBGTUtility.getCircuitSlotTooltip(slotWidget, this.circuitItemStackHandler));
 
-        return builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 7, 102)
+        final int textYPos = 95;
+        builder.widget(new ImageWidget(7, textYPos, 18 * 4, 20, GuiTextures.DISPLAY)
+                .setTooltip("zbgt.machine.super_input_bus.slot_limit"));
+        builder.widget(new TextFieldWidget2(9, textYPos + 5, 18 * 4, 16,
+                () -> String.valueOf(this.slotLimit),
+                (string) -> {
+                    if (!string.isEmpty()) {
+                        this.slotLimit = Integer.parseInt(string);
+                    }
+                }).setMaxLength(10).setNumbersOnly(1, Integer.MAX_VALUE));
+
+        return builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 7, 122)
                 .widget(slots)
                 .widget(circuitSlot)
                 .build(getHolder(), entityPlayer);
@@ -162,11 +173,24 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
     }
 
     @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+        buf.writeInt(this.slotLimit);
+    }
+
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+        this.slotLimit = buf.readInt();
+    }
+
+    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
 
         GTUtility.writeItems(infiniteItemStackHandler, "InfiniteInventory", data);
         this.circuitItemStackHandler.write(data);
+        data.setInteger("SlotLimit", this.slotLimit);
 
         return data;
     }
@@ -177,6 +201,9 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
 
         GTUtility.readItems(infiniteItemStackHandler, "InfiniteInventory", data);
         this.circuitItemStackHandler.read(data);
+        if (data.hasKey("SlotLimit")) {
+            this.slotLimit = data.getInteger("SlotLimit");
+        }
     }
 
     @SideOnly(Side.CLIENT)
@@ -209,6 +236,7 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
         NBTTagCompound tag = new NBTTagCompound();
         tag.setTag("Inventory", infiniteItemStackHandler.serializeNBT());
         this.circuitItemStackHandler.write(tag);
+        tag.setInteger("SlotLimit", this.slotLimit);
         return tag;
     }
 
@@ -225,6 +253,7 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
     private void readConfigFromTag(NBTTagCompound tag) {
         this.infiniteItemStackHandler.deserializeNBT(tag.getCompoundTag("Inventory"));
         this.circuitItemStackHandler.read(tag);
+        this.slotLimit = tag.getInteger("SlotLimit");
     }
 
     @Override

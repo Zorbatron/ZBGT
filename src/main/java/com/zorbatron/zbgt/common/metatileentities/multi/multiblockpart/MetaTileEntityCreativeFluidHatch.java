@@ -69,10 +69,6 @@ public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNo
 
     @Override
     protected ModularUI createUI(EntityPlayer entityPlayer) {
-        return createTankUI(getMetaFullName(), entityPlayer).build(getHolder(), entityPlayer);
-    }
-
-    public ModularUI.Builder createTankUI(String title, EntityPlayer entityPlayer) {
         ModularUI.Builder builder = ModularUI.defaultBuilder();
 
         PhantomFluidWidget tankWidget = new PhantomFluidWidget(69, 52, 18, 18, this.fluidTank::getFluid,
@@ -83,12 +79,13 @@ public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNo
                 .widget(new SlotWidget(exportItems, 0, 90, 53, true, false)
                         .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.OUT_SLOT_OVERLAY));
 
-        return builder.label(6, 6, title)
+        return builder.label(6, 6, getMetaFullName())
                 .widget(new SimpleTextWidget(11, 20, "", 0xFFFFFF, getFluidNameText(this.fluidTank)).setCenter(false))
                 .widget(tankWidget)
                 .widget(new FluidContainerSlotWidget(importItems, 0, 90, 16, false)
                         .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.IN_SLOT_OVERLAY))
-                .bindPlayerInventory(entityPlayer.inventory);
+                .bindPlayerInventory(entityPlayer.inventory)
+                .build(getHolder(), entityPlayer);
     }
 
     private Supplier<String> getFluidNameText(InfiniteFluidTank fluidTank) {
