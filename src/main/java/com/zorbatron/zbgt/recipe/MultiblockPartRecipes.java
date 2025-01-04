@@ -103,6 +103,38 @@ public class MultiblockPartRecipes {
                 'C', ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.CRYOGENIC_CASING),
                 'H', MetaTileEntities.FLUID_IMPORT_HATCH[IV].getStackForm(),
                 'A', new UnificationEntry(OrePrefix.plate, Materials.Aluminium));
+
+        ModHandler.addShapedRecipe("creative_item_bus_to_chest", ZBGTMetaTileEntities.CREATIVE_ITEM_BUS.getStackForm(),
+                "C",
+                'C', MetaTileEntities.CREATIVE_CHEST.getStackForm());
+        ModHandler.addShapedRecipe("creative_chest_to_item_bus", MetaTileEntities.CREATIVE_CHEST.getStackForm(),
+                "C",
+                'C', ZBGTMetaTileEntities.CREATIVE_ITEM_BUS.getStackForm());
+
+        ModHandler.addShapedRecipe("creative_tank_to_fluid_hatch",
+                ZBGTMetaTileEntities.CREATIVE_RESERVOIR_HATCH.getStackForm(),
+                "T",
+                'T', MetaTileEntities.CREATIVE_TANK.getStackForm());
+        ModHandler.addShapedRecipe("creative_fluid_hatch_to_tank", MetaTileEntities.CREATIVE_TANK.getStackForm(),
+                "T",
+                'T', ZBGTMetaTileEntities.CREATIVE_RESERVOIR_HATCH.getStackForm());
+
+        ModHandler.addShapedRecipe("creative_emitter_to_energy_hatch",
+                ZBGTMetaTileEntities.CREATIVE_ENERGY_SOURCE.getStackForm(),
+                "E",
+                'E', MetaTileEntities.CREATIVE_ENERGY.getStackForm());
+        ModHandler.addShapedRecipe("creative_energy_hatch_to_emitter", MetaTileEntities.CREATIVE_ENERGY.getStackForm(),
+                "E",
+                'E', ZBGTMetaTileEntities.CREATIVE_ENERGY_SOURCE.getStackForm());
+
+        ModHandler.addShapedRecipe("creative_energy_hatch_to_energy_sink",
+                ZBGTMetaTileEntities.CREATIVE_ENERGY_SINK.getStackForm(),
+                "E",
+                'E', ZBGTMetaTileEntities.CREATIVE_ENERGY_SOURCE.getStackForm());
+        ModHandler.addShapedRecipe("creative_energy_sink_to_energy_source",
+                ZBGTMetaTileEntities.CREATIVE_ENERGY_SOURCE.getStackForm(),
+                "E",
+                'E', ZBGTMetaTileEntities.CREATIVE_ENERGY_SINK.getStackForm());
     }
 
     private static void largeParallelHatches() {
