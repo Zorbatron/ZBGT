@@ -8,6 +8,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -50,10 +51,11 @@ public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNo
                                               IMultiblockAbilityPart<IFluidTank>, IDataStickIntractable {
 
     private final InfiniteFluidTank fluidTank;
+    private int slotLimit = Integer.MAX_VALUE;
 
     public MetaTileEntityCreativeFluidHatch(ResourceLocation metaTileEntityId, boolean isExportHatch) {
         super(metaTileEntityId, GTValues.MAX, isExportHatch);
-        this.fluidTank = new InfiniteFluidTank(this, isExportHatch);
+        this.fluidTank = new InfiniteFluidTank(this, isExportHatch, () -> slotLimit);
         initializeInventory();
     }
 
@@ -69,11 +71,7 @@ public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNo
 
     @Override
     protected ModularUI createUI(EntityPlayer entityPlayer) {
-        return createTankUI(getMetaFullName(), entityPlayer).build(getHolder(), entityPlayer);
-    }
-
-    public ModularUI.Builder createTankUI(String title, EntityPlayer entityPlayer) {
-        ModularUI.Builder builder = ModularUI.defaultBuilder();
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 166 + 20);
 
         PhantomFluidWidget tankWidget = new PhantomFluidWidget(69, 52, 18, 18, this.fluidTank::getFluid,
                 this.fluidTank::setFluid).showTip(false).setBackgroundTexture(null);
@@ -83,12 +81,25 @@ public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNo
                 .widget(new SlotWidget(exportItems, 0, 90, 53, true, false)
                         .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.OUT_SLOT_OVERLAY));
 
-        return builder.label(6, 6, title)
+        final int textYPos = 80;
+        builder.widget(new ImageWidget(7, textYPos, 18 * 4, 20, GuiTextures.DISPLAY)
+                .setTooltip("zbgt.machine.super_input_bus.slot_limit"));
+        builder.widget(new TextFieldWidget2(9, textYPos + 5, 18 * 4, 16,
+                () -> String.valueOf(this.slotLimit),
+                (string) -> {
+                    if (!string.isEmpty()) {
+                        this.slotLimit = Integer.parseInt(string);
+                    }
+                    this.fluidTank.onContentsChangedButPublic();
+                }).setMaxLength(10).setNumbersOnly(1, Integer.MAX_VALUE));
+
+        return builder.label(6, 6, getMetaFullName())
                 .widget(new SimpleTextWidget(11, 20, "", 0xFFFFFF, getFluidNameText(this.fluidTank)).setCenter(false))
                 .widget(tankWidget)
                 .widget(new FluidContainerSlotWidget(importItems, 0, 90, 16, false)
                         .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.IN_SLOT_OVERLAY))
-                .bindPlayerInventory(entityPlayer.inventory);
+                .bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 20)
+                .build(getHolder(), entityPlayer);
     }
 
     private Supplier<String> getFluidNameText(InfiniteFluidTank fluidTank) {
@@ -167,8 +178,21 @@ public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNo
     }
 
     @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+        buf.writeInt(this.slotLimit);
+    }
+
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+        this.slotLimit = buf.readInt();
+    }
+
+    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         this.fluidTank.writeToNBT(data);
+        data.setInteger("SlotLimit", this.slotLimit);
 
         return super.writeToNBT(data);
     }
@@ -176,6 +200,9 @@ public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNo
     @Override
     public void readFromNBT(NBTTagCompound data) {
         this.fluidTank.readFromNBT(data);
+        if (data.hasKey("SlotLimit")) {
+            this.slotLimit = data.getInteger("SlotLimit");
+        }
 
         super.readFromNBT(data);
     }
@@ -191,6 +218,7 @@ public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNo
 
     private NBTTagCompound writeConfigToTag() {
         NBTTagCompound tag = new NBTTagCompound();
+        tag.setInteger("SlotLimit", this.slotLimit);
 
         return fluidTank.writeToNBT(tag);
     }
@@ -209,6 +237,7 @@ public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNo
 
     private void readConfigFromTag(NBTTagCompound tag) {
         fluidTank.setFluid(FluidStack.loadFluidStackFromNBT(tag));
+        this.slotLimit = tag.getInteger("SlotLimit");
     }
 
     @Override

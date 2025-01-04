@@ -1,5 +1,7 @@
 package com.zorbatron.zbgt.api.capability.impl;
 
+import java.util.function.Supplier;
+
 import net.minecraft.item.ItemStack;
 
 import org.jetbrains.annotations.NotNull;
@@ -10,14 +12,21 @@ import gregtech.api.util.GTUtility;
 
 public class InfiniteItemStackHandler extends NotifiableItemStackHandler {
 
-    public InfiniteItemStackHandler(MetaTileEntity dirtyNotifier, int slots, boolean isExport) {
-        super(dirtyNotifier, slots, null, isExport);
+    private final Supplier<Integer> supplyAmount;
+
+    public InfiniteItemStackHandler(MetaTileEntity dirtyNotifier, int slots, Supplier<Integer> supplyAmount) {
+        super(dirtyNotifier, slots, null, false);
+        this.supplyAmount = supplyAmount;
+    }
+
+    public InfiniteItemStackHandler(MetaTileEntity dirtyNotifier, int slots) {
+        this(dirtyNotifier, slots, () -> Integer.MAX_VALUE);
     }
 
     @NotNull
     @Override
     public ItemStack getStackInSlot(int slot) {
-        return GTUtility.copy(Integer.MAX_VALUE, super.getStackInSlot(slot));
+        return GTUtility.copy(supplyAmount.get(), super.getStackInSlot(slot));
     }
 
     @NotNull
