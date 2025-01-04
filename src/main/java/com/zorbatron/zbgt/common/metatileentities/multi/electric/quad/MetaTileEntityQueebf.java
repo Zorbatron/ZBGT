@@ -24,6 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
+import com.zorbatron.zbgt.api.capability.impl.HeatingCoilMRL;
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 
@@ -62,6 +63,7 @@ public class MetaTileEntityQueebf extends RecipeMapMultiblockController implemen
 
     public MetaTileEntityQueebf(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.BLAST_RECIPES);
+        this.recipeMapWorkable = new HeatingCoilMRL(this);
         this.recipeMapWorkable.setParallelLimit(4);
     }
 
