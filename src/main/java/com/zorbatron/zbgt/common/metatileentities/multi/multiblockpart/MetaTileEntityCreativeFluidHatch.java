@@ -90,6 +90,7 @@ public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNo
                     if (!string.isEmpty()) {
                         this.slotLimit = Integer.parseInt(string);
                     }
+                    this.fluidTank.onContentsChangedButPublic();
                 }).setMaxLength(10).setNumbersOnly(1, Integer.MAX_VALUE));
 
         return builder.label(6, 6, getMetaFullName())

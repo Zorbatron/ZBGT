@@ -103,6 +103,7 @@ public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotif
                     if (!string.isEmpty()) {
                         this.slotLimit = Integer.parseInt(string);
                     }
+                    this.infiniteItemStackHandler.onContentsChanged(0);
                 }).setMaxLength(10).setNumbersOnly(1, Integer.MAX_VALUE));
 
         return builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 7, 122)

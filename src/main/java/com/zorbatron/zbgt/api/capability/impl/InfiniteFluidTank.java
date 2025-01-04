@@ -93,4 +93,8 @@ public class InfiniteFluidTank extends NotifiableFluidTank {
         if (this.fluid == null || !this.fluid.isFluidEqual(resource)) return null;
         return resource.copy();
     }
+
+    public void onContentsChangedButPublic() {
+        onContentsChanged();
+    }
 }
