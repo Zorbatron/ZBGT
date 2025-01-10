@@ -501,5 +501,9 @@ zbgt.vein.adamantium=Adamantium vein
 zbgt.vein.quantium=Quantium Vein
 
 
+# Ore prefixes
+item.material.oreprefix.nanites=%s Nanites
+
+
 # Creative tab
 itemGroup.ZBGT=ZBGT
