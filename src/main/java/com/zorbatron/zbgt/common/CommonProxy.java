@@ -37,6 +37,7 @@ import gregtech.api.block.VariantItemBlock;
 import gregtech.api.cover.CoverDefinition;
 import gregtech.api.unification.material.event.MaterialEvent;
 import gregtech.api.unification.material.event.MaterialRegistryEvent;
+import gregtech.api.util.Mods;
 
 @Mod.EventBusSubscriber(modid = ZBGTCore.MODID)
 public class CommonProxy {
@@ -46,7 +47,9 @@ public class CommonProxy {
     }
 
     public void init() {
-        ZBGTTOPModule.init();
+        if (Mods.TheOneProbe.isModLoaded()) {
+            ZBGTTOPModule.init();
+        }
     }
 
     public void postInit() throws IOException {
