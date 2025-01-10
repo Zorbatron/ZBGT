@@ -1,4 +1,4 @@
-package com.zorbatron.zbgt.api.unification.ore;
+package com.zorbatron.zbgt.api.unification.material.ore;
 
 import static gregtech.api.unification.ore.OrePrefix.Flags.ENABLE_UNIFICATION;
 

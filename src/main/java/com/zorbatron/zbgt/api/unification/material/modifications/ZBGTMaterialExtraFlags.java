@@ -10,7 +10,6 @@ import java.util.List;
 
 import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
 import com.zorbatron.zbgt.api.ZBGTAPI;
-import com.zorbatron.zbgt.api.unification.material.info.ZBGTMaterialFlags;
 
 import gregicality.multiblocks.api.unification.GCYMMaterials;
 import gregtech.api.unification.material.Material;
@@ -37,7 +36,6 @@ public final class ZBGTMaterialExtraFlags {
         frameBoxes();
         smallGears();
         longRods();
-        nanites();
         rotors();
         plates();
         gears();
@@ -82,12 +80,6 @@ public final class ZBGTMaterialExtraFlags {
         Material[] materials = { Chrome, IronMagnetic, SteelMagnetic, NeodymiumMagnetic, SamariumMagnetic };
 
         setFlags(materials, GENERATE_LONG_ROD);
-    }
-
-    private static void nanites() {
-        Material[] materials = { Carbon, Iron, Copper, Silver, Gold, Neutronium, Glowstone };
-
-        setFlags(materials, ZBGTMaterialFlags.GENERATE_NANITES);
     }
 
     private static void rotors() {
