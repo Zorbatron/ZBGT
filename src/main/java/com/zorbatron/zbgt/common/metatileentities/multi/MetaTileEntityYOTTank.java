@@ -18,19 +18,19 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.StringUtils;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
+import com.zorbatron.zbgt.api.util.ZBGTUtility;
 import com.zorbatron.zbgt.common.ZBGTConfig;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
@@ -74,13 +74,17 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
     private boolean shouldImport;
     private boolean shouldExport;
 
-    private BigInteger storage;
-    private BigInteger storageCurrent;
+    private BigInteger capacity;
+    private BigInteger stored;
+    @Nullable
     private FluidStack fluid;
+    @Nullable
     private FluidStack lockedFluid;
 
     private int tickRate;
     private boolean voiding;
+
+    private MetaTileEntityYOTTankMEHatch MEHatch;
 
     private static final String YOTTANK_CELL_HEADER = "YOTTANK_CELL_";
 
@@ -91,8 +95,8 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         this.shouldImport = false;
         this.shouldExport = false;
 
-        this.storage = BigInteger.ZERO;
-        this.storageCurrent = BigInteger.ZERO;
+        this.capacity = BigInteger.ZERO;
+        this.stored = BigInteger.ZERO;
 
         this.tickRate = 20;
     }
@@ -116,7 +120,23 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
     }
 
     private void importFluids() {
+        long totalDrained = 0;
+        long drainUpTo;
+        if (isVoiding()) {
+            drainUpTo = Long.MAX_VALUE;
+        } else {
+            BigInteger bigDrainUpTo = capacity.subtract(stored);
+            if (bigDrainUpTo.compareTo(ZBGTUtility.BIGINT_MAXLONG) >= 1) {
+                drainUpTo = Long.MAX_VALUE;
+            } else {
+                drainUpTo = bigDrainUpTo.longValueExact();
+            }
+        }
+
         for (IMultipleTankHandler.MultiFluidTankEntry tank : this.importFluids.getFluidTanks()) {
+            if (drainUpTo <= 0) break;
+            int drainUpToInt = (int) Math.min(Integer.MAX_VALUE, drainUpTo);
+
             FluidStack tankFluid = tank.getFluid();
             if (tankFluid == null) continue;
 
@@ -138,38 +158,31 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
                     setFluid(tankFluid.copy());
                 }
 
-                if (addFluid(tankFluid.amount, true)) {
-                    tank.drain(tankFluid.amount, true);
-                } else {
-                    if (isVoiding()) {
-                        tank.drain(tankFluid.amount, true);
-                    } else {
-                        final BigInteger delta = this.storage.subtract(this.storageCurrent);
-                        tank.drain(delta.intValueExact(), true);
-                    }
-
-                    this.storageCurrent = this.storage;
+                FluidStack drainedFluid = tank.drain(drainUpToInt, true);
+                if (drainedFluid != null) {
+                    totalDrained += drainedFluid.amount;
+                    drainUpTo -= drainedFluid.amount;
                 }
             }
         }
 
-        if (this.storageCurrent.compareTo(BigInteger.ZERO) <= 0) {
-            this.fluid = null;
-        }
+        this.stored = stored.add(BigInteger.valueOf(totalDrained));
     }
 
     private void exportFluids() {
         if (this.fluid != null) {
-            int outputAmount;
-            if (this.storageCurrent.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) >= 0) {
-                outputAmount = Integer.MAX_VALUE;
+            long outputAmount;
+            if (this.stored.compareTo(ZBGTUtility.BIGINT_MAXLONG) >= 0) {
+                outputAmount = Long.MAX_VALUE;
             } else {
-                outputAmount = this.storageCurrent.intValueExact();
+                outputAmount = this.stored.longValueExact();
             }
 
-            final int originalOutputAmount = outputAmount;
+            final long originalOutputAmount = outputAmount;
 
             for (IMultipleTankHandler.MultiFluidTankEntry tank : this.exportFluids.getFluidTanks()) {
+                if (outputAmount <= 0) break;
+                int outputAmountInt = (int) Math.min(Integer.MAX_VALUE, outputAmount);
                 final FluidStack fluidInHatch = tank.getFluid();
 
                 final int remainingHatchSpace;
@@ -184,7 +197,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
                     remainingHatchSpace = tank.getCapacity();
                 }
 
-                final int amountToFillHatch = Math.min(remainingHatchSpace, outputAmount);
+                final int amountToFillHatch = Math.min(remainingHatchSpace, outputAmountInt);
                 if (amountToFillHatch <= 0) {
                     continue;
                 }
@@ -195,44 +208,55 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
                 outputAmount -= transferredAmount;
             }
 
-            final int totalDrainedAmount = originalOutputAmount - outputAmount;
-            if (totalDrainedAmount > 0) {
-                this.storageCurrent = this.storageCurrent.subtract(BigInteger.valueOf(totalDrainedAmount));
-                if (this.storageCurrent.signum() < 0) {
+            final long totalOutputAmount = originalOutputAmount - outputAmount;
+            if (totalOutputAmount > 0) {
+                this.stored = this.stored.subtract(BigInteger.valueOf(totalOutputAmount));
+                if (this.stored.signum() < 0) {
                     throw new IllegalStateException(
-                            "YOTTank drained beyond its fluid amount, indicating logic bug: " + this.storageCurrent);
+                            "YOTTank drained beyond its fluid amount, indicating logic bug: " + this.stored);
                 }
+            }
+
+            if (this.stored.compareTo(BigInteger.ZERO) <= 0) {
+                this.fluid = null;
             }
         }
     }
 
-    public void setFluid(FluidStack fluid) {
+    public void setFluid(@Nullable FluidStack fluid) {
         this.fluid = fluid;
-        this.fluid.amount = 1;
 
-        if (this.lockedFluid == null && this.isFluidLocked) {
-            this.lockedFluid = this.fluid.copy();
+        if (fluid != null) {
+            if (this.lockedFluid == null && this.isFluidLocked) {
+                this.lockedFluid = fluid.copy();
+            }
         }
     }
 
+    @Nullable
     public FluidStack getFluid() {
         return this.fluid;
     }
 
+    public boolean isFluidLocked() {
+        return isFluidLocked;
+    }
+
+    @Nullable
     public FluidStack getLockedFluid() {
         return this.lockedFluid;
     }
 
-    public BigInteger getStorage() {
-        return this.storage;
+    public BigInteger getCapacity() {
+        return this.capacity;
     }
 
-    public void setStorage(BigInteger storage) {
-        this.storage = storage;
+    public void setStored(BigInteger stored) {
+        this.capacity = stored;
     }
 
-    public BigInteger getStorageCurrent() {
-        return this.storageCurrent;
+    public BigInteger getStored() {
+        return this.stored;
     }
 
     /**
@@ -245,13 +269,13 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
      */
     public boolean addFluid(long amount, boolean doFill) {
         final BigInteger bigAmount = BigInteger.valueOf(amount);
-        final BigInteger newTotal = this.storageCurrent.add(bigAmount);
+        final BigInteger newTotal = this.stored.add(bigAmount);
 
-        if (newTotal.compareTo(this.storage) > 0) {
+        if (newTotal.compareTo(this.capacity) > 0) {
             return false;
         } else {
             if (doFill) {
-                this.storageCurrent = newTotal;
+                this.stored = newTotal;
             }
 
             return true;
@@ -266,8 +290,12 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
     public void reduceFluid(long amount) {
         final BigInteger bigAmount = BigInteger.valueOf(amount);
 
-        if (this.storageCurrent.compareTo(bigAmount) >= 0) {
-            this.storageCurrent = this.storageCurrent.subtract(bigAmount);
+        if (this.stored.compareTo(bigAmount) >= 0) {
+            this.stored = this.stored.subtract(bigAmount);
+        }
+
+        if (stored.compareTo(BigInteger.ZERO) <= 0) {
+            this.fluid = null;
         }
     }
 
@@ -288,9 +316,16 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
             }
         }
 
-        cells.forEach(casingType -> this.storage = this.storage.add(casingType.getCapacity()));
+        cells.forEach(casingType -> this.capacity = this.capacity.add(casingType.getCapacity()));
 
-        resetMEHatches();
+        for (IMultiblockPart multiblockPart : this.getMultiblockParts()) {
+            if (multiblockPart instanceof MetaTileEntityYOTTankMEHatch meHatch) {
+                MEHatch = meHatch;
+                break;
+            }
+        }
+
+        notifyMEHatch();
     }
 
     protected void initializeAbilities() {
@@ -300,9 +335,9 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
 
     @Override
     public void invalidateStructure() {
-        this.storage = BigInteger.ZERO;
+        this.capacity = BigInteger.ZERO;
         resetTileAbilities();
-        resetMEHatches();
+        notifyMEHatch();
 
         super.invalidateStructure();
     }
@@ -312,12 +347,8 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         this.exportFluids = new FluidTankList(true);
     }
 
-    private void resetMEHatches() {
-        for (IMultiblockPart multiblockPart : this.getMultiblockParts()) {
-            if (multiblockPart instanceof MetaTileEntityYOTTankMEHatch meHatch) {
-                meHatch.notifyME();
-            }
-        }
+    private void notifyMEHatch() {
+        if (MEHatch != null) MEHatch.notifyME();
     }
 
     @Override
@@ -450,11 +481,11 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
                 .addCustom(tl -> {
                     tl.add(TextComponentUtil.translationWithColor(TextFormatting.WHITE,
                             "zbgt.machine.yottank.max_capacity",
-                            TextFormattingUtil.formatNumbers(this.storage)));
+                            TextFormattingUtil.formatNumbers(this.capacity)));
 
                     tl.add(TextComponentUtil.translationWithColor(TextFormatting.WHITE,
                             "zbgt.machine.yottank.current_capacity",
-                            TextFormattingUtil.formatNumbers(this.storageCurrent)));
+                            TextFormattingUtil.formatNumbers(this.stored)));
 
                     tl.add(TextComponentUtil.translationWithColor(TextFormatting.WHITE,
                             "zbgt.machine.yottank.fluid",
@@ -551,12 +582,24 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setString("StorageCurrent", this.storageCurrent.toString());
-        data.setString("Fluid", this.fluid == null ? "" : this.fluid.getFluid().getName());
-        data.setString("LockedFluid", this.lockedFluid == null ? "" : this.lockedFluid.getFluid().getName());
+        data.setString("StorageCurrent", this.stored.toString());
         data.setBoolean("IsFluidLocked", this.isFluidLocked);
         data.setBoolean("IsVoiding", this.voiding);
         data.setInteger("TickRate", this.tickRate);
+        data.setBoolean("IsWorkingEnabled", this.isWorkingEnabled);
+
+        if (fluid != null) {
+            data.setBoolean("HasFluid", true);
+            data.setTag("FluidTag", fluid.writeToNBT(new NBTTagCompound()));
+        } else {
+            data.setBoolean("HasFluid", false);
+        }
+        if (lockedFluid != null) {
+            data.setBoolean("HasLockedFluid", true);
+            data.setTag("LockedFluidTag", lockedFluid.writeToNBT(new NBTTagCompound()));
+        } else {
+            data.setBoolean("HasLockedFluid", false);
+        }
 
         return super.writeToNBT(data);
     }
@@ -566,13 +609,18 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         super.readFromNBT(data);
 
         String amountCurrent = data.getString("StorageCurrent");
-        if (StringUtils.isNullOrEmpty(amountCurrent)) amountCurrent = "0";
-        this.storageCurrent = new BigInteger(amountCurrent);
-        this.fluid = FluidRegistry.getFluidStack(data.getString("Fluid"), 1);
-        this.lockedFluid = FluidRegistry.getFluidStack(data.getString("LockedFluid"), 1);
+        this.stored = amountCurrent.isEmpty() ? BigInteger.ZERO : new BigInteger(amountCurrent);
         this.isFluidLocked = data.getBoolean("IsFluidLocked");
         this.voiding = data.getBoolean("IsVoiding");
         this.tickRate = data.getInteger("TickRate");
+        this.isWorkingEnabled = !data.hasKey("IsWorkingEnabled") || data.getBoolean("IsWorkingEnabled");
+
+        if (data.getBoolean("HasFluid")) {
+            this.fluid = FluidStack.loadFluidStackFromNBT(data.getCompoundTag("FluidTag"));
+        }
+        if (data.getBoolean("HasLockedFluid")) {
+            this.lockedFluid = FluidStack.loadFluidStackFromNBT(data.getCompoundTag("LockedFluidTag"));
+        }
     }
 
     @Override
@@ -581,7 +629,8 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
 
         buf.writeBoolean(voiding);
         buf.writeBoolean(isFluidLocked);
-        buf.writeInt(this.tickRate);
+        buf.writeInt(tickRate);
+        buf.writeBoolean(isWorkingEnabled);
     }
 
     @Override
@@ -591,6 +640,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
         this.voiding = buf.readBoolean();
         this.isFluidLocked = buf.readBoolean();
         this.tickRate = buf.readInt();
+        this.isWorkingEnabled = buf.readBoolean();
     }
 
     @SideOnly(Side.CLIENT)
