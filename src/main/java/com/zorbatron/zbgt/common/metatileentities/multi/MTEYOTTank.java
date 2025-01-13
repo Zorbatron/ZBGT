@@ -36,7 +36,7 @@ import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
 import com.zorbatron.zbgt.common.block.blocks.YOTTankCell;
 import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
-import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MetaTileEntityYOTTankMEHatch;
+import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.MTEYOTTankMEHatch;
 import com.zorbatron.zbgt.core.sound.ZBGTSoundEvents;
 
 import codechicken.lib.render.CCRenderState;
@@ -67,7 +67,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 
-public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements IControllable {
+public class MTEYOTTank extends MultiblockWithDisplayBase implements IControllable {
 
     private boolean isWorkingEnabled;
     private boolean isFluidLocked;
@@ -84,7 +84,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
 
     private static final String YOTTANK_CELL_HEADER = "YOTTANK_CELL_";
 
-    public MetaTileEntityYOTTank(ResourceLocation metaTileEntityId) {
+    public MTEYOTTank(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
         this.isWorkingEnabled = true;
         this.isFluidLocked = false;
@@ -99,7 +99,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityYOTTank(metaTileEntityId);
+        return new MTEYOTTank(metaTileEntityId);
     }
 
     @Override
@@ -314,7 +314,7 @@ public class MetaTileEntityYOTTank extends MultiblockWithDisplayBase implements 
 
     private void resetMEHatches() {
         for (IMultiblockPart multiblockPart : this.getMultiblockParts()) {
-            if (multiblockPart instanceof MetaTileEntityYOTTankMEHatch meHatch) {
+            if (multiblockPart instanceof MTEYOTTankMEHatch meHatch) {
                 meHatch.notifyME();
             }
         }

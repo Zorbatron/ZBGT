@@ -56,12 +56,12 @@ import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 
-public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblockController {
+public class MTEPreciseAssembler extends LaserCapableMultiMapMultiblockController {
 
     private int preciseCasingTier = -1;
     private int machineCasingTier = -1;
 
-    public MetaTileEntityPreciseAssembler(ResourceLocation metaTileEntityId) {
+    public MTEPreciseAssembler(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new gregtech.api.recipes.RecipeMap[] { RecipeMaps.ASSEMBLER_RECIPES,
                 ZBGTRecipeMaps.PRECISE_ASSEMBLER_RECIPES });
         this.recipeMapWorkable = new PreciseAssemblerRecipeLogic(this);
@@ -69,7 +69,7 @@ public class MetaTileEntityPreciseAssembler extends LaserCapableMultiMapMultiblo
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityPreciseAssembler(metaTileEntityId);
+        return new MTEPreciseAssembler(metaTileEntityId);
     }
 
     @Override

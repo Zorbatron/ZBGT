@@ -50,20 +50,20 @@ import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.common.blocks.*;
 
-public class MetaTileEntityCoAL extends LaserCapableRecipeMapMultiblockController
-                                implements IOpticalComputationReceiver {
+public class MTECoAL extends LaserCapableRecipeMapMultiblockController
+                     implements IOpticalComputationReceiver {
 
     private IOpticalComputationProvider computationProvider;
     private int tier;
 
-    public MetaTileEntityCoAL(ResourceLocation metaTileEntityId) {
+    public MTECoAL(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, CoAL_RECIPES);
         this.recipeMapWorkable = new CoALRecipeLogic(this);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityCoAL(metaTileEntityId);
+        return new MTECoAL(metaTileEntityId);
     }
 
     @NotNull
@@ -266,7 +266,7 @@ public class MetaTileEntityCoAL extends LaserCapableRecipeMapMultiblockControlle
 
     protected class CoALRecipeLogic extends ComputationRecipeLogic {
 
-        public CoALRecipeLogic(MetaTileEntityCoAL metaTileEntity) {
+        public CoALRecipeLogic(MTECoAL metaTileEntity) {
             super(metaTileEntity, ComputationType.STEADY);
         }
 

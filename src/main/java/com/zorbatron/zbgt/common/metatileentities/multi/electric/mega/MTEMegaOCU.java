@@ -52,18 +52,18 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 
-public class MetaTileEntityMegaOCU extends LaserCapableGCYMRecipeMapMultiblockController {
+public class MTEMegaOCU extends LaserCapableGCYMRecipeMapMultiblockController {
 
     private int coilTier;
 
-    public MetaTileEntityMegaOCU(ResourceLocation metaTileEntityId) {
+    public MTEMegaOCU(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.CRACKING_RECIPES);
         this.recipeMapWorkable = new CrackingUnitWorkableHandler(this);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityMegaOCU(metaTileEntityId);
+        return new MTEMegaOCU(metaTileEntityId);
     }
 
     @Override
@@ -226,7 +226,7 @@ public class MetaTileEntityMegaOCU extends LaserCapableGCYMRecipeMapMultiblockCo
         protected void modifyOverclockPost(int[] resultOverclock, @NotNull IRecipePropertyStorage storage) {
             super.modifyOverclockPost(resultOverclock, storage);
 
-            int coilTier = ((MetaTileEntityMegaOCU) metaTileEntity).getCoilTier();
+            int coilTier = ((MTEMegaOCU) metaTileEntity).getCoilTier();
             if (coilTier <= 0)
                 return;
 

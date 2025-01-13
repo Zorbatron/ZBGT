@@ -43,8 +43,8 @@ import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 
-public class MetaTileEntityCreativeComputationProvider extends MetaTileEntity
-                                                       implements IOpticalComputationProvider, IControllable {
+public class MTECreativeComputationProvider extends MetaTileEntity
+                                            implements IOpticalComputationProvider, IControllable {
 
     private boolean isWorkingEnabled = true;
     private int maxCWUt = 0;
@@ -52,13 +52,13 @@ public class MetaTileEntityCreativeComputationProvider extends MetaTileEntity
     private int lastRequestedCWUt;
     private int requestedCWUPerSec;
 
-    public MetaTileEntityCreativeComputationProvider(ResourceLocation metaTileEntityId) {
+    public MTECreativeComputationProvider(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityCreativeComputationProvider(metaTileEntityId);
+        return new MTECreativeComputationProvider(metaTileEntityId);
     }
 
     @Override

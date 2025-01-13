@@ -32,11 +32,11 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityAutoMaintenanceHatch;
 
-public class MetaTileEntitySterileCleaningHatch extends MetaTileEntityAutoMaintenanceHatch {
+public class MTESterileCleaningHatch extends MetaTileEntityAutoMaintenanceHatch {
 
     private static ICleanroomProvider DUMMY_CLEANROOM;
 
-    public MetaTileEntitySterileCleaningHatch(ResourceLocation metaTileEntityId) {
+    public MTESterileCleaningHatch(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
 
         DUMMY_CLEANROOM = DummyCleanroom.createForAllTypes();
@@ -44,7 +44,7 @@ public class MetaTileEntitySterileCleaningHatch extends MetaTileEntityAutoMainte
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntitySterileCleaningHatch(metaTileEntityId);
+        return new MTESterileCleaningHatch(metaTileEntityId);
     }
 
     @Override

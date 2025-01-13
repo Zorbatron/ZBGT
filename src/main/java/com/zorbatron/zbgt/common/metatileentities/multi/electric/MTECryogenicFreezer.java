@@ -31,13 +31,13 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.ICubeRenderer;
 
-public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockController {
+public class MTECryogenicFreezer extends RecipeMapMultiblockController {
 
     private final int CRYOTHEUM_DRAIN_AMOUNT = 10;
 
     private IFluidTank cryotheumTank;
 
-    public MetaTileEntityCryogenicFreezer(ResourceLocation metaTileEntityId) {
+    public MTECryogenicFreezer(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.VACUUM_RECIPES);
         recipeMapWorkable = new MultiblockRecipeLogic(this) {
 
@@ -57,7 +57,7 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityCryogenicFreezer(metaTileEntityId);
+        return new MTECryogenicFreezer(metaTileEntityId);
     }
 
     @Override

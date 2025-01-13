@@ -51,8 +51,8 @@ import gregtech.api.util.Position;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
-public class MetaTileEntitySuperInputBus extends MetaTileEntityMultiblockNotifiablePart
-                                         implements IMultiblockAbilityPart<IItemHandlerModifiable>, IControllable {
+public class MTESuperInputBus extends MetaTileEntityMultiblockNotifiablePart
+                              implements IMultiblockAbilityPart<IItemHandlerModifiable>, IControllable {
 
     private boolean workingEnabled = false;
     private boolean shouldReturnItems = false;
@@ -61,7 +61,7 @@ public class MetaTileEntitySuperInputBus extends MetaTileEntityMultiblockNotifia
     private LargeSlotItemStackHandler largeSlotItemStackHandler;
     private ItemHandlerList actualImportItems;
 
-    public MetaTileEntitySuperInputBus(ResourceLocation metaTileEntityId) {
+    public MTESuperInputBus(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTValues.HV, false);
     }
 
@@ -78,7 +78,7 @@ public class MetaTileEntitySuperInputBus extends MetaTileEntityMultiblockNotifia
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntitySuperInputBus(metaTileEntityId);
+        return new MTESuperInputBus(metaTileEntityId);
     }
 
     @Override

@@ -56,14 +56,14 @@ import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 
-public class MetaTileEntityVolcanus extends RecipeMapMultiblockController implements IHeatingCoil {
+public class MTEVolcanus extends RecipeMapMultiblockController implements IHeatingCoil {
 
     private final int PYROTHEUM_DRAIN_AMOUNT = 10;
 
     private int blastFurnaceTemperature;
     private IFluidTank pyrotheumTank;
 
-    public MetaTileEntityVolcanus(ResourceLocation metaTileEntityId) {
+    public MTEVolcanus(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.BLAST_RECIPES);
         recipeMapWorkable = new HeatingCoilRecipeLogic(this) {
 
@@ -84,7 +84,7 @@ public class MetaTileEntityVolcanus extends RecipeMapMultiblockController implem
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityVolcanus(metaTileEntityId);
+        return new MTEVolcanus(metaTileEntityId);
     }
 
     @Override

@@ -25,11 +25,11 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.common.metatileentities.multi.electric.MetaTileEntityCrackingUnit;
 
-public class MetaTileEntityQuacker extends MetaTileEntityCrackingUnit {
+public class MTEQuacker extends MetaTileEntityCrackingUnit {
 
     private int quackTimer;
 
-    public MetaTileEntityQuacker(ResourceLocation metaTileEntityId) {
+    public MTEQuacker(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
         this.recipeMapWorkable.setParallelLimit(4);
         this.quackTimer = calculateQuackInterval();
@@ -37,7 +37,7 @@ public class MetaTileEntityQuacker extends MetaTileEntityCrackingUnit {
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityQuacker(metaTileEntityId);
+        return new MTEQuacker(metaTileEntityId);
     }
 
     @Override

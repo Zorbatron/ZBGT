@@ -27,16 +27,16 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
 
-public class MetaTileEntityQueezer extends RecipeMapMultiblockController {
+public class MTEQueezer extends RecipeMapMultiblockController {
 
-    public MetaTileEntityQueezer(ResourceLocation metaTileEntityId) {
+    public MTEQueezer(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.VACUUM_RECIPES);
         this.recipeMapWorkable.setParallelLimit(4);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityQueezer(metaTileEntityId);
+        return new MTEQueezer(metaTileEntityId);
     }
 
     @Override

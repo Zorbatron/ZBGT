@@ -23,15 +23,15 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 
-public class MetaTileEntityMegaVF extends LaserCapableGCYMRecipeMapMultiblockController {
+public class MTEMegaVF extends LaserCapableGCYMRecipeMapMultiblockController {
 
-    public MetaTileEntityMegaVF(ResourceLocation metaTileEntityId) {
+    public MTEMegaVF(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.VACUUM_RECIPES);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityMegaVF(metaTileEntityId);
+        return new MTEMegaVF(metaTileEntityId);
     }
 
     @Override

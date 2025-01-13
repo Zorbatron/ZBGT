@@ -46,22 +46,22 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
-public class MetaTileEntityCreativeItemBus extends MetaTileEntityMultiblockNotifiablePart implements
-                                           IMultiblockAbilityPart<IItemHandlerModifiable>, IGhostSlotConfigurable,
-                                           IDataStickIntractable {
+public class MTECreativeItemBus extends MetaTileEntityMultiblockNotifiablePart implements
+                                IMultiblockAbilityPart<IItemHandlerModifiable>, IGhostSlotConfigurable,
+                                IDataStickIntractable {
 
     private InfiniteItemStackHandler infiniteItemStackHandler;
     private GhostCircuitItemStackHandler circuitItemStackHandler;
     private ItemHandlerList actualImportItems;
     private int slotLimit = Integer.MAX_VALUE;
 
-    public MetaTileEntityCreativeItemBus(ResourceLocation metaTileEntityId) {
+    public MTECreativeItemBus(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTValues.MAX, false);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityCreativeItemBus(metaTileEntityId);
+        return new MTECreativeItemBus(metaTileEntityId);
     }
 
     @Override

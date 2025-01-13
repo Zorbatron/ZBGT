@@ -58,18 +58,18 @@ import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 
-public class MetaTileEntityMegaABS extends LaserCapableGCYMRecipeMapMultiblockController implements IHeatingCoil {
+public class MTEMegaABS extends LaserCapableGCYMRecipeMapMultiblockController implements IHeatingCoil {
 
     private int temperature;
 
-    public MetaTileEntityMegaABS(ResourceLocation metaTileEntityId) {
+    public MTEMegaABS(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GCYMRecipeMaps.ALLOY_BLAST_RECIPES);
         this.recipeMapWorkable = new HeatingCoilGCYMMultiblockRecipeLogic(this);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityMegaABS(metaTileEntityId);
+        return new MTEMegaABS(metaTileEntityId);
     }
 
     @Override

@@ -35,18 +35,18 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 
-public class MetaTileEntityLargeAlloySmelter extends GCYMRecipeMapMultiblockController {
+public class MTELargeAlloySmelter extends GCYMRecipeMapMultiblockController {
 
     private int coilTier;
 
-    public MetaTileEntityLargeAlloySmelter(ResourceLocation metaTileEntityId) {
+    public MTELargeAlloySmelter(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.ALLOY_SMELTER_RECIPES);
         this.recipeMapWorkable = new LargeAlloySmelterRecipeLogic(this);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityLargeAlloySmelter(metaTileEntityId);
+        return new MTELargeAlloySmelter(metaTileEntityId);
     }
 
     @Override
@@ -147,7 +147,7 @@ public class MetaTileEntityLargeAlloySmelter extends GCYMRecipeMapMultiblockCont
         protected void modifyOverclockPost(int[] overclockResults, @NotNull IRecipePropertyStorage storage) {
             super.modifyOverclockPost(overclockResults, storage);
 
-            int coilTier = ((MetaTileEntityLargeAlloySmelter) metaTileEntity).getCoilTier();
+            int coilTier = ((MTELargeAlloySmelter) metaTileEntity).getCoilTier();
             if (coilTier <= 0) return;
 
             overclockResults[0] = (int) Math.max(1, overclockResults[0] * (1.0f - coilTier * 0.1));
