@@ -25,15 +25,15 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.*;
 import it.unimi.dsi.fastutil.ints.IntLists;
 
-public class MetaTileEntityLargeAirCollector extends GCYMRecipeMapMultiblockController {
+public class MTELargeAirCollector extends GCYMRecipeMapMultiblockController {
 
-    public MetaTileEntityLargeAirCollector(ResourceLocation metaTileEntityId) {
+    public MTELargeAirCollector(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.GAS_COLLECTOR_RECIPES);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityLargeAirCollector(metaTileEntityId);
+        return new MTELargeAirCollector(metaTileEntityId);
     }
 
     @Override

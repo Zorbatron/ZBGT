@@ -26,15 +26,15 @@ import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.common.blocks.*;
 
-public class MetaTileEntityLargeRockBreaker extends GCYMRecipeMapMultiblockController {
+public class MTELargeRockBreaker extends GCYMRecipeMapMultiblockController {
 
-    public MetaTileEntityLargeRockBreaker(ResourceLocation metaTileEntityId) {
+    public MTELargeRockBreaker(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.ROCK_BREAKER_RECIPES);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityLargeRockBreaker(metaTileEntityId);
+        return new MTELargeRockBreaker(metaTileEntityId);
     }
 
     @Override

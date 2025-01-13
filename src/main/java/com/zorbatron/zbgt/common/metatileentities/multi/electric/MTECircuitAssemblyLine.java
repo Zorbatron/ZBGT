@@ -42,9 +42,9 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockMultiblockCasing;
 import gregtech.common.blocks.MetaBlocks;
 
-public class MetaTileEntityCircuitAssemblyLine extends MultiMapMultiblockController {
+public class MTECircuitAssemblyLine extends MultiMapMultiblockController {
 
-    public MetaTileEntityCircuitAssemblyLine(ResourceLocation metaTileEntityId) {
+    public MTECircuitAssemblyLine(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new gregtech.api.recipes.RecipeMap[] { ZBGTRecipeMaps.CIRCUIT_ASSEMBLY_LINE_RECIPES,
                 RecipeMaps.CIRCUIT_ASSEMBLER_RECIPES });
         this.recipeMapWorkable = new MultiblockRecipeLogic(this, true);
@@ -52,7 +52,7 @@ public class MetaTileEntityCircuitAssemblyLine extends MultiMapMultiblockControl
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityCircuitAssemblyLine(metaTileEntityId);
+        return new MTECircuitAssemblyLine(metaTileEntityId);
     }
 
     @Override

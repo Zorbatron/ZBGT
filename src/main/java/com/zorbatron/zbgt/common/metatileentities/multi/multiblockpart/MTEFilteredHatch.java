@@ -39,8 +39,8 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 
-public class MetaTileEntityFilteredHatch extends MetaTileEntityMultiblockPart
-                                         implements IMultiblockAbilityPart<IFluidTank>, IControllable {
+public class MTEFilteredHatch extends MetaTileEntityMultiblockPart
+                              implements IMultiblockAbilityPart<IFluidTank>, IControllable {
 
     private final MultiblockAbility<IFluidTank> multiblockAbility;
     private final Supplier<FluidStack> filter;
@@ -50,9 +50,9 @@ public class MetaTileEntityFilteredHatch extends MetaTileEntityMultiblockPart
 
     private boolean workingEnabled = true;
 
-    public MetaTileEntityFilteredHatch(ResourceLocation metaTileEntityId, int tier,
-                                       MultiblockAbility<IFluidTank> multiblockAbility, Supplier<FluidStack> filter,
-                                       int tankCapacity) {
+    public MTEFilteredHatch(ResourceLocation metaTileEntityId, int tier,
+                            MultiblockAbility<IFluidTank> multiblockAbility, Supplier<FluidStack> filter,
+                            int tankCapacity) {
         super(metaTileEntityId, tier);
         this.multiblockAbility = multiblockAbility;
         this.filter = filter;
@@ -71,7 +71,7 @@ public class MetaTileEntityFilteredHatch extends MetaTileEntityMultiblockPart
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityFilteredHatch(metaTileEntityId, getTier(), multiblockAbility, filter, tankCapacity);
+        return new MTEFilteredHatch(metaTileEntityId, getTier(), multiblockAbility, filter, tankCapacity);
     }
 
     @Override

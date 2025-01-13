@@ -61,7 +61,7 @@ import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 
-public class MetaTileEntityMegaFusionReactor extends RecipeMapMultiblockController {
+public class MTEMegaFusionReactor extends RecipeMapMultiblockController {
 
     private EnergyContainerList inputEnergyContainers;
     private final int tier;
@@ -69,7 +69,7 @@ public class MetaTileEntityMegaFusionReactor extends RecipeMapMultiblockControll
 
     private long previouslyStoredEnergy;
 
-    public MetaTileEntityMegaFusionReactor(ResourceLocation metaTileEntityId, int tier) {
+    public MTEMegaFusionReactor(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, RecipeMaps.FUSION_RECIPES);
         this.recipeMapWorkable = new MegaFusionRecipeLogic(this);
         this.recipeMapWorkable.setParallelLimit(64 * (tier - GTValues.IV));
@@ -80,7 +80,7 @@ public class MetaTileEntityMegaFusionReactor extends RecipeMapMultiblockControll
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityMegaFusionReactor(metaTileEntityId, tier);
+        return new MTEMegaFusionReactor(metaTileEntityId, tier);
     }
 
     @Override
@@ -531,7 +531,7 @@ public class MetaTileEntityMegaFusionReactor extends RecipeMapMultiblockControll
 
     private class MegaFusionRecipeLogic extends MultiblockRecipeLogic {
 
-        public MegaFusionRecipeLogic(MetaTileEntityMegaFusionReactor tileEntity) {
+        public MegaFusionRecipeLogic(MTEMegaFusionReactor tileEntity) {
             super(tileEntity);
         }
 

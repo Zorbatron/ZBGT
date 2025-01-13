@@ -32,16 +32,16 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.*;
 
-public class MetaTileEntityMegaLCR extends LaserCapableGCYMRecipeMapMultiblockController {
+public class MTEMegaLCR extends LaserCapableGCYMRecipeMapMultiblockController {
 
-    public MetaTileEntityMegaLCR(ResourceLocation metaTileEntityId) {
+    public MTEMegaLCR(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.LARGE_CHEMICAL_RECIPES);
         this.recipeMapWorkable = new ZBGT_GCYMMultiblockRecipeLogic(this, true);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityMegaLCR(metaTileEntityId);
+        return new MTEMegaLCR(metaTileEntityId);
     }
 
     @Override

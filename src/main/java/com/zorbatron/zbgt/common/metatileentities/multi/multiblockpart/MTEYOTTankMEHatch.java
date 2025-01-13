@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
-import com.zorbatron.zbgt.common.metatileentities.multi.MetaTileEntityYOTTank;
+import com.zorbatron.zbgt.common.metatileentities.multi.MTEYOTTank;
 
 import appeng.api.AEApi;
 import appeng.api.config.AccessRestriction;
@@ -61,10 +61,10 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.common.ConfigHolder;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 
-public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
-                                          implements IGridProxyable, IActionHost, ICellContainer,
-                                          IMEInventory<IAEFluidStack>, IMEInventoryHandler<IAEFluidStack>,
-                                          IDataStickIntractable {
+public class MTEYOTTankMEHatch extends MetaTileEntityMultiblockPart
+                               implements IGridProxyable, IActionHost, ICellContainer,
+                               IMEInventory<IAEFluidStack>, IMEInventoryHandler<IAEFluidStack>,
+                               IDataStickIntractable {
 
     private int priority;
     private AccessRestriction readMode;
@@ -80,7 +80,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
 
     private boolean lastActive;
 
-    public MetaTileEntityYOTTankMEHatch(ResourceLocation metaTileEntityId, int tier) {
+    public MTEYOTTankMEHatch(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier);
         this.priority = 0;
         this.readMode = AccessRestriction.READ_WRITE;
@@ -94,7 +94,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityYOTTankMEHatch(metaTileEntityId, getTier());
+        return new MTEYOTTankMEHatch(metaTileEntityId, getTier());
     }
 
     @Override
@@ -102,11 +102,11 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         super.update();
 
         if (getOffsetTimer() % (tickRateOverride ? overriddenTickRate : tickRate) == 0 && !getWorld().isRemote) {
-            if (getController() instanceof MetaTileEntityYOTTank metaTileEntityYOTTank) {
-                if (isChanged(metaTileEntityYOTTank)) {
+            if (getController() instanceof MTEYOTTank MTEYOTTank) {
+                if (isChanged(MTEYOTTank)) {
                     notifyME();
                     faster();
-                    updateLast(metaTileEntityYOTTank);
+                    updateLast(MTEYOTTank);
                 } else {
                     slower();
                 }
@@ -129,15 +129,15 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
         }
     }
 
-    private boolean isChanged(MetaTileEntityYOTTank metaTileEntityYOTTank) {
-        return !this.lastAmount.equals(metaTileEntityYOTTank.getStorageCurrent()) ||
-                this.lastFluid != metaTileEntityYOTTank.getFluid();
+    private boolean isChanged(MTEYOTTank MTEYOTTank) {
+        return !this.lastAmount.equals(MTEYOTTank.getStorageCurrent()) ||
+                this.lastFluid != MTEYOTTank.getFluid();
     }
 
-    private void updateLast(MetaTileEntityYOTTank metaTileEntityYOTTank) {
-        if (metaTileEntityYOTTank != null) {
-            this.lastAmount = metaTileEntityYOTTank.getStorageCurrent();
-            this.lastFluid = metaTileEntityYOTTank.getFluid();
+    private void updateLast(MTEYOTTank MTEYOTTank) {
+        if (MTEYOTTank != null) {
+            this.lastAmount = MTEYOTTank.getStorageCurrent();
+            this.lastFluid = MTEYOTTank.getFluid();
         } else {
             this.lastAmount = BigInteger.ZERO;
             this.lastFluid = null;
@@ -348,8 +348,8 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
 
     @Override
     public boolean isPrioritized(IAEFluidStack iaeFluidStack) {
-        if (getController() instanceof MetaTileEntityYOTTank metaTileEntityYOTTank) {
-            return metaTileEntityYOTTank.getFluid().isFluidEqual(iaeFluidStack.getFluidStack());
+        if (getController() instanceof MTEYOTTank MTEYOTTank) {
+            return MTEYOTTank.getFluid().isFluidEqual(iaeFluidStack.getFluidStack());
         }
 
         return false;
@@ -380,7 +380,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
     public void saveChanges(@Nullable ICellInventory<?> iCellInventory) {}
 
     private long fill(IAEFluidStack iaeFluidStack, boolean doFill) {
-        if (!(getController() instanceof MetaTileEntityYOTTank controller)) return 0;
+        if (!(getController() instanceof MTEYOTTank controller)) return 0;
         if (!controller.isWorkingEnabled()) return 0;
 
         FluidStack controllerFluid = controller.getFluid();
@@ -430,7 +430,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
     }
 
     private IAEFluidStack drain(IAEFluidStack iaeFluidStack, boolean doDrain) {
-        if (!(getController() instanceof MetaTileEntityYOTTank controller)) return null;
+        if (!(getController() instanceof MTEYOTTank controller)) return null;
         if (!controller.isWorkingEnabled()) return null;
 
         FluidStack controllerFluid = controller.getFluid();
@@ -467,7 +467,7 @@ public class MetaTileEntityYOTTankMEHatch extends MetaTileEntityMultiblockPart
             iItemList.add(null);
             return iItemList;
         }
-        if (!(getController() instanceof MetaTileEntityYOTTank controller)) return iItemList;
+        if (!(getController() instanceof MTEYOTTank controller)) return iItemList;
         if (!controller.isWorkingEnabled()) return iItemList;
 
         final BigInteger controllerCurrent = controller.getStorageCurrent();

@@ -57,8 +57,8 @@ import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMulti
 import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.ints.IntLists;
 
-public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifiablePart
-                                          implements IMultiblockAbilityPart<IFluidTank> {
+public class MTEAirIntakeHatch extends MetaTileEntityMultiblockNotifiablePart
+                               implements IMultiblockAbilityPart<IFluidTank> {
 
     private final FluidTank fluidTank;
     private boolean isWorkingEnabled;
@@ -68,7 +68,7 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
 
     private final int tickRate = 5;
 
-    public MetaTileEntityAirIntakeHatch(ResourceLocation metaTileEntityId, int tier, int tankCapacity, int fillAmount) {
+    public MTEAirIntakeHatch(ResourceLocation metaTileEntityId, int tier, int tankCapacity, int fillAmount) {
         super(metaTileEntityId, tier, false);
         this.fluidTank = new NotifiableFluidTank(tankCapacity, this, false);
 
@@ -80,7 +80,7 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityAirIntakeHatch(metaTileEntityId, getTier(), tankCapacity, fillAmount);
+        return new MTEAirIntakeHatch(metaTileEntityId, getTier(), tankCapacity, fillAmount);
     }
 
     @Override

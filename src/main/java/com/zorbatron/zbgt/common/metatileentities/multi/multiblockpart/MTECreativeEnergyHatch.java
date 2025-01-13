@@ -47,9 +47,9 @@ import gregtech.common.metatileentities.multi.electric.MetaTileEntityActiveTrans
 import gregtech.common.metatileentities.multi.electric.MetaTileEntityPowerSubstation;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 
-public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockPart implements
-                                               IMultiblockAbilityPart<IEnergyContainer>, IControllable,
-                                               IDataStickIntractable {
+public class MTECreativeEnergyHatch extends MetaTileEntityMultiblockPart implements
+                                    IMultiblockAbilityPart<IEnergyContainer>, IControllable,
+                                    IDataStickIntractable {
 
     protected InfiniteEnergyContainer energyContainer;
 
@@ -60,7 +60,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
     private boolean isPSSOrAT = false;
     private boolean isWorkingEnabled = true;
 
-    public MetaTileEntityCreativeEnergyHatch(ResourceLocation metaTileEntityId, boolean isExportHatch) {
+    public MTECreativeEnergyHatch(ResourceLocation metaTileEntityId, boolean isExportHatch) {
         super(metaTileEntityId, GTValues.MAX);
         this.isExportHatch = isExportHatch;
         setInitialEnergyConfiguration();
@@ -68,7 +68,7 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityCreativeEnergyHatch(metaTileEntityId, isExportHatch);
+        return new MTECreativeEnergyHatch(metaTileEntityId, isExportHatch);
     }
 
     @SideOnly(Side.CLIENT)

@@ -59,18 +59,18 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 
-public class MetaTileEntityMegaEBF extends LaserCapableGCYMRecipeMapMultiblockController implements IHeatingCoil {
+public class MTEMegaEBF extends LaserCapableGCYMRecipeMapMultiblockController implements IHeatingCoil {
 
     private int blastFurnaceTemperature;
 
-    public MetaTileEntityMegaEBF(ResourceLocation metaTileEntityId) {
+    public MTEMegaEBF(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.BLAST_RECIPES);
         this.recipeMapWorkable = new HeatingCoilGCYMMultiblockRecipeLogic(this);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityMegaEBF(metaTileEntityId);
+        return new MTEMegaEBF(metaTileEntityId);
     }
 
     @Override

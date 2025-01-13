@@ -47,13 +47,13 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
-public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNotifiablePart implements
-                                              IMultiblockAbilityPart<IFluidTank>, IDataStickIntractable {
+public class MTECreativeFluidHatch extends MetaTileEntityMultiblockNotifiablePart implements
+                                   IMultiblockAbilityPart<IFluidTank>, IDataStickIntractable {
 
     private final InfiniteFluidTank fluidTank;
     private int slotLimit = Integer.MAX_VALUE;
 
-    public MetaTileEntityCreativeFluidHatch(ResourceLocation metaTileEntityId, boolean isExportHatch) {
+    public MTECreativeFluidHatch(ResourceLocation metaTileEntityId, boolean isExportHatch) {
         super(metaTileEntityId, GTValues.MAX, isExportHatch);
         this.fluidTank = new InfiniteFluidTank(this, isExportHatch, () -> slotLimit);
         initializeInventory();
@@ -61,7 +61,7 @@ public class MetaTileEntityCreativeFluidHatch extends MetaTileEntityMultiblockNo
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityCreativeFluidHatch(metaTileEntityId, isExportHatch);
+        return new MTECreativeFluidHatch(metaTileEntityId, isExportHatch);
     }
 
     @Override

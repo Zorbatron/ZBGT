@@ -29,18 +29,18 @@ import gregtech.api.util.TextFormattingUtil;
 
 // I need to do all of this shit just so I can have more than 1,048,576 as a parallel amount
 // It's marginally easier to extend and override than make a class from scratch (not sure about that anymore...)
-public class MetaTileEntityLargeParallelHatch extends MetaTileEntityParallelHatch {
+public class MTELargeParallelHatch extends MetaTileEntityParallelHatch {
 
     private final int maxParallelUpper;
     private int currentParallelUpper;
 
-    public MetaTileEntityLargeParallelHatch(ResourceLocation metaTileEntityId, int tier, int maxParallel) {
+    public MTELargeParallelHatch(ResourceLocation metaTileEntityId, int tier, int maxParallel) {
         super(metaTileEntityId, tier);
         this.maxParallelUpper = maxParallel;
         this.currentParallelUpper = maxParallel;
     }
 
-    public MetaTileEntityLargeParallelHatch(ResourceLocation metaTileEntityId, int tier) {
+    public MTELargeParallelHatch(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier);
         this.maxParallelUpper = (int) Math.pow(4, tier - GTValues.EV);
         this.currentParallelUpper = maxParallelUpper;
@@ -48,7 +48,7 @@ public class MetaTileEntityLargeParallelHatch extends MetaTileEntityParallelHatc
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
-        return new MetaTileEntityLargeParallelHatch(metaTileEntityId, getTier(), getMaxParallel());
+        return new MTELargeParallelHatch(metaTileEntityId, getTier(), getMaxParallel());
     }
 
     @Override

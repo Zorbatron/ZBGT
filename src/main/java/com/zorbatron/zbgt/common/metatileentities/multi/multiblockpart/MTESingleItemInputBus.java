@@ -22,18 +22,18 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityItemBus;
 
-public class MetaTileEntitySingleItemInputBus extends MetaTileEntityItemBus {
+public class MTESingleItemInputBus extends MetaTileEntityItemBus {
 
     private final int stackSizeLimit = 1;
     private final int slotSize = 1;
 
-    public MetaTileEntitySingleItemInputBus(ResourceLocation metaTileEntityId) {
+    public MTESingleItemInputBus(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTValues.ULV, false);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntitySingleItemInputBus(metaTileEntityId);
+        return new MTESingleItemInputBus(metaTileEntityId);
     }
 
     @Override
