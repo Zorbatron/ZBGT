@@ -29,7 +29,7 @@ public final class ZBGTMaterialExtraFlags {
         }
     }
 
-    public static void register() {
+    public static void init() {
         doublePlates();
         densePlates();
         screwsBolts();

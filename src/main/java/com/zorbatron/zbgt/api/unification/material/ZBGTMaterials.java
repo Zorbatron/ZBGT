@@ -12,7 +12,6 @@ public final class ZBGTMaterials {
 
     // Elements
     public static Material Adamantium;
-    public static Material LiquidNitrogen;
     public static Material Quantium;
 
     // First degree materials
@@ -71,8 +70,14 @@ public final class ZBGTMaterials {
         ZBGTSecondDegreeMaterials.register();
         ZBGTThirdDegreeMaterials.register();
         ZBGTUnknownCompositionMaterials.register();
+    }
 
-        ZBGTMaterialExtraProperties.register();
-        ZBGTMaterialExtraFlags.register();
+    public static void initChanges() {
+        ZBGTMaterialExtraProperties.init();
+        ZBGTMaterialExtraFlags.init();
+    }
+
+    public static void initLateChanges() {
+        ZBGTMaterialExtraProperties.initLate();
     }
 }

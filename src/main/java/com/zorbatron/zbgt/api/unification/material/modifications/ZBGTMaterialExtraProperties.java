@@ -22,12 +22,23 @@ import gregtech.api.unification.material.properties.*;
 
 public final class ZBGTMaterialExtraProperties {
 
-    public static void register() {
+    public static void init() {
         ingots();
         fluids();
         wires();
         dusts();
         ores();
+    }
+
+    public static void initLate() {
+        if (Nitrogen.getProperty(PropertyKey.FLUID).get(FluidStorageKeys.LIQUID) == null) {
+            Nitrogen.getProperty(PropertyKey.FLUID).enqueueRegistration(FluidStorageKeys.LIQUID,
+                    new FluidBuilder()
+                            .temperature(77)
+                            .color(0x008D8F)
+                            .name("liquid_nitrogen")
+                            .translation("gregtech.fluid.liquid_generic"));
+        }
     }
 
     private static void ingots() {

@@ -15,6 +15,7 @@ import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.util.ZBGTMods;
 
+import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.builders.BlastRecipeBuilder;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
@@ -60,7 +61,7 @@ public class MaterialRecipes {
     private static void vacuumFreezer() {
         VACUUM_RECIPES.recipeBuilder()
                 .fluidInputs(Nitrogen.getFluid(1000))
-                .fluidOutputs(LiquidNitrogen.getFluid(1000))
+                .fluidOutputs(Nitrogen.getFluid(FluidStorageKeys.LIQUID, 1000))
                 .EUt(VA[HV]).duration(15)
                 .buildAndRegister();
 
@@ -311,7 +312,7 @@ public class MaterialRecipes {
                 .buildAndRegister();
 
         RecipeBuilder<BlastRecipeBuilder> aluminumNitrideBuilder = BLAST_RECIPES.recipeBuilder()
-                .fluidInputs(LiquidNitrogen.getFluid(2000))
+                .fluidInputs(Nitrogen.getFluid(FluidStorageKeys.LIQUID, 2000))
                 .output(dust, AluminumNitride, 2)
                 .fluidOutputs(CarbonMonoxide.getFluid(3000))
                 .EUt(VA[EV]).duration(20 * 10)

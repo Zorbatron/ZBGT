@@ -50,7 +50,7 @@ public class ZBGTCore {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        // register to the event bus so that we can listen to events
+        // init to the event bus so that we can listen to events
         MinecraftForge.EVENT_BUS.register(this);
 
         ZBGTLog.logger.info("I am " + Tags.MODNAME + " + at version " + Tags.VERSION);
