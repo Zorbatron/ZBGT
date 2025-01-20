@@ -31,7 +31,14 @@ public final class ZBGTMaterialExtraProperties {
     }
 
     public static void initLate() {
-        if (Nitrogen.getProperty(PropertyKey.FLUID).get(FluidStorageKeys.LIQUID) == null) {
+        Nitrogen.getProperty(PropertyKey.FLUID).enqueueRegistration(FluidStorageKeys.LIQUID,
+                new FluidBuilder()
+                        .temperature(77)
+                        .color(0x008D8F)
+                        .name("liquid_nitrogen")
+                        .translation("gregtech.fluid.liquid_generic"));
+
+        if (Nitrogen.getProperty(PropertyKey.FLUID).getQueuedBuilder(FluidStorageKeys.LIQUID) == null) {
             Nitrogen.getProperty(PropertyKey.FLUID).enqueueRegistration(FluidStorageKeys.LIQUID,
                     new FluidBuilder()
                             .temperature(77)
