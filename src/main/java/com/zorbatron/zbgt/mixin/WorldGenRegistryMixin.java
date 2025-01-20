@@ -39,7 +39,7 @@ public class WorldGenRegistryMixin {
                                     root.resolve(FileUtility.slashToNativeSep(definition.getDepositName())));
 
                     if (element == null) {
-                        GTLog.logger.error("Addon mod tried to register bad ore definition at {}",
+                        GTLog.logger.error("Addon mod tried to init bad ore definition at {}",
                                 definition.getDepositName());
                         itemsToRemove.add(definition);
                         continue;
@@ -55,7 +55,7 @@ public class WorldGenRegistryMixin {
                                     root.resolve(FileUtility.slashToNativeSep(definition.getDepositName())));
 
                     if (element == null) {
-                        GTLog.logger.error("Addon mod tried to register bad ore definition at {}",
+                        GTLog.logger.error("Addon mod tried to init bad ore definition at {}",
                                 definition.getDepositName());
                         itemsToRemove.add(definition);
                         continue;

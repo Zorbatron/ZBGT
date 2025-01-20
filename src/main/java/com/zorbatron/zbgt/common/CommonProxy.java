@@ -14,6 +14,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -37,6 +38,7 @@ import gregtech.api.block.VariantItemBlock;
 import gregtech.api.cover.CoverDefinition;
 import gregtech.api.unification.material.event.MaterialEvent;
 import gregtech.api.unification.material.event.MaterialRegistryEvent;
+import gregtech.api.unification.material.event.PostMaterialEvent;
 import gregtech.api.util.Mods;
 
 @Mod.EventBusSubscriber(modid = ZBGTCore.MODID)
@@ -101,8 +103,20 @@ public class CommonProxy {
 
     @SubscribeEvent
     public static void registerMaterials(MaterialEvent event) {
-        ZBGTLog.logger.info("Registering materials and material modifications...");
+        ZBGTLog.logger.info("Registering materials");
         ZBGTMaterials.init();
+    }
+
+    @SubscribeEvent
+    public static void materialChanges(PostMaterialEvent event) {
+        ZBGTLog.logger.info("Registering material modifications...");
+        ZBGTMaterials.initChanges();
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void lateMaterialChanges(PostMaterialEvent event) {
+        ZBGTLog.logger.info("Registering late material modifications...");
+        ZBGTMaterials.initLateChanges();
     }
 
     @SubscribeEvent
