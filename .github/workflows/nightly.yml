@@ -21,11 +21,17 @@ jobs:
           ref: ${{ inputs.tag }}
           fetch-depth: 0
 
+      - name: Version Suffix
+        run: echo "VERSION_SUFFIX=NIGHTLY-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
       - name: Setup Build
         uses: ./.github/actions/build_setup
 
       - name: Build Project
-        run: ./gradlew build
+        run: ./gradlew build --build-cache
+
+      - name: Rename Jars
+        run: for file in build/libs/*; do mv "$file" "${file/.jar/-${{ env.VERSION_SUFFIX }}.jar}"; done;
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
