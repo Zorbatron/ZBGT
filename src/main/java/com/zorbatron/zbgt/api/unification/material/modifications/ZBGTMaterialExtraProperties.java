@@ -31,7 +31,7 @@ public final class ZBGTMaterialExtraProperties {
     }
 
     public static void initLate() {
-        if (Nitrogen.getProperty(PropertyKey.FLUID).get(FluidStorageKeys.LIQUID) == null) {
+        if (Nitrogen.getProperty(PropertyKey.FLUID).getQueuedBuilder(FluidStorageKeys.LIQUID) == null) {
             Nitrogen.getProperty(PropertyKey.FLUID).enqueueRegistration(FluidStorageKeys.LIQUID,
                     new FluidBuilder()
                             .temperature(77)
