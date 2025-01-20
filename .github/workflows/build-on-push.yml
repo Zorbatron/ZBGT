@@ -1,9 +1,8 @@
-# CI/CD: Build ZBGT on Commit
-name: Build ZBGT
+# Adapted from https://github.com/GregTechCEu/GregTech-Modern/blob/1.20.1/.github/workflows/build-on-push.yml
+name: Build pull request on push
 on:
-  push:
   pull_request:
-  workflow_dispatch:
+    paths: ['**']
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -13,6 +12,8 @@ jobs:
   build:
     name: Build ZBGT
     runs-on: ubuntu-latest
+    env:
+      VERSION_SUFFIX: "PR-${{ github.event.number }}"
 
     steps:
       - name: Checkout Repository
@@ -26,6 +27,9 @@ jobs:
 
       - name: Build Project
         run: ./gradlew build
+
+      - name: Rename Jars
+        run: for file in build/libs/*; do mv "$file" "${file/.jar/-${{ env.VERSION_SUFFIX }}.jar}"; done;
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
