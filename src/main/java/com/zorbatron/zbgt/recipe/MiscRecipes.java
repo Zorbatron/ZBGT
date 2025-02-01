@@ -303,7 +303,7 @@ public class MiscRecipes {
                 .input(GG_CIRCUIT_3, 2)
                 .input(ENGRAVED_ENERGY_CHIP, 8)
                 .input(MetaItems.QUBIT_CENTRAL_PROCESSING_UNIT, 16)
-                .input(rotor, EnergeticAlloy, 2)
+                .input(rotor, ZBGTAPI.nomiLabsCompat ? LabsMaterials.EnergeticAlloy : EnergeticAlloy, 2)
                 .fluidInputs(MAR_M200.getFluid(L * 8))
                 .fluidInputs((ZBGTAPI.nomiLabsCompat ? LabsMaterials.Signalum : Signalum).getFluid(L * 4))
                 .fluidInputs((ZBGTAPI.nomiLabsCompat ? LabsMaterials.Lumium : Lumium).getFluid(L * 2))
