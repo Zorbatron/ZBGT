@@ -37,6 +37,16 @@
         "textures": {
           "all": "gregtech:blocks/casings/misc/5"
         }
+      },
+      "volcanus_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/misc/volcanus"
+        }
+      },
+      "cryogenic_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/misc/cryogenic"
+        }
       }
     }
   }

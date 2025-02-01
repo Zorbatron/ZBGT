@@ -1,6 +1,7 @@
 package com.zorbatron.zbgt.api;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraftforge.fluids.FluidStack;
 
 import com.zorbatron.zbgt.api.util.ZBGTMods;
 import com.zorbatron.zbgt.common.ZBGTConfig;
@@ -29,4 +30,7 @@ public class ZBGTAPI {
 
     public static final BaseCreativeTab TAB_ZBGT = new BaseCreativeTab("ZBGT",
             () -> ZBGTMetaItems.ZBGT_ITEM.getStackForm(), false);
+
+    public static FluidStack pyrotheum;
+    public static FluidStack cryotheum;
 }

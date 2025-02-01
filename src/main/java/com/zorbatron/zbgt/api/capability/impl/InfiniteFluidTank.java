@@ -1,5 +1,7 @@
 package com.zorbatron.zbgt.api.capability.impl;
 
+import java.util.function.Supplier;
+
 import net.minecraftforge.fluids.FluidStack;
 
 import org.jetbrains.annotations.Nullable;
@@ -11,11 +13,16 @@ public class InfiniteFluidTank extends NotifiableFluidTank {
 
     // NotifiableFluidTank's isExport is private and there is no getter method :\
     private final boolean isExport;
-    private final int supplyAmount = Integer.MAX_VALUE;
+    private final Supplier<Integer> supplyAmount;
 
-    public InfiniteFluidTank(MetaTileEntity entityToNotify, boolean isExport) {
+    public InfiniteFluidTank(MetaTileEntity entityToNotify, boolean isExport, Supplier<Integer> supplyAmount) {
         super(0, entityToNotify, isExport);
         this.isExport = isExport;
+        this.supplyAmount = supplyAmount;
+    }
+
+    public InfiniteFluidTank(MetaTileEntity entityToNotify, boolean isExport) {
+        this(entityToNotify, isExport, () -> Integer.MAX_VALUE);
     }
 
     @Nullable
@@ -24,7 +31,9 @@ public class InfiniteFluidTank extends NotifiableFluidTank {
         if (this.fluid == null) {
             return null;
         } else {
-            return new FluidStack(this.fluid, supplyAmount);
+            FluidStack fluidStack = this.fluid.copy();
+            fluidStack.amount = supplyAmount.get();
+            return fluidStack;
         }
     }
 
@@ -35,14 +44,14 @@ public class InfiniteFluidTank extends NotifiableFluidTank {
             return;
         }
 
-        this.fluid = new FluidStack(fluid.getFluid(), supplyAmount);
+        this.fluid = fluid.copy();
         onContentsChanged();
     }
 
     @Override
     public int getFluidAmount() {
         if (this.fluid != null) {
-            return supplyAmount;
+            return supplyAmount.get();
         } else {
             return 0;
         }
@@ -50,7 +59,7 @@ public class InfiniteFluidTank extends NotifiableFluidTank {
 
     @Override
     public int getCapacity() {
-        return supplyAmount;
+        return supplyAmount.get();
     }
 
     @Override
@@ -65,7 +74,7 @@ public class InfiniteFluidTank extends NotifiableFluidTank {
 
     @Override
     public int fill(FluidStack resource, boolean doFill) {
-        return supplyAmount;
+        return isExport ? supplyAmount.get() : 0;
     }
 
     @Override
@@ -73,12 +82,19 @@ public class InfiniteFluidTank extends NotifiableFluidTank {
         if (this.fluid == null) {
             return null;
         } else {
-            return new FluidStack(this.fluid, maxDrain);
+            FluidStack fluidStack = this.fluid.copy();
+            fluidStack.amount = maxDrain;
+            return fluidStack;
         }
     }
 
     @Override
     public FluidStack drain(FluidStack resource, boolean doDrain) {
-        return new FluidStack(resource.getFluid(), supplyAmount);
+        if (this.fluid == null || !this.fluid.isFluidEqual(resource)) return null;
+        return resource.copy();
+    }
+
+    public void onContentsChangedButPublic() {
+        onContentsChanged();
     }
 }

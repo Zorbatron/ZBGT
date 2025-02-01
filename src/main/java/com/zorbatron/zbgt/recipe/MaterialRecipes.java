@@ -7,11 +7,15 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
 import com.zorbatron.zbgt.api.ZBGTAPI;
+import com.zorbatron.zbgt.api.util.ZBGTMods;
 
+import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.builders.BlastRecipeBuilder;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
@@ -24,6 +28,8 @@ public class MaterialRecipes {
         chemicalReactor();
         vacuumFreezer();
         alloyBlast();
+        macerator();
+        chemBath();
         mixer();
         ebf();
     }
@@ -55,9 +61,17 @@ public class MaterialRecipes {
     private static void vacuumFreezer() {
         VACUUM_RECIPES.recipeBuilder()
                 .fluidInputs(Nitrogen.getFluid(1000))
-                .fluidOutputs(LiquidNitrogen.getFluid(1000))
+                .fluidOutputs(Nitrogen.getFluid(FluidStorageKeys.LIQUID, 1000))
                 .EUt(VA[HV]).duration(15)
                 .buildAndRegister();
+
+        if (!ZBGTMods.THERMAL_FOUNDATION.isModLoaded()) {
+            VACUUM_RECIPES.recipeBuilder()
+                    .input(stick, Blaze)
+                    .output(stick, Blizz)
+                    .EUt(VA[MV]).duration(20 * 25)
+                    .buildAndRegister();
+        }
     }
 
     private static void alloyBlast() {
@@ -71,6 +85,31 @@ public class MaterialRecipes {
                 .blastFurnaceTemp(5475)
                 .EUt(VA[IV]),
                 20 * 40, BlastProperty.GasTier.MID, 5, 10);
+    }
+
+    private static void macerator() {
+        MACERATOR_RECIPES.recipeBuilder()
+                .input(Blocks.SNOW)
+                .output(dust, SnowPowder)
+                .EUt(4).duration(16)
+                .buildAndRegister();
+
+        MACERATOR_RECIPES.recipeBuilder()
+                .input(Items.SNOWBALL)
+                .output(dustSmall, SnowPowder)
+                .EUt(4).duration(16)
+                .buildAndRegister();
+    }
+
+    private static void chemBath() {
+        if (!ZBGTMods.THERMAL_FOUNDATION.isModLoaded()) {
+            CHEMICAL_BATH_RECIPES.recipeBuilder()
+                    .input(Items.SNOWBALL, 4)
+                    .fluidInputs(Blaze.getFluid(L * 10))
+                    .output(dust, Blizz)
+                    .EUt(VA[HV]).duration(20 * 20)
+                    .buildAndRegister();
+        }
     }
 
     private static void mixer() {
@@ -229,6 +268,38 @@ public class MaterialRecipes {
                 .output(dust, Inconel792, 6)
                 .EUt(VA[HV]).duration((int) (20 * 2.6))
                 .buildAndRegister();
+
+        if (!ZBGTMods.THERMAL_FOUNDATION.isModLoaded()) {
+            MIXER_RECIPES.recipeBuilder()
+                    .input(dust, Redstone)
+                    .input(dust, Blaze)
+                    .input(dust, Sulfur)
+                    .input(dust, Coal)
+                    .output(dust, Pyrotheum, 4)
+                    .EUt(VA[MV]).duration(20 * 8)
+                    .buildAndRegister();
+
+            MIXER_RECIPES.recipeBuilder()
+                    .input(dust, Redstone)
+                    .input(dust, SnowPowder)
+                    .input(dust, Saltpeter)
+                    .input(dust, Blizz)
+                    .output(dust, Cryotheum, 4)
+                    .EUt(VA[MV]).duration(20 * 8)
+                    .buildAndRegister();
+        }
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Titanium, 9)
+                .input(dust, Carbon, 9)
+                .input(dust, Potassium, 9)
+                .input(dust, Lithium, 9)
+                .input(dust, Sulfur, 9)
+                .circuitMeta(2)
+                .fluidInputs(Hydrogen.getFluid(5000))
+                .output(dust, Grismium, 50)
+                .EUt(VA[EV]).duration(20 * 60)
+                .buildAndRegister();
     }
 
     private static void ebf() {
@@ -241,7 +312,7 @@ public class MaterialRecipes {
                 .buildAndRegister();
 
         RecipeBuilder<BlastRecipeBuilder> aluminumNitrideBuilder = BLAST_RECIPES.recipeBuilder()
-                .fluidInputs(LiquidNitrogen.getFluid(2000))
+                .fluidInputs(Nitrogen.getFluid(FluidStorageKeys.LIQUID, 2000))
                 .output(dust, AluminumNitride, 2)
                 .fluidOutputs(CarbonMonoxide.getFluid(3000))
                 .EUt(VA[EV]).duration(20 * 10)

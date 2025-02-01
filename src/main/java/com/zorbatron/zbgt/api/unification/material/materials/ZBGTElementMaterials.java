@@ -5,8 +5,6 @@ import static com.zorbatron.zbgt.api.unification.ZBGTElements.Qt;
 import static com.zorbatron.zbgt.api.unification.material.ZBGTMaterials.*;
 import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 
-import gregtech.api.fluids.FluidBuilder;
-import gregtech.api.unification.Elements;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialIconSet;
 
@@ -19,12 +17,6 @@ public final class ZBGTElementMaterials {
                 .dust(7).iconSet(MaterialIconSet.SHINY)
                 .ore(true)
                 .element(Ad)
-                .build();
-
-        LiquidNitrogen = new Material.Builder(id++, zbgtId("zb_liquid_nitrogen"))
-                .liquid(new FluidBuilder().temperature(77))
-                .color(0xE1FAFA)
-                .element(Elements.N)
                 .build();
 
         Quantium = new Material.Builder(id++, zbgtId("quantium"))
