@@ -14,6 +14,7 @@ import com.zorbatron.zbgt.common.metatileentities.multi.electric.large.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.mega.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.quad.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.multiblockpart.*;
+import com.zorbatron.zbgt.common.metatileentities.multi.primitive.MTEIndustrialPBF;
 import com.zorbatron.zbgt.common.metatileentities.storage.MTECreativeComputationProvider;
 
 import gregtech.api.GTValues;
@@ -59,6 +60,8 @@ public class ZBGTMetaTileEntities {
 
     public static MTEVolcanus VOLCANUS;
     public static MTECryogenicFreezer CRYOGENIC_FREEZER;
+
+    public static MTEIndustrialPBF IPBF;
 
     public static void init() {
         MachineItemBlock.addCreativeTab(ZBGTAPI.TAB_ZBGT);
@@ -174,5 +177,8 @@ public class ZBGTMetaTileEntities {
                 new MTEVolcanus(zbgtId("volcanus")));
         CRYOGENIC_FREEZER = registerMetaTileEntity(18072,
                 new MTECryogenicFreezer(zbgtId("cryogenic_freezer")));
+
+        IPBF = registerMetaTileEntity(18073,
+                new MTEIndustrialPBF(zbgtId("industrial_pbf")));
     }
 }

@@ -357,7 +357,9 @@ zbgt.machine.cryogenic_freezer.name=Cryogenic Freezer
 zbgt.machine.cryogenic_freezer.tooltip.1=Speed: +100%% | EU Usage: 100%% | Parallel: 4
 zbgt.machine.cryogenic_freezer.tooltip.2=Consumes 10L of Gelid Cryotheum per second during operation
 
-zbgt.machine.ipbf.name=Industrial Primitive Blast Furnace (iPBF)
+zbgt.machine.industrial_pbf.name=Industrial Primitive Blast Furnace
+zbgt.machine.industrial_pbf.tooltip=Produce steel at an industrial scale!
+zbgt.machine.industrial_pbf.speed=Speed bonus: %s%%
 
 
 # Multiblock Casings

@@ -1,7 +1,11 @@
 package com.zorbatron.zbgt.common.metatileentities.multi.primitive;
 
+import java.util.List;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -11,31 +15,32 @@ import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.capability.impl.ItemHandlerList;
-import gregtech.api.capability.impl.ItemHandlerProxy;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.RecipeMapPrimitiveMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.util.RelativeDirection;
+import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 
-public class MetaTileEntityIndustrialPBF extends RecipeMapPrimitiveMultiblockController {
+public class MTEIndustrialPBF extends RecipeMapPrimitiveMultiblockController {
 
-    public MetaTileEntityIndustrialPBF(ResourceLocation metaTileEntityId) {
+    public MTEIndustrialPBF(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.PRIMITIVE_BLAST_FURNACE_RECIPES);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityIndustrialPBF(metaTileEntityId);
+        return new MTEIndustrialPBF(metaTileEntityId);
     }
 
     @Override
@@ -43,7 +48,17 @@ public class MetaTileEntityIndustrialPBF extends RecipeMapPrimitiveMultiblockCon
         this.importItems = new ItemHandlerList(getAbilities(MultiblockAbility.IMPORT_ITEMS));
         this.exportItems = new ItemHandlerList(getAbilities(MultiblockAbility.EXPORT_ITEMS));
 
-        this.itemInventory = new ItemHandlerProxy(this.importItems, this.exportItems);
+        // this.itemInventory = new ItemHandlerProxy(this.importItems, this.exportItems);
+    }
+
+    @Override
+    protected void addDisplayText(List<ITextComponent> textList) {
+        MultiblockDisplayText.builder(textList, isStructureFormed())
+                .setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addWorkingStatusLine()
+                .addCustom(list -> list.add(new TextComponentTranslation("zbgt.machine.industrial_pbf.speed",
+                        TextFormattingUtil.formatNumbers(structurePattern.formedRepetitionCount[1] * 100L))))
+                .addProgressLine(recipeMapWorkable.getProgressPercent());
     }
 
     @Override
@@ -54,7 +69,7 @@ public class MetaTileEntityIndustrialPBF extends RecipeMapPrimitiveMultiblockCon
                 .aisle("XXX", "XOX", "XXX", "XXX")
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState()))
-                .where('I', abilities(MultiblockAbility.IMPORT_ITEMS)
+                .where('I', abilities(MultiblockAbility.IMPORT_ITEMS).setPreviewCount(1)
                         .or(states(getCasingState())))
                 .where('O', abilities(MultiblockAbility.EXPORT_ITEMS))
                 .where('#', air())
@@ -71,7 +86,8 @@ public class MetaTileEntityIndustrialPBF extends RecipeMapPrimitiveMultiblockCon
 
         initializeAbilities();
 
-        this.recipeMapWorkable.setSpeedBonus((double) 1 / this.structurePattern.formedRepetitionCount[1]);
+        recipeMapWorkable.setSpeedBonus((double) 1 / structurePattern.formedRepetitionCount[1]);
+        // recipeMapWorkable.setParallelLimit(structurePattern.formedRepetitionCount[1]);
     }
 
     @SideOnly(Side.CLIENT)
