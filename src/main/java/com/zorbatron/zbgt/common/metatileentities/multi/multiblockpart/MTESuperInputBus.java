@@ -37,6 +37,7 @@ import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.capability.IControllable;
+import gregtech.api.capability.IGhostSlotConfigurable;
 import gregtech.api.capability.impl.GhostCircuitItemStackHandler;
 import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.gui.GuiTextures;
@@ -52,7 +53,8 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 
 public class MTESuperInputBus extends MetaTileEntityMultiblockNotifiablePart
-                              implements IMultiblockAbilityPart<IItemHandlerModifiable>, IControllable {
+                              implements IMultiblockAbilityPart<IItemHandlerModifiable>, IControllable,
+                              IGhostSlotConfigurable {
 
     private boolean workingEnabled = false;
     private boolean shouldReturnItems = false;
@@ -261,6 +263,24 @@ public class MTESuperInputBus extends MetaTileEntityMultiblockNotifiablePart
         }
 
         return true;
+    }
+
+    @Override
+    public boolean hasGhostCircuitInventory() {
+        return true;
+    }
+
+    @Override
+    public void setGhostCircuitConfig(int config) {
+        if (this.ghostCircuitItemStackHandler.getCircuitValue() == config) {
+            return;
+        }
+
+        this.ghostCircuitItemStackHandler.setCircuitValue(config);
+
+        if (!getWorld().isRemote) {
+            markDirty();
+        }
     }
 
     @SideOnly(Side.CLIENT)
