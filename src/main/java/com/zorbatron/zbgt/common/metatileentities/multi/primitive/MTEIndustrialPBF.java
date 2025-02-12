@@ -3,9 +3,12 @@ package com.zorbatron.zbgt.common.metatileentities.multi.primitive;
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -31,6 +34,7 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
+import org.jetbrains.annotations.Nullable;
 
 public class MTEIndustrialPBF extends RecipeMapPrimitiveMultiblockController {
 
@@ -109,6 +113,12 @@ public class MTEIndustrialPBF extends RecipeMapPrimitiveMultiblockController {
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return Textures.PRIMITIVE_BLAST_FURNACE_OVERLAY;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World world, @NotNull List<String> tooltip, boolean advanced) {
+        tooltip.add(I18n.format("zbgt.machine.industrial_pbf.tooltip2"));
     }
 
     @Override
