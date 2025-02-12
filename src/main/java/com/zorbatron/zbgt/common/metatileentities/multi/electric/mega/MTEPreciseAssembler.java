@@ -306,7 +306,7 @@ public class MTEPreciseAssembler extends LaserCapableMultiMapMultiblockControlle
 
         @Override
         protected void modifyOverclockPre(int @NotNull [] values, @NotNull IRecipePropertyStorage storage) {
-            if (isPrecise()) {
+            if (!isPrecise()) {
                 values[1] = (int) (values[1] * 0.5);
             }
 
