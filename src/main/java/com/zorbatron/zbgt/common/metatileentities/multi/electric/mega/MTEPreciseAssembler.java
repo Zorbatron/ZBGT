@@ -274,6 +274,10 @@ public class MTEPreciseAssembler extends LaserCapableMultiMapMultiblockControlle
         return getRecipeMapIndex() == supposedRecipeMap;
     }
 
+    public boolean isPrecise() {
+        return getRecipeMapIndex() == 1;
+    }
+
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
@@ -302,7 +306,7 @@ public class MTEPreciseAssembler extends LaserCapableMultiMapMultiblockControlle
 
         @Override
         protected void modifyOverclockPre(int @NotNull [] values, @NotNull IRecipePropertyStorage storage) {
-            if (getRecipeMapIndex() == 0) {
+            if (!isPrecise()) {
                 values[1] = (int) (values[1] * 0.5);
             }
 
@@ -311,14 +315,16 @@ public class MTEPreciseAssembler extends LaserCapableMultiMapMultiblockControlle
 
         @Override
         public int getParallelLimit() {
-            return (int) (16 * Math.pow(2, getPreciseCasingTier()));
+            return isPrecise() ? 1 : (int) (16 * Math.pow(2, getPreciseCasingTier()));
         }
 
         @Override
         public boolean checkRecipe(@NotNull Recipe recipe) {
-            return getRecipeMapIndex() == 0 ? super.checkRecipe(recipe) :
-                    super.checkRecipe(recipe) &&
-                            recipe.getProperty(PreciseAssemblerProperty.getInstance(), 0) <= getPreciseCasingTier();
+            if (!super.checkRecipe(recipe)) return false;
+
+            if (isPrecise()) {
+                return recipe.getProperty(PreciseAssemblerProperty.getInstance(), 0) <= getPreciseCasingTier();
+            } else return true;
         }
     }
 
