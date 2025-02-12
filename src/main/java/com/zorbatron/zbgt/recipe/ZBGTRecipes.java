@@ -1,6 +1,8 @@
 package com.zorbatron.zbgt.recipe;
 
-import gregtech.api.util.Mods;
+import com.zorbatron.zbgt.common.ZBGTConfig;
+import com.zorbatron.zbgt.recipe.cal.CALCircuits;
+import com.zorbatron.zbgt.recipe.cal.WrapRecipes;
 
 public class ZBGTRecipes {
 
@@ -11,9 +13,15 @@ public class ZBGTRecipes {
         CoALRecipes.init();
         MiscRecipes.init();
         CasingRecipes.init();
+        MaterialRecipes.init();
+        AE2Recipes.init();
 
-        if (Mods.AppliedEnergistics2.isModLoaded()) {
-            AE2Recipes.init();
+        if (ZBGTConfig.recipeSettings.wrapRecipes) {
+            WrapRecipes.init();
+        }
+
+        if (ZBGTConfig.recipeSettings.calCircuitRecipes) {
+            CALCircuits.init();
         }
     }
 }

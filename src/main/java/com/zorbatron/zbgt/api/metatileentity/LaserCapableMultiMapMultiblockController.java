@@ -1,7 +1,8 @@
 package com.zorbatron.zbgt.api.metatileentity;
 
+import static com.zorbatron.zbgt.api.pattern.TraceabilityPredicates.autoEnergyInputs;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.client.resources.I18n;
@@ -11,7 +12,7 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.zorbatron.zbgt.ZBGTConfig;
+import com.zorbatron.zbgt.common.ZBGTConfig;
 
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.impl.EnergyContainerList;
@@ -50,7 +51,7 @@ public abstract class LaserCapableMultiMapMultiblockController extends MultiMapM
             list.addAll(getAbilities(MultiblockAbility.SUBSTATION_INPUT_ENERGY));
         }
 
-        this.energyContainer = new EnergyContainerList(Collections.unmodifiableList(list));
+        this.energyContainer = new EnergyContainerList(list);
     }
 
     @Override
@@ -61,29 +62,10 @@ public abstract class LaserCapableMultiMapMultiblockController extends MultiMapM
                 checkFluidIn, checkFluidOut, checkMuffler);
 
         if (checkEnergyIn) {
-            predicate = predicate.or(autoEnergyInputs());
+            predicate = predicate.or(autoEnergyInputs(1, 3, true, false, true));
         }
 
         return predicate;
-    }
-
-    public TraceabilityPredicate autoEnergyInputs(int min, int max, int previewCount) {
-        if (allowsSubstationHatches()) {
-            return new TraceabilityPredicate(abilities(MultiblockAbility.INPUT_ENERGY, MultiblockAbility.INPUT_LASER,
-                    MultiblockAbility.SUBSTATION_INPUT_ENERGY)
-                            .setMinGlobalLimited(min).setMaxGlobalLimited(max).setPreviewCount(previewCount));
-        } else {
-            return new TraceabilityPredicate(abilities(MultiblockAbility.INPUT_ENERGY, MultiblockAbility.INPUT_LASER)
-                    .setMinGlobalLimited(min).setMaxGlobalLimited(max).setPreviewCount(previewCount));
-        }
-    }
-
-    public TraceabilityPredicate autoEnergyInputs(int min, int max) {
-        return autoEnergyInputs(min, max, 2);
-    }
-
-    public TraceabilityPredicate autoEnergyInputs() {
-        return autoEnergyInputs(1, 3);
     }
 
     @Override

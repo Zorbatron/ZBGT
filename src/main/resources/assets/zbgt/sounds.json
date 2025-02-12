@@ -1,0 +1,62 @@
+{
+  "yottank_pulse": {
+    "category": "block",
+    "subtitle": "zbgt.subtitle.yottank_pulse",
+    "sounds": [
+      {
+        "name": "zbgt:fx_lo_freq",
+        "stream": false
+      }
+    ]
+  },
+  "quack_1": {
+    "category": "block",
+    "subtitle": "zbgt.subtitle.quack",
+    "sounds": [
+      {
+        "name": "zbgt:quack_1",
+        "stream": false
+      }
+    ]
+  },
+  "quack_2": {
+    "category": "block",
+    "subtitle": "zbgt.subtitle.quack",
+    "sounds": [
+      {
+        "name": "zbgt:quack_2",
+        "stream": false
+      }
+    ]
+  },
+  "quack_3": {
+    "category": "block",
+    "subtitle": "zbgt.subtitle.quack",
+    "sounds": [
+      {
+        "name": "zbgt:quack_3",
+        "stream": false
+      }
+    ]
+  },
+  "quack_4": {
+    "category": "block",
+    "subtitle": "zbgt.subtitle.quack",
+    "sounds": [
+      {
+        "name": "zbgt:quack_4",
+        "stream": false
+      }
+    ]
+  },
+  "quack_5": {
+    "category": "block",
+    "subtitle": "zbgt.subtitle.quack",
+    "sounds": [
+      {
+        "name": "zbgt:quack_5",
+        "stream": false
+      }
+    ]
+  }
+}

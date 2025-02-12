@@ -1,21 +1,28 @@
 package com.zorbatron.zbgt;
 
 import static com.zorbatron.zbgt.api.ZBGTAPI.*;
-import static com.zorbatron.zbgt.common.block.ZBGTMetaBlocks.CoAL_CASING;
-import static com.zorbatron.zbgt.common.block.ZBGTMetaBlocks.PRECISE_CASING;
+import static com.zorbatron.zbgt.common.block.ZBGTMetaBlocks.*;
+import static gregtech.api.GregTechAPI.HEATING_COILS;
+
+import java.io.IOException;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import com.zorbatron.zbgt.api.util.ZBGTLog;
 import com.zorbatron.zbgt.common.CommonProxy;
-import com.zorbatron.zbgt.common.ZBGTMetaTileEntities;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
+import com.zorbatron.zbgt.common.block.blocks.CreativeHeatingCoil;
 import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
+import com.zorbatron.zbgt.common.block.blocks.YOTTankCell;
+import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
+import com.zorbatron.zbgt.core.sound.ZBGTSoundEvents;
 
 import gregtech.GTInternalTags;
 import gregtech.api.GTValues;
@@ -29,7 +36,7 @@ import gregtech.common.blocks.MetaBlocks;
      acceptedMinecraftVersions = "[1.12.2]",
      dependencies = GTInternalTags.DEP_VERSION_STRING +
              "required-after:gcym@[1.2.11,);" +
-             "after:appliedenergistics2;")
+             "required-after:appliedenergistics2;")
 public class ZBGTCore {
 
     public static final String MODID = Tags.MODID;
@@ -45,8 +52,6 @@ public class ZBGTCore {
     public void preInit(FMLPreInitializationEvent event) {
         // register to the event bus so that we can listen to events
         MinecraftForge.EVENT_BUS.register(this);
-
-        ZBGTLog.init(event.getModLog());
 
         ZBGTLog.logger.info("I am " + Tags.MODNAME + " + at version " + Tags.VERSION);
 
@@ -67,6 +72,25 @@ public class ZBGTCore {
             MACHINE_CASINGS.put(MetaBlocks.MACHINE_CASING.getState(type), type);
         }
 
+        for (YOTTankCell.CasingType type : YOTTankCell.CasingType.values()) {
+            YOTTANK_CELLS.put(YOTTANK_CELL.getState(type), type);
+        }
+
+        HEATING_COILS.put(CREATIVE_HEATING_COIL.getState(CreativeHeatingCoil.CoilType.CREATIVE_COIL),
+                CreativeHeatingCoil.CoilType.CREATIVE_COIL);
+
+        ZBGTSoundEvents.register();
+
         proxy.preInit();
+    }
+
+    @EventHandler
+    public void init(FMLInitializationEvent event) {
+        proxy.init();
+    }
+
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event) throws IOException {
+        proxy.postInit();
     }
 }

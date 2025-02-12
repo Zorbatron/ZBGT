@@ -1,0 +1,53 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all"
+  },
+  "variants": {
+    "variant": {
+      "yottank_casing": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "top": "gregtech:blocks/casings/yottank/top",
+          "side": "gregtech:blocks/casings/yottank/side",
+          "bottom": "gregtech:blocks/casings/yottank/bottom"
+        }
+      },
+      "ameliorated_superconductor_coil": {
+        "textures": {
+          "all": "gregtech:blocks/casings/misc/1"
+        }
+      },
+      "compact_fusion_coil_1": {
+        "textures": {
+          "all": "gregtech:blocks/casings/misc/2"
+        }
+      },
+      "compact_fusion_coil_2": {
+        "textures": {
+          "all": "gregtech:blocks/casings/misc/3"
+        }
+      },
+      "compact_fusion_coil_3": {
+        "textures": {
+          "all": "gregtech:blocks/casings/misc/4"
+        }
+      },
+      "compact_fusion_coil_4": {
+        "textures": {
+          "all": "gregtech:blocks/casings/misc/5"
+        }
+      },
+      "volcanus_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/misc/volcanus"
+        }
+      },
+      "cryogenic_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/misc/cryogenic"
+        }
+      }
+    }
+  }
+}

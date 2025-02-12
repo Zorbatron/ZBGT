@@ -16,9 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
-import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
-import com.zorbatron.zbgt.common.block.blocks.ZBGTBlockMultiblockCasing;
+import com.zorbatron.zbgt.common.block.blocks.*;
 
 import gregtech.api.block.VariantBlock;
 import gregtech.common.blocks.MetaBlocks;
@@ -27,15 +25,18 @@ public class ZBGTMetaBlocks {
 
     private ZBGTMetaBlocks() {}
 
-    public static ZBGTBlockMultiblockCasing MULTIBLOCK_CASING;
+    public static MaterialCasing MATERIAL_CASINGS;
     public static CoALCasing CoAL_CASING;
     public static PreciseCasing PRECISE_CASING;
+    public static YOTTankCell YOTTANK_CELL;
+    public static MiscCasing MISC_CASING;
+    public static CreativeHeatingCoil CREATIVE_HEATING_COIL;
 
     public static List<VariantBlock<?>> ALL_CASINGS = new ArrayList<>();
 
     public static void init() {
-        MULTIBLOCK_CASING = new ZBGTBlockMultiblockCasing();
-        MULTIBLOCK_CASING.setRegistryName("multiblock_casing");
+        MATERIAL_CASINGS = new MaterialCasing();
+        MATERIAL_CASINGS.setRegistryName("multiblock_casing");
 
         CoAL_CASING = new CoALCasing();
         CoAL_CASING.setRegistryName("coal_casing");
@@ -43,7 +44,17 @@ public class ZBGTMetaBlocks {
         PRECISE_CASING = new PreciseCasing();
         PRECISE_CASING.setRegistryName("precise_casing");
 
-        ALL_CASINGS.addAll(Arrays.asList(MULTIBLOCK_CASING, CoAL_CASING, PRECISE_CASING));
+        YOTTANK_CELL = new YOTTankCell();
+        YOTTANK_CELL.setRegistryName("yottank_cell");
+
+        MISC_CASING = new MiscCasing();
+        MISC_CASING.setRegistryName("misc_casing");
+
+        CREATIVE_HEATING_COIL = new CreativeHeatingCoil();
+        CREATIVE_HEATING_COIL.setRegistryName("creative_heating_coil");
+
+        ALL_CASINGS.addAll(Arrays.asList(MATERIAL_CASINGS, CoAL_CASING, PRECISE_CASING, YOTTANK_CELL, MISC_CASING,
+                CREATIVE_HEATING_COIL));
     }
 
     @SideOnly(Side.CLIENT)

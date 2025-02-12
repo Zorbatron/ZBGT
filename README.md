@@ -4,8 +4,14 @@
 <p align="center">
   An addon mod for <a href="https://github.com/GregTechCEu/GregTech">GregTech CEu</a>
 </p>
-
-## Features:
+<h1 align="center">
+    <a href="https://www.curseforge.com/minecraft/mc-mods/zbgt"><img src="https://img.shields.io/badge/Available%20for-MC%201.12.2%20-informational?style=for-the-badge" alt="Supported Versions"></a>
+    <a href="https://github.com/GregTechCEu/GregTech/blob/master/LICENSE"><img src="https://img.shields.io/github/license/Zorbatron/ZBGT?style=for-the-badge" alt="License"></a>
+    <br>
+    <a href="https://www.curseforge.com/minecraft/mc-mods/zbgt"><img src="https://cf.way2muchnoise.eu/1101263.svg?badge_style=for_the_badge" alt="CurseForge"></a>
+    <a href="https://modrinth.com/mod/zbgt"><img src="https://img.shields.io/modrinth/dt/zbgt?logo=modrinth&label=&suffix=%20&style=for-the-badge&color=2d2d2d&labelColor=5ca424&logoColor=1c1c1c" alt="Modrinth"></a>
+    <a href="https://github.com/Zorbatron/ZBGT/releases"><img src="https://img.shields.io/github/downloads/Zorbatron/ZBGT/total?sort=semver&logo=github&label=&style=for-the-badge&color=2d2d2d&labelColor=545454&logoColor=FFFFFF" alt="GitHub"></a>
+</h1>
 
 ### Multiblocks:
 
@@ -15,13 +21,21 @@ Ported the following multiblocks from GT:NH:
 - Mega Vacuum Freezer (mVF)
 - Mega Oil Cracking Unit (mOCU)
 - Mega Alloy Blast Smelter (mABS)
-- Precise Assembler (PRASS) (Does Assembler, Circuit Assembler, and Assembly Line recipes xD)
+- Precise Assembler (PRASS)
 - Component Assembly Line (CoAL)
+- YOTTank and YOTHatch
+- Compact™ Fusion Reactors
+- Zyngen
+- Circuit Assembly Line
 
-My multiblocks:
-- Quad EBF (qEBF)
+### My multiblocks:
+- Queezer (quad EBF)
+- Queezer (quad vacuum freezer)
+- Quacker (quad oil cracker)
+- GCYM Air Collector
+- GCYM Rock Breaker
 
-Images (_In order with the above list_):
+### Images (_In order with the above list_):
 ![](images/mega_ebf.png)
 ![](images/mega_lcr.png)
 ![](images/mega_vf.png)
@@ -29,10 +43,48 @@ Images (_In order with the above list_):
 ![](images/mega_abs.png)
 ![](images/prass.png)
 ![](images/coal.png)
+![](images/yottank.png)
+![](images/yothatch.png)
+![](images/compact_fusion.png)
+![](images/zyngen.png)
+![](images/cal.png)
 
+<br></br>
+### My multiblocks:
 ![](images/quad_ebf.png)
+![](images/queezer.png)
+![](images/quacker.png)
+![](images/large_air_collector.png)
+![](images/large_rock_breaker.png)
 
-### Multiblock Parts:
+
+## Covers:
+
+Dual Cover
+- Combines the conveyor and pump into one cover!
+
+![](images/dual_cover_item.png)
+![](images/dual_cover_fluid.png)
+
+Precise Dual Cover
+- Combines the robot arm and fluid regulator into one cover!
+
+![](images/precise_dual_cover_item.png)
+![](images/precise_dual_cover_fluid.png)
+
+Dropper Cover
+- Is placed on any gregtech block that accepts covers and will drop items from its inventory.
+
+
+## Multiblock Parts:
+
+### From GT:NH:
+
+Air Intake Hatch
+- Ported from GT++ but it collects dimensions specific gas now!
+- Is a Gas Collector that passively generates air.
+
+### My own:
 
 Creative Energy Source
 - Configurable like the creative emitter, but as a multiblock part.
@@ -66,27 +118,18 @@ Creative Computation Provider
 
 ![](images/creative_computation_provider.png)
 
-Dual Cover
-- Combines the conveyor and pump into one cover!
-
-![](images/dual_cover_item.png)
-![](images/dual_cover_fluid.png)
-
-Precise Dual Cover
-- Combines the robot arm and fluid regulator into one cover!
-
-![](images/precise_dual_cover_item.png)
-![](images/precise_dual_cover_fluid.png)
-
-Air Intake Hatch
-- Ported from GT++ but it collects dimensions specific gas now!
-- Is a Gas Collector that passively generates air.
-
 Single Item Input Bus
 - Functionally identical to a ULV input bus, but it has a max stack size of 1.
 
+Larger parallel hatch
+- The same as normal GCYM parallel hatches, but with much larger values!
+- Will turn your Ticks Per Second into Seconds Per Tick if used when doing recipes with chanced outputs! :troll:
+
 
 ## Credited Works
-- GT:NH for many of the multiblocks
+- [GT:NH](https://github.com/GTNewHorizons/) for many of its multiblocks.
 - Ursamina for the dual cover textures and the icon! :heart:
 - [Synthitic](https://github.com/Synthitic/) for porting GT:NH's CoAL to [GCYL: CEu](https://github.com/Synthitic/GCYL-CEu), which I more or less directly copied.
+- [GT:CEu](https://github.com/GregTechCEu/GregTech) for much code inspiration.
+- MkcTao/[D-Alessian](https://github.com/D-Alessian/) for the Large Air Collector multiblock shape.
+- Quacker quack from https://freesound.org/people/WavJunction.com/sounds/456770/.

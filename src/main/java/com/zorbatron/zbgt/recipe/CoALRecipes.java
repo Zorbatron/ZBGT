@@ -9,11 +9,15 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.QUANTUM_EYE;
 import static gregtech.common.items.MetaItems.QUANTUM_STAR;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.filostorm.ulvcovers.items.ULVCoverMetaItems;
 import com.zorbatron.zbgt.api.recipes.builders.CoALRecipeBuilder;
 import com.zorbatron.zbgt.api.util.ZBGTMods;
 
 import gregtech.api.recipes.RecipeBuilder;
+import gregtech.api.recipes.ingredients.GTRecipeInput;
 
 public class CoALRecipes {
 
@@ -233,7 +237,7 @@ public class CoALRecipes {
                 .CWUt(getCWUt(tier))
                 .circuitMeta(type.ordinal() + 1);
 
-        return switch (type) {
+        switch (type) {
             case MOTOR -> builder
                     .outputs(getMotorByTier(tier).getStackForm(64))
                     .input(stickLong, getMagneticMaterialByTier(tier), 24)
@@ -241,8 +245,7 @@ public class CoALRecipes {
                     .fluidInputs(SolderingAlloy.getFluid((int) (48 * L * Math.pow(2, tier - LuV))))
                     .fluidInputs(Lubricant.getFluid((int) (48 * 250 * Math.pow(2, tier - LuV))))
                     .fluidInputs(getMainComponentMaterialByTier(tier).getFluid((tier == LuV ? 900 : 1800) * 48))
-                    .fluidInputs(getFineWireByTier(tier).getFluid(L * 48 * 8 * (tier - 4)))
-                    .fluidInputs(tier > ZPM ? Naquadria.getFluid(L * 4 * 48) : null);
+                    .fluidInputs(getFineWireByTier(tier).getFluid(L * 48 * 8 * (tier - 4)));
 
             case PISTON -> builder
                     .outputs(getPistonByTier(tier).getStackForm(64))
@@ -250,8 +253,7 @@ public class CoALRecipes {
                     .inputs(getMotorByTier(tier).getStackForm(48))
                     .input(cableGtHex, getCableByTier(tier), 6)
                     .fluidInputs(SolderingAlloy.getFluid((int) (48 * L * Math.pow(2, tier - LuV))))
-                    .fluidInputs(Lubricant.getFluid((int) (48 * 250 * Math.pow(2, tier - LuV))))
-                    .fluidInputs(tier > ZPM ? Naquadria.getFluid(L * 4 * 48) : null);
+                    .fluidInputs(Lubricant.getFluid((int) (48 * 250 * Math.pow(2, tier - LuV))));
 
             case PUMP -> builder
                     .outputs(getPumpByTier(tier).getStackForm(64))
@@ -262,9 +264,7 @@ public class CoALRecipes {
                     .fluidInputs(Lubricant.getFluid((int) (48 * 250 * Math.pow(2, tier - LuV))))
                     .fluidInputs(getFluidPipeMaterialByTier(tier).getFluid(getFluidPipeAsFluidAmountByTier(tier) * 48))
                     .fluidInputs(getMainComponentMaterialByTier(tier).getFluid((tier < UV ? 5 : 1) * L * 48))
-                    .fluidInputs(tier >= UV ? getSecondaryComponentMaterialByTier(tier).getFluid(L * 4 * 48) : null)
-                    .fluidInputs(SiliconeRubber.getFluid((int) Math.pow(2, tier - LuV) * 48 * L))
-                    .fluidInputs(tier > ZPM ? Naquadria.getFluid(L * 4 * 48) : null);
+                    .fluidInputs(SiliconeRubber.getFluid((int) Math.pow(2, tier - LuV) * 48 * L));
 
             case ROBOT_ARM -> builder.outputs(getRobotArmByTier(tier).getStackForm(64))
                     .input(circuit, getMarkerMaterialByTier(tier), 48)
@@ -275,8 +275,7 @@ public class CoALRecipes {
                     .inputs(getMotorByTier(tier).getStackForm(96))
                     .fluidInputs(SolderingAlloy.getFluid((int) (48 * L * Math.pow(2, tier - LuV))))
                     .fluidInputs(Lubricant.getFluid((int) (48 * 250 * Math.pow(2, tier - LuV))))
-                    .fluidInputs(getMainComponentMaterialByTier(tier).getFluid(L * 11 * 48))
-                    .fluidInputs(tier > ZPM ? Naquadria.getFluid(L * 4 * 48) : null);
+                    .fluidInputs(getMainComponentMaterialByTier(tier).getFluid(L * 11 * 48));
 
             case CONVEYOR -> builder
                     .outputs(getConveyorByTier(tier).getStackForm(64))
@@ -286,32 +285,29 @@ public class CoALRecipes {
                     .fluidInputs(SolderingAlloy.getFluid((int) (48 * L * Math.pow(2, tier - LuV))))
                     .fluidInputs(Lubricant.getFluid((int) (48 * 250 * Math.pow(2, tier - LuV))))
                     .fluidInputs(getMainComponentMaterialByTier(tier).getFluid(424 * 48))
-                    .fluidInputs(StyreneButadieneRubber.getFluid(L * 48 * 8 * (tier - 5)))
-                    .fluidInputs(tier > ZPM ? Naquadria.getFluid(L * 4 * 48) : null);
+                    .fluidInputs(StyreneButadieneRubber.getFluid(L * 48 * 8 * (tier - 5)));
 
             case EMITTER -> builder
                     .outputs(getEmitterByTier(tier).getStackForm(64))
                     .input(cableGtHex, getCableByTier(tier), 24)
                     .inputs(getMotorByTier(tier).getStackForm(48))
-                    .input(getStarByTier(tier), tier == ZPM ? 2 : 1)
+                    .input(getStarByTier(tier), 48)
                     .input(frameGt, tier == ZPM ? NaquadahAlloy : getMainComponentMaterialByTier(tier), 48)
                     .input(circuit, getMarkerMaterialByTier(tier), 96)
                     .fluidInputs(SolderingAlloy.getFluid((int) (48 * L * Math.pow(2, tier - LuV))))
                     .fluidInputs(getSensorEmitterFoilByTier(tier).getFluid(L * 48 * 24))
-                    .fluidInputs(getSensorEmitterPlateRodByTier(tier).getFluid(L * 48 * 4))
-                    .fluidInputs(tier > ZPM ? Naquadria.getFluid(L * 4 * 48) : null);
+                    .fluidInputs(getSensorEmitterPlateRodByTier(tier).getFluid(L * 48 * 4));
 
             case SENSOR -> builder
                     .outputs(getSensorByTier(tier).getStackForm(64))
                     .input(cableGtHex, getCableByTier(tier), 24)
                     .inputs(getMotorByTier(tier).getStackForm(48))
-                    .input(getStarByTier(tier), tier == ZPM ? 2 : 1)
+                    .input(getStarByTier(tier), 48)
                     .input(frameGt, tier == ZPM ? NaquadahAlloy : getMainComponentMaterialByTier(tier), 48)
                     .input(circuit, getMarkerMaterialByTier(tier), 96)
                     .fluidInputs(SolderingAlloy.getFluid((int) (48 * L * Math.pow(2, tier - LuV))))
                     .fluidInputs(getSensorEmitterFoilByTier(tier).getFluid(L * 48 * 24))
-                    .fluidInputs(getSensorEmitterPlateRodByTier(tier).getFluid(L * 48 * 4))
-                    .fluidInputs(tier > ZPM ? Naquadria.getFluid(L * 4 * 48) : null);
+                    .fluidInputs(getSensorEmitterPlateRodByTier(tier).getFluid(L * 48 * 4));
 
             case FIELD_GEN -> builder
                     .outputs(getFieldGeneratorByTier(tier).getStackForm(64))
@@ -322,9 +318,40 @@ public class CoALRecipes {
                     .inputs(getEmitterByTier(tier).getStackForm(96))
                     .input(circuit, getMarkerMaterialByTier(tier), 384)
                     .fluidInputs(SolderingAlloy.getFluid(L * 48 * 4 * (tier - 5)))
-                    .fluidInputs(getSuperconductorByTier(tier).getFluid(L * 16 * 48))
-                    .fluidInputs(tier > ZPM ? Naquadria.getFluid(L * 4 * 48) : null);
-        };
+                    .fluidInputs(getSuperconductorByTier(tier).getFluid(L * 16 * 48));
+        }
+
+        if (type == PUMP && tier >= UV) {
+            builder.fluidInputs(getSecondaryComponentMaterialByTier(tier).getFluid(L * 4 * 48));
+        }
+
+        if (tier > ZPM) {
+            boolean alreadyHasNaquadria = false;
+            List<GTRecipeInput> originalInputs = new ArrayList<>(builder.getFluidInputs());
+
+            for (GTRecipeInput recipeInput : originalInputs) {
+                if (recipeInput.getInputFluidStack().isFluidEqual(Naquadria.getFluid(1))) {
+                    alreadyHasNaquadria = true;
+                }
+            }
+
+            if (alreadyHasNaquadria) {
+                builder.clearFluidInputs();
+
+                for (GTRecipeInput recipeInput : originalInputs) {
+                    if (recipeInput.getInputFluidStack().isFluidEqual(Naquadria.getFluid(1))) {
+                        builder.fluidInputs(Naquadria.getFluid(L * 4 * 48 + recipeInput.getAmount()));
+                        continue;
+                    }
+
+                    builder.fluidInputs(recipeInput);
+                }
+            } else {
+                builder.fluidInputs(Naquadria.getFluid(L * 4 * 48));
+            }
+        }
+
+        return builder;
     }
 
     public enum coalRecipeType {

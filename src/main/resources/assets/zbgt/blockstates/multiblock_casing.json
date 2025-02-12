@@ -10,7 +10,7 @@
     "variant": {
       "iridium": {
         "textures": {
-          "all": "gregtech:blocks/casings/multiblocks/iridium"
+          "all": "gregtech:blocks/casings/material/iridium"
         }
       }
     }
