@@ -35,8 +35,8 @@ public class FilterTestSlot extends WidgetGroup {
         this.itemMatcher = itemMatcher;
 
         addWidget(slotWidget);
-        addWidget(this.match);
-        addWidget(this.noMatch);
+        addWidget(match);
+        addWidget(noMatch);
     }
 
     public void update() {
