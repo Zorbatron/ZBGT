@@ -24,7 +24,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenCustomHashMap;
 public class RegistryNameItemFilterCover extends ItemFilter {
 
     @NotNull
-    private String expression = "";
+    private String regex = "";
     private final Object2ObjectOpenCustomHashMap<ItemStack, Boolean> matchCache = new Object2ObjectOpenCustomHashMap<>(
             ItemStackHashStrategy.builder().compareItem(true).build());
 
@@ -50,7 +50,7 @@ public class RegistryNameItemFilterCover extends ItemFilter {
             ResourceLocation resloc = Item.REGISTRY.getNameForObject(itemStack.getItem());
             if (resloc == null) return false;
             String name = resloc.toString();
-            return Pattern.matches(expression, name);
+            return Pattern.matches(regex, name);
         });
     }
 
@@ -68,12 +68,12 @@ public class RegistryNameItemFilterCover extends ItemFilter {
         }
 
         widgetGroup.accept(new ImageWidget(10, 22, 154, 18, GuiTextures.DISPLAY));
-        widgetGroup.accept(new TextFieldWidget2(14, 26, 150, 14, this::getPattern, this::setPattern));
+        widgetGroup.accept(new TextFieldWidget2(14, 26, 150, 14, this::getRegex, this::setRegex));
     }
 
-    private void setPattern(String pattern) {
-        if (!expression.equals(pattern)) {
-            expression = pattern;
+    private void setRegex(String newRegex) {
+        if (!regex.equals(newRegex)) {
+            regex = newRegex;
             matchCache.clear();
             for (FilterTestSlot testSlot : testSlots) {
                 if (testSlot == null) continue;
@@ -82,17 +82,18 @@ public class RegistryNameItemFilterCover extends ItemFilter {
         }
     }
 
-    private String getPattern() {
-        return expression;
+    @NotNull
+    private String getRegex() {
+        return regex;
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tagCompound) {
-        tagCompound.setString("Filter", getPattern());
+        tagCompound.setString("Filter", getRegex());
     }
 
     @Override
     public void readFromNBT(NBTTagCompound tagCompound) {
-        setPattern(tagCompound.getString("Filter"));
+        setRegex(tagCompound.getString("Filter"));
     }
 }

@@ -22,7 +22,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenCustomHashMap;
 public class LocalNameFluidFilterCover extends FluidFilter {
 
     @NotNull
-    private String expression = "";
+    private String regex = "";
     private final Object2ObjectOpenCustomHashMap<FluidStack, Boolean> matchCache = new Object2ObjectOpenCustomHashMap<>(
             FluidStackHashStrategy.builder().compareFluid().build());
 
@@ -31,7 +31,7 @@ public class LocalNameFluidFilterCover extends FluidFilter {
     @Override
     public boolean testFluid(@NotNull FluidStack fluidStack) {
         return ZBGTUtility.computeIfAbsentDiffKey(matchCache, fluidStack, fluidStack::copy,
-                stack -> Pattern.matches(expression, stack.getUnlocalizedName()));
+                stack -> Pattern.matches(regex, stack.getUnlocalizedName()));
     }
 
     @Override
@@ -53,12 +53,12 @@ public class LocalNameFluidFilterCover extends FluidFilter {
         }
 
         widgetGroup.accept(new ImageWidget(10, 22, 154, 18, GuiTextures.DISPLAY));
-        widgetGroup.accept(new TextFieldWidget2(14, 26, 150, 14, this::getPattern, this::setPattern));
+        widgetGroup.accept(new TextFieldWidget2(14, 26, 150, 14, this::getRegex, this::setRegex));
     }
 
-    private void setPattern(String pattern) {
-        if (!expression.equals(pattern)) {
-            expression = pattern;
+    private void setRegex(String newRegex) {
+        if (!regex.equals(newRegex)) {
+            regex = newRegex;
             matchCache.clear();
             for (FilterTestFluidSlot testSlot : testSlots) {
                 if (testSlot == null) continue;
@@ -67,18 +67,19 @@ public class LocalNameFluidFilterCover extends FluidFilter {
         }
     }
 
-    private String getPattern() {
-        return expression;
+    @NotNull
+    private String getRegex() {
+        return regex;
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tagCompound) {
-        tagCompound.setString("Filter", getPattern());
+        tagCompound.setString("Filter", getRegex());
     }
 
     @Override
     public void readFromNBT(NBTTagCompound tagCompound) {
-        setPattern(tagCompound.getString("Filter"));
+        setRegex(tagCompound.getString("Filter"));
     }
 
     @Override
