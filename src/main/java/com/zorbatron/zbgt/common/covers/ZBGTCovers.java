@@ -6,7 +6,11 @@ import com.zorbatron.zbgt.api.util.ZBGTLog;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 
 import gregtech.api.GTValues;
+import gregtech.client.renderer.texture.Textures;
 import gregtech.common.covers.CoverBehaviors;
+import gregtech.common.covers.CoverFluidFilter;
+import gregtech.common.covers.CoverItemFilter;
+import gregtech.common.covers.filter.FilterTypeRegistry;
 
 public final class ZBGTCovers {
 
@@ -74,5 +78,17 @@ public final class ZBGTCovers {
                 (def, tile, side) -> new CoverDropper(def, tile, side, 8 * 2048));
         CoverBehaviors.registerBehavior(zbgtId("cover_dropper.opv"), ZBGTMetaItems.DROPPER_COVER_OpV,
                 (def, tile, side) -> new CoverDropper(def, tile, side, 8 * 4096));
+
+        FilterTypeRegistry.registerItemFilter(5, RegistryNameItemFilterCover.class,
+                ZBGTMetaItems.REGNAME_FILTER_ITEM.getStackForm());
+        CoverBehaviors.registerBehavior(zbgtId("cover_regname_item"), ZBGTMetaItems.REGNAME_FILTER_ITEM,
+                (def, tile, side) -> new CoverItemFilter(def, tile, side, "cover.regname_item.title",
+                        Textures.ITEM_FILTER_FILTER_OVERLAY, new RegistryNameItemFilterCover()));
+
+        FilterTypeRegistry.registerFluidFilter(6, LocalNameFluidFilterCover.class,
+                ZBGTMetaItems.REGNAME_FILTER_FLUID.getStackForm());
+        CoverBehaviors.registerBehavior(zbgtId("cover_localname_fluid"), ZBGTMetaItems.REGNAME_FILTER_FLUID,
+                (def, tile, side) -> new CoverFluidFilter(def, tile, side, "cover.localname_fluid.title",
+                        Textures.FLUID_FILTER_OVERLAY, new LocalNameFluidFilterCover()));
     }
 }
