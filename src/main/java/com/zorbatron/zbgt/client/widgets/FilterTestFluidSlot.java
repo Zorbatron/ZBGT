@@ -16,6 +16,7 @@ public class FilterTestFluidSlot extends WidgetGroup {
 
     private final ImageWidget match;
     private final ImageWidget noMatch;
+    private boolean fluidMatches = false;
 
     @Nullable
     private FluidStack testStack;
@@ -27,6 +28,9 @@ public class FilterTestFluidSlot extends WidgetGroup {
         super(x, y, 18, 18);
         this.match = new ImageWidget(18 - 5, -3, 9, 6, GuiTextures.ORE_FILTER_MATCH);
         this.noMatch = new ImageWidget(18 - 5, -3, 7, 7, GuiTextures.ORE_FILTER_NO_MATCH);
+        match.setPredicate(() -> fluidMatches);
+        noMatch.setPredicate(() -> !fluidMatches);
+
         PhantomFluidWidget tankWidget = new PhantomFluidWidget(0, 0, 18, 18, () -> testStack,
                 fluidStack -> {
                     testStack = fluidStack;
@@ -42,11 +46,8 @@ public class FilterTestFluidSlot extends WidgetGroup {
     }
 
     public void update() {
-        boolean fluidMatches;
         if (testStack != null) {
             fluidMatches = fluidMatcher.apply(testStack);
         } else fluidMatches = false;
-        match.setVisible(fluidMatches);
-        noMatch.setVisible(!fluidMatches);
     }
 }
