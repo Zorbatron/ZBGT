@@ -19,7 +19,7 @@ import gregtech.api.gui.widgets.TextFieldWidget2;
 import gregtech.common.covers.filter.FluidFilter;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenCustomHashMap;
 
-public class RegistryNameFluidFilterCover extends FluidFilter {
+public class LocalNameFluidFilterCover extends FluidFilter {
 
     @NotNull
     private String expression = "";
