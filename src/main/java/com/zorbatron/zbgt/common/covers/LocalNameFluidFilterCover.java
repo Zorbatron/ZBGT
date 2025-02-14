@@ -47,13 +47,13 @@ public class LocalNameFluidFilterCover extends FluidFilter {
     @Override
     public void initUI(Consumer<Widget> widgetGroup) {
         for (int x = 0; x < 5; x++) {
-            FilterTestFluidSlot testSlot = new FilterTestFluidSlot(20 + 22 * x, 0, this::testFluid);
+            FilterTestFluidSlot testSlot = new FilterTestFluidSlot(10 + 22 * x, 0, this::testFluid);
             testSlots[x] = testSlot;
             widgetGroup.accept(testSlot);
         }
 
-        widgetGroup.accept(new ImageWidget(10, 22, 154, 18, GuiTextures.DISPLAY));
-        widgetGroup.accept(new TextFieldWidget2(14, 26, 150, 14, this::getRegex, this::setRegex));
+        widgetGroup.accept(new ImageWidget(10 - 22, 22 + 5, 154, 18, GuiTextures.DISPLAY));
+        widgetGroup.accept(new TextFieldWidget2(14 - 22, 26 + 5, 150, 14, this::getRegex, this::setRegex));
     }
 
     private void setRegex(String newRegex) {
