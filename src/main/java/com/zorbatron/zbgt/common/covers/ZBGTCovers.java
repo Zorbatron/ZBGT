@@ -87,8 +87,8 @@ public final class ZBGTCovers {
 
         FilterTypeRegistry.registerFluidFilter(6, LocalNameFluidFilterCover.class,
                 ZBGTMetaItems.REGNAME_FILTER_FLUID.getStackForm());
-        CoverBehaviors.registerBehavior(zbgtId("cover_regname_fluid"), ZBGTMetaItems.REGNAME_FILTER_FLUID,
-                (def, tile, side) -> new CoverFluidFilter(def, tile, side, "cover.regname_fluid.title",
+        CoverBehaviors.registerBehavior(zbgtId("cover_localname_fluid"), ZBGTMetaItems.REGNAME_FILTER_FLUID,
+                (def, tile, side) -> new CoverFluidFilter(def, tile, side, "cover.localname_fluid.title",
                         Textures.FLUID_FILTER_OVERLAY, new LocalNameFluidFilterCover()));
     }
 }

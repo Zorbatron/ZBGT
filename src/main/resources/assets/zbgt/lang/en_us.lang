@@ -136,6 +136,14 @@ cover.cover_dropper.update_rate.2=ticks
 cover.cover_dropper.update_rate.3=Dropping every tick
 cover.cover_dropper.tooltip=Can drop up to §f%,d items/s§7
 
+metaitem.registry_name_filter_item.name=Item registry name filter
+metaitem.registry_name_filter_item.tooltip=Filters items using regex on the resource location. F3+H to see extra information under items.
+
+metaitem.local_name_filter_fluid.name=Fluid local name filter
+metaitem.local_name_filter_fluid.tooltip=Filters fluids using regex on the untranslated name of fluids.
+metaitem.local_name_filter_fluid.tooltip.1=Unfortunately there's no way to see the untranslated name of fluids in-game.
+metaitem.local_name_filter_fluid.tooltip.2=But for example, normal GT fluids are "fluid.material_name" and GCYM molten fluids are "fluid.molten.material_name"
+
 
 # Items
 metaitem.generic_circuit.ulv.name=Generic ULV Circuit

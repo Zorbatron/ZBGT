@@ -362,6 +362,12 @@ public class ZBGTMetaItem extends StandardMetaItem {
                 .addComponents(new ElectricStats(393_216_000, IV, true, true));
 
         REGNAME_FILTER_ITEM = addItem(148, "registry_name_filter_item");
-        REGNAME_FILTER_FLUID = addItem(149, "registry_name_filter_fluid");
+        // .addComponents(new TooltipBehavior(list -> list.add(I18n.format(""))));
+        REGNAME_FILTER_FLUID = addItem(149, "local_name_filter_fluid")
+                .addComponents(new TooltipBehavior(
+                        list -> {
+                            list.add(I18n.format("metaitem.local_name_filter_fluid.tooltip.1"));
+                            list.add(I18n.format("metaitem.local_name_filter_fluid.tooltip.2"));
+                        }));
     }
 }
