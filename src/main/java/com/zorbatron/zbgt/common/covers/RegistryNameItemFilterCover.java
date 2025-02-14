@@ -10,6 +10,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.zorbatron.zbgt.api.util.ZBGTUtility;
+
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.ImageWidget;
@@ -41,7 +43,7 @@ public class RegistryNameItemFilterCover extends ItemFilter {
     }
 
     public boolean matchesItemStack(@NotNull ItemStack itemStack) {
-        return matchCache.computeIfAbsent(itemStack, stack -> {
+        return ZBGTUtility.computeIfAbsentDiffKey(matchCache, itemStack, itemStack::copy, stack -> {
             ResourceLocation resloc = Item.REGISTRY.getNameForObject(itemStack.getItem());
             if (resloc == null) return false;
             String name = resloc.toString();
@@ -61,8 +63,10 @@ public class RegistryNameItemFilterCover extends ItemFilter {
     }
 
     private void setPattern(String pattern) {
-        this.expression = pattern;
-        matchCache.clear();
+        if (!expression.equals(pattern)) {
+            expression = pattern;
+            matchCache.clear();
+        }
     }
 
     private String getPattern() {

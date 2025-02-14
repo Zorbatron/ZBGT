@@ -1,5 +1,9 @@
 package com.zorbatron.zbgt.api.util;
 
+import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.items.IItemHandler;
@@ -15,7 +19,7 @@ import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 
-public class ZBGTUtility {
+public final class ZBGTUtility {
 
     public static @NotNull ResourceLocation zbgtId(@NotNull String path) {
         return new ResourceLocation(ZBGTCore.MODID, path);
@@ -72,5 +76,19 @@ public class ZBGTUtility {
     public static void removeNotifiableFromMTE(INotifiableHandler notifiableHandler,
                                                MultiblockControllerBase controllerBase) {
         notifiableHandler.removeNotifiableMetaTileEntity(controllerBase);
+    }
+
+    public static <K, V> V computeIfAbsentDiffKey(Map<K, V> map, K key, Supplier<K> keyToPut,
+                                                  Function<? super K, ? extends V> mappingFunction) {
+        V v;
+        if ((v = map.get(key)) == null) {
+            V newValue;
+            if ((newValue = mappingFunction.apply(key)) != null) {
+                map.put(keyToPut.get(), newValue);
+                return newValue;
+            }
+        }
+
+        return v;
     }
 }
