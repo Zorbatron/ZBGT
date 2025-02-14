@@ -11,6 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 import com.zorbatron.zbgt.api.util.ZBGTUtility;
+import com.zorbatron.zbgt.client.widgets.FilterTestSlot;
 
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
@@ -26,6 +27,8 @@ public class RegistryNameItemFilterCover extends ItemFilter {
     private String expression = "";
     private final Object2ObjectOpenCustomHashMap<ItemStack, Boolean> matchCache = new Object2ObjectOpenCustomHashMap<>(
             ItemStackHashStrategy.builder().compareItem(true).build());
+
+    private final FilterTestSlot[] testSlots = new FilterTestSlot[5];
 
     @Override
     public boolean showGlobalTransferLimitSlider() {
@@ -58,7 +61,13 @@ public class RegistryNameItemFilterCover extends ItemFilter {
 
     @Override
     public void initUI(Consumer<Widget> widgetGroup) {
-        widgetGroup.accept(new ImageWidget(10, 24, 154, 16, GuiTextures.DISPLAY));
+        for (int x = 0; x < 5; x++) {
+            FilterTestSlot testSlot = new FilterTestSlot(20 + 22 * x, 0, this::matchesItemStack);
+            testSlots[x] = testSlot;
+            widgetGroup.accept(testSlot);
+        }
+
+        widgetGroup.accept(new ImageWidget(10, 22, 154, 18, GuiTextures.DISPLAY));
         widgetGroup.accept(new TextFieldWidget2(14, 26, 150, 14, this::getPattern, this::setPattern));
     }
 
@@ -66,6 +75,10 @@ public class RegistryNameItemFilterCover extends ItemFilter {
         if (!expression.equals(pattern)) {
             expression = pattern;
             matchCache.clear();
+            for (FilterTestSlot testSlot : testSlots) {
+                if (testSlot == null) continue;
+                testSlot.update();
+            }
         }
     }
 
