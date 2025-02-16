@@ -2,6 +2,7 @@ package com.zorbatron.zbgt.common.covers;
 
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,6 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.util.ZBGTUtility;
 import com.zorbatron.zbgt.client.widgets.FilterTestSlot;
 
@@ -24,7 +26,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenCustomHashMap;
 public class RegistryNameItemFilterCover extends ItemFilter {
 
     @NotNull
-    private String regex = "";
+    private Pattern regex = ZBGTAPI.EMPTY_PATTERN;
     private final Object2ObjectOpenCustomHashMap<ItemStack, Boolean> matchCache = new Object2ObjectOpenCustomHashMap<>(
             ItemStackHashStrategy.builder().compareItem(true).build());
 
@@ -46,11 +48,13 @@ public class RegistryNameItemFilterCover extends ItemFilter {
     }
 
     public boolean matchesItemStack(@NotNull ItemStack itemStack) {
+        if (regex == ZBGTAPI.EMPTY_PATTERN) return false;
+
         return ZBGTUtility.computeIfAbsentDiffKey(matchCache, itemStack, itemStack::copy, stack -> {
             ResourceLocation resloc = Item.REGISTRY.getNameForObject(itemStack.getItem());
             if (resloc == null) return false;
             String name = resloc.toString();
-            return Pattern.matches(regex, name);
+            return regex.matcher(name).matches();
         });
     }
 
@@ -68,13 +72,19 @@ public class RegistryNameItemFilterCover extends ItemFilter {
         }
 
         widgetGroup.accept(new ImageWidget(10, 22, 154, 18, GuiTextures.DISPLAY));
-        widgetGroup.accept(new TextFieldWidget2(14, 26, 150, 14, this::getRegex, this::setRegex));
+        widgetGroup.accept(new TextFieldWidget2(14, 26, 150, 14, this::getPattern, this::setRegex));
     }
 
     private void setRegex(String newRegex) {
-        if (!regex.equals(newRegex)) {
-            regex = newRegex;
+        if (!newRegex.equals(getPattern())) {
             matchCache.clear();
+
+            try {
+                regex = Pattern.compile(newRegex);
+            } catch (PatternSyntaxException e) {
+                regex = ZBGTAPI.EMPTY_PATTERN;
+            }
+
             for (FilterTestSlot testSlot : testSlots) {
                 if (testSlot == null) continue;
                 testSlot.update();
@@ -83,13 +93,13 @@ public class RegistryNameItemFilterCover extends ItemFilter {
     }
 
     @NotNull
-    private String getRegex() {
-        return regex;
+    private String getPattern() {
+        return regex.pattern();
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tagCompound) {
-        tagCompound.setString("Filter", getRegex());
+        tagCompound.setString("Filter", getPattern());
     }
 
     @Override
