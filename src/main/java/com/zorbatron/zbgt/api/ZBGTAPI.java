@@ -1,5 +1,7 @@
 package com.zorbatron.zbgt.api;
 
+import java.util.regex.Pattern;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -33,4 +35,6 @@ public class ZBGTAPI {
 
     public static FluidStack pyrotheum;
     public static FluidStack cryotheum;
+
+    public static final Pattern EMPTY_PATTERN = Pattern.compile("");
 }
