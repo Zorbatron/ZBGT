@@ -2,12 +2,14 @@ package com.zorbatron.zbgt.common.covers;
 
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.util.FluidStackHashStrategy;
 import com.zorbatron.zbgt.api.util.ZBGTUtility;
 import com.zorbatron.zbgt.client.widgets.FilterTestFluidSlot;
@@ -22,7 +24,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenCustomHashMap;
 public class LocalNameFluidFilterCover extends FluidFilter {
 
     @NotNull
-    private String regex = "";
+    private Pattern regex = ZBGTAPI.EMPTY_PATTERN;
     private final Object2ObjectOpenCustomHashMap<FluidStack, Boolean> matchCache = new Object2ObjectOpenCustomHashMap<>(
             FluidStackHashStrategy.builder().compareFluid().build());
 
@@ -31,7 +33,7 @@ public class LocalNameFluidFilterCover extends FluidFilter {
     @Override
     public boolean testFluid(@NotNull FluidStack fluidStack) {
         return ZBGTUtility.computeIfAbsentDiffKey(matchCache, fluidStack, fluidStack::copy,
-                stack -> Pattern.matches(regex, stack.getUnlocalizedName()));
+                stack -> regex.matcher(stack.getUnlocalizedName()).matches());
     }
 
     @Override
@@ -53,13 +55,19 @@ public class LocalNameFluidFilterCover extends FluidFilter {
         }
 
         widgetGroup.accept(new ImageWidget(10 - 22, 22 + 5, 154, 18, GuiTextures.DISPLAY));
-        widgetGroup.accept(new TextFieldWidget2(14 - 22, 26 + 5, 150, 14, this::getRegex, this::setRegex));
+        widgetGroup.accept(new TextFieldWidget2(14 - 22, 26 + 5, 150, 14, this::getPattern, this::setRegex));
     }
 
     private void setRegex(String newRegex) {
-        if (!regex.equals(newRegex)) {
-            regex = newRegex;
+        if (!newRegex.equals(getPattern())) {
             matchCache.clear();
+
+            try {
+                regex = Pattern.compile(newRegex);
+            } catch (PatternSyntaxException e) {
+                regex = ZBGTAPI.EMPTY_PATTERN;
+            }
+
             for (FilterTestFluidSlot testSlot : testSlots) {
                 if (testSlot == null) continue;
                 testSlot.update();
@@ -68,13 +76,13 @@ public class LocalNameFluidFilterCover extends FluidFilter {
     }
 
     @NotNull
-    private String getRegex() {
-        return regex;
+    private String getPattern() {
+        return regex.pattern();
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tagCompound) {
-        tagCompound.setString("Filter", getRegex());
+        tagCompound.setString("Filter", getPattern());
     }
 
     @Override
