@@ -24,6 +24,7 @@ public class CoverRecipes {
         dualCovers();
         preciseDualCovers();
         dropperCovers();
+        misc();
     }
 
     private static void dualCovers() {
@@ -184,5 +185,42 @@ public class CoverRecipes {
                 .output(getDropperCoverByTier(UV))
                 .EUt(VA[UV]).duration(20 * 10)
                 .buildAndRegister();
+    }
+
+    private static void misc() {
+        ModHandler.addShapedRecipe("regname_item_filter", REGNAME_FILTER_ITEM.getStackForm(),
+                "FFF",
+                "SPF",
+                "FFF",
+                'F', new UnificationEntry(OrePrefix.foil, Materials.Zinc),
+                'P', new UnificationEntry(OrePrefix.plate, Materials.Titanium),
+                'S', SENSOR_EV);
+
+        ModHandler.addShapedRecipe("local_name_fluid_filter_lapis", REGNAME_FILTER_FLUID.getStackForm(),
+                "LFL",
+                "SPF",
+                "LFL",
+                'F', new UnificationEntry(OrePrefix.foil, Materials.Zinc),
+                'P', new UnificationEntry(OrePrefix.plate, Materials.TungstenSteel),
+                'S', SENSOR_IV,
+                'L', new UnificationEntry(OrePrefix.plate, Materials.Lapis));
+
+        ModHandler.addShapedRecipe("local_name_fluid_filter_lazurite", REGNAME_FILTER_FLUID.getStackForm(),
+                "LFL",
+                "SPF",
+                "LFL",
+                'F', new UnificationEntry(OrePrefix.foil, Materials.Zinc),
+                'P', new UnificationEntry(OrePrefix.plate, Materials.TungstenSteel),
+                'S', SENSOR_IV,
+                'L', new UnificationEntry(OrePrefix.plate, Materials.Lazurite));
+
+        ModHandler.addShapedRecipe("local_name_fluid_filter_sodalite", REGNAME_FILTER_FLUID.getStackForm(),
+                "LFL",
+                "SPF",
+                "LFL",
+                'F', new UnificationEntry(OrePrefix.foil, Materials.Zinc),
+                'P', new UnificationEntry(OrePrefix.plate, Materials.TungstenSteel),
+                'S', SENSOR_IV,
+                'L', new UnificationEntry(OrePrefix.plate, Materials.Sodalite));
     }
 }

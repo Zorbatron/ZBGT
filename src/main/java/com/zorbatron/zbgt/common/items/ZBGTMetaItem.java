@@ -360,5 +360,14 @@ public class ZBGTMetaItem extends StandardMetaItem {
 
         GREGTECH_COMPUTER_CUBE = addItem(147, "gregtech_computer_cube")
                 .addComponents(new ElectricStats(393_216_000, IV, true, true));
+
+        REGNAME_FILTER_ITEM = addItem(148, "registry_name_filter_item");
+        // .addComponents(new TooltipBehavior(list -> list.add(I18n.format(""))));
+        REGNAME_FILTER_FLUID = addItem(149, "local_name_filter_fluid")
+                .addComponents(new TooltipBehavior(
+                        list -> {
+                            list.add(I18n.format("metaitem.local_name_filter_fluid.tooltip.1"));
+                            list.add(I18n.format("metaitem.local_name_filter_fluid.tooltip.2"));
+                        }));
     }
 }

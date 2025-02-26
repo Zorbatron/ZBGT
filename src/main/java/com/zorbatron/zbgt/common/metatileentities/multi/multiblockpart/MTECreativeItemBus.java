@@ -162,7 +162,9 @@ public class MTECreativeItemBus extends MetaTileEntityMultiblockNotifiablePart i
         if (this.circuitItemStackHandler.getCircuitValue() == config) {
             return;
         }
+
         this.circuitItemStackHandler.setCircuitValue(config);
+
         if (!getWorld().isRemote) {
             markDirty();
         }

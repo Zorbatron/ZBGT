@@ -175,6 +175,9 @@ public class ZBGTMetaItems {
 
     public static MetaItem<?>.MetaValueItem GREGTECH_COMPUTER_CUBE;
 
+    public static MetaItem<?>.MetaValueItem REGNAME_FILTER_ITEM;
+    public static MetaItem<?>.MetaValueItem REGNAME_FILTER_FLUID;
+
     public static void init() {
         ZBGTMetaItem item = new ZBGTMetaItem();
         item.setRegistryName("zbgt_meta_item");
