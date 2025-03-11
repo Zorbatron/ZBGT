@@ -90,5 +90,12 @@ public final class ZBGTCovers {
         CoverBehaviors.registerBehavior(zbgtId("cover_localname_fluid"), ZBGTMetaItems.REGNAME_FILTER_FLUID,
                 (def, tile, side) -> new CoverFluidFilter(def, tile, side, "cover.localname_fluid.title",
                         Textures.FLUID_FILTER_OVERLAY, new LocalNameFluidFilterCover()));
+
+        FilterTypeRegistry.registerFluidFilter(7, CoverTemperatureFilter.class,
+                ZBGTMetaItems.TEMPERATURE_FILTER_FLUID.getStackForm());
+        CoverBehaviors.registerBehavior(zbgtId("cover_fluid_temperature_filter"),
+                ZBGTMetaItems.TEMPERATURE_FILTER_FLUID,
+                (def, tile, side) -> new CoverFluidFilter(def, tile, side, "cover.fluid_temperature_filter.title",
+                        Textures.FLUID_FILTER_OVERLAY, new CoverTemperatureFilter()));
     }
 }

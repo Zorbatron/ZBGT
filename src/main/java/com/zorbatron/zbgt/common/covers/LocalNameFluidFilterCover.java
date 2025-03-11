@@ -19,14 +19,14 @@ import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.ImageWidget;
 import gregtech.api.gui.widgets.TextFieldWidget2;
 import gregtech.common.covers.filter.FluidFilter;
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenCustomHashMap;
+import it.unimi.dsi.fastutil.objects.Object2BooleanOpenCustomHashMap;
 
 public class LocalNameFluidFilterCover extends FluidFilter {
 
     @NotNull
     private Pattern regex = ZBGTAPI.EMPTY_PATTERN;
-    private final Object2ObjectOpenCustomHashMap<FluidStack, Boolean> matchCache = new Object2ObjectOpenCustomHashMap<>(
-            FluidStackHashStrategy.builder().compareFluid().build());
+    private final Object2BooleanOpenCustomHashMap<FluidStack> matchCache = new Object2BooleanOpenCustomHashMap<>(
+            FluidStackHashStrategy.compareFluid);
 
     private final FilterTestFluidSlot[] testSlots = new FilterTestFluidSlot[5];
 
@@ -48,11 +48,7 @@ public class LocalNameFluidFilterCover extends FluidFilter {
 
     @Override
     public void initUI(Consumer<Widget> widgetGroup) {
-        for (int x = 0; x < 5; x++) {
-            FilterTestFluidSlot testSlot = new FilterTestFluidSlot(10 + 22 * x, 0, this::testFluid);
-            testSlots[x] = testSlot;
-            widgetGroup.accept(testSlot);
-        }
+        FilterTestFluidSlot.createTestSlotArray(widgetGroup, testSlots, this::testFluid);
 
         widgetGroup.accept(new ImageWidget(10 - 22, 22 + 5, 154, 18, GuiTextures.DISPLAY));
         widgetGroup.accept(new TextFieldWidget2(14 - 22, 26 + 5, 150, 14, this::getPattern, this::setRegex));

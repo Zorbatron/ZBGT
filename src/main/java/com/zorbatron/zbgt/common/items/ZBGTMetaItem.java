@@ -369,5 +369,6 @@ public class ZBGTMetaItem extends StandardMetaItem {
                             list.add(I18n.format("metaitem.local_name_filter_fluid.tooltip.1"));
                             list.add(I18n.format("metaitem.local_name_filter_fluid.tooltip.2"));
                         }));
+        TEMPERATURE_FILTER_FLUID = addItem(150, "fluid_temperature_filter");
     }
 }

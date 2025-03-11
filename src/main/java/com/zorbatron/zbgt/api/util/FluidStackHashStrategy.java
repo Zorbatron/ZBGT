@@ -10,25 +10,29 @@ import it.unimi.dsi.fastutil.Hash;
 
 public interface FluidStackHashStrategy extends Hash.Strategy<FluidStack> {
 
-    static FluidStackHashStrategyBuilder builder() {
-        return new FluidStackHashStrategyBuilder();
+    FluidStackHashStrategy compareFluid = builder()
+            .compareFluid()
+            .build();
+
+    static Builder builder() {
+        return new Builder();
     }
 
-    class FluidStackHashStrategyBuilder {
+    class Builder {
 
         private boolean fluid, amount, tag;
 
-        public FluidStackHashStrategyBuilder compareFluid() {
+        public Builder compareFluid() {
             fluid = true;
             return this;
         }
 
-        public FluidStackHashStrategyBuilder compareAmount() {
+        public Builder compareAmount() {
             amount = true;
             return this;
         }
 
-        public FluidStackHashStrategyBuilder compareTag() {
+        public Builder compareTag() {
             tag = true;
             return this;
         }

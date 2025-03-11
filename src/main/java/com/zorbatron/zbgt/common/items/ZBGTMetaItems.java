@@ -177,6 +177,7 @@ public class ZBGTMetaItems {
 
     public static MetaItem<?>.MetaValueItem REGNAME_FILTER_ITEM;
     public static MetaItem<?>.MetaValueItem REGNAME_FILTER_FLUID;
+    public static MetaItem<?>.MetaValueItem TEMPERATURE_FILTER_FLUID;
 
     public static void init() {
         ZBGTMetaItem item = new ZBGTMetaItem();

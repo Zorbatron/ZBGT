@@ -21,13 +21,13 @@ import gregtech.api.gui.widgets.ImageWidget;
 import gregtech.api.gui.widgets.TextFieldWidget2;
 import gregtech.api.util.ItemStackHashStrategy;
 import gregtech.common.covers.filter.ItemFilter;
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenCustomHashMap;
+import it.unimi.dsi.fastutil.objects.Object2BooleanOpenCustomHashMap;
 
 public class RegistryNameItemFilterCover extends ItemFilter {
 
     @NotNull
     private Pattern regex = ZBGTAPI.EMPTY_PATTERN;
-    private final Object2ObjectOpenCustomHashMap<ItemStack, Boolean> matchCache = new Object2ObjectOpenCustomHashMap<>(
+    private final Object2BooleanOpenCustomHashMap<ItemStack> matchCache = new Object2BooleanOpenCustomHashMap<>(
             ItemStackHashStrategy.builder().compareItem(true).build());
 
     private final FilterTestSlot[] testSlots = new FilterTestSlot[5];
