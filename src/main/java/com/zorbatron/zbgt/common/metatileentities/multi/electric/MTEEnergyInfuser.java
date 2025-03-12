@@ -3,30 +3,24 @@ package com.zorbatron.zbgt.common.metatileentities.multi.electric;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zorbatron.zbgt.api.util.ZBGTUtility;
-import gregtech.api.capability.*;
-import gregtech.api.capability.impl.EnergyContainerList;
-import gregtech.api.capability.impl.ItemHandlerList;
-import gregtech.api.pattern.PatternMatchContext;
-import gregtech.api.util.GTTransferUtils;
-import gregtech.api.util.GTUtility;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandlerModifiable;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
+import com.zorbatron.zbgt.api.util.ZBGTUtility;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
 import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
@@ -35,6 +29,9 @@ import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
+import gregtech.api.capability.*;
+import gregtech.api.capability.impl.EnergyContainerList;
+import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -43,6 +40,9 @@ import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
+import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.util.GTTransferUtils;
+import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockComputerCasing;
@@ -121,7 +121,8 @@ public class MTEEnergyInfuser extends MultiblockWithDisplayBase implements ICont
         if (itemStack.hasCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null)) {
             IElectricItem electricItem = itemStack.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
             if (electricItem == null) return 0;
-            return electricItem.charge(availableEU, GTUtility.getFloorTierByVoltage(energyContainer.getInputVoltage()), true, false);
+            return electricItem.charge(availableEU, GTUtility.getFloorTierByVoltage(energyContainer.getInputVoltage()),
+                    true, false);
         } else if (itemStack.hasCapability(CapabilityEnergy.ENERGY, null)) {
             IEnergyStorage energyStorage = itemStack.getCapability(CapabilityEnergy.ENERGY, null);
             if (energyStorage == null) return 0;
@@ -228,7 +229,8 @@ public class MTEEnergyInfuser extends MultiblockWithDisplayBase implements ICont
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
-        getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), isActive(), isWorkingEnabled());
+        getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), isActive(),
+                isWorkingEnabled());
     }
 
     @Override
@@ -254,7 +256,8 @@ public class MTEEnergyInfuser extends MultiblockWithDisplayBase implements ICont
     private void setActive(boolean active) {
         this.isChargingItem = active;
         markDirty();
-        ZBGTUtility.writeCustomData(this, getWorld(), GregtechDataCodes.WORKABLE_ACTIVE, buf -> buf.writeBoolean(isChargingItem));
+        ZBGTUtility.writeCustomData(this, getWorld(), GregtechDataCodes.WORKABLE_ACTIVE,
+                buf -> buf.writeBoolean(isChargingItem));
     }
 
     @Override
@@ -266,7 +269,8 @@ public class MTEEnergyInfuser extends MultiblockWithDisplayBase implements ICont
     public void setWorkingEnabled(boolean isWorkingAllowed) {
         this.isWorkingEnabled = isWorkingAllowed;
         markDirty();
-        ZBGTUtility.writeCustomData(this, getWorld(), GregtechDataCodes.WORKING_ENABLED, buf -> buf.writeBoolean(isWorkingEnabled));
+        ZBGTUtility.writeCustomData(this, getWorld(), GregtechDataCodes.WORKING_ENABLED,
+                buf -> buf.writeBoolean(isWorkingEnabled));
     }
 
     @Override
