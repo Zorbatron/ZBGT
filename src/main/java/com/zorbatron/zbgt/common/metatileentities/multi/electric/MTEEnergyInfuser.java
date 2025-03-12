@@ -8,10 +8,17 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
+import com.zorbatron.zbgt.api.render.ZBGTTextures;
+import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
+import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
 import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.pipeline.IVertexOperation;
+import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -24,8 +31,6 @@ import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockComputerCasing;
-import gregtech.common.blocks.BlockWarningSign;
-import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 
@@ -71,13 +76,11 @@ public class MTEEnergyInfuser extends MultiblockWithDisplayBase {
     }
 
     protected IBlockState getCoilState() {
-        // todo: replace with the actual coils
-        return MetaBlocks.WIRE_COIL.getState(BlockWireCoil.CoilType.CUPRONICKEL);
+        return ZBGTMetaBlocks.MISC_CASING.getState(MiscCasing.CasingType.MOLECULAR_COIL);
     }
 
     protected IBlockState getMolecularCasingState() {
-        // todo: replace with the actual molecular casings
-        return MetaBlocks.WARNING_SIGN.getState(BlockWarningSign.SignType.ANTIMATTER_HAZARD);
+        return ZBGTMetaBlocks.MISC_CASING.getState(MiscCasing.CasingType.MOLECULAR_CASING);
     }
 
     @Override
@@ -101,8 +104,23 @@ public class MTEEnergyInfuser extends MultiblockWithDisplayBase {
     }
 
     @Override
-    public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-        // todo: replace with molecular casing
-        return Textures.HIGH_POWER_CASING;
+    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
+        super.renderMetaTileEntity(renderState, translation, pipeline);
+        getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), false, false);
+    }
+
+    @Override
+    public ICubeRenderer getBaseTexture(@Nullable IMultiblockPart sourcePart) {
+        if (sourcePart == null) {
+            // part is null when it's the controller
+            return ZBGTTextures.MOLECULAR_CASING;
+        } else {
+            return Textures.HIGH_POWER_CASING;
+        }
+    }
+
+    @Override
+    protected @NotNull ICubeRenderer getFrontOverlay() {
+        return Textures.DATA_BANK_OVERLAY;
     }
 }
