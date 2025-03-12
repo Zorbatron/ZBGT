@@ -19,6 +19,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
@@ -70,14 +71,16 @@ public class MTEEnergyInfuser extends MultiblockWithDisplayBase implements ICont
 
     @Override
     protected void updateFormedValid() {
-        if (!isWorkingEnabled) return;
+        World world = getWorld();
+        if (!isWorkingEnabled() || world == null || world.isRemote) return;
 
         boolean chargedItem = false;
         for (int index = 0; index < inputInventory.getSlots(); index++) {
+            long availableEU = energyContainer.getEnergyStored();
+            if (availableEU < 1) break;
+
             ItemStack stackInSlot = inputInventory.getStackInSlot(index);
             if (stackInSlot.isEmpty()) continue;
-            Item itemInSlot = stackInSlot.getItem();
-            if (stackInSlot.getCount() > 1 || itemInSlot == Items.AIR) continue;
 
             if (isItemFullyCharged(stackInSlot)) {
                 stackInSlot = inputInventory.extractItem(index, 1, true);
@@ -90,41 +93,44 @@ public class MTEEnergyInfuser extends MultiblockWithDisplayBase implements ICont
                     inputInventory.extractItem(index, 1, false);
                 }
             } else {
-                chargeItem(stackInSlot);
-                chargedItem = true;
+                long usedEU = chargeItem(stackInSlot, availableEU);
+                if (!chargedItem) chargedItem = usedEU > 0;
             }
         }
 
-        setActive(chargedItem);
+        if (chargedItem != isActive()) {
+            setActive(chargedItem);
+        }
     }
 
-    private boolean isItemFullyCharged(ItemStack itemStack) {
+    private boolean isItemFullyCharged(@NotNull ItemStack itemStack) {
         if (itemStack.hasCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null)) {
             IElectricItem electricItem = itemStack.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
             if (electricItem == null || !electricItem.chargeable()) return true;
             return electricItem.getCharge() >= electricItem.getMaxCharge();
+        } else if (itemStack.hasCapability(CapabilityEnergy.ENERGY, null)) {
+            IEnergyStorage energyStorage = itemStack.getCapability(CapabilityEnergy.ENERGY, null);
+            if (energyStorage == null || !energyStorage.canReceive()) return true;
+            return energyStorage.getEnergyStored() >= energyStorage.getMaxEnergyStored();
         }
 
         return true;
     }
 
-    private void chargeItem(ItemStack itemStack) {
-        long availableEU = energyContainer.getEnergyStored();
-        if (availableEU < 1) return;
-
-        long usedEU = 0;
+    private long chargeItem(@NotNull ItemStack itemStack, long toCharge) {
+        long availableEU = Math.min(toCharge, energyContainer.getInputVoltage() * energyContainer.getInputAmperage());
 
         if (itemStack.hasCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null)) {
             IElectricItem electricItem = itemStack.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
-            if (electricItem == null) return;
-            usedEU = electricItem.charge(availableEU, GTUtility.getFloorTierByVoltage(energyContainer.getInputVoltage()), true, false);
+            if (electricItem == null) return 0;
+            return electricItem.charge(availableEU, GTUtility.getFloorTierByVoltage(energyContainer.getInputVoltage()), true, false);
         } else if (itemStack.hasCapability(CapabilityEnergy.ENERGY, null)) {
             IEnergyStorage energyStorage = itemStack.getCapability(CapabilityEnergy.ENERGY, null);
-            if (energyStorage == null) return;
-            usedEU = FeCompat.insertEu(energyStorage, availableEU);
+            if (energyStorage == null) return 0;
+            return FeCompat.insertEu(energyStorage, availableEU);
         }
 
-        energyContainer.changeEnergy(-usedEU);
+        return 0;
     }
 
     @Override

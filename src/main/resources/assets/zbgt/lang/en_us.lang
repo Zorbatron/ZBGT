@@ -445,8 +445,10 @@ tile.misc_casing.inconel_reinforced_casing.name=Inconel Reinforced Casing
 tile.creative_heating_coil.creative_heating_coil.name=Creative Heating Coil
 
 tile.misc_casing.volcanus_casing.name=Volcanus Casing
-
 tile.misc_casing.cryogenic_casing.name=Advanced Cryogenic Casing
+
+tile.misc_casing.molecular_casing.name=Molecular Casing
+tile.misc_casing.molecular_coil.name=Molecular Coil
 
 
 # Misc
