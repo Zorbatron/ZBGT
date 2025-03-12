@@ -1,11 +1,15 @@
 package com.zorbatron.zbgt.api.util;
 
 import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 
 import org.jetbrains.annotations.NotNull;
@@ -92,5 +96,11 @@ public final class ZBGTUtility {
         }
 
         return v;
+    }
+
+    public static void writeCustomData(MetaTileEntity mte, World world, int dataID, Consumer<PacketBuffer> bufWriter) {
+        if (world != null && !world.isRemote) {
+            mte.writeCustomData(dataID, bufWriter);
+        }
     }
 }

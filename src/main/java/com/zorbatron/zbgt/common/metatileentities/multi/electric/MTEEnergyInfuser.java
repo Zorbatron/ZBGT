@@ -3,10 +3,27 @@ package com.zorbatron.zbgt.common.metatileentities.multi.electric;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.zorbatron.zbgt.api.util.ZBGTUtility;
+import gregtech.api.capability.*;
+import gregtech.api.capability.impl.EnergyContainerList;
+import gregtech.api.capability.impl.ItemHandlerList;
+import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.util.GTTransferUtils;
+import gregtech.api.util.GTUtility;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 
+import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,7 +51,14 @@ import gregtech.common.blocks.BlockComputerCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 
-public class MTEEnergyInfuser extends MultiblockWithDisplayBase {
+public class MTEEnergyInfuser extends MultiblockWithDisplayBase implements IControllable {
+
+    protected IItemHandlerModifiable inputInventory;
+    protected IItemHandlerModifiable outputInventory;
+    protected IEnergyContainer energyContainer;
+    private boolean isWorkingEnabled = true;
+
+    private boolean isChargingItem = false;
 
     public MTEEnergyInfuser(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
@@ -46,7 +70,102 @@ public class MTEEnergyInfuser extends MultiblockWithDisplayBase {
     }
 
     @Override
-    protected void updateFormedValid() {}
+    protected void updateFormedValid() {
+        if (!isWorkingEnabled) return;
+
+        boolean chargedItem = false;
+        for (int index = 0; index < inputInventory.getSlots(); index++) {
+            ItemStack stackInSlot = inputInventory.getStackInSlot(index);
+            if (stackInSlot.isEmpty()) continue;
+            Item itemInSlot = stackInSlot.getItem();
+            if (stackInSlot.getCount() > 1 || itemInSlot == Items.AIR) continue;
+
+            if (isItemFullyCharged(stackInSlot)) {
+                stackInSlot = inputInventory.extractItem(index, 1, true);
+                // Check if there's actually space to put the item in the output bus
+                if (GTTransferUtils.insertItem(outputInventory, stackInSlot, true).isEmpty()) {
+                    stackInSlot = inputInventory.extractItem(index, 1, false);
+                    GTTransferUtils.insertItem(outputInventory, stackInSlot, false);
+                } else if (getVoidingMode() == 1 || getVoidingMode() == 3) {
+                    // If the voiding mode voids items, extract the item but don't do anything with it.
+                    inputInventory.extractItem(index, 1, false);
+                }
+            } else {
+                chargeItem(stackInSlot);
+                chargedItem = true;
+            }
+        }
+
+        setActive(chargedItem);
+    }
+
+    private boolean isItemFullyCharged(ItemStack itemStack) {
+        if (itemStack.hasCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null)) {
+            IElectricItem electricItem = itemStack.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
+            if (electricItem == null || !electricItem.chargeable()) return true;
+            return electricItem.getCharge() >= electricItem.getMaxCharge();
+        }
+
+        return true;
+    }
+
+    private void chargeItem(ItemStack itemStack) {
+        long availableEU = energyContainer.getEnergyStored();
+        if (availableEU < 1) return;
+
+        long usedEU = 0;
+
+        if (itemStack.hasCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null)) {
+            IElectricItem electricItem = itemStack.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
+            if (electricItem == null) return;
+            usedEU = electricItem.charge(availableEU, GTUtility.getFloorTierByVoltage(energyContainer.getInputVoltage()), true, false);
+        } else if (itemStack.hasCapability(CapabilityEnergy.ENERGY, null)) {
+            IEnergyStorage energyStorage = itemStack.getCapability(CapabilityEnergy.ENERGY, null);
+            if (energyStorage == null) return;
+            usedEU = FeCompat.insertEu(energyStorage, availableEU);
+        }
+
+        energyContainer.changeEnergy(-usedEU);
+    }
+
+    @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+        buf.writeBoolean(isWorkingEnabled);
+        buf.writeBoolean(isChargingItem);
+    }
+
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+        isWorkingEnabled = buf.readBoolean();
+        isChargingItem = buf.readBoolean();
+    }
+
+    @Override
+    public void receiveCustomData(int dataId, PacketBuffer buf) {
+        super.receiveCustomData(dataId, buf);
+
+        if (dataId == GregtechDataCodes.WORKABLE_ACTIVE) {
+            isChargingItem = buf.readBoolean();
+            scheduleRenderUpdate();
+        } else if (dataId == GregtechDataCodes.WORKING_ENABLED) {
+            isWorkingEnabled = buf.readBoolean();
+            scheduleRenderUpdate();
+        }
+    }
+
+    private void initializeAbilities() {
+        this.inputInventory = new ItemHandlerList(getAbilities(MultiblockAbility.IMPORT_ITEMS));
+        this.outputInventory = new ItemHandlerList(getAbilities(MultiblockAbility.EXPORT_ITEMS));
+        this.energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.INPUT_ENERGY));
+    }
+
+    @Override
+    protected void formStructure(PatternMatchContext context) {
+        super.formStructure(context);
+        initializeAbilities();
+    }
 
     @NotNull
     @Override
@@ -71,15 +190,15 @@ public class MTEEnergyInfuser extends MultiblockWithDisplayBase {
                 .build();
     }
 
-    protected IBlockState getCasingState() {
+    private IBlockState getCasingState() {
         return MetaBlocks.COMPUTER_CASING.getState(BlockComputerCasing.CasingType.HIGH_POWER_CASING);
     }
 
-    protected IBlockState getCoilState() {
+    private IBlockState getCoilState() {
         return ZBGTMetaBlocks.MISC_CASING.getState(MiscCasing.CasingType.MOLECULAR_COIL);
     }
 
-    protected IBlockState getMolecularCasingState() {
+    private IBlockState getMolecularCasingState() {
         return ZBGTMetaBlocks.MISC_CASING.getState(MiscCasing.CasingType.MOLECULAR_CASING);
     }
 
@@ -106,7 +225,7 @@ public class MTEEnergyInfuser extends MultiblockWithDisplayBase {
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
-        getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), false, false);
+        getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), isActive(), isWorkingEnabled());
     }
 
     @Override
@@ -122,5 +241,58 @@ public class MTEEnergyInfuser extends MultiblockWithDisplayBase {
     @Override
     protected @NotNull ICubeRenderer getFrontOverlay() {
         return Textures.DATA_BANK_OVERLAY;
+    }
+
+    @Override
+    public boolean isActive() {
+        return super.isActive() && isChargingItem;
+    }
+
+    private void setActive(boolean active) {
+        this.isChargingItem = active;
+        markDirty();
+        ZBGTUtility.writeCustomData(this, getWorld(), GregtechDataCodes.WORKABLE_ACTIVE, buf -> buf.writeBoolean(isChargingItem));
+    }
+
+    @Override
+    public boolean isWorkingEnabled() {
+        return this.isWorkingEnabled;
+    }
+
+    @Override
+    public void setWorkingEnabled(boolean isWorkingAllowed) {
+        this.isWorkingEnabled = isWorkingAllowed;
+        markDirty();
+        ZBGTUtility.writeCustomData(this, getWorld(), GregtechDataCodes.WORKING_ENABLED, buf -> buf.writeBoolean(isWorkingEnabled));
+    }
+
+    @Override
+    public <T> T getCapability(Capability<T> capability, EnumFacing side) {
+        if (capability == GregtechTileCapabilities.CAPABILITY_CONTROLLABLE) {
+            return GregtechTileCapabilities.CAPABILITY_CONTROLLABLE.cast(this);
+        }
+
+        return super.getCapability(capability, side);
+    }
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        super.writeToNBT(data);
+
+        data.setBoolean("IsWorkingEnabled", isWorkingEnabled);
+
+        return data;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+
+        isWorkingEnabled = data.getBoolean("IsWorkingEnabled");
+    }
+
+    @Override
+    public boolean hasMaintenanceMechanics() {
+        return false;
     }
 }
