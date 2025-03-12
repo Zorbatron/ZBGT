@@ -11,8 +11,6 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.util.GTTransferUtils;
 import gregtech.api.util.GTUtility;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
