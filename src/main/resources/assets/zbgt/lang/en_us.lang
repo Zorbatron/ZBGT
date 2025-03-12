@@ -370,6 +370,8 @@ zbgt.machine.industrial_pbf.tooltip=Produce steel at an industrial scale!
 zbgt.machine.industrial_pbf.tooltip2=Recipe length divided by the length of the multiblock.
 zbgt.machine.industrial_pbf.speed=Speed bonus: %s%%
 
+zbgt.machine.energy_infuser.name=Energy Infuser
+
 
 # Multiblock Casings
 tile.multiblock_casing.precise_0.name=Imprecise Electronic Unit Casing

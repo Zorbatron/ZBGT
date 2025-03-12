@@ -19,9 +19,11 @@ import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 
+@SuppressWarnings("unused")
 public final class ZBGTUtility {
 
-    public static @NotNull ResourceLocation zbgtId(@NotNull String path) {
+    @NotNull
+    public static ResourceLocation zbgtId(@NotNull String path) {
         return new ResourceLocation(ZBGTCore.MODID, path);
     }
 
