@@ -448,7 +448,11 @@ tile.misc_casing.volcanus_casing.name=Volcanus Casing
 tile.misc_casing.cryogenic_casing.name=Advanced Cryogenic Casing
 
 tile.misc_casing.molecular_casing.name=Molecular Casing
+tile.misc_casing.molecular_casing.tooltip=Stops elemental things.
 tile.misc_casing.molecular_coil.name=Molecular Coil
+tile.misc_casing.molecular_coil.tooltip=Well it does things too.
+tile.misc_casing.hollow_casing.name=Hollow Casing
+tile.misc_casing.hollow_casing.tooltip=Reinforced accelerator tunnel.
 
 
 # Misc
@@ -511,6 +515,7 @@ zbgt.material.hikarium=Hikarium
 zbgt.material.pikyonium_64_b=Pikyonium 64B
 
 zbgt.material.special_ceramics=Special Ceramics
+zbgt.material.ic_2_coolant=IC2 Coolant
 
 
 # Ore veins

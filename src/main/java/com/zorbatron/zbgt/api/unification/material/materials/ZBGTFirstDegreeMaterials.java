@@ -233,5 +233,10 @@ public final class ZBGTFirstDegreeMaterials {
                         .blastStats(VA[EV]))
                 .components(Steel, 16, Molybdenum, 1, Titanium, 1, Nickel, 4, Cobalt, 2)
                 .build();
+
+        IC2Coolant = new Material.Builder(id++, zbgtId("ic_2_coolant"))
+                .fluid()
+                .color(0x2D8C9C)
+                .build();
     }
 }

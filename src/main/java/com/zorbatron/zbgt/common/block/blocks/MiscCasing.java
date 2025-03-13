@@ -34,7 +34,8 @@ public class MiscCasing extends VariantBlock<MiscCasing.CasingType> {
         VOLCANUS_CASING("volcanus_casing"),
         CRYOGENIC_CASING("cryogenic_casing"),
         MOLECULAR_CASING("molecular_casing"),
-        MOLECULAR_COIL("molecular_coil");
+        MOLECULAR_COIL("molecular_coil"),
+        HOLLOW_CASING("hollow_casing");
 
         private final String name;
 

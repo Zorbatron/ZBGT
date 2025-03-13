@@ -60,6 +60,11 @@
           "bottom": "gregtech:blocks/casings/misc/molecular_coil_top",
           "side": "gregtech:blocks/casings/misc/molecular_coil_side"
         }
+      },
+      "hollow_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/misc/hollow_casing"
+        }
       }
     }
   }

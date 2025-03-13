@@ -37,7 +37,9 @@ import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.api.util.GTUtility;
 import gregtech.common.ConfigHolder;
+import gregtech.common.blocks.BlockComputerCasing;
 import gregtech.common.blocks.BlockFusionCasing;
+import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 
@@ -306,5 +308,53 @@ public class CasingRecipes {
                 'V', GCYMMetaBlocks.UNIQUE_CASING.getItemVariant(BlockUniqueCasing.UniqueCasingType.HEAT_VENT),
                 'F', new UnificationEntry(frameGt, GCYMMaterials.HastelloyX),
                 'G', new UnificationEntry(gear, HastelloyW));
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(MetaBlocks.COMPUTER_CASING.getItemVariant(BlockComputerCasing.CasingType.HIGH_POWER_CASING))
+                .input(plateDense, Osmiridium, 6)
+                .input(foil, Trinium, 12)
+                .input(screw, TungstenSteel, 24)
+                .input(ring, TungstenSteel, 24)
+                .input(MetaItems.FIELD_GENERATOR_IV)
+                .fluidInputs(Osmium.getFluid(L * 8))
+                .outputs(ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.MOLECULAR_CASING))
+                .EUt(VA[LuV]).duration(25 * 20)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.MOLECULAR_CASING))
+                .input(plateDense, Europium, 2)
+                .input(plateDense, Plutonium239, 5)
+                .input(plateDouble, Lead, 8)
+                .input(plate, Uranium238, 16)
+                .input(screw, Quantium, 16)
+                .fluidInputs(Trinium.getFluid(L * 8))
+                .fluidInputs(Osmium.getFluid(L * 8))
+                .fluidInputs(IC2Coolant.getFluid(2000))
+                .fluidInputs(Argon.getFluid(1000))
+                .scannerResearch(scanner -> scanner
+                        .researchStack(
+                                ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.MOLECULAR_CASING))
+                        .EUt(VA[LuV]).duration(50 * 20))
+                .outputs(ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.HOLLOW_CASING, 2))
+                .EUt(VA[UV]).duration(20 * 20)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.HOLLOW_CASING))
+                .inputs(MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.FUSION_COIL, 2))
+                .inputs(MetaBlocks.WIRE_COIL.getItemVariant(BlockWireCoil.CoilType.NAQUADAH, 2))
+                .input(wireFine, Europium, 64)
+                .input(foil, Europium, 64)
+                .fluidInputs(Glass.getFluid(L * 16))
+                .fluidInputs(SiliconeRubber.getFluid(L * 12))
+                .fluidInputs(IC2Coolant.getFluid(2000))
+                .fluidInputs(Trinium.getFluid(L * 8))
+                .scannerResearch(scanner -> scanner
+                        .researchStack(ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.HOLLOW_CASING))
+                        .EUt(VA[LuV]).duration(25 * 20))
+                .outputs(ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.MOLECULAR_COIL, 4))
+                .EUt(VA[ZPM]).duration(40 * 20)
+                .buildAndRegister();
     }
 }

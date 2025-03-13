@@ -23,10 +23,7 @@ import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.stack.UnificationEntry;
-import gregtech.common.blocks.BlockCleanroomCasing;
-import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.BlockMultiblockCasing;
-import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.blocks.*;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 
@@ -324,5 +321,20 @@ public class MultiblockRecipes {
                 'B', MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.PRIMITIVE_BRICKS),
                 'F', Blocks.FURNACE,
                 'P', MetaTileEntities.PRIMITIVE_BLAST_FURNACE.getStackForm());
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(MetaTileEntities.ACTIVE_TRANSFORMER)
+                .inputs(ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.MOLECULAR_COIL, 8))
+                .inputs(MetaBlocks.COMPUTER_CASING.getItemVariant(BlockComputerCasing.CasingType.HIGH_POWER_CASING, 8))
+                .input(screw, Neodymium, 16)
+                .fluidInputs(Electrum.getFluid(L * 18))
+                .fluidInputs(Europium.getFluid(L * 12))
+                .fluidInputs(IC2Coolant.getFluid(2000))
+                .scannerResearch(scanner -> scanner
+                        .researchStack(MetaTileEntities.ACTIVE_TRANSFORMER.getStackForm())
+                        .EUt(VA[LuV]).duration(60 * 20))
+                .output(ZBGTMetaTileEntities.ENERGY_INFUSER)
+                .EUt(VA[ZPM]).duration(120 * 20)
+                .buildAndRegister();
     }
 }
