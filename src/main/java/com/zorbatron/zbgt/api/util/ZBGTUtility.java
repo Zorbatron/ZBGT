@@ -1,6 +1,7 @@
 package com.zorbatron.zbgt.api.util;
 
 import static net.minecraft.util.text.TextFormatting.*;
+
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;

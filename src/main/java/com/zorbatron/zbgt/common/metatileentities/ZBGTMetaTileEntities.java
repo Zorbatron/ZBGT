@@ -40,7 +40,6 @@ public class ZBGTMetaTileEntities {
     public static MetaTileEntityRFEnergyHatch RF_ENERGY_HATCH_INPUT;
     public static MetaTileEntityRFEnergyHatch RF_ENERGY_HATCH_OUTPUT;
 
-
     public static MTEMegaEBF MEGA_EBF;
     public static MTEMegaLCR MEGA_LCR;
     public static MTEMegaVF MEGA_VF;
