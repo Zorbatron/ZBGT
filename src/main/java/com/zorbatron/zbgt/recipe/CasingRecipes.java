@@ -25,12 +25,16 @@ import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
 import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 
+import gregicality.multiblocks.api.unification.GCYMMaterials;
+import gregicality.multiblocks.common.block.GCYMMetaBlocks;
+import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregtech.api.block.VariantBlock;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.builders.AssemblyLineRecipeBuilder;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.api.util.GTUtility;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockFusionCasing;
@@ -281,5 +285,26 @@ public class CasingRecipes {
                 'P', OreDictUnifier.get(pipeNormalFluid, StainlessSteel),
                 'F', OreDictUnifier.get(frameGt, BlackSteel),
                 'T', OreDictUnifier.get(plate, Polytetrafluoroethylene));
+
+        ModHandler.addShapedRecipe("cryogenic_casing",
+                ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.CRYOGENIC_CASING, casingsPerCraft),
+                "PGP",
+                "HFN",
+                "PGP",
+                'P', new UnificationEntry(plateDouble, Grismium),
+                'G', new UnificationEntry(gear, GCYMMaterials.IncoloyMA956),
+                'H', ZBGTMetaItems.COOLANT_CELL_360k_He.getStackForm(),
+                'F', new UnificationEntry(frameGt, Nitinol60),
+                'N', ZBGTMetaItems.COOLANT_CELL_360k_NaK.getStackForm());
+
+        ModHandler.addShapedRecipe("volcanus_casing",
+                ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.VOLCANUS_CASING, casingsPerCraft),
+                "PVP",
+                "VFV",
+                "PGP",
+                'P', new UnificationEntry(plateDouble, HastelloyN),
+                'V', GCYMMetaBlocks.UNIQUE_CASING.getItemVariant(BlockUniqueCasing.UniqueCasingType.HEAT_VENT),
+                'F', new UnificationEntry(frameGt, GCYMMaterials.HastelloyX),
+                'G', new UnificationEntry(gear, HastelloyW));
     }
 }

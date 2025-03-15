@@ -14,6 +14,7 @@ public class ZBGTTextures {
     public static SimpleOverlayRenderer SWIRLY_INFINITY;
     public static SimpleOverlayRenderer YOTTANK_ME_HATCH;
     public static SimpleOverlayRenderer MAINTENANCE_OVERLAY_STERILE;
+    public static SimpleOverlayRenderer FLUID_INPUT_BLACK;
 
     // GUI overlays
     public static TextureArea ITEM_FLUID_OVERLAY;
@@ -38,12 +39,16 @@ public class ZBGTTextures {
 
     public static ICubeRenderer YOTTANK_CASING;
 
+    public static SimpleOverlayRenderer VOLCANUS_CASING;
+    public static SimpleOverlayRenderer CRYOGENIC_CASING;
+
     public static void preInit() {
         WATER_OVERLAY_INFINITY = new SimpleOverlayRenderer("overlay/machine/water_infinity");
         ITEM_OVERLAY_INFINITY = new SimpleOverlayRenderer("overlay/machine/item_infinity");
         SWIRLY_INFINITY = new SimpleOverlayRenderer("overlay/machine/swirly_infinity");
         YOTTANK_ME_HATCH = new SimpleOverlayRenderer("overlay/machine/yottank_me_hatch");
         MAINTENANCE_OVERLAY_STERILE = new SimpleOverlayRenderer("overlay/machine/overlay_maintenance_sterile");
+        FLUID_INPUT_BLACK = new SimpleOverlayRenderer("overlay/machine/fluid_input_black");
 
         ITEM_FLUID_OVERLAY = TextureArea.fullImage("textures/gui/widget/item_fluid.png");
         AUTO_PULL = TextureArea.fullImage("textures/gui/widget/auto_pull.png");
@@ -64,6 +69,9 @@ public class ZBGTTextures {
         IRIDIUM_CASING = new SimpleOverlayRenderer("casings/material/iridium");
 
         YOTTANK_CASING = new SidedCubeRenderer("casings/yottank");
+
+        VOLCANUS_CASING = new SimpleOverlayRenderer("casings/misc/volcanus");
+        CRYOGENIC_CASING = new SimpleOverlayRenderer("casings/misc/cryogenic");
     }
 
     public static SimpleOverlayRenderer getPrassTextureByTier(int tier) {

@@ -73,6 +73,10 @@ zbgt.machine.yottank_me_hatch.sticky.disabled=Enable sticky mode
 zbgt.machine.sterile_cleaning_hatch.name=Automatic Sterilization Maintenance Hatch
 zbgt.machine.sterile_cleaning_hatch.tooltip=For automatically maintaining Multiblocks with Cleaning, but sterile!
 
+zbgt.machine.pyrotheum_heating_hatch.name=Pyrotheum Heating Vent
+
+zbgt.machine.cryotheum_cooling_hatch.name=Cryotheum Cooling Hatch
+
 zbgt.machine.rf_input_hatch_ulv.name=ULV RF Energy Hatch
 zbgt.machine.rf_input_hatch_lv.name=LV RF Energy Hatch
 zbgt.machine.rf_input_hatch_mv.name=MV RF Energy Hatch
@@ -145,6 +149,34 @@ metaitem.cover.dual.tooltip.transfer_rate=§bTransfer Rate: §f%,d items/s§7 an
 metaitem.cover.dual.tooltip.transfer_rate.stacks=§bTransfer Rate: §f%,d stacks/s§7 and §f%,d L/t
 
 cover.dual_cover.mode_changer=Click to change between the item and fluid settings
+
+metaitem.cover.cover_dropper.lv.name=LV Dropper Cover
+metaitem.cover.cover_dropper.mv.name=MV Dropper Cover
+metaitem.cover.cover_dropper.hv.name=HV Dropper Cover
+metaitem.cover.cover_dropper.ev.name=EV Dropper Cover
+metaitem.cover.cover_dropper.iv.name=IV Dropper Cover
+metaitem.cover.cover_dropper.luv.name=LuV Dropper Cover
+metaitem.cover.cover_dropper.zpm.name=ZPM Dropper Cover
+metaitem.cover.cover_dropper.uv.name=UV Dropper Cover
+metaitem.cover.cover_dropper.uhv.name=UHV Dropper Cover
+metaitem.cover.cover_dropper.uev.name=UEV Dropper Cover
+metaitem.cover.cover_dropper.uiv.name=UIV Dropper Cover
+metaitem.cover.cover_dropper.uxv.name=UXV Dropper Cover
+metaitem.cover.cover_dropper.opv.name=OpV Dropper Cover
+cover.cover_dropper.update_rate_label.1=Drop every %s ticks
+cover.cover_dropper.update_rate_label.2=Drop every tick
+cover.cover_dropper.update_rate.1=Dropping every
+cover.cover_dropper.update_rate.2=ticks
+cover.cover_dropper.update_rate.3=Dropping every tick
+cover.cover_dropper.tooltip=Can drop up to §f%,d items/s§7
+
+metaitem.registry_name_filter_item.name=Item registry name filter
+metaitem.registry_name_filter_item.tooltip=Filters items using regex on the resource location. F3+H to see extra information under items.
+
+metaitem.local_name_filter_fluid.name=Fluid local name filter
+metaitem.local_name_filter_fluid.tooltip=Filters fluids using regex on the untranslated name of fluids.
+metaitem.local_name_filter_fluid.tooltip.1=Unfortunately there's no way to see the untranslated name of fluids in-game.
+metaitem.local_name_filter_fluid.tooltip.2=But for example, normal GT fluids are "fluid.material_name" and GCYM molten fluids are "fluid.molten.material_name"
 
 
 # Items
@@ -253,6 +285,26 @@ metaitem.wrapped.misc.engraved_crystal_chip.name=Wrap of Engraved Crystal Chips
 metaitem.wrapped.misc.crystal_cpu.name=Wrap of Crystal CPUs
 metaitem.wrapped.misc.crystal_soc.name=Wrap of Crystal SoCs
 
+metaitem.coolant_cell.10k.name=10K Cell
+metaitem.coolant_cell.30k.name=30K Cell
+metaitem.coolant_cell.60k.name=60K Cell
+metaitem.coolant_cell.180k.name=180K Space Cell
+metaitem.coolant_cell.360k.name=360K Space Cell
+metaitem.coolant_cell.540k.name=540K Space Cell
+metaitem.coolant_cell.1080k.name=1080K Space Cell
+metaitem.coolant_cell.60k.he.name=60K He Coolant Cell
+metaitem.coolant_cell.180k.he.name=180K He Coolant Cell
+metaitem.coolant_cell.360k.he.name=360K He Coolant Cell
+metaitem.coolant_cell.60k.nak.name=60K NaK Coolant Cell
+metaitem.coolant_cell.180k.nak.name=180K NaK Coolant Cell
+metaitem.coolant_cell.360k.nak.name=360K NaK Coolant Cell
+metaitem.coolant_cell.180k_sp.name=180K Sp Coolant Cell
+metaitem.coolant_cell.360k_sp.name=360K Sp Coolant Cell
+metaitem.coolant_cell.540k_sp.name=540K Sp Coolant Cell
+metaitem.coolant_cell.1080k_sp.name=1080K Sp Coolant Cell
+
+metaitem.gregtech_computer_cube.name=GregTech Computer Cube
+
 
 # Widgets
 zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s
@@ -339,6 +391,19 @@ zbgt.machine.cal.tooltip=Does not lose efficiency when overclocked
 zbgt.machine.cal.tooltip_ordered_items=When in §eCircuit Assembly Line§7 mode, §fitems§7 must be in the correct order to run.
 recipemap.circuit_assembly_line_recipes.name=Circuit Assembly Line
 
+zbgt.machine.volcanus.name=Volcanus
+zbgt.machine.volcanus.tooltip.1=Speed: +120%% | EU Usage: 90%% | Parallel: 8
+zbgt.machine.volcanus.tooltip.2=Consumes 10L of Blazing Pyrotheum per second during operation
+
+zbgt.machine.cryogenic_freezer.name=Cryogenic Freezer
+zbgt.machine.cryogenic_freezer.tooltip.1=Speed: +100%% | EU Usage: 100%% | Parallel: 4
+zbgt.machine.cryogenic_freezer.tooltip.2=Consumes 10L of Gelid Cryotheum per second during operation
+
+zbgt.machine.industrial_pbf.name=Industrial Primitive Blast Furnace
+zbgt.machine.industrial_pbf.tooltip=Produce steel at an industrial scale!
+zbgt.machine.industrial_pbf.tooltip2=Recipe length divided by the length of the multiblock.
+zbgt.machine.industrial_pbf.speed=Speed bonus: %s%%
+
 
 # Multiblock Casings
 tile.multiblock_casing.precise_0.name=Imprecise Electronic Unit Casing
@@ -411,6 +476,10 @@ tile.misc_casing.inconel_reinforced_casing.name=Inconel Reinforced Casing
 
 tile.creative_heating_coil.creative_heating_coil.name=Creative Heating Coil
 
+tile.misc_casing.volcanus_casing.name=Volcanus Casing
+
+tile.misc_casing.cryogenic_casing.name=Advanced Cryogenic Casing
+
 
 # Misc
 zbgt.laser_enabled.1=Can use
@@ -443,6 +512,18 @@ zbgt.material.energetic_alloy=Energetic Alloy
 zbgt.material.luminessence=Luminessence
 zbgt.material.eglin_steel_base=Eglin Steel Base Compound
 zbgt.material.inconel_792=Inconel-792
+zbgt.material.blizz=Blizz
+zbgt.material.pyrotheum=Pyrotheum
+zbgt.material.pyrotheum.liquid=Blazing Pyrotheum
+zbgt.material.snowpowder=Snow Powder
+item.zbgt.material.snowpowder.dust=Snow Powder
+item.zbgt.material.snowpowder.dustSmall=Small Pile of Snow Powder
+item.zbgt.material.snowpowder.dustTiny=Tiny Pile of Snow Powder
+zbgt.material.grisium=Grisium
+zbgt.material.nitinol_60=Nitinol 60
+zbgt.material.hastelloy_n=Hastelloy-N
+zbgt.material.hastelloy_w=Hastelloy-W
+zbgt.material.maraging_steel_250=Maraging Steel 250
 
 zbgt.material.mar_ce_m_200=MAR-Ce-M200
 zbgt.material.artherium_sn=Artherium-Sn
@@ -452,6 +533,8 @@ zbgt.material.signalum=Signalum
 zbgt.material.vibrant_alloy=Vibrant Alloy
 zbgt.material.lumium=Lumium
 zbgt.material.eglin_steel=Eglin Steel
+zbgt.material.cryotheum=Cryotheum
+zbgt.material.cryotheum.liquid=Gelid Cryotheum
 
 zbgt.material.fluxed_electrum=Fluxed Electrum
 zbgt.material.hikarium=Hikarium
@@ -463,3 +546,11 @@ zbgt.material.special_ceramics=Special Ceramics
 # Ore veins
 zbgt.vein.adamantium=Adamantium vein
 zbgt.vein.quantium=Quantium Vein
+
+
+# Ore prefixes
+item.material.oreprefix.nanites=%s Nanites
+
+
+# Creative tab
+itemGroup.ZBGT=ZBGT

@@ -231,7 +231,7 @@ public class CALCircuits {
                 .input(WRAPPED_CHIP_RAM, 16)
                 .input(wireGtHex, Platinum, 4)
                 .solderMultiplier(2)
-                .output(QUANTUM_COMPUTER_LUV)
+                .output(QUANTUM_COMPUTER_LUV, 16)
                 .EUt(VA[IV]).duration(12 * (20 * 20))
                 .buildAndRegister();
 
@@ -243,7 +243,7 @@ public class CALCircuits {
                 .input(WRAPPED_CHIP_RAM, 16)
                 .input(wireGtHex, Platinum, 4)
                 .solderMultiplier(2)
-                .output(QUANTUM_COMPUTER_LUV)
+                .output(QUANTUM_COMPUTER_LUV, 16)
                 .EUt(VA[IV]).duration(12 * (10 * 20))
                 .buildAndRegister();
 

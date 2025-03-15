@@ -11,20 +11,25 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import com.zorbatron.zbgt.ZBGTCore;
+import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 import com.zorbatron.zbgt.api.recipes.properties.CoALProperty;
 import com.zorbatron.zbgt.api.unification.material.ZBGTMaterials;
 import com.zorbatron.zbgt.api.util.ZBGTLog;
+import com.zorbatron.zbgt.api.util.ZBGTMods;
 import com.zorbatron.zbgt.api.worldgen.CustomOreVeins;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.covers.ZBGTCovers;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
+import com.zorbatron.zbgt.integration.theoneprobe.ZBGTTOPModule;
 import com.zorbatron.zbgt.recipe.ZBGTRecipes;
 
 import gregtech.api.GTValues;
@@ -33,6 +38,8 @@ import gregtech.api.block.VariantItemBlock;
 import gregtech.api.cover.CoverDefinition;
 import gregtech.api.unification.material.event.MaterialEvent;
 import gregtech.api.unification.material.event.MaterialRegistryEvent;
+import gregtech.api.unification.material.event.PostMaterialEvent;
+import gregtech.api.util.Mods;
 
 @Mod.EventBusSubscriber(modid = ZBGTCore.MODID)
 public class CommonProxy {
@@ -41,10 +48,23 @@ public class CommonProxy {
         ZBGTMetaItems.init();
     }
 
+    public void init() {
+        if (Mods.TheOneProbe.isModLoaded()) {
+            ZBGTTOPModule.init();
+        }
+    }
+
     public void postInit() throws IOException {
         if (ZBGTConfig.worldGenerationSettings.enableOreGeneration) {
             CustomOreVeins.init();
         }
+
+        ZBGTAPI.pyrotheum = ZBGTMods.THERMAL_FOUNDATION.isModLoaded() ?
+                FluidRegistry.getFluidStack("pyrotheum", 1) :
+                ZBGTMaterials.Pyrotheum.getFluid(1);
+        ZBGTAPI.cryotheum = ZBGTMods.THERMAL_FOUNDATION.isModLoaded() ?
+                FluidRegistry.getFluidStack("cryotheum", 1) :
+                ZBGTMaterials.Cryotheum.getFluid(1);
     }
 
     @SubscribeEvent
@@ -83,8 +103,20 @@ public class CommonProxy {
 
     @SubscribeEvent
     public static void registerMaterials(MaterialEvent event) {
-        ZBGTLog.logger.info("Registering materials and material modifications...");
+        ZBGTLog.logger.info("Registering materials");
         ZBGTMaterials.init();
+    }
+
+    @SubscribeEvent
+    public static void materialChanges(PostMaterialEvent event) {
+        ZBGTLog.logger.info("Registering material modifications...");
+        ZBGTMaterials.initChanges();
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void lateMaterialChanges(PostMaterialEvent event) {
+        ZBGTLog.logger.info("Registering late material modifications...");
+        ZBGTMaterials.initLateChanges();
     }
 
     @SubscribeEvent

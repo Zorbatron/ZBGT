@@ -11,6 +11,7 @@ import com.zorbatron.zbgt.api.util.ZBGTUtility;
 import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
 
 import gregtech.api.GregTechAPI;
+import gregtech.api.items.metaitem.ElectricStats;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.StandardMetaItem;
 import gregtech.api.unification.ore.OrePrefix;
@@ -20,6 +21,7 @@ public class ZBGTMetaItem extends StandardMetaItem {
 
     public ZBGTMetaItem() {
         super();
+        setCreativeTab(ZBGTAPI.TAB_ZBGT);
     }
 
     @Override
@@ -286,5 +288,86 @@ public class ZBGTMetaItem extends StandardMetaItem {
         WRAPPED_ENGRAVED_CRYSTAL_CHIP = addItem(113, "wrapped.misc.engraved_crystal_chip");
         WRAPPED_CRYSTAL_CPU = addItem(114, "wrapped.misc.crystal_cpu");
         WRAPPED_CRYSTAL_SOC = addItem(115, "wrapped.misc.crystal_soc");
+
+        ZBGT_ITEM = addItem(116, "zbgt").setInvisible();
+
+        // Dropper Covers 117-129
+        DROPPER_COVER_LV = addItem(117, "cover.cover_dropper.lv")
+                .addComponents(new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8))));
+        DROPPER_COVER_MV = addItem(118, "cover.cover_dropper.mv")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 2))));
+        DROPPER_COVER_HV = addItem(119, "cover.cover_dropper.hv")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 4))));
+        DROPPER_COVER_EV = addItem(120, "cover.cover_dropper.ev")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 8))));
+        DROPPER_COVER_IV = addItem(121, "cover.cover_dropper.iv")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 16))));
+        DROPPER_COVER_LuV = addItem(122, "cover.cover_dropper.luv")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 32))));
+        DROPPER_COVER_ZPM = addItem(123, "cover.cover_dropper.zpm")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 64))));
+        DROPPER_COVER_UV = addItem(124, "cover.cover_dropper.uv")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 128))));
+        DROPPER_COVER_UHV = addItem(125, "cover.cover_dropper.uhv")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 256))))
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        DROPPER_COVER_UEV = addItem(126, "cover.cover_dropper.uev")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 512))))
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        DROPPER_COVER_UIV = addItem(127, "cover.cover_dropper.uiv")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 1024))))
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        DROPPER_COVER_UXV = addItem(128, "cover.cover_dropper.uxv")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 2048))))
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+        DROPPER_COVER_OpV = addItem(129, "cover.cover_dropper.opv")
+                .addComponents(
+                        new TooltipBehavior(list -> list.add(I18n.format("cover.cover_dropper.tooltip", 8 * 4096))))
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+
+        COOLANT_CELL_10k = addItem(130, "coolant_cell.10k");
+        COOLANT_CELL_30k = addItem(131, "coolant_cell.30k");
+        COOLANT_CELL_60k = addItem(132, "coolant_cell.60k");
+
+        COOLANT_CELL_SPACE_180k = addItem(133, "coolant_cell.180k");
+        COOLANT_CELL_SPACE_360k = addItem(134, "coolant_cell.360k");
+        COOLANT_CELL_SPACE_540k = addItem(135, "coolant_cell.540k");
+        COOLANT_CELL_SPACE_1080k = addItem(136, "coolant_cell.1080k");
+
+        COOLANT_CELL_60k_He = addItem(137, "coolant_cell.60k.he");
+        COOLANT_CELL_180k_He = addItem(138, "coolant_cell.180k.he");
+        COOLANT_CELL_360k_He = addItem(139, "coolant_cell.360k.he");
+
+        COOLANT_CELL_60k_NaK = addItem(140, "coolant_cell.60k.nak");
+        COOLANT_CELL_180k_NaK = addItem(141, "coolant_cell.180k.nak");
+        COOLANT_CELL_360k_NaK = addItem(142, "coolant_cell.360k.nak");
+
+        COOLANT_CELL_SPACE_180k_Sp = addItem(143, "coolant_cell.180k_sp");
+        COOLANT_CELL_SPACE_360k_Sp = addItem(144, "coolant_cell.360k_sp");
+        COOLANT_CELL_SPACE_540k_Sp = addItem(145, "coolant_cell.540k_sp");
+        COOLANT_CELL_SPACE_1080k_Sp = addItem(146, "coolant_cell.1080k_sp");
+
+        GREGTECH_COMPUTER_CUBE = addItem(147, "gregtech_computer_cube")
+                .addComponents(new ElectricStats(393_216_000, IV, true, true));
+
+        REGNAME_FILTER_ITEM = addItem(148, "registry_name_filter_item");
+        // .addComponents(new TooltipBehavior(list -> list.add(I18n.format(""))));
+        REGNAME_FILTER_FLUID = addItem(149, "local_name_filter_fluid")
+                .addComponents(new TooltipBehavior(
+                        list -> {
+                            list.add(I18n.format("metaitem.local_name_filter_fluid.tooltip.1"));
+                            list.add(I18n.format("metaitem.local_name_filter_fluid.tooltip.2"));
+                        }));
     }
 }
