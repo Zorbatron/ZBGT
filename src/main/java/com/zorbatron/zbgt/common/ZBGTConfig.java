@@ -52,6 +52,21 @@ public class ZBGTConfig {
                 "Default: true" })
         @Config.Name("Megas Need Mufflers")
         public boolean megasNeedMufflers = true;
+
+        @Config.Name("Energy Infuser Settings")
+        public EnergyInfuserSettings energyInfuserSettings = new EnergyInfuserSettings();
+
+        public static class EnergyInfuserSettings {
+
+            @Config.Name("Max repaired durability per operation")
+            public int maxRepairedDamagePerOperation = 1000;
+
+            @Config.Name("Used EU per durability point")
+            public int usedEUPerDurability = 1000;
+
+            @Config.Name("Used UU Matter per durability point")
+            public int usedUUMatterPerDurability = 1;
+        }
     }
 
     @Config.Name("Recipe Settings")

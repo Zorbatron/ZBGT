@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
@@ -13,6 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import org.jetbrains.annotations.NotNull;
@@ -21,6 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.api.util.ZBGTUtility;
+import com.zorbatron.zbgt.common.ZBGTConfig;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.MiscCasing;
 import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
@@ -31,6 +34,7 @@ import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.capability.*;
 import gregtech.api.capability.impl.EnergyContainerList;
+import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -41,6 +45,7 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTTransferUtils;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
@@ -53,6 +58,7 @@ public class MTEEnergyInfuser extends MultiblockWithDisplayBase implements ICont
 
     protected IItemHandlerModifiable inputInventory;
     protected IItemHandlerModifiable outputInventory;
+    protected IMultipleTankHandler inputFluidInventory;
     protected IEnergyContainer energyContainer;
     private boolean isWorkingEnabled = true;
 
@@ -72,7 +78,7 @@ public class MTEEnergyInfuser extends MultiblockWithDisplayBase implements ICont
         World world = getWorld();
         if (!isWorkingEnabled() || world == null || world.isRemote) return;
 
-        boolean chargedItem = false;
+        boolean itemProcessed = false;
         for (int index = 0; index < inputInventory.getSlots(); index++) {
             long availableEU = energyContainer.getEnergyStored();
             if (availableEU < 1) break;
@@ -80,24 +86,46 @@ public class MTEEnergyInfuser extends MultiblockWithDisplayBase implements ICont
             ItemStack stackInSlot = inputInventory.getStackInSlot(index);
             if (stackInSlot.isEmpty()) continue;
 
-            if (isItemFullyCharged(stackInSlot)) {
+            boolean isCharged = isItemFullyCharged(stackInSlot);
+            boolean isRepaired = isItemFullyRepaired(stackInSlot);
+
+            if (isCharged && isRepaired) {
                 stackInSlot = inputInventory.extractItem(index, 1, true);
                 // Check if there's actually space to put the item in the output bus
-                if (GTTransferUtils.insertItem(outputInventory, stackInSlot, true).isEmpty()) {
+                if (outputInventory.getSlots() > 0 &&
+                        GTTransferUtils.insertItem(outputInventory, stackInSlot, true).isEmpty()) {
                     stackInSlot = inputInventory.extractItem(index, 1, false);
                     GTTransferUtils.insertItem(outputInventory, stackInSlot, false);
                 } else if (getVoidingMode() == 1 || getVoidingMode() == 3) {
                     // If the voiding mode voids items, extract the item but don't do anything with it.
                     inputInventory.extractItem(index, 1, false);
                 }
-            } else {
+            }
+
+            if (!isCharged) {
                 long usedEU = chargeItem(stackInSlot, availableEU);
-                if (!chargedItem) chargedItem = usedEU > 0;
+                if (!itemProcessed) itemProcessed = usedEU > 0;
+            }
+
+            if (!isRepaired && inputFluidInventory.getTanks() > 0) {
+                availableEU = energyContainer.getEnergyStored();
+                int toRepair = Math.min(stackInSlot.getItemDamage(),
+                        ZBGTConfig.multiblockSettings.energyInfuserSettings.maxRepairedDamagePerOperation);
+                long powerCost = (long) toRepair *
+                        ZBGTConfig.multiblockSettings.energyInfuserSettings.usedEUPerDurability;
+                FluidStack toDrain = new FluidStack(Materials.UUMatter.getFluid(),
+                        toRepair * ZBGTConfig.multiblockSettings.energyInfuserSettings.usedUUMatterPerDurability);
+                if (availableEU > powerCost && inputFluidInventory.drain(toDrain, false) != null) {
+                    stackInSlot.setItemDamage(Math.max(stackInSlot.getItemDamage() - toRepair, 0));
+                    inputFluidInventory.drain(toDrain, true);
+                    energyContainer.removeEnergy(powerCost);
+                    itemProcessed = true;
+                }
             }
         }
 
-        if (chargedItem != isActive()) {
-            setActive(chargedItem);
+        if (itemProcessed != isActive()) {
+            setActive(itemProcessed);
         }
     }
 
@@ -132,6 +160,11 @@ public class MTEEnergyInfuser extends MultiblockWithDisplayBase implements ICont
         return 0;
     }
 
+    private boolean isItemFullyRepaired(@NotNull ItemStack itemStack) {
+        Item item = itemStack.getItem();
+        return !item.isRepairable() || item.getDamage(itemStack) <= 0;
+    }
+
     @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
@@ -161,6 +194,7 @@ public class MTEEnergyInfuser extends MultiblockWithDisplayBase implements ICont
 
     private void initializeAbilities() {
         this.inputInventory = new ItemHandlerList(getAbilities(MultiblockAbility.IMPORT_ITEMS));
+        this.inputFluidInventory = new FluidTankList(true, getAbilities(MultiblockAbility.IMPORT_FLUIDS));
         this.outputInventory = new ItemHandlerList(getAbilities(MultiblockAbility.EXPORT_ITEMS));
         this.energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.INPUT_ENERGY));
     }
@@ -183,9 +217,10 @@ public class MTEEnergyInfuser extends MultiblockWithDisplayBase implements ICont
                         .setMinGlobalLimited(9)
                         .or(TraceabilityPredicates.inputBusesNormal()
                                 .setExactLimit(1))
-                        .or(TraceabilityPredicates.outputBusesNormal()
+                        .or(abilities(MultiblockAbility.EXPORT_ITEMS)
                                 .setMaxGlobalLimited(1)
                                 .setPreviewCount(1))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY, MultiblockAbility.SUBSTATION_INPUT_ENERGY,
                                 MultiblockAbility.INPUT_LASER)
                                         .setMinGlobalLimited(1)))
