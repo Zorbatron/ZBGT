@@ -37,8 +37,8 @@ public class ZBGTMetaTileEntities {
     public static MTESterileCleaningHatch STERILE_CLEANING_HATCH;
     public static MTEFilteredHatch PYROTHEUM_HEATING_HATCH;
     public static MTEFilteredHatch CRYOTHEUM_COOLING_HATCH;
-    public static MetaTileEntityRFEnergyHatch RF_ENERGY_HATCH_INPUT;
-    public static MetaTileEntityRFEnergyHatch RF_ENERGY_HATCH_OUTPUT;
+    public static MetaTileEntityRFEnergyHatch[] RF_ENERGY_HATCH_INPUT = new MetaTileEntityRFEnergyHatch[GTValues.V.length];
+    public static MetaTileEntityRFEnergyHatch[] RF_ENERGY_HATCH_OUTPUT = new MetaTileEntityRFEnergyHatch[GTValues.V.length];
 
     public static MTEMegaEBF MEGA_EBF;
     public static MTEMegaLCR MEGA_LCR;
@@ -126,12 +126,12 @@ public class ZBGTMetaTileEntities {
                         ZBGTMultiblockAbilities.CRYOTHEUM_HATCH, () -> ZBGTAPI.cryotheum, 128_000));
 
         for (int i = 0; i <= (GregTechAPI.isHighTier() ? GTValues.OpV : GTValues.UHV); i++) {
-            RF_ENERGY_HATCH_INPUT = registerMetaTileEntity(18019 + 2 + i, new MetaTileEntityRFEnergyHatch(
+            RF_ENERGY_HATCH_INPUT[i] = registerMetaTileEntity(18019 + 2 + i, new MetaTileEntityRFEnergyHatch(
                     zbgtId(String.format("rf_input_hatch_%s", GTValues.VN[i].toLowerCase())), i, false));
         }
 
         for (int i = 0; i <= (GregTechAPI.isHighTier() ? GTValues.OpV : GTValues.UHV); i++) {
-            RF_ENERGY_HATCH_OUTPUT = registerMetaTileEntity(18033 + 2 + i, new MetaTileEntityRFEnergyHatch(
+            RF_ENERGY_HATCH_OUTPUT[i] = registerMetaTileEntity(18033 + 2 + i, new MetaTileEntityRFEnergyHatch(
                     zbgtId(String.format("rf_output_hatch_%s", GTValues.VN[i].toLowerCase())), i, true));
         }
 
