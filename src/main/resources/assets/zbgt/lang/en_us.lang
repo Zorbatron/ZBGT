@@ -371,6 +371,8 @@ zbgt.machine.industrial_pbf.tooltip2=Recipe length divided by the length of the 
 zbgt.machine.industrial_pbf.speed=Speed bonus: %s%%
 
 zbgt.machine.energy_infuser.name=Energy Infuser
+zbgt.machine.energy_infuser.tooltip.0=Charges electric items in its input bus
+zbgt.machine.energy_infuser.tooltip.1=If UU matter is supplied, it also repairs items using %smB per durability point
 
 
 # Multiblock Casings

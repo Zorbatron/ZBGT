@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -336,5 +337,13 @@ public class MTEEnergyInfuser extends MultiblockWithDisplayBase implements ICont
     @Override
     public boolean hasMaintenanceMechanics() {
         return false;
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World world, @NotNull List<String> tooltip,
+                               boolean advanced) {
+        tooltip.add(I18n.format("zbgt.machine.energy_infuser.tooltip.0"));
+        tooltip.add(I18n.format("zbgt.machine.energy_infuser.tooltip.1",
+                ZBGTConfig.multiblockSettings.energyInfuserSettings.usedUUMatterPerDurability));
     }
 }
