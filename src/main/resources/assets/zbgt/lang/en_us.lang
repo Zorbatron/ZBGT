@@ -110,6 +110,7 @@ zbgt.machine.rf_hatch.fe_out=§aFE OUT: §f%,d FE/t
 zbgt.machine.rf_hatch.all_side_access=Use a §fScrewdriver§7 to toggle RF access from §fall sides§7 or only the §ffront§7 face
 zbgt.machine.rf_hatch.all_side_access.on=Hatch allows RF access from all sides
 zbgt.machine.rf_hatch.all_side_access.off=Hatch only allows RF access from the front face
+zbgt.machine.rf_hatch.tooltip=Is only allowed on Power Substations and Active Transformers!
 
 
 # Covers

@@ -163,6 +163,7 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
 
         tooltip.add(I18n.format("zbgt.machine.rf_hatch.energy_storage_capacity", feContainer.getMaxEnergyStored()));
         tooltip.add(I18n.format("gregtech.universal.disabled"));
+        tooltip.add(I18n.format("zbgt.machine.rf_hatch.tooltip"));
     }
 
     @Override
@@ -235,7 +236,6 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
         return false;
     }
 
-    @SuppressWarnings("InnerClassMayBeStatic")
     public class EUContainer implements IEnergyContainer {
 
         @Override
@@ -295,7 +295,6 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
         }
     }
 
-    @SuppressWarnings("InnerClassMayBeStatic")
     public class FEContainer implements IEnergyStorage {
 
         @Override

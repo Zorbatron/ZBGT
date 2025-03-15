@@ -126,12 +126,12 @@ public class ZBGTMetaTileEntities {
                         ZBGTMultiblockAbilities.CRYOTHEUM_HATCH, () -> ZBGTAPI.cryotheum, 128_000));
 
         for (int i = 0; i <= (GregTechAPI.isHighTier() ? GTValues.OpV : GTValues.UHV); i++) {
-            RF_ENERGY_HATCH_INPUT = registerMetaTileEntity(18019 + i, new MetaTileEntityRFEnergyHatch(
+            RF_ENERGY_HATCH_INPUT = registerMetaTileEntity(18019 + 2 + i, new MetaTileEntityRFEnergyHatch(
                     zbgtId(String.format("rf_input_hatch_%s", GTValues.VN[i].toLowerCase())), i, false));
         }
 
         for (int i = 0; i <= (GregTechAPI.isHighTier() ? GTValues.OpV : GTValues.UHV); i++) {
-            RF_ENERGY_HATCH_OUTPUT = registerMetaTileEntity(18033 + i, new MetaTileEntityRFEnergyHatch(
+            RF_ENERGY_HATCH_OUTPUT = registerMetaTileEntity(18033 + 2 + i, new MetaTileEntityRFEnergyHatch(
                     zbgtId(String.format("rf_output_hatch_%s", GTValues.VN[i].toLowerCase())), i, true));
         }
 
