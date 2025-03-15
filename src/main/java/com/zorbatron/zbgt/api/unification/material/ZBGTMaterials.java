@@ -61,7 +61,8 @@ public final class ZBGTMaterials {
 
     // Unknown Composition Materials
     public static Material SpecialCeramics;
-    public static Material IC2Coolant;
+    public static Material LowGradeCoolant;
+    public static Material HotLowGradeCoolant;
 
     public static void init() {
         MetaItems.addOrePrefix(ZBGTOrePrefix.nanites);

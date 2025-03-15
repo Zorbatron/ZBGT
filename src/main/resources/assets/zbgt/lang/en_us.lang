@@ -515,7 +515,8 @@ zbgt.material.hikarium=Hikarium
 zbgt.material.pikyonium_64_b=Pikyonium 64B
 
 zbgt.material.special_ceramics=Special Ceramics
-zbgt.material.ic_2_coolant=IC2 Coolant
+zbgt.material.low_grade_coolant=Low Grade Coolant
+zbgt.material.hot_low_grade_coolant=Hot Low Grade Coolant
 
 
 # Ore veins

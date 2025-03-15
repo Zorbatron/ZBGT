@@ -330,7 +330,7 @@ public class CasingRecipes {
                 .input(screw, Quantium, 16)
                 .fluidInputs(Trinium.getFluid(L * 8))
                 .fluidInputs(Osmium.getFluid(L * 8))
-                .fluidInputs(IC2Coolant.getFluid(2000))
+                .fluidInputs(LowGradeCoolant.getFluid(2000))
                 .fluidInputs(Argon.getFluid(1000))
                 .scannerResearch(scanner -> scanner
                         .researchStack(
@@ -348,7 +348,7 @@ public class CasingRecipes {
                 .input(foil, Europium, 64)
                 .fluidInputs(Glass.getFluid(L * 16))
                 .fluidInputs(SiliconeRubber.getFluid(L * 12))
-                .fluidInputs(IC2Coolant.getFluid(2000))
+                .fluidInputs(LowGradeCoolant.getFluid(2000))
                 .fluidInputs(Trinium.getFluid(L * 8))
                 .scannerResearch(scanner -> scanner
                         .researchStack(ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.HOLLOW_CASING))

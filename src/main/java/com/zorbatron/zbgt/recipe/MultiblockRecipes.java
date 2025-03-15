@@ -329,7 +329,7 @@ public class MultiblockRecipes {
                 .input(screw, Neodymium, 16)
                 .fluidInputs(Electrum.getFluid(L * 18))
                 .fluidInputs(Europium.getFluid(L * 12))
-                .fluidInputs(IC2Coolant.getFluid(2000))
+                .fluidInputs(LowGradeCoolant.getFluid(2000))
                 .scannerResearch(scanner -> scanner
                         .researchStack(MetaTileEntities.ACTIVE_TRANSFORMER.getStackForm())
                         .EUt(VA[LuV]).duration(60 * 20))
