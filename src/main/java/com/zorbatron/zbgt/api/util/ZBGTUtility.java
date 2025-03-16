@@ -1,5 +1,6 @@
 package com.zorbatron.zbgt.api.util;
 
+import static gregtech.api.capability.FeCompat.*;
 import static net.minecraft.util.text.TextFormatting.*;
 
 import java.util.Map;
@@ -12,12 +13,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 
 import org.jetbrains.annotations.NotNull;
 
 import com.zorbatron.zbgt.ZBGTCore;
 
+import gregtech.api.capability.FeCompat;
 import gregtech.api.capability.INotifiableHandler;
 import gregtech.api.capability.impl.GhostCircuitItemStackHandler;
 import gregtech.api.capability.impl.ItemHandlerList;
@@ -143,5 +146,15 @@ public final class ZBGTUtility {
         if (world != null && !world.isRemote) {
             mte.writeCustomData(dataID, bufWriter);
         }
+    }
+
+    /**
+     * Copied from {@link FeCompat#insertEu(IEnergyStorage, long)} but with {@link FeCompat#toFeBounded(long, int, int)}
+     * instead of {@link FeCompat#toFe(long, int)}.
+     */
+    public static long insertEuBounded(IEnergyStorage storage, long amountEU, int max) {
+        int euToFeRatio = ratio(false);
+        int feSent = storage.receiveEnergy(toFeBounded(amountEU, euToFeRatio, max), true);
+        return toEu(storage.receiveEnergy(feSent - (feSent % euToFeRatio), false), euToFeRatio);
     }
 }

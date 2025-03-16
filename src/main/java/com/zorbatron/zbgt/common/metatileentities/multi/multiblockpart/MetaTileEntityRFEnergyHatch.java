@@ -26,13 +26,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.metatileentity.ZBGTMultiblockAbilities;
+import com.zorbatron.zbgt.api.util.ZBGTUtility;
 
 import codechicken.lib.raytracer.CuboidRayTraceResult;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
-import gregtech.api.capability.FeCompat;
 import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.gui.ModularUI;
@@ -91,17 +91,7 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
         if (te == null) return;
         IEnergyStorage energyStorage = te.getCapability(CapabilityEnergy.ENERGY, direction.getOpposite());
         if (energyStorage == null) return;
-        euContainer.removeEnergy(insertEuBounded(energyStorage, storedEU, Integer.MAX_VALUE));
-    }
-
-    /**
-     * Copied from {@link FeCompat#insertEu(IEnergyStorage, long)} but with {@link FeCompat#toFeBounded(long, int, int)}
-     * instead of {@link FeCompat#toFe(long, int)}.
-     */
-    private long insertEuBounded(IEnergyStorage storage, long amountEU, int max) {
-        int euToFeRatio = ratio(false);
-        int feSent = storage.receiveEnergy(toFeBounded(amountEU, euToFeRatio, max), true);
-        return toEu(storage.receiveEnergy(feSent - (feSent % euToFeRatio), false), euToFeRatio);
+        euContainer.removeEnergy(ZBGTUtility.insertEuBounded(energyStorage, storedEU, Integer.MAX_VALUE));
     }
 
     @Override
