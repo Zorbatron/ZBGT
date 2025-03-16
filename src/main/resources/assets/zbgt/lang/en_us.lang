@@ -370,6 +370,10 @@ zbgt.machine.industrial_pbf.tooltip=Produce steel at an industrial scale!
 zbgt.machine.industrial_pbf.tooltip2=Recipe length divided by the length of the multiblock.
 zbgt.machine.industrial_pbf.speed=Speed bonus: %s%%
 
+zbgt.machine.energy_infuser.name=Energy Infuser
+zbgt.machine.energy_infuser.tooltip.0=Charges electric items in its input bus
+zbgt.machine.energy_infuser.tooltip.1=If UU matter is supplied, it also repairs items using %smB per durability point
+
 
 # Multiblock Casings
 tile.multiblock_casing.precise_0.name=Imprecise Electronic Unit Casing
@@ -443,8 +447,14 @@ tile.misc_casing.inconel_reinforced_casing.name=Inconel Reinforced Casing
 tile.creative_heating_coil.creative_heating_coil.name=Creative Heating Coil
 
 tile.misc_casing.volcanus_casing.name=Volcanus Casing
-
 tile.misc_casing.cryogenic_casing.name=Advanced Cryogenic Casing
+
+tile.misc_casing.molecular_casing.name=Molecular Casing
+tile.misc_casing.molecular_casing.tooltip=Stops elemental things.
+tile.misc_casing.molecular_coil.name=Molecular Coil
+tile.misc_casing.molecular_coil.tooltip=Well it does things too.
+tile.misc_casing.hollow_casing.name=Hollow Casing
+tile.misc_casing.hollow_casing.tooltip=Reinforced accelerator tunnel.
 
 
 # Misc
@@ -507,6 +517,8 @@ zbgt.material.hikarium=Hikarium
 zbgt.material.pikyonium_64_b=Pikyonium 64B
 
 zbgt.material.special_ceramics=Special Ceramics
+zbgt.material.low_grade_coolant=Low Grade Coolant
+zbgt.material.hot_low_grade_coolant=Hot Low Grade Coolant
 
 
 # Ore veins

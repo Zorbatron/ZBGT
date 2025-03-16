@@ -1,11 +1,14 @@
 package com.zorbatron.zbgt.api.util;
 
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 
 import org.jetbrains.annotations.NotNull;
@@ -19,9 +22,11 @@ import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 
+@SuppressWarnings("unused")
 public final class ZBGTUtility {
 
-    public static @NotNull ResourceLocation zbgtId(@NotNull String path) {
+    @NotNull
+    public static ResourceLocation zbgtId(@NotNull String path) {
         return new ResourceLocation(ZBGTCore.MODID, path);
     }
 
@@ -90,5 +95,11 @@ public final class ZBGTUtility {
         }
 
         return v;
+    }
+
+    public static void writeCustomData(MetaTileEntity mte, World world, int dataID, Consumer<PacketBuffer> bufWriter) {
+        if (world != null && !world.isRemote) {
+            mte.writeCustomData(dataID, bufWriter);
+        }
     }
 }

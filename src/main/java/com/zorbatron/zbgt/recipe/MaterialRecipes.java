@@ -72,6 +72,12 @@ public class MaterialRecipes {
                     .EUt(VA[MV]).duration(20 * 25)
                     .buildAndRegister();
         }
+
+        VACUUM_RECIPES.recipeBuilder()
+                .fluidInputs(HotLowGradeCoolant.getFluid(1000))
+                .fluidOutputs(LowGradeCoolant.getFluid(1000))
+                .EUt(VA[HV]).duration(45)
+                .buildAndRegister();
     }
 
     private static void alloyBlast() {
@@ -300,6 +306,20 @@ public class MaterialRecipes {
                 .output(dust, Grismium, 50)
                 .EUt(VA[EV]).duration(20 * 60)
                 .buildAndRegister();
+
+        RecipeBuilder<SimpleRecipeBuilder> ic2coolantBuilder = MIXER_RECIPES.recipeBuilder()
+                .input(dust, Lapis)
+                .circuitMeta(4)
+                .EUt(VA[MV]).duration(256);
+
+        ic2coolantBuilder.copy()
+                .fluidInputs(Water.getFluid(125))
+                .fluidOutputs(LowGradeCoolant.getFluid(125))
+                .buildAndRegister();
+        ic2coolantBuilder.copy()
+                .fluidInputs(DistilledWater.getFluid(1000))
+                .fluidOutputs(LowGradeCoolant.getFluid(1000))
+                .buildAndRegister();
     }
 
     private static void ebf() {
@@ -350,6 +370,7 @@ public class MaterialRecipes {
                 .buildAndRegister();
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static void blastHelper(RecipeBuilder<?> blastBuilder, int duration, BlastProperty.GasTier gasTier,
                                     int circ1, int circ2) {
         FluidStack gas = CraftingComponent.EBF_GASES.get(gasTier).copy();
