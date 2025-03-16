@@ -25,6 +25,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.zorbatron.zbgt.api.metatileentity.ZBGTMultiblockAbilities;
+
 import codechicken.lib.raytracer.CuboidRayTraceResult;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
@@ -126,7 +128,7 @@ public class MetaTileEntityRFEnergyHatch extends MetaTileEntityMultiblockPart
 
     @Override
     public MultiblockAbility<IEnergyContainer> getAbility() {
-        return isExportHatch ? MultiblockAbility.SUBSTATION_OUTPUT_ENERGY : MultiblockAbility.SUBSTATION_INPUT_ENERGY;
+        return isExportHatch ? ZBGTMultiblockAbilities.RF_OUTPUT_HATCH : ZBGTMultiblockAbilities.RF_INPUT_HATCH;
     }
 
     @Override
