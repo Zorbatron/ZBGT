@@ -49,7 +49,8 @@ public final class ZBGTMaterialExtraFlags {
 
     private static void densePlates() {
         Material[] materials = { Steel, Aluminium, StainlessSteel, Titanium, TungstenSteel, Tritanium, HSSS,
-                Osmiridium, NiobiumTitanium, Iridium, WroughtIron, Trinaquadalloy, GCYMMaterials.Trinaquadalloy };
+                Osmiridium, NiobiumTitanium, Iridium, WroughtIron, Trinaquadalloy, GCYMMaterials.Trinaquadalloy,
+                Europium, Plutonium239 };
 
         setFlags(materials, GENERATE_DENSE);
     }

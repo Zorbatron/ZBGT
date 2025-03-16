@@ -6,10 +6,7 @@ import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTile
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.metatileentity.ZBGTMultiblockAbilities;
 import com.zorbatron.zbgt.common.metatileentities.multi.MTEYOTTank;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.MTECircuitAssemblyLine;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.MTECoAL;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.MTECryogenicFreezer;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.MTEVolcanus;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.large.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.mega.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.quad.*;
@@ -65,6 +62,8 @@ public class ZBGTMetaTileEntities {
     public static MTECryogenicFreezer CRYOGENIC_FREEZER;
 
     public static MTEIndustrialPBF IPBF;
+
+    public static MTEEnergyInfuser ENERGY_INFUSER;
 
     public static void init() {
         MachineItemBlock.addCreativeTab(ZBGTAPI.TAB_ZBGT);
@@ -193,5 +192,8 @@ public class ZBGTMetaTileEntities {
 
         IPBF = registerMetaTileEntity(18073,
                 new MTEIndustrialPBF(zbgtId("industrial_pbf")));
+
+        ENERGY_INFUSER = registerMetaTileEntity(18074,
+                new MTEEnergyInfuser(zbgtId("energy_infuser")));
     }
 }
