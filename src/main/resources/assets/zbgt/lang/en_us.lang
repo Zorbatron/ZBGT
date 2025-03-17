@@ -77,6 +77,41 @@ zbgt.machine.pyrotheum_heating_hatch.name=Pyrotheum Heating Vent
 
 zbgt.machine.cryotheum_cooling_hatch.name=Cryotheum Cooling Hatch
 
+zbgt.machine.rf_input_hatch_ulv.name=ULV RF Energy Hatch
+zbgt.machine.rf_input_hatch_lv.name=LV RF Energy Hatch
+zbgt.machine.rf_input_hatch_mv.name=MV RF Energy Hatch
+zbgt.machine.rf_input_hatch_hv.name=HV RF Energy Hatch
+zbgt.machine.rf_input_hatch_ev.name=EV RF Energy Hatch
+zbgt.machine.rf_input_hatch_iv.name=IV RF Energy Hatch
+zbgt.machine.rf_input_hatch_luv.name=LuV RF Energy Hatch
+zbgt.machine.rf_input_hatch_zpm.name=ZPM RF Energy Hatch
+zbgt.machine.rf_input_hatch_uv.name=UV RF Energy Hatch
+zbgt.machine.rf_input_hatch_uhv.name=UHV RF Energy Hatch
+zbgt.machine.rf_input_hatch_uev.name=UEV RF Energy Hatch
+zbgt.machine.rf_input_hatch_uiv.name=UIV RF Energy Hatch
+zbgt.machine.rf_input_hatch_uxv.name=UXV RF Energy Hatch
+zbgt.machine.rf_input_hatch_opv.name=OpV RF Energy Hatch
+zbgt.machine.rf_output_hatch_ulv.name=ULV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_lv.name=LV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_mv.name=MV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_hv.name=HV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_ev.name=EV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_iv.name=IV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_luv.name=LuV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_zpm.name=ZPM RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_uv.name=UV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_uhv.name=UHV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_uev.name=UEV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_uiv.name=UIV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_uxv.name=UXV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_opv.name=OpV RF Dynamo Hatch
+zbgt.machine.rf_hatch.energy_storage_capacity=§cEnergy Capacity: §f%,d FE
+zbgt.machine.rf_hatch.fe_out=§aFE OUT: §f%,d FE/t
+zbgt.machine.rf_hatch.all_side_access=Use a §fScrewdriver§7 to toggle RF access from §fall sides§7 or only the §ffront§7 face
+zbgt.machine.rf_hatch.all_side_access.on=Hatch allows RF access from all sides
+zbgt.machine.rf_hatch.all_side_access.off=Hatch only allows RF access from the front face
+zbgt.machine.rf_hatch.tooltip=Is only allowed on Power Substations and Active Transformers!
+
 
 # Covers
 metaitem.cover.dual_cover.lv.name=LV Dual Cover
