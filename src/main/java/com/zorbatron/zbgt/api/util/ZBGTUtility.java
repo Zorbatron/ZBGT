@@ -91,4 +91,8 @@ public final class ZBGTUtility {
 
         return v;
     }
+
+    public static int combineRGB(int r, int g, int b) {
+        return (r << 16) | (g << 8) | b;
+    }
 }
