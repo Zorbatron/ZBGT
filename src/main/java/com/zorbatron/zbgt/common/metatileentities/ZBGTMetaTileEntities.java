@@ -6,10 +6,7 @@ import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTile
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.metatileentity.ZBGTMultiblockAbilities;
 import com.zorbatron.zbgt.common.metatileentities.multi.MTEYOTTank;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.MTECircuitAssemblyLine;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.MTECoAL;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.MTECryogenicFreezer;
-import com.zorbatron.zbgt.common.metatileentities.multi.electric.MTEVolcanus;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.large.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.mega.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.quad.*;
@@ -18,6 +15,7 @@ import com.zorbatron.zbgt.common.metatileentities.multi.primitive.MTEIndustrialP
 import com.zorbatron.zbgt.common.metatileentities.storage.MTECreativeComputationProvider;
 
 import gregtech.api.GTValues;
+import gregtech.api.GregTechAPI;
 import gregtech.api.block.machines.MachineItemBlock;
 
 public class ZBGTMetaTileEntities {
@@ -36,6 +34,8 @@ public class ZBGTMetaTileEntities {
     public static MTESterileCleaningHatch STERILE_CLEANING_HATCH;
     public static MTEFilteredHatch PYROTHEUM_HEATING_HATCH;
     public static MTEFilteredHatch CRYOTHEUM_COOLING_HATCH;
+    public static MetaTileEntityRFEnergyHatch[] RF_ENERGY_HATCH_INPUT = new MetaTileEntityRFEnergyHatch[GTValues.V.length];
+    public static MetaTileEntityRFEnergyHatch[] RF_ENERGY_HATCH_OUTPUT = new MetaTileEntityRFEnergyHatch[GTValues.V.length];
 
     public static MTEMegaEBF MEGA_EBF;
     public static MTEMegaLCR MEGA_LCR;
@@ -62,6 +62,8 @@ public class ZBGTMetaTileEntities {
     public static MTECryogenicFreezer CRYOGENIC_FREEZER;
 
     public static MTEIndustrialPBF IPBF;
+
+    public static MTEEnergyInfuser ENERGY_INFUSER;
 
     public static void init() {
         MachineItemBlock.addCreativeTab(ZBGTAPI.TAB_ZBGT);
@@ -122,6 +124,16 @@ public class ZBGTMetaTileEntities {
                 new MTEFilteredHatch(zbgtId("cryotheum_cooling_hatch"), GTValues.IV,
                         ZBGTMultiblockAbilities.CRYOTHEUM_HATCH, () -> ZBGTAPI.cryotheum, 128_000));
 
+        for (int i = 0; i <= (GregTechAPI.isHighTier() ? GTValues.OpV : GTValues.UHV); i++) {
+            RF_ENERGY_HATCH_INPUT[i] = registerMetaTileEntity(18019 + 2 + i, new MetaTileEntityRFEnergyHatch(
+                    zbgtId(String.format("rf_input_hatch_%s", GTValues.VN[i].toLowerCase())), i, false));
+        }
+
+        for (int i = 0; i <= (GregTechAPI.isHighTier() ? GTValues.OpV : GTValues.UHV); i++) {
+            RF_ENERGY_HATCH_OUTPUT[i] = registerMetaTileEntity(18033 + 2 + i, new MetaTileEntityRFEnergyHatch(
+                    zbgtId(String.format("rf_output_hatch_%s", GTValues.VN[i].toLowerCase())), i, true));
+        }
+
         // 18050-18099 (50) reserved for multiblocks
         MEGA_EBF = registerMetaTileEntity(18050,
                 new MTEMegaEBF(zbgtId("mega_ebf")));
@@ -180,5 +192,8 @@ public class ZBGTMetaTileEntities {
 
         IPBF = registerMetaTileEntity(18073,
                 new MTEIndustrialPBF(zbgtId("industrial_pbf")));
+
+        ENERGY_INFUSER = registerMetaTileEntity(18074,
+                new MTEEnergyInfuser(zbgtId("energy_infuser")));
     }
 }

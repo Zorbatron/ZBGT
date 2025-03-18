@@ -32,7 +32,10 @@ public class MiscCasing extends VariantBlock<MiscCasing.CasingType> {
         COMPACT_FUSION_COIL_3("compact_fusion_coil_3"),
         COMPACT_FUSION_COIL_4("compact_fusion_coil_4"),
         VOLCANUS_CASING("volcanus_casing"),
-        CRYOGENIC_CASING("cryogenic_casing");
+        CRYOGENIC_CASING("cryogenic_casing"),
+        MOLECULAR_CASING("molecular_casing"),
+        MOLECULAR_COIL("molecular_coil"),
+        HOLLOW_CASING("hollow_casing");
 
         private final String name;
 

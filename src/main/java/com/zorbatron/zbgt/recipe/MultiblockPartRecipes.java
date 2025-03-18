@@ -135,6 +135,26 @@ public class MultiblockPartRecipes {
                 ZBGTMetaTileEntities.CREATIVE_ENERGY_SOURCE.getStackForm(),
                 "E",
                 'E', ZBGTMetaTileEntities.CREATIVE_ENERGY_SINK.getStackForm());
+
+        for (int i = 0; i <= UHV; i++) {
+            ASSEMBLER_RECIPES.recipeBuilder()
+                    .input(MetaTileEntities.ENERGY_CONVERTER[0][i])
+                    .input(MetaTileEntities.ENERGY_INPUT_HATCH[i])
+                    .circuitMeta(1)
+                    .fluidInputs(Materials.Glue.getFluid(L * (i + 1)))
+                    .output(ZBGTMetaTileEntities.RF_ENERGY_HATCH_INPUT[i])
+                    .EUt(VA[i]).duration(42)
+                    .buildAndRegister();
+
+            ASSEMBLER_RECIPES.recipeBuilder()
+                    .input(MetaTileEntities.ENERGY_CONVERTER[0][i])
+                    .input(MetaTileEntities.ENERGY_OUTPUT_HATCH[i])
+                    .circuitMeta(2)
+                    .fluidInputs(Materials.Glue.getFluid(L * (i + 1)))
+                    .output(ZBGTMetaTileEntities.RF_ENERGY_HATCH_OUTPUT[i])
+                    .EUt(VA[i]).duration(42)
+                    .buildAndRegister();
+        }
     }
 
     private static void largeParallelHatches() {

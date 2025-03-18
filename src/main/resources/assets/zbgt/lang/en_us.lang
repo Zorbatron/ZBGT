@@ -77,6 +77,41 @@ zbgt.machine.pyrotheum_heating_hatch.name=Pyrotheum Heating Vent
 
 zbgt.machine.cryotheum_cooling_hatch.name=Cryotheum Cooling Hatch
 
+zbgt.machine.rf_input_hatch_ulv.name=ULV RF Energy Hatch
+zbgt.machine.rf_input_hatch_lv.name=LV RF Energy Hatch
+zbgt.machine.rf_input_hatch_mv.name=MV RF Energy Hatch
+zbgt.machine.rf_input_hatch_hv.name=HV RF Energy Hatch
+zbgt.machine.rf_input_hatch_ev.name=EV RF Energy Hatch
+zbgt.machine.rf_input_hatch_iv.name=IV RF Energy Hatch
+zbgt.machine.rf_input_hatch_luv.name=LuV RF Energy Hatch
+zbgt.machine.rf_input_hatch_zpm.name=ZPM RF Energy Hatch
+zbgt.machine.rf_input_hatch_uv.name=UV RF Energy Hatch
+zbgt.machine.rf_input_hatch_uhv.name=UHV RF Energy Hatch
+zbgt.machine.rf_input_hatch_uev.name=UEV RF Energy Hatch
+zbgt.machine.rf_input_hatch_uiv.name=UIV RF Energy Hatch
+zbgt.machine.rf_input_hatch_uxv.name=UXV RF Energy Hatch
+zbgt.machine.rf_input_hatch_opv.name=OpV RF Energy Hatch
+zbgt.machine.rf_output_hatch_ulv.name=ULV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_lv.name=LV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_mv.name=MV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_hv.name=HV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_ev.name=EV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_iv.name=IV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_luv.name=LuV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_zpm.name=ZPM RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_uv.name=UV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_uhv.name=UHV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_uev.name=UEV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_uiv.name=UIV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_uxv.name=UXV RF Dynamo Hatch
+zbgt.machine.rf_output_hatch_opv.name=OpV RF Dynamo Hatch
+zbgt.machine.rf_hatch.energy_storage_capacity=§cEnergy Capacity: §f%,d FE
+zbgt.machine.rf_hatch.fe_out=§aFE OUT: §f%,d FE/t
+zbgt.machine.rf_hatch.all_side_access=Use a §fScrewdriver§7 to toggle RF access from §fall sides§7 or only the §ffront§7 face
+zbgt.machine.rf_hatch.all_side_access.on=Hatch allows RF access from all sides
+zbgt.machine.rf_hatch.all_side_access.off=Hatch only allows RF access from the front face
+zbgt.machine.rf_hatch.tooltip=Is only allowed on Power Substations and Active Transformers!
+
 
 # Covers
 metaitem.cover.dual_cover.lv.name=LV Dual Cover
@@ -370,6 +405,10 @@ zbgt.machine.industrial_pbf.tooltip=Produce steel at an industrial scale!
 zbgt.machine.industrial_pbf.tooltip2=Recipe length divided by the length of the multiblock.
 zbgt.machine.industrial_pbf.speed=Speed bonus: %s%%
 
+zbgt.machine.energy_infuser.name=Energy Infuser
+zbgt.machine.energy_infuser.tooltip.0=Charges electric items in its input bus
+zbgt.machine.energy_infuser.tooltip.1=If UU matter is supplied, it also repairs items using %smB per durability point
+
 
 # Multiblock Casings
 tile.multiblock_casing.precise_0.name=Imprecise Electronic Unit Casing
@@ -443,8 +482,14 @@ tile.misc_casing.inconel_reinforced_casing.name=Inconel Reinforced Casing
 tile.creative_heating_coil.creative_heating_coil.name=Creative Heating Coil
 
 tile.misc_casing.volcanus_casing.name=Volcanus Casing
-
 tile.misc_casing.cryogenic_casing.name=Advanced Cryogenic Casing
+
+tile.misc_casing.molecular_casing.name=Molecular Casing
+tile.misc_casing.molecular_casing.tooltip=Stops elemental things.
+tile.misc_casing.molecular_coil.name=Molecular Coil
+tile.misc_casing.molecular_coil.tooltip=Well it does things too.
+tile.misc_casing.hollow_casing.name=Hollow Casing
+tile.misc_casing.hollow_casing.tooltip=Reinforced accelerator tunnel.
 
 
 # Misc
@@ -507,6 +552,8 @@ zbgt.material.hikarium=Hikarium
 zbgt.material.pikyonium_64_b=Pikyonium 64B
 
 zbgt.material.special_ceramics=Special Ceramics
+zbgt.material.low_grade_coolant=Low Grade Coolant
+zbgt.material.hot_low_grade_coolant=Hot Low Grade Coolant
 zbgt.material.sluice_juice=Sluice Juice
 zbgt.material.sluice_sand=Sluice Sand
 

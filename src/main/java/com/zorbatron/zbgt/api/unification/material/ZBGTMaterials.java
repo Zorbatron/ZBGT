@@ -61,6 +61,8 @@ public final class ZBGTMaterials {
 
     // Unknown Composition Materials
     public static Material SpecialCeramics;
+    public static Material LowGradeCoolant;
+    public static Material HotLowGradeCoolant;
     public static Material SluiceJuice;
     public static Material SluiceSand;
 

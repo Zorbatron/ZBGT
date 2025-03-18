@@ -4,9 +4,13 @@ import static com.zorbatron.zbgt.api.unification.ZBGTElements.Ad;
 import static com.zorbatron.zbgt.api.unification.ZBGTElements.Qt;
 import static com.zorbatron.zbgt.api.unification.material.ZBGTMaterials.*;
 import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
+import static gregtech.api.GTValues.*;
 
+import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.info.MaterialIconSet;
+import gregtech.api.unification.material.properties.BlastProperty;
 
 public final class ZBGTElementMaterials {
 
@@ -20,8 +24,12 @@ public final class ZBGTElementMaterials {
                 .build();
 
         Quantium = new Material.Builder(id++, zbgtId("quantium"))
-                .dust().ore(true)
+                .dust().ore(true).liquid(new FluidBuilder().temperature(9900))
                 .color(0x00d10b).iconSet(MaterialIconSet.SHINY)
+                .flags(MaterialFlags.GENERATE_BOLT_SCREW)
+                .blast(blast -> blast
+                        .temp(5400, BlastProperty.GasTier.HIGH)
+                        .blastStats(VA[IV], 45 * 20))
                 .element(Qt)
                 .build();
     }

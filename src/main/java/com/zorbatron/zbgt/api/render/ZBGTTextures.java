@@ -42,6 +42,8 @@ public class ZBGTTextures {
     public static SimpleOverlayRenderer VOLCANUS_CASING;
     public static SimpleOverlayRenderer CRYOGENIC_CASING;
 
+    public static SimpleOverlayRenderer MOLECULAR_CASING;
+
     public static void preInit() {
         WATER_OVERLAY_INFINITY = new SimpleOverlayRenderer("overlay/machine/water_infinity");
         ITEM_OVERLAY_INFINITY = new SimpleOverlayRenderer("overlay/machine/item_infinity");
@@ -72,6 +74,8 @@ public class ZBGTTextures {
 
         VOLCANUS_CASING = new SimpleOverlayRenderer("casings/misc/volcanus");
         CRYOGENIC_CASING = new SimpleOverlayRenderer("casings/misc/cryogenic");
+
+        MOLECULAR_CASING = new SimpleOverlayRenderer("casings/misc/molecular_casing");
     }
 
     public static SimpleOverlayRenderer getPrassTextureByTier(int tier) {
