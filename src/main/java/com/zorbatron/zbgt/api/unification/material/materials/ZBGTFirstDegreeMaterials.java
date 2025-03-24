@@ -1,6 +1,7 @@
 package com.zorbatron.zbgt.api.unification.material.materials;
 
 import static com.zorbatron.zbgt.api.unification.material.ZBGTMaterials.*;
+import static com.zorbatron.zbgt.api.util.ZBGTUtility.combineRGB;
 import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -242,6 +243,13 @@ public final class ZBGTFirstDegreeMaterials {
         HotLowGradeCoolant = new Material.Builder(id++, zbgtId("hot_low_grade_coolant"))
                 .fluid()
                 .color(0xbf1d1d)
+                .build();
+
+        WoodsGlass = new Material.Builder(id++, zbgtId("woods_glass"))
+                .dust()
+                .color(combineRGB(220, 60, 255)).iconSet(METALLIC)
+                .flags(DECOMPOSITION_BY_CENTRIFUGING)
+                .components(Sodium, 2, Silicon, 4, Nickel, 1, Barium, 3)
                 .build();
     }
 }

@@ -320,6 +320,15 @@ public class MaterialRecipes {
                 .fluidInputs(DistilledWater.getFluid(1000))
                 .fluidOutputs(LowGradeCoolant.getFluid(1000))
                 .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Sodium, 2)
+                .input(dust, Silicon, 4)
+                .input(dust, Nickel)
+                .input(dust, Barium, 3)
+                .output(dust, WoodsGlass)
+                .EUt(VA[MV]).duration(127)
+                .buildAndRegister();
     }
 
     private static void ebf() {

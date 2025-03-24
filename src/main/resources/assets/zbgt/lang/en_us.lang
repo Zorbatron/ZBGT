@@ -306,6 +306,8 @@ metaitem.coolant_cell.1080k_sp.name=1080K Sp Coolant Cell
 
 metaitem.gregtech_computer_cube.name=GregTech Computer Cube
 
+metaitem.woods_glass_lens.name=Wood's Glass Lens
+
 
 # Widgets
 zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s
@@ -535,6 +537,7 @@ zbgt.material.nitinol_60=Nitinol 60
 zbgt.material.hastelloy_n=Hastelloy-N
 zbgt.material.hastelloy_w=Hastelloy-W
 zbgt.material.maraging_steel_250=Maraging Steel 250
+zbgt.material.woods_glass=Wood's Glass
 
 zbgt.material.mar_ce_m_200=MAR-Ce-M200
 zbgt.material.artherium_sn=Artherium-Sn

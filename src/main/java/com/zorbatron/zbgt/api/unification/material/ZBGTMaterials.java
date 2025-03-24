@@ -33,6 +33,7 @@ public final class ZBGTMaterials {
     public static Material HastelloyN;
     public static Material HastelloyW;
     public static Material MaragingSteel250;
+    public static Material WoodsGlass;
 
     // Second degree materials
     public static Material MAR_CE_M200;

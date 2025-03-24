@@ -134,6 +134,13 @@ public class MiscRecipes {
                 .output(GREGTECH_COMPUTER_CUBE)
                 .EUt(VA[IV]).duration(20 * 180)
                 .buildAndRegister();
+
+        ALLOY_SMELTER_RECIPES.recipeBuilder()
+                .input(dust, WoodsGlass, 5)
+                .notConsumable(MetaItems.SHAPE_MOLD_BALL)
+                .output(WOODS_GLASS_LENS)
+                .EUt(VA[HV]).duration(596)
+                .buildAndRegister();
     }
 
     private static void magneticFluids() {
