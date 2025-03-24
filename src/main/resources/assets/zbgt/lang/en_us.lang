@@ -307,6 +307,7 @@ metaitem.coolant_cell.1080k_sp.name=1080K Sp Coolant Cell
 metaitem.gregtech_computer_cube.name=GregTech Computer Cube
 
 metaitem.woods_glass_lens.name=Wood's Glass Lens
+metaitem.woods_glass_lens.tooltip=Allows UV & IF to pass through, blocks visible light spectrums
 
 
 # Widgets
