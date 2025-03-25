@@ -1,0 +1,85 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all"
+  },
+  "variants": {
+    "variant": {
+      "reinforced_gas_turbine_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/reinforced_gas_turbine_casing"
+        }
+      },
+      "reinforced_plasma_turbine_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/reinforced_plasma_turbine_casing"
+        }
+      },
+      "structural_solar_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/structural_solar_casing"
+        }
+      },
+      "salt_containment_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/salt_containment_casing"
+        }
+      },
+      "thermally_insulated_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/thermally_insulated_casing"
+        }
+      },
+      "flotation_cell_casings": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/flotation_cell_casings"
+        }
+      },
+      "molecular_containment_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/molecular_containment_casing"
+        }
+      },
+      "high_voltage_current_capacitor": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/high_voltage_current_capacitor"
+        }
+      },
+      "particle_containment_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/particle_containment_casing"
+        }
+      },
+      "resonance_chamber_1": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/resonance_chamber_1"
+        }
+      },
+      "resonance_chamber_2": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/resonance_chamber_2"
+        }
+      },
+      "resonance_chamber_3": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/resonance_chamber_3"
+        }
+      },
+      "resonance_chamber_4": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/resonance_chamber_4"
+        }
+      },
+      "modulator_1": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/modulator_1"
+        }
+      },
+      "modulator_2": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/modulator_2"
+        }
+      }
+    }
+  }
+}

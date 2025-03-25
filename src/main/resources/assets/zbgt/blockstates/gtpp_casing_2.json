@@ -1,0 +1,88 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all"
+  },
+  "variants": {
+    "variant": {
+      "vacuum_casing": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "top": "gregtech:blocks/casings/gtpp/vacuum_casing_top",
+          "side": "gregtech:blocks/casings/gtpp/vacuum_casing_side",
+          "bottom": "gregtech:blocks/casings/gtpp/vacuum_casing_top"
+        }
+      },
+      "turbodyne_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/turbodyne_casing"
+        }
+      },
+      "isamill_exterior_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/isamill_exterior_casing"
+        }
+      },
+      "isamill_piping": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/isamill_piping"
+        }
+      },
+      "isamill_gearbox": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/isamill_gearbox"
+        }
+      },
+      "elemental_confinement_shell": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/elemental_confinement_shell"
+        }
+      },
+      "sparge_tower_exterior_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/sparge_tower_exterior_casing"
+        }
+      },
+      "sturdy_printer_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/sturdy_printer_casing"
+        }
+      },
+      "forge_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/forge_casing"
+        }
+      },
+      "neutron_pulse_manipulator": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/neutron_pulse_manipulator"
+        }
+      },
+      "cosmic_fabric_manipulator": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/cosmic_fabric_manipulator"
+        }
+      },
+      "infinity_infused_manipulator": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/infinity_infused_manipulator"
+        }
+      },
+      "spacetime_continuum_ripper": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/spacetime_continuum_ripper"
+        }
+      },
+      "neutron_shielding_core": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/neutron_shielding_core"
+        }
+      },
+      "cosmic_fabric_shielding_core": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/cosmic_fabric_shielding_core"
+        }
+      }
+    }
+  }
+}

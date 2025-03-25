@@ -1,0 +1,85 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all"
+  },
+  "variants": {
+    "variant": {
+      "spacetime_bending_core": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/spacetime_bending_core"
+        }
+      },
+      "force_field_glass": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/force_field_glass"
+        }
+      },
+      "integral_encasement_1": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/integral_encasement_1"
+        }
+      },
+      "integral_encasement_2": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/integral_encasement_2"
+        }
+      },
+      "integral_encasement_3": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/integral_encasement_3"
+        }
+      },
+      "integral_encasement_4": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/integral_encasement_4"
+        }
+      },
+      "integral_encasement_5": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/integral_encasement_5"
+        }
+      },
+      "integral_encasement_6": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/integral_encasement_6"
+        }
+      },
+      "integral_encasement_7": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/integral_encasement_7"
+        }
+      },
+      "integral_encasement_8": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/integral_encasement_8"
+        }
+      },
+      "integral_encasement_9": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/integral_encasement_9"
+        }
+      },
+      "integral_encasement_10": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/integral_encasement_10"
+        }
+      },
+      "turbine_shaft": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/turbine_shaft"
+        }
+      },
+      "reinforced_steam_turbine_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/reinforced_steam_turbine_casing"
+        }
+      },
+      "reinforced_hp_steam_turbine_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/reinforced_hp_steam_turbine_casing"
+        }
+      }
+    }
+  }
+}
