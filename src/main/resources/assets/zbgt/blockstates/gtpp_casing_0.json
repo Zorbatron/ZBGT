@@ -1,0 +1,85 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all"
+  },
+  "variants": {
+    "variant": {
+      "centrifuge_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/centrifuge_casing"
+        }
+      },
+      "structural_coke_oven_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/structural_coke_oven_casing"
+        }
+      },
+      "heat_resistant_coke_oven_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/heat_resistant_coke_oven_casing"
+        }
+      },
+      "heat_proof_coke_oven_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/heat_proof_coke_oven_casing"
+        }
+      },
+      "material_press_machine_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/material_press_machine_casing"
+        }
+      },
+      "electrolyzer_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/electrolyzer_casing"
+        }
+      },
+      "wire_factory_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/wire_factory_casing"
+        }
+      },
+      "maceration_stack_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/maceration_stack_casing"
+        }
+      },
+      "matter_generation_coil": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/matter_generation_coil"
+        }
+      },
+      "matter_fabrication_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/matter_fabrication_casing"
+        }
+      },
+      "hastelloy_n_reactor_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/hastelloy_n_reactor_casing"
+        }
+      },
+      "zeron_100_reactor_shielding": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/zeron_100_reactor_shielding"
+        }
+      },
+      "thermal_processing_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/thermal_processing_casing"
+        }
+      },
+      "hastelloy_n_sealant_block": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/hastelloy_n_sealant_block"
+        }
+      },
+      "hastelloy_x_structural_block": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/hastelloy_x_structural_block"
+        }
+      }
+    }
+  }
+}

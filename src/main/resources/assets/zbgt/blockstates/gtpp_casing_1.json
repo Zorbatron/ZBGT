@@ -1,0 +1,88 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all"
+  },
+  "variants": {
+    "variant": {
+      "wash_plant_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/wash_plant_casing"
+        }
+      },
+      "industrial_sieve_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/industrial_sieve_casing"
+        }
+      },
+      "industrial_sieve_grate": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/industrial_sieve_grate"
+        }
+      },
+      "cyclotron_coil": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/cyclotron_coil"
+        }
+      },
+      "cyclotron_outer_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/cyclotron_outer_casing"
+        }
+      },
+      "thermal_containment_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/thermal_containment_casing"
+        }
+      },
+      "bulk_production_frame": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/bulk_production_frame"
+        }
+      },
+      "cutting_factory_frame": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "top": "gregtech:blocks/casings/gtpp/cutting_factory_frame_top",
+          "side": "gregtech:blocks/casings/gtpp/cutting_factory_frame_side",
+          "bottom": "gregtech:blocks/casings/gtpp/cutting_factory_frame_top"
+        }
+      },
+      "sterile_farm_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/sterile_farm_casing"
+        }
+      },
+      "aquatic_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/aquatic_casing"
+        }
+      },
+      "inconel_reinforced_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/inconel_reinforced_casing"
+        }
+      },
+      "multi_use_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/multi_use_casing"
+        }
+      },
+      "supply_depot_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/supply_depot_casing"
+        }
+      },
+      "containment_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/containment_casing"
+        }
+      },
+      "tempered_arc_furnace_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/tempered_arc_furnace_casing"
+        }
+      }
+    }
+  }
+}

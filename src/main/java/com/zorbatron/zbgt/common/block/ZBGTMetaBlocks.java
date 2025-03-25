@@ -30,7 +30,12 @@ public class ZBGTMetaBlocks {
     public static PreciseCasing PRECISE_CASING;
     public static YOTTankCell YOTTANK_CELL;
     public static MiscCasing MISC_CASING;
-    public static RandomGTPPCasings PARTICLE_CASING;
+    public static RandomGTPPCasings0 GTPP_CASING_0;
+    public static RandomGTPPCasings1 GTPP_CASING_1;
+    public static RandomGTPPCasings2 GTPP_CASING_2;
+    public static RandomGTPPCasings3 GTPP_CASING_3;
+    public static RandomGTPPCasings4 GTPP_CASING_4;
+    public static RandomGTPPCasings5 GTPP_CASING_5;
 
     public static CreativeHeatingCoil CREATIVE_HEATING_COIL;
 
@@ -52,14 +57,25 @@ public class ZBGTMetaBlocks {
         MISC_CASING = new MiscCasing();
         MISC_CASING.setRegistryName("misc_casing");
 
-        PARTICLE_CASING = new RandomGTPPCasings();
-        PARTICLE_CASING.setRegistryName("particle_casing");
+        GTPP_CASING_0 = new RandomGTPPCasings0();
+        GTPP_CASING_0.setRegistryName("gtpp_casing_0");
+        GTPP_CASING_1 = new RandomGTPPCasings1();
+        GTPP_CASING_1.setRegistryName("gtpp_casing_1");
+        GTPP_CASING_2 = new RandomGTPPCasings2();
+        GTPP_CASING_2.setRegistryName("gtpp_casing_2");
+        GTPP_CASING_3 = new RandomGTPPCasings3();
+        GTPP_CASING_3.setRegistryName("gtpp_casing_3");
+        GTPP_CASING_4 = new RandomGTPPCasings4();
+        GTPP_CASING_4.setRegistryName("gtpp_casing_4");
+        GTPP_CASING_5 = new RandomGTPPCasings5();
+        GTPP_CASING_5.setRegistryName("gtpp_casing_5");
 
         CREATIVE_HEATING_COIL = new CreativeHeatingCoil();
         CREATIVE_HEATING_COIL.setRegistryName("creative_heating_coil");
 
         ALL_CASINGS.addAll(Arrays.asList(MATERIAL_CASINGS, CoAL_CASING, PRECISE_CASING, YOTTANK_CELL, MISC_CASING,
-                PARTICLE_CASING, CREATIVE_HEATING_COIL));
+                GTPP_CASING_0, GTPP_CASING_1, GTPP_CASING_2, GTPP_CASING_3, GTPP_CASING_4, GTPP_CASING_5,
+                CREATIVE_HEATING_COIL));
     }
 
     @SideOnly(Side.CLIENT)
