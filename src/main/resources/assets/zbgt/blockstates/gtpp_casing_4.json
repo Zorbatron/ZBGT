@@ -79,6 +79,11 @@
         "textures": {
           "all": "gregtech:blocks/casings/gtpp/modulator_2"
         }
+      },
+      "modulator_3": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/modulator_3"
+        }
       }
     }
   }

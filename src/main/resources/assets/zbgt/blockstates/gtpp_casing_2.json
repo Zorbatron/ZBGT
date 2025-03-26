@@ -54,33 +54,50 @@
         }
       },
       "neutron_pulse_manipulator": {
+        "model": "minecraft:cube_bottom_top",
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/neutron_pulse_manipulator"
+          "top": "gregtech:blocks/casings/gtpp/qft/manipulator_top",
+          "side": "gregtech:blocks/casings/gtpp/qft/neutron_pulse_manipulator",
+          "bottom": "gregtech:blocks/casings/gtpp/qft/manipulator_top"
         }
       },
       "cosmic_fabric_manipulator": {
+        "model": "minecraft:cube_bottom_top",
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/cosmic_fabric_manipulator"
+          "top": "gregtech:blocks/casings/gtpp/qft/manipulator_top",
+          "side": "gregtech:blocks/casings/gtpp/qft/cosmic_fabric_manipulator",
+          "bottom": "gregtech:blocks/casings/gtpp/qft/manipulator_top"
         }
       },
       "infinity_infused_manipulator": {
+        "model": "minecraft:cube_bottom_top",
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/infinity_infused_manipulator"
+          "top": "gregtech:blocks/casings/gtpp/qft/manipulator_top",
+          "side": "gregtech:blocks/casings/gtpp/qft/infinity_infused_manipulator",
+          "bottom": "gregtech:blocks/casings/gtpp/qft/manipulator_top"
         }
       },
       "spacetime_continuum_ripper": {
+        "model": "minecraft:cube_bottom_top",
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/spacetime_continuum_ripper"
+          "top": "gregtech:blocks/casings/gtpp/qft/manipulator_top",
+          "side": "gregtech:blocks/casings/gtpp/qft/spacetime_continuum_ripper",
+          "bottom": "gregtech:blocks/casings/gtpp/qft/manipulator_top"
         }
       },
       "neutron_shielding_core": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/neutron_shielding_core"
+          "all": "gregtech:blocks/casings/gtpp/qft/neutron_shielding_core"
         }
       },
       "cosmic_fabric_shielding_core": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/cosmic_fabric_shielding_core"
+          "all": "gregtech:blocks/casings/gtpp/qft/cosmic_fabric_shielding_core"
+        }
+      },
+      "infinity_infused_shielding_core": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/qft/infinity_infused_shielding_core"
         }
       }
     }

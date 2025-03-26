@@ -26,7 +26,6 @@ public class RandomGTPPCasings3 extends VariantBlock<RandomGTPPCasings3.CasingTy
     public enum CasingType implements IStringSerializable {
 
         SPACETIME_BENDING_CORE("spacetime_bending_core"),
-        FORCE_FIELD_GLASS("force_field_glass"),
         INTEGRAL_ENCASEMENT_1("integral_encasement_1"),
         INTEGRAL_ENCASEMENT_2("integral_encasement_2"),
         INTEGRAL_ENCASEMENT_3("integral_encasement_3"),

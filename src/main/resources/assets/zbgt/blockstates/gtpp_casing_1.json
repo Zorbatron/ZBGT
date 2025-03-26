@@ -82,6 +82,11 @@
         "textures": {
           "all": "gregtech:blocks/casings/gtpp/tempered_arc_furnace_casing"
         }
+      },
+      "quantum_force_transformer_coil_casings": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/qft/quantum_force_transformer_coil_casings"
+        }
       }
     }
   }

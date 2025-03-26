@@ -79,6 +79,11 @@
         "textures": {
           "all": "gregtech:blocks/casings/gtpp/hastelloy_x_structural_block"
         }
+      },
+      "incoloy_ds_fluid_containment_block": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/incoloy_ds_fluid_containment_block"
+        }
       }
     }
   }

@@ -36,6 +36,7 @@ public class ZBGTMetaBlocks {
     public static RandomGTPPCasings3 GTPP_CASING_3;
     public static RandomGTPPCasings4 GTPP_CASING_4;
     public static RandomGTPPCasings5 GTPP_CASING_5;
+    public static TransparentBlock TRANSPARENT_BLOCK;
 
     public static CreativeHeatingCoil CREATIVE_HEATING_COIL;
 
@@ -70,12 +71,15 @@ public class ZBGTMetaBlocks {
         GTPP_CASING_5 = new RandomGTPPCasings5();
         GTPP_CASING_5.setRegistryName("gtpp_casing_5");
 
+        TRANSPARENT_BLOCK = new TransparentBlock();
+        TRANSPARENT_BLOCK.setRegistryName("transparent_block");
+
         CREATIVE_HEATING_COIL = new CreativeHeatingCoil();
         CREATIVE_HEATING_COIL.setRegistryName("creative_heating_coil");
 
         ALL_CASINGS.addAll(Arrays.asList(MATERIAL_CASINGS, CoAL_CASING, PRECISE_CASING, YOTTANK_CELL, MISC_CASING,
                 GTPP_CASING_0, GTPP_CASING_1, GTPP_CASING_2, GTPP_CASING_3, GTPP_CASING_4, GTPP_CASING_5,
-                CREATIVE_HEATING_COIL));
+                TRANSPARENT_BLOCK, CREATIVE_HEATING_COIL));
     }
 
     @SideOnly(Side.CLIENT)
