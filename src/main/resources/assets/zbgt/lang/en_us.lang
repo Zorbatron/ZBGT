@@ -521,7 +521,6 @@ tile.gtpp_casing_1.aquatic_casing.name=Aquatic Casing
 tile.gtpp_casing_1.inconel_reinforced_casing.name=Inconel Reinforced Casing
 tile.gtpp_casing_1.multi_use_casing.name=Multi Use Casing
 tile.gtpp_casing_1.supply_depot_casing.name=Supply Depot Casing
-tile.gtpp_casing_1.containment_casing.name=Containment Casing
 tile.gtpp_casing_1.tempered_arc_furnace_casing.name=Tempered Arc Furnace Casing
 tile.gtpp_casing_1.quantum_force_transformer_coil_casings.name=Quantum Force Transformer Coil Casings
 tile.gtpp_casing_2.vacuum_casing.name=Vacuum Casing
@@ -563,7 +562,6 @@ tile.gtpp_casing_4.thermally_insulated_casing.name=Thermally Insulated Casing
 tile.gtpp_casing_4.flotation_cell_casings.name=Flotation Cell Casings
 tile.gtpp_casing_4.molecular_containment_casing.name=Molecular Containment Casing
 tile.gtpp_casing_4.high_voltage_current_capacitor.name=High Voltage Current Capacitor
-tile.gtpp_casing_4.particle_containment_casing.name=Particle Containment Casing
 tile.gtpp_casing_4.resonance_chamber_1.name=Resonance Chamber 1
 tile.gtpp_casing_4.resonance_chamber_2.name=Resonance Chamber 2
 tile.gtpp_casing_4.resonance_chamber_3.name=Resonance Chamber 3
@@ -578,6 +576,8 @@ tile.gtpp_casing_5.vigorous_laurenium_machine_casing.name=Vigorous Laurenium Mac
 tile.gtpp_casing_5.rugged_botmium_machine_casing.name=Rugged Botmium Machine Casing
 
 tile.transparent_block.force_field_glass.name=Force Field Glass
+tile.transparent_block.containment_casing.name=Containment Casing
+tile.transparent_block.particle_containment_casing.name=Particle Containment Casing
 
 
 # Misc

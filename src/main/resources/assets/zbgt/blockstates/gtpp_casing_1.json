@@ -73,11 +73,6 @@
           "all": "gregtech:blocks/casings/gtpp/supply_depot_casing"
         }
       },
-      "containment_casing": {
-        "textures": {
-          "all": "gregtech:blocks/casings/gtpp/containment_casing"
-        }
-      },
       "tempered_arc_furnace_casing": {
         "textures": {
           "all": "gregtech:blocks/casings/gtpp/tempered_arc_furnace_casing"

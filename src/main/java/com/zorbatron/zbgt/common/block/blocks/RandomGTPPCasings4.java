@@ -33,7 +33,6 @@ public class RandomGTPPCasings4 extends VariantBlock<RandomGTPPCasings4.CasingTy
         FLOTATION_CELL_CASINGS("flotation_cell_casings"),
         MOLECULAR_CONTAINMENT_CASING("molecular_containment_casing"),
         HIGH_VOLTAGE_CURRENT_CAPACITOR("high_voltage_current_capacitor"),
-        PARTICLE_CONTAINMENT_CASING("particle_containment_casing"),
         RESONANCE_CHAMBER_1("resonance_chamber_1"),
         RESONANCE_CHAMBER_2("resonance_chamber_2"),
         RESONANCE_CHAMBER_3("resonance_chamber_3"),

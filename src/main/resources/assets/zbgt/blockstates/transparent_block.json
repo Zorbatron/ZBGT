@@ -12,6 +12,16 @@
           "side": "gregtech:blocks/casings/gtpp/qft/force_field_glass",
           "bottom": "gregtech:blocks/casings/gtpp/qft/blank"
         }
+      },
+      "containment_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/containment_casing"
+        }
+      },
+      "particle_containment_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/particle_containment_casing"
+        }
       }
     }
   }

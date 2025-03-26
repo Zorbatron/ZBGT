@@ -45,11 +45,6 @@
           "all": "gregtech:blocks/casings/gtpp/high_voltage_current_capacitor"
         }
       },
-      "particle_containment_casing": {
-        "textures": {
-          "all": "gregtech:blocks/casings/gtpp/particle_containment_casing"
-        }
-      },
       "resonance_chamber_1": {
         "textures": {
           "all": "gregtech:blocks/casings/gtpp/resonance_chamber_1"

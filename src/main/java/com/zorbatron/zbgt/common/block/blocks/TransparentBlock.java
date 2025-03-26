@@ -53,7 +53,9 @@ public class TransparentBlock extends VariantBlock<TransparentBlock.CasingType> 
 
     public enum CasingType implements IStringSerializable {
 
-        FORCE_FIELD_GLASS("force_field_glass");
+        FORCE_FIELD_GLASS("force_field_glass"),
+        CONTAINMENT_CASING("containment_casing"),
+        PARTICLE_CONTAINMENT_CASING("particle_containment_casing");
 
         private final String name;
 
