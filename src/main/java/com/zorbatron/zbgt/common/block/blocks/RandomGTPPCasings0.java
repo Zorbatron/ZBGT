@@ -40,7 +40,7 @@ public class RandomGTPPCasings0 extends VariantBlock<RandomGTPPCasings0.CasingTy
         THERMAL_PROCESSING_CASING("thermal_processing_casing"),
         HASTELLOY_N_SEALANT_BLOCK("hastelloy_n_sealant_block"),
         HASTELLOY_X_STRUCTURAL_BLOCK("hastelloy_x_structural_block"),
-        INCOLOY_DS_FLUID_CONTAINMENT_BLOCK("incoloy_ds_fluid_containment_block"),;
+        INCOLOY_DS_FLUID_CONTAINMENT_BLOCK("incoloy_ds_fluid_containment_block");
 
         private final String name;
 
