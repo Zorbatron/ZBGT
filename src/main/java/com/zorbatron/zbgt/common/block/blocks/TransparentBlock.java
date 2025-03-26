@@ -19,7 +19,7 @@ public class TransparentBlock extends VariantBlock<TransparentBlock.CasingType> 
 
     public TransparentBlock() {
         super(Material.IRON);
-        setTranslationKey("transparent_blocks");
+        setTranslationKey("transparent_block");
         setHardness(5.0f);
         setResistance(10.0f);
         setSoundType(SoundType.METAL);

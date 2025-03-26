@@ -577,7 +577,7 @@ tile.gtpp_casing_5.sturdy_aluminum_machine_casing.name=Sturdy Aluminum Machine C
 tile.gtpp_casing_5.vigorous_laurenium_machine_casing.name=Vigorous Laurenium Machine Casing
 tile.gtpp_casing_5.rugged_botmium_machine_casing.name=Rugged Botmium Machine Casing
 
-tile.transparent_blocks.force_field_glass.name=Force Field Glass
+tile.transparent_block.force_field_glass.name=Force Field Glass
 
 
 # Misc
