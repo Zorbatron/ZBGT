@@ -1,5 +1,6 @@
 package com.zorbatron.zbgt.api.unification.material.modifications;
 
+import static com.zorbatron.zbgt.api.unification.material.ZBGTMaterials.Tumbaga;
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
@@ -66,7 +67,8 @@ public final class ZBGTMaterialExtraFlags {
     }
 
     private static void frameBoxes() {
-        Material[] materials = { NaquadahAlloy, RhodiumPlatedPalladium, Darmstadtium, WroughtIron, Duranium };
+        Material[] materials = { NaquadahAlloy, RhodiumPlatedPalladium, Darmstadtium, WroughtIron, Duranium, Tumbaga,
+                Potin };
 
         setFlags(materials, GENERATE_FRAME);
     }
@@ -78,7 +80,7 @@ public final class ZBGTMaterialExtraFlags {
     }
 
     private static void longRods() {
-        Material[] materials = { Chrome, IronMagnetic, SteelMagnetic, NeodymiumMagnetic, SamariumMagnetic };
+        Material[] materials = { Chrome, IronMagnetic, SteelMagnetic, NeodymiumMagnetic, SamariumMagnetic, Palladium };
 
         setFlags(materials, GENERATE_LONG_ROD);
     }

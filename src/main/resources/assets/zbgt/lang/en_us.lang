@@ -624,6 +624,8 @@ zbgt.material.hastelloy_n=Hastelloy-N
 zbgt.material.hastelloy_w=Hastelloy-W
 zbgt.material.maraging_steel_250=Maraging Steel 250
 zbgt.material.woods_glass=Wood's Glass
+zbgt.material.tantalloy_60=Tantalloy 60
+zbgt.material.inconel_625=Inconel-625
 
 zbgt.material.mar_ce_m_200=MAR-Ce-M200
 zbgt.material.artherium_sn=Artherium-Sn
@@ -635,6 +637,7 @@ zbgt.material.lumium=Lumium
 zbgt.material.eglin_steel=Eglin Steel
 zbgt.material.cryotheum=Cryotheum
 zbgt.material.cryotheum.liquid=Gelid Cryotheum
+zbgt.material.tantalloy_61=Tantalloy 61
 
 zbgt.material.fluxed_electrum=Fluxed Electrum
 zbgt.material.hikarium=Hikarium

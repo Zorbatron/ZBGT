@@ -260,18 +260,22 @@ public final class ZBGTFirstDegreeMaterials {
                 .build();
 
         Tantalloy60 = new Material.Builder(id++, zbgtId("tantalloy_60"))
-                .dust()
+                .ingot().liquid(new FluidBuilder().temperature(3025))
                 .color(combineRGB(213, 231, 237)).iconSet(METALLIC)
-                .flags(GENERATE_FRAME, GENERATE_PLATE)
+                .flags(GENERATE_FRAME, GENERATE_PLATE, DECOMPOSITION_BY_CENTRIFUGING, GENERATE_LONG_ROD)
+                .blast(b -> b
+                        .temp(3300, BlastProperty.GasTier.MID)
+                        .blastStats(VA[HV], 20 * 21 + 6))
                 .components(Tantalum, 23, Tungsten, 2)
                 .build();
 
         Inconel625 = new Material.Builder(id++, zbgtId("inconel_625"))
-                .ingot()
+                .ingot().liquid(new FluidBuilder().temperature(2425))
                 .color(combineRGB(128, 200, 128)).iconSet(METALLIC)
-                .flags(GENERATE_FRAME)
+                .flags(GENERATE_FRAME, DECOMPOSITION_BY_CENTRIFUGING)
                 .blast(b -> b
-                        .temp(2700, BlastProperty.GasTier.MID))
+                        .temp(2700, BlastProperty.GasTier.MID)
+                        .blastStats(VA[HV], 20 * 40 + 15))
                 .components(Nickel, 3, Chrome, 7, Molybdenum, 10, Invar, 10, Nichrome, 13)
                 .build();
     }

@@ -358,7 +358,6 @@ public class CasingRecipes {
     private static void gtpp() {
         ItemStack casing = ZBGTMetaBlocks.GTPP_CASING_0.getItemVariant(RandomGTPPCasings0.CasingType.CENTRIFUGE_CASING,
                 casingsPerCraft);
-
         ModHandler.addShapedRecipe("centrifuge_casing", casing,
                 "MTM",
                 "ITI",
@@ -405,7 +404,7 @@ public class CasingRecipes {
 
         casing = ZBGTMetaBlocks.GTPP_CASING_0.getItemVariant(RandomGTPPCasings0.CasingType.HEAT_PROOF_COKE_OVEN_CASING,
                 casingsPerCraft);
-        ModHandler.addShapedRecipe("heat_resistant_coke_oven_casing", casing,
+        ModHandler.addShapedRecipe("heat_proof_coke_oven_casing", casing,
                 "PPP",
                 "FGF",
                 "PPP",
@@ -415,7 +414,7 @@ public class CasingRecipes {
 
         casing = ZBGTMetaBlocks.GTPP_CASING_0
                 .getItemVariant(RandomGTPPCasings0.CasingType.MATERIAL_PRESS_MACHINE_CASING, casingsPerCraft);
-        ModHandler.addShapedRecipe("heat_proof_coke_oven_casing", casing,
+        ModHandler.addShapedRecipe("material_press_machine_casing", casing,
                 "PLP",
                 "RFR",
                 "PLP",
@@ -426,7 +425,7 @@ public class CasingRecipes {
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(plate, Titanium, 4)
-                .input(stick, Tantalloy60, 2)
+                .input(stickLong, Tantalloy60, 2)
                 .input(stickLong, Tumbaga, 2)
                 .input(frameGt, Tumbaga)
                 .outputs(casing)
@@ -435,7 +434,7 @@ public class CasingRecipes {
 
         casing = ZBGTMetaBlocks.GTPP_CASING_0.getItemVariant(RandomGTPPCasings0.CasingType.ELECTROLYZER_CASING,
                 casingsPerCraft);
-        ModHandler.addShapedRecipe("material_press_machine_casing", casing,
+        ModHandler.addShapedRecipe("electrolyzer_casing", casing,
                 "PCP",
                 "LFL",
                 "PLP",

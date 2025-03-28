@@ -123,8 +123,12 @@ public final class ZBGTSecondDegreeMaterials {
         }
 
         Tantalloy61 = new Material.Builder(id++, zbgtId("tantalloy_61"))
-                .dust()
-                .color(combineRGB(193, 211, 217))
+                .ingot().liquid(new FluidBuilder().temperature(3030))
+                .color(combineRGB(193, 211, 217)).iconSet(METALLIC)
+                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_FRAME, DECOMPOSITION_BY_CENTRIFUGING)
+                .blast(b -> b
+                        .temp(3305, BlastProperty.GasTier.MID)
+                        .blastStats(VA[EV], 20 * 45 + 9))
                 .components(Tantalloy60, 1, Titanium, 6, Yttrium, 4)
                 .build();
     }

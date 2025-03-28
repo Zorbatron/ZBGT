@@ -329,6 +329,21 @@ public class MaterialRecipes {
                 .output(dust, WoodsGlass)
                 .EUt(VA[MV]).duration(127)
                 .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Tantalum, 23)
+                .input(dust, Tungsten, 2)
+                .output(dust, Tantalloy60, 25)
+                .EUt(VA[HV]).duration(20 * 18 + 2)
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Tantalloy60)
+                .input(dust, Titanium, 6)
+                .input(dust, Yttrium, 4)
+                .output(dust, Tantalloy61, 11)
+                .EUt(VA[HV]).duration(20 * 10 + 10)
+                .buildAndRegister();
     }
 
     private static void ebf() {
