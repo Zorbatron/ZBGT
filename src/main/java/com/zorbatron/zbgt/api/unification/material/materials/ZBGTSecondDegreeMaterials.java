@@ -1,6 +1,7 @@
 package com.zorbatron.zbgt.api.unification.material.materials;
 
 import static com.zorbatron.zbgt.api.unification.material.ZBGTMaterials.*;
+import static com.zorbatron.zbgt.api.util.ZBGTUtility.combineRGB;
 import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -120,5 +121,11 @@ public final class ZBGTSecondDegreeMaterials {
         } else {
             id++;
         }
+
+        Tantalloy61 = new Material.Builder(id++, zbgtId("tantalloy_61"))
+                .dust()
+                .color(combineRGB(193, 211, 217))
+                .components(Tantalloy60, 1, Titanium, 6, Yttrium, 4)
+                .build();
     }
 }

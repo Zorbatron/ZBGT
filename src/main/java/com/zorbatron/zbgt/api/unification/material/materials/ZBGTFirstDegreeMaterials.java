@@ -251,5 +251,28 @@ public final class ZBGTFirstDegreeMaterials {
                 .flags(DECOMPOSITION_BY_CENTRIFUGING)
                 .components(Sodium, 2, Silicon, 4, Nickel, 1, Barium, 3)
                 .build();
+
+        Tumbaga = new Material.Builder(id++, zbgtId("tumbaga"))
+                .ingot()
+                .color(combineRGB(255, 178, 15)).iconSet(METALLIC)
+                .flags(GENERATE_ROD, GENERATE_LONG_ROD)
+                .components(Gold, 7, Copper, 3)
+                .build();
+
+        Tantalloy60 = new Material.Builder(id++, zbgtId("tantalloy_60"))
+                .dust()
+                .color(combineRGB(213, 231, 237)).iconSet(METALLIC)
+                .flags(GENERATE_FRAME, GENERATE_PLATE)
+                .components(Tantalum, 23, Tungsten, 2)
+                .build();
+
+        Inconel625 = new Material.Builder(id++, zbgtId("inconel_625"))
+                .ingot()
+                .color(combineRGB(128, 200, 128)).iconSet(METALLIC)
+                .flags(GENERATE_FRAME)
+                .blast(b -> b
+                        .temp(2700, BlastProperty.GasTier.MID))
+                .components(Nickel, 3, Chrome, 7, Molybdenum, 10, Invar, 10, Nichrome, 13)
+                .build();
     }
 }

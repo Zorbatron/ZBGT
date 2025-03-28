@@ -34,12 +34,16 @@ public final class ZBGTMaterials {
     public static Material HastelloyW;
     public static Material MaragingSteel250;
     public static Material WoodsGlass;
+    public static Material Tumbaga;
+    public static Material Tantalloy60;
+    public static Material Inconel625;
 
     // Second degree materials
     public static Material MAR_CE_M200;
     public static Material HDCS;
     public static Material Dalisenite;
     public static Material EglinSteel;
+    public static Material Tantalloy61;
 
     // Third degree materials
     public static Material Hikarium;
