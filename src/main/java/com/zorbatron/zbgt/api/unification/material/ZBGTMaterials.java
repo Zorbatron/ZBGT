@@ -37,6 +37,10 @@ public final class ZBGTMaterials {
     public static Material Tumbaga;
     public static Material Tantalloy60;
     public static Material Inconel625;
+    public static Material Inconel690;
+    public static Material NiobiumCarbide;
+    public static Material IncoloyDS;
+    public static Material Staballoy;
 
     // Second degree materials
     public static Material MAR_CE_M200;

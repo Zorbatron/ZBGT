@@ -2,6 +2,7 @@ package com.zorbatron.zbgt.recipe;
 
 import static com.zorbatron.zbgt.api.unification.material.ZBGTMaterials.*;
 import static com.zorbatron.zbgt.recipe.helpers.RecipeAssists.*;
+import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
@@ -29,6 +30,7 @@ import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregtech.api.block.VariantBlock;
 import gregtech.api.recipes.ModHandler;
+import gregtech.api.recipes.builders.AssemblerRecipeBuilder;
 import gregtech.api.recipes.builders.AssemblyLineRecipeBuilder;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
@@ -38,6 +40,7 @@ import gregtech.api.util.GTUtility;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.*;
 import gregtech.common.items.MetaItems;
+import gregtech.common.metatileentities.MetaTileEntities;
 
 public class CasingRecipes {
 
@@ -356,6 +359,7 @@ public class CasingRecipes {
     }
 
     private static void gtpp() {
+        // GTPP casings 0
         ItemStack casing = ZBGTMetaBlocks.GTPP_CASING_0.getItemVariant(RandomGTPPCasings0.CasingType.CENTRIFUGE_CASING,
                 casingsPerCraft);
         ModHandler.addShapedRecipe("centrifuge_casing", casing,
@@ -366,12 +370,10 @@ public class CasingRecipes {
                 'T', rod(Tumbaga),
                 'I', plate(Inconel792));
 
-        ASSEMBLER_RECIPES.recipeBuilder()
+        casingBuilder(casing)
                 .input(plate, MaragingSteel250, 4)
                 .input(plate, Inconel792, 2)
                 .input(stick, Tumbaga, 3)
-                .outputs(casing)
-                .EUt(VA[LV]).duration(50)
                 .buildAndRegister();
 
         casing = ZBGTMetaBlocks.GTPP_CASING_0.getItemVariant(RandomGTPPCasings0.CasingType.STRUCTURAL_COKE_OVEN_CASING,
@@ -384,12 +386,10 @@ public class CasingRecipes {
                 'R', rod(Tantalloy61),
                 'F', frameBox(Tantalloy61));
 
-        ASSEMBLER_RECIPES.recipeBuilder()
+        casingBuilder(casing)
                 .input(plate, Tantalloy61, 4)
                 .input(stick, Tantalloy61, 4)
                 .input(frameGt, Tantalloy61)
-                .outputs(casing)
-                .EUt(VA[LV]).duration(50)
                 .buildAndRegister();
 
         casing = ZBGTMetaBlocks.GTPP_CASING_0
@@ -423,13 +423,11 @@ public class CasingRecipes {
                 'R', longRod(Tantalloy60),
                 'F', frameBox(Tumbaga));
 
-        ASSEMBLER_RECIPES.recipeBuilder()
+        casingBuilder(casing)
                 .input(plate, Titanium, 4)
                 .input(stickLong, Tantalloy60, 2)
                 .input(stickLong, Tumbaga, 2)
                 .input(frameGt, Tumbaga)
-                .outputs(casing)
-                .EUt(VA[LV]).duration(50)
                 .buildAndRegister();
 
         casing = ZBGTMetaBlocks.GTPP_CASING_0.getItemVariant(RandomGTPPCasings0.CasingType.ELECTROLYZER_CASING,
@@ -443,13 +441,11 @@ public class CasingRecipes {
                 'L', longRod(Potin),
                 'F', frameBox(Potin));
 
-        ASSEMBLER_RECIPES.recipeBuilder()
+        casingBuilder(casing)
                 .input(plate, Potin, 4)
                 .input(stickLong, Potin, 3)
                 .input(stickLong, Chrome)
                 .input(frameGt, Potin)
-                .outputs(casing)
-                .EUt(VA[LV]).duration(50)
                 .buildAndRegister();
 
         casing = ZBGTMetaBlocks.GTPP_CASING_0.getItemVariant(RandomGTPPCasings0.CasingType.WIRE_FACTORY_CASING,
@@ -462,12 +458,10 @@ public class CasingRecipes {
                 'R', rod(BlueSteel),
                 'F', frameBox(BlueSteel));
 
-        ASSEMBLER_RECIPES.recipeBuilder()
+        casingBuilder(casing)
                 .input(plate, BlueSteel, 4)
                 .input(stick, BlueSteel, 4)
                 .input(frameGt, BlueSteel)
-                .outputs(casing)
-                .EUt(VA[LV]).duration(50)
                 .buildAndRegister();
 
         casing = ZBGTMetaBlocks.GTPP_CASING_0.getItemVariant(RandomGTPPCasings0.CasingType.MACERATION_STACK_CASING,
@@ -481,14 +475,124 @@ public class CasingRecipes {
                 'F', frameBox(Inconel625),
                 'L', longRod(Palladium));
 
-        ASSEMBLER_RECIPES.recipeBuilder()
+        casingBuilder(casing)
                 .input(plate, Palladium, 5)
                 .input(stick, Platinum, 2)
                 .input(stickLong, Palladium)
                 .input(frameGt, Inconel625)
-                .outputs(casing)
-                .EUt(VA[LV]).duration(50)
                 .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_0.getItemVariant(RandomGTPPCasings0.CasingType.MATTER_GENERATION_COIL,
+                casingsPerCraft);
+        ModHandler.addShapedRecipe("matter_generation_coil", casing,
+                "ZPZ",
+                "FCF",
+                "ZPZ",
+                'Z', plate(Zeron100),
+                'P', plate(Pikyonium64b),
+                'F', frameBox(Stellite100),
+                'C', MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.UV));
+
+        casingBuilder(casing)
+                .inputs(MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.UV))
+                .input(plate, Zeron100, 4)
+                .input(plate, Pikyonium64b, 2)
+                .input(frameGt, Stellite100, 2)
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_0.getItemVariant(RandomGTPPCasings0.CasingType.MATTER_FABRICATION_CASING,
+                casingsPerCraft);
+        ModHandler.addShapedRecipe("matter_fabrication_casing", casing,
+                "PRP",
+                "RFR",
+                "PRP",
+                'P', plate(NiobiumCarbide),
+                'R', rod(Inconel792),
+                'F', frameBox(Inconel690));
+
+        casingBuilder(casing)
+                .input(plate, NiobiumCarbide, 4)
+                .input(stick, Inconel792, 4)
+                .input(frameGt, Inconel690)
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_0.getItemVariant(RandomGTPPCasings0.CasingType.THERMAL_PROCESSING_CASING,
+                casingsPerCraft);
+        ModHandler.addShapedRecipe("thermal_processing_casing", casing,
+                "PhP",
+                "PFP",
+                "PwP",
+                'P', plate(RedSteel),
+                'F', frameBox(BlackSteel));
+
+        casingBuilder(casing)
+                .input(plate, RedSteel, 6)
+                .input(frameGt, BlackSteel)
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_0.getItemVariant(RandomGTPPCasings0.CasingType.HASTELLOY_N_SEALANT_BLOCK,
+                casingsPerCraft);
+        ModHandler.addShapedRecipe("hastelloy_n_sealant_block", casing,
+                "IHI",
+                "HFH",
+                "IHI",
+                'I', plate(IncoloyMA956),
+                'H', plate(HastelloyN),
+                'F', frameBox(HastelloyC276));
+
+        casingBuilder(casing)
+                .input(plate, IncoloyMA956, 4)
+                .input(plate, HastelloyN, 4)
+                .input(frameGt, HastelloyC276)
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_0.getItemVariant(RandomGTPPCasings0.CasingType.HASTELLOY_X_STRUCTURAL_BLOCK,
+                casingsPerCraft);
+        ModHandler.addShapedRecipe("hastelloy_x_structural_block", casing,
+                "RGP",
+                "hFw",
+                "PCR",
+                'R', ring(Inconel792),
+                'G', gear(HastelloyX),
+                'P', plate(Steel),
+                'F', frameBox(HastelloyC276),
+                'C', MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.EV));
+
+        casingBuilder(casing, VA[EV], 20 * 5)
+                .inputs(MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.EV))
+                .input(plate, Steel, 2)
+                .input(gear, HastelloyX)
+                .input(frameGt, HastelloyC276)
+                .input(ring, Inconel792, 2)
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_0
+                .getItemVariant(RandomGTPPCasings0.CasingType.INCOLOY_DS_FLUID_CONTAINMENT_BLOCK, casingsPerCraft);
+        ModHandler.addShapedRecipe("incoloy_ds_fluid_containment_block", casing,
+                "IPI",
+                "GTG",
+                "IPI",
+                'I', plate(IncoloyDS),
+                'P', new UnificationEntry(pipeHugeFluid, Staballoy),
+                'G', gear(IncoloyDS),
+                'T', MetaTileEntities.QUANTUM_TANK[IV].getStackForm());
+
+        casingBuilder(casing, VA[HV], 20 * 10)
+                .input(plate, IncoloyDS, 4)
+                .input(pipeHugeFluid, Staballoy, 2)
+                .input(gear, IncoloyDS, 2)
+                .input(MetaTileEntities.QUANTUM_TANK[IV])
+                .buildAndRegister();
+    }
+
+    private static AssemblerRecipeBuilder casingBuilder(ItemStack casing, int eut, int duration) {
+        return ASSEMBLER_RECIPES.recipeBuilder()
+                .outputs(casing)
+                .EUt(eut).duration(duration);
+    }
+
+    private static AssemblerRecipeBuilder casingBuilder(ItemStack casing) {
+        return casingBuilder(casing, VA[LV], 50);
     }
 
     private static UnificationEntry plate(@NotNull Material material) {
@@ -505,5 +609,13 @@ public class CasingRecipes {
 
     private static UnificationEntry frameBox(@NotNull Material material) {
         return new UnificationEntry(frameGt, material);
+    }
+
+    private static UnificationEntry ring(@NotNull Material material) {
+        return new UnificationEntry(ring, material);
+    }
+
+    private static UnificationEntry gear(@NotNull Material material) {
+        return new UnificationEntry(gear, material);
     }
 }

@@ -151,7 +151,7 @@ public final class ZBGTFirstDegreeMaterials {
                 .ingot().liquid(new FluidBuilder().temperature(3700))
                 .color(0x6cf076).iconSet(METALLIC)
                 .flags(DECOMPOSITION_BY_CENTRIFUGING)
-                .flags(EXT_METAL)
+                .flags(EXT_METAL, GENERATE_RING)
                 .blast(b -> b
                         .temp(3700, BlastProperty.GasTier.MID)
                         .blastStats(VA[HV], (int) (20 * 37.5)))
@@ -277,6 +277,47 @@ public final class ZBGTFirstDegreeMaterials {
                         .temp(2700, BlastProperty.GasTier.MID)
                         .blastStats(VA[HV], 20 * 40 + 15))
                 .components(Nickel, 3, Chrome, 7, Molybdenum, 10, Invar, 10, Nichrome, 13)
+                .build();
+
+        Inconel690 = new Material.Builder(id++, zbgtId("inconel_690"))
+                .ingot().liquid(new FluidBuilder().temperature(3700))
+                .color(combineRGB(118, 220, 138)).iconSet(METALLIC)
+                .flags(GENERATE_FRAME)
+                .blast(b -> b
+                        .temp(3700, BlastProperty.GasTier.HIGH)
+                        .blastStats(VA[EV], 37 * 20 + 10))
+                .components(Chrome, 1, Niobium, 2, Molybdenum, 2, Nichrome, 3)
+                .build();
+
+        NiobiumCarbide = new Material.Builder(id++, zbgtId("niobium_carbide"))
+                .ingot().liquid(new FluidBuilder().temperature(2750))
+                .color(combineRGB(205, 197, 191)).iconSet(METALLIC)
+                .flags(GENERATE_PLATE, DECOMPOSITION_BY_CENTRIFUGING)
+                .blast(b -> b
+                        .temp(2750, BlastProperty.GasTier.MID)
+                        .blastStats(VA[HV], 20 * 25))
+                .components(Niobium, 1, Carbon, 1)
+                .build();
+
+        IncoloyDS = new Material.Builder(id++, zbgtId("incoloy_ds"))
+                .ingot().liquid(new FluidBuilder().temperature(3700))
+                .color(combineRGB(155, 150, 197)).iconSet(METALLIC)
+                .flags(GENERATE_PLATE, GENERATE_GEAR)
+                .blast(b -> b
+                        .temp(3700, BlastProperty.GasTier.HIGH)
+                        .blastStats(VA[HV], 20 * 37 + 10))
+                .components(Chrome, 9, Iron, 23, Cobalt, 9, Nickel, 9)
+                .build();
+
+        Staballoy = new Material.Builder(id++, zbgtId("staballoy"))
+                .color(combineRGB(68, 75, 66)).iconSet(METALLIC)
+                .ingot().liquid(new FluidBuilder().temperature(3725))
+                .flags(GENERATE_FRAME, GENERATE_PLATE, DECOMPOSITION_BY_CENTRIFUGING)
+                .fluidPipeProperties(7500, 25000, true)
+                .blast(b -> b
+                        .temp(3725, BlastProperty.GasTier.HIGH)
+                        .blastStats(VA[EV], 37 * 20 + 10))
+                .components(Titanium, 1, Uranium238, 9)
                 .build();
     }
 }

@@ -344,6 +344,38 @@ public class MaterialRecipes {
                 .output(dust, Tantalloy61, 11)
                 .EUt(VA[HV]).duration(20 * 10 + 10)
                 .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Chrome)
+                .input(dust, Niobium, 2)
+                .input(dust, Molybdenum, 2)
+                .input(dust, Nichrome, 3)
+                .output(dust, Inconel690, 8)
+                .EUt(VA[HV]).duration(20 * 7 + 9)
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Niobium)
+                .input(dust, Carbon)
+                .output(dust, NiobiumCarbide)
+                .EUt(VA[HV]).duration(20 * 5 + 2)
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Chrome, 9)
+                .input(dust, Iron, 23)
+                .input(dust, Cobalt, 9)
+                .input(dust, Nickel, 9)
+                .output(dust, IncoloyDS, 50)
+                .EUt(VA[HV]).duration(20 * 34 + 7)
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Titanium)
+                .input(dust, Uranium238, 9)
+                .output(dust, Staballoy, 10)
+                .EUt(VA[HV]).duration(20 * 14 + 6)
+                .buildAndRegister();
     }
 
     private static void ebf() {
