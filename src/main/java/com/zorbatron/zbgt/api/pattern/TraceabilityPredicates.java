@@ -11,7 +11,9 @@ import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.common.block.blocks.CoALCasing;
 import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
 
+import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 import gregtech.api.pattern.PatternStringError;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.RecipeMap;
@@ -20,7 +22,43 @@ import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.metatileentities.MetaTileEntities;
 
-public class TraceabilityPredicates {
+@SuppressWarnings("unused")
+public final class TraceabilityPredicates {
+
+    private static final List<MetaTileEntity> ENERGY_HATCHES = new ArrayList<>();
+    private static final List<MetaTileEntity> DYNAMO_HATCHES = new ArrayList<>();
+
+    private static final List<MetaTileEntity> LASERS_INPUT = new ArrayList<>();
+    private static final List<MetaTileEntity> LASERS_OUTPUT = new ArrayList<>();
+
+    private static final List<MetaTileEntity> ALL_ENERGY_INPUTS = new ArrayList<>();
+    private static final List<MetaTileEntity> ALL_ENERGY_OUTPUTS = new ArrayList<>();
+
+    static {
+        ENERGY_HATCHES.addAll(Arrays.asList(MetaTileEntities.ENERGY_INPUT_HATCH));
+        ENERGY_HATCHES.addAll(Arrays.asList(MetaTileEntities.ENERGY_INPUT_HATCH_4A));
+        ENERGY_HATCHES.addAll(Arrays.asList(MetaTileEntities.ENERGY_INPUT_HATCH_16A));
+
+        DYNAMO_HATCHES.addAll(Arrays.asList(MetaTileEntities.ENERGY_OUTPUT_HATCH));
+        DYNAMO_HATCHES.addAll(Arrays.asList(MetaTileEntities.ENERGY_OUTPUT_HATCH_4A));
+        DYNAMO_HATCHES.addAll(Arrays.asList(MetaTileEntities.ENERGY_OUTPUT_HATCH_16A));
+
+        LASERS_INPUT.addAll(Arrays.asList(MetaTileEntities.LASER_INPUT_HATCH_256));
+        LASERS_INPUT.addAll(Arrays.asList(MetaTileEntities.LASER_INPUT_HATCH_1024));
+        LASERS_INPUT.addAll(Arrays.asList(MetaTileEntities.LASER_INPUT_HATCH_4096));
+
+        LASERS_OUTPUT.addAll(Arrays.asList(MetaTileEntities.LASER_INPUT_HATCH_256));
+        LASERS_OUTPUT.addAll(Arrays.asList(MetaTileEntities.LASER_INPUT_HATCH_1024));
+        LASERS_OUTPUT.addAll(Arrays.asList(MetaTileEntities.LASER_INPUT_HATCH_4096));
+
+        ALL_ENERGY_INPUTS.addAll(ENERGY_HATCHES);
+        ALL_ENERGY_INPUTS.addAll(Arrays.asList(MetaTileEntities.SUBSTATION_ENERGY_INPUT_HATCH));
+        ALL_ENERGY_INPUTS.addAll(LASERS_INPUT);
+
+        ALL_ENERGY_OUTPUTS.addAll(DYNAMO_HATCHES);
+        DYNAMO_HATCHES.addAll(Arrays.asList(MetaTileEntities.SUBSTATION_ENERGY_OUTPUT_HATCH));
+        ALL_ENERGY_OUTPUTS.addAll(LASERS_OUTPUT);
+    }
 
     private static final Supplier<TraceabilityPredicate> CoAL_PREDICATE = () -> new TraceabilityPredicate(
             blockWorldState -> {
@@ -111,7 +149,7 @@ public class TraceabilityPredicates {
         return MACHINE_CASING_PREDICATE.get();
     }
 
-    private static TraceabilityPredicate AIR_BLOCKS_COUNTED = new TraceabilityPredicate(
+    private static final TraceabilityPredicate AIR_BLOCKS_COUNTED = new TraceabilityPredicate(
             blockWorldState -> {
                 boolean isAirBlock = blockWorldState.getBlockState().getBlock().isAir(blockWorldState.getBlockState(),
                         blockWorldState.getWorld(), blockWorldState.getPos());
@@ -202,5 +240,83 @@ public class TraceabilityPredicates {
 
     public static TraceabilityPredicate autoEnergyInputs() {
         return autoEnergyInputs(1, 3);
+    }
+
+    public static TraceabilityPredicate inputBusesNormal() {
+        return MultiblockControllerBase.metaTileEntities(MetaTileEntities.ITEM_IMPORT_BUS);
+    }
+
+    public static TraceabilityPredicate outputBusesNormal() {
+        return MultiblockControllerBase.metaTileEntities(MetaTileEntities.ITEM_EXPORT_BUS);
+    }
+
+    public static TraceabilityPredicate inputHatchesNormal() {
+        return MultiblockControllerBase.metaTileEntities(MetaTileEntities.FLUID_IMPORT_HATCH);
+    }
+
+    public static TraceabilityPredicate outputHatchesNormal() {
+        return MultiblockControllerBase.metaTileEntities(MetaTileEntities.FLUID_EXPORT_HATCH);
+    }
+
+    public static TraceabilityPredicate energyHatchesNormal() {
+        return MultiblockControllerBase.metaTileEntities(MetaTileEntities.ENERGY_INPUT_HATCH);
+    }
+
+    public static TraceabilityPredicate dynamoHatchesNormal() {
+        return MultiblockControllerBase.metaTileEntities(MetaTileEntities.ENERGY_OUTPUT_HATCH);
+    }
+
+    public static TraceabilityPredicate energyHatches4a() {
+        return MultiblockControllerBase.metaTileEntities(MetaTileEntities.ENERGY_INPUT_HATCH_4A);
+    }
+
+    public static TraceabilityPredicate dynamoHatches4a() {
+        return MultiblockControllerBase.metaTileEntities(MetaTileEntities.ENERGY_OUTPUT_HATCH_4A);
+    }
+
+    public static TraceabilityPredicate energyHatches16a() {
+        return MultiblockControllerBase.metaTileEntities(MetaTileEntities.ENERGY_INPUT_HATCH_16A);
+    }
+
+    public static TraceabilityPredicate dynamoHatches16a() {
+        return MultiblockControllerBase.metaTileEntities(MetaTileEntities.ENERGY_OUTPUT_HATCH_16A);
+    }
+
+    public static TraceabilityPredicate energyHatchesSubstation() {
+        return MultiblockControllerBase.metaTileEntities(MetaTileEntities.SUBSTATION_ENERGY_INPUT_HATCH);
+    }
+
+    public static TraceabilityPredicate dynamoHatchesSubstation() {
+        return MultiblockControllerBase.metaTileEntities(MetaTileEntities.SUBSTATION_ENERGY_OUTPUT_HATCH);
+    }
+
+    public static TraceabilityPredicate energyHatchesLaser() {
+        return MultiblockControllerBase.metaTileEntities(LASERS_INPUT.toArray(new MetaTileEntity[0]));
+    }
+
+    public static TraceabilityPredicate dynamoHatchesLaser() {
+        return MultiblockControllerBase.metaTileEntities(LASERS_OUTPUT.toArray(new MetaTileEntity[0]));
+    }
+
+    public static TraceabilityPredicate allEnergyHatches() {
+        return MultiblockControllerBase.metaTileEntities(ENERGY_HATCHES.toArray(new MetaTileEntity[0]));
+    }
+
+    public static TraceabilityPredicate allDynamoHatches() {
+        return MultiblockControllerBase.metaTileEntities(DYNAMO_HATCHES.toArray(new MetaTileEntity[0]));
+    }
+
+    /**
+     * <i>all</i> energy input hatches
+     */
+    public static TraceabilityPredicate allEnergyInputHatches() {
+        return MultiblockControllerBase.metaTileEntities(ALL_ENERGY_INPUTS.toArray(new MetaTileEntity[0]));
+    }
+
+    /**
+     * <i>all</i> energy output hatches
+     */
+    public static TraceabilityPredicate allEnergyOutputHatches() {
+        return MultiblockControllerBase.metaTileEntities(ALL_ENERGY_OUTPUTS.toArray(new MetaTileEntity[0]));
     }
 }
