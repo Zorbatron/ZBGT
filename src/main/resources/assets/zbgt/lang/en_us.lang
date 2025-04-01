@@ -626,6 +626,14 @@ zbgt.material.maraging_steel_250=Maraging Steel 250
 zbgt.material.woods_glass=Wood's Glass
 zbgt.material.tantalloy_60=Tantalloy 60
 zbgt.material.inconel_625=Inconel-625
+zbgt.material.inconel_690=Inconel-690
+zbgt.material.niobium_carbide=Niobium Carbide
+zbgt.material.incoloy_ds=Incoloy-DS
+zbgt.material.staballoy=Staballoy
+zbgt.material.talonite=Talonite
+zbgt.material.incoloy_020=Incoloy-020
+zbgt.material.hg_1223=HG1223
+zbgt.material.zirconium_carbide=Zirconium Carbide
 
 zbgt.material.mar_ce_m_200=MAR-Ce-M200
 zbgt.material.artherium_sn=Artherium-Sn

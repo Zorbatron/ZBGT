@@ -28,7 +28,7 @@ public final class ZBGTMaterials {
     public static Material EglinSteelBase;
     public static Material Inconel792;
     public static Material SnowPowder;
-    public static Material Grismium;
+    public static Material Grisium;
     public static Material Nitinol60;
     public static Material HastelloyN;
     public static Material HastelloyW;
@@ -41,6 +41,10 @@ public final class ZBGTMaterials {
     public static Material NiobiumCarbide;
     public static Material IncoloyDS;
     public static Material Staballoy;
+    public static Material Talonite;
+    public static Material Incoloy020;
+    public static Material HG1223;
+    public static Material ZirconiumCarbide;
 
     // Second degree materials
     public static Material MAR_CE_M200;

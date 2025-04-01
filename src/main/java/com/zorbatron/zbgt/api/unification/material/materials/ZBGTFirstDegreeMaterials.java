@@ -181,10 +181,10 @@ public final class ZBGTFirstDegreeMaterials {
                 .color(0xFAFAFA).iconSet(FINE)
                 .build();
 
-        Grismium = new Material.Builder(id++, zbgtId("grisium"))
+        Grisium = new Material.Builder(id++, zbgtId("grisium"))
                 .ingot().liquid(new FluidBuilder().temperature(4125))
                 .color(0x355D6A)
-                .flags(STD_METAL, GENERATE_DOUBLE_PLATE)
+                .flags(STD_METAL, GENERATE_DOUBLE_PLATE, GENERATE_FRAME)
                 .blast(b -> b
                         .temp(4125, BlastProperty.GasTier.MID)
                         .blastStats(VA[EV], 20 * 25))
@@ -282,7 +282,7 @@ public final class ZBGTFirstDegreeMaterials {
         Inconel690 = new Material.Builder(id++, zbgtId("inconel_690"))
                 .ingot().liquid(new FluidBuilder().temperature(3700))
                 .color(combineRGB(118, 220, 138)).iconSet(METALLIC)
-                .flags(GENERATE_FRAME)
+                .flags(GENERATE_FRAME, GENERATE_BOLT_SCREW)
                 .blast(b -> b
                         .temp(3700, BlastProperty.GasTier.HIGH)
                         .blastStats(VA[EV], 37 * 20 + 10))
@@ -310,14 +310,51 @@ public final class ZBGTFirstDegreeMaterials {
                 .build();
 
         Staballoy = new Material.Builder(id++, zbgtId("staballoy"))
-                .color(combineRGB(68, 75, 66)).iconSet(METALLIC)
                 .ingot().liquid(new FluidBuilder().temperature(3725))
+                .color(combineRGB(68, 75, 66)).iconSet(METALLIC)
                 .flags(GENERATE_FRAME, GENERATE_PLATE, DECOMPOSITION_BY_CENTRIFUGING)
                 .fluidPipeProperties(7500, 25000, true)
                 .blast(b -> b
                         .temp(3725, BlastProperty.GasTier.HIGH)
                         .blastStats(VA[EV], 37 * 20 + 10))
                 .components(Titanium, 1, Uranium238, 9)
+                .build();
+
+        Talonite = new Material.Builder(id++, zbgtId("talonite"))
+                .ingot().liquid(new FluidBuilder().temperature(3725))
+                .color(combineRGB(178, 173, 162)).iconSet(METALLIC)
+                .flags(GENERATE_PLATE, DECOMPOSITION_BY_CENTRIFUGING)
+                .blast(b -> b
+                        .temp(3725, BlastProperty.GasTier.MID)
+                        .blastStats(VA[HV], 20 * 37 + 10))
+                .components(Cobalt, 4, Chrome, 3, Phosphorus, 2, Molybdenum, 1)
+                .build();
+
+        Incoloy020 = new Material.Builder(id++, zbgtId("incoloy_020"))
+                .ingot().liquid(new FluidBuilder().temperature(3700))
+                .color(combineRGB(187, 150, 140)).iconSet(METALLIC)
+                .flags(GENERATE_BOLT_SCREW)
+                .blast(b -> b
+                        .temp(3700, BlastProperty.GasTier.MID)
+                        .blastStats(VA[HV], 20 * 37 + 10))
+                .components(Iron, 10, Copper, 1, Chrome, 5, Nickel, 9)
+                .build();
+
+        HG1223 = new Material.Builder(id++, zbgtId("hg_1223"))
+                .ingot().liquid(new FluidBuilder().temperature(6630))
+                .color(combineRGB(39, 85, 159)).iconSet(METALLIC)
+                .flags(DECOMPOSITION_BY_CENTRIFUGING)
+                .blast(b -> b
+                        .temp(6630, BlastProperty.GasTier.HIGHER)
+                        .blastStats(VA[LuV], 20 * 40 + 6))
+                .components(Mercury, 1, Barium, 2, Calcium, 2, Copper, 2, Oxygen, 8)
+                .build();
+
+        ZirconiumCarbide = new Material.Builder(id++, zbgtId("zirconium_carbide"))
+                .ingot().liquid(new FluidBuilder().temperature(1830))
+                .color(combineRGB(222, 202, 180)).iconSet(METALLIC)
+                .flags(GENERATE_PLATE, GENERATE_FRAME, DECOMPOSITION_BY_CENTRIFUGING)
+                .components(Zirconium, 1, Carbon, 1)
                 .build();
     }
 }

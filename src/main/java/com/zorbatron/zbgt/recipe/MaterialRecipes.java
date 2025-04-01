@@ -91,6 +91,14 @@ public class MaterialRecipes {
                 .blastFurnaceTemp(5475)
                 .EUt(VA[IV]),
                 20 * 40, BlastProperty.GasTier.MID, 5, 10);
+
+        blastHelper(ALLOY_BLAST_RECIPES.recipeBuilder()
+                .input(dust, Zirconium)
+                .input(dust, Carbon)
+                .fluidOutputs(ZirconiumCarbide.getFluid(L * 2))
+                .blastFurnaceTemp(1830)
+                .EUt(VA[LV]),
+                20 * 10, BlastProperty.GasTier.LOW, 2, 12);
     }
 
     private static void macerator() {
@@ -303,7 +311,7 @@ public class MaterialRecipes {
                 .input(dust, Sulfur, 9)
                 .circuitMeta(2)
                 .fluidInputs(Hydrogen.getFluid(5000))
-                .output(dust, Grismium, 50)
+                .output(dust, Grisium, 50)
                 .EUt(VA[EV]).duration(20 * 60)
                 .buildAndRegister();
 
@@ -375,6 +383,22 @@ public class MaterialRecipes {
                 .input(dust, Uranium238, 9)
                 .output(dust, Staballoy, 10)
                 .EUt(VA[HV]).duration(20 * 14 + 6)
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Cobalt, 4)
+                .input(dust, Chrome, 3)
+                .input(dust, Phosphorus, 2)
+                .input(dust, Molybdenum, 1)
+                .output(dust, Talonite, 10)
+                .EUt(VA[HV]).duration(20 * 14 + 13)
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Zirconium)
+                .input(dust, Carbon)
+                .output(dust, ZirconiumCarbide, 2)
+                .EUt(VA[LV]).duration(20 * 5 + 2)
                 .buildAndRegister();
     }
 

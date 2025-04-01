@@ -310,7 +310,7 @@ public class MultiblockRecipes {
                 'C', new UnificationEntry(circuit, getMarkerMaterialByTier(LuV)),
                 'T', getPistonByTier(IV),
                 'Y', ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.CRYOGENIC_CASING),
-                'P', new UnificationEntry(plateDouble, Grismium),
+                'P', new UnificationEntry(plateDouble, Grisium),
                 'B', ZBGTMetaItems.GREGTECH_COMPUTER_CUBE);
 
         ModHandler.addShapedRecipe("industrial_pbf",
