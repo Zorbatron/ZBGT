@@ -272,7 +272,7 @@ public final class ZBGTFirstDegreeMaterials {
         Inconel625 = new Material.Builder(id++, zbgtId("inconel_625"))
                 .ingot().liquid(new FluidBuilder().temperature(2425))
                 .color(combineRGB(128, 200, 128)).iconSet(METALLIC)
-                .flags(GENERATE_FRAME, DECOMPOSITION_BY_CENTRIFUGING)
+                .flags(GENERATE_FRAME, DECOMPOSITION_BY_CENTRIFUGING, GENERATE_BOLT_SCREW)
                 .blast(b -> b
                         .temp(2700, BlastProperty.GasTier.MID)
                         .blastStats(VA[HV], 20 * 40 + 15))
@@ -282,7 +282,7 @@ public final class ZBGTFirstDegreeMaterials {
         Inconel690 = new Material.Builder(id++, zbgtId("inconel_690"))
                 .ingot().liquid(new FluidBuilder().temperature(3700))
                 .color(combineRGB(118, 220, 138)).iconSet(METALLIC)
-                .flags(GENERATE_FRAME, GENERATE_BOLT_SCREW)
+                .flags(GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_PLATE)
                 .blast(b -> b
                         .temp(3700, BlastProperty.GasTier.HIGH)
                         .blastStats(VA[EV], 37 * 20 + 10))
@@ -323,7 +323,7 @@ public final class ZBGTFirstDegreeMaterials {
         Talonite = new Material.Builder(id++, zbgtId("talonite"))
                 .ingot().liquid(new FluidBuilder().temperature(3725))
                 .color(combineRGB(178, 173, 162)).iconSet(METALLIC)
-                .flags(GENERATE_PLATE, DECOMPOSITION_BY_CENTRIFUGING)
+                .flags(GENERATE_PLATE, DECOMPOSITION_BY_CENTRIFUGING, GENERATE_FRAME)
                 .blast(b -> b
                         .temp(3725, BlastProperty.GasTier.MID)
                         .blastStats(VA[HV], 20 * 37 + 10))
@@ -355,6 +355,25 @@ public final class ZBGTFirstDegreeMaterials {
                 .color(combineRGB(222, 202, 180)).iconSet(METALLIC)
                 .flags(GENERATE_PLATE, GENERATE_FRAME, DECOMPOSITION_BY_CENTRIFUGING)
                 .components(Zirconium, 1, Carbon, 1)
+                .build();
+
+        MaragingSteel350 = new Material.Builder(id++, zbgtId("maraging_steel_350"))
+                .ingot().liquid(new FluidBuilder().temperature(2685))
+                .color(combineRGB(117, 129, 179)).iconSet(METALLIC)
+                .flags(GENERATE_PLATE)
+                .blast(b -> b
+                        .temp(2685, BlastProperty.GasTier.LOW)
+                        .blastStats(VA[HV], 20 * 20 + 8))
+                .components(Steel, 16, Aluminium, 1, Molybdenum, 1, Nickel, 4, Cobalt, 2)
+                .build();
+
+        TriniumNaquadahAlloy = new Material.Builder(id++, zbgtId("trinium_naquadah_alloy"))
+                .ingot().liquid(new FluidBuilder().temperature(6775))
+                .iconSet(METALLIC)
+                .blast(b -> b
+                        .temp(6775, BlastProperty.GasTier.HIGH)
+                        .blastStats(VA[LuV], 20 * 35))
+                .components(Naquadah, 9, Trinium, 5)
                 .build();
     }
 }

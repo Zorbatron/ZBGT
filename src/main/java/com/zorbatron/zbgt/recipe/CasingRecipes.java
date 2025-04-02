@@ -652,53 +652,92 @@ public class CasingRecipes {
                 .fluidInputs(ZirconiumCarbide.getFluid(L * 8))
                 .buildAndRegister();
 
-        // casing =
-        // ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.THERMAL_CONTAINMENT_CASING,
-        // casingsPerCraft);
-        // ModHandler.addShapedRecipe("thermal_containment_casing", casing,
-        // "",
-        // "",
-        // "");
-        //
-        //
-        // casing = ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.BULK_PRODUCTION_FRAME,
-        // casingsPerCraft);
-        // ModHandler.addShapedRecipe("bulk_production_frame", casing,
-        // "",
-        // "",
-        // "");
-        //
-        //
-        // casing = ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.CUTTING_FACTORY_FRAME,
-        // casingsPerCraft);
-        // ModHandler.addShapedRecipe("cutting_factory_frame", casing,
-        // "",
-        // "",
-        // "");
-        //
-        //
-        // casing = ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.STERILE_FARM_CASING,
-        // casingsPerCraft);
-        // ModHandler.addShapedRecipe("sterile_farm_casing", casing,
-        // "",
-        // "",
-        // "");
-        //
-        //
-        // casing = ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.AQUATIC_CASING,
-        // casingsPerCraft);
-        // ModHandler.addShapedRecipe("aquatic_casing", casing,
-        // "",
-        // "",
-        // "");
-        //
-        //
-        // casing = ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.INCONEL_REINFORCED_CASING,
-        // casingsPerCraft);
-        // ModHandler.addShapedRecipe("inconel_reinforced_casing", casing,
-        // "",
-        // "",
-        // "");
+        casing = ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.THERMAL_CONTAINMENT_CASING,
+                casingsPerCraft * 2);
+        ModHandler.addShapedRecipe("thermal_containment_casing", casing,
+                "MSM",
+                "HCH",
+                "MMM",
+                'M', plate(MaragingSteel250),
+                'S', plate(StainlessSteel),
+                'H', new UnificationEntry(circuit, getMarkerMaterialByTier(HV)),
+                'C', MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.HV));
+        casingBuilder(casing)
+                .inputs(MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.HV))
+                .input(plate, MaragingSteel350, 5)
+                .input(plate, StainlessSteel)
+                .input(circuit, getMarkerMaterialByTier(HV), 2)
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.BULK_PRODUCTION_FRAME,
+                casingsPerCraft);
+        casingBuilder(casing, VA[IV], 20 * 25)
+                .inputs(ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.MULTI_USE_CASING))
+                .input(frameGt, Iridium)
+                .input(circuit, getMarkerMaterialByTier(MV), 16)
+                .input(screw, Inconel625, 32)
+                .input(plate, Zeron100, 8)
+                .fluidInputs(TriniumNaquadahCarbonite.getFluid(L * 4))
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.CUTTING_FACTORY_FRAME,
+                casingsPerCraft);
+        ModHandler.addShapedRecipe("cutting_factory_frame", casing,
+                "MhM",
+                "SFS",
+                "MwM",
+                'M', plate(MaragingSteel300),
+                'S', plate(Stellite100),
+                'F', frameBox(Talonite));
+
+        casingBuilder(casing)
+                .input(plate, MaragingSteel300, 4)
+                .input(plate, Stellite100, 2)
+                .input(frameGt, Talonite)
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.STERILE_FARM_CASING,
+                casingsPerCraft);
+        casingBuilder(casing, VA[MV], 20 * 10)
+                .input(frameGt, Tumbaga)
+                .input(pipeTinyFluid, Steel)
+                .input(MetaItems.VOLTAGE_COIL_MV)
+                .input(MetaItems.PLANT_BALL, 4)
+                .input(plank, Wood, 8)
+                .fluidInputs(Water.getFluid(2000))
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.AQUATIC_CASING,
+                casingsPerCraft);
+        ModHandler.addShapedRecipe("aquatic_casing", casing,
+                "WhW",
+                "EFE",
+                "WwW",
+                'W', plate(WatertightSteel),
+                'E', plate(EglinSteel),
+                'F', frameBox(EglinSteel));
+
+        casingBuilder(casing)
+                .input(plate, WatertightSteel, 4)
+                .input(plate, EglinSteel, 2)
+                .input(frameGt, EglinSteel)
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.INCONEL_REINFORCED_CASING,
+                casingsPerCraft);
+        ModHandler.addShapedRecipe("inconel_reinforced_casing", casing,
+                "IhI",
+                "TFT",
+                "IwI",
+                'I', plate(Inconel690),
+                'T', plate(Talonite),
+                'F', frameBox(Staballoy));
+
+        casingBuilder(casing)
+                .input(plate, Inconel690, 4)
+                .input(plate, Talonite, 2)
+                .input(frameGt, Staballoy)
+                .buildAndRegister();
     }
 
     private static AssemblerRecipeBuilder casingBuilder(ItemStack casing, int eut, int duration) {

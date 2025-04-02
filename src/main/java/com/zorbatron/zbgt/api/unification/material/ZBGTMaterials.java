@@ -45,6 +45,8 @@ public final class ZBGTMaterials {
     public static Material Incoloy020;
     public static Material HG1223;
     public static Material ZirconiumCarbide;
+    public static Material MaragingSteel350;
+    public static Material TriniumNaquadahAlloy;
 
     // Second degree materials
     public static Material MAR_CE_M200;
@@ -52,6 +54,7 @@ public final class ZBGTMaterials {
     public static Material Dalisenite;
     public static Material EglinSteel;
     public static Material Tantalloy61;
+    public static Material TriniumNaquadahCarbonite;
 
     // Third degree materials
     public static Material Hikarium;
