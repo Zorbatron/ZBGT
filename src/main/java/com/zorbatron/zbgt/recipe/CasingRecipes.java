@@ -848,7 +848,7 @@ public class CasingRecipes {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(MetaTileEntities.HULL[LuV], 5)
                 .input(getFieldGeneratorByTier(HV), 16)
-                .input(ZBGTMetaItems.ENERGY_CORE_MV) // TODO: was it more than one?
+                .input(ZBGTMetaItems.ENERGY_CORE_MV, 2)
                 .input(plate, Pikyonium64b, 4)
                 .input(screw, Pikyonium64b, 4)
                 .input(bolt, TriniumNaquadahCarbonite, 8)
