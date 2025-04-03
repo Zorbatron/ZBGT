@@ -359,7 +359,6 @@ public class CasingRecipes {
     }
 
     private static void gtpp() {
-        // GTPP casings 0
         ItemStack casing = ZBGTMetaBlocks.GTPP_CASING_0.getItemVariant(RandomGTPPCasings0.CasingType.CENTRIFUGE_CASING,
                 casingsPerCraft);
         ModHandler.addShapedRecipe("centrifuge_casing", casing,
@@ -632,7 +631,7 @@ public class CasingRecipes {
                 casingsPerCraft);
         casingBuilder(casing, VA[IV], 20 * 25)
                 .inputs(MetaBlocks.WIRE_COIL.getItemVariant(BlockWireCoil.CoilType.NICHROME))
-                // IV coil wire
+                // TODO: IV coil wire
                 .input(plate, IncoloyMA956, 8)
                 .input(bolt, Tantalloy61, 16)
                 .input(screw, Incoloy020, 32)
@@ -644,7 +643,7 @@ public class CasingRecipes {
                 casingsPerCraft);
         casingBuilder(casing, VA[EV], 20 * 20)
                 .inputs(MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF))
-                // EV coil wire
+                // TODO: EV coil wire
                 .input(plate, IncoloyDS, 8)
                 .input(screw, Inconel690, 16)
                 .input(stickLong, EglinSteel, 4)
@@ -738,6 +737,126 @@ public class CasingRecipes {
                 .input(plate, Talonite, 2)
                 .input(frameGt, Staballoy)
                 .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.MULTI_USE_CASING,
+                casingsPerCraft);
+        ModHandler.addShapedRecipe("multi_use_casing", casing,
+                "ShS",
+                "TFT",
+                "SwS",
+                'S', plate(Staballoy),
+                'T', plate(StainlessSteel),
+                'F', frameBox(ZirconiumCarbide));
+
+        casingBuilder(casing)
+                .input(plate, Staballoy, 4)
+                .input(plate, StainlessSteel, 2)
+                .input(frameGt, ZirconiumCarbide)
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.SUPPLY_DEPOT_CASING,
+                casingsPerCraft);
+        ModHandler.addShapedRecipe("supply_depot_casing", casing,
+                "PMP",
+                "wFh",
+                "PCP",
+                'P', new UnificationEntry(plateDouble, HastelloyC276),
+                'M', MetaItems.ELECTRIC_MOTOR_HV.getStackForm(),
+                'F', frameBox(TungstenCarbide),
+                'C', getMotorByTier(HV).getStackForm());
+
+        casingBuilder(casing)
+                .input(frameGt, TungstenCarbide)
+                .input(plateDouble, HastelloyC276, 4)
+                .input(getMotorByTier(HV))
+                .input(getConveyorByTier(HV))
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.TEMPERED_ARC_FURNACE_CASING,
+                casingsPerCraft);
+        casingBuilder(casing, VA[IV], 20 * 30)
+                .inputs(ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.MULTI_USE_CASING,
+                        casingsPerCraft))
+                // TODO: Transmission control thingy MV
+                .input(getPistonByTier(EV), 2)
+                .input(plate, Inconel625, 4)
+                .input(pipeSmallFluid, TungstenSteel)
+                .buildAndRegister();
+
+        // casing =
+        // ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.QUANTUM_FORCE_TRANSFORMER_COIL_CASINGS,
+        // casingsPerCraft);
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.VACUUM_CASING,
+                casingsPerCraft);
+        casingBuilder(casing, VA[LuV], 20 * 20)
+                .inputs(ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.MULTI_USE_CASING,
+                        casingsPerCraft))
+                .inputs(MetaBlocks.WIRE_COIL.getItemVariant(BlockWireCoil.CoilType.NICHROME, casingsPerCraft))
+                .input(getPistonByTier(HV))
+                .input(plate, Zeron100, 4)
+                .input(gear, Zeron100, 2)
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.TURBODYNE_CASING,
+                casingsPerCraft);
+        ModHandler.addShapedRecipe("turbodyne_casing", casing,
+                "GhG",
+                "PCP",
+                "GRG",
+                'G', gear(Nitinol60),
+                'P', new UnificationEntry(pipeNormalFluid, TungstenSteel),
+                'C', MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST),
+                'R', longRod(TungstenSteel));
+
+        casingBuilder(casing)
+                .inputs(MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST))
+                .input(gear, Nitinol60, 4)
+                .input(pipeNormalFluid, TungstenSteel, 2)
+                .input(stickLong, TungstenSteel)
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.ISAMILL_EXTERIOR_CASING,
+                casingsPerCraft);
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.ISAMILL_PIPING,
+                casingsPerCraft);
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.ISAMILL_GEARBOX,
+                casingsPerCraft);
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.ELEMENTAL_CONFINEMENT_SHELL,
+                casingsPerCraft);
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.SPARGE_TOWER_EXTERIOR_CASING,
+                casingsPerCraft);
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.STURDY_PRINTER_CASING,
+                casingsPerCraft);
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.FORGE_CASING,
+                casingsPerCraft);
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.NEUTRON_PULSE_MANIPULATOR,
+                casingsPerCraft);
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.COSMIC_FABRIC_MANIPULATOR,
+                casingsPerCraft);
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.INFINITY_INFUSED_MANIPULATOR,
+                casingsPerCraft);
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.SPACETIME_CONTINUUM_RIPPER,
+                casingsPerCraft);
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.NEUTRON_SHIELDING_CORE,
+                casingsPerCraft);
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.COSMIC_FABRIC_SHIELDING_CORE,
+                casingsPerCraft);
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_2
+                .getItemVariant(RandomGTPPCasings2.CasingType.INFINITY_INFUSED_SHIELDING_CORE, casingsPerCraft);
     }
 
     private static AssemblerRecipeBuilder casingBuilder(ItemStack casing, int eut, int duration) {
