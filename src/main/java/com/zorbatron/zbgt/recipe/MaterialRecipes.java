@@ -99,6 +99,16 @@ public class MaterialRecipes {
                 .blastFurnaceTemp(1830)
                 .EUt(VA[LV]),
                 20 * 10, BlastProperty.GasTier.LOW, 2, 12);
+
+        blastHelper(ALLOY_BLAST_RECIPES.recipeBuilder()
+                .input(dust, Tin, 5)
+                .input(dust, Lead, 36)
+                .input(dust, Antimony, 8)
+                .input(dust, Arsenic, 1)
+                .fluidOutputs(BabbitAlloy.getFluid(L * 50))
+                .blastFurnaceTemp(540)
+                .EUt(VA[LV]),
+                20 * 50, BlastProperty.GasTier.LOW, 4, 14);
     }
 
     private static void macerator() {

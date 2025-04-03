@@ -309,6 +309,32 @@ metaitem.gregtech_computer_cube.name=GregTech Computer Cube
 metaitem.woods_glass_lens.name=Wood's Glass Lens
 metaitem.woods_glass_lens.tooltip=Allows UV & IF to pass through, blocks visible light spectrums
 
+metaitem.coil_wire_ev.name=Coil Wire [EV]
+metaitem.coil_wire_iv.name=Coil Wire [IV]
+metaitem.coil_wire_luv.name=Coil Wire [LuV]
+metaitem.coil_wire_zpm.name=Coil Wire [ZPM]
+
+metaitem.energy_core_ulv.name=Energy Core [ULV]
+metaitem.energy_core_ulv.tooltip=A key crafting component for ULV Appliances
+metaitem.energy_core_lv.name=Energy Core [LV]
+metaitem.energy_core_lv.tooltip=A key crafting component for LV Appliances
+metaitem.energy_core_mv.name=Energy Core [MV]
+metaitem.energy_core_mv.tooltip=A key crafting component for MV Appliances
+metaitem.energy_core_hv.name=Energy Core [HV]
+metaitem.energy_core_hv.tooltip=A key crafting component for HV Appliances
+metaitem.energy_core_ev.name=Energy Core [EV]
+metaitem.energy_core_ev.tooltip=A key crafting component for EV Appliances
+metaitem.energy_core_iv.name=Energy Core [IV]
+metaitem.energy_core_iv.tooltip=A key crafting component for IV Appliances
+metaitem.energy_core_luv.name=Energy Core [LuV]
+metaitem.energy_core_luv.tooltip=A key crafting component for LuV Appliances
+metaitem.energy_core_zpm.name=Energy Core [ZPM]
+metaitem.energy_core_zpm.tooltip=A key crafting component for ZPM Appliances
+metaitem.energy_core_uv.name=Energy Core [UV]
+metaitem.energy_core_uv.tooltip=A key crafting component for UV Appliances
+metaitem.energy_core_uhv.name=Energy Core [UHV]
+metaitem.energy_core_uhv.tooltip=A key crafting component for UHV Appliances
+
 
 # Widgets
 zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s

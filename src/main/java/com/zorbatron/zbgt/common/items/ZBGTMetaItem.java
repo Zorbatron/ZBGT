@@ -371,5 +371,21 @@ public class ZBGTMetaItem extends StandardMetaItem {
                         }));
 
         WOODS_GLASS_LENS = addItem(150, "woods_glass_lens");
+
+        COIL_WIRE_EV = addItem(151, "coil_wire_ev");
+        COIL_WIRE_IV = addItem(152, "coil_wire_iv");
+        COIL_WIRE_LuV = addItem(153, "coil_wire_luv");
+        COIL_WIRE_ZPM = addItem(154, "coil_wire_zpm");
+
+        ENERGY_CORE_ULV = addItem(155, "energy_core_ulv");
+        ENERGY_CORE_LV = addItem(156, "energy_core_lv");
+        ENERGY_CORE_MV = addItem(157, "energy_core_mv");
+        ENERGY_CORE_HV = addItem(158, "energy_core_hv");
+        ENERGY_CORE_EV = addItem(159, "energy_core_ev");
+        ENERGY_CORE_IV = addItem(160, "energy_core_iv");
+        ENERGY_CORE_LuV = addItem(161, "energy_core_luv");
+        ENERGY_CORE_ZPM = addItem(162, "energy_core_zpm");
+        ENERGY_CORE_UV = addItem(163, "energy_core_uv");
+        ENERGY_CORE_UHV = addItem(164, "energy_core_uhv");
     }
 }

@@ -135,6 +135,7 @@ public final class ZBGTSecondDegreeMaterials {
         TriniumNaquadahCarbonite = new Material.Builder(id++, zbgtId("trinium_naquadah_carbonite"))
                 .ingot().liquid(new FluidBuilder().temperature(6775))
                 .iconSet(METALLIC)
+                .flags(GENERATE_BOLT_SCREW)
                 .blast(b -> b
                         .temp(6775, BlastProperty.GasTier.HIGHER)
                         .blastStats(VA[LuV], 20 * 40 + 14))

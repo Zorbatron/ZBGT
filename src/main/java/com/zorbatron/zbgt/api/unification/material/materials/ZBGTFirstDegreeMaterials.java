@@ -194,8 +194,7 @@ public final class ZBGTFirstDegreeMaterials {
         Nitinol60 = new Material.Builder(id++, zbgtId("nitinol_60"))
                 .ingot().liquid(new FluidBuilder().temperature(5925))
                 .color(0xD2B4F5)
-                .flags(DECOMPOSITION_BY_CENTRIFUGING)
-                .flags(GENERATE_FRAME)
+                .flags(DECOMPOSITION_BY_CENTRIFUGING, GENERATE_FRAME, GENERATE_GEAR)
                 .blast(b -> b
                         .temp(5925, BlastProperty.GasTier.HIGH)
                         .blastStats(VA[IV]))
@@ -272,7 +271,8 @@ public final class ZBGTFirstDegreeMaterials {
         Inconel625 = new Material.Builder(id++, zbgtId("inconel_625"))
                 .ingot().liquid(new FluidBuilder().temperature(2425))
                 .color(combineRGB(128, 200, 128)).iconSet(METALLIC)
-                .flags(GENERATE_FRAME, DECOMPOSITION_BY_CENTRIFUGING, GENERATE_BOLT_SCREW)
+                .flags(GENERATE_FRAME, DECOMPOSITION_BY_CENTRIFUGING, GENERATE_BOLT_SCREW, GENERATE_PLATE,
+                        GENERATE_DOUBLE_PLATE, GENERATE_GEAR)
                 .blast(b -> b
                         .temp(2700, BlastProperty.GasTier.MID)
                         .blastStats(VA[HV], 20 * 40 + 15))
@@ -282,7 +282,7 @@ public final class ZBGTFirstDegreeMaterials {
         Inconel690 = new Material.Builder(id++, zbgtId("inconel_690"))
                 .ingot().liquid(new FluidBuilder().temperature(3700))
                 .color(combineRGB(118, 220, 138)).iconSet(METALLIC)
-                .flags(GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_PLATE)
+                .flags(GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_PLATE, DECOMPOSITION_BY_CENTRIFUGING)
                 .blast(b -> b
                         .temp(3700, BlastProperty.GasTier.HIGH)
                         .blastStats(VA[EV], 37 * 20 + 10))
@@ -302,7 +302,7 @@ public final class ZBGTFirstDegreeMaterials {
         IncoloyDS = new Material.Builder(id++, zbgtId("incoloy_ds"))
                 .ingot().liquid(new FluidBuilder().temperature(3700))
                 .color(combineRGB(155, 150, 197)).iconSet(METALLIC)
-                .flags(GENERATE_PLATE, GENERATE_GEAR)
+                .flags(GENERATE_PLATE, GENERATE_GEAR, DECOMPOSITION_BY_CENTRIFUGING)
                 .blast(b -> b
                         .temp(3700, BlastProperty.GasTier.HIGH)
                         .blastStats(VA[HV], 20 * 37 + 10))
@@ -333,7 +333,7 @@ public final class ZBGTFirstDegreeMaterials {
         Incoloy020 = new Material.Builder(id++, zbgtId("incoloy_020"))
                 .ingot().liquid(new FluidBuilder().temperature(3700))
                 .color(combineRGB(187, 150, 140)).iconSet(METALLIC)
-                .flags(GENERATE_BOLT_SCREW)
+                .flags(GENERATE_BOLT_SCREW, DECOMPOSITION_BY_CENTRIFUGING)
                 .blast(b -> b
                         .temp(3700, BlastProperty.GasTier.MID)
                         .blastStats(VA[HV], 20 * 37 + 10))
@@ -360,7 +360,7 @@ public final class ZBGTFirstDegreeMaterials {
         MaragingSteel350 = new Material.Builder(id++, zbgtId("maraging_steel_350"))
                 .ingot().liquid(new FluidBuilder().temperature(2685))
                 .color(combineRGB(117, 129, 179)).iconSet(METALLIC)
-                .flags(GENERATE_PLATE)
+                .flags(GENERATE_PLATE, DECOMPOSITION_BY_CENTRIFUGING)
                 .blast(b -> b
                         .temp(2685, BlastProperty.GasTier.LOW)
                         .blastStats(VA[HV], 20 * 20 + 8))
@@ -370,10 +370,17 @@ public final class ZBGTFirstDegreeMaterials {
         TriniumNaquadahAlloy = new Material.Builder(id++, zbgtId("trinium_naquadah_alloy"))
                 .ingot().liquid(new FluidBuilder().temperature(6775))
                 .iconSet(METALLIC)
+                .flags(DECOMPOSITION_BY_CENTRIFUGING)
                 .blast(b -> b
                         .temp(6775, BlastProperty.GasTier.HIGH)
                         .blastStats(VA[LuV], 20 * 35))
                 .components(Naquadah, 9, Trinium, 5)
+                .build();
+
+        BabbitAlloy = new Material.Builder(id++, zbgtId("babbit_alloy"))
+                .dust().liquid(new FluidBuilder().temperature(540))
+                .flags(DECOMPOSITION_BY_CENTRIFUGING)
+                .components(Tin, 5, Lead, 36, Antimony, 8, Arsenic, 1)
                 .build();
     }
 }

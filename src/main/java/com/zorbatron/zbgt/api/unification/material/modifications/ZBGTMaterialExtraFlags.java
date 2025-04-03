@@ -12,7 +12,6 @@ import java.util.List;
 import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
 import com.zorbatron.zbgt.api.ZBGTAPI;
 
-import gregicality.multiblocks.api.unification.GCYMMaterials;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialFlag;
 
@@ -40,24 +39,27 @@ public final class ZBGTMaterialExtraFlags {
         rotors();
         plates();
         gears();
+        rings();
+        rods();
     }
 
     private static void doublePlates() {
-        Material[] materials = { Invar, GCYMMaterials.MaragingSteel300 };
+        Material[] materials = { Invar, MaragingSteel300, HastelloyC276 };
 
         setFlags(materials, GENERATE_DOUBLE_PLATE);
     }
 
     private static void densePlates() {
         Material[] materials = { Steel, Aluminium, StainlessSteel, Titanium, TungstenSteel, Tritanium, HSSS,
-                Osmiridium, NiobiumTitanium, Iridium, WroughtIron, Trinaquadalloy, GCYMMaterials.Trinaquadalloy,
+                Osmiridium, NiobiumTitanium, Iridium, WroughtIron, Trinaquadalloy, Trinaquadalloy,
                 Europium, Plutonium239 };
 
         setFlags(materials, GENERATE_DENSE);
     }
 
     private static void screwsBolts() {
-        List<Material> materials = new ArrayList<>(Arrays.asList(BlueSteel, CertusQuartz, Ruthenium, NaquadahEnriched));
+        List<Material> materials = new ArrayList<>(
+                Arrays.asList(BlueSteel, CertusQuartz, Ruthenium, NaquadahEnriched, IncoloyMA956));
 
         if (ZBGTAPI.nomiLabsCompat) {
             materials.add(LabsMaterials.Signalum);
@@ -68,13 +70,13 @@ public final class ZBGTMaterialExtraFlags {
 
     private static void frameBoxes() {
         Material[] materials = { NaquadahAlloy, RhodiumPlatedPalladium, Darmstadtium, WroughtIron, Duranium, Tumbaga,
-                Potin };
+                Potin, Zeron100 };
 
         setFlags(materials, GENERATE_FRAME);
     }
 
     private static void smallGears() {
-        Material[] materials = { Platinum, Naquadria };
+        Material[] materials = { Platinum, Naquadria, HSSE };
 
         setFlags(materials, GENERATE_SMALL_GEAR);
     }
@@ -102,8 +104,21 @@ public final class ZBGTMaterialExtraFlags {
     }
 
     private static void gears() {
-        Material[] materials = { RhodiumPlatedPalladium, Darmstadtium, IncoloyMA956, MaragingSteel300, HastelloyX };
+        Material[] materials = { RhodiumPlatedPalladium, Darmstadtium, IncoloyMA956, MaragingSteel300, HastelloyX,
+                Zeron100 };
 
         setFlags(materials, GENERATE_GEAR);
+    }
+
+    private static void rings() {
+        Material[] materials = { IncoloyMA956 };
+
+        setFlags(materials, GENERATE_RING);
+    }
+
+    private static void rods() {
+        Material[] materials = { Zeron100 };
+
+        setFlags(materials, GENERATE_BOLT_SCREW);
     }
 }
