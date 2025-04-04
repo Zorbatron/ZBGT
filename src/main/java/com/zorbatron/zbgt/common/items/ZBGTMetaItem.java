@@ -4,6 +4,7 @@ import static com.zorbatron.zbgt.common.items.ZBGTMetaItems.*;
 import static gregtech.api.GTValues.*;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
@@ -369,5 +370,34 @@ public class ZBGTMetaItem extends StandardMetaItem {
                             list.add(I18n.format("metaitem.local_name_filter_fluid.tooltip.1"));
                             list.add(I18n.format("metaitem.local_name_filter_fluid.tooltip.2"));
                         }));
+
+        WOODS_GLASS_LENS = addItem(150, "woods_glass_lens");
+
+        COIL_WIRE_EV = addItem(151, "coil_wire_ev");
+        COIL_WIRE_IV = addItem(152, "coil_wire_iv");
+        COIL_WIRE_LuV = addItem(153, "coil_wire_luv");
+        COIL_WIRE_ZPM = addItem(154, "coil_wire_zpm");
+
+        ENERGY_CORE_ULV = addItem(155, "energy_core_ulv");
+        ENERGY_CORE_LV = addItem(156, "energy_core_lv");
+        ENERGY_CORE_MV = addItem(157, "energy_core_mv");
+        ENERGY_CORE_HV = addItem(158, "energy_core_hv");
+        ENERGY_CORE_EV = addItem(159, "energy_core_ev");
+        ENERGY_CORE_IV = addItem(160, "energy_core_iv");
+        ENERGY_CORE_LuV = addItem(161, "energy_core_luv");
+        ENERGY_CORE_ZPM = addItem(162, "energy_core_zpm");
+        ENERGY_CORE_UV = addItem(163, "energy_core_uv");
+        ENERGY_CORE_UHV = addItem(164, "energy_core_uhv");
+    }
+
+    @Override
+    protected int getColorForItemStack(ItemStack stack, int tintIndex) {
+        if (stack.getMetadata() == 164) {
+            // To make the UHV Energy Core look like it's flashing really fast without me having to make a long texture
+            return ZBGTUtility.combineRGB(ZBGTUtility.randInt(220, 250), ZBGTUtility.randInt(221, 251),
+                    ZBGTUtility.randInt(220, 250));
+        }
+
+        return super.getColorForItemStack(stack, tintIndex);
     }
 }
