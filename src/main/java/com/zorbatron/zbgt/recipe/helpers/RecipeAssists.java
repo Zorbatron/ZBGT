@@ -6,12 +6,12 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.common.items.MetaItems.*;
 
 import java.util.List;
-import java.util.Optional;
 
 import net.minecraft.item.ItemStack;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.google.common.collect.ImmutableList;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
 
@@ -19,11 +19,9 @@ import gregtech.api.GregTechAPI;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.properties.IMaterialProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.MetaBlocks;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
 @SuppressWarnings("unused")
 public class RecipeAssists {
@@ -483,23 +481,27 @@ public class RecipeAssists {
         };
     }
 
-    // generics ;3
+    /**
+     * Get a list of all materials that have a {@link PropertyKey#WIRE} with a specified voltage.
+     * PS, if this method is ever called with the same voltage query, tell me to add caching, especially if you're
+     * calling it often and aren't caching the result yourself! (I haven't added it right now because it wouldn't be
+     * used)
+     * 
+     * @param voltage the voltage to check for
+     * @return an immutable list of {@link Material}s
+     */
     @NotNull
-    public static List<Material> getMaterialsWithWireVoltage(int voltage) {
-        List<Material> foundMaterials = new ObjectArrayList<>();
+    public static List<Material> getMaterialsWithWireVoltage(long voltage) {
+        ImmutableList.Builder<Material> foundMaterials = new ImmutableList.Builder<>();
 
         for (Material material : GregTechAPI.materialManager.getRegisteredMaterials()) {
-            getOptionalMaterialProperty(PropertyKey.WIRE, material).ifPresent(prop -> {
-                if (prop.getVoltage() == voltage) foundMaterials.add(material);
-            });
+            if (material.hasProperty(PropertyKey.WIRE)) {
+                if (material.getProperty(PropertyKey.WIRE).getVoltage() == voltage) {
+                    foundMaterials.add(material);
+                }
+            }
         }
 
-        return foundMaterials;
-    }
-
-    @NotNull
-    public static <T extends IMaterialProperty> Optional<T> getOptionalMaterialProperty(PropertyKey<T> propertyKey,
-                                                                                        Material material) {
-        return Optional.ofNullable(material.getProperty(propertyKey));
+        return foundMaterials.build();
     }
 }

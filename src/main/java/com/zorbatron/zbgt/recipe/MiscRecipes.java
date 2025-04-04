@@ -3,32 +3,25 @@ package com.zorbatron.zbgt.recipe;
 import static com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
 import static com.zorbatron.zbgt.api.unification.material.ZBGTMaterials.*;
 import static com.zorbatron.zbgt.common.items.ZBGTMetaItems.*;
+import static com.zorbatron.zbgt.recipe.helpers.RecipeAssists.getMaterialsWithWireVoltage;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
-
-import java.util.Collections;
-import java.util.List;
-
-import org.jetbrains.annotations.NotNull;
 
 import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
 
-import gregtech.api.GregTechAPI;
 import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.builders.AssemblerRecipeBuilder;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
 public class MiscRecipes {
 
@@ -413,21 +406,5 @@ public class MiscRecipes {
                     .EUt(VA[LuV]).duration(20 * 10)
                     .buildAndRegister();
         }
-    }
-
-    @NotNull
-    public static List<Material> getMaterialsWithWireVoltage(long voltage) {
-        List<Material> foundMaterials = null;
-
-        for (Material material : GregTechAPI.materialManager.getRegisteredMaterials()) {
-            if (material.hasProperty(PropertyKey.WIRE)) {
-                if (material.getProperty(PropertyKey.WIRE).getVoltage() == voltage) {
-                    if (foundMaterials == null) foundMaterials = new ObjectArrayList<>();
-                    foundMaterials.add(material);
-                }
-            }
-        }
-
-        return foundMaterials == null ? Collections.emptyList() : foundMaterials;
     }
 }
