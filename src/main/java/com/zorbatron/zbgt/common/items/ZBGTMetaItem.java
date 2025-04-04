@@ -4,6 +4,7 @@ import static com.zorbatron.zbgt.common.items.ZBGTMetaItems.*;
 import static gregtech.api.GTValues.*;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
@@ -387,5 +388,16 @@ public class ZBGTMetaItem extends StandardMetaItem {
         ENERGY_CORE_ZPM = addItem(162, "energy_core_zpm");
         ENERGY_CORE_UV = addItem(163, "energy_core_uv");
         ENERGY_CORE_UHV = addItem(164, "energy_core_uhv");
+    }
+
+    @Override
+    protected int getColorForItemStack(ItemStack stack, int tintIndex) {
+        if (stack.getMetadata() == 164) {
+            // To make the UHV Energy Core look like it's flashing really fast without me having to make a long texture
+            return ZBGTUtility.combineRGB(ZBGTUtility.randInt(220, 250), ZBGTUtility.randInt(221, 251),
+                    ZBGTUtility.randInt(220, 250));
+        }
+
+        return super.getColorForItemStack(stack, tintIndex);
     }
 }
