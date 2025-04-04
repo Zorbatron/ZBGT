@@ -867,35 +867,68 @@ public class CasingRecipes {
                 .EUt(VA[LuV]).duration(20 * 75)
                 .buildAndRegister();
 
-        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.SPARGE_TOWER_EXTERIOR_CASING,
-                casingsPerCraft);
+        casing = ZBGTMetaBlocks.GTPP_CASING_2
+                .getItemVariant(RandomGTPPCasings2.CasingType.SPARGE_TOWER_EXTERIOR_CASING);
+        casingBuilder(casing, VA[IV], 20 * 25)
+                .inputs(ZBGTMetaBlocks.INTEGRAL_CASING.getItemVariant(IntegralCasing.CasingType.INTEGRAL_ENCASEMENT_4))
+                // HS-188A plate
+                .input(ring, HastelloyN, 4)
+                .input(plateDouble, TungstenSteel, 4)
+                .input(screw, HastelloyN, 4)
+                .fluidInputs(StainlessSteel.getFluid(L * 8))
+                .buildAndRegister();
 
-        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.STURDY_PRINTER_CASING,
-                casingsPerCraft);
+        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.STURDY_PRINTER_CASING);
+        casingBuilder(casing, VA[HV], 20 * 10)
+                .inputs(MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.STEEL_SOLID, 2))
+                .input(plate, IncoloyDS, 2)
+                .input(plate, TantalumCarbide, 4)
+                .input(ring, Titanium, 8)
+                .input(stick, EglinSteel, 4)
+                .fluidInputs(EglinSteel.getFluid(L * 2))
+                .buildAndRegister();
 
         casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.FORGE_CASING,
                 casingsPerCraft);
+        ModHandler.addShapedRecipe("forge_casing", casing,
+                "IBI",
+                "RCR",
+                "IRI",
+                'I', plate(IncoloyDS),
+                'B', plate(BabbitAlloy),
+                'R', rod(HastelloyX),
+                'C', MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF));
 
-        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.NEUTRON_PULSE_MANIPULATOR,
-                casingsPerCraft);
+        casingBuilder(casing)
+                .inputs(MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF))
+                .input(plate, IncoloyDS, 4)
+                .input(stick, HastelloyX, 3)
+                .input(plate, BabbitAlloy)
+                .buildAndRegister();
 
-        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.COSMIC_FABRIC_MANIPULATOR,
-                casingsPerCraft);
-
-        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.INFINITY_INFUSED_MANIPULATOR,
-                casingsPerCraft);
-
-        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.SPACETIME_CONTINUUM_RIPPER,
-                casingsPerCraft);
-
-        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.NEUTRON_SHIELDING_CORE,
-                casingsPerCraft);
-
-        casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.COSMIC_FABRIC_SHIELDING_CORE,
-                casingsPerCraft);
-
-        casing = ZBGTMetaBlocks.GTPP_CASING_2
-                .getItemVariant(RandomGTPPCasings2.CasingType.INFINITY_INFUSED_SHIELDING_CORE, casingsPerCraft);
+        // casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.NEUTRON_PULSE_MANIPULATOR,
+        // casingsPerCraft);
+        //
+        // casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.COSMIC_FABRIC_MANIPULATOR,
+        // casingsPerCraft);
+        //
+        // casing =
+        // ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.INFINITY_INFUSED_MANIPULATOR,
+        // casingsPerCraft);
+        //
+        // casing =
+        // ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.SPACETIME_CONTINUUM_RIPPER,
+        // casingsPerCraft);
+        //
+        // casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.NEUTRON_SHIELDING_CORE,
+        // casingsPerCraft);
+        //
+        // casing =
+        // ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.COSMIC_FABRIC_SHIELDING_CORE,
+        // casingsPerCraft);
+        //
+        // casing = ZBGTMetaBlocks.GTPP_CASING_2
+        // .getItemVariant(RandomGTPPCasings2.CasingType.INFINITY_INFUSED_SHIELDING_CORE, casingsPerCraft);
     }
 
     private static AssemblerRecipeBuilder casingBuilder(ItemStack casing, int eut, int duration) {

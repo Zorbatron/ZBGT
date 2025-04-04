@@ -378,8 +378,8 @@ public final class ZBGTFirstDegreeMaterials {
                 .build();
 
         BabbitAlloy = new Material.Builder(id++, zbgtId("babbit_alloy"))
-                .dust().liquid(new FluidBuilder().temperature(540))
-                .flags(DECOMPOSITION_BY_CENTRIFUGING)
+                .ingot().liquid(new FluidBuilder().temperature(540))
+                .flags(DECOMPOSITION_BY_CENTRIFUGING, GENERATE_PLATE)
                 .components(Tin, 5, Lead, 36, Antimony, 8, Arsenic, 1)
                 .build();
     }
