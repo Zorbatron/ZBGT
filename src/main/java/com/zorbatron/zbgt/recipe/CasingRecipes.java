@@ -52,6 +52,7 @@ public class CasingRecipes {
         fusionCasings();
         coALCasings();
         miscCasings();
+        transparent();
         gtpp();
     }
 
@@ -355,6 +356,15 @@ public class CasingRecipes {
                         .EUt(VA[LuV]).duration(25 * 20))
                 .outputs(ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.MOLECULAR_COIL, 4))
                 .EUt(VA[ZPM]).duration(40 * 20)
+                .buildAndRegister();
+    }
+
+    private static void transparent() {
+        ItemStack casing = ZBGTMetaBlocks.TRANSPARENT_BLOCK.getItemVariant(TransparentBlock.CasingType.QUANTUM_GLASS);
+        casingBuilder(casing, VA[UV], 20 * 10)
+                .inputs(ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.MOLECULAR_CASING))
+                .inputs(MetaBlocks.TRANSPARENT_CASING.getItemVariant(BlockGlassCasing.CasingType.LAMINATED_GLASS))
+                .fluidInputs(Trinium.getFluid(L * 4))
                 .buildAndRegister();
     }
 
