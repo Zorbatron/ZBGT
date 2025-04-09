@@ -44,7 +44,7 @@ public class MTEQuacker extends MetaTileEntityCrackingUnit {
     protected void updateFormedValid() {
         super.updateFormedValid();
 
-        if (ZBGTConfig.multiblockSettings.quackerQuacks && isActive()) {
+        if (ZBGTConfig.multiblockSettings.quackerQuacks && getWorld().isRemote && isActive()) {
             if (quackTimer == 0) {
                 playQuack();
                 // Only quack every 1 to 5 minutes.
