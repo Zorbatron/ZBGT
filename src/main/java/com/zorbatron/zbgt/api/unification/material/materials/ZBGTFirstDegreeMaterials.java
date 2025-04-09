@@ -252,7 +252,7 @@ public final class ZBGTFirstDegreeMaterials {
                 .build();
 
         Tumbaga = new Material.Builder(id++, zbgtId("tumbaga"))
-                .ingot()
+                .ingot().liquid(new FluidBuilder().temperature(1575))
                 .color(combineRGB(255, 178, 15)).iconSet(METALLIC)
                 .flags(GENERATE_ROD, GENERATE_LONG_ROD)
                 .components(Gold, 7, Copper, 3)

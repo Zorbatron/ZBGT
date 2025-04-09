@@ -309,31 +309,44 @@ metaitem.gregtech_computer_cube.name=GregTech Computer Cube
 metaitem.woods_glass_lens.name=Wood's Glass Lens
 metaitem.woods_glass_lens.tooltip=Allows UV & IF to pass through, blocks visible light spectrums
 
-metaitem.coil_wire_ev.name=Coil Wire [EV]
-metaitem.coil_wire_iv.name=Coil Wire [IV]
-metaitem.coil_wire_luv.name=Coil Wire [LuV]
-metaitem.coil_wire_zpm.name=Coil Wire [ZPM]
+metaitem.coil_wire.ev.name=Coil Wire [EV]
+metaitem.coil_wire.iv.name=Coil Wire [IV]
+metaitem.coil_wire.luv.name=Coil Wire [LuV]
+metaitem.coil_wire.zpm.name=Coil Wire [ZPM]
 
-metaitem.energy_core_ulv.name=Energy Core [ULV]
-metaitem.energy_core_ulv.tooltip=A key crafting component for ULV Appliances
-metaitem.energy_core_lv.name=Energy Core [LV]
-metaitem.energy_core_lv.tooltip=A key crafting component for LV Appliances
-metaitem.energy_core_mv.name=Energy Core [MV]
-metaitem.energy_core_mv.tooltip=A key crafting component for MV Appliances
-metaitem.energy_core_hv.name=Energy Core [HV]
-metaitem.energy_core_hv.tooltip=A key crafting component for HV Appliances
-metaitem.energy_core_ev.name=Energy Core [EV]
-metaitem.energy_core_ev.tooltip=A key crafting component for EV Appliances
-metaitem.energy_core_iv.name=Energy Core [IV]
-metaitem.energy_core_iv.tooltip=A key crafting component for IV Appliances
-metaitem.energy_core_luv.name=Energy Core [LuV]
-metaitem.energy_core_luv.tooltip=A key crafting component for LuV Appliances
-metaitem.energy_core_zpm.name=Energy Core [ZPM]
-metaitem.energy_core_zpm.tooltip=A key crafting component for ZPM Appliances
-metaitem.energy_core_uv.name=Energy Core [UV]
-metaitem.energy_core_uv.tooltip=A key crafting component for UV Appliances
-metaitem.energy_core_uhv.name=Energy Core [UHV]
-metaitem.energy_core_uhv.tooltip=A key crafting component for UHV Appliances
+metaitem.energy_core.ulv.name=Energy Core [ULV]
+metaitem.energy_core.ulv.tooltip=A key crafting component for ULV Appliances
+metaitem.energy_core.lv.name=Energy Core [LV]
+metaitem.energy_core.lv.tooltip=A key crafting component for LV Appliances
+metaitem.energy_core.mv.name=Energy Core [MV]
+metaitem.energy_core.mv.tooltip=A key crafting component for MV Appliances
+metaitem.energy_core.hv.name=Energy Core [HV]
+metaitem.energy_core.hv.tooltip=A key crafting component for HV Appliances
+metaitem.energy_core.ev.name=Energy Core [EV]
+metaitem.energy_core.ev.tooltip=A key crafting component for EV Appliances
+metaitem.energy_core.iv.name=Energy Core [IV]
+metaitem.energy_core.iv.tooltip=A key crafting component for IV Appliances
+metaitem.energy_core.luv.name=Energy Core [LuV]
+metaitem.energy_core.luv.tooltip=A key crafting component for LuV Appliances
+metaitem.energy_core.zpm.name=Energy Core [ZPM]
+metaitem.energy_core.zpm.tooltip=A key crafting component for ZPM Appliances
+metaitem.energy_core.uv.name=Energy Core [UV]
+metaitem.energy_core.uv.tooltip=A key crafting component for UV Appliances
+metaitem.energy_core.uhv.name=Energy Core [UHV]
+metaitem.energy_core.uhv.tooltip=A key crafting component for UHV Appliances
+
+metaitem.quantum_anomaly.name=Quantum Anomaly
+
+metaitem.transmission_control_component.ulv.name=Transmission Control Component [ULV]
+metaitem.transmission_control_component.lv.name=Transmission Control Component [LV]
+metaitem.transmission_control_component.mv.name=Transmission Control Component [MV]
+metaitem.transmission_control_component.hv.name=Transmission Control Component [HV]
+metaitem.transmission_control_component.ev.name=Transmission Control Component [EV]
+metaitem.transmission_control_component.iv.name=Transmission Control Component [IV]
+metaitem.transmission_control_component.luv.name=Transmission Control Component [LuV]
+metaitem.transmission_control_component.zpm.name=Transmission Control Component [ZPM]
+metaitem.transmission_control_component.uv.name=Transmission Control Component [UV]
+metaitem.transmission_control_component.uhv.name=Transmission Control Component [UHV]
 
 
 # Widgets

@@ -32,6 +32,8 @@ import gregtech.api.block.VariantBlock;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.builders.AssemblerRecipeBuilder;
 import gregtech.api.recipes.builders.AssemblyLineRecipeBuilder;
+import gregtech.api.recipes.ingredients.nbtmatch.NBTCondition;
+import gregtech.api.recipes.ingredients.nbtmatch.NBTMatcher;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
@@ -365,6 +367,38 @@ public class CasingRecipes {
                 .inputs(ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.MOLECULAR_CASING))
                 .inputs(MetaBlocks.TRANSPARENT_CASING.getItemVariant(BlockGlassCasing.CasingType.LAMINATED_GLASS))
                 .fluidInputs(Trinium.getFluid(L * 4))
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.TRANSPARENT_BLOCK.getItemVariant(TransparentBlock.CasingType.CONTAINMENT_CASING, 32);
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(getFieldGeneratorByTier(IV), 32)
+                .input(getMotorByTier(IV), 64)
+                .inputNBT(MetaItems.ENERGY_LAPOTRONIC_ORB, 32, NBTMatcher.ANY, NBTCondition.ANY)
+                .input(cableGtOctal, YttriumBariumCuprate, 32)
+                .input(wireGtHex, Platinum, 64)
+                .input(plate, Naquadria, 64)
+                .input(circuit, getMarkerMaterialByTier(IV), 64)
+                .input(circuit, getMarkerMaterialByTier(LuV), 32)
+                .input(circuit, getMarkerMaterialByTier(ZPM), 16)
+                .input(ZBGTMetaItems.QUANTUM_ANOMALY)
+                .input(ZBGTMetaItems.COIL_WIRE_ZPM, 64)
+                .fluidInputs(Nitinol60.getFluid(L * 8))
+                .fluidInputs(Tumbaga.getFluid(L * 64))
+                .fluidInputs(Nichrome.getFluid(L * 16))
+                .scannerResearch(ZBGTMetaItems.TRANSMISSION_CONTROL_COMPONENT_LuV.getStackForm())
+                .outputs(casing)
+                .EUt(VA[LuV]).duration(20 * 15 * 32)
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.TRANSPARENT_BLOCK
+                .getItemVariant(TransparentBlock.CasingType.PARTICLE_CONTAINMENT_CASING);
+        casingBuilder(casing, VA[IV], 20 * 15)
+                .input(block, Glowstone, 16)
+                .input(gear, Inconel625, 8)
+                .input(wireGtQuadruple, Titanium, 4)
+                .input(getFieldGeneratorByTier(EV), 2)
+                .input(circuit, getMarkerMaterialByTier(EV), 8)
+                .fluidInputs(Inconel625.getFluid(L * 4))
                 .buildAndRegister();
     }
 

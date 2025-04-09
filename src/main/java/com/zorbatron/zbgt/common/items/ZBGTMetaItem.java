@@ -373,21 +373,34 @@ public class ZBGTMetaItem extends StandardMetaItem {
 
         WOODS_GLASS_LENS = addItem(150, "woods_glass_lens");
 
-        COIL_WIRE_EV = addItem(151, "coil_wire_ev");
-        COIL_WIRE_IV = addItem(152, "coil_wire_iv");
-        COIL_WIRE_LuV = addItem(153, "coil_wire_luv");
-        COIL_WIRE_ZPM = addItem(154, "coil_wire_zpm");
+        COIL_WIRE_EV = addItem(151, "coil_wire.ev");
+        COIL_WIRE_IV = addItem(152, "coil_wire.iv");
+        COIL_WIRE_LuV = addItem(153, "coil_wire.luv");
+        COIL_WIRE_ZPM = addItem(154, "coil_wire.zpm");
 
-        ENERGY_CORE_ULV = addItem(155, "energy_core_ulv");
-        ENERGY_CORE_LV = addItem(156, "energy_core_lv");
-        ENERGY_CORE_MV = addItem(157, "energy_core_mv");
-        ENERGY_CORE_HV = addItem(158, "energy_core_hv");
-        ENERGY_CORE_EV = addItem(159, "energy_core_ev");
-        ENERGY_CORE_IV = addItem(160, "energy_core_iv");
-        ENERGY_CORE_LuV = addItem(161, "energy_core_luv");
-        ENERGY_CORE_ZPM = addItem(162, "energy_core_zpm");
-        ENERGY_CORE_UV = addItem(163, "energy_core_uv");
-        ENERGY_CORE_UHV = addItem(164, "energy_core_uhv");
+        ENERGY_CORE_ULV = addItem(155, "energy_core.ulv");
+        ENERGY_CORE_LV = addItem(156, "energy_core.lv");
+        ENERGY_CORE_MV = addItem(157, "energy_core.mv");
+        ENERGY_CORE_HV = addItem(158, "energy_core.hv");
+        ENERGY_CORE_EV = addItem(159, "energy_core.ev");
+        ENERGY_CORE_IV = addItem(160, "energy_core.iv");
+        ENERGY_CORE_LuV = addItem(161, "energy_core.luv");
+        ENERGY_CORE_ZPM = addItem(162, "energy_core.zpm");
+        ENERGY_CORE_UV = addItem(163, "energy_core.uv");
+        ENERGY_CORE_UHV = addItem(164, "energy_core.uhv");
+
+        QUANTUM_ANOMALY = addItem(165, "quantum_anomaly");
+
+        TRANSMISSION_CONTROL_COMPONENT_ULV = addItem(166, "transmission_control_component.ulv");
+        TRANSMISSION_CONTROL_COMPONENT_LV = addItem(167, "transmission_control_component.lv");
+        TRANSMISSION_CONTROL_COMPONENT_MV = addItem(168, "transmission_control_component.mv");
+        TRANSMISSION_CONTROL_COMPONENT_HV = addItem(169, "transmission_control_component.hv");
+        TRANSMISSION_CONTROL_COMPONENT_EV = addItem(170, "transmission_control_component.ev");
+        TRANSMISSION_CONTROL_COMPONENT_IV = addItem(171, "transmission_control_component.iv");
+        TRANSMISSION_CONTROL_COMPONENT_LuV = addItem(172, "transmission_control_component.luv");
+        TRANSMISSION_CONTROL_COMPONENT_ZPM = addItem(173, "transmission_control_component.zpm");
+        TRANSMISSION_CONTROL_COMPONENT_UV = addItem(174, "transmission_control_component.uv");
+        TRANSMISSION_CONTROL_COMPONENT_UHV = addItem(175, "transmission_control_component.uhv");
     }
 
     @Override
