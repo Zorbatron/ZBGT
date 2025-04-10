@@ -410,6 +410,17 @@ zbgt.machine.energy_infuser.tooltip.0=Charges electric items in its input bus
 zbgt.machine.energy_infuser.tooltip.1=If UU matter is supplied, it also repairs items using %smB per durability point
 
 
+# Single Blocks
+zbgt.machine.mini_ebf.lv.name=Basic Mini EBF
+zbgt.machine.mini_ebf.mv.name=Advanced Mini EBF
+zbgt.machine.mini_ebf.hv.name=Advanced Mini EBF II
+zbgt.machine.mini_ebf.ev.name=Advanced Mini EBF III
+zbgt.machine.mini_ebf.iv.name=Elite Mini EBF
+zbgt.machine.mini_ebf.luv.name=Elite Mini EBF II
+zbgt.machine.mini_ebf.zpm.name=Elite Mini EBF III
+zbgt.machine.mini_ebf.uv.name=Ultimate Mini EBF
+
+
 # Multiblock Casings
 tile.multiblock_casing.precise_0.name=Imprecise Electronic Unit Casing
 tile.multiblock_casing.precise_1.name=Precise Electronic Unit Casing Mk-I

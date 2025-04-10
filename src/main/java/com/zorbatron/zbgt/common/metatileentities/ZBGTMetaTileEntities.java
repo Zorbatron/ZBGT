@@ -5,6 +5,7 @@ import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTile
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.metatileentity.ZBGTMultiblockAbilities;
+import com.zorbatron.zbgt.common.metatileentities.electric.MTEMiniEBF;
 import com.zorbatron.zbgt.common.metatileentities.multi.MTEYOTTank;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.*;
 import com.zorbatron.zbgt.common.metatileentities.multi.electric.large.*;
@@ -17,6 +18,7 @@ import com.zorbatron.zbgt.common.metatileentities.storage.MTECreativeComputation
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.machines.MachineItemBlock;
+import gregtech.common.metatileentities.MetaTileEntities;
 
 public class ZBGTMetaTileEntities {
 
@@ -64,6 +66,8 @@ public class ZBGTMetaTileEntities {
     public static MTEIndustrialPBF IPBF;
 
     public static MTEEnergyInfuser ENERGY_INFUSER;
+
+    public static MTEMiniEBF[] MINI_EBF = new MTEMiniEBF[GTValues.V.length - 1];
 
     public static void init() {
         MachineItemBlock.addCreativeTab(ZBGTAPI.TAB_ZBGT);
@@ -195,5 +199,8 @@ public class ZBGTMetaTileEntities {
 
         ENERGY_INFUSER = registerMetaTileEntity(18074,
                 new MTEEnergyInfuser(zbgtId("energy_infuser")));
+
+        MetaTileEntities.registerMetaTileEntities(MINI_EBF, 18075, "small_blast_furnace",
+                (tier, voltageName) -> new MTEMiniEBF(zbgtId(String.format("%s.%s", "mini_ebf", voltageName)), tier));
     }
 }
