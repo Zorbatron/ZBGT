@@ -14,6 +14,7 @@ import net.minecraftforge.fluids.FluidStack;
 import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.util.ZBGTMods;
+import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 
 import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.recipes.RecipeBuilder;
@@ -29,6 +30,7 @@ public class MaterialRecipes {
         vacuumFreezer();
         alloyBlast();
         macerator();
+        engraver();
         chemBath();
         mixer();
         ebf();
@@ -457,6 +459,15 @@ public class MaterialRecipes {
                 .input(dust, Alumina, 5)
                 .input(dust, Carbon, 3)
                 .circuitMeta(5)
+                .buildAndRegister();
+    }
+
+    private static void engraver() {
+        LASER_ENGRAVER_RECIPES.recipeBuilder()
+                .input(dust, Glass, 64)
+                .notConsumable(ZBGTMetaItems.QUANTUM_ANOMALY)
+                .output(dust, ChronomaticGlass)
+                .EUt(VA[UHV]).duration(20 * 35)
                 .buildAndRegister();
     }
 

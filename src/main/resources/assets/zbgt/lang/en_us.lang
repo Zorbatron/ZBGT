@@ -700,6 +700,7 @@ zbgt.material.low_grade_coolant=Low Grade Coolant
 zbgt.material.hot_low_grade_coolant=Hot Low Grade Coolant
 zbgt.material.sluice_juice=Sluice Juice
 zbgt.material.sluice_sand=Sluice Sand
+zbgt.material.chronomatic_glass=Chronomatic Glass
 
 
 # Ore veins

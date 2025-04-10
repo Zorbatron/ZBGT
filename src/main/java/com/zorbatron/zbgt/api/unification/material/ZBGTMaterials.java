@@ -82,6 +82,7 @@ public final class ZBGTMaterials {
     public static Material HotLowGradeCoolant;
     public static Material SluiceJuice;
     public static Material SluiceSand;
+    public static Material ChronomaticGlass;
 
     public static void init() {
         MetaItems.addOrePrefix(ZBGTOrePrefix.nanites);
