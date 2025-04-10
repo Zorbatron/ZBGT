@@ -27,5 +27,11 @@ public final class ZBGTUnknownCompositionMaterials {
                 .dust()
                 .color(combineRGB(165, 165, 120)).iconSet(MaterialIconSet.FINE)
                 .build();
+
+        ChronomaticGlass = new Material.Builder(id++, zbgtId("chronomatic_glass"))
+                .dust().ingot().liquid(new FluidBuilder().temperature(9200))
+                .color(combineRGB(255, 255, 255)).iconSet(MaterialIconSet.METALLIC)
+                .build();
+        ChronomaticGlass.setFormula("⌘☯☯⌘ ", false);
     }
 }

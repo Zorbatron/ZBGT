@@ -5,14 +5,21 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.common.items.MetaItems.*;
 
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 
+import org.jetbrains.annotations.NotNull;
+
+import com.google.common.collect.ImmutableList;
 import com.zorbatron.zbgt.common.block.ZBGTMetaBlocks;
 import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
 
+import gregtech.api.GregTechAPI;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.MetaBlocks;
 
@@ -472,5 +479,29 @@ public class RecipeAssists {
             case (MAX)  -> WRAPPED_CIRCUIT_MAX;
             default     -> DROPPER_COVER_LV;
         };
+    }
+
+    /**
+     * Get a list of all materials that have a {@link PropertyKey#WIRE} with a specified voltage.
+     * PS, if this method is ever called with the same voltage query, tell me to add caching, especially if you're
+     * calling it often and aren't caching the result yourself! (I haven't added it right now because it wouldn't be
+     * used)
+     * 
+     * @param voltage the voltage to check for
+     * @return an immutable list of {@link Material}s
+     */
+    @NotNull
+    public static List<Material> getMaterialsWithWireVoltage(long voltage) {
+        ImmutableList.Builder<Material> foundMaterials = new ImmutableList.Builder<>();
+
+        for (Material material : GregTechAPI.materialManager.getRegisteredMaterials()) {
+            if (material.hasProperty(PropertyKey.WIRE)) {
+                if (material.getProperty(PropertyKey.WIRE).getVoltage() == voltage) {
+                    foundMaterials.add(material);
+                }
+            }
+        }
+
+        return foundMaterials.build();
     }
 }
