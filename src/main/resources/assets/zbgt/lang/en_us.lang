@@ -337,16 +337,16 @@ metaitem.energy_core.uhv.tooltip=A key crafting component for UHV Appliances
 
 metaitem.quantum_anomaly.name=Quantum Anomaly
 
-metaitem.transmission_control_component.ulv.name=Transmission Control Component [ULV]
-metaitem.transmission_control_component.lv.name=Transmission Control Component [LV]
-metaitem.transmission_control_component.mv.name=Transmission Control Component [MV]
-metaitem.transmission_control_component.hv.name=Transmission Control Component [HV]
-metaitem.transmission_control_component.ev.name=Transmission Control Component [EV]
-metaitem.transmission_control_component.iv.name=Transmission Control Component [IV]
-metaitem.transmission_control_component.luv.name=Transmission Control Component [LuV]
-metaitem.transmission_control_component.zpm.name=Transmission Control Component [ZPM]
-metaitem.transmission_control_component.uv.name=Transmission Control Component [UV]
-metaitem.transmission_control_component.uhv.name=Transmission Control Component [UHV]
+metaitem.transmission_component.ulv.name=Transmission Component [ULV]
+metaitem.transmission_component.lv.name=Transmission Component [LV]
+metaitem.transmission_component.mv.name=Transmission Component [MV]
+metaitem.transmission_component.hv.name=Transmission Component [HV]
+metaitem.transmission_component.ev.name=Transmission Component [EV]
+metaitem.transmission_component.iv.name=Transmission Component [IV]
+metaitem.transmission_component.luv.name=Transmission Component [LuV]
+metaitem.transmission_component.zpm.name=Transmission Component [ZPM]
+metaitem.transmission_component.uv.name=Transmission Component [UV]
+metaitem.transmission_component.uhv.name=Transmission Component [UHV]
 
 
 # Widgets

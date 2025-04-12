@@ -391,16 +391,17 @@ public class ZBGTMetaItem extends StandardMetaItem {
 
         QUANTUM_ANOMALY = addItem(165, "quantum_anomaly");
 
-        TRANSMISSION_CONTROL_COMPONENT_ULV = addItem(166, "transmission_control_component.ulv");
-        TRANSMISSION_CONTROL_COMPONENT_LV = addItem(167, "transmission_control_component.lv");
-        TRANSMISSION_CONTROL_COMPONENT_MV = addItem(168, "transmission_control_component.mv");
-        TRANSMISSION_CONTROL_COMPONENT_HV = addItem(169, "transmission_control_component.hv");
-        TRANSMISSION_CONTROL_COMPONENT_EV = addItem(170, "transmission_control_component.ev");
-        TRANSMISSION_CONTROL_COMPONENT_IV = addItem(171, "transmission_control_component.iv");
-        TRANSMISSION_CONTROL_COMPONENT_LuV = addItem(172, "transmission_control_component.luv");
-        TRANSMISSION_CONTROL_COMPONENT_ZPM = addItem(173, "transmission_control_component.zpm");
-        TRANSMISSION_CONTROL_COMPONENT_UV = addItem(174, "transmission_control_component.uv");
-        TRANSMISSION_CONTROL_COMPONENT_UHV = addItem(175, "transmission_control_component.uhv");
+        TRANSMISSION_COMPONENT_ULV = addItem(166, "transmission_component.ulv");
+        TRANSMISSION_COMPONENT_LV = addItem(167, "transmission_component.lv");
+        TRANSMISSION_COMPONENT_MV = addItem(168, "transmission_component.mv");
+        TRANSMISSION_COMPONENT_HV = addItem(169, "transmission_component.hv");
+        TRANSMISSION_COMPONENT_EV = addItem(170, "transmission_component.ev");
+        TRANSMISSION_COMPONENT_IV = addItem(171, "transmission_component.iv");
+        TRANSMISSION_COMPONENT_LuV = addItem(172, "transmission_component.luv");
+        TRANSMISSION_COMPONENT_ZPM = addItem(173, "transmission_component.zpm");
+        TRANSMISSION_COMPONENT_UV = addItem(174, "transmission_component.uv");
+        TRANSMISSION_COMPONENT_UHV = addItem(175, "transmission_component.uhv")
+                .setInvisibleIf(!GregTechAPI.isHighTier());
     }
 
     @Override

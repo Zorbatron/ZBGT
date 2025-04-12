@@ -198,16 +198,16 @@ public class ZBGTMetaItems {
 
     public static MetaItem<?>.MetaValueItem QUANTUM_ANOMALY;
 
-    public static MetaItem<?>.MetaValueItem TRANSMISSION_CONTROL_COMPONENT_ULV;
-    public static MetaItem<?>.MetaValueItem TRANSMISSION_CONTROL_COMPONENT_LV;
-    public static MetaItem<?>.MetaValueItem TRANSMISSION_CONTROL_COMPONENT_MV;
-    public static MetaItem<?>.MetaValueItem TRANSMISSION_CONTROL_COMPONENT_HV;
-    public static MetaItem<?>.MetaValueItem TRANSMISSION_CONTROL_COMPONENT_EV;
-    public static MetaItem<?>.MetaValueItem TRANSMISSION_CONTROL_COMPONENT_IV;
-    public static MetaItem<?>.MetaValueItem TRANSMISSION_CONTROL_COMPONENT_LuV;
-    public static MetaItem<?>.MetaValueItem TRANSMISSION_CONTROL_COMPONENT_ZPM;
-    public static MetaItem<?>.MetaValueItem TRANSMISSION_CONTROL_COMPONENT_UV;
-    public static MetaItem<?>.MetaValueItem TRANSMISSION_CONTROL_COMPONENT_UHV;
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_ULV;
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_LV;
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_MV;
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_HV;
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_EV;
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_IV;
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_LuV;
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_ZPM;
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_UV;
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_UHV;
 
     public static void init() {
         ZBGTMetaItem item = new ZBGTMetaItem();

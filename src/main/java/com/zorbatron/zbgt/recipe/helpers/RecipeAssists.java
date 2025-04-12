@@ -23,7 +23,7 @@ import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.MetaBlocks;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "DuplicatedCode" })
 public class RecipeAssists {
 
     public static int getCWUt(int tier) {
@@ -476,8 +476,22 @@ public class RecipeAssists {
             case (UIV)  -> DROPPER_COVER_UIV;
             case (UXV)  -> DROPPER_COVER_UXV;
             case (OpV)  -> DROPPER_COVER_OpV;
-            case (MAX)  -> WRAPPED_CIRCUIT_MAX;
             default     -> DROPPER_COVER_LV;
+        };
+    }
+
+    public static MetaItem<?>.MetaValueItem getTransmissionComponentByTier(int tier) {
+        return switch (tier) {
+            case (LV)   -> TRANSMISSION_COMPONENT_LV;
+            case (MV)   -> TRANSMISSION_COMPONENT_MV;
+            case (HV)   -> TRANSMISSION_COMPONENT_HV;
+            case (EV)   -> TRANSMISSION_COMPONENT_EV;
+            case (IV)   -> TRANSMISSION_COMPONENT_IV;
+            case (LuV)  -> TRANSMISSION_COMPONENT_LuV;
+            case (ZPM)  -> TRANSMISSION_COMPONENT_ZPM;
+            case (UV)   -> TRANSMISSION_COMPONENT_UV;
+            case (UHV)   -> TRANSMISSION_COMPONENT_UHV;
+            default     -> TRANSMISSION_COMPONENT_ULV;
         };
     }
 

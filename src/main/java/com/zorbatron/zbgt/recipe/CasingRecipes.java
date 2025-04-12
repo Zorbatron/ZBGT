@@ -385,7 +385,7 @@ public class CasingRecipes {
                 .fluidInputs(Nitinol60.getFluid(L * 8))
                 .fluidInputs(Tumbaga.getFluid(L * 64))
                 .fluidInputs(Nichrome.getFluid(L * 16))
-                .scannerResearch(ZBGTMetaItems.TRANSMISSION_CONTROL_COMPONENT_LuV.getStackForm())
+                .scannerResearch(getTransmissionComponentByTier(ZPM).getStackForm())
                 .outputs(casing)
                 .EUt(VA[LuV]).duration(20 * 15 * 32)
                 .buildAndRegister();

@@ -3,7 +3,7 @@ package com.zorbatron.zbgt.recipe;
 import static com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
 import static com.zorbatron.zbgt.api.unification.material.ZBGTMaterials.*;
 import static com.zorbatron.zbgt.common.items.ZBGTMetaItems.*;
-import static com.zorbatron.zbgt.recipe.helpers.RecipeAssists.getMaterialsWithWireVoltage;
+import static com.zorbatron.zbgt.recipe.helpers.RecipeAssists.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -14,6 +14,7 @@ import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
 
+import gregtech.api.GregTechAPI;
 import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.builders.AssemblerRecipeBuilder;
@@ -404,6 +405,15 @@ public class MiscRecipes {
                     .notConsumable(craftingLens, MarkerMaterials.Color.Lime)
                     .output(COIL_WIRE_ZPM)
                     .EUt(VA[LuV]).duration(20 * 10)
+                    .buildAndRegister();
+        }
+
+        for (int tier = LV; tier < (GregTechAPI.isHighTier() ? UHV : UV); tier++) {
+            LASER_ENGRAVER_RECIPES.recipeBuilder()
+                    .input(getEmitterByTier(tier), 2)
+                    .input(getSensorByTier(tier), 2)
+                    .output(getTransmissionComponentByTier(tier))
+                    .EUt(VA[tier]).duration(20 * 5)
                     .buildAndRegister();
         }
     }
