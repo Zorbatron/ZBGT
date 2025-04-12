@@ -3,6 +3,7 @@ package com.zorbatron.zbgt.api.unification.material.materials;
 import static com.zorbatron.zbgt.api.unification.material.ZBGTMaterials.*;
 import static com.zorbatron.zbgt.api.util.ZBGTUtility.combineRGB;
 import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
+import static gregtech.api.unification.material.info.MaterialFlags.*;
 
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.unification.material.Material;
@@ -31,6 +32,7 @@ public final class ZBGTUnknownCompositionMaterials {
         ChronomaticGlass = new Material.Builder(id++, zbgtId("chronomatic_glass"))
                 .dust().ingot().liquid(new FluidBuilder().temperature(9200))
                 .color(combineRGB(255, 255, 255)).iconSet(MaterialIconSet.METALLIC)
+                .flags(GENERATE_PLATE, GENERATE_BOLT_SCREW)
                 .build();
         ChronomaticGlass.setFormula("⌘☯☯⌘ ", false);
     }
