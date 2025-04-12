@@ -36,6 +36,7 @@ import com.zorbatron.zbgt.common.block.blocks.PreciseCasing;
 import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 
 import gregtech.api.GTValues;
+import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -283,11 +284,9 @@ public class MTEPreciseAssembler extends LaserCapableMultiMapMultiblockControlle
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
 
-        tooltip.add(I18n.format("zbgt.machine.precise_assembler.tooltip.1"));
-        tooltip.add(I18n.format("zbgt.machine.precise_assembler.tooltip.2"));
-        tooltip.add(I18n.format("zbgt.machine.precise_assembler.tooltip.3"));
-        tooltip.add(I18n.format("zbgt.machine.precise_assembler.tooltip.4"));
-        tooltip.add(I18n.format("zbgt.machine.precise_assembler.tooltip.5"));
+        for (int i = 1; i <= 6; i++) {
+            tooltip.add(I18n.format(String.format("zbgt.machine.precise_assembler.tooltip.%d", i)));
+        }
     }
 
     protected class PreciseAssemblerRecipeLogic extends MultiblockRecipeLogic {
@@ -299,7 +298,7 @@ public class MTEPreciseAssembler extends LaserCapableMultiMapMultiblockControlle
         @Override
         public long getMaxVoltage() {
             int casingTier = getMachineCasingTier() == -1 ? GTValues.ULV : getMachineCasingTier();
-            long maxVoltage = super.getMaxVoltage();
+            long maxVoltage = ((EnergyContainerList) getEnergyContainer()).getHighestInputVoltage();
 
             return casingTier >= GTValues.UHV ? maxVoltage : Math.min(maxVoltage, GTValues.V[casingTier]);
         }

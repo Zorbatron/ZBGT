@@ -328,11 +328,12 @@ zbgt.machine.mega_abs.name=Mega Alloy Blast Smelter
 zbgt.machine.mega_abs.tooltip=Mix and melt everything!
 
 zbgt.machine.precise_assembler.name=Precise Assembler
-zbgt.machine.precise_assembler.tooltip.1=Recipe voltage limited to the tier of the machine casings.
-zbgt.machine.precise_assembler.tooltip.2=UHV machine casings remove the above limit.
-zbgt.machine.precise_assembler.tooltip.3=Gains a 100%% speed boost in the normal assembler mode.
-zbgt.machine.precise_assembler.tooltip.4=Gains parallels based on the precise casing tier.
-zbgt.machine.precise_assembler.tooltip.5=Parallels = 16 * 2^(casing tier), with imprecise casings being tier 0.
+zbgt.machine.precise_assembler.tooltip.1=Can have multiple energy hatches but §4cannot§r tier skip§7!
+zbgt.machine.precise_assembler.tooltip.2=Recipe voltage limited to the tier of the machine casings.
+zbgt.machine.precise_assembler.tooltip.3=UHV machine casings remove the above limit.
+zbgt.machine.precise_assembler.tooltip.4=Gains a 100%% speed boost in the normal assembler mode.
+zbgt.machine.precise_assembler.tooltip.5=Gains parallels based on the precise casing tier.
+zbgt.machine.precise_assembler.tooltip.6=Parallels = 16 * 2^(casing tier), with imprecise casings being tier 0.
 zbgt.machine.precise_assembler.precise_casing.tier=Casing tier: %s
 zbgt.machine.precise_assembler.precise_casing.tier.hover=Highest precise tier recipe that can be run
 zbgt.machine.precise_assembler.machine_casing.tier=Machine casing tier: %s
