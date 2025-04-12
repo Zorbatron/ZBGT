@@ -22,6 +22,11 @@
         "textures": {
           "all": "gregtech:blocks/casings/gtpp/particle_containment_casing"
         }
+      },
+      "quantum_glass": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/qft/quantum_glass"
+        }
       }
     }
   }

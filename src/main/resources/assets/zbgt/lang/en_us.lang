@@ -618,6 +618,7 @@ tile.gtpp_casing_5.rugged_botmium_machine_casing.name=Rugged Botmium Machine Cas
 tile.transparent_block.force_field_glass.name=Force Field Glass
 tile.transparent_block.containment_casing.name=Containment Casing
 tile.transparent_block.particle_containment_casing.name=Particle Containment Casing
+tile.transparent_block.quantum_glass.name=Quantum Glass
 
 
 # Misc

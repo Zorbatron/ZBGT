@@ -36,7 +36,7 @@ public class TransparentBlock extends VariantBlock<TransparentBlock.CasingType> 
 
     @Override
     public @NotNull BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
+        return BlockRenderLayer.TRANSLUCENT;
     }
 
     @SuppressWarnings("deprecation")
