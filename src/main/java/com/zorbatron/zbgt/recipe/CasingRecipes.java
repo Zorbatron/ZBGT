@@ -819,7 +819,7 @@ public class CasingRecipes {
         casing = ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.TEMPERED_ARC_FURNACE_CASING);
         casingBuilder(casing, VA[IV], 20 * 30)
                 .inputs(ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.MULTI_USE_CASING))
-                // TODO: Transmission control thingy MV
+                .input(ZBGTMetaItems.TRANSMISSION_COMPONENT_HV)
                 .input(getPistonByTier(EV), 2)
                 .input(plate, Inconel625, 4)
                 .input(pipeSmallFluid, TungstenSteel)
@@ -973,6 +973,29 @@ public class CasingRecipes {
         //
         // casing = ZBGTMetaBlocks.GTPP_CASING_2
         // .getItemVariant(RandomGTPPCasings2.CasingType.INFINITY_INFUSED_SHIELDING_CORE, casingsPerCraft);
+
+        // casing = ZBGTMetaBlocks.GTPP_CASING_3
+        // .getItemVariant(RandomGTPPCasings3.CasingType.SPACETIME_BENDING_CORE, casingsPerCraft);
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_3.getItemVariant(RandomGTPPCasings3.CasingType.TURBINE_SHAFT, casingsPerCraft);
+        ModHandler.addShapedRecipe("turbine_shaft", casing,
+                "PMP",
+                "CGC",
+                "PMP",
+                'P', doublePlate(IncoloyDS),
+                'M', getMotorByTier(HV).getStackForm(),
+                'C', MetaItems.FLUID_CELL.getStackForm(),
+                'G', MetaBlocks.TURBINE_CASING.getItemVariant(BlockTurbineCasing.TurbineCasingType.TITANIUM_GEARBOX));
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_3.getItemVariant(RandomGTPPCasings3.CasingType.REINFORCED_STEAM_TURBINE_CASING, casingsPerCraft);
+
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_3.getItemVariant(RandomGTPPCasings3.CasingType.REINFORCED_HP_STEAM_TURBINE_CASING, casingsPerCraft);
+
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_3.getItemVariant(RandomGTPPCasings3.CasingType.REINFORCED_SC_STEAM_TURBINE_CASING, casingsPerCraft);
+
+
     }
 
     private static AssemblerRecipeBuilder casingBuilder(ItemStack casing, int eut, int duration) {
@@ -987,6 +1010,10 @@ public class CasingRecipes {
 
     private static UnificationEntry plate(@NotNull Material material) {
         return new UnificationEntry(plate, material);
+    }
+
+    private static UnificationEntry doublePlate(@NotNull Material material) {
+        return new UnificationEntry(plateDouble, material);
     }
 
     private static UnificationEntry rod(@NotNull Material material) {
