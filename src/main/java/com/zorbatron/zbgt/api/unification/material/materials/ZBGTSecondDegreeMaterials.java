@@ -1,6 +1,7 @@
 package com.zorbatron.zbgt.api.unification.material.materials;
 
 import static com.zorbatron.zbgt.api.unification.material.ZBGTMaterials.*;
+import static com.zorbatron.zbgt.api.util.ZBGTUtility.combineRGB;
 import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -105,7 +106,7 @@ public final class ZBGTSecondDegreeMaterials {
         EglinSteel = new Material.Builder(id++, zbgtId("eglin_steel"))
                 .ingot().liquid(new FluidBuilder().temperature(1320))
                 .color(0x8b4513).iconSet(METALLIC)
-                .flags(DECOMPOSITION_BY_CENTRIFUGING)
+                .flags(DECOMPOSITION_BY_CENTRIFUGING, GENERATE_FRAME, GENERATE_LONG_ROD, GENERATE_PLATE)
                 .flags(EXT_METAL)
                 .components(EglinSteelBase, 10, Sulfur, 1, Silicon, 4, Carbon, 1)
                 .build();
@@ -120,5 +121,25 @@ public final class ZBGTSecondDegreeMaterials {
         } else {
             id++;
         }
+
+        Tantalloy61 = new Material.Builder(id++, zbgtId("tantalloy_61"))
+                .ingot().liquid(new FluidBuilder().temperature(3030))
+                .color(combineRGB(193, 211, 217)).iconSet(METALLIC)
+                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_FRAME, DECOMPOSITION_BY_CENTRIFUGING, GENERATE_BOLT_SCREW)
+                .blast(b -> b
+                        .temp(3305, BlastProperty.GasTier.MID)
+                        .blastStats(VA[EV], 20 * 45 + 9))
+                .components(Tantalloy60, 1, Titanium, 6, Yttrium, 4)
+                .build();
+
+        TriniumNaquadahCarbonite = new Material.Builder(id++, zbgtId("trinium_naquadah_carbonite"))
+                .ingot().liquid(new FluidBuilder().temperature(6775))
+                .iconSet(METALLIC)
+                .flags(GENERATE_BOLT_SCREW)
+                .blast(b -> b
+                        .temp(6775, BlastProperty.GasTier.HIGHER)
+                        .blastStats(VA[LuV], 20 * 40 + 14))
+                .components(TriniumNaquadahAlloy, 9, Carbon, 1)
+                .build();
     }
 }

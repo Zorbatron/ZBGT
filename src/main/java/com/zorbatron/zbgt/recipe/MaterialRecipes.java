@@ -14,6 +14,7 @@ import net.minecraftforge.fluids.FluidStack;
 import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.util.ZBGTMods;
+import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 
 import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.recipes.RecipeBuilder;
@@ -29,6 +30,7 @@ public class MaterialRecipes {
         vacuumFreezer();
         alloyBlast();
         macerator();
+        engraver();
         chemBath();
         mixer();
         ebf();
@@ -91,6 +93,24 @@ public class MaterialRecipes {
                 .blastFurnaceTemp(5475)
                 .EUt(VA[IV]),
                 20 * 40, BlastProperty.GasTier.MID, 5, 10);
+
+        blastHelper(ALLOY_BLAST_RECIPES.recipeBuilder()
+                .input(dust, Zirconium)
+                .input(dust, Carbon)
+                .fluidOutputs(ZirconiumCarbide.getFluid(L * 2))
+                .blastFurnaceTemp(1830)
+                .EUt(VA[LV]),
+                20 * 10, BlastProperty.GasTier.LOW, 2, 12);
+
+        blastHelper(ALLOY_BLAST_RECIPES.recipeBuilder()
+                .input(dust, Tin, 5)
+                .input(dust, Lead, 36)
+                .input(dust, Antimony, 8)
+                .input(dust, Arsenic, 1)
+                .fluidOutputs(BabbitAlloy.getFluid(L * 50))
+                .blastFurnaceTemp(540)
+                .EUt(VA[LV]),
+                20 * 50, BlastProperty.GasTier.LOW, 4, 14);
     }
 
     private static void macerator() {
@@ -303,7 +323,7 @@ public class MaterialRecipes {
                 .input(dust, Sulfur, 9)
                 .circuitMeta(2)
                 .fluidInputs(Hydrogen.getFluid(5000))
-                .output(dust, Grismium, 50)
+                .output(dust, Grisium, 50)
                 .EUt(VA[EV]).duration(20 * 60)
                 .buildAndRegister();
 
@@ -319,6 +339,78 @@ public class MaterialRecipes {
         ic2coolantBuilder.copy()
                 .fluidInputs(DistilledWater.getFluid(1000))
                 .fluidOutputs(LowGradeCoolant.getFluid(1000))
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Sodium, 2)
+                .input(dust, Silicon, 4)
+                .input(dust, Nickel)
+                .input(dust, Barium, 3)
+                .output(dust, WoodsGlass)
+                .EUt(VA[MV]).duration(127)
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Tantalum, 23)
+                .input(dust, Tungsten, 2)
+                .output(dust, Tantalloy60, 25)
+                .EUt(VA[HV]).duration(20 * 18 + 2)
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Tantalloy60)
+                .input(dust, Titanium, 6)
+                .input(dust, Yttrium, 4)
+                .output(dust, Tantalloy61, 11)
+                .EUt(VA[HV]).duration(20 * 10 + 10)
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Chrome)
+                .input(dust, Niobium, 2)
+                .input(dust, Molybdenum, 2)
+                .input(dust, Nichrome, 3)
+                .output(dust, Inconel690, 8)
+                .EUt(VA[HV]).duration(20 * 7 + 9)
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Niobium)
+                .input(dust, Carbon)
+                .output(dust, NiobiumCarbide)
+                .EUt(VA[HV]).duration(20 * 5 + 2)
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Chrome, 9)
+                .input(dust, Iron, 23)
+                .input(dust, Cobalt, 9)
+                .input(dust, Nickel, 9)
+                .output(dust, IncoloyDS, 50)
+                .EUt(VA[HV]).duration(20 * 34 + 7)
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Titanium)
+                .input(dust, Uranium238, 9)
+                .output(dust, Staballoy, 10)
+                .EUt(VA[HV]).duration(20 * 14 + 6)
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Cobalt, 4)
+                .input(dust, Chrome, 3)
+                .input(dust, Phosphorus, 2)
+                .input(dust, Molybdenum, 1)
+                .output(dust, Talonite, 10)
+                .EUt(VA[HV]).duration(20 * 14 + 13)
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Zirconium)
+                .input(dust, Carbon)
+                .output(dust, ZirconiumCarbide, 2)
+                .EUt(VA[LV]).duration(20 * 5 + 2)
                 .buildAndRegister();
     }
 
@@ -367,6 +459,15 @@ public class MaterialRecipes {
                 .input(dust, Alumina, 5)
                 .input(dust, Carbon, 3)
                 .circuitMeta(5)
+                .buildAndRegister();
+    }
+
+    private static void engraver() {
+        LASER_ENGRAVER_RECIPES.recipeBuilder()
+                .input(dust, Glass, 64)
+                .notConsumable(ZBGTMetaItems.QUANTUM_ANOMALY)
+                .output(dust, ChronomaticGlass)
+                .EUt(VA[UHV]).duration(20 * 35)
                 .buildAndRegister();
     }
 
