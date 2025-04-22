@@ -12,7 +12,6 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
-import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.fluids.store.FluidStorageKeys;
@@ -132,7 +131,7 @@ public class MiscRecipes {
                 .input(MetaItems.TOOL_DATA_ORB, 4)
                 .input(MetaItems.COVER_SCREEN, 4)
                 .input(MetaTileEntities.HULL[IV])
-                .input(circuit, RecipeAssists.getMarkerMaterialByTier(ZPM))
+                .input(circuit, getMarkerMaterialByTier(ZPM))
                 .fluidInputs(Tantalum.getFluid(L * 16))
                 .output(GREGTECH_COMPUTER_CUBE)
                 .EUt(VA[IV]).duration(20 * 180)
@@ -175,10 +174,10 @@ public class MiscRecipes {
     private static void genericCircuits() {
         for (int tier = ULV; tier <= MAX; tier++) {
             ASSEMBLER_RECIPES.recipeBuilder()
-                    .input(circuit, RecipeAssists.getMarkerMaterialByTier(tier), 16)
+                    .input(circuit, getMarkerMaterialByTier(tier), 1)
                     .circuitMeta(29)
-                    .output(RecipeAssists.getGenericCircuitByTier(tier), 16)
-                    .EUt(8).duration(20)
+                    .output(getGenericCircuitByTier(tier), 1)
+                    .EUt(1).duration(1)
                     .buildAndRegister();
         }
     }
