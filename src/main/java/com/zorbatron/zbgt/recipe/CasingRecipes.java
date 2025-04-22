@@ -977,7 +977,8 @@ public class CasingRecipes {
         // casing = ZBGTMetaBlocks.GTPP_CASING_3
         // .getItemVariant(RandomGTPPCasings3.CasingType.SPACETIME_BENDING_CORE, casingsPerCraft);
 
-        casing = ZBGTMetaBlocks.GTPP_CASING_3.getItemVariant(RandomGTPPCasings3.CasingType.TURBINE_SHAFT, casingsPerCraft);
+        casing = ZBGTMetaBlocks.GTPP_CASING_3.getItemVariant(RandomGTPPCasings3.CasingType.TURBINE_SHAFT,
+                casingsPerCraft);
         ModHandler.addShapedRecipe("turbine_shaft", casing,
                 "PMP",
                 "CGC",
@@ -987,15 +988,14 @@ public class CasingRecipes {
                 'C', MetaItems.FLUID_CELL.getStackForm(),
                 'G', MetaBlocks.TURBINE_CASING.getItemVariant(BlockTurbineCasing.TurbineCasingType.TITANIUM_GEARBOX));
 
-        casing = ZBGTMetaBlocks.GTPP_CASING_3.getItemVariant(RandomGTPPCasings3.CasingType.REINFORCED_STEAM_TURBINE_CASING, casingsPerCraft);
+        casing = ZBGTMetaBlocks.GTPP_CASING_3
+                .getItemVariant(RandomGTPPCasings3.CasingType.REINFORCED_STEAM_TURBINE_CASING, casingsPerCraft);
 
+        casing = ZBGTMetaBlocks.GTPP_CASING_3
+                .getItemVariant(RandomGTPPCasings3.CasingType.REINFORCED_HP_STEAM_TURBINE_CASING, casingsPerCraft);
 
-        casing = ZBGTMetaBlocks.GTPP_CASING_3.getItemVariant(RandomGTPPCasings3.CasingType.REINFORCED_HP_STEAM_TURBINE_CASING, casingsPerCraft);
-
-
-        casing = ZBGTMetaBlocks.GTPP_CASING_3.getItemVariant(RandomGTPPCasings3.CasingType.REINFORCED_SC_STEAM_TURBINE_CASING, casingsPerCraft);
-
-
+        casing = ZBGTMetaBlocks.GTPP_CASING_3
+                .getItemVariant(RandomGTPPCasings3.CasingType.REINFORCED_SC_STEAM_TURBINE_CASING, casingsPerCraft);
     }
 
     private static AssemblerRecipeBuilder casingBuilder(ItemStack casing, int eut, int duration) {
