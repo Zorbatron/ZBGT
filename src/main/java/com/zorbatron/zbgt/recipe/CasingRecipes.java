@@ -1218,6 +1218,34 @@ public class CasingRecipes {
                 .input(plate, Pikyonium64b, 4)
                 .input(circuit, getMarkerMaterialByTier(ZPM), 4)
                 .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_4.getItemVariant(RandomGTPPCasings4.CasingType.STRONG_BRONZE_MACHINE_CASING,
+                casingsPerCraft);
+        ModHandler.addShapedRecipe("strong_bronze_machine_casing", casing,
+                "PhP",
+                "PFP",
+                "PwP",
+                'P', plate(Bronze),
+                'F', frameBox(Bronze));
+        casingBuilder(casing)
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_4
+                .getItemVariant(RandomGTPPCasings4.CasingType.STURDY_ALUMINUM_MACHINE_CASING, casingsPerCraft);
+        ModHandler.addShapedRecipe("sturdy_aluminum_machine_casing", casing,
+                "PPP",
+                "hFw",
+                "PPP",
+                'P', plate(Aluminium),
+                'F', frameBox(Aluminium));
+        casingBuilder(casing)
+                .buildAndRegister();
+
+        // casing = ZBGTMetaBlocks.GTPP_CASING_4
+        // .getItemVariant(RandomGTPPCasings4.CasingType.VIGOROUS_LAURENIUM_MACHINE_CASING, casingsPerCraft);
+        //
+        // casing = ZBGTMetaBlocks.GTPP_CASING_4
+        // .getItemVariant(RandomGTPPCasings4.CasingType.RUGGED_BOTMIUM_MACHINE_CASING, casingsPerCraft);
     }
 
     private static AssemblerRecipeBuilder casingBuilder(ItemStack casing, int eut, int duration) {
