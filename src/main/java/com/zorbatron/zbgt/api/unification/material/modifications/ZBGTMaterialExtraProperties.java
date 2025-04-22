@@ -89,7 +89,7 @@ public final class ZBGTMaterialExtraProperties {
     }
 
     private static void dusts() {
-        Material[] materials = { Ytterbium };
+        Material[] materials = { Ytterbium, Zirconium };
 
         for (Material material : materials) {
             if (material.hasProperty(DUST)) continue;
