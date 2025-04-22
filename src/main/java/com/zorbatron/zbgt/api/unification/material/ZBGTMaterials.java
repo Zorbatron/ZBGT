@@ -43,7 +43,6 @@ public final class ZBGTMaterials {
     public static Material Staballoy;
     public static Material Talonite;
     public static Material Incoloy020;
-    public static Material HG1223;
     public static Material ZirconiumCarbide;
     public static Material MaragingSteel350;
     public static Material TriniumNaquadahAlloy;

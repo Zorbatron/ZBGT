@@ -764,7 +764,7 @@ public class CasingRecipes {
                 .input(bolt, Tantalloy61, 16)
                 .input(screw, Incoloy020, 32)
                 .input(MetaItems.FIELD_GENERATOR_EV)
-                .fluidInputs(HG1223.getFluid(L * 5))
+                .fluidInputs(MercuryBariumCalciumCuprate.getFluid(L * 5))
                 .buildAndRegister();
 
         casing = ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.CYCLOTRON_OUTER_CASING,

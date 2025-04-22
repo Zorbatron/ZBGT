@@ -35,6 +35,7 @@ public final class ZBGTMaterialExtraFlags {
         screwsBolts();
         frameBoxes();
         smallGears();
+        fineWire();
         longRods();
         rotors();
         plates();
@@ -79,6 +80,12 @@ public final class ZBGTMaterialExtraFlags {
         Material[] materials = { Platinum, Naquadria, HSSE };
 
         setFlags(materials, GENERATE_SMALL_GEAR);
+    }
+
+    private static void fineWire() {
+        Material[] materials = { MercuryBariumCalciumCuprate };
+
+        setFlags(materials, GENERATE_FINE_WIRE);
     }
 
     private static void longRods() {

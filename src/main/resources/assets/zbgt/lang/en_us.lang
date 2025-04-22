@@ -454,6 +454,7 @@ zbgt.machine.energy_infuser.tooltip.1=If UU matter is supplied, it also repairs 
 
 zbgt.machine.molecular_transformer.name=Molecular Transformer
 zbgt.machine.molecular_transformer.tooltip=Changes the structure of materials into new ones!
+recipemap.molecular_transformer.name=Molecular Transformer
 
 
 # Multiblock Casings
