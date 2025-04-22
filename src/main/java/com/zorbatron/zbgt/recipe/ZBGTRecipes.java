@@ -26,5 +26,6 @@ public class ZBGTRecipes {
         }
 
         SluiceJuice.init();
+        MolecularTransformer.init();
     }
 }
