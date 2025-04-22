@@ -1159,11 +1159,11 @@ public class CasingRecipes {
                 casingsPerCraft);
         ModHandler.addShapedRecipe("modulator_1", casing,
                 "CPC",
-                "PCP",
+                "PMP",
                 "CPC",
                 'C', circuit(EV),
                 'P', plate(IncoloyDS),
-                'C', MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.EV));
+                'M', MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.EV));
 
         casingBuilder(casing)
                 .inputs(MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.EV))
@@ -1175,11 +1175,11 @@ public class CasingRecipes {
                 casingsPerCraft);
         ModHandler.addShapedRecipe("modulator_2", casing,
                 "CPC",
-                "PCP",
+                "PMP",
                 "CPC",
                 'C', circuit(IV),
                 'P', plate(Inconel625),
-                'C', MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.IV));
+                'M', MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.IV));
 
         casingBuilder(casing)
                 .inputs(MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.IV))
@@ -1191,11 +1191,11 @@ public class CasingRecipes {
                 casingsPerCraft);
         ModHandler.addShapedRecipe("modulator_3", casing,
                 "CPC",
-                "PCP",
+                "PMP",
                 "CPC",
                 'C', circuit(LuV),
                 'P', plate(Zeron100),
-                'C', MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.LuV));
+                'M', MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.LuV));
 
         casingBuilder(casing)
                 .inputs(MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.LuV))
@@ -1207,11 +1207,11 @@ public class CasingRecipes {
                 casingsPerCraft);
         ModHandler.addShapedRecipe("modulator_4", casing,
                 "CPC",
-                "PCP",
+                "PMP",
                 "CPC",
                 'C', circuit(ZPM),
                 'P', plate(Pikyonium64b),
-                'C', MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.ZPM));
+                'M', MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.ZPM));
 
         casingBuilder(casing)
                 .inputs(MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.ZPM))
@@ -1228,6 +1228,9 @@ public class CasingRecipes {
                 'P', plate(Bronze),
                 'F', frameBox(Bronze));
         casingBuilder(casing)
+                .input(frameGt, Bronze)
+                .input(plate, Bronze, 6)
+                .circuitMeta(7)
                 .buildAndRegister();
 
         casing = ZBGTMetaBlocks.GTPP_CASING_4
@@ -1239,6 +1242,9 @@ public class CasingRecipes {
                 'P', plate(Aluminium),
                 'F', frameBox(Aluminium));
         casingBuilder(casing)
+                .input(frameGt, Aluminium)
+                .input(plate, Aluminium, 6)
+                .circuitMeta(7)
                 .buildAndRegister();
 
         // casing = ZBGTMetaBlocks.GTPP_CASING_4

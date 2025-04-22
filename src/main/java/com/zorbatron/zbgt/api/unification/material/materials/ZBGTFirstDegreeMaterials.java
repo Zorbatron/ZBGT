@@ -226,7 +226,7 @@ public final class ZBGTFirstDegreeMaterials {
         MaragingSteel250 = new Material.Builder(id++, zbgtId("maraging_steel_250"))
                 .ingot().liquid(new FluidBuilder().temperature(2685))
                 .color(0xA195D9)
-                .flags(DECOMPOSITION_BY_CENTRIFUGING)
+                .flags(DECOMPOSITION_BY_CENTRIFUGING, GENERATE_FRAME, GENERATE_BOLT_SCREW)
                 .flags(GENERATE_PLATE, GENERATE_GEAR)
                 .blast(b -> b
                         .temp(2685, BlastProperty.GasTier.MID)

@@ -44,7 +44,7 @@ public final class ZBGTMaterialExtraFlags {
     }
 
     private static void doublePlates() {
-        Material[] materials = { Invar, MaragingSteel300, HastelloyC276 };
+        Material[] materials = { Invar, MaragingSteel300, HastelloyC276, Zeron100, HSSG };
 
         setFlags(materials, GENERATE_DOUBLE_PLATE);
     }
