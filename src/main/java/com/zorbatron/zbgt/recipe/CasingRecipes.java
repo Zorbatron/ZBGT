@@ -909,10 +909,6 @@ public class CasingRecipes {
                 .input(pipeSmallFluid, TungstenSteel)
                 .buildAndRegister();
 
-        // casing =
-        // ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.QUANTUM_FORCE_TRANSFORMER_COIL_CASINGS,
-        // casingsPerCraft);
-
         casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.VACUUM_CASING);
         casingBuilder(casing, VA[LuV], 20 * 20)
                 .inputs(ZBGTMetaBlocks.GTPP_CASING_1.getItemVariant(RandomGTPPCasings1.CasingType.MULTI_USE_CASING))
@@ -1034,32 +1030,7 @@ public class CasingRecipes {
                 .input(plate, BabbitAlloy)
                 .buildAndRegister();
 
-        // casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.NEUTRON_PULSE_MANIPULATOR,
-        // casingsPerCraft);
-        //
-        // casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.COSMIC_FABRIC_MANIPULATOR,
-        // casingsPerCraft);
-        //
-        // casing =
-        // ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.INFINITY_INFUSED_MANIPULATOR,
-        // casingsPerCraft);
-        //
-        // casing =
-        // ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.SPACETIME_CONTINUUM_RIPPER,
-        // casingsPerCraft);
-        //
-        // casing = ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.NEUTRON_SHIELDING_CORE,
-        // casingsPerCraft);
-        //
-        // casing =
-        // ZBGTMetaBlocks.GTPP_CASING_2.getItemVariant(RandomGTPPCasings2.CasingType.COSMIC_FABRIC_SHIELDING_CORE,
-        // casingsPerCraft);
-        //
-        // casing = ZBGTMetaBlocks.GTPP_CASING_2
-        // .getItemVariant(RandomGTPPCasings2.CasingType.INFINITY_INFUSED_SHIELDING_CORE, casingsPerCraft);
 
-        // casing = ZBGTMetaBlocks.GTPP_CASING_3
-        // .getItemVariant(RandomGTPPCasings3.CasingType.SPACETIME_BENDING_CORE, casingsPerCraft);
     }
 
     private static AssemblerRecipeBuilder casingBuilder(ItemStack casing, int eut, int duration) {
