@@ -10,26 +10,27 @@ import com.zorbatron.zbgt.api.ZBGTAPI;
 
 import gregtech.api.block.VariantBlock;
 
-public class RandomGTPPCasings5 extends VariantBlock<RandomGTPPCasings5.CasingType> {
+public class LargeTurbineCasings extends VariantBlock<LargeTurbineCasings.CasingType> {
 
-    public RandomGTPPCasings5() {
+    public LargeTurbineCasings() {
         super(Material.IRON);
-        setTranslationKey("gtpp_casing_5");
+        setTranslationKey("large_turbine_casing");
         setHardness(5.0f);
         setResistance(10.0f);
         setSoundType(SoundType.METAL);
         setHarvestLevel("wrench", 2);
-        setDefaultState(getState(RandomGTPPCasings5.CasingType.values()[0]));
+        setDefaultState(getState(LargeTurbineCasings.CasingType.values()[0]));
         setCreativeTab(ZBGTAPI.TAB_ZBGT);
     }
 
     public enum CasingType implements IStringSerializable {
 
-        MODULATOR_4("modulator_4"),
-        STRONG_BRONZE_MACHINE_CASING("strong_bronze_machine_casing"),
-        STURDY_ALUMINUM_MACHINE_CASING("sturdy_aluminum_machine_casing"),
-        VIGOROUS_LAURENIUM_MACHINE_CASING("vigorous_laurenium_machine_casing"),
-        RUGGED_BOTMIUM_MACHINE_CASING("rugged_botmium_machine_casing");
+        TURBINE_SHAFT("turbine_shaft"),
+        REINFORCED_STEAM_TURBINE_CASING("reinforced_steam_turbine_casing"),
+        REINFORCED_HP_STEAM_TURBINE_CASING("reinforced_hp_steam_turbine_casing"),
+        REINFORCED_SC_STEAM_TURBINE_CASING("reinforced_sc_steam_turbine_casing"),
+        REINFORCED_GAS_TURBINE_CASING("reinforced_gas_turbine_casing"),
+        REINFORCED_PLASMA_TURBINE_CASING("reinforced_plasma_turbine_casing");
 
         private final String name;
 
@@ -39,7 +40,7 @@ public class RandomGTPPCasings5 extends VariantBlock<RandomGTPPCasings5.CasingTy
 
         @Override
         public @NotNull String getName() {
-            return this.name;
+            return name;
         }
     }
 }

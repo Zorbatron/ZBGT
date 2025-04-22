@@ -55,6 +55,7 @@ public class CasingRecipes {
         coALCasings();
         miscCasings();
         transparent();
+        turbines();
         gtpp();
     }
 
@@ -399,6 +400,89 @@ public class CasingRecipes {
                 .input(getFieldGeneratorByTier(EV), 2)
                 .input(circuit, getMarkerMaterialByTier(EV), 8)
                 .fluidInputs(Inconel625.getFluid(L * 4))
+                .buildAndRegister();
+    }
+
+    private static void turbines() {
+        ItemStack casing = ZBGTMetaBlocks.LARGE_TURBINE_CASINGS
+                .getItemVariant(LargeTurbineCasings.CasingType.TURBINE_SHAFT);
+        casingBuilder(casing, VA[HV], 20 * 5)
+                .input(plateDouble, IncoloyDS, 4)
+                .input(getMotorByTier(HV), 2)
+                .inputs(MetaBlocks.TURBINE_CASING.getItemVariant(BlockTurbineCasing.TurbineCasingType.TITANIUM_GEARBOX))
+                .fluidInputs(Lubricant.getFluid(2000))
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.LARGE_TURBINE_CASINGS
+                .getItemVariant(LargeTurbineCasings.CasingType.REINFORCED_STEAM_TURBINE_CASING);
+        casingBuilder(casing, VA[HV], 20 * 5)
+                .inputs(MetaBlocks.TURBINE_CASING
+                        .getItemVariant(BlockTurbineCasing.TurbineCasingType.STEEL_TURBINE_CASING))
+                .input(plate, Inconel625, 4)
+                .input(screw, Inconel625, 8)
+                .circuitMeta(18)
+                .fluidInputs(Aluminium.getFluid(L * 2))
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.LARGE_TURBINE_CASINGS
+                .getItemVariant(LargeTurbineCasings.CasingType.REINFORCED_HP_STEAM_TURBINE_CASING);
+        casingBuilder(casing, VA[EV], 20 * 5)
+                .inputs(MetaBlocks.TURBINE_CASING
+                        .getItemVariant(BlockTurbineCasing.TurbineCasingType.TITANIUM_TURBINE_CASING))
+                .input(plate, IncoloyDS, 4)
+                .input(screw, IncoloyDS, 8)
+                .fluidInputs(StainlessSteel.getFluid(L * 2))
+                .circuitMeta(18)
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.GTPP_CASING_4.getItemVariant(RandomGTPPCasings4.CasingType.SC_STEAM_TURBINE_CASING);
+        ModHandler.addShapedRecipe("sc_steam_turbine_casing", casing,
+                "PhP",
+                "GCG",
+                "PwP",
+                'P', plate(MAR_CE_M200),
+                'G', gear(MAR_CE_M200),
+                'C',
+                MetaBlocks.TURBINE_CASING.getItemVariant(BlockTurbineCasing.TurbineCasingType.TITANIUM_TURBINE_CASING));
+
+        casingBuilder(casing)
+                .input(gear, MAR_CE_M200, 2)
+                .input(plate, MAR_CE_M200, 4)
+                .inputs(MetaBlocks.TURBINE_CASING
+                        .getItemVariant(BlockTurbineCasing.TurbineCasingType.STEEL_TURBINE_CASING))
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.LARGE_TURBINE_CASINGS
+                .getItemVariant(LargeTurbineCasings.CasingType.REINFORCED_SC_STEAM_TURBINE_CASING);
+        casingBuilder(casing, VA[LuV], 20 * 5)
+                .inputs(ZBGTMetaBlocks.GTPP_CASING_4
+                        .getItemVariant(RandomGTPPCasings4.CasingType.SC_STEAM_TURBINE_CASING))
+                .input(plate, ZBGTAPI.nomiLabsCompat ? LabsMaterials.Lumium : Lumium, 4)
+                .input(screw, ZBGTAPI.nomiLabsCompat ? LabsMaterials.Lumium : Lumium, 8)
+                .fluidInputs(AdamantiumAlloy.getFluid(L * 2))
+                .circuitMeta(18)
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.LARGE_TURBINE_CASINGS
+                .getItemVariant(LargeTurbineCasings.CasingType.REINFORCED_GAS_TURBINE_CASING);
+        casingBuilder(casing, VA[IV], 20 * 5)
+                .inputs(MetaBlocks.TURBINE_CASING
+                        .getItemVariant(BlockTurbineCasing.TurbineCasingType.STAINLESS_TURBINE_CASING))
+                .input(plate, Inconel625, 4)
+                .input(screw, Inconel625, 8)
+                .fluidInputs(Titanium.getFluid(L * 2))
+                .circuitMeta(18)
+                .buildAndRegister();
+
+        casing = ZBGTMetaBlocks.LARGE_TURBINE_CASINGS
+                .getItemVariant(LargeTurbineCasings.CasingType.REINFORCED_PLASMA_TURBINE_CASING);
+        casingBuilder(casing, VA[LuV], 20 * 5)
+                .inputs(MetaBlocks.TURBINE_CASING
+                        .getItemVariant(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_TURBINE_CASING))
+                .input(plate, Zeron100, 4)
+                .input(screw, Zeron100, 8)
+                .fluidInputs(TungstenSteel.getFluid(L * 2))
+                .circuitMeta(18)
                 .buildAndRegister();
     }
 
@@ -904,8 +988,8 @@ public class CasingRecipes {
                 .fluidInputs(HastelloyN.getFluid(L * 8))
                 .fluidInputs(BabbitAlloy.getFluid(L * 16))
                 .scannerResearch(scanner -> scanner
-                        .researchStack(ZBGTMetaBlocks.GTPP_CASING_4
-                                .getItemVariant(RandomGTPPCasings4.CasingType.RESONANCE_CHAMBER_3))
+                        .researchStack(ZBGTMetaBlocks.GTPP_CASING_3
+                                .getItemVariant(RandomGTPPCasings3.CasingType.RESONANCE_CHAMBER_3))
                         .EUt(VA[LuV]).duration(20 * 45))
                 .outputs(casing)
                 .EUt(VA[LuV]).duration(20 * 75)
@@ -976,26 +1060,6 @@ public class CasingRecipes {
 
         // casing = ZBGTMetaBlocks.GTPP_CASING_3
         // .getItemVariant(RandomGTPPCasings3.CasingType.SPACETIME_BENDING_CORE, casingsPerCraft);
-
-        casing = ZBGTMetaBlocks.GTPP_CASING_3.getItemVariant(RandomGTPPCasings3.CasingType.TURBINE_SHAFT,
-                casingsPerCraft);
-        ModHandler.addShapedRecipe("turbine_shaft", casing,
-                "PMP",
-                "CGC",
-                "PMP",
-                'P', doublePlate(IncoloyDS),
-                'M', getMotorByTier(HV).getStackForm(),
-                'C', MetaItems.FLUID_CELL.getStackForm(),
-                'G', MetaBlocks.TURBINE_CASING.getItemVariant(BlockTurbineCasing.TurbineCasingType.TITANIUM_GEARBOX));
-
-        casing = ZBGTMetaBlocks.GTPP_CASING_3
-                .getItemVariant(RandomGTPPCasings3.CasingType.REINFORCED_STEAM_TURBINE_CASING, casingsPerCraft);
-
-        casing = ZBGTMetaBlocks.GTPP_CASING_3
-                .getItemVariant(RandomGTPPCasings3.CasingType.REINFORCED_HP_STEAM_TURBINE_CASING, casingsPerCraft);
-
-        casing = ZBGTMetaBlocks.GTPP_CASING_3
-                .getItemVariant(RandomGTPPCasings3.CasingType.REINFORCED_SC_STEAM_TURBINE_CASING, casingsPerCraft);
     }
 
     private static AssemblerRecipeBuilder casingBuilder(ItemStack casing, int eut, int duration) {

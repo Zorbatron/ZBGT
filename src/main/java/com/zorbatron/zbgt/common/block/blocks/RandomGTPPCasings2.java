@@ -33,14 +33,7 @@ public class RandomGTPPCasings2 extends VariantBlock<RandomGTPPCasings2.CasingTy
         ELEMENTAL_CONFINEMENT_SHELL("elemental_confinement_shell"),
         SPARGE_TOWER_EXTERIOR_CASING("sparge_tower_exterior_casing"),
         STURDY_PRINTER_CASING("sturdy_printer_casing"),
-        FORGE_CASING("forge_casing"),
-        NEUTRON_PULSE_MANIPULATOR("neutron_pulse_manipulator"),
-        COSMIC_FABRIC_MANIPULATOR("cosmic_fabric_manipulator"),
-        INFINITY_INFUSED_MANIPULATOR("infinity_infused_manipulator"),
-        SPACETIME_CONTINUUM_RIPPER("spacetime_continuum_ripper"),
-        NEUTRON_SHIELDING_CORE("neutron_shielding_core"),
-        COSMIC_FABRIC_SHIELDING_CORE("cosmic_fabric_shielding_core"),
-        INFINITY_INFUSED_SHIELDING_CORE("infinity_infused_shielding_core");
+        FORGE_CASING("forge_casing");
 
         private final String name;
 

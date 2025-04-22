@@ -5,87 +5,74 @@
   },
   "variants": {
     "variant": {
-      "spacetime_bending_core": {
+      "structural_solar_casing": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/qft/spacetime_bending_core"
+          "all": "gregtech:blocks/casings/gtpp/structural_solar_casing"
         }
       },
-      "force_field_glass": {
-        "model": "minecraft:cube_bottom_top",
+      "salt_containment_casing": {
         "textures": {
-          "top": "gregtech:blocks/casings/gtpp/qft/blank",
-          "side": "gregtech:blocks/casings/gtpp/qft/force_field_glass",
-          "bottom": "gregtech:blocks/casings/gtpp/qft/blank"
+          "all": "gregtech:blocks/casings/gtpp/salt_containment_casing"
         }
       },
-      "integral_encasement_1": {
+      "thermally_insulated_casing": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/integral_encasement_1"
+          "all": "gregtech:blocks/casings/gtpp/thermally_insulated_casing"
         }
       },
-      "integral_encasement_2": {
+      "flotation_cell_casings": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/integral_encasement_2"
+          "all": "gregtech:blocks/casings/gtpp/flotation_cell_casings"
         }
       },
-      "integral_encasement_3": {
+      "molecular_containment_casing": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/integral_encasement_3"
+          "all": "gregtech:blocks/casings/gtpp/molecular_containment_casing"
         }
       },
-      "integral_encasement_4": {
+      "high_voltage_current_capacitor": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/integral_encasement_4"
+          "all": "gregtech:blocks/casings/gtpp/high_voltage_current_capacitor"
         }
       },
-      "integral_encasement_5": {
+      "resonance_chamber_1": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/integral_encasement_5"
+          "all": "gregtech:blocks/casings/gtpp/resonance_chamber_1"
         }
       },
-      "integral_encasement_6": {
+      "resonance_chamber_2": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/integral_encasement_6"
+          "all": "gregtech:blocks/casings/gtpp/resonance_chamber_2"
         }
       },
-      "integral_encasement_7": {
+      "resonance_chamber_3": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/integral_encasement_7"
+          "all": "gregtech:blocks/casings/gtpp/resonance_chamber_3"
         }
       },
-      "integral_encasement_8": {
+      "resonance_chamber_4": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/integral_encasement_8"
+          "all": "gregtech:blocks/casings/gtpp/resonance_chamber_4"
         }
       },
-      "integral_encasement_9": {
+      "modulator_1": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/integral_encasement_9"
+          "all": "gregtech:blocks/casings/gtpp/modulator_1"
         }
       },
-      "integral_encasement_10": {
+      "modulator_2": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/integral_encasement_10"
+          "all": "gregtech:blocks/casings/gtpp/modulator_2"
         }
       },
-      "turbine_shaft": {
+      "modulator_3": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/turbine_shaft"
+          "all": "gregtech:blocks/casings/gtpp/modulator_3"
         }
       },
-      "reinforced_steam_turbine_casing": {
+      "modulator_4": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/reinforced_steam_turbine_casing"
-        }
-      },
-      "reinforced_hp_steam_turbine_casing": {
-        "textures": {
-          "all": "gregtech:blocks/casings/gtpp/reinforced_hp_steam_turbine_casing"
-        }
-      },
-      "reinforced_sc_steam_turbine_casing": {
-        "textures": {
-          "all": "gregtech:blocks/casings/gtpp/reinforced_sc_steam_turbine_casing"
+          "all": "gregtech:blocks/casings/gtpp/modulator_4"
         }
       }
     }

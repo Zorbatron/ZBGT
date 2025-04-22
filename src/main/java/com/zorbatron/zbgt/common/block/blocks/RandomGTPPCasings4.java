@@ -25,21 +25,11 @@ public class RandomGTPPCasings4 extends VariantBlock<RandomGTPPCasings4.CasingTy
 
     public enum CasingType implements IStringSerializable {
 
-        REINFORCED_GAS_TURBINE_CASING("reinforced_gas_turbine_casing"),
-        REINFORCED_PLASMA_TURBINE_CASING("reinforced_plasma_turbine_casing"),
-        STRUCTURAL_SOLAR_CASING("structural_solar_casing"),
-        SALT_CONTAINMENT_CASING("salt_containment_casing"),
-        THERMALLY_INSULATED_CASING("thermally_insulated_casing"),
-        FLOTATION_CELL_CASINGS("flotation_cell_casings"),
-        MOLECULAR_CONTAINMENT_CASING("molecular_containment_casing"),
-        HIGH_VOLTAGE_CURRENT_CAPACITOR("high_voltage_current_capacitor"),
-        RESONANCE_CHAMBER_1("resonance_chamber_1"),
-        RESONANCE_CHAMBER_2("resonance_chamber_2"),
-        RESONANCE_CHAMBER_3("resonance_chamber_3"),
-        RESONANCE_CHAMBER_4("resonance_chamber_4"),
-        MODULATOR_1("modulator_1"),
-        MODULATOR_2("modulator_2"),
-        MODULATOR_3("modulator_3");
+        STRONG_BRONZE_MACHINE_CASING("strong_bronze_machine_casing"),
+        STURDY_ALUMINUM_MACHINE_CASING("sturdy_aluminum_machine_casing"),
+        VIGOROUS_LAURENIUM_MACHINE_CASING("vigorous_laurenium_machine_casing"),
+        RUGGED_BOTMIUM_MACHINE_CASING("rugged_botmium_machine_casing"),
+        SC_STEAM_TURBINE_CASING("sc_steam_turbine_casing");
 
         private final String name;
 

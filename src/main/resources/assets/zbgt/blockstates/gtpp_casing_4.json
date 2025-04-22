@@ -5,79 +5,29 @@
   },
   "variants": {
     "variant": {
-      "reinforced_gas_turbine_casing": {
+      "strong_bronze_machine_casing": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/reinforced_gas_turbine_casing"
+          "all": "gregtech:blocks/casings/gtpp/strong_bronze_machine_casing"
         }
       },
-      "reinforced_plasma_turbine_casing": {
+      "sturdy_aluminum_machine_casing": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/reinforced_plasma_turbine_casing"
+          "all": "gregtech:blocks/casings/gtpp/sturdy_aluminum_machine_casing"
         }
       },
-      "structural_solar_casing": {
+      "vigorous_laurenium_machine_casing": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/structural_solar_casing"
+          "all": "gregtech:blocks/casings/gtpp/vigorous_laurenium_machine_casing"
         }
       },
-      "salt_containment_casing": {
+      "rugged_botmium_machine_casing": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/salt_containment_casing"
+          "all": "gregtech:blocks/casings/gtpp/rugged_botmium_machine_casing"
         }
       },
-      "thermally_insulated_casing": {
+      "sc_steam_turbine_casing": {
         "textures": {
-          "all": "gregtech:blocks/casings/gtpp/thermally_insulated_casing"
-        }
-      },
-      "flotation_cell_casings": {
-        "textures": {
-          "all": "gregtech:blocks/casings/gtpp/flotation_cell_casings"
-        }
-      },
-      "molecular_containment_casing": {
-        "textures": {
-          "all": "gregtech:blocks/casings/gtpp/molecular_containment_casing"
-        }
-      },
-      "high_voltage_current_capacitor": {
-        "textures": {
-          "all": "gregtech:blocks/casings/gtpp/high_voltage_current_capacitor"
-        }
-      },
-      "resonance_chamber_1": {
-        "textures": {
-          "all": "gregtech:blocks/casings/gtpp/resonance_chamber_1"
-        }
-      },
-      "resonance_chamber_2": {
-        "textures": {
-          "all": "gregtech:blocks/casings/gtpp/resonance_chamber_2"
-        }
-      },
-      "resonance_chamber_3": {
-        "textures": {
-          "all": "gregtech:blocks/casings/gtpp/resonance_chamber_3"
-        }
-      },
-      "resonance_chamber_4": {
-        "textures": {
-          "all": "gregtech:blocks/casings/gtpp/resonance_chamber_4"
-        }
-      },
-      "modulator_1": {
-        "textures": {
-          "all": "gregtech:blocks/casings/gtpp/modulator_1"
-        }
-      },
-      "modulator_2": {
-        "textures": {
-          "all": "gregtech:blocks/casings/gtpp/modulator_2"
-        }
-      },
-      "modulator_3": {
-        "textures": {
-          "all": "gregtech:blocks/casings/gtpp/modulator_3"
+          "all": "gregtech:blocks/casings/gtpp/reinforced_sc_steam_turbine_casing"
         }
       }
     }

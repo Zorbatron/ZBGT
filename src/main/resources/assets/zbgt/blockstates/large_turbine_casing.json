@@ -1,0 +1,40 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all"
+  },
+  "variants": {
+    "variant": {
+      "turbine_shaft": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/turbine_shaft"
+        }
+      },
+      "reinforced_steam_turbine_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/reinforced_steam_turbine_casing"
+        }
+      },
+      "reinforced_hp_steam_turbine_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/reinforced_hp_steam_turbine_casing"
+        }
+      },
+      "reinforced_sc_steam_turbine_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/reinforced_sc_steam_turbine_casing"
+        }
+      },
+      "reinforced_gas_turbine_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/reinforced_gas_turbine_casing"
+        }
+      },
+      "reinforced_plasma_turbine_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/reinforced_plasma_turbine_casing"
+        }
+      }
+    }
+  }
+}

@@ -70,7 +70,7 @@ public final class ZBGTMaterialExtraFlags {
 
     private static void frameBoxes() {
         Material[] materials = { NaquadahAlloy, RhodiumPlatedPalladium, Darmstadtium, WroughtIron, Duranium, Tumbaga,
-                Potin, Zeron100 };
+                Potin, Zeron100, Stellite100 };
 
         setFlags(materials, GENERATE_FRAME);
     }

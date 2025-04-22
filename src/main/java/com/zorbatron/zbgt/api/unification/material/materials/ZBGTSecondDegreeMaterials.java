@@ -27,7 +27,7 @@ public final class ZBGTSecondDegreeMaterials {
                 .color(0x383030).iconSet(MaterialIconSet.METALLIC)
                 .flags(DECOMPOSITION_BY_CENTRIFUGING)
                 .flags(GENERATE_PLATE, GENERATE_LONG_ROD, GCYMMaterialFlags.DISABLE_ALLOY_PROPERTY,
-                        GENERATE_DOUBLE_PLATE, GENERATE_BOLT_SCREW)
+                        GENERATE_DOUBLE_PLATE, GENERATE_BOLT_SCREW, GENERATE_GEAR)
                 .components(MAR_M200, 18, Cerium, 1)
                 .blast(5000, BlastProperty.GasTier.HIGH)
                 .build();
@@ -91,7 +91,7 @@ public final class ZBGTSecondDegreeMaterials {
             Lumium = new Material.Builder(id++, zbgtId("lumium"))
                     .ingot().liquid(new FluidBuilder().temperature(4000))
                     .color(0xf6ff99).iconSet(BRIGHT)
-                    .flags(DECOMPOSITION_BY_CENTRIFUGING)
+                    .flags(DECOMPOSITION_BY_CENTRIFUGING, GENERATE_PLATE, GENERATE_BOLT_SCREW)
                     .blast(builder -> builder
                             .temp(4000, BlastProperty.GasTier.MID)
                             .blastStats(VA[IV], 1600)

@@ -38,8 +38,7 @@ public class RandomGTPPCasings1 extends VariantBlock<RandomGTPPCasings1.CasingTy
         INCONEL_REINFORCED_CASING("inconel_reinforced_casing"),
         MULTI_USE_CASING("multi_use_casing"),
         SUPPLY_DEPOT_CASING("supply_depot_casing"),
-        TEMPERED_ARC_FURNACE_CASING("tempered_arc_furnace_casing"),
-        QUANTUM_FORCE_TRANSFORMER_COIL_CASINGS("quantum_force_transformer_coil_casings");
+        TEMPERED_ARC_FURNACE_CASING("tempered_arc_furnace_casing");
 
         private final String name;
 

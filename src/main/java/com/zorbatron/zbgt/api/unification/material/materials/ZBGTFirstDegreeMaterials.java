@@ -204,7 +204,7 @@ public final class ZBGTFirstDegreeMaterials {
         HastelloyN = new Material.Builder(id++, zbgtId("hastelloy_n"))
                 .ingot().liquid(new FluidBuilder().temperature(4625))
                 .color(0xD7CCE8)
-                .flags(DECOMPOSITION_BY_CENTRIFUGING)
+                .flags(DECOMPOSITION_BY_CENTRIFUGING, GENERATE_RING, GENERATE_BOLT_SCREW)
                 .flags(GENERATE_DOUBLE_PLATE)
                 .blast(b -> b
                         .temp(4625, BlastProperty.GasTier.MID)
@@ -302,7 +302,8 @@ public final class ZBGTFirstDegreeMaterials {
         IncoloyDS = new Material.Builder(id++, zbgtId("incoloy_ds"))
                 .ingot().liquid(new FluidBuilder().temperature(3700))
                 .color(combineRGB(155, 150, 197)).iconSet(METALLIC)
-                .flags(GENERATE_PLATE, GENERATE_GEAR, DECOMPOSITION_BY_CENTRIFUGING)
+                .flags(GENERATE_PLATE, GENERATE_GEAR, DECOMPOSITION_BY_CENTRIFUGING, GENERATE_DOUBLE_PLATE,
+                        GENERATE_BOLT_SCREW)
                 .blast(b -> b
                         .temp(3700, BlastProperty.GasTier.HIGH)
                         .blastStats(VA[HV], 20 * 37 + 10))
