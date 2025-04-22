@@ -111,7 +111,7 @@ public final class ZBGTMaterialExtraFlags {
     }
 
     private static void rings() {
-        Material[] materials = { IncoloyMA956 };
+        Material[] materials = { IncoloyMA956, Stellite100 };
 
         setFlags(materials, GENERATE_RING);
     }
