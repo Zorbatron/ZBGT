@@ -21,8 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
-import com.zorbatron.zbgt.api.capability.impl.HeatingCoilGCYMMultiblockRecipeLogic;
-import com.zorbatron.zbgt.api.metatileentity.LaserCapableGCYMRecipeMapMultiblockController;
+import com.zorbatron.zbgt.api.capability.impl.HeatingCoilMegaMultiblockRecipeLogic;
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.common.ZBGTConfig;
@@ -58,13 +57,13 @@ import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 
-public class MTEMegaABS extends LaserCapableGCYMRecipeMapMultiblockController implements IHeatingCoil {
+public class MTEMegaABS extends MTEMegaBase implements IHeatingCoil {
 
     private int temperature;
 
     public MTEMegaABS(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GCYMRecipeMaps.ALLOY_BLAST_RECIPES);
-        this.recipeMapWorkable = new HeatingCoilGCYMMultiblockRecipeLogic(this);
+        this.recipeMapWorkable = new HeatingCoilMegaMultiblockRecipeLogic(this);
     }
 
     @Override
@@ -90,8 +89,8 @@ public class MTEMegaABS extends LaserCapableGCYMRecipeMapMultiblockController im
                 // spotless:on
                 .where('S', selfPredicate())
                 .where('B', states(getCasingState())
-                        .or(TraceabilityPredicates.autoBusesAndHatches(getAvailableRecipeMaps()))
-                        .or(autoEnergyInputsMega()))
+                        .or(TraceabilityPredicates.autoBusesAndHatches(recipeMap))
+                        .or(autoEnergyInputs()))
                 .where('X', states(getCasingState()))
                 .where('V', states(getVentState()))
                 .where('G', states(getGlassState()))

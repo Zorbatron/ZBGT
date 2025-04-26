@@ -23,8 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
-import com.zorbatron.zbgt.api.capability.impl.HeatingCoilGCYMMultiblockRecipeLogic;
-import com.zorbatron.zbgt.api.metatileentity.LaserCapableGCYMRecipeMapMultiblockController;
+import com.zorbatron.zbgt.api.capability.impl.HeatingCoilMegaMultiblockRecipeLogic;
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.common.ZBGTConfig;
@@ -59,13 +58,13 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 
-public class MTEMegaEBF extends LaserCapableGCYMRecipeMapMultiblockController implements IHeatingCoil {
+public class MTEMegaEBF extends MTEMegaBase implements IHeatingCoil {
 
     private int blastFurnaceTemperature;
 
     public MTEMegaEBF(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.BLAST_RECIPES);
-        this.recipeMapWorkable = new HeatingCoilGCYMMultiblockRecipeLogic(this);
+        this.recipeMapWorkable = new HeatingCoilMegaMultiblockRecipeLogic(this);
     }
 
     @Override
@@ -94,9 +93,9 @@ public class MTEMegaEBF extends LaserCapableGCYMRecipeMapMultiblockController im
                 .aisle("XXXXXXXXXXXXXXX", "GGGGGGGGGGGGGGG", "GGGGGGGSGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "GGGGGGGGGGGGGGG", "XXXXXXXXXXXXXXX")
                 // spotless:on
                 .where('S', selfPredicate())
-                .where('X', states(getCasingState()).setMinGlobalLimited(420)
+                .where('X', states(getCasingState()).setMinGlobalLimited(400)
                         .or(autoAbilities(false, true, true, true, true, true, false))
-                        .or(autoEnergyInputsMega()))
+                        .or(autoEnergyInputs()))
                 .where('G', states(getGlassState()))
                 .where('C', heatingCoils())
                 .where(' ', air());
@@ -292,7 +291,8 @@ public class MTEMegaEBF extends LaserCapableGCYMRecipeMapMultiblockController im
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, @Nullable World player, @NotNull List<String> tooltip,
+                               boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));

@@ -4,16 +4,16 @@ import static gregtech.api.recipes.logic.OverclockingLogic.heatingCoilOverclocki
 
 import org.jetbrains.annotations.NotNull;
 
-import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
+import com.zorbatron.zbgt.common.metatileentities.multi.electric.mega.MTEMegaBase;
+
 import gregtech.api.capability.IHeatingCoil;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.recipes.logic.OverclockingLogic;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 
-public class HeatingCoilGCYMMultiblockRecipeLogic extends GCYMMultiblockRecipeLogic {
+public class HeatingCoilMegaMultiblockRecipeLogic extends MTEMegaBase.MegaRecipeLogic {
 
-    public HeatingCoilGCYMMultiblockRecipeLogic(RecipeMapMultiblockController metaTileEntity) {
+    public HeatingCoilMegaMultiblockRecipeLogic(MTEMegaBase metaTileEntity) {
         super(metaTileEntity);
 
         if (!(metaTileEntity instanceof IHeatingCoil)) {
@@ -22,7 +22,7 @@ public class HeatingCoilGCYMMultiblockRecipeLogic extends GCYMMultiblockRecipeLo
     }
 
     @Override
-    protected void modifyOverclockPre(@NotNull int[] values, @NotNull IRecipePropertyStorage storage) {
+    protected void modifyOverclockPre(int @NotNull [] values, @NotNull IRecipePropertyStorage storage) {
         super.modifyOverclockPre(values, storage);
         // coil EU/t discount
         values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0],

@@ -15,8 +15,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
-import com.zorbatron.zbgt.api.capability.impl.ZBGT_GCYMMultiblockRecipeLogic;
-import com.zorbatron.zbgt.api.metatileentity.LaserCapableGCYMRecipeMapMultiblockController;
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 
@@ -32,11 +30,10 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.*;
 
-public class MTEMegaLCR extends LaserCapableGCYMRecipeMapMultiblockController {
+public class MTEMegaLCR extends MTEMegaBase {
 
     public MTEMegaLCR(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.LARGE_CHEMICAL_RECIPES);
-        this.recipeMapWorkable = new ZBGT_GCYMMultiblockRecipeLogic(this, true);
+        super(metaTileEntityId, RecipeMaps.LARGE_CHEMICAL_RECIPES, true);
     }
 
     @Override
@@ -63,8 +60,8 @@ public class MTEMegaLCR extends LaserCapableGCYMRecipeMapMultiblockController {
                 .where('G', states(getGlassState()))
                 .where('F', states(getCoilState()))
                 .where('E', states(getCasingState())
-                        .or(autoEnergyInputsMega())
-                        .or(abilities(GCYMMultiblockAbility.PARALLEL_HATCH).setMaxGlobalLimited(1))
+                        .or(autoEnergyInputs())
+                        .or(abilities(GCYMMultiblockAbility.PARALLEL_HATCH).setMaxGlobalLimited(1, 1))
                         .or(maintenancePredicate()))
                 .where('H', states(getCasingState())
                         .or(TraceabilityPredicates.autoBusesAndHatches(getRecipeMap())))
@@ -95,7 +92,8 @@ public class MTEMegaLCR extends LaserCapableGCYMRecipeMapMultiblockController {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, @Nullable World player, @NotNull List<String> tooltip,
+                               boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc"));
     }

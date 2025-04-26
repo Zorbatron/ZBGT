@@ -9,7 +9,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
-import com.zorbatron.zbgt.api.metatileentity.LaserCapableGCYMRecipeMapMultiblockController;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -23,7 +22,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 
-public class MTEMegaVF extends LaserCapableGCYMRecipeMapMultiblockController {
+public class MTEMegaVF extends MTEMegaBase {
 
     public MTEMegaVF(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.VACUUM_RECIPES);
@@ -57,7 +56,7 @@ public class MTEMegaVF extends LaserCapableGCYMRecipeMapMultiblockController {
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState()).setMinGlobalLimited(800)
                         .or(autoAbilities(false, true, true, true, true, true, false))
-                        .or(autoEnergyInputsMega()))
+                        .or(autoEnergyInputs()))
                 .build();
     }
 

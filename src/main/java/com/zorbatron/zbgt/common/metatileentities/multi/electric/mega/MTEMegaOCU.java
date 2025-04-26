@@ -21,7 +21,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
-import com.zorbatron.zbgt.api.metatileentity.LaserCapableGCYMRecipeMapMultiblockController;
 import com.zorbatron.zbgt.api.pattern.TraceabilityPredicates;
 import com.zorbatron.zbgt.api.render.ZBGTTextures;
 import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
@@ -52,7 +51,7 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 
-public class MTEMegaOCU extends LaserCapableGCYMRecipeMapMultiblockController {
+public class MTEMegaOCU extends MTEMegaBase {
 
     private int coilTier;
 
@@ -88,7 +87,7 @@ public class MTEMegaOCU extends LaserCapableGCYMRecipeMapMultiblockController {
                 .where('O', abilities(MultiblockAbility.EXPORT_FLUIDS))
                 .where('E', states(getCasingState())
                         .or(autoAbilities(false, true, true, true, false, false, false))
-                        .or(autoEnergyInputsMega()))
+                        .or(autoEnergyInputs()))
                 .where('G', states(getGlassState()))
                 .where('#', air())
                 .build();
@@ -155,7 +154,8 @@ public class MTEMegaOCU extends LaserCapableGCYMRecipeMapMultiblockController {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, @Nullable World player, @NotNull List<String> tooltip,
+                               boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.cracker.tooltip.1"));
     }
