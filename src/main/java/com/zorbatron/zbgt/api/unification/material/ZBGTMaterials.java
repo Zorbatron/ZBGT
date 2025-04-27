@@ -28,17 +28,33 @@ public final class ZBGTMaterials {
     public static Material EglinSteelBase;
     public static Material Inconel792;
     public static Material SnowPowder;
-    public static Material Grismium;
+    public static Material Grisium;
     public static Material Nitinol60;
     public static Material HastelloyN;
     public static Material HastelloyW;
     public static Material MaragingSteel250;
+    public static Material WoodsGlass;
+    public static Material Tumbaga;
+    public static Material Tantalloy60;
+    public static Material Inconel625;
+    public static Material Inconel690;
+    public static Material NiobiumCarbide;
+    public static Material IncoloyDS;
+    public static Material Staballoy;
+    public static Material Talonite;
+    public static Material Incoloy020;
+    public static Material ZirconiumCarbide;
+    public static Material MaragingSteel350;
+    public static Material TriniumNaquadahAlloy;
+    public static Material BabbitAlloy;
 
     // Second degree materials
     public static Material MAR_CE_M200;
     public static Material HDCS;
     public static Material Dalisenite;
     public static Material EglinSteel;
+    public static Material Tantalloy61;
+    public static Material TriniumNaquadahCarbonite;
 
     // Third degree materials
     public static Material Hikarium;
@@ -65,6 +81,7 @@ public final class ZBGTMaterials {
     public static Material HotLowGradeCoolant;
     public static Material SluiceJuice;
     public static Material SluiceSand;
+    public static Material ChronomaticGlass;
 
     public static void init() {
         MetaItems.addOrePrefix(ZBGTOrePrefix.nanites);

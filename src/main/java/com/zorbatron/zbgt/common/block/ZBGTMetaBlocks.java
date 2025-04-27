@@ -30,6 +30,16 @@ public class ZBGTMetaBlocks {
     public static PreciseCasing PRECISE_CASING;
     public static YOTTankCell YOTTANK_CELL;
     public static MiscCasing MISC_CASING;
+    public static IntegralCasing INTEGRAL_CASING;
+    public static LargeTurbineCasings LARGE_TURBINE_CASINGS;
+    public static RandomGTPPCasings0 GTPP_CASING_0;
+    public static RandomGTPPCasings1 GTPP_CASING_1;
+    public static RandomGTPPCasings2 GTPP_CASING_2;
+    public static RandomGTPPCasings3 GTPP_CASING_3;
+    public static RandomGTPPCasings4 GTPP_CASING_4;
+    public static QFTCasings QFT_CASINGS;
+    public static TransparentBlock TRANSPARENT_BLOCK;
+
     public static CreativeHeatingCoil CREATIVE_HEATING_COIL;
 
     public static List<VariantBlock<?>> ALL_CASINGS = new ArrayList<>();
@@ -50,11 +60,35 @@ public class ZBGTMetaBlocks {
         MISC_CASING = new MiscCasing();
         MISC_CASING.setRegistryName("misc_casing");
 
+        INTEGRAL_CASING = new IntegralCasing();
+        INTEGRAL_CASING.setRegistryName("integral_casing");
+
+        LARGE_TURBINE_CASINGS = new LargeTurbineCasings();
+        LARGE_TURBINE_CASINGS.setRegistryName("large_turbine_casing");
+
+        GTPP_CASING_0 = new RandomGTPPCasings0();
+        GTPP_CASING_0.setRegistryName("gtpp_casing_0");
+        GTPP_CASING_1 = new RandomGTPPCasings1();
+        GTPP_CASING_1.setRegistryName("gtpp_casing_1");
+        GTPP_CASING_2 = new RandomGTPPCasings2();
+        GTPP_CASING_2.setRegistryName("gtpp_casing_2");
+        GTPP_CASING_3 = new RandomGTPPCasings3();
+        GTPP_CASING_3.setRegistryName("gtpp_casing_3");
+        GTPP_CASING_4 = new RandomGTPPCasings4();
+        GTPP_CASING_4.setRegistryName("gtpp_casing_4");
+
+        QFT_CASINGS = new QFTCasings();
+        QFT_CASINGS.setRegistryName("qft_casings");
+
+        TRANSPARENT_BLOCK = new TransparentBlock();
+        TRANSPARENT_BLOCK.setRegistryName("transparent_block");
+
         CREATIVE_HEATING_COIL = new CreativeHeatingCoil();
         CREATIVE_HEATING_COIL.setRegistryName("creative_heating_coil");
 
         ALL_CASINGS.addAll(Arrays.asList(MATERIAL_CASINGS, CoAL_CASING, PRECISE_CASING, YOTTANK_CELL, MISC_CASING,
-                CREATIVE_HEATING_COIL));
+                INTEGRAL_CASING, LARGE_TURBINE_CASINGS, GTPP_CASING_0, GTPP_CASING_1, GTPP_CASING_2, GTPP_CASING_3,
+                GTPP_CASING_4, QFT_CASINGS, TRANSPARENT_BLOCK, CREATIVE_HEATING_COIL));
     }
 
     @SideOnly(Side.CLIENT)

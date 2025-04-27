@@ -4,6 +4,7 @@ import static com.zorbatron.zbgt.common.items.ZBGTMetaItems.*;
 import static gregtech.api.GTValues.*;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
@@ -369,5 +370,48 @@ public class ZBGTMetaItem extends StandardMetaItem {
                             list.add(I18n.format("metaitem.local_name_filter_fluid.tooltip.1"));
                             list.add(I18n.format("metaitem.local_name_filter_fluid.tooltip.2"));
                         }));
+
+        WOODS_GLASS_LENS = addItem(150, "woods_glass_lens");
+
+        COIL_WIRE_EV = addItem(151, "coil_wire.ev");
+        COIL_WIRE_IV = addItem(152, "coil_wire.iv");
+        COIL_WIRE_LuV = addItem(153, "coil_wire.luv");
+        COIL_WIRE_ZPM = addItem(154, "coil_wire.zpm");
+
+        ENERGY_CORE_ULV = addItem(155, "energy_core.ulv");
+        ENERGY_CORE_LV = addItem(156, "energy_core.lv");
+        ENERGY_CORE_MV = addItem(157, "energy_core.mv");
+        ENERGY_CORE_HV = addItem(158, "energy_core.hv");
+        ENERGY_CORE_EV = addItem(159, "energy_core.ev");
+        ENERGY_CORE_IV = addItem(160, "energy_core.iv");
+        ENERGY_CORE_LuV = addItem(161, "energy_core.luv");
+        ENERGY_CORE_ZPM = addItem(162, "energy_core.zpm");
+        ENERGY_CORE_UV = addItem(163, "energy_core.uv");
+        ENERGY_CORE_UHV = addItem(164, "energy_core.uhv");
+
+        QUANTUM_ANOMALY = addItem(165, "quantum_anomaly");
+
+        TRANSMISSION_COMPONENT_ULV = addItem(166, "transmission_component.ulv");
+        TRANSMISSION_COMPONENT_LV = addItem(167, "transmission_component.lv");
+        TRANSMISSION_COMPONENT_MV = addItem(168, "transmission_component.mv");
+        TRANSMISSION_COMPONENT_HV = addItem(169, "transmission_component.hv");
+        TRANSMISSION_COMPONENT_EV = addItem(170, "transmission_component.ev");
+        TRANSMISSION_COMPONENT_IV = addItem(171, "transmission_component.iv");
+        TRANSMISSION_COMPONENT_LuV = addItem(172, "transmission_component.luv");
+        TRANSMISSION_COMPONENT_ZPM = addItem(173, "transmission_component.zpm");
+        TRANSMISSION_COMPONENT_UV = addItem(174, "transmission_component.uv");
+        TRANSMISSION_COMPONENT_UHV = addItem(175, "transmission_component.uhv")
+                .setInvisibleIf(!GregTechAPI.isHighTier());
+    }
+
+    @Override
+    protected int getColorForItemStack(ItemStack stack, int tintIndex) {
+        if (stack.getMetadata() == 164) {
+            // To make the UHV Energy Core look like it's flashing really fast without me having to make a long texture
+            return ZBGTUtility.combineRGB(ZBGTUtility.randInt(220, 250), ZBGTUtility.randInt(221, 251),
+                    ZBGTUtility.randInt(220, 250));
+        }
+
+        return super.getColorForItemStack(stack, tintIndex);
     }
 }

@@ -65,6 +65,8 @@ public class ZBGTMetaTileEntities {
 
     public static MTEEnergyInfuser ENERGY_INFUSER;
 
+    public static MTEMolecularTransformer MOLECULAR_TRANSFORMER;
+
     public static void init() {
         MachineItemBlock.addCreativeTab(ZBGTAPI.TAB_ZBGT);
 
@@ -195,5 +197,8 @@ public class ZBGTMetaTileEntities {
 
         ENERGY_INFUSER = registerMetaTileEntity(18074,
                 new MTEEnergyInfuser(zbgtId("energy_infuser")));
+
+        MOLECULAR_TRANSFORMER = registerMetaTileEntity(18075,
+                new MTEMolecularTransformer(zbgtId("molecular_transformer")));
     }
 }

@@ -3,8 +3,7 @@ package com.zorbatron.zbgt.recipe;
 import static com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
 import static com.zorbatron.zbgt.api.unification.material.ZBGTMaterials.*;
 import static com.zorbatron.zbgt.common.items.ZBGTMetaItems.*;
-import static com.zorbatron.zbgt.recipe.helpers.RecipeAssists.getGenericCircuitByTier;
-import static com.zorbatron.zbgt.recipe.helpers.RecipeAssists.getMarkerMaterialByTier;
+import static com.zorbatron.zbgt.recipe.helpers.RecipeAssists.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -14,11 +13,13 @@ import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 
+import gregtech.api.GregTechAPI;
 import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.builders.AssemblerRecipeBuilder;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.api.unification.material.MarkerMaterials;
+import gregtech.api.unification.material.Material;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 
@@ -134,6 +135,13 @@ public class MiscRecipes {
                 .fluidInputs(Tantalum.getFluid(L * 16))
                 .output(GREGTECH_COMPUTER_CUBE)
                 .EUt(VA[IV]).duration(20 * 180)
+                .buildAndRegister();
+
+        ALLOY_SMELTER_RECIPES.recipeBuilder()
+                .input(dust, WoodsGlass, 5)
+                .notConsumable(MetaItems.SHAPE_MOLD_BALL)
+                .output(WOODS_GLASS_LENS)
+                .EUt(VA[HV]).duration(596)
                 .buildAndRegister();
     }
 
@@ -329,6 +337,7 @@ public class MiscRecipes {
                 .buildAndRegister();
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private static void engraver() {
         LASER_ENGRAVER_RECIPES.recipeBuilder()
                 .notConsumable(craftingLens, MarkerMaterials.Color.White)
@@ -338,24 +347,73 @@ public class MiscRecipes {
                 .buildAndRegister();
 
         LASER_ENGRAVER_RECIPES.recipeBuilder()
-                .notConsumable(craftingLens, MarkerMaterials.Color.LightBlue)
                 .input(plate, Diamond, 4)
+                .notConsumable(craftingLens, MarkerMaterials.Color.LightBlue)
                 .output(ZBGTMetaItems.ENGRAVED_DIAMOND_CHIP)
                 .EUt(VA[IV]).duration(20 * 30)
                 .buildAndRegister();
 
         LASER_ENGRAVER_RECIPES.recipeBuilder()
-                .notConsumable(craftingLens, MarkerMaterials.Color.Red)
                 .input(MetaItems.ENERGIUM_CRYSTAL)
+                .notConsumable(craftingLens, MarkerMaterials.Color.Red)
                 .output(ZBGTMetaItems.ENGRAVED_ENERGY_CHIP)
                 .EUt(VA[IV]).duration(20 * 30)
                 .buildAndRegister();
 
         LASER_ENGRAVER_RECIPES.recipeBuilder()
-                .notConsumable(craftingLens, MarkerMaterials.Color.Pink)
                 .input(plate, ZBGTAPI.nomiLabsCompat ? LabsMaterials.Manyullyn : Manyullyn, 4)
+                .notConsumable(craftingLens, MarkerMaterials.Color.Pink)
                 .output(ZBGTMetaItems.ENGRAVED_MANYULLYN_CHIP)
                 .EUt(VA[IV]).duration(20 * 30)
                 .buildAndRegister();
+
+        // Coil Wire EV
+        for (Material material : getMaterialsWithWireVoltage(V[EV])) {
+            LASER_ENGRAVER_RECIPES.recipeBuilder()
+                    .input(wireGtDouble, material)
+                    .notConsumable(craftingLens, MarkerMaterials.Color.Lime)
+                    .output(COIL_WIRE_EV)
+                    .EUt(VA[HV]).duration(20 * 10)
+                    .buildAndRegister();
+        }
+
+        // Coil Wire IV
+        for (Material material : getMaterialsWithWireVoltage(V[IV])) {
+            LASER_ENGRAVER_RECIPES.recipeBuilder()
+                    .input(wireGtDouble, material)
+                    .notConsumable(craftingLens, MarkerMaterials.Color.Lime)
+                    .output(COIL_WIRE_IV)
+                    .EUt(VA[EV]).duration(20 * 10)
+                    .buildAndRegister();
+        }
+
+        // Coil Wire LuV
+        for (Material material : getMaterialsWithWireVoltage(V[LuV])) {
+            LASER_ENGRAVER_RECIPES.recipeBuilder()
+                    .input(wireGtDouble, material)
+                    .notConsumable(craftingLens, MarkerMaterials.Color.Lime)
+                    .output(COIL_WIRE_LuV)
+                    .EUt(VA[IV]).duration(20 * 10)
+                    .buildAndRegister();
+        }
+
+        // Coil Wire ZPM
+        for (Material material : getMaterialsWithWireVoltage(V[ZPM])) {
+            LASER_ENGRAVER_RECIPES.recipeBuilder()
+                    .input(wireGtDouble, material)
+                    .notConsumable(craftingLens, MarkerMaterials.Color.Lime)
+                    .output(COIL_WIRE_ZPM)
+                    .EUt(VA[LuV]).duration(20 * 10)
+                    .buildAndRegister();
+        }
+
+        for (int tier = LV; tier < (GregTechAPI.isHighTier() ? UHV : UV); tier++) {
+            LASER_ENGRAVER_RECIPES.recipeBuilder()
+                    .input(getEmitterByTier(tier), 2)
+                    .input(getSensorByTier(tier), 2)
+                    .output(getTransmissionComponentByTier(tier))
+                    .EUt(VA[tier]).duration(20 * 5)
+                    .buildAndRegister();
+        }
     }
 }

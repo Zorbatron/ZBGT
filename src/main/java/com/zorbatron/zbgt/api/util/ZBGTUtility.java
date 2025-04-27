@@ -20,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 import com.zorbatron.zbgt.ZBGTCore;
 
+import gregtech.api.GTValues;
 import gregtech.api.capability.FeCompat;
 import gregtech.api.capability.INotifiableHandler;
 import gregtech.api.capability.impl.GhostCircuitItemStackHandler;
@@ -160,5 +161,15 @@ public final class ZBGTUtility {
 
     public static int combineRGB(int r, int g, int b) {
         return (r << 16) | (g << 8) | b;
+    }
+
+    /**
+     * Generates a random but bounded int
+     * 
+     * @param min lower bound
+     * @param max upper bound
+     */
+    public static int randInt(final int min, final int max) {
+        return GTValues.RNG.nextInt((max - min) + 1) + min;
     }
 }

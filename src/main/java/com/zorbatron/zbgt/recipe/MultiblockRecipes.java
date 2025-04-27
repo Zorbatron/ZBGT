@@ -2,6 +2,7 @@ package com.zorbatron.zbgt.recipe;
 
 import static com.zorbatron.zbgt.api.unification.material.ZBGTMaterials.*;
 import static com.zorbatron.zbgt.recipe.helpers.RecipeAssists.*;
+import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
@@ -22,6 +23,9 @@ import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities;
 import gregtech.api.recipes.ModHandler;
+import gregtech.api.recipes.ingredients.nbtmatch.NBTCondition;
+import gregtech.api.recipes.ingredients.nbtmatch.NBTMatcher;
+import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.blocks.*;
 import gregtech.common.items.MetaItems;
@@ -310,7 +314,7 @@ public class MultiblockRecipes {
                 'C', new UnificationEntry(circuit, getMarkerMaterialByTier(LuV)),
                 'T', getPistonByTier(IV),
                 'Y', ZBGTMetaBlocks.MISC_CASING.getItemVariant(MiscCasing.CasingType.CRYOGENIC_CASING),
-                'P', new UnificationEntry(plateDouble, Grismium),
+                'P', new UnificationEntry(plateDouble, Grisium),
                 'B', ZBGTMetaItems.GREGTECH_COMPUTER_CUBE);
 
         ModHandler.addShapedRecipe("industrial_pbf",
@@ -335,6 +339,29 @@ public class MultiblockRecipes {
                         .EUt(VA[LuV]).duration(60 * 20))
                 .output(ZBGTMetaTileEntities.ENERGY_INFUSER)
                 .EUt(VA[ZPM]).duration(120 * 20)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(wireFine, MercuryBariumCalciumCuprate, 64)
+                .input(getMotorByTier(IV), 16)
+                .inputNBT(MetaItems.ENERGY_LAPOTRONIC_ORB, 16, NBTMatcher.ANY, NBTCondition.ANY)
+                .input(cableGtHex, Platinum, 16)
+                .input(wireGtHex, Nichrome, 32)
+                .input(frameGt, Zeron100, 4)
+                .input(plateDouble, ZirconiumCarbide, 32)
+                .input(plate, BabbitAlloy, 64)
+                .input(gear, Grisium, 8)
+                .input(circuit, getMarkerMaterialByTier(EV), 64)
+                .input(circuit, getMarkerMaterialByTier(IV), 32)
+                .input(circuit, getMarkerMaterialByTier(LuV), 16)
+                .input(ZBGTMetaItems.WOODS_GLASS_LENS)
+                .fluidInputs(Nitinol60.getFluid(L * 18))
+                .fluidInputs(IncoloyMA956.getFluid(L * 72))
+                .fluidInputs(Kanthal.getFluid(L * 4))
+                .scannerResearch(scanner -> scanner
+                        .researchStack(OreDictUnifier.get(wireFine, MercuryBariumCalciumCuprate)))
+                .output(ZBGTMetaTileEntities.MOLECULAR_TRANSFORMER)
+                .EUt(VA[LuV]).duration(20 * 85)
                 .buildAndRegister();
     }
 }

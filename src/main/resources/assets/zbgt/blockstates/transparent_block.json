@@ -1,0 +1,33 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all"
+  },
+  "variants": {
+    "variant": {
+      "force_field_glass": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "top": "gregtech:blocks/casings/gtpp/qft/blank",
+          "side": "gregtech:blocks/casings/gtpp/qft/force_field_glass",
+          "bottom": "gregtech:blocks/casings/gtpp/qft/blank"
+        }
+      },
+      "containment_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/containment_casing"
+        }
+      },
+      "particle_containment_casing": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/particle_containment_casing"
+        }
+      },
+      "quantum_glass": {
+        "textures": {
+          "all": "gregtech:blocks/casings/gtpp/qft/quantum_glass"
+        }
+      }
+    }
+  }
+}

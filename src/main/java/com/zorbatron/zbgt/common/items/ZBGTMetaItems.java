@@ -178,6 +178,37 @@ public class ZBGTMetaItems {
     public static MetaItem<?>.MetaValueItem REGNAME_FILTER_ITEM;
     public static MetaItem<?>.MetaValueItem REGNAME_FILTER_FLUID;
 
+    public static MetaItem<?>.MetaValueItem WOODS_GLASS_LENS;
+
+    public static MetaItem<?>.MetaValueItem COIL_WIRE_EV;
+    public static MetaItem<?>.MetaValueItem COIL_WIRE_IV;
+    public static MetaItem<?>.MetaValueItem COIL_WIRE_LuV;
+    public static MetaItem<?>.MetaValueItem COIL_WIRE_ZPM;
+
+    public static MetaItem<?>.MetaValueItem ENERGY_CORE_ULV;
+    public static MetaItem<?>.MetaValueItem ENERGY_CORE_LV;
+    public static MetaItem<?>.MetaValueItem ENERGY_CORE_MV;
+    public static MetaItem<?>.MetaValueItem ENERGY_CORE_HV;
+    public static MetaItem<?>.MetaValueItem ENERGY_CORE_EV;
+    public static MetaItem<?>.MetaValueItem ENERGY_CORE_IV;
+    public static MetaItem<?>.MetaValueItem ENERGY_CORE_LuV;
+    public static MetaItem<?>.MetaValueItem ENERGY_CORE_ZPM;
+    public static MetaItem<?>.MetaValueItem ENERGY_CORE_UV;
+    public static MetaItem<?>.MetaValueItem ENERGY_CORE_UHV;
+
+    public static MetaItem<?>.MetaValueItem QUANTUM_ANOMALY;
+
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_ULV;
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_LV;
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_MV;
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_HV;
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_EV;
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_IV;
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_LuV;
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_ZPM;
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_UV;
+    public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_UHV;
+
     public static void init() {
         ZBGTMetaItem item = new ZBGTMetaItem();
         item.setRegistryName("zbgt_meta_item");

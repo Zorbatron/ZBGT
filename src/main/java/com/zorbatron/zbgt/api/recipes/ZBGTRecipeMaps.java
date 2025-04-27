@@ -13,6 +13,7 @@ import gregtech.api.GTValues;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.api.unification.material.Materials;
 import gregtech.core.sound.GTSoundEvents;
 
@@ -37,6 +38,10 @@ public final class ZBGTRecipeMaps {
                                     .getFluid(Math.max(1, (GTValues.L / 2) * recipeBuilder.getSolderMultiplier())));
                         }
                     });
+
+    public static final RecipeMap<SimpleRecipeBuilder> MOLECULAR_TRANSFORMER = new RecipeMap<>("molecular_transformer",
+            1, 1, 0, 0, new SimpleRecipeBuilder(), false)
+                    .setSlotOverlay(false, false, false, GuiTextures.SCANNER_OVERLAY);
 
     public static void modifyMaps() {
         POLARIZER_RECIPES.setMaxFluidInputs(1);

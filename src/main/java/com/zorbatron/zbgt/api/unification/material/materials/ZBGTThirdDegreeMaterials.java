@@ -5,6 +5,7 @@ import static com.zorbatron.zbgt.api.util.ZBGTUtility.zbgtId;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.DECOMPOSITION_BY_CENTRIFUGING;
+import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_DOUBLE_PLATE;
 import static gregtech.api.unification.material.info.MaterialIconSet.*;
 
 import com.nomiceu.nomilabs.gregtech.material.registry.LabsMaterials;
@@ -48,7 +49,7 @@ public final class ZBGTThirdDegreeMaterials {
         Pikyonium64b = new Material.Builder(id++, zbgtId("pikyonium_64_b"))
                 .ingot().liquid(new FluidBuilder().temperature(7125))
                 .color(0x3467ba).iconSet(METALLIC)
-                .flags(DECOMPOSITION_BY_CENTRIFUGING)
+                .flags(DECOMPOSITION_BY_CENTRIFUGING, GENERATE_DOUBLE_PLATE)
                 .flags(EXT2_METAL)
                 .blast(b -> b
                         .temp(7125, BlastProperty.GasTier.HIGH)
