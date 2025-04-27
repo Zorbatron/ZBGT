@@ -638,7 +638,7 @@ zbgt.laser_enabled.1=Can use
 zbgt.laser_enabled.2= Laser Hatches
 zbgt.substation_enabled= and Substation Hatches
 zbgt.mega_parallel.1=Mega multiblocks are capable of processing recipes with 256 parallels!
-zbgt.mega_parallel.2=Adding a GCYM Parallel Hatch to the structure will multiply the 256 parallels by the square root of the hatch's parallels.
+zbgt.mega_parallel.2=Adding a GCYM Parallel Hatch to the structure will multiply the 256 parallels by the hatch's parallels.
 
 
 # Sound subtitles
