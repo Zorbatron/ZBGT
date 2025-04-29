@@ -224,3 +224,20 @@ zbgt.machine.creative_computation_provider.average=Ср. запрашиваем�
 zbgt.machine.creative_item_bus.data_stick.name=§oНастройки Творческого предметного люка
 zbgt.machine.single_item_input_bus.stack_size=§6Макс. размер стака: §f%,d
 zbgt.machine.super_input_bus.return_items.button.disabled=Нажмите, чтобы вернуть предметы к целевому блоку
+zbgt.machine.rf_input_hatch_ulv.name=RF Энергетический входной разъем (§8ULV§r)
+zbgt.machine.rf_input_hatch_ev.name=RF Энергетический входной разъем (§5EV§r)
+zbgt.machine.rf_input_hatch_hv.name=RF Энергетический входной разъем (§6HV§r)
+zbgt.machine.rf_input_hatch_zpm.name=RF Энергетический входной разъем (§fZPM§r)
+zbgt.machine.rf_input_hatch_uiv.name=RF Энергетический входной разъем (§2UIV§r)
+zbgt.machine.rf_output_hatch_lv.name=RF Энергетический выходной разъем (§7LV§r)
+zbgt.machine.rf_input_hatch_lv.name=RF Энергетический входной разъем (§7LV§r)
+zbgt.machine.rf_input_hatch_mv.name=RF Энергетический входной разъем (§bMV§r)
+zbgt.machine.rf_input_hatch_iv.name=RF Энергетический входной разъем (§1IV§r)
+zbgt.machine.rf_input_hatch_luv.name=RF Энергетический входной разъем (§dLuV§r)
+zbgt.machine.rf_input_hatch_uv.name=RF Энергетический входной разъем (§3UV§r)
+zbgt.machine.rf_input_hatch_uhv.name=RF Энергетический входной разъем (§4UHV§r)
+zbgt.machine.rf_input_hatch_uev.name=RF Энергетический входной разъем (§aUEV§r)
+zbgt.machine.rf_input_hatch_uxv.name=RF Энергетический входной разъем (§eUXV§r)
+zbgt.machine.rf_input_hatch_opv.name=RF Энергетический входной разъем (§9OpV§r)
+zbgt.machine.rf_output_hatch_ulv.name=RF Энергетический выходной разъем (§8ULV§r)
+zbgt.machine.rf_output_hatch_mv.name=RF Энергетический выходной разъем (§bMV§r)
