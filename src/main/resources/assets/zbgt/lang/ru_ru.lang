@@ -327,3 +327,6 @@ zbgt.machine.rf_hatch.all_side_access.on=Разъем имеет RF доступ
 zbgt.machine.rf_hatch.all_side_access.off=Разъем имеет RF доступ ТОЛЬКО с лицевой стороны
 zbgt.machine.rf_hatch.tooltip=Разрешено только на Подстанциях и Активных трансформаторах!
 zbgt.machine.sterile_cleaning_hatch.tooltip=Для автоматического обслуживания мультиблоков с чисткой, но стерильно!
+metaitem.gg_circuit_5.tooltip=§5Парадокс§r
+metaitem.gg_circuit_4.tooltip=§c56е простое число Мерсенна§r
+metaitem.gg_circuit_1.tooltip=§b93015 ТФлопс§r
