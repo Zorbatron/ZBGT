@@ -31,7 +31,7 @@ zbgt.machine.parallel_hatch.uev.name=Люк контроля параллеле�
 zbgt.machine.parallel_hatch.uiv.name=Люк контроля параллелей (§2UIV§r)
 zbgt.machine.parallel_hatch.uxv.name=Люк контроля параллелей (§eUXV§r)
 zbgt.machine.parallel_hatch.opv.name=Люк контроля параллелей (§9§lOpV§r)
-zbgt.machine.parallel_hatch.max.name=Люк контроля параллелей (§cMAX§r)
+zbgt.machine.parallel_hatch.max.name=Люк контроля параллелей (§c§lMAX§r)
 zbgt.machine.parallel_hatch.final.name=Последний люк контроля параллелей
 zbgt.machine.sterile_cleaning_hatch.name=Люк обслуживания автоматической стерилизации
 metaitem.cover.dual_cover.lv.name=Двойное улучшение (§7LV§r)
@@ -46,7 +46,7 @@ metaitem.cover.dual_cover.uhv.name=Двойное улучшение (§4UHV§r)
 metaitem.cover.dual_cover.uev.name=Двойное улучшение (§aUEV§r)
 metaitem.cover.dual_cover.uiv.name=Двойное улучшение (§2UIV§r)
 metaitem.cover.dual_cover.uxv.name=Двойное улучшение (§eUXV§r)
-metaitem.cover.dual_cover.opv.name=Двойное улучшение (§9OpV§r)
+metaitem.cover.dual_cover.opv.name=Двойное улучшение (§9§lOpV§r)
 metaitem.cover.precise_dual_cover.lv.name=Точное двойное улучшение (§7LV§r)
 metaitem.cover.precise_dual_cover.mv.name=Точное двойное улучшение (§bMV§r)
 metaitem.cover.precise_dual_cover.hv.name=Точное двойное улучшение (§6HV§r)
@@ -59,7 +59,7 @@ metaitem.cover.precise_dual_cover.uhv.name=Точное двойное улуч�
 metaitem.cover.precise_dual_cover.uev.name=Точное двойное улучшение (§aUEV§r)
 metaitem.cover.precise_dual_cover.uiv.name=Точное двойное улучшение (§2UIV§r)
 metaitem.cover.precise_dual_cover.uxv.name=Точное двойное улучшение (§eUXV§r)
-metaitem.cover.precise_dual_cover.opv.name=Точное двойное улучшение (§9OpV§r)
+metaitem.cover.precise_dual_cover.opv.name=Точное двойное улучшение (§9§lOpV§r)
 zbgt.material.indalloy_140=Индиевый сплав 140
 zbgt.material.inconel_792=Инконель-792
 zbgt.material.artherium_sn=Этерий
@@ -165,7 +165,7 @@ cover.cover_dropper.update_rate.3=Выбрасывает каждый тик
 metaitem.cover.dual_cover.tooltip=Передаёт §fПредметы§7 и §fЖидкости§7 с определенной скоростью как §fУлучшение механизма§7.
 metaitem.cover.cover_dropper.uv.name=Выбрасыватель (§3UV§r)
 cover.cover_dropper.tooltip=Может выбрасывать до §f%, d предметов/сек§7
-metaitem.cover.cover_dropper.opv.name=Выбрасыватель (§9OpV§r)
+metaitem.cover.cover_dropper.opv.name=Выбрасыватель (§9§lOpV§r)
 cover.dual_cover.mode_changer=Нажмите, чтобы переключить между настройками жидкостей и предметов
 cover.dual_cover.title=Настройки Двойного улучшения (%s)
 metaitem.cover.precise_dual_cover.tooltip=Ограничивает передачу §fПредметов§7 §fЖидкостей§7 заданным кол-вом как §fУлучшение машины§7.
@@ -238,7 +238,7 @@ zbgt.machine.rf_input_hatch_uv.name=RF Энергетический входно
 zbgt.machine.rf_input_hatch_uhv.name=RF Энергетический входной разъем (§4UHV§r)
 zbgt.machine.rf_input_hatch_uev.name=RF Энергетический входной разъем (§aUEV§r)
 zbgt.machine.rf_input_hatch_uxv.name=RF Энергетический входной разъем (§eUXV§r)
-zbgt.machine.rf_input_hatch_opv.name=RF Энергетический входной разъем (§9OpV§r)
+zbgt.machine.rf_input_hatch_opv.name=RF Энергетический входной разъем (§9§lOpV§r)
 zbgt.machine.rf_output_hatch_ulv.name=RF Энергетический выходной разъем (§8ULV§r)
 zbgt.machine.rf_output_hatch_mv.name=RF Энергетический выходной разъем (§bMV§r)
 metaitem.coolant_cell.10k.name=10К ячейка
@@ -261,7 +261,7 @@ zbgt.machine.rf_output_hatch_zpm.name=RF Энергетический выход
 zbgt.machine.rf_output_hatch_uv.name=RF Энергетический выходной разъем (§3UV§r)
 zbgt.machine.rf_output_hatch_uev.name=RF Энергетический выходной разъем (§aUEV§r)
 zbgt.machine.rf_output_hatch_uiv.name=RF Энергетический выходной разъем (§2UIV§r)
-zbgt.machine.rf_output_hatch_opv.name=RF Энергетический выходной разъем (§9OpV§r)
+zbgt.machine.rf_output_hatch_opv.name=RF Энергетический выходной разъем (§9§lOpV§r)
 metaitem.gg_circuit_3.name=Высоковычислительная станция модель 3
 metaitem.gg_circuit_5.name=Высоковычислительная станция модель 5 Финал
 metaitem.special_ceramics_plate.name=Специальная керамическая пластина
@@ -330,3 +330,55 @@ zbgt.machine.sterile_cleaning_hatch.tooltip=Для автоматическог�
 metaitem.gg_circuit_5.tooltip=§5Парадокс§r
 metaitem.gg_circuit_4.tooltip=§c56е простое число Мерсенна§r
 metaitem.gg_circuit_1.tooltip=§b93015 ТФлопс§r
+metaitem.coil_wire.luv.name=Провод катушки [§dLuV§r]
+metaitem.coil_wire.zpm.name=Провод катушки [§cZPM§r]
+metaitem.energy_core.ulv.name=Энергетическое ядро [§8ULV§r]
+metaitem.energy_core.lv.name=Энергетическое ядро [§7LV§r]
+metaitem.energy_core.hv.name=Энергетическое ядро [§6HV§r]
+metaitem.energy_core.ev.name=Энергетическое ядро [§5EV§r]
+metaitem.energy_core.iv.name=Энергетическое ядро [§1IV§r]
+metaitem.energy_core.zpm.name=Энергетическое ядро [§cZPM§r]
+metaitem.energy_core.uv.name=Энергетическое ядро [§3UV§r]
+metaitem.quantum_anomaly.name=Квантовая аномалия
+metaitem.transmission_component.ulv.name=Компонент передачи [§8ULV§r]
+metaitem.transmission_component.lv.name=Компонент передачи [§7LV§r]
+metaitem.transmission_component.hv.name=Компонент передачи [§6HV§r]
+metaitem.transmission_component.ev.name=Компонент передачи [§5EV§r]
+metaitem.transmission_component.iv.name=Компонент передачи [§1IV§r]
+metaitem.transmission_component.luv.name=Компонент передачи [§dLuV§r]
+metaitem.transmission_component.uv.name=Компонент передачи [§3UV§r]
+metaitem.transmission_component.uhv.name=Компонент передачи [§4UHV§r]
+tile.multiblock_casing.precise_3.name=Точный корпус электронного блока модель III
+tile.multiblock_casing.precise_4.name=Точный корпус электронного блока модель IV
+tile.multiblock_casing.precise_0.name.short=Неточный
+tile.multiblock_casing.precise_1.name.short=Модель I
+tile.coal_casing.lv.name=Корпус компонентной сборочной линии (§7LV§r)
+tile.coal_casing.mv.name=Корпус компонентной сборочной линии (§bMV§r)
+tile.coal_casing.ev.name=Корпус компонентной сборочной линии (§5EV§r)
+tile.coal_casing.iv.name=Корпус компонентной сборочной линии (§1IV§r)
+tile.coal_casing.zpm.name=Корпус компонентной сборочной линии (§cZPM§r)
+tile.coal_casing.uv.name=Корпус компонентной сборочной линии (§3UV§r)
+metaitem.coil_wire.iv.name=Провод катушки [§1IV§r]
+metaitem.energy_core.mv.name=Энергетическое ядро [§bMV§r]
+metaitem.energy_core.luv.name=Энергетическое ядро [§dLuV§r]
+metaitem.transmission_component.mv.name=Компонент передачи [§bMV§r]
+metaitem.transmission_component.zpm.name=Компонент передачи [§cZPM§r]
+zbgt.machine.precise_assembler.name=Точный сборщик
+zbgt.machine.large_alloy_smelter.name=Zyngen
+tile.multiblock_casing.precise_2.name=Точный корпус электронного блока модель II
+tile.coal_casing.ulv.name=Корпус компонентной сборочной линии (§8ULV§r)
+metaitem.coil_wire.ev.name=Провод катушки [§5EV§r]
+metaitem.energy_core.uhv.name=Энергетическое ядро [§4UHV§r]
+tile.multiblock_casing.precise_1.name=Точный корпус электронного блока модель I
+tile.multiblock_casing.precise_4.name.short=Модель IV
+tile.coal_casing.hv.name=Корпус компонентной сборочной линии (§6HV§r)
+tile.coal_casing.luv.name=Корпус компонентной сборочной линии (§dLuV§r)
+tile.coal_casing.uev.name=Корпус компонентной сборочной линии (§aUEV§r)
+tile.coal_casing.uiv.name=Корпус компонентной сборочной линии (§2UIV§r)
+tile.coal_casing.max.name=Корпус компонентной сборочной линии (§c§lMAX§r)
+tile.multiblock_casing.precise_0.name=Неточный корпус электронного блока
+tile.multiblock_casing.precise_2.name.short=Модель II
+tile.multiblock_casing.precise_3.name.short=Модель III
+tile.coal_casing.uhv.name=Корпус компонентной сборочной линии (§4UHV§r)
+tile.coal_casing.uxv.name=Корпус компонентной сборочной линии (§eUXV§r)
+tile.coal_casing.opv.name=Корпус компонентной сборочной линии (§9§lOpV§r)
