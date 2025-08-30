@@ -2,7 +2,6 @@ package com.zorbatron.zbgt.mixin;
 
 import java.util.Map;
 
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
