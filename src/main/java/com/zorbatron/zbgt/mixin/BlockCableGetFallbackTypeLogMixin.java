@@ -16,14 +16,13 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.WireProperties;
 import gregtech.common.pipelike.cable.BlockCable;
 
-@Mixin(value = BlockCable.class)
+@Mixin(value = BlockCable.class, remap = false)
 public class BlockCableGetFallbackTypeLogMixin {
 
     @Shadow
     @Final
     private Map<Material, WireProperties> enabledMaterials;
 
-    @Debug(export = true)
     @Inject(method = "getFallbackType()Lgregtech/api/unification/material/properties/WireProperties;",
             at = @At(value = "HEAD"))
     public void logEnabledMaterials(CallbackInfoReturnable<WireProperties> cir) {
