@@ -110,7 +110,7 @@ public class ZBGTMetaItems {
     public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_BOARD_ADVANCED;
     public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_BOARD_ELITE;
     public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_BOARD_EXTREME;
-    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_BOARD_WETWARE;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_BOARD_MASTER;
 
     public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_SOC_SIMPLE;
     public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_SOC;

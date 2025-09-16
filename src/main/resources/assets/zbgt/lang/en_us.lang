@@ -262,7 +262,7 @@ metaitem.wrapped.circuit_board.plastic.name=Wrap of Plastic Circuit Boards
 metaitem.wrapped.circuit_board.advanced.name=Wrap of Advanced Circuit Boards
 metaitem.wrapped.circuit_board.elite.name=Wrap of Elite Circuit Boards
 metaitem.wrapped.circuit_board.extreme.name=Wrap of Extreme Circuit Boards
-metaitem.wrapped.circuit_board.wetware.name=Wrap of Master Circuit Boards
+metaitem.wrapped.circuit_board.master.name=Wrap of Master Circuit Boards
 
 metaitem.wrapped.chip.soc_simple.name=Wrap of Simple SoCs
 metaitem.wrapped.chip.soc.name=Wrap of SoCs

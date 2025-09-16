@@ -262,7 +262,7 @@ public class ZBGTMetaItem extends StandardMetaItem {
         WRAPPED_CIRCUIT_BOARD_ADVANCED = addItem(92, "wrapped.circuit_board.advanced");
         WRAPPED_CIRCUIT_BOARD_ELITE = addItem(93, "wrapped.circuit_board.elite");
         WRAPPED_CIRCUIT_BOARD_EXTREME = addItem(94, "wrapped.circuit_board.extreme");
-        WRAPPED_CIRCUIT_BOARD_WETWARE = addItem(95, "wrapped.circuit_board.wetware");
+        WRAPPED_CIRCUIT_BOARD_MASTER = addItem(95, "wrapped.circuit_board.master");
 
         // Wrapped chips 96-111
         WRAPPED_CHIP_SOC_SIMPLE = addItem(96, "wrapped.chip.soc_simple");

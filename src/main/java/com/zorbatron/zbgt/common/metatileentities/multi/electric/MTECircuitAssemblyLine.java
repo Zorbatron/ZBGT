@@ -31,6 +31,7 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.ingredients.GTRecipeInput;
 import gregtech.api.util.RelativeDirection;
@@ -45,7 +46,7 @@ import gregtech.common.blocks.MetaBlocks;
 public class MTECircuitAssemblyLine extends MultiMapMultiblockController {
 
     public MTECircuitAssemblyLine(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new gregtech.api.recipes.RecipeMap[] { ZBGTRecipeMaps.CIRCUIT_ASSEMBLY_LINE_RECIPES,
+        super(metaTileEntityId, new RecipeMap[] { ZBGTRecipeMaps.CIRCUIT_ASSEMBLY_LINE_RECIPES,
                 RecipeMaps.CIRCUIT_ASSEMBLER_RECIPES });
         this.recipeMapWorkable = new MultiblockRecipeLogic(this, true);
     }

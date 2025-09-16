@@ -1,352 +1,409 @@
 package com.zorbatron.zbgt.recipe.cal;
 
 import static com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps.CIRCUIT_ASSEMBLY_LINE_RECIPES;
-import static com.zorbatron.zbgt.common.items.ZBGTMetaItems.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 
-public class CALCircuits {
+import com.zorbatron.zbgt.api.recipes.builders.CALRecipeBuilder;
+import com.zorbatron.zbgt.api.recipes.builders.CALRecipeBuilder.*;
+
+import gregtech.api.metatileentity.multiblock.CleanroomType;
+
+public final class CALCircuits {
 
     public static void init() {
-        // T1
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_PLASTIC)
-                .input(WRAPPED_CHIP_CPU)
-                .input(WRAPPED_SMD_RESISTOR, 2)
-                .input(WRAPPED_SMD_CAPACITOR, 2)
-                .input(WRAPPED_SMD_TRANSISTOR, 2)
-                .input(wireGtQuadruple, Copper)
-                .output(MICROPROCESSOR_LV, 16 * 3)
-                .EUt(VA[MV]).duration(12 * (10 * 20))
+        ulv();
+        lv();
+        mv();
+        hv();
+        ev();
+        iv();
+        luv();
+        zpm();
+    }
+
+    private static void ulv() {
+        // TODO
+    }
+
+    private static void lv() {
+        builder(16, 10 * 20)
+                .board(BoardType.BASIC)
+                .component(ComponentType.RESISTOR, 2)
+                .wire(RedAlloy, 2)
+                .anyTierCircuit(ULV, 32)
+                .output(ELECTRONIC_CIRCUIT_LV, 16 * 2)
                 .buildAndRegister();
 
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_PLASTIC)
-                .input(WRAPPED_CHIP_SOC)
-                .input(wireGtQuadruple, Copper)
-                .input(bolt, Tin, 16 * 2)
-                .output(MICROPROCESSOR_LV, 16 * 3)
-                .EUt(VA[EV]).duration((int) (12 * (2.5 * 20)))
+        builder(16, 10 * 20)
+                .board(BoardType.BASIC)
+                .chip(ChipType.INTEGRATED_LOGIC)
+                .component(ComponentType.RESISTOR, 2)
+                .component(ComponentType.DIODE, 2)
+                .fineWire(Copper, 2)
+                .bolt(Tin, 2)
+                .output(INTEGRATED_CIRCUIT_LV, 16 * 2)
                 .buildAndRegister();
 
-        // T2
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_PLASTIC)
-                .input(WRAPPED_CHIP_CPU)
-                .input(WRAPPED_SMD_RESISTOR, 2)
-                .input(WRAPPED_SMD_CAPACITOR, 2)
-                .input(WRAPPED_SMD_TRANSISTOR, 2)
-                .input(wireGtOctal, RedAlloy)
+        builder(60, 10 * 20)
+                .board(BoardType.PLASTIC)
+                .cpu(CPUType.NORMAL)
+                .component(ComponentType.RESISTOR)
+                .component(ComponentType.CAPACITOR)
+                .component(ComponentType.TRANSISTOR)
+                .fineWire(Copper, 2)
+                .output(MICROPROCESSOR_LV, 16 * 3)
+                .buildAndRegister();
+
+        builder(600, 50)
+                .board(BoardType.PLASTIC)
+                .soc(SOCType.NORMAL)
+                .fineWire(Copper, 2)
+                .bolt(Tin, 2)
+                .output(MICROPROCESSOR_LV, 16 * 6)
+                .buildAndRegister();
+    }
+
+    private static void mv() {
+        builder(16, 15 * 20)
+                .board(BoardType.GOOD)
+                .anyTierCircuit(LV, 32)
+                .component(ComponentType.DIODE, 2)
+                .wire(Copper, 2)
+                .output(ELECTRONIC_CIRCUIT_MV, 16)
+                .buildAndRegister();
+
+        builder(24, 20 * 20)
+                .board(BoardType.GOOD)
+                .input(INTEGRATED_CIRCUIT_LV, 32)
+                .component(ComponentType.RESISTOR, 2)
+                .component(ComponentType.DIODE, 2)
+                .fineWire(Gold, 4)
+                .bolt(Silver, 4)
+                .output(INTEGRATED_CIRCUIT_MV, 16 * 2)
+                .buildAndRegister();
+
+        builder(60, 10 * 20)
+                .board(BoardType.PLASTIC)
+                .cpu(CPUType.NORMAL)
+                .component(ComponentType.RESISTOR, 4)
+                .component(ComponentType.CAPACITOR, 4)
+                .component(ComponentType.TRANSISTOR, 4)
+                .fineWire(RedAlloy, 4)
                 .output(PROCESSOR_MV, 16 * 2)
-                .EUt(VA[MV]).duration(12 * (10 * 20))
                 .buildAndRegister();
 
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_PLASTIC)
-                .input(WRAPPED_CHIP_SOC)
-                .input(wireGtOctal, RedAlloy)
-                .input(bolt, AnnealedCopper, 16 * 4)
+        builder(2400, 50)
+                .board(BoardType.PLASTIC)
+                .soc(SOCType.NORMAL)
+                .fineWire(RedAlloy, 4)
+                .bolt(AnnealedCopper, 4)
                 .output(PROCESSOR_MV, 16 * 4)
-                .EUt(VA[IV]).duration((int) (12 * (2.5 * 20)))
+                .buildAndRegister();
+    }
+
+    private static void hv() {
+        builder(30, 40 * 20)
+                .input(INTEGRATED_CIRCUIT_MV, 16 * 2)
+                .chip(ChipType.INTEGRATED_LOGIC, 2)
+                .chip(ChipType.RAM, 2)
+                .component(ComponentType.TRANSISTOR, 4)
+                .fineWire(Electrum, 8)
+                .bolt(AnnealedCopper, 8)
+                .output(INTEGRATED_CIRCUIT_HV, 16)
                 .buildAndRegister();
 
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_PLASTIC)
-                .input(PROCESSOR_MV, 16 * 2)
-                .input(WRAPPED_SMD_INDUCTOR, 4)
-                .input(WRAPPED_SMD_CAPACITOR, 8)
-                .input(WRAPPED_CHIP_RAM, 4)
-                .input(wireGtHex, RedAlloy)
-                .solderMultiplier(2)
-                .output(PROCESSOR_ASSEMBLY_HV, 16)
-                .EUt(VA[MV]).duration(12 * (20 * 20))
+        builder(90, 20 * 20, 2)
+                .board(BoardType.PLASTIC)
+                .input(INTEGRATED_CIRCUIT_MV, 16 * 2)
+                .component(ComponentType.INDUCTOR, 4)
+                .component(ComponentType.CAPACITOR, 8)
+                .chip(ChipType.RAM, 4)
+                .fineWire(RedAlloy, 8)
+                .output(INTEGRATED_CIRCUIT_HV, 16)
                 .buildAndRegister();
 
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_PLASTIC)
-                .input(PROCESSOR_ASSEMBLY_HV, 16 * 2)
-                .input(WRAPPED_SMD_DIODE, 4)
-                .input(WRAPPED_CHIP_RAM, 4)
-                .input(wireGtHex, Electrum, 2)
-                .input(stick, BlueAlloy, 16 * 4)
-                .output(WORKSTATION_EV, 16)
-                .EUt(VA[MV]).duration(12 * (20 * 20))
-                .buildAndRegister();
-
-        // T3
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_ADVANCED)
-                .input(WRAPPED_CHIP_CPU_NANO)
-                .input(WRAPPED_SMD_RESISTOR, 8)
-                .input(WRAPPED_SMD_CAPACITOR, 8)
-                .input(WRAPPED_SMD_TRANSISTOR, 8)
-                .input(wireGtHex, Electrum)
+        builder(600, 10 * 20)
+                .board(BoardType.ADVANCED)
+                .cpu(CPUType.NANO)
+                .component(ComponentType.RESISTOR, 8)
+                .component(ComponentType.CAPACITOR, 8)
+                .component(ComponentType.TRANSISTOR, 8)
+                .fineWire(Electrum, 8)
                 .output(NANO_PROCESSOR_HV, 16 * 2)
-                .EUt(VA[EV]).duration(12 * (10 * 20))
                 .buildAndRegister();
 
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_ADVANCED)
-                .input(WRAPPED_CHIP_CPU_NANO)
-                .input(WRAPPED_ADVANCED_SMD_RESISTOR, 2)
-                .input(WRAPPED_ADVANCED_SMD_CAPACITOR, 2)
-                .input(WRAPPED_ADVANCED_SMD_TRANSISTOR, 2)
-                .input(wireGtHex, Electrum)
+        builder(600, 5 * 20)
+                .board(BoardType.ADVANCED)
+                .cpu(CPUType.NANO)
+                .component(ComponentType.ADVANCED_RESISTOR, 2)
+                .component(ComponentType.ADVANCED_CAPACITOR, 2)
+                .component(ComponentType.ADVANCED_TRANSISTOR, 2)
+                .fineWire(Electrum, 8)
                 .output(NANO_PROCESSOR_HV, 16 * 2)
-                .EUt(VA[EV]).duration(12 * (5 * 20))
                 .buildAndRegister();
 
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_ADVANCED)
-                .input(WRAPPED_CHIP_SOC_ADVANCED)
-                .input(wireGtOctal, Electrum)
-                .input(bolt, Platinum, 16 * 4)
+        builder(9600, 50)
+                .board(BoardType.ADVANCED)
+                .soc(SOCType.ADVANCED)
+                .fineWire(Electrum, 4)
+                .bolt(Platinum, 4)
                 .output(NANO_PROCESSOR_HV, 16 * 4)
-                .EUt(VA[LuV]).duration((int) (12 * (2.5 * 20)))
+                .buildAndRegister();
+    }
+
+    private static void ev() {
+        builder(120, 20 * 20, 2)
+                .board(BoardType.PLASTIC)
+                .input(INTEGRATED_CIRCUIT_HV, 16 * 2)
+                .component(ComponentType.DIODE, 4)
+                .chip(ChipType.RAM, 4)
+                .fineWire(Electrum, 16)
+                .bolt(BlueAlloy, 16)
+                .output(WORKSTATION_EV, 16)
                 .buildAndRegister();
 
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_ADVANCED)
+        builder(600, 20 * 20, 2)
+                .board(BoardType.ADVANCED)
                 .input(NANO_PROCESSOR_HV, 16 * 2)
-                .input(WRAPPED_SMD_INDUCTOR, 4)
-                .input(WRAPPED_SMD_CAPACITOR, 8)
-                .input(WRAPPED_CHIP_RAM, 8)
-                .input(wireGtHex, Electrum, 2)
-                .solderMultiplier(2)
+                .component(ComponentType.INDUCTOR, 4)
+                .component(ComponentType.CAPACITOR, 8)
+                .chip(ChipType.RAM, 8)
+                .fineWire(Electrum, 16)
                 .output(NANO_PROCESSOR_ASSEMBLY_EV, 16)
-                .EUt(VA[EV]).duration(12 * (20 * 20))
                 .buildAndRegister();
 
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_ADVANCED)
-                .input(NANO_PROCESSOR_ASSEMBLY_EV, 16 * 2)
-                .input(WRAPPED_SMD_DIODE, 8)
-                .input(WRAPPED_CHIP_NOR, 4)
-                .input(WRAPPED_CHIP_RAM, 16)
-                .input(wireGtHex, Electrum, 2)
-                .solderMultiplier(2)
-                .output(NANO_COMPUTER_IV, 16)
-                .EUt(VA[EV]).duration(12 * (20 * 20))
-                .buildAndRegister();
-
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_ADVANCED)
-                .input(NANO_PROCESSOR_ASSEMBLY_EV, 16 * 2)
-                .input(WRAPPED_ADVANCED_SMD_DIODE, 2)
-                .input(WRAPPED_CHIP_NOR, 4)
-                .input(WRAPPED_CHIP_RAM, 16)
-                .input(wireGtHex, Electrum, 2)
-                .solderMultiplier(2)
-                .output(NANO_COMPUTER_IV, 16)
-                .EUt(VA[EV]).duration(12 * (10 * 20))
-                .buildAndRegister();
-
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(frameGt, Aluminium, 16 * 2)
-                .input(NANO_COMPUTER_IV, 16 * 2)
-                .input(WRAPPED_SMD_INDUCTOR, 16)
-                .input(WRAPPED_SMD_CAPACITOR, 32)
-                .input(WRAPPED_CHIP_RAM, 16)
-                .input(wireGtHex, AnnealedCopper, 16)
-                .solderMultiplier(4)
-                .output(NANO_MAINFRAME_LUV, 16)
-                .EUt(VA[EV]).duration(12 * (20 * 20))
-                .buildAndRegister();
-
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(frameGt, Aluminium, 16 * 2)
-                .input(NANO_COMPUTER_IV, 16 * 2)
-                .input(WRAPPED_ADVANCED_SMD_INDUCTOR, 4)
-                .input(WRAPPED_ADVANCED_SMD_CAPACITOR, 8)
-                .input(WRAPPED_CHIP_RAM, 16)
-                .input(wireGtHex, AnnealedCopper, 16)
-                .solderMultiplier(4)
-                .output(NANO_MAINFRAME_LUV, 16)
-                .EUt(VA[EV]).duration(12 * (10 * 20))
-                .buildAndRegister();
-
-        // T4
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_EXTREME)
-                .input(WRAPPED_CHIP_CPU_QUBIT)
-                .input(WRAPPED_CHIP_CPU_NANO)
-                .input(WRAPPED_SMD_CAPACITOR, 12)
-                .input(WRAPPED_SMD_TRANSISTOR, 12)
-                .input(wireGtOctal, Platinum, 3)
+        builder(2400, 10 * 20)
+                .board(BoardType.EXTREME)
+                .cpu(CPUType.QUBIT)
+                .cpu(CPUType.NANO)
+                .component(ComponentType.CAPACITOR, 12)
+                .component(ComponentType.TRANSISTOR, 12)
+                .fineWire(Platinum, 12)
                 .output(QUANTUM_PROCESSOR_EV, 16 * 2)
-                .EUt(VA[IV]).duration(12 * (10 * 20))
                 .buildAndRegister();
 
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_EXTREME)
-                .input(WRAPPED_CHIP_CPU_QUBIT)
-                .input(WRAPPED_CHIP_CPU_NANO)
-                .input(WRAPPED_ADVANCED_SMD_CAPACITOR, 3)
-                .input(WRAPPED_ADVANCED_SMD_TRANSISTOR, 3)
-                .input(wireGtOctal, Platinum, 3)
+        builder(2400, 5 * 20)
+                .board(BoardType.EXTREME)
+                .cpu(CPUType.QUBIT)
+                .cpu(CPUType.NANO)
+                .component(ComponentType.CAPACITOR, 3)
+                .component(ComponentType.TRANSISTOR, 3)
+                .fineWire(Platinum, 12)
                 .output(QUANTUM_PROCESSOR_EV, 16 * 2)
-                .EUt(VA[IV]).duration(12 * (5 * 20))
                 .buildAndRegister();
 
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_EXTREME)
-                .input(WRAPPED_CHIP_SOC_ADVANCED)
-                .input(wireGtOctal, Platinum, 3)
-                .input(stick, NiobiumTitanium, 16 * 2)
+        builder(2400, 5 * 20)
+                .board(BoardType.EXTREME)
+                .soc(SOCType.ADVANCED)
+                .fineWire(Platinum, 12)
+                .bolt(NiobiumTitanium, 8)
                 .output(QUANTUM_PROCESSOR_EV, 16 * 4)
-                .EUt(VA[ZPM]).duration((int) (12 * (2.5 * 20)))
+                .buildAndRegister();
+    }
+
+    private static void iv() {
+        builder(480, 40 * 20, 4)
+                .frameBox(Aluminium, 2)
+                .input(WORKSTATION_EV, 16 * 2)
+                .component(ComponentType.INDUCTOR, 8)
+                .component(ComponentType.CAPACITOR, 16)
+                .chip(ChipType.RAM, 16)
+                .wire(AnnealedCopper, 16)
+                .output(MAINFRAME_IV, 16)
                 .buildAndRegister();
 
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_EXTREME)
+        builder(480, 20 * 20, 4)
+                .frameBox(Aluminium, 2)
+                .input(WORKSTATION_EV, 16 * 2)
+                .component(ComponentType.ADVANCED_INDUCTOR, 2)
+                .component(ComponentType.ADVANCED_CAPACITOR, 4)
+                .chip(ChipType.RAM, 16)
+                .wire(AnnealedCopper, 16)
+                .output(MAINFRAME_IV, 16)
+                .buildAndRegister();
+
+        builder(600, 20 * 20, 2)
+                .board(BoardType.ADVANCED)
+                .input(NANO_PROCESSOR_ASSEMBLY_EV, 16 * 2)
+                .component(ComponentType.DIODE, 8)
+                .chip(ChipType.NOR, 4)
+                .chip(ChipType.RAM, 16)
+                .fineWire(Electrum, 16)
+                .output(NANO_COMPUTER_IV, 16)
+                .buildAndRegister();
+
+        builder(600, 10 * 20, 2)
+                .board(BoardType.ADVANCED)
+                .input(NANO_PROCESSOR_ASSEMBLY_EV, 16 * 2)
+                .component(ComponentType.ADVANCED_DIODE, 8)
+                .chip(ChipType.NOR, 4)
+                .chip(ChipType.RAM, 16)
+                .fineWire(Electrum, 16)
+                .output(NANO_COMPUTER_IV, 16)
+                .buildAndRegister();
+
+        builder(2400, 20 * 20, 2)
+                .board(BoardType.EXTREME)
                 .input(QUANTUM_PROCESSOR_EV, 16 * 2)
-                .input(WRAPPED_SMD_INDUCTOR, 8)
-                .input(WRAPPED_SMD_CAPACITOR, 16)
-                .input(WRAPPED_CHIP_RAM, 4)
-                .input(wireGtHex, Platinum, 2)
-                .solderMultiplier(2)
+                .component(ComponentType.INDUCTOR, 8)
+                .component(ComponentType.CAPACITOR, 16)
+                .chip(ChipType.RAM, 4)
+                .fineWire(Platinum, 16)
                 .output(QUANTUM_ASSEMBLY_IV, 16)
-                .EUt(VA[IV]).duration(12 * (20 * 20))
                 .buildAndRegister();
 
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_EXTREME)
+        builder(2400, 10 * 20, 2)
+                .board(BoardType.EXTREME)
                 .input(QUANTUM_PROCESSOR_EV, 16 * 2)
-                .input(WRAPPED_ADVANCED_SMD_INDUCTOR, 2)
-                .input(WRAPPED_ADVANCED_SMD_CAPACITOR, 4)
-                .input(WRAPPED_CHIP_RAM, 4)
-                .input(wireGtHex, Platinum, 2)
-                .solderMultiplier(2)
+                .component(ComponentType.ADVANCED_INDUCTOR, 2)
+                .component(ComponentType.ADVANCED_CAPACITOR, 4)
+                .chip(ChipType.RAM, 4)
+                .fineWire(Platinum, 16)
                 .output(QUANTUM_ASSEMBLY_IV, 16)
-                .EUt(VA[IV]).duration(12 * (10 * 20))
                 .buildAndRegister();
 
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_EXTREME)
-                .input(QUANTUM_ASSEMBLY_IV, 16 * 2)
-                .input(WRAPPED_SMD_DIODE, 8)
-                .input(WRAPPED_CHIP_NOR, 4)
-                .input(WRAPPED_CHIP_RAM, 16)
-                .input(wireGtHex, Platinum, 4)
-                .solderMultiplier(2)
-                .output(QUANTUM_COMPUTER_LUV, 16)
-                .EUt(VA[IV]).duration(12 * (20 * 20))
-                .buildAndRegister();
-
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_EXTREME)
-                .input(QUANTUM_ASSEMBLY_IV, 16 * 2)
-                .input(WRAPPED_ADVANCED_SMD_DIODE, 2)
-                .input(WRAPPED_CHIP_NOR, 4)
-                .input(WRAPPED_CHIP_RAM, 16)
-                .input(wireGtHex, Platinum, 4)
-                .solderMultiplier(2)
-                .output(QUANTUM_COMPUTER_LUV, 16)
-                .EUt(VA[IV]).duration(12 * (10 * 20))
-                .buildAndRegister();
-
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(frameGt, HSSG, 16 * 2)
-                .input(QUANTUM_COMPUTER_LUV, 16 * 2)
-                .input(WRAPPED_SMD_INDUCTOR, 24)
-                .input(WRAPPED_SMD_CAPACITOR, 48)
-                .input(WRAPPED_CHIP_RAM, 24)
-                .input(wireGtHex, AnnealedCopper, 48)
-                .solderMultiplier(4)
-                .output(QUANTUM_MAINFRAME_ZPM, 16)
-                .EUt(VA[IV]).duration(12 * (40 * 20))
-                .buildAndRegister();
-
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(frameGt, HSSG, 16 * 2)
-                .input(QUANTUM_COMPUTER_LUV, 16 * 2)
-                .input(WRAPPED_ADVANCED_SMD_INDUCTOR, 6)
-                .input(WRAPPED_ADVANCED_SMD_CAPACITOR, 12)
-                .input(WRAPPED_CHIP_RAM, 24)
-                .input(wireGtHex, AnnealedCopper, 48)
-                .solderMultiplier(4)
-                .output(QUANTUM_MAINFRAME_ZPM, 16)
-                .EUt(VA[IV]).duration(12 * (20 * 20))
-                .buildAndRegister();
-
-        // T5
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_ELITE)
-                .input(WRAPPED_CRYSTAL_CPU)
-                .input(WRAPPED_CHIP_CPU_NANO, 2)
-                .input(WRAPPED_ADVANCED_SMD_CAPACITOR, 6)
-                .input(WRAPPED_ADVANCED_SMD_TRANSISTOR, 6)
-                .input(wireGtHex, NiobiumTitanium)
+        builder(9600, 10 * 20)
+                .board(BoardType.ELITE)
+                .cpu(CPUType.CRYSTAL)
+                .cpu(CPUType.NANO, 2)
+                .component(ComponentType.ADVANCED_CAPACITOR, 6)
+                .component(ComponentType.ADVANCED_TRANSISTOR, 6)
+                .fineWire(NiobiumTitanium, 8)
                 .output(CRYSTAL_PROCESSOR_IV, 16 * 2)
-                .EUt(VA[LuV]).duration(12 * (10 * 20))
                 .buildAndRegister();
 
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_ELITE)
-                .input(WRAPPED_CRYSTAL_SOC)
-                .input(wireGtHex, NiobiumTitanium)
-                .input(stick, NiobiumTitanium, 16 * 2)
+        builder(86000, 5 * 10)
+                .board(BoardType.ELITE)
+                .soc(SOCType.CRYSTAL)
+                .fineWire(NiobiumTitanium, 8)
+                .bolt(YttriumBariumCuprate, 8)
                 .output(CRYSTAL_PROCESSOR_IV, 16 * 4)
-                .EUt(VA[ZPM]).duration(12 * (5 * 20))
+                .buildAndRegister();
+    }
+
+    private static void luv() {
+        builder(1920, 40 * 20, 4)
+                .frameBox(Aluminium, 2)
+                .input(NANO_COMPUTER_IV, 16 * 2)
+                .component(ComponentType.INDUCTOR, 16)
+                .component(ComponentType.CAPACITOR, 32)
+                .chip(ChipType.RAM, 16)
+                .wire(AnnealedCopper, 32)
+                .output(NANO_MAINFRAME_LUV, 16)
                 .buildAndRegister();
 
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_ELITE)
+        builder(1920, 20 * 20, 4)
+                .frameBox(Aluminium, 2)
+                .input(NANO_COMPUTER_IV, 16 * 2)
+                .component(ComponentType.ADVANCED_INDUCTOR, 4)
+                .component(ComponentType.ADVANCED_CAPACITOR, 8)
+                .chip(ChipType.RAM, 16)
+                .wire(AnnealedCopper, 32)
+                .output(NANO_MAINFRAME_LUV, 16)
+                .buildAndRegister();
+
+        builder(2400, 20 * 20, 2)
+                .board(BoardType.EXTREME)
+                .input(QUANTUM_ASSEMBLY_IV, 16 * 2)
+                .component(ComponentType.DIODE, 8)
+                .chip(ChipType.NOR, 4)
+                .chip(ChipType.RAM, 16)
+                .fineWire(Platinum, 32)
+                .output(QUANTUM_COMPUTER_LUV, 16)
+                .buildAndRegister();
+
+        builder(2400, 10 * 20, 2)
+                .board(BoardType.EXTREME)
+                .input(QUANTUM_ASSEMBLY_IV, 16 * 2)
+                .component(ComponentType.DIODE, 2)
+                .chip(ChipType.NOR, 4)
+                .chip(ChipType.RAM, 16)
+                .fineWire(Platinum, 32)
+                .output(QUANTUM_COMPUTER_LUV, 16)
+                .buildAndRegister();
+
+        builder(9600, 20 * 20, 2)
+                .board(BoardType.ELITE)
                 .input(CRYSTAL_PROCESSOR_IV, 16 * 2)
-                .input(WRAPPED_ADVANCED_SMD_INDUCTOR, 4)
-                .input(WRAPPED_ADVANCED_SMD_CAPACITOR, 8)
-                .input(WRAPPED_CHIP_RAM, 24)
-                .input(wireGtHex, NiobiumTitanium, 2)
-                .solderMultiplier(2)
+                .component(ComponentType.ADVANCED_INDUCTOR, 4)
+                .component(ComponentType.ADVANCED_CAPACITOR, 8)
+                .chip(ChipType.RAM, 24)
+                .fineWire(NiobiumTitanium, 16)
                 .output(CRYSTAL_ASSEMBLY_LUV, 16)
-                .EUt(VA[LuV]).duration(12 * (20 * 20))
                 .buildAndRegister();
 
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_ELITE)
-                .input(CRYSTAL_ASSEMBLY_LUV, 16 * 2)
-                .input(WRAPPED_CHIP_RAM, 4)
-                .input(WRAPPED_CHIP_NOR, 32)
-                .input(WRAPPED_CHIP_NAND, 64)
-                .input(wireGtHex, NiobiumTitanium, 4)
-                .solderMultiplier(2)
-                .output(CRYSTAL_COMPUTER_ZPM, 16)
-                .EUt(VA[LuV]).duration(12 * (20 * 20))
-                .buildAndRegister();
-
-        // T6
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_NEURO_PROCESSOR)
-                .input(WRAPPED_CRYSTAL_CPU)
-                .input(WRAPPED_CHIP_CPU_NANO)
-                .input(WRAPPED_ADVANCED_SMD_CAPACITOR, 8)
-                .input(WRAPPED_ADVANCED_SMD_TRANSISTOR, 8)
-                .input(wireGtHex, YttriumBariumCuprate)
+        builder(38400, 10 * 20)
+                .cpu(CPUType.NEURO)
+                .cpu(CPUType.CRYSTAL)
+                .cpu(CPUType.NANO)
+                .component(ComponentType.ADVANCED_CAPACITOR, 8)
+                .component(ComponentType.ADVANCED_TRANSISTOR, 8)
+                .fineWire(YttriumBariumCuprate, 8)
                 .output(WETWARE_PROCESSOR_LUV, 16 * 2)
-                .EUt(VA[ZPM]).duration(12 * (10 * 20))
                 .buildAndRegister();
 
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_NEURO_PROCESSOR)
-                .input(WRAPPED_CHIP_SOC_HIGHLY_ADVANCED)
-                .input(wireGtHex, YttriumBariumCuprate)
-                .input(stick, Naquadah, 16 * 2)
+        builder(150000, 5 * 20)
+                .cpu(CPUType.NEURO)
+                .soc(SOCType.HIGHLY_ADVANCED)
+                .fineWire(YttriumBariumCuprate, 8)
+                .bolt(Naquadah, 8)
                 .output(WETWARE_PROCESSOR_LUV, 16 * 4)
-                .EUt(VA[UV]).duration(12 * (5 * 20))
+                .buildAndRegister();
+    }
+
+    private static void zpm() {
+        builder(7680, 40 * 20, 4)
+                .frameBox(HSSG, 2)
+                .input(QUANTUM_COMPUTER_LUV, 16 * 2)
+                .component(ComponentType.INDUCTOR, 24)
+                .component(ComponentType.CAPACITOR, 48)
+                .chip(ChipType.RAM, 24)
+                .wire(AnnealedCopper, 48)
+                .output(QUANTUM_MAINFRAME_ZPM, 16)
                 .buildAndRegister();
 
-        CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(WRAPPED_CIRCUIT_BOARD_WETWARE)
-                .input(WETWARE_PROCESSOR_LUV, 16 * 2)
-                .input(WRAPPED_ADVANCED_SMD_INDUCTOR, 6)
-                .input(WRAPPED_ADVANCED_SMD_CAPACITOR, 12)
-                .input(WRAPPED_CHIP_RAM, 24)
-                .input(wireGtHex, YttriumBariumCuprate, 2)
-                .solderMultiplier(2)
-                .output(WETWARE_PROCESSOR_ASSEMBLY_ZPM, 16)
-                .EUt(VA[ZPM]).duration(12 * (20 * 20))
+        builder(7680, 20 * 20, 4)
+                .frameBox(HSSG, 2)
+                .input(QUANTUM_COMPUTER_LUV, 16 * 2)
+                .component(ComponentType.ADVANCED_INDUCTOR, 6)
+                .component(ComponentType.ADVANCED_CAPACITOR, 12)
+                .chip(ChipType.RAM, 24)
+                .wire(AnnealedCopper, 48)
+                .output(QUANTUM_MAINFRAME_ZPM, 16)
                 .buildAndRegister();
+
+        builder(9600, 20 * 20, 2)
+                .board(BoardType.ELITE)
+                .input(CRYSTAL_ASSEMBLY_LUV, 16 * 2)
+                .chip(ChipType.RAM, 4)
+                .chip(ChipType.NOR, 32)
+                .chip(ChipType.NAND, 64)
+                .fineWire(NiobiumTitanium, 32)
+                .output(CRYSTAL_COMPUTER_ZPM, 16)
+                .buildAndRegister();
+
+        builder(38400, 20 * 20, 2)
+                .board(BoardType.MASTER)
+                .input(WETWARE_PROCESSOR_LUV, 16 * 2)
+                .component(ComponentType.ADVANCED_INDUCTOR, 6)
+                .component(ComponentType.ADVANCED_CAPACITOR, 12)
+                .chip(ChipType.RAM, 24)
+                .fineWire(YttriumBariumCuprate, 16)
+                .output(WETWARE_PROCESSOR_ASSEMBLY_ZPM, 16)
+                .buildAndRegister();
+    }
+
+    private static CALRecipeBuilder builder(int eut, int baseDuration) {
+        return builder(eut, baseDuration, 1);
+    }
+
+    private static CALRecipeBuilder builder(int eut, int baseDuration, int solderMultiplier) {
+        return CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .fluidInputs(SolderingAlloy.getFluid(72 * 16 * solderMultiplier))
+                .cleanroom(CleanroomType.CLEANROOM)
+                .EUt(eut).duration(baseDuration * 12);
     }
 }

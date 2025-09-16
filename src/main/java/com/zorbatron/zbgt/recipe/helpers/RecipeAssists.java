@@ -24,7 +24,7 @@ import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.MetaBlocks;
 
 @SuppressWarnings({ "unused", "DuplicatedCode" })
-public class RecipeAssists {
+public final class RecipeAssists {
 
     public static int getCWUt(int tier) {
         return (int) Math.max(EV, Math.pow(MV, tier - MV));
