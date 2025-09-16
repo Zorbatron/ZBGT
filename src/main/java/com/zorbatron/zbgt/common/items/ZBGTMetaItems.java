@@ -209,6 +209,8 @@ public class ZBGTMetaItems {
     public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_UV;
     public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_UHV;
 
+    public static MetaItem<?>.MetaValueItem NAND_CHIP_ARRAY;
+
     public static void init() {
         ZBGTMetaItem item = new ZBGTMetaItem();
         item.setRegistryName("zbgt_meta_item");

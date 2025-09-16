@@ -402,6 +402,8 @@ public class ZBGTMetaItem extends StandardMetaItem {
         TRANSMISSION_COMPONENT_UV = addItem(174, "transmission_component.uv");
         TRANSMISSION_COMPONENT_UHV = addItem(175, "transmission_component.uhv")
                 .setInvisibleIf(!GregTechAPI.isHighTier());
+
+        NAND_CHIP_ARRAY = addItem(176, "nand_array");
     }
 
     @Override

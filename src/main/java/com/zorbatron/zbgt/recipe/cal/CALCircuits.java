@@ -8,6 +8,7 @@ import static gregtech.common.items.MetaItems.*;
 
 import com.zorbatron.zbgt.api.recipes.builders.CALRecipeBuilder;
 import com.zorbatron.zbgt.api.recipes.builders.CALRecipeBuilder.*;
+import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 
@@ -25,7 +26,21 @@ public final class CALCircuits {
     }
 
     private static void ulv() {
-        // TODO
+        builder(VA[MV], 15 * 20)
+                .board(BoardType.GOOD)
+                .soc(SOCType.SIMPLE)
+                .bolt(RedAlloy, 2)
+                .fineWire(Tin, 2)
+                .output(ZBGTMetaItems.NAND_CHIP_ARRAY, 8)
+                .buildAndRegister();
+
+        builder(VA[MV], 15 * 20)
+                .board(BoardType.PLASTIC)
+                .soc(SOCType.SIMPLE)
+                .bolt(RedAlloy, 2)
+                .fineWire(Tin, 2)
+                .output(ZBGTMetaItems.NAND_CHIP_ARRAY, 12)
+                .buildAndRegister();
     }
 
     private static void lv() {

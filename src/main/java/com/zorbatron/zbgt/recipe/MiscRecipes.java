@@ -143,6 +143,25 @@ public class MiscRecipes {
                 .output(WOODS_GLASS_LENS)
                 .EUt(VA[HV]).duration(596)
                 .buildAndRegister();
+
+        SimpleRecipeBuilder nandBuilder = CUTTER_RECIPES.recipeBuilder()
+                .input(NAND_CHIP_ARRAY)
+                .output(MetaItems.NAND_CHIP_ULV, 16)
+                .EUt(VA[HV]);
+
+        nandBuilder.copy()
+                .fluidInputs(Lubricant.getFluid(37))
+                .duration(5 * 20)
+                .buildAndRegister();
+
+        nandBuilder.copy()
+                .fluidInputs(DistilledWater.getFluid(112))
+                .duration(10 * 20)
+                .buildAndRegister();
+
+        nandBuilder.fluidInputs(Water.getFluid(150))
+                .duration(10 * 20)
+                .buildAndRegister();
     }
 
     private static void magneticFluids() {

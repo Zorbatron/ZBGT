@@ -348,6 +348,9 @@ metaitem.transmission_component.zpm.name=Transmission Component [ZPM]
 metaitem.transmission_component.uv.name=Transmission Component [UV]
 metaitem.transmission_component.uhv.name=Transmission Component [UHV]
 
+metaitem.nand_array.name=NAND Chip Array
+metaitem.nand_array.tooltip=Chips on Board
+
 
 # Widgets
 zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s
