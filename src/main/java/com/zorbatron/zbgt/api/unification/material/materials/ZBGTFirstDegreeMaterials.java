@@ -373,5 +373,11 @@ public final class ZBGTFirstDegreeMaterials {
                 .flags(DECOMPOSITION_BY_CENTRIFUGING, GENERATE_PLATE)
                 .components(Tin, 5, Lead, 36, Antimony, 8, Arsenic, 1)
                 .build();
+
+        Prasiolite = new Material.Builder(id++, zbgtId("prasiolite"))
+                .ore().gem().dust()
+                .color(0xD0DD95).iconSet(CERTUS)
+                .components(SiliconDioxide, 5, Iron, 1)
+                .build();
     }
 }

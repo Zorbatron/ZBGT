@@ -351,6 +351,13 @@ metaitem.transmission_component.uhv.name=Transmission Component [UHV]
 metaitem.nand_array.name=NAND Chip Array
 metaitem.nand_array.tooltip=Chips on Board
 
+metaitem.raw_imprint_supporting_board.name=Raw Imprint Supporting Board
+metaitem.imprint_supporting_board.name=Imprint Supporting Board
+metaitem.sliced_circuit.name=Sliced Circuit
+metaitem.sliced_circuit.slice=Slice of: %s
+metaitem.circuit_imprint.name=Circuit Imprint
+metaitem.circuit_imprint.imprint=Imprint of: %s
+
 
 # Widgets
 zbgt.widget.item_slot_tiny_amount.amount_tooltip=Amount: %s
@@ -436,6 +443,8 @@ zbgt.machine.large_alloy_smelter.tooltip=Gains a 5%% energy discount per coil ti
 zbgt.machine.cal.name=Circuit Assembly Line
 zbgt.machine.cal.tooltip=Does not lose efficiency when overclocked
 zbgt.machine.cal.tooltip_ordered_items=When in §eCircuit Assembly Line§7 mode, §fitems§7 must be in the correct order to run.
+zbgt.machine.cal.imprint=Circuit Imprint: %s
+zbgt.machine.cal.no_imprint=Missing Imprint
 recipemap.circuit_assembly_line_recipes.name=Circuit Assembly Line
 
 zbgt.machine.volcanus.name=Volcanus
@@ -694,6 +703,7 @@ zbgt.material.zirconium_carbide=Zirconium Carbide
 zbgt.material.maraging_steel_350=Maraging Steel 350
 zbgt.material.trinium_naquadah_alloy=Trinium Naquadah Alloy
 zbgt.material.babbit_alloy=Babbit Alloy
+zbgt.material.prasiolite=Prasiolite
 
 zbgt.material.mar_ce_m_200=MAR-Ce-M200
 zbgt.material.artherium_sn=Artherium-Sn

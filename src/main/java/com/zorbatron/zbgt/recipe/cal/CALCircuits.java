@@ -1,20 +1,35 @@
 package com.zorbatron.zbgt.recipe.cal;
 
 import static com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps.CIRCUIT_ASSEMBLY_LINE_RECIPES;
+import static com.zorbatron.zbgt.common.items.ZBGTMetaItems.IMPRINT_SUPPORTING_BOARD;
+import static com.zorbatron.zbgt.common.items.ZBGTMetaItems.RAW_IMPRINT_SUPPORTING_BOARD;
 import static gregtech.api.GTValues.*;
+import static gregtech.api.recipes.RecipeMaps.AUTOCLAVE_RECIPES;
+import static gregtech.api.recipes.RecipeMaps.CUTTER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
-import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
+
+import net.minecraft.item.ItemStack;
+
+import org.jetbrains.annotations.NotNull;
 
 import com.zorbatron.zbgt.api.recipes.builders.CALRecipeBuilder;
 import com.zorbatron.zbgt.api.recipes.builders.CALRecipeBuilder.*;
+import com.zorbatron.zbgt.api.unification.material.ZBGTMaterials;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
+import com.zorbatron.zbgt.common.items.behaviors.imprints.ImprintBehavior;
 
+import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
+import gregtech.api.recipes.ModHandler;
+import gregtech.api.unification.ore.OrePrefix;
+import gregtech.api.unification.stack.UnificationEntry;
 
 public final class CALCircuits {
 
     public static void init() {
+        imprints();
+
         ulv();
         lv();
         mv();
@@ -26,7 +41,7 @@ public final class CALCircuits {
     }
 
     private static void ulv() {
-        builder(VA[MV], 15 * 20)
+        builder(60, 15 * 20)
                 .board(BoardType.GOOD)
                 .soc(SOCType.SIMPLE)
                 .bolt(RedAlloy, 2)
@@ -34,7 +49,7 @@ public final class CALCircuits {
                 .output(ZBGTMetaItems.NAND_CHIP_ARRAY, 8)
                 .buildAndRegister();
 
-        builder(VA[MV], 15 * 20)
+        builder(60, 15 * 20)
                 .board(BoardType.PLASTIC)
                 .soc(SOCType.SIMPLE)
                 .bolt(RedAlloy, 2)
@@ -420,5 +435,63 @@ public final class CALCircuits {
                 .fluidInputs(SolderingAlloy.getFluid(72 * 16 * solderMultiplier))
                 .cleanroom(CleanroomType.CLEANROOM)
                 .EUt(eut).duration(baseDuration * 12);
+    }
+
+    @SuppressWarnings("DuplicatedCode")
+    private static void imprints() {
+        AUTOCLAVE_RECIPES.recipeBuilder()
+                .input(RAW_IMPRINT_SUPPORTING_BOARD)
+                .fluidInputs(Polyethylene.getFluid(L * 4))
+                .output(IMPRINT_SUPPORTING_BOARD)
+                .EUt(VA[EV]).duration(15 * 20)
+                .buildAndRegister();
+
+        createImprint(ELECTRONIC_CIRCUIT_LV);
+        createImprint(ELECTRONIC_CIRCUIT_MV);
+        createImprint(INTEGRATED_CIRCUIT_LV);
+        createImprint(INTEGRATED_CIRCUIT_MV);
+        createImprint(INTEGRATED_CIRCUIT_HV);
+        createImprint(ZBGTMetaItems.NAND_CHIP_ARRAY);
+        createImprint(MICROPROCESSOR_LV);
+        createImprint(PROCESSOR_MV);
+        createImprint(PROCESSOR_ASSEMBLY_HV);
+        createImprint(WORKSTATION_EV);
+        createImprint(MAINFRAME_IV);
+        createImprint(NANO_PROCESSOR_HV);
+        createImprint(NANO_PROCESSOR_ASSEMBLY_EV);
+        createImprint(NANO_COMPUTER_IV);
+        createImprint(NANO_MAINFRAME_LUV);
+        createImprint(QUANTUM_PROCESSOR_EV);
+        createImprint(QUANTUM_ASSEMBLY_IV);
+        createImprint(QUANTUM_COMPUTER_LUV);
+        createImprint(QUANTUM_MAINFRAME_ZPM);
+        createImprint(CRYSTAL_PROCESSOR_IV);
+        createImprint(CRYSTAL_ASSEMBLY_LUV);
+        createImprint(CRYSTAL_COMPUTER_ZPM);
+        createImprint(WETWARE_PROCESSOR_LUV);
+        createImprint(WETWARE_PROCESSOR_ASSEMBLY_ZPM);
+    }
+
+    private static void createImprint(@NotNull MetaItem<?>.MetaValueItem circuit) {
+        ItemStack slicedCircuit = ZBGTMetaItems.SLICED_CIRCUIT.getStackForm();
+        ImprintBehavior.setImprintedCircuit(slicedCircuit, circuit);
+
+        CUTTER_RECIPES.recipeBuilder()
+                .input(circuit)
+                .fluidInputs(Lubricant.getFluid(L))
+                .outputs(slicedCircuit)
+                .EUt(VA[HV]).duration(20)
+                .buildAndRegister();
+
+        ItemStack imprintedBoard = ZBGTMetaItems.CIRCUIT_IMPRINT.getStackForm();
+        ImprintBehavior.setImprintedCircuit(imprintedBoard, circuit);
+
+        ModHandler.addShapedRecipe("imprint" + circuit.unlocalizedName, imprintedBoard,
+                " S ",
+                "PIP",
+                " S ",
+                'S', IMPRINT_SUPPORTING_BOARD.getStackForm(),
+                'P', new UnificationEntry(OrePrefix.gemExquisite, ZBGTMaterials.Prasiolite),
+                'I', slicedCircuit);
     }
 }

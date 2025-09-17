@@ -47,6 +47,7 @@ public final class ZBGTMaterials {
     public static Material MaragingSteel350;
     public static Material TriniumNaquadahAlloy;
     public static Material BabbitAlloy;
+    public static Material Prasiolite;
 
     // Second degree materials
     public static Material MAR_CE_M200;

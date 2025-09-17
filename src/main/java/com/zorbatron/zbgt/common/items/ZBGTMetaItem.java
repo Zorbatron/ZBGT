@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.util.ZBGTUtility;
+import com.zorbatron.zbgt.common.items.behaviors.imprints.ImprintBehavior;
 import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
 
 import gregtech.api.GregTechAPI;
@@ -404,6 +405,13 @@ public class ZBGTMetaItem extends StandardMetaItem {
                 .setInvisibleIf(!GregTechAPI.isHighTier());
 
         NAND_CHIP_ARRAY = addItem(176, "nand_array");
+
+        RAW_IMPRINT_SUPPORTING_BOARD = addItem(177, "raw_imprint_supporting_board");
+        IMPRINT_SUPPORTING_BOARD = addItem(178, "imprint_supporting_board");
+        SLICED_CIRCUIT = addItem(179, "sliced_circuit")
+                .addComponents(new ImprintBehavior("metaitem.sliced_circuit.slice"));
+        CIRCUIT_IMPRINT = addItem(180, "circuit_imprint")
+                .addComponents(new ImprintBehavior("metaitem.circuit_imprint.imprint"));
     }
 
     @Override
