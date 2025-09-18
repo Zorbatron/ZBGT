@@ -94,9 +94,50 @@ public class CustomOreVeins {
         OreDepositDefinition quantiumDeposit = new OreDepositDefinition("quantium");
         quantiumDeposit.initializeFromConfig(quantiumDefinition);
 
+        JsonObject prasioliteDefinition = parser.parse("""
+                {
+                  "name": "zbgt.vein.prasiolite",
+                  "weight": 20,
+                  "density": 0.1,
+                  "min_height": 10,
+                  "max_height": 50,
+                  "vein_populator": {
+                    "type": "surface_rock",
+                    "material": "zbgt:prasiolite"
+                  },
+                  "generator": {
+                    "type": "layered",
+                    "radius": [
+                      12,
+                      20
+                    ]
+                  },
+                  "filler": {
+                    "type": "layered",
+                    "values": [
+                      {
+                        "primary": "ore:zbgt:prasiolite"
+                      },
+                      {
+                        "secondary": "ore:gregtech:quartzite"
+                      },
+                      {
+                        "between": "ore:gregtech:amethyst"
+                      },
+                      {
+                        "sporadic": "ore:gregtech:certus_quartz"
+                      }
+                    ]
+                  }
+                }
+                """).getAsJsonObject();
+        OreDepositDefinition prasioliteDeposit = new OreDepositDefinition("prasiolite");
+        prasioliteDeposit.initializeFromConfig(prasioliteDefinition);
+
         WorldGenRegistry worldGenRegistry = WorldGenRegistry.INSTANCE;
         worldGenRegistry.addVeinDefinitions(adamantiumDeposit);
         worldGenRegistry.addVeinDefinitions(quantiumDeposit);
+        worldGenRegistry.addVeinDefinitions(prasioliteDeposit);
 
         worldGenRegistry.reinitializeRegisteredVeins();
     }

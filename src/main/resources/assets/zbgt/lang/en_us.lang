@@ -731,8 +731,9 @@ zbgt.material.chronomatic_glass=Chronomatic Glass
 
 
 # Ore veins
-zbgt.vein.adamantium=Adamantium vein
+zbgt.vein.adamantium=Adamantium Vein
 zbgt.vein.quantium=Quantium Vein
+zbgt.vein.prasiolite=Prasiolite Vein
 
 
 # Ore prefixes
