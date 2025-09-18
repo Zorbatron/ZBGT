@@ -17,8 +17,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import org.jetbrains.annotations.NotNull;
@@ -31,6 +33,7 @@ import com.zorbatron.zbgt.common.items.behaviors.imprints.ImprintBehavior;
 
 import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.capability.IControllable;
+import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.capability.impl.NotifiableItemStackHandler;
 import gregtech.api.gui.GuiTextures;
@@ -45,6 +48,7 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.ingredients.GTRecipeInput;
+import gregtech.api.util.GTTransferUtils;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.RelativeDirection;
 import gregtech.client.renderer.ICubeRenderer;
@@ -63,7 +67,7 @@ public class MTECircuitAssemblyLine extends MultiMapMultiblockController {
     public MTECircuitAssemblyLine(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[] { ZBGTRecipeMaps.CIRCUIT_ASSEMBLY_LINE_RECIPES,
                 RecipeMaps.CIRCUIT_ASSEMBLER_RECIPES });
-        this.recipeMapWorkable = new MultiblockRecipeLogic(this, true);
+        this.recipeMapWorkable = new CALRecipeLogic(this);
     }
 
     @Override
@@ -170,10 +174,15 @@ public class MTECircuitAssemblyLine extends MultiMapMultiblockController {
             // slot count is not enough, so don't try to match it
             if (itemInputInventory.size() < inputs.size()) return false;
 
-            for (int i = 0; i < inputs.size(); i++) {
-                if (!inputs.get(i).acceptsStack(itemInputInventory.get(i).getStackInSlot(0))) {
-                    return false;
+            for (int handlerIndex = 0; handlerIndex < inputs.size(); handlerIndex++) {
+                IItemHandler handler = itemInputInventory.get(handlerIndex);
+                boolean oneSuccess = false;
+                for (int handlerStackIndex = 0; handlerStackIndex < handler.getSlots(); handlerStackIndex++) {
+                    oneSuccess = inputs.get(handlerIndex).acceptsStack(handler.getStackInSlot(handlerStackIndex));
+                    if (oneSuccess) break;
                 }
+
+                if (!oneSuccess) return false;
             }
         }
 
@@ -280,5 +289,89 @@ public class MTECircuitAssemblyLine extends MultiMapMultiblockController {
     @Override
     public boolean isInCreativeTab(CreativeTabs creativeTab) {
         return creativeTab == CreativeTabs.SEARCH || creativeTab == ZBGTAPI.TAB_ZBGT;
+    }
+
+    private static class CALRecipeLogic extends MultiblockRecipeLogic {
+
+        public CALRecipeLogic(MTECircuitAssemblyLine tileEntity) {
+            super(tileEntity, true);
+        }
+
+        // Ugly copy but oh well not my problem
+        @Override
+        protected boolean setupAndConsumeRecipeInputs(@NotNull Recipe recipe,
+                                                      @NotNull IItemHandlerModifiable importInventory,
+                                                      @NotNull IMultipleTankHandler importFluids) {
+            this.overclockResults = calculateOverclock(recipe);
+
+            modifyOverclockPost(overclockResults, recipe.getRecipePropertyStorage());
+
+            if (!hasEnoughPower(overclockResults)) return false;
+
+            IItemHandlerModifiable exportInventory = getOutputInventory();
+            IMultipleTankHandler exportFluids = getOutputTank();
+
+            // We have already trimmed outputs and chanced outputs at this time
+            // Attempt to merge all outputs + chanced outputs into the output bus, to prevent voiding chanced outputs
+            if (!metaTileEntity.canVoidRecipeItemOutputs() &&
+                    !GTTransferUtils.addItemsToItemHandler(exportInventory, true, recipe.getAllItemOutputs())) {
+                this.isOutputsFull = true;
+                return false;
+            }
+
+            // We have already trimmed fluid outputs at this time
+            if (!metaTileEntity.canVoidRecipeFluidOutputs() &&
+                    !GTTransferUtils.addFluidsToFluidHandler(exportFluids, true, recipe.getAllFluidOutputs())) {
+                this.isOutputsFull = true;
+                return false;
+            }
+
+            this.isOutputsFull = false;
+            if (recipe.matches(false, importInventory, importFluids)) {
+                this.consumeInputs(recipe);
+                this.metaTileEntity.addNotifiedInput(importInventory);
+                return true;
+            }
+
+            return false;
+        }
+
+        private void consumeInputs(Recipe recipe) {
+            if (!ConfigHolder.machines.orderedAssembly) {
+                recipe.matches(true, metaTileEntity.getImportItems(), metaTileEntity.getImportFluids());
+                return;
+            }
+
+            List<GTRecipeInput> ingredients = recipe.getInputs();
+            List<IItemHandlerModifiable> buses = ((RecipeMapMultiblockController) metaTileEntity)
+                    .getAbilities(MultiblockAbility.IMPORT_ITEMS);
+            for (int i = 0; i < Math.min(ingredients.size(), buses.size()); i++) {
+                IItemHandlerModifiable bus = buses.get(i);
+                GTRecipeInput ingredient = ingredients.get(i);
+                int amount = ingredient.getAmount();
+                for (int j = 0; j < bus.getSlots(); j++) {
+                    ItemStack stack = bus.getStackInSlot(j);
+                    if (ingredient.acceptsStack(stack)) {
+                        amount -= bus.extractItem(j, amount, false).getCount();
+                    }
+                    if (amount == 0) break;
+                }
+            }
+
+            IMultipleTankHandler hatches = getInputTank();
+            ingredients = recipe.getFluidInputs();
+            for (int i = 0; i < ingredients.size(); i++) {
+                GTRecipeInput ingredient = ingredients.get(i);
+                int amount = ingredient.getAmount();
+                for (int j = 0; j < hatches.getTanks(); j++) {
+                    FluidStack stack = hatches.getTankAt(i).getFluid();
+                    if (ingredient.acceptsFluid(stack)) {
+                        FluidStack drain = hatches.getTankAt(i).drain(amount, true);
+                        if (drain != null) amount -= drain.amount;
+                    }
+                    if (amount == 0) break;
+                }
+            }
+        }
     }
 }
