@@ -30,9 +30,12 @@ import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
 import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
 import com.zorbatron.zbgt.common.items.behaviors.imprints.ImprintBehavior;
+import com.zorbatron.zbgt.common.metatileentities.ZBGTMetaTileEntities;
 
+import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.capability.IControllable;
+import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.capability.impl.NotifiableItemStackHandler;
@@ -58,6 +61,8 @@ import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockMultiblockCasing;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.MetaTileEntities;
+import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 
 public class MTECircuitAssemblyLine extends MultiMapMultiblockController {
 
@@ -115,13 +120,20 @@ public class MTECircuitAssemblyLine extends MultiMapMultiblockController {
 
     @Override
     protected @NotNull BlockPattern createStructurePattern() {
+        MetaTileEntityMultiblockPart[] allowedHatches = new MetaTileEntityMultiblockPart[MetaTileEntities.ENERGY_INPUT_HATCH.length +
+                1];
+        System.arraycopy(MetaTileEntities.ENERGY_INPUT_HATCH, 0, allowedHatches, 0,
+                MetaTileEntities.ENERGY_INPUT_HATCH.length);
+        allowedHatches[allowedHatches.length - 1] = ZBGTMetaTileEntities.CREATIVE_ENERGY_SOURCE;
+
         return FactoryBlockPattern.start(FRONT, UP, RIGHT)
                 .aisle("FIF", "RTR", "SGG")
                 .aisle("FIF", "RTR", "GGG").setRepeatable(5)
                 .aisle("FOF", "RTR", "GGG")
                 .where('S', selfPredicate())
                 .where('G', states(getGrateState())
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setExactLimit(1)))
+                        .or(metaTileEntities(allowedHatches)
+                                .setExactLimit(1)))
                 .where('R', states(getGlassState()))
                 .where('T', states(getAssemblyCasingState()))
                 .where('I', abilities(MultiblockAbility.IMPORT_ITEMS))
@@ -295,6 +307,17 @@ public class MTECircuitAssemblyLine extends MultiMapMultiblockController {
 
         public CALRecipeLogic(MTECircuitAssemblyLine tileEntity) {
             super(tileEntity, true);
+        }
+
+        @Override
+        public long getMaxVoltage() {
+            if (((MTECircuitAssemblyLine) metaTileEntity).getRecipeMapIndex() == 0) {
+                return super.getMaxVoltage();
+            } else {
+                IEnergyContainer energyContainer = getEnergyContainer();
+                int tier = GTUtility.getTierByVoltage(energyContainer.getInputVoltage());
+                return GTValues.V[tier - 1];
+            }
         }
 
         // Ugly copy but oh well not my problem
