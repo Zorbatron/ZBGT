@@ -354,6 +354,13 @@ public class MiscRecipes {
                 .casingTier(3)
                 .EUt(VA[UHV]).duration(20 * 15)
                 .buildAndRegister();
+
+        FORMING_PRESS_RECIPES.recipeBuilder()
+                .input(dust, MagnetoResonance)
+                .input(dust, CircuitCompoundMk_3, 4)
+                .output(RAW_IMPRINT_SUPPORTING_BOARD)
+                .EUt(VA[HV]).duration(15 * 20)
+                .buildAndRegister();
     }
 
     @SuppressWarnings("DuplicatedCode")

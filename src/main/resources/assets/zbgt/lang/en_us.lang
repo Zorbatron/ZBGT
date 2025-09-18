@@ -704,6 +704,13 @@ zbgt.material.maraging_steel_350=Maraging Steel 350
 zbgt.material.trinium_naquadah_alloy=Trinium Naquadah Alloy
 zbgt.material.babbit_alloy=Babbit Alloy
 zbgt.material.prasiolite=Prasiolite
+zbgt.material.dibismuthhydroborat=Dibismuthhydroborat
+zbgt.material.cubic_zirconia=Cubic Zirconia
+zbgt.material.bismuth_telluride=Bismuth Telluride
+zbgt.material.red_zircon=Red Zircon
+zbgt.material.fayalite=Fayalite
+zbgt.material.green_fuchsite=Green Fuchsite
+zbgt.material.red_fuchsite=Red Fuchsite
 
 zbgt.material.mar_ce_m_200=MAR-Ce-M200
 zbgt.material.artherium_sn=Artherium-Sn
@@ -717,6 +724,8 @@ zbgt.material.cryotheum=Cryotheum
 zbgt.material.cryotheum.liquid=Gelid Cryotheum
 zbgt.material.tantalloy_61=Tantalloy 61
 zbgt.material.trinium_naquadah_carbonite=Trinium Naquadah Carbonite
+zbgt.material.circuit_compound_mk_3=Circuit Compound Mk3
+zbgt.material.magneto_resonance=Magneto Resonance
 
 zbgt.material.fluxed_electrum=Fluxed Electrum
 zbgt.material.hikarium=Hikarium
@@ -734,6 +743,7 @@ zbgt.material.chronomatic_glass=Chronomatic Glass
 zbgt.vein.adamantium=Adamantium Vein
 zbgt.vein.quantium=Quantium Vein
 zbgt.vein.prasiolite=Prasiolite Vein
+zbgt.vein.red_zircon=Red Zircon Vein
 
 
 # Ore prefixes

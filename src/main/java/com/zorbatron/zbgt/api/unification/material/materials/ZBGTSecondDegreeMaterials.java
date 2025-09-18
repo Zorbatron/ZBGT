@@ -141,5 +141,17 @@ public final class ZBGTSecondDegreeMaterials {
                         .blastStats(VA[LuV], 20 * 40 + 14))
                 .components(TriniumNaquadahAlloy, 9, Carbon, 1)
                 .build();
+
+        CircuitCompoundMk_3 = new Material.Builder(id++, zbgtId("circuit_compound_mk_3"))
+                .dust()
+                .color(0x242424).iconSet(METALLIC)
+                .components(IndiumGalliumPhosphide, 1, BismuthTelluride, 2, Dibismuthhydroborat, 3)
+                .build();
+
+        MagnetoResonance = new Material.Builder(id++, zbgtId("magneto_resonance"))
+                .dust().gem()
+                .color(0xDD77DD).iconSet(MAGNETIC)
+                .components(SteelMagnetic, 1, CubicZirconia, 1, BismuthTelluride, 4, Prasiolite, 3)
+                .build();
     }
 }
