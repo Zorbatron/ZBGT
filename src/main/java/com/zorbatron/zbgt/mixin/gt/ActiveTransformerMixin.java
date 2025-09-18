@@ -1,4 +1,4 @@
-package com.zorbatron.zbgt.mixin;
+package com.zorbatron.zbgt.mixin.gt;
 
 import java.util.List;
 

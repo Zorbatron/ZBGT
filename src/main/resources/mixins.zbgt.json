@@ -5,9 +5,10 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ActiveTransformerMixin",
-    "PSSMixin",
-    "WorldGenRegistryMixin"
+    "gt.ActiveTransformerMixin",
+    "gt.PSSMixin",
+    "gt.RecipeMapCategoryMixin",
+    "gt.WorldGenRegistryMixin"
   ],
   "client": [],
   "server": []
