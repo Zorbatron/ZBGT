@@ -26,16 +26,19 @@ import org.jetbrains.annotations.Nullable;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.recipes.ZBGTRecipeMaps;
+import com.zorbatron.zbgt.common.items.ZBGTMetaItems;
+import com.zorbatron.zbgt.common.items.behaviors.imprints.ImprintBehavior;
 
+import gregtech.api.capability.GregtechTileCapabilities;
+import gregtech.api.capability.IControllable;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.capability.impl.NotifiableItemStackHandler;
-import gregtech.api.gui.Widget;
-import gregtech.api.gui.widgets.SlotWidget;
+import gregtech.api.gui.GuiTextures;
+import gregtech.api.gui.ModularUI;
+import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
-import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.*;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.recipes.Recipe;
@@ -73,10 +76,35 @@ public class MTECircuitAssemblyLine extends MultiMapMultiblockController {
         super.initializeInventory();
         controllerSlot = new NotifiableItemStackHandler(this, 1, this, false) {
 
+            @Nullable
+            private static ItemStack imprint = null;
+
+            private static @NotNull ItemStack getReferenceImprint() {
+                return imprint == null ? imprint = ZBGTMetaItems.CIRCUIT_IMPRINT.getStackForm() : imprint;
+            }
+
+            @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+            private static boolean isValidImprint(@NotNull ItemStack stack) {
+                if (!getReferenceImprint().isItemEqual(stack)) return false;
+                return !ImprintBehavior.getImprintedCircuit(stack).isEmpty();
+            }
+
+            @Override
+            public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+                if (!isValidImprint(stack)) return stack;
+                return super.insertItem(slot, stack, simulate);
+            }
+
+            @Override
+            public void setStackInSlot(int slot, @NotNull ItemStack stack) {
+                if (!isValidImprint(stack)) return;
+                super.setStackInSlot(slot, stack);
+            }
+
             @Override
             public void onContentsChanged(int slot) {
                 super.onContentsChanged(slot);
-                MTECircuitAssemblyLine.this.imprintStack = getStackInSlot(0);
+                MTECircuitAssemblyLine.this.imprintStack = ImprintBehavior.getImprintedCircuit(getStackInSlot(0));
             }
         };
     }
@@ -153,14 +181,51 @@ public class MTECircuitAssemblyLine extends MultiMapMultiblockController {
     }
 
     @Override
-    protected @NotNull Widget getFlexButton(int x, int y, int width, int height) {
-        return new SlotWidget(controllerSlot, 0, x, y);
-    }
+    protected ModularUI createUI(EntityPlayer entityPlayer) {
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 198, 208);
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-        return Textures.SOLID_STEEL_CASING;
+        // Display
+        builder.image(4, 4, 190, 117, GuiTextures.DISPLAY);
+        builder.widget(new IndicatorImageWidget(174, 101, 17, 17, getLogo())
+                .setWarningStatus(getWarningLogo(), this::addWarningText)
+                .setErrorStatus(getErrorLogo(), this::addErrorText));
+
+        builder.label(9, 9, getMetaFullName(), 0xFFFFFF);
+        builder.widget(new AdvancedTextWidget(9, 20, this::addDisplayText, 0xFFFFFF)
+                .setMaxWidthLimit(181)
+                .setClickHandler(this::handleDisplayClick));
+
+        // Power Button
+        IControllable controllable = getCapability(GregtechTileCapabilities.CAPABILITY_CONTROLLABLE, null);
+        if (controllable != null) {
+            builder.widget(new ImageCycleButtonWidget(173, 183, 18, 18, GuiTextures.BUTTON_POWER,
+                    controllable::isWorkingEnabled, controllable::setWorkingEnabled));
+            builder.widget(new ImageWidget(173, 201, 18, 6, GuiTextures.BUTTON_POWER_DETAIL));
+        }
+
+        // Voiding Mode Button
+        if (shouldShowVoidingModeButton()) {
+            builder.widget(new ImageCycleButtonWidget(173, 161, 18, 18, GuiTextures.BUTTON_VOID_MULTIBLOCK,
+                    4, this::getVoidingMode, this::setVoidingMode)
+                            .setTooltipHoverString(MultiblockWithDisplayBase::getVoidingModeTooltip));
+        } else {
+            builder.widget(new ImageWidget(173, 161, 18, 18, GuiTextures.BUTTON_VOID_NONE)
+                    .setTooltip("gregtech.gui.multiblock_voiding_not_supported"));
+        }
+
+        builder.widget(new ImageWidget(173, 143, 18, 18, GuiTextures.BUTTON_NO_DISTINCT_BUSES)
+                .setTooltip("gregtech.multiblock.universal.distinct_not_supported"));
+
+        // Imprint slot
+        builder.widget(new SlotWidget(controllerSlot, 0, 173, 161)
+                .setBackgroundTexture(GuiTextures.SLOT));
+
+        // Flex Button
+        builder.widget(getFlexButton(173, 125, 18, 18));
+
+        builder.bindPlayerInventory(entityPlayer.inventory, 125);
+
+        return builder.build(getHolder(), entityPlayer);
     }
 
     @Override
@@ -171,9 +236,15 @@ public class MTECircuitAssemblyLine extends MultiMapMultiblockController {
                 textList.add(new TextComponentTranslation("zbgt.machine.cal.no_imprint"));
             } else {
                 textList.add(new TextComponentTranslation("zbgt.machine.cal.imprint",
-                        new TextComponentTranslation(imprintStack.getTranslationKey())));
+                        new TextComponentTranslation(imprintStack.getTranslationKey() + ".name")));
             }
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
+        return Textures.SOLID_STEEL_CASING;
     }
 
     @SideOnly(Side.CLIENT)
@@ -186,10 +257,10 @@ public class MTECircuitAssemblyLine extends MultiMapMultiblockController {
     }
 
     @Override
-    public void getDrops(NonNullList<ItemStack> dropsList, @Nullable EntityPlayer harvester) {
+    public void clearMachineInventory(NonNullList<ItemStack> itemBuffer) {
         ItemStack controllerStack = controllerSlot.getStackInSlot(0);
         if (!controllerStack.isEmpty()) {
-            dropsList.add(controllerStack);
+            itemBuffer.add(controllerStack);
         }
     }
 
