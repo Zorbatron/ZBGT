@@ -32,6 +32,7 @@ public class MaterialRecipes {
         macerator();
         engraver();
         chemBath();
+        sifter();
         mixer();
         ebf();
     }
@@ -57,6 +58,21 @@ public class MaterialRecipes {
                 .circuitMeta(5)
                 .output(dust, YttriumOxide, 5)
                 .EUt(VA[HV]).duration(20 * 14)
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .input(dust, Bismuth, 2)
+                .input(dust, Boron)
+                .fluidInputs(Hydrogen.getFluid(1000))
+                .output(dust, Dibismuthhydroborat, 4)
+                .EUt(VA[MV]).duration(57)
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .input(dust, Bismuth, 2)
+                .input(dust, Tellurium, 3)
+                .output(dust, BismuthTelluride, 5)
+                .EUt(VA[MV]).duration(161)
                 .buildAndRegister();
     }
 
@@ -136,6 +152,41 @@ public class MaterialRecipes {
                     .EUt(VA[HV]).duration(20 * 20)
                     .buildAndRegister();
         }
+    }
+
+    private static void sifter() {
+        SIFTER_RECIPES.recipeBuilder()
+                .input(crushedPurified, Tin)
+                .output(dust, Tin)
+                .chancedOutput(dust, Zinc, 556, 100)
+                .chancedOutput(dust, Zirconium, 1500, 150)
+                .chancedOutput(dust, Zirconium, 1000, 100)
+                .chancedOutput(dust, Zirconium, 500, 50)
+                .chancedOutput(dust, Zirconium, 250, 25)
+                .EUt(VA[HV]).duration(15 * 20)
+                .buildAndRegister();
+
+        SIFTER_RECIPES.recipeBuilder()
+                .input(crushedPurified, Cassiterite)
+                .output(dust, Cassiterite)
+                .chancedOutput(dust, Tin, 556, 100)
+                .chancedOutput(dust, Zirconium, 1500, 150)
+                .chancedOutput(dust, Zirconium, 1000, 100)
+                .chancedOutput(dust, Zirconium, 500, 50)
+                .chancedOutput(dust, Zirconium, 250, 25)
+                .EUt(VA[HV]).duration(15 * 20)
+                .buildAndRegister();
+
+        SIFTER_RECIPES.recipeBuilder()
+                .input(crushedPurified, Ilmenite)
+                .chancedOutput(dust, Iron, 5000, 750)
+                .chancedOutput(dust, WroughtIron, 278, 50)
+                .chancedOutput(dust, Zirconium, 1100, 125)
+                .chancedOutput(dust, Zirconium, 1000, 100)
+                .chancedOutput(dust, Hafnium, 400, 75)
+                .chancedOutput(dust, Hafnium, 300, 50)
+                .EUt(VA[HV]).duration(15 * 20)
+                .buildAndRegister();
     }
 
     private static void mixer() {
@@ -412,6 +463,23 @@ public class MaterialRecipes {
                 .output(dust, ZirconiumCarbide, 2)
                 .EUt(VA[LV]).duration(20 * 5 + 2)
                 .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, IndiumGalliumPhosphide)
+                .input(dust, BismuthTelluride, 2)
+                .input(dust, Dibismuthhydroborat, 3)
+                .output(dust, CircuitCompoundMk_3, 6)
+                .EUt(VA[MV]).duration(5 * 20)
+                .buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, SteelMagnetic)
+                .input(dust, CubicZirconia)
+                .input(dust, BismuthTelluride, 4)
+                .input(dust, Prasiolite, 3)
+                .output(dust, MagnetoResonance, 9)
+                .EUt(VA[HV]).duration(9 * 20)
+                .buildAndRegister();
     }
 
     private static void ebf() {
@@ -455,10 +523,17 @@ public class MaterialRecipes {
                 .input(dust, Coal, 3)
                 .circuitMeta(5)
                 .buildAndRegister();
-        aluminumNitrideBuilder.copy()
-                .input(dust, Alumina, 5)
+        aluminumNitrideBuilder.input(dust, Alumina, 5)
                 .input(dust, Carbon, 3)
                 .circuitMeta(5)
+                .buildAndRegister();
+
+        BLAST_RECIPES.recipeBuilder()
+                .input(dust, Zirconium, 10)
+                .notConsumable(dust, YttriumOxide)
+                .fluidInputs(Oxygen.getFluid(20_000))
+                .output(gem, CubicZirconia, 10)
+                .EUt(VA[HV]).duration(2880 * 20)
                 .buildAndRegister();
     }
 

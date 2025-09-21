@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 import com.zorbatron.zbgt.api.ZBGTAPI;
 import com.zorbatron.zbgt.api.util.ZBGTUtility;
+import com.zorbatron.zbgt.common.items.behaviors.imprints.ImprintBehavior;
 import com.zorbatron.zbgt.recipe.helpers.RecipeAssists;
 
 import gregtech.api.GregTechAPI;
@@ -262,7 +263,7 @@ public class ZBGTMetaItem extends StandardMetaItem {
         WRAPPED_CIRCUIT_BOARD_ADVANCED = addItem(92, "wrapped.circuit_board.advanced");
         WRAPPED_CIRCUIT_BOARD_ELITE = addItem(93, "wrapped.circuit_board.elite");
         WRAPPED_CIRCUIT_BOARD_EXTREME = addItem(94, "wrapped.circuit_board.extreme");
-        WRAPPED_CIRCUIT_BOARD_WETWARE = addItem(95, "wrapped.circuit_board.wetware");
+        WRAPPED_CIRCUIT_BOARD_MASTER = addItem(95, "wrapped.circuit_board.master");
 
         // Wrapped chips 96-111
         WRAPPED_CHIP_SOC_SIMPLE = addItem(96, "wrapped.chip.soc_simple");
@@ -402,6 +403,15 @@ public class ZBGTMetaItem extends StandardMetaItem {
         TRANSMISSION_COMPONENT_UV = addItem(174, "transmission_component.uv");
         TRANSMISSION_COMPONENT_UHV = addItem(175, "transmission_component.uhv")
                 .setInvisibleIf(!GregTechAPI.isHighTier());
+
+        NAND_CHIP_ARRAY = addItem(176, "nand_array");
+
+        RAW_IMPRINT_SUPPORTING_BOARD = addItem(177, "raw_imprint_supporting_board");
+        IMPRINT_SUPPORTING_BOARD = addItem(178, "imprint_supporting_board");
+        SLICED_CIRCUIT = addItem(179, "sliced_circuit")
+                .addComponents(new ImprintBehavior("metaitem.sliced_circuit.slice"));
+        CIRCUIT_IMPRINT = addItem(180, "circuit_imprint")
+                .addComponents(new ImprintBehavior("metaitem.circuit_imprint.imprint"));
     }
 
     @Override

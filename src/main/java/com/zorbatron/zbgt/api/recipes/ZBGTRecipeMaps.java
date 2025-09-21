@@ -9,12 +9,10 @@ import com.zorbatron.zbgt.api.recipes.maps.RecipeMapCAL;
 import com.zorbatron.zbgt.api.recipes.maps.RecipeMapCoAL;
 import com.zorbatron.zbgt.api.recipes.maps.RecipeMapPreciseAssembler;
 
-import gregtech.api.GTValues;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
-import gregtech.api.unification.material.Materials;
 import gregtech.core.sound.GTSoundEvents;
 
 public final class ZBGTRecipeMaps {
@@ -31,13 +29,7 @@ public final class ZBGTRecipeMaps {
             "circuit_assembly_line_recipes",
             new CALRecipeBuilder())
                     .setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT_ASSEMBLER, ProgressWidget.MoveType.HORIZONTAL)
-                    .setSound(GTSoundEvents.ASSEMBLER)
-                    .onRecipeBuild(recipeBuilder -> {
-                        if (recipeBuilder.getFluidInputs().isEmpty()) {
-                            recipeBuilder.fluidInputs(Materials.SolderingAlloy
-                                    .getFluid(Math.max(1, (GTValues.L / 2) * recipeBuilder.getSolderMultiplier())));
-                        }
-                    });
+                    .setSound(GTSoundEvents.ASSEMBLER);
 
     public static final RecipeMap<SimpleRecipeBuilder> MOLECULAR_TRANSFORMER = new RecipeMap<>("molecular_transformer",
             1, 1, 0, 0, new SimpleRecipeBuilder(), false)

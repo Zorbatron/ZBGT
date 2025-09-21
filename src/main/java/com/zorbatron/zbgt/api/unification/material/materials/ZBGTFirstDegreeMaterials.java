@@ -373,5 +373,53 @@ public final class ZBGTFirstDegreeMaterials {
                 .flags(DECOMPOSITION_BY_CENTRIFUGING, GENERATE_PLATE)
                 .components(Tin, 5, Lead, 36, Antimony, 8, Arsenic, 1)
                 .build();
+
+        Prasiolite = new Material.Builder(id++, zbgtId("prasiolite"))
+                .dust().ore().gem()
+                .color(0xD0DD95).iconSet(CERTUS)
+                .components(SiliconDioxide, 5, Iron, 1)
+                .build();
+
+        Dibismuthhydroborat = new Material.Builder(id++, zbgtId("dibismuthhydroborat"))
+                .dust()
+                .color(0x489048).iconSet(METALLIC)
+                .components(Bismuth, 2, Boron, 1, Hydrogen, 1)
+                .build();
+
+        CubicZirconia = new Material.Builder(id++, zbgtId("cubic_zirconia"))
+                .dust().gem()
+                .color(0xFFFFFF).iconSet(METALLIC)
+                .components(Zirconium, 1, Oxygen, 2)
+                .build();
+
+        BismuthTelluride = new Material.Builder(id++, zbgtId("bismuth_telluride"))
+                .dust()
+                .color(0x204820).iconSet(METALLIC)
+                .components(Bismuth, 1, Tellurium, 2)
+                .build();
+
+        RedZircon = new Material.Builder(id++, zbgtId("red_zircon"))
+                .addOreByproducts(Zirconium, SiliconDioxide).dust().gem()
+                .color(0xC31313)
+                .components(Zirconium, 1, Silicon, 1, Oxygen, 4)
+                .build();
+
+        Fayalite = new Material.Builder(id++, zbgtId("fayalite"))
+                .addOreByproducts(Iron, SiliconDioxide).dust().gem()
+                .color(0x323232).iconSet(CERTUS)
+                .components(Iron, 2, Silicon, 1, Oxygen, 4)
+                .build();
+
+        GreenFuchsite = new Material.Builder(id++, zbgtId("green_fuchsite"))
+                .addOreByproducts(Potassium, Alumina, SiliconDioxide).dust()
+                .color(0x4D7F64).iconSet(METALLIC)
+                .components(Potassium, 1, Alumina, 3, SiliconDioxide, 3, Oxygen, 2, Hydrogen, 2)
+                .build();
+
+        RedFuchsite = new Material.Builder(id++, zbgtId("red_fuchsite"))
+                .addOreByproducts(Potassium, Chrome, SiliconDioxide).separatedInto(Iron).dust()
+                .color(0x800000).iconSet(METALLIC)
+                .components(Potassium, 1, Chrome, 3, SiliconDioxide, 3, Oxygen, 2, Hydrogen, 2)
+                .build();
     }
 }

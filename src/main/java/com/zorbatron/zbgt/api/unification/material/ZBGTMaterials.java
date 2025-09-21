@@ -47,6 +47,14 @@ public final class ZBGTMaterials {
     public static Material MaragingSteel350;
     public static Material TriniumNaquadahAlloy;
     public static Material BabbitAlloy;
+    public static Material Prasiolite;
+    public static Material Dibismuthhydroborat;
+    public static Material CubicZirconia;
+    public static Material BismuthTelluride;
+    public static Material RedZircon;
+    public static Material Fayalite;
+    public static Material GreenFuchsite;
+    public static Material RedFuchsite;
 
     // Second degree materials
     public static Material MAR_CE_M200;
@@ -55,6 +63,8 @@ public final class ZBGTMaterials {
     public static Material EglinSteel;
     public static Material Tantalloy61;
     public static Material TriniumNaquadahCarbonite;
+    public static Material CircuitCompoundMk_3;
+    public static Material MagnetoResonance;
 
     // Third degree materials
     public static Material Hikarium;

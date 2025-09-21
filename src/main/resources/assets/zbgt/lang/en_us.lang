@@ -262,7 +262,7 @@ metaitem.wrapped.circuit_board.plastic.name=Wrap of Plastic Circuit Boards
 metaitem.wrapped.circuit_board.advanced.name=Wrap of Advanced Circuit Boards
 metaitem.wrapped.circuit_board.elite.name=Wrap of Elite Circuit Boards
 metaitem.wrapped.circuit_board.extreme.name=Wrap of Extreme Circuit Boards
-metaitem.wrapped.circuit_board.wetware.name=Wrap of Master Circuit Boards
+metaitem.wrapped.circuit_board.master.name=Wrap of Master Circuit Boards
 
 metaitem.wrapped.chip.soc_simple.name=Wrap of Simple SoCs
 metaitem.wrapped.chip.soc.name=Wrap of SoCs
@@ -347,6 +347,16 @@ metaitem.transmission_component.luv.name=Transmission Component [LuV]
 metaitem.transmission_component.zpm.name=Transmission Component [ZPM]
 metaitem.transmission_component.uv.name=Transmission Component [UV]
 metaitem.transmission_component.uhv.name=Transmission Component [UHV]
+
+metaitem.nand_array.name=NAND Chip Array
+metaitem.nand_array.tooltip=Chips on Board
+
+metaitem.raw_imprint_supporting_board.name=Raw Imprint Supporting Board
+metaitem.imprint_supporting_board.name=Imprint Supporting Board
+metaitem.sliced_circuit.name=Sliced Circuit
+metaitem.sliced_circuit.slice=Slice of: %s
+metaitem.circuit_imprint.name=Circuit Imprint
+metaitem.circuit_imprint.imprint=Imprint of: %s
 
 
 # Widgets
@@ -433,6 +443,8 @@ zbgt.machine.large_alloy_smelter.tooltip=Gains a 5%% energy discount per coil ti
 zbgt.machine.cal.name=Circuit Assembly Line
 zbgt.machine.cal.tooltip=Does not lose efficiency when overclocked
 zbgt.machine.cal.tooltip_ordered_items=When in §eCircuit Assembly Line§7 mode, §fitems§7 must be in the correct order to run.
+zbgt.machine.cal.imprint=Circuit Imprint: %s
+zbgt.machine.cal.no_imprint=Missing Imprint
 recipemap.circuit_assembly_line_recipes.name=Circuit Assembly Line
 
 zbgt.machine.volcanus.name=Volcanus
@@ -691,6 +703,14 @@ zbgt.material.zirconium_carbide=Zirconium Carbide
 zbgt.material.maraging_steel_350=Maraging Steel 350
 zbgt.material.trinium_naquadah_alloy=Trinium Naquadah Alloy
 zbgt.material.babbit_alloy=Babbit Alloy
+zbgt.material.prasiolite=Prasiolite
+zbgt.material.dibismuthhydroborat=Dibismuthhydroborat
+zbgt.material.cubic_zirconia=Cubic Zirconia
+zbgt.material.bismuth_telluride=Bismuth Telluride
+zbgt.material.red_zircon=Red Zircon
+zbgt.material.fayalite=Fayalite
+zbgt.material.green_fuchsite=Green Fuchsite
+zbgt.material.red_fuchsite=Red Fuchsite
 
 zbgt.material.mar_ce_m_200=MAR-Ce-M200
 zbgt.material.artherium_sn=Artherium-Sn
@@ -704,6 +724,8 @@ zbgt.material.cryotheum=Cryotheum
 zbgt.material.cryotheum.liquid=Gelid Cryotheum
 zbgt.material.tantalloy_61=Tantalloy 61
 zbgt.material.trinium_naquadah_carbonite=Trinium Naquadah Carbonite
+zbgt.material.circuit_compound_mk_3=Circuit Compound Mk3
+zbgt.material.magneto_resonance=Magneto Resonance
 
 zbgt.material.fluxed_electrum=Fluxed Electrum
 zbgt.material.hikarium=Hikarium
@@ -718,8 +740,10 @@ zbgt.material.chronomatic_glass=Chronomatic Glass
 
 
 # Ore veins
-zbgt.vein.adamantium=Adamantium vein
+zbgt.vein.adamantium=Adamantium Vein
 zbgt.vein.quantium=Quantium Vein
+zbgt.vein.prasiolite=Prasiolite Vein
+zbgt.vein.red_zircon=Red Zircon Vein
 
 
 # Ore prefixes

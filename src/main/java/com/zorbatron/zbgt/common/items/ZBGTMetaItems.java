@@ -110,7 +110,7 @@ public class ZBGTMetaItems {
     public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_BOARD_ADVANCED;
     public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_BOARD_ELITE;
     public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_BOARD_EXTREME;
-    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_BOARD_WETWARE;
+    public static MetaItem<?>.MetaValueItem WRAPPED_CIRCUIT_BOARD_MASTER;
 
     public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_SOC_SIMPLE;
     public static MetaItem<?>.MetaValueItem WRAPPED_CHIP_SOC;
@@ -208,6 +208,13 @@ public class ZBGTMetaItems {
     public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_ZPM;
     public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_UV;
     public static MetaItem<?>.MetaValueItem TRANSMISSION_COMPONENT_UHV;
+
+    public static MetaItem<?>.MetaValueItem NAND_CHIP_ARRAY;
+
+    public static MetaItem<?>.MetaValueItem RAW_IMPRINT_SUPPORTING_BOARD;
+    public static MetaItem<?>.MetaValueItem IMPRINT_SUPPORTING_BOARD;
+    public static MetaItem<?>.MetaValueItem SLICED_CIRCUIT;
+    public static MetaItem<?>.MetaValueItem CIRCUIT_IMPRINT;
 
     public static void init() {
         ZBGTMetaItem item = new ZBGTMetaItem();
