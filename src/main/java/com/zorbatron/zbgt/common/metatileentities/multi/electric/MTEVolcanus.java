@@ -133,7 +133,7 @@ public class MTEVolcanus extends RecipeMapMultiblockController implements IHeati
                 .where('S', selfPredicate())
                 .where('C', heatingCoils())
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
-                .where('X', states(getCasing()).setMinGlobalLimited(8)
+                .where('X', states(getCasing()).setMinGlobalLimited(6)
                         .or(autoAbilities(true, true, true, true, true, true, false))
                         .or(abilities(ZBGTMultiblockAbilities.PYROTHEUM_HATCH).setExactLimit(1)))
                 .where('#', air())
